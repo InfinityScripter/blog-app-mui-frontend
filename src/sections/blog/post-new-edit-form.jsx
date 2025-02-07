@@ -33,10 +33,10 @@ import {createPost, updatePost} from "../../actions/blog-ssr";
 export const NewPostSchema = zod.object({
   title: zod.string().min(1, { message: 'Title is required!' }),
   description: zod.string().min(1, { message: 'Description is required!' }),
-  // content: schemaHelper.editor().min(100, { message: 'Content must be at least 100 characters' }),
-  // coverUrl: schemaHelper.file({ message: { required_error: 'Cover is required!' } }),
-  // tags: zod.string().array().min(2, { message: 'Must have at least 2 items!' }),
-  // metaKeywords: zod.string().array().nonempty({ message: 'Meta keywords is required!' }),
+  content: schemaHelper.editor().min(100, { message: 'Content must be at least 100 characters' }),
+  coverUrl: schemaHelper.file({ message: { required_error: 'Cover is required!' } }),
+  tags: zod.string().array().min(2, { message: 'Must have at least 2 items!' }),
+  metaKeywords: zod.string().array().nonempty({ message: 'Meta keywords is required!' }),
   // Not required
   metaTitle: zod.string(),
   metaDescription: zod.string(),
