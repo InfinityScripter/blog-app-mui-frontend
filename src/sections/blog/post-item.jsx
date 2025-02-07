@@ -23,6 +23,7 @@ import { Iconify } from 'src/components/iconify';
 
 export function PostItem({ post }) {
   const theme = useTheme();
+  console.log({post}, 'данные от сервера которые нужно показывать в карточке');
 
   const linkTo = paths.post.details(post.title);
 
@@ -41,8 +42,8 @@ export function PostItem({ post }) {
         />
 
         <Avatar
-          alt={post.author.name}
-          src={post.author.avatarUrl}
+          alt={post.author?.name}
+          src={post.author?.avatarUrl}
           sx={{
             left: 24,
             zIndex: 9,
@@ -91,8 +92,8 @@ export function PostItemLatest({ post, index }) {
   return (
     <Card>
       <Avatar
-        alt={post.author.name}
-        src={post.author.avatarUrl}
+        alt={post.author?.name}
+        src={post.author?.avatarUrl}
         sx={{
           top: 24,
           left: 24,

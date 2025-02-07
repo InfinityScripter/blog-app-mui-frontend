@@ -116,8 +116,8 @@ export function PostItemHorizontal({ post }) {
           }}
         >
           <Avatar
-            alt={author.name}
-            src={author.avatarUrl}
+            alt={author?.name}
+            src={author?.avatarUrl}
             sx={{ top: 16, right: 16, zIndex: 9, position: 'absolute' }}
           />
           <Image alt={title} src={coverUrl} sx={{ height: 1, borderRadius: 1.5 }} />

@@ -26,16 +26,17 @@ import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
 import { PostDetailsPreview } from './post-details-preview';
+import {createPost, updatePost} from "../../actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
 export const NewPostSchema = zod.object({
   title: zod.string().min(1, { message: 'Title is required!' }),
   description: zod.string().min(1, { message: 'Description is required!' }),
-  content: schemaHelper.editor().min(100, { message: 'Content must be at least 100 characters' }),
-  coverUrl: schemaHelper.file({ message: { required_error: 'Cover is required!' } }),
-  tags: zod.string().array().min(2, { message: 'Must have at least 2 items!' }),
-  metaKeywords: zod.string().array().nonempty({ message: 'Meta keywords is required!' }),
+  // content: schemaHelper.editor().min(100, { message: 'Content must be at least 100 characters' }),
+  // coverUrl: schemaHelper.file({ message: { required_error: 'Cover is required!' } }),
+  // tags: zod.string().array().min(2, { message: 'Must have at least 2 items!' }),
+  // metaKeywords: zod.string().array().nonempty({ message: 'Meta keywords is required!' }),
   // Not required
   metaTitle: zod.string(),
   metaDescription: zod.string(),
@@ -84,16 +85,25 @@ export function PostNewEditForm({ currentPost }) {
     }
   }, [currentPost, defaultValues, reset]);
 
+
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      let response;
+      if (currentPost) {
+        // Update an existing post. You might pass an id here.
+        response = await updatePost({ ...data, id: currentPost.id });
+      } else {
+        // Create a new post
+        response = await createPost(data);
+      }
       reset();
       preview.onFalse();
       toast.success(currentPost ? 'Update success!' : 'Create success!');
       router.push(paths.dashboard.post.root);
-      console.info('DATA', data);
+      console.info('Response:', response);
     } catch (error) {
       console.error(error);
+      toast.error('Operation failed');
     }
   });
 

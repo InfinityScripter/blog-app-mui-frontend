@@ -49,6 +49,8 @@ export const endpoints = {
     details: '/api/post/details',
     latest: '/api/post/latest',
     search: '/api/post/search',
+    new: '/api/post/new',    // эндпоинт для создания нового поста
+    edit: '/api/post/edit'   // эндпоинт для редактирования поста
   },
   product: {
     list: '/api/product/list',
