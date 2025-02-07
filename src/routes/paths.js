@@ -35,8 +35,8 @@ export const paths = {
   figma: 'https://www.figma.com/design/cAPz4pYPtQEXivqe11EcDE/%5BPreview%5D-Minimal-Web.v6.0.0',
   post: {
     root: `/post`,
-    details: (title) => `/post/${paramCase(title)}`,
-    demo: { details: `/post/${paramCase(MOCK_TITLE)}` },
+    details: (id) => `/post/${id}`,
+    // demo: { details: `/post/${paramCase(MOCK_TITLE)}` },
   },
   // AUTH
   auth: {

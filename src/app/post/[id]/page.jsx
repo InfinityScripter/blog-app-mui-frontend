@@ -11,14 +11,11 @@ import { PostDetailsHomeView } from 'src/sections/blog/view';
 export const metadata = { title: `Post details - ${CONFIG.site.name}` };
 
 export default async function Page({ params }) {
-  const { title } = params;
-
-  const { post } = await getPost(title);
-
-  const { latestPosts } = await getLatestPosts(title);
-
+  const { id } = params; // теперь id вместо title
+  const { post, latestPosts } = await getPost(id); // getPost получает id
   return <PostDetailsHomeView post={post} latestPosts={latestPosts} />;
 }
+
 
 // ----------------------------------------------------------------------
 

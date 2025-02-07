@@ -25,7 +25,7 @@ export function PostItem({ post }) {
   const theme = useTheme();
   console.log({post}, 'данные от сервера которые нужно показывать в карточке');
 
-  const linkTo = paths.post.details(post.title);
+  const linkTo = paths.post.details(post._id);
 
   return (
     <Card>
@@ -85,7 +85,7 @@ export function PostItem({ post }) {
 export function PostItemLatest({ post, index }) {
   const theme = useTheme();
 
-  const linkTo = paths.post.details(post.title);
+  const linkTo = paths.post.details(post._id);
 
   const postSmall = index === 1 || index === 2;
 

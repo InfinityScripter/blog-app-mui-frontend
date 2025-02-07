@@ -10,18 +10,16 @@ export async function getPosts() {
 
 // ----------------------------------------------------------------------
 
-export async function getPost(title) {
-  const URL = title ? `${endpoints.post.details}?title=${title}` : '';
-
-  const res = await axios.get(URL);
-
+export async function getPost(id) {
+  const res = await axios.get(`${endpoints.post.details}?id=${id}`);
   return res.data;
 }
 
+
 // ----------------------------------------------------------------------
 
-export async function getLatestPosts(title) {
-  const URL = title ? `${endpoints.post.latest}?title=${title}` : '';
+export async function getLatestPosts(id) {
+  const URL = id ? `${endpoints.post.latest}?id=${id}` : '';
 
   const res = await axios.get(URL);
 
@@ -35,6 +33,18 @@ export async function createPost(postData) {
 }
 
 export async function updatePost(postData) {
-  const res = await axios.put(endpoints.post.edit, postData);
+  const res = await axios.put(`/api/post/${postData.id}/edit`, postData);
   return res.data;
+}
+
+
+export async function deletePost(postId) {
+  try {
+    // Если вы хотите использовать динамический URL с [id]:
+    const res = await axios.delete(`/api/post/${postId}/delete`);
+    return res.data;
+  } catch (error) {
+    console.error('Ошибка удаления поста:', error);
+    throw error;
+  }
 }
