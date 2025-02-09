@@ -91,7 +91,7 @@ export function PostNewEditForm({ currentPost }) {
       let response;
       if (currentPost) {
         // Update an existing post. You might pass an id here.
-        response = await updatePost({ ...data, id: currentPost.id });
+        response = await updatePost({ ...data, id: currentPost._id });
       } else {
         // Create a new post
         response = await createPost(data);

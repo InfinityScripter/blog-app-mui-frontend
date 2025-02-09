@@ -1,4 +1,3 @@
-import { paramCase } from 'src/utils/change-case';
 import axios, { endpoints } from 'src/utils/axios';
 
 import { CONFIG } from 'src/config-global';
@@ -10,17 +9,17 @@ import { PostEditView } from 'src/sections/blog/view';
 export const metadata = { title: `Post edit | Dashboard - ${CONFIG.site.name}` };
 
 export default async function Page({ params }) {
-  const { title } = params;
+  const { id } = params;
 
-  const { post } = await getPost(title);
+  const { post } = await getPost(id);
 
   return <PostEditView post={post} />;
 }
 
 // ----------------------------------------------------------------------
 
-async function getPost(title) {
-  const URL = title ? `${endpoints.post.details}?title=${title}` : '';
+async function getPost(id) {
+  const URL = id ? `${endpoints.post.details}?id=${id}` : '';
 
   const res = await axios.get(URL);
 
@@ -43,7 +42,7 @@ export async function generateStaticParams() {
   if (CONFIG.isStaticExport) {
     const res = await axios.get(endpoints.post.list);
 
-    return res.data.posts.map((post) => ({ title: paramCase(post.title) }));
+    return res.data.posts.map((post) => ({ id: post.id }));
   }
   return [];
 }

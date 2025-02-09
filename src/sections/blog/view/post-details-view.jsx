@@ -47,8 +47,8 @@ export function PostDetailsView({ post }) {
       <Container maxWidth={false} sx={{ px: { sm: 5 } }}>
         <PostDetailsToolbar
           backLink={paths.dashboard.post.root}
-          editLink={paths.dashboard.post.edit(`${post?.title}`)}
-          liveLink={paths.post.details(`${post?.title}`)}
+          editLink={paths.dashboard.post.edit(`${post?._id}`)}
+          liveLink={paths.post.details(`${post?._id}`)}
           publish={`${publish}`}
           onChangePublish={handleChangePublish}
           publishOptions={POST_PUBLISH_OPTIONS}

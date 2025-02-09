@@ -79,6 +79,7 @@ export const navData = [
         children: [
           { title: 'List', path: paths.dashboard.post.root },
           { title: 'Create', path: paths.dashboard.post.new },
+
         ],
       },
     ],
