@@ -7,10 +7,16 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 
+import { useRouter } from 'src/routes/hooks';
+
+import { deletePost } from 'src/actions/blog-ssr';
+
+import { toast } from 'src/components/snackbar'; // если используете уведомления
 import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { paths } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -21,10 +27,27 @@ export function PostDetailsToolbar({
   liveLink,
   publishOptions,
   onChangePublish,
+  postId,
   sx,
   ...other
 }) {
   const popover = usePopover();
+  const router = useRouter();
+  const handleDelete = async () => {
+    // можно добавить подтверждение через window.confirm
+    if (window.confirm('Вы действительно хотите удалить пост?')) {
+      try {
+        await deletePost(postId);
+        toast.success('Пост успешно удалён');
+        // Перенаправляем пользователя на список постов (например, dashboard)
+
+        router.push(paths.dashboard.post.root);
+      } catch (error) {
+        toast.error('Не удалось удалить пост');
+        console.error(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -50,6 +73,12 @@ export function PostDetailsToolbar({
         <Tooltip title="Edit">
           <IconButton component={RouterLink} href={editLink}>
             <Iconify icon="solar:pen-bold" />
+          </IconButton>
+        </Tooltip>
+
+        <Tooltip title="Delete">
+          <IconButton onClick={handleDelete}>
+            <Iconify icon="solar:trash-bin-trash-bold" />
           </IconButton>
         </Tooltip>
 

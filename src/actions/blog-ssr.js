@@ -1,3 +1,5 @@
+import {mutate} from "swr";
+
 import axios, { endpoints } from 'src/utils/axios';
 
 // ----------------------------------------------------------------------
@@ -34,6 +36,7 @@ export async function createPost(postData) {
 
 export async function updatePost(postData) {
   const res = await axios.put(`/api/post/${postData.id}/edit`, postData);
+  await mutate(endpoints.post.list);
   return res.data;
 }
 
@@ -42,6 +45,7 @@ export async function deletePost(postId) {
   try {
     // Если вы хотите использовать динамический URL с [id]:
     const res = await axios.delete(`/api/post/${postId}/delete`);
+    await mutate(endpoints.post.list);
     return res.data;
   } catch (error) {
     console.error('Ошибка удаления поста:', error);

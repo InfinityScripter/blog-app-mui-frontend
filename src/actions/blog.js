@@ -6,7 +6,7 @@ import { fetcher, endpoints } from 'src/utils/axios';
 // ----------------------------------------------------------------------
 
 const swrOptions = {
-  revalidateIfStale: false,
+  revalidateIfStale: true, // Для обновления кэша, используем mutate
   revalidateOnFocus: false,
   revalidateOnReconnect: false,
 };

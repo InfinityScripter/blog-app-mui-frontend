@@ -52,6 +52,7 @@ export function PostDetailsView({ post }) {
           publish={`${publish}`}
           onChangePublish={handleChangePublish}
           publishOptions={POST_PUBLISH_OPTIONS}
+          postId={post._id}
         />
       </Container>
 
