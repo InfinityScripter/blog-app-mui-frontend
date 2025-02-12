@@ -8,15 +8,13 @@ import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 
 import { useRouter } from 'src/routes/hooks';
-
-import { deletePost } from 'src/actions/blog-ssr';
-
-import { toast } from 'src/components/snackbar'; // если используете уведомления
 import { RouterLink } from 'src/routes/components';
 
+import { usePostDelete } from 'src/hooks/use-post-delete';
+
 import { Iconify } from 'src/components/iconify';
+import { ConfirmDialog } from 'src/components/confirm-dialog';
 import { usePopover, CustomPopover } from 'src/components/custom-popover';
-import { paths } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -33,20 +31,11 @@ export function PostDetailsToolbar({
 }) {
   const popover = usePopover();
   const router = useRouter();
-  const handleDelete = async () => {
-    // можно добавить подтверждение через window.confirm
-    if (window.confirm('Вы действительно хотите удалить пост?')) {
-      try {
-        await deletePost(postId);
-        toast.success('Пост успешно удалён');
-        // Перенаправляем пользователя на список постов (например, dashboard)
+  const { openConfirm, loading, handleOpenConfirm, handleCloseConfirm, handleDelete } =
+    usePostDelete();
 
-        router.push(paths.dashboard.post.root);
-      } catch (error) {
-        toast.error('Не удалось удалить пост');
-        console.error(error);
-      }
-    }
+  const handleClickDelete = () => {
+    handleOpenConfirm({ _id: postId });
   };
 
   return (
@@ -77,7 +66,7 @@ export function PostDetailsToolbar({
         </Tooltip>
 
         <Tooltip title="Delete">
-          <IconButton onClick={handleDelete}>
+          <IconButton onClick={handleClickDelete}>
             <Iconify icon="solar:trash-bin-trash-bold" />
           </IconButton>
         </Tooltip>
@@ -118,6 +107,17 @@ export function PostDetailsToolbar({
           ))}
         </MenuList>
       </CustomPopover>
+
+      <ConfirmDialog
+        open={openConfirm}
+        onClose={handleCloseConfirm}
+        title="Delete Post"
+        content="Are you sure you want to delete this post?"
+        onConfirm={handleDelete}
+        loading={loading}
+        confirmText="Delete"
+        confirmColor="error"
+      />
     </>
   );
 }
