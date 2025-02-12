@@ -22,15 +22,17 @@ import { Label } from 'src/components/label';
 import { Image } from 'src/components/image';
 import { Iconify } from 'src/components/iconify';
 import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { ConfirmDialog } from 'src/components/confirm-dialog';
+import { usePostDelete } from 'src/hooks/use-post-delete';
 
 // ----------------------------------------------------------------------
 
 export function PostItemHorizontal({ post }) {
   const theme = useTheme();
-
   const popover = usePopover();
-
   const router = useRouter();
+  const { openConfirm, loading, handleOpenConfirm, handleCloseConfirm, handleDelete } =
+    usePostDelete();
 
   const {
     title,
@@ -43,6 +45,16 @@ export function PostItemHorizontal({ post }) {
     totalComments,
     description,
   } = post;
+
+  const handleEdit = () => {
+    router.push(paths.dashboard.post.edit(post._id));
+    popover.onClose();
+  };
+
+  const handleClickDelete = () => {
+    handleOpenConfirm(post);
+    popover.onClose();
+  };
 
   return (
     <>
@@ -122,46 +134,45 @@ export function PostItemHorizontal({ post }) {
           />
           <Image alt={title} src={coverUrl} sx={{ height: 1, borderRadius: 1.5 }} />
         </Box>
+
+        <CustomPopover
+          open={popover.open}
+          onClose={popover.onClose}
+          anchorEl={popover.anchorEl}
+          slotProps={{ arrow: { placement: 'bottom-center' } }}
+        >
+          <MenuList>
+            <MenuItem
+              onClick={() => {
+                popover.onClose();
+                router.push(paths.dashboard.post.details(post._id));
+              }}
+            >
+              <Iconify icon="solar:eye-bold" />
+              View
+            </MenuItem>
+            <MenuItem onClick={handleEdit}>
+              <Iconify icon="solar:pen-bold" />
+              Edit
+            </MenuItem>
+
+            <MenuItem onClick={handleClickDelete} sx={{ color: 'error.main' }}>
+              <Iconify icon="solar:trash-bin-trash-bold" />
+              Delete
+            </MenuItem>
+          </MenuList>
+        </CustomPopover>
       </Card>
-
-      <CustomPopover
-        open={popover.open}
-        anchorEl={popover.anchorEl}
-        onClose={popover.onClose}
-        slotProps={{ arrow: { placement: 'bottom-center' } }}
-      >
-        <MenuList>
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-              router.push(paths.dashboard.post.details(title));
-            }}
-          >
-            <Iconify icon="solar:eye-bold" />
-            View
-          </MenuItem>
-
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-              router.push(paths.dashboard.post.edit(title));
-            }}
-          >
-            <Iconify icon="solar:pen-bold" />
-            Edit
-          </MenuItem>
-
-          <MenuItem
-            onClick={() => {
-              popover.onClose();
-            }}
-            sx={{ color: 'error.main' }}
-          >
-            <Iconify icon="solar:trash-bin-trash-bold" />
-            Delete
-          </MenuItem>
-        </MenuList>
-      </CustomPopover>
+      <ConfirmDialog
+        open={openConfirm}
+        onClose={handleCloseConfirm}
+        title="Delete Post"
+        content="Are you sure you want to delete this post?"
+        onConfirm={handleDelete}
+        loading={loading}
+        confirmText="Delete"
+        confirmColor="error"
+      />
     </>
   );
 }
