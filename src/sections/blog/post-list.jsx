@@ -25,7 +25,7 @@ export function PostList({ posts, loading }) {
     <Grid container spacing={3}>
       {posts.slice(0, 3).map((post, index) => (
         <Grid
-          key={post.id}
+          key={post._id}
           xs={12}
           sm={6}
           md={4}
@@ -37,13 +37,13 @@ export function PostList({ posts, loading }) {
       ))}
 
       {posts.slice(0, 3).map((post) => (
-        <Grid key={post.id} xs={12} sm={6} md={4} lg={3} sx={{ display: { lg: 'none' } }}>
+        <Grid key={post._id} xs={12} sm={6} md={4} lg={3} sx={{ display: { lg: 'none' } }}>
           <PostItem post={post} />
         </Grid>
       ))}
 
       {posts.slice(3, posts.length).map((post) => (
-        <Grid key={post.id} xs={12} sm={6} md={4} lg={3}>
+        <Grid key={post._id} xs={12} sm={6} md={4} lg={3}>
           <PostItem post={post} />
         </Grid>
       ))}
