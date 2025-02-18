@@ -40,6 +40,16 @@ export async function updatePost(postData) {
   return res.data;
 }
 
+export async function updatePostPublish(postId, publishStatus) {
+  try {
+    const res = await axios.put(`/api/post/${postId}/publish`, { publish: publishStatus });
+    await mutate(endpoints.post.list);
+    return res.data;
+  } catch (error) {
+    console.error('Ошибка обновления статуса публикации:', error);
+    throw error;
+  }
+}
 
 export async function deletePost(postId) {
   try {

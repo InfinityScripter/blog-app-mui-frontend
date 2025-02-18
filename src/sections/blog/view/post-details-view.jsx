@@ -27,14 +27,21 @@ import { PostCommentList } from '../post-comment-list';
 import { PostCommentForm } from '../post-comment-form';
 import { PostDetailsToolbar } from '../post-details-toolbar';
 
+import { updatePostPublish } from 'src/actions/blog-ssr';
+
 // ----------------------------------------------------------------------
 
 export function PostDetailsView({ post }) {
   const [publish, setPublish] = useState('');
 
-  const handleChangePublish = useCallback((newValue) => {
-    setPublish(newValue);
-  }, []);
+  const handleChangePublish = useCallback(async (newValue) => {
+    try {
+      await updatePostPublish(post._id, newValue);
+      setPublish(newValue);
+    } catch (error) {
+      console.error('Failed to update publish status:', error);
+    }
+  }, [post._id]);
 
   useEffect(() => {
     if (post) {
