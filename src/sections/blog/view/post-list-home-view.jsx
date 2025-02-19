@@ -70,17 +70,17 @@ export function PostListHomeView({ posts }) {
 }
 
 const applyFilter = ({ inputData, sortBy }) => {
+
+  const publishedPosts = inputData.filter(post => post.publish === 'published');
+
   if (sortBy === 'latest') {
-    return orderBy(inputData, ['createdAt'], ['desc']);
+    return orderBy(publishedPosts, ['createdAt'], ['desc']);
   }
-
   if (sortBy === 'oldest') {
-    return orderBy(inputData, ['createdAt'], ['asc']);
+    return orderBy(publishedPosts, ['createdAt'], ['asc']);
   }
-
   if (sortBy === 'popular') {
-    return orderBy(inputData, ['totalViews'], ['desc']);
+    return orderBy(publishedPosts, ['totalViews'], ['desc']);
   }
-
-  return inputData;
+  return publishedPosts;
 };
