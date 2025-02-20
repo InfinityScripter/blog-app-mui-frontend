@@ -19,14 +19,15 @@ import {formatImageUrl} from "../../utils/format-image-url";
 export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
   const router = useRouter();
 
-  const handleClick = (title) => {
-    router.push(hrefItem(title));
+  const handleClick = (postId) => {
+    router.push(hrefItem(postId));
   };
 
   const handleKeyUp = (event) => {
     if (query) {
       if (event.key === 'Enter') {
-        handleClick(query);
+        // Используем ID первого найденного поста
+        handleClick(results[0]._id);
       }
     }
   };
