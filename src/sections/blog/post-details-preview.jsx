@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -10,6 +11,9 @@ import DialogActions from '@mui/material/DialogActions';
 import { Markdown } from 'src/components/markdown';
 import { Scrollbar } from 'src/components/scrollbar';
 import { EmptyContent } from 'src/components/empty-content';
+
+import { useResponsive } from 'src/hooks/use-responsive';
+import { formatImageUrl } from 'src/utils/format-image-url';
 
 import { PostDetailsHero } from './post-details-hero';
 
@@ -26,15 +30,17 @@ export function PostDetailsPreview({
   description,
   isSubmitting,
 }) {
-  let previewUrl = '';
+  const [previewUrl, setPreviewUrl] = useState('');
 
-  if (coverUrl) {
-    if (typeof coverUrl === 'string') {
-      previewUrl = coverUrl;
-    } else {
-      previewUrl = URL.createObjectURL(coverUrl);
+  useEffect(() => {
+    if (coverUrl) {
+      if (typeof coverUrl === 'string') {
+        setPreviewUrl(formatImageUrl(coverUrl));
+      } else {
+        setPreviewUrl(URL.createObjectURL(coverUrl));
+      }
     }
-  }
+  }, [coverUrl]);
 
   const hasHero = title || previewUrl;
 

@@ -27,6 +27,7 @@ import { Form, Field, schemaHelper } from 'src/components/hook-form';
 
 import { PostDetailsPreview } from './post-details-preview';
 import {createPost, updatePost} from "../../actions/blog-ssr";
+import axios from "../../utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -88,14 +89,31 @@ export function PostNewEditForm({ currentPost }) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      const finalData = { ...data };
+
+      // Handle file upload if there's a new file
+      if (data.coverUrl && data.coverUrl instanceof File) {
+        const formData = new FormData();
+        formData.append('file', data.coverUrl);
+
+        const uploadResponse = await axios.post('/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        finalData.coverUrl = uploadResponse.data.file.path;
+      }
+
       let response;
       if (currentPost) {
-        // Update an existing post. You might pass an id here.
-        response = await updatePost({ ...data, id: currentPost._id });
+        // Update an existing post
+        response = await updatePost({ ...finalData, id: currentPost._id });
       } else {
         // Create a new post
-        response = await createPost(data);
+        response = await createPost(finalData);
       }
+
       reset();
       preview.onFalse();
       toast.success(currentPost ? 'Update success!' : 'Create success!');
@@ -103,7 +121,7 @@ export function PostNewEditForm({ currentPost }) {
       console.info('Response:', response);
     } catch (error) {
       console.error(error);
-      toast.error('Operation failed');
+      toast.error(error.message || 'Operation failed');
     }
   });
 

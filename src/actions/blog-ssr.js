@@ -62,22 +62,3 @@ export async function deletePost(postId) {
     throw error;
   }
 }
-
-export async function uploadFile(file) {
-  if (!file) return;
-  const formData = new FormData();
-  formData.append('cover', file); // имя поля "cover" должно совпадать с ожиданиями сервера
-
-  try {
-    const response = await axios.post('/api/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    // eslint-disable-next-line consistent-return
-    return response.data.url; // например, "/uploads/filename.jpg"
-  } catch (error) {
-    console.error('Ошибка загрузки файла:', error);
-    throw error;
-  }
-}

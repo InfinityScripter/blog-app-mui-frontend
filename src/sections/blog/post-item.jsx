@@ -9,9 +9,11 @@ import CardContent from '@mui/material/CardContent';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
+import { useRouter } from 'src/routes/hooks';
 
 import { fDate } from 'src/utils/format-time';
 import { fShortenNumber } from 'src/utils/format-number';
+import { formatImageUrl } from 'src/utils/format-image-url';
 
 import { maxLine, varAlpha } from 'src/theme/styles';
 import { AvatarShape } from 'src/assets/illustrations';
@@ -52,7 +54,7 @@ export function PostItem({ post }) {
           }}
         />
 
-        <Image alt={post.title} src={post.coverUrl} ratio="4/3" />
+        <Image alt={post.title} src={formatImageUrl(post.coverUrl)} ratio="4/3" />
       </Box>
 
       <CardContent sx={{ pt: 6 }}>
@@ -104,7 +106,7 @@ export function PostItemLatest({ post, index }) {
 
       <Image
         alt={post.title}
-        src={post.coverUrl}
+        src={formatImageUrl(post.coverUrl)}
         ratio="4/3"
         sx={{ height: 360 }}
         slotProps={{ overlay: { bgcolor: varAlpha(theme.vars.palette.grey['900Channel'], 0.48) } }}

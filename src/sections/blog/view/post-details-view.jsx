@@ -28,6 +28,7 @@ import { PostCommentForm } from '../post-comment-form';
 import { PostDetailsToolbar } from '../post-details-toolbar';
 
 import { updatePostPublish } from 'src/actions/blog-ssr';
+import {formatImageUrl} from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
@@ -63,7 +64,7 @@ export function PostDetailsView({ post }) {
         />
       </Container>
 
-      <PostDetailsHero title={`${post?.title}`} coverUrl={`${post?.coverUrl}`} />
+      <PostDetailsHero title={`${post?.title}`} coverUrl={`${formatImageUrl(post?.coverUrl)}`} />
 
       <Stack
         sx={{

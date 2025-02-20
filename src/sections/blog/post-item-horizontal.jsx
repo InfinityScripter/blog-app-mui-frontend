@@ -24,6 +24,7 @@ import { Iconify } from 'src/components/iconify';
 import { usePopover, CustomPopover } from 'src/components/custom-popover';
 import { ConfirmDialog } from 'src/components/confirm-dialog';
 import { usePostDelete } from 'src/hooks/use-post-delete';
+import {formatImageUrl} from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
@@ -132,7 +133,7 @@ export function PostItemHorizontal({ post }) {
             src={author?.avatarUrl}
             sx={{ top: 16, right: 16, zIndex: 9, position: 'absolute' }}
           />
-          <Image alt={title} src={coverUrl} sx={{ height: 1, borderRadius: 1.5 }} />
+          <Image alt={title} src={formatImageUrl(coverUrl)} sx={{ height: 1, borderRadius: 1.5 }} />
         </Box>
 
         <CustomPopover

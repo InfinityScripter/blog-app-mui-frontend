@@ -9,7 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
 
 import { useResponsive } from 'src/hooks/use-responsive';
-
+import { formatImageUrl } from 'src/utils/format-image-url';
 import { fDate } from 'src/utils/format-time';
 
 import { _socials } from 'src/_mock';
@@ -24,12 +24,14 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }) {
 
   const smUp = useResponsive('up', 'sm');
 
+  const formattedCoverUrl = formatImageUrl(coverUrl);
+
   return (
     <Box
       sx={{
         ...bgGradient({
           color: `0deg, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.64)}, ${varAlpha(theme.vars.palette.grey['900Channel'], 0.64)}`,
-          imgUrl: coverUrl,
+          imgUrl: formattedCoverUrl,
         }),
         height: 480,
         overflow: 'hidden',

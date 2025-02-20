@@ -71,8 +71,11 @@ export function JwtSignInView() {
 
       router.refresh();
     } catch (error) {
-      console.error(error);
-      setErrorMsg(error instanceof Error ? error.message : error);
+      // Извлекаем сообщение об ошибке из ответа сервера, если оно есть
+      const errorMessage =
+        error.response?.data?.message || error.message || 'Ошибка авторизации';
+      setErrorMsg(errorMessage);
+      console.error('Ошибка входа:', errorMessage);
     }
   });
 

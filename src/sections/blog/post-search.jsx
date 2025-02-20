@@ -12,6 +12,7 @@ import { useRouter } from 'src/routes/hooks';
 
 import { Iconify } from 'src/components/iconify';
 import { SearchNotFound } from 'src/components/search-not-found';
+import {formatImageUrl} from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
@@ -73,9 +74,9 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
         return (
           <li {...props} key={post.id}>
             <Avatar
-              key={post.id}
+              key={post._id}
               alt={post.title}
-              src={post.coverUrl}
+              src={formatImageUrl(post.coverUrl)}
               variant="rounded"
               sx={{
                 width: 48,
