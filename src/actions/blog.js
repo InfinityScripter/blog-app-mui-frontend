@@ -75,8 +75,8 @@ export function useGetLatestPosts(title) {
 
 // ----------------------------------------------------------------------
 
-export function useSearchPosts(query) {
-  const url = query ? [endpoints.post.search, { params: { query } }] : '';
+export function useSearchPosts(query, dashboard = false) {
+  const url = query ? [endpoints.post.search, { params: { query, dashboard } }] : '';
 
   const { data, isLoading, error, isValidating } = useSWR(url, fetcher, {
     ...swrOptions,

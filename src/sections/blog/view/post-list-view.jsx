@@ -38,7 +38,7 @@ export function PostListView() {
 
   const { posts, postsLoading } = useGetPosts();
 
-  const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
+  const { searchResults, searchLoading } = useSearchPosts(debouncedQuery, true);
 
   const filters = useSetState({ publish: 'all' });
 
@@ -94,6 +94,7 @@ export function PostListView() {
           onSearch={handleSearch}
           loading={searchLoading}
           hrefItem={(title) => paths.dashboard.post.details(title)}
+          dashboard={true}
         />
 
         <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />

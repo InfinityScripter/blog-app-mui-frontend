@@ -42,7 +42,7 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
       onInputChange={(event, newValue) => onSearch(newValue)}
       getOptionLabel={(option) => option.title}
       noOptionsText={<SearchNotFound query={query} />}
-      isOptionEqualToValue={(option, value) => option.id === value.id}
+      isOptionEqualToValue={(option, value) => option._id === value._id}
       slotProps={{
         popper: { placement: 'bottom-start', sx: { minWidth: 320 } },
         paper: { sx: { [` .${autocompleteClasses.option}`]: { pl: 0.75 } } },
@@ -68,12 +68,12 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
           }}
         />
       )}
-      renderOption={(props, post, { inputValue }) => {
-        const matches = match(post.title, inputValue);
+      renderOption={(props, post) => {
+        const matches = match(post.title, query);
         const parts = parse(post.title, matches);
 
         return (
-          <li {...props} key={post.id}>
+          <li {...props} key={post._id}>
             <Avatar
               key={post._id}
               alt={post.title}
@@ -88,10 +88,10 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
               }}
             />
 
-            <Link key={inputValue} underline="none" onClick={() => handleClick(post._id)}>
+            <Link underline="none" onClick={() => handleClick(post._id)}>
               {parts.map((part, index) => (
                 <Typography
-                  key={index}
+                  key={`${post._id}-part-${index}`}
                   component="span"
                   color={part.highlight ? 'primary' : 'textPrimary'}
                   sx={{
