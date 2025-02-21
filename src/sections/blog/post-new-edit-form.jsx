@@ -1,7 +1,7 @@
 import { z as zod } from 'zod';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMemo, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
@@ -23,11 +23,11 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { _tags } from 'src/_mock';
 
 import { toast } from 'src/components/snackbar';
-import { Form, Field, schemaHelper } from 'src/components/hook-form';
+import { Field, Form, schemaHelper } from 'src/components/hook-form';
 
 import { PostDetailsPreview } from './post-details-preview';
-import {createPost, updatePost} from "../../actions/blog-ssr";
-import axios from "../../utils/axios";
+import { createPost, updatePost } from '../../actions/blog-ssr';
+import axios from '../../utils/axios';
 
 // ----------------------------------------------------------------------
 
@@ -38,6 +38,7 @@ export const NewPostSchema = zod.object({
   coverUrl: schemaHelper.file({ message: { required_error: 'Cover is required!' } }),
   tags: zod.string().array().min(2, { message: 'Must have at least 2 items!' }),
   metaKeywords: zod.string().array().nonempty({ message: 'Meta keywords is required!' }),
+  publish: zod.boolean(),
   // Not required
   metaTitle: zod.string(),
   metaDescription: zod.string(),
@@ -60,6 +61,7 @@ export function PostNewEditForm({ currentPost }) {
       metaKeywords: currentPost?.metaKeywords || [],
       metaTitle: currentPost?.metaTitle || '',
       metaDescription: currentPost?.metaDescription || '',
+      publish: currentPost ? currentPost.publish === 'published' : false,
     }),
     [currentPost]
   );
@@ -86,11 +88,11 @@ export function PostNewEditForm({ currentPost }) {
     }
   }, [currentPost, defaultValues, reset]);
 
-
   const onSubmit = handleSubmit(async (data) => {
     try {
       const finalData = { ...data };
 
+      finalData.publish = data.publish ? 'published' : 'draft';
       // Handle file upload if there's a new file
       if (data.coverUrl && data.coverUrl instanceof File) {
         const formData = new FormData();
@@ -234,10 +236,16 @@ export function PostNewEditForm({ currentPost }) {
 
   const renderActions = (
     <Box display="flex" alignItems="center" flexWrap="wrap" justifyContent="flex-end">
-      <FormControlLabel
-        control={<Switch defaultChecked inputProps={{ id: 'publish-switch' }} />}
-        label="Publish"
-        sx={{ pl: 3, flexGrow: 1 }}
+      <Controller
+        name="publish"
+        control={methods.control}
+        render={({ field: { value, onChange } }) => (
+          <FormControlLabel
+            control={<Switch checked={value} onChange={(e) => onChange(e.target.checked)} />}
+            label="Publish"
+            sx={{ pl: 3, flexGrow: 1 }}
+          />
+        )}
       />
 
       <div>
