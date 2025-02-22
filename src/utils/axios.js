@@ -8,7 +8,12 @@ const axiosInstance = axios.create({ baseURL: CONFIG.site.serverUrl });
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  (error) => Promise.reject((error.response && error.response.data) || 'Something went wrong!')
+  (error) => {
+    if (error.response?.data?.message) {
+      return Promise.reject(new Error(error.response.data.message));
+    }
+    return Promise.reject(new Error('Something went wrong. Please try again.'));
+  }
 );
 
 export default axiosInstance;
@@ -38,6 +43,10 @@ export const endpoints = {
     me: '/api/auth/me',
     signIn: '/api/auth/sign-in',
     signUp: '/api/auth/sign-up',
+    verify: '/api/auth/verify',
+    resendVerification: '/api/auth/resend-verification',
+    resetPassword: '/api/auth/reset-password',
+    updatePassword: '/api/auth/update-password',
   },
   mail: {
     list: '/api/mail/list',

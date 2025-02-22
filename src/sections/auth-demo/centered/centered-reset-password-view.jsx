@@ -16,6 +16,9 @@ import { PasswordIcon } from 'src/assets/icons';
 
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
+import axios, {endpoints} from "../../../utils/axios";
+import {useState} from "react";
+import Alert from "@mui/material/Alert";
 
 // ----------------------------------------------------------------------
 
@@ -30,6 +33,8 @@ export const ResetPasswordSchema = zod.object({
 
 export function CenteredResetPasswordView() {
   const defaultValues = { email: '' };
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const methods = useForm({
     resolver: zodResolver(ResetPasswordSchema),
@@ -42,11 +47,19 @@ export function CenteredResetPasswordView() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
+    console.log(data,"data")
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      console.info('DATA', data);
+      setError('');
+      setSuccess('');
+
+      const response = await axios.post(endpoints.auth.resetPassword, {
+        email: data.email,
+      });
+
+      setSuccess(response.data.message || 'Reset password instructions have been sent to your email');
     } catch (error) {
-      console.error(error);
+      console.error('Reset password error:', error);
+      setError(error.message || 'Failed to send reset password email');
     }
   });
 
@@ -73,6 +86,8 @@ export function CenteredResetPasswordView() {
         autoFocus
         InputLabelProps={{ shrink: true }}
       />
+      {error && <Alert severity="error">{error}</Alert>}
+      {success && <Alert severity="success">{success}</Alert>}
 
       <LoadingButton
         fullWidth
