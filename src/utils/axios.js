@@ -4,7 +4,7 @@ import { CONFIG } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-const axiosInstance = axios.create({ baseURL: CONFIG.site.serverUrl });
+const axiosInstance = axios.create({ baseURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:7272' });
 
 axiosInstance.interceptors.response.use(
   (response) => response,

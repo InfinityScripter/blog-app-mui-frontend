@@ -38,7 +38,7 @@ export const VerifySchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:7272';
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ;
 
 export function SplitVerifyView() {
   const router = useRouter();

@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { z as zod } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,16 +11,15 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
+import Alert from '@mui/material/Alert';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
-
 import { useBoolean } from 'src/hooks/use-boolean';
-
 import { SentIcon } from 'src/assets/icons';
-
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
+import axios from '../../../utils/axios';
 
 export const UpdatePasswordSchema = zod
   .object({
@@ -42,14 +42,19 @@ export const UpdatePasswordSchema = zod
     path: ['confirmPassword'],
   });
 
-// ----------------------------------------------------------------------
-
 export function CenteredUpdatePasswordView() {
   const password = useBoolean();
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  // Получаем параметры из URL
+  const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
+  const emailFromUrl = urlParams.get('email') || '';
+  const codeFromUrl = urlParams.get('code') || '';
 
   const defaultValues = {
-    code: '',
-    email: '',
+    code: codeFromUrl,
+    email: emailFromUrl,
     password: '',
     confirmPassword: '',
   };
@@ -58,6 +63,7 @@ export function CenteredUpdatePasswordView() {
     resolver: zodResolver(UpdatePasswordSchema),
     defaultValues,
   });
+
   const {
     handleSubmit,
     formState: { isSubmitting },
@@ -65,10 +71,24 @@ export function CenteredUpdatePasswordView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      console.info('DATA', data);
+      setError('');
+      setSuccess('');
+
+      await axios.post('/api/auth/update-password', {
+        email: data.email,
+        code: data.code,
+        password: data.password
+      });
+
+      setSuccess('Password updated successfully!');
+      
+      // Redirect to login after short delay
+      setTimeout(() => {
+        window.location.href = paths.auth.jwt.signIn;
+      }, 1500);
     } catch (error) {
-      console.error(error);
+      console.error('Error updating password:', error);
+      setError(error.response?.data?.message || 'Failed to update password. Please try again.');
     }
   });
 
@@ -77,10 +97,10 @@ export function CenteredUpdatePasswordView() {
       <SentIcon sx={{ mx: 'auto' }} />
 
       <Stack spacing={1} sx={{ mt: 3, mb: 5, textAlign: 'center', whiteSpace: 'pre-line' }}>
-        <Typography variant="h5">Request sent successfully!</Typography>
+        <Typography variant="h5">Update Your Password</Typography>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {`We've sent a 6-digit confirmation email to your email. \nPlease enter the code in below box to verify your email.`}
+          Please enter your verification code and new password
         </Typography>
       </Stack>
     </>
@@ -93,16 +113,18 @@ export function CenteredUpdatePasswordView() {
         label="Email address"
         placeholder="example@gmail.com"
         InputLabelProps={{ shrink: true }}
+        disabled
       />
 
-      <Field.Code name="code" />
+      <Field.Code 
+        name="code"
+        defaultValue={codeFromUrl}
+      />
 
       <Field.Text
         name="password"
-        label="Password"
-        placeholder="6+ characters"
+        label="New Password"
         type={password.value ? 'text' : 'password'}
-        InputLabelProps={{ shrink: true }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -116,9 +138,8 @@ export function CenteredUpdatePasswordView() {
 
       <Field.Text
         name="confirmPassword"
-        label="Confirm new password"
+        label="Confirm New Password"
         type={password.value ? 'text' : 'password'}
-        InputLabelProps={{ shrink: true }}
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -130,44 +151,41 @@ export function CenteredUpdatePasswordView() {
         }}
       />
 
+      {error && <Alert severity="error">{error}</Alert>}
+      {success && <Alert severity="success">{success}</Alert>}
+
       <LoadingButton
         fullWidth
         size="large"
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Update password..."
       >
-        Update password
+        Update Password
       </LoadingButton>
-
-      <Typography variant="body2" sx={{ mx: 'auto' }}>
-        {`Don’t have a code? `}
-        <Link variant="subtitle2" sx={{ cursor: 'pointer' }}>
-          Resend code
-        </Link>
-      </Typography>
 
       <Link
         component={RouterLink}
-        href={paths.authDemo.centered.signIn}
+        href={paths.auth.jwt.signIn}
         color="inherit"
         variant="subtitle2"
-        sx={{ mx: 'auto', alignItems: 'center', display: 'inline-flex' }}
+        sx={{
+          mt: 3,
+          mx: 'auto',
+          alignItems: 'center',
+          display: 'inline-flex',
+        }}
       >
-        <Iconify icon="eva:arrow-ios-back-fill" width={16} sx={{ mr: 0.5 }} />
+        <Iconify icon="eva:arrow-ios-back-fill" width={16} />
         Return to sign in
       </Link>
     </Stack>
   );
 
   return (
-    <>
+    <Form methods={methods} onSubmit={onSubmit}>
       {renderHead}
-
-      <Form methods={methods} onSubmit={onSubmit}>
-        {renderForm}
-      </Form>
-    </>
+      {renderForm}
+    </Form>
   );
 }
