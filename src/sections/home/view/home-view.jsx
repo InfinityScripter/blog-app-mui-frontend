@@ -1,60 +1,51 @@
 'use client';
 
-import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
 
 import { BackToTop } from 'src/components/animate/back-to-top';
-import { ScrollProgress, useScrollProgress } from 'src/components/animate/scroll-progress';
+import { ScrollProgress } from 'src/components/animate/scroll-progress';
 
 import { HomeHero } from '../home-hero';
-import { HomeFAQs } from '../home-faqs';
-import { HomeZoneUI } from '../home-zone-ui';
-import { HomeMinimal } from '../home-minimal';
-import { HomePricing } from '../home-pricing';
-import { HomeForDesigner } from '../home-for-designer';
-import { HomeTestimonials } from '../home-testimonials';
-import { HomeIntegrations } from '../home-integrations';
-import { HomeAdvertisement } from '../home-advertisement';
-import { HomeHugePackElements } from '../home-hugepack-elements';
-import { HomeHighlightFeatures } from '../home-highlight-features';
+import HomeSkills from '../home-skills';
+import {HomeProjects} from '../home-projects';
+import HomeExperience from '../home-experience';
 
 // ----------------------------------------------------------------------
 
 export function HomeView() {
-  const pageProgress = useScrollProgress();
-
   return (
     <>
-      <ScrollProgress
-        variant="linear"
-        progress={pageProgress.scrollYProgress}
-        sx={{ position: 'fixed' }}
-      />
+      <ScrollProgress />
 
       <BackToTop />
 
       <HomeHero />
 
-      <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
-        <HomeMinimal />
+      <Box
+        sx={{
+          overflow: 'hidden',
+          position: 'relative',
+          bgcolor: 'background.default',
+        }}
+      >
+        <Container
+          sx={{
+            py: { xs: 10, md: 15 },
+            maxWidth: '1200px !important',
+          }}
+        >
+          <HomeSkills />
 
-        <HomeHugePackElements />
+          <Box sx={{ height: { xs: 40, md: 80 } }} />
 
-        <HomeForDesigner />
+          <HomeProjects />
 
-        <HomeHighlightFeatures />
+          <Box sx={{ height: { xs: 40, md: 80 } }} />
 
-        <HomeIntegrations />
-
-        <HomePricing />
-
-        <HomeTestimonials />
-
-        <HomeFAQs />
-
-        <HomeZoneUI />
-
-        <HomeAdvertisement />
-      </Stack>
+          <HomeExperience />
+        </Container>
+      </Box>
     </>
   );
 }
