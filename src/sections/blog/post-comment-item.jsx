@@ -4,17 +4,87 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { useState } from 'react';
 
 import { useBoolean } from 'src/hooks/use-boolean';
+import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 
 import { fDate } from 'src/utils/format-time';
 
 import { Iconify } from 'src/components/iconify';
 
+import { updateComment, deleteComment } from 'src/actions/blog-ssr';
+import { PostCommentForm } from "./post-comment-form";
+
 // ----------------------------------------------------------------------
 
-export function PostCommentItem({ name, avatarUrl, message, tagUser, postedAt, hasReply }) {
+export function PostCommentItem({
+  name,
+  avatarUrl,
+  message,
+  tagUser,
+  postedAt,
+  hasReply,
+  comment,
+  postId,
+  parentCommentId,
+  onCommentUpdated,
+}) {
   const reply = useBoolean();
+  const { user } = useAuthContext();
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedMessage, setEditedMessage] = useState(message);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleEdit = async () => {
+    if (isEditing && editedMessage.trim()) {
+      try {
+        setIsLoading(true);
+        await updateComment(postId, comment.id, {
+          message: editedMessage,
+          isReply: hasReply,
+          parentCommentId,
+        });
+        if (onCommentUpdated) {
+          onCommentUpdated();
+        }
+        setIsEditing(false);
+      } catch (error) {
+        console.error('Failed to update comment:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      setIsEditing(true);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      setIsLoading(true);
+      await deleteComment(postId, comment.id, {
+        isReply: hasReply,
+        parentCommentId,
+      });
+      if (onCommentUpdated) {
+        onCommentUpdated();
+      }
+    } catch (error) {
+      console.error('Failed to delete comment:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // For debugging
+  console.log('Current user ID:', user?._id);
+  console.log('Comment user ID:', comment.userId);
+  console.log('Post user ID:', postId?.user);
+
+  // Check if the current user is the creator of the comment
+  const isCommentOwner = user?._id && comment.userId && String(user._id) === String(comment.userId);
 
   return (
     <Box
@@ -45,27 +115,59 @@ export function PostCommentItem({ name, avatarUrl, message, tagUser, postedAt, h
               @{tagUser}
             </Box>
           )}
-          {message}
+          {isEditing ? (
+            <TextField
+              fullWidth
+              multiline
+              size="small"
+              value={editedMessage}
+              onChange={(e) => setEditedMessage(e.target.value)}
+              sx={{ mt: 1 }}
+            />
+          ) : (
+            message
+          )}
         </Typography>
 
-        {reply.value && (
-          <Box sx={{ mt: 2 }}>
-            <TextField fullWidth autoFocus placeholder="Write comment..." />
-          </Box>
-        )}
-      </Stack>
+        <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+          {!hasReply && (
+            <Button
+              size="small"
+              color="inherit"
+              startIcon={<Iconify icon="solar:pen-bold" />}
+              onClick={reply.onTrue}
+            >
+              Reply
+            </Button>
+          )}
 
-      {!hasReply && (
-        <Button
-          size="small"
-          color={reply.value ? 'primary' : 'inherit'}
-          startIcon={<Iconify icon="solar:pen-bold" width={16} />}
-          onClick={reply.onToggle}
-          sx={{ right: 0, position: 'absolute' }}
-        >
-          Reply
-        </Button>
-      )}
+          {isCommentOwner && (
+            <>
+              <LoadingButton
+                size="small"
+                color={isEditing ? 'primary' : 'inherit'}
+                startIcon={<Iconify icon={isEditing ? 'solar:disk-bold' : 'solar:pen-bold'} />}
+                onClick={handleEdit}
+                loading={isLoading && isEditing}
+              >
+                {isEditing ? 'Save' : 'Edit'}
+              </LoadingButton>
+
+              <LoadingButton
+                size="small"
+                color="error"
+                startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
+                onClick={handleDelete}
+                loading={isLoading && !isEditing}
+              >
+                Delete
+              </LoadingButton>
+            </>
+          )}
+        </Stack>
+
+        {reply.value && <PostCommentForm hasReply onClose={reply.onFalse} />}
+      </Stack>
     </Box>
   );
 }

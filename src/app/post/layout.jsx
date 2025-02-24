@@ -1,7 +1,13 @@
 import { MainLayout } from 'src/layouts/main';
+import {AuthProvider} from "../../auth/context/jwt";
 
 // ----------------------------------------------------------------------
 
 export default function Layout({ children }) {
-  return <MainLayout>{children}</MainLayout>;
+
+  return (
+    <AuthProvider>
+      <MainLayout>{children}</MainLayout>
+    </AuthProvider>
+  );
 }

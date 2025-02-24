@@ -1,4 +1,4 @@
-import {mutate} from "swr";
+import { mutate } from "swr";
 
 import axios, { endpoints } from 'src/utils/axios';
 
@@ -59,6 +59,54 @@ export async function deletePost(postId) {
     return res.data;
   } catch (error) {
     console.error('Ошибка удаления поста:', error);
+    throw error;
+  }
+}
+
+export async function getCurrentUser() {
+  const res = await axios.get('/api/auth/me');
+  return res.data;
+}
+
+export async function addComment(postId, commentData) {
+  if (!postId) {
+    throw new Error('Post ID is required');
+  }
+  try {
+    const res = await axios.post(`${endpoints.post.comments.add(postId)}?postId=${postId}`, commentData);
+    // Инвалидируем кэш для обновления данных
+    await mutate(`${endpoints.post.details}?id=${postId}`);
+    return res.data;
+  } catch (error) {
+    console.error('Ошибка добавления комментария:', error);
+    throw error;
+  }
+}
+
+export async function updateComment(postId, commentId, commentData) {
+  if (!postId || !commentId) {
+    throw new Error('Post ID and Comment ID are required');
+  }
+  try {
+    const res = await axios.put(`${endpoints.post.comments.update(postId, commentId)}?postId=${postId}`, commentData);
+    await mutate(`${endpoints.post.details}?id=${postId}`);
+    return res.data;
+  } catch (error) {
+    console.error('Ошибка обновления комментария:', error);
+    throw error;
+  }
+}
+
+export async function deleteComment(postId, commentId, options = {}) {
+  if (!postId || !commentId) {
+    throw new Error('Post ID and Comment ID are required');
+  }
+  try {
+    const res = await axios.delete(`${endpoints.post.comments.delete(postId, commentId)}?postId=${postId}`, { data: options });
+    await mutate(`${endpoints.post.details}?id=${postId}`);
+    return res.data;
+  } catch (error) {
+    console.error('Ошибка удаления комментария:', error);
     throw error;
   }
 }

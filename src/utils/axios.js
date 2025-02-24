@@ -59,7 +59,14 @@ export const endpoints = {
     latest: '/api/post/latest',
     search: '/api/post/search',
     new: '/api/post/new',
-    edit: '/api/post/edit'
+    edit: '/api/post/edit',
+    comments: {
+      list: (postId) => `/api/post/${postId}/comments`,
+      add: (postId) => `/api/post/${postId}/comments`,
+      update: (postId, commentId) => `/api/post/${postId}/comments/${commentId}`,
+      delete: (postId, commentId) => `/api/post/${postId}/comments/${commentId}`,
+      reply: (postId, commentId) => `/api/post/${postId}/comments/${commentId}/reply`,
+    },
   },
   product: {
     list: '/api/product/list',

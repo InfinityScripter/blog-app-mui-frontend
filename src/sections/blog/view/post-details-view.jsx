@@ -129,7 +129,7 @@ export function PostDetailsView({ post }) {
 
         <Divider sx={{ mt: 5, mb: 2 }} />
 
-        <PostCommentList comments={post?.comments ?? []} />
+        <PostCommentList comments={post?.comments ?? []} postId={post?._id} />
       </Stack>
     </DashboardContent>
   );

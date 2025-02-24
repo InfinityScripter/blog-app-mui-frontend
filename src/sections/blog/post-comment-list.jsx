@@ -5,7 +5,7 @@ import { PostCommentItem } from './post-comment-item';
 
 // ----------------------------------------------------------------------
 
-export function PostCommentList({ comments = [] }) {
+export function PostCommentList({ comments = [], postId, onCommentUpdated }) {
   return (
     <>
       {comments.map((comment) => {
@@ -18,6 +18,9 @@ export function PostCommentList({ comments = [] }) {
               message={comment.message}
               postedAt={comment.postedAt}
               avatarUrl={comment.avatarUrl}
+              comment={comment}
+              postId={postId}
+              onCommentUpdated={onCommentUpdated}
             />
             {hasReply &&
               comment.replyComment.map((reply) => {
@@ -32,6 +35,10 @@ export function PostCommentList({ comments = [] }) {
                     avatarUrl={userReply?.avatarUrl || ''}
                     tagUser={reply.tagUser}
                     hasReply
+                    comment={reply}
+                    postId={postId}
+                    parentCommentId={comment.id}
+                    onCommentUpdated={onCommentUpdated}
                   />
                 );
               })}
