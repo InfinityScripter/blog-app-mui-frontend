@@ -15,39 +15,45 @@ import { fDate } from 'src/utils/format-time';
 
 import { Iconify } from 'src/components/iconify';
 
-import { updateComment, deleteComment } from 'src/actions/blog-ssr';
+import { deleteComment, updateComment } from 'src/actions/blog-ssr';
 import { PostCommentForm } from './post-comment-form';
+import { endpoints } from '../../utils/axios';
 
 export default function PostCommentItem({
-                                  name,
-                                  avatarUrl,
-                                  message,
-                                  tagUser,
-                                  postedAt,
-                                  hasReply,
-                                  comment,
-                                  parentCommentId,
-                                  onCommentUpdated,
-                                }) {
+  name,
+  avatarUrl,
+  message,
+  tagUser,
+  postedAt,
+  hasReply,
+  comment,
+  parentCommentId,
+  onCommentUpdated,
+}) {
   const reply = useBoolean();
   const { user } = useAuthContext();
   const params = useParams();
-  const PostId = params?.id;
+  const postId = params?.id;
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
   const [isLoading, setIsLoading] = useState(false);
 
+  const postCacheKey = `${endpoints.post.details}?id=${postId}`;
+
   const handleEdit = async () => {
     if (isEditing && editedMessage.trim()) {
-      console.log('Сохранение отредактированного комментария. PostId:', PostId, 'comment id:', comment.id);
       try {
         setIsLoading(true);
-        await updateComment(PostId, comment.id, {
+        await updateComment(postId, comment.id, {
           message: editedMessage,
           isReply: hasReply,
           parentCommentId,
         });
+
+        // Directly trigger a revalidation of the post data
+        await mutate(postCacheKey);
+
         if (onCommentUpdated) {
           onCommentUpdated();
         }
@@ -58,19 +64,21 @@ export default function PostCommentItem({
         setIsLoading(false);
       }
     } else {
-      console.log('Переключение в режим редактирования');
       setIsEditing(true);
     }
   };
 
   const handleDelete = async () => {
-    console.log('Удаление комментария. PostId:', PostId, 'comment id:', comment.id);
     try {
       setIsLoading(true);
-      await deleteComment(PostId, comment.id, {
+      await deleteComment(postId, comment.id, {
         isReply: hasReply,
         parentCommentId,
       });
+
+      // Directly trigger a revalidation of the post data
+      await mutate(postCacheKey);
+
       if (onCommentUpdated) {
         onCommentUpdated();
       }
@@ -81,9 +89,7 @@ export default function PostCommentItem({
     }
   };
 
-
-  const isCommentOwner =
-    user?._id && comment.userId && String(user._id) === String(comment.userId);
+  const isCommentOwner = user?._id && comment.userId && String(user._id) === String(comment.userId);
 
   return (
     <Box

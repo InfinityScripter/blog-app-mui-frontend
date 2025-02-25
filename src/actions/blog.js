@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { useMemo } from 'react';
 
-import { fetcher, endpoints } from 'src/utils/axios';
+import { endpoints, fetcher } from 'src/utils/axios';
 
 // ----------------------------------------------------------------------
 
@@ -34,22 +34,22 @@ export function useGetPosts() {
 
 // ----------------------------------------------------------------------
 
-export function useGetPost(title) {
+export function useGetPost(postId, title) {
   const url = title ? [endpoints.post.details, { params: { title } }] : '';
+  const key = postId ? `${endpoints.post.details}?id=${postId}` : null;
 
-  const { data, isLoading, error, isValidating } = useSWR(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating, mutate } = useSWR(key, fetcher, swrOptions);
 
-  const memoizedValue = useMemo(
+  return useMemo(
     () => ({
       post: data?.post,
       postLoading: isLoading,
       postError: error,
       postValidating: isValidating,
+      postMutate: mutate, // Expose mutate function
     }),
-    [data?.post, error, isLoading, isValidating]
+    [data?.post, error, isLoading, isValidating, mutate]
   );
-
-  return memoizedValue;
 }
 
 // ----------------------------------------------------------------------

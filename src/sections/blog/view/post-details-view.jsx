@@ -22,49 +22,57 @@ import { DashboardContent } from 'src/layouts/dashboard';
 import { Iconify } from 'src/components/iconify';
 import { Markdown } from 'src/components/markdown';
 
+import { updatePostPublish } from 'src/actions/blog-ssr';
+import { useGetPost } from 'src/actions/blog';
 import { PostDetailsHero } from '../post-details-hero';
 import { PostCommentList } from '../post-comment-list';
 import { PostCommentForm } from '../post-comment-form';
 import { PostDetailsToolbar } from '../post-details-toolbar';
 
-import { updatePostPublish } from 'src/actions/blog-ssr';
 import {formatImageUrl} from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
-export function PostDetailsView({ post }) {
+export function PostDetailsView({ initialPost }) {
   const [publish, setPublish] = useState('');
+  
+  const { post, postLoading } = useGetPost(initialPost?._id);
+  const currentPost = post || initialPost;
 
   const handleChangePublish = useCallback(async (newValue) => {
     try {
-      await updatePostPublish(post._id, newValue);
+      await updatePostPublish(currentPost._id, newValue);
       setPublish(newValue);
     } catch (error) {
       console.error('Failed to update publish status:', error);
     }
-  }, [post._id]);
+  }, [currentPost._id]);
 
   useEffect(() => {
-    if (post) {
-      setPublish(post?.publish);
+    if (currentPost) {
+      setPublish(currentPost?.publish);
     }
-  }, [post]);
+  }, [currentPost]);
+
+  if (postLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <DashboardContent maxWidth={false} disablePadding>
       <Container maxWidth={false} sx={{ px: { sm: 5 } }}>
         <PostDetailsToolbar
           backLink={paths.dashboard.post.root}
-          editLink={paths.dashboard.post.edit(`${post?._id}`)}
-          liveLink={paths.post.details(`${post?._id}`)}
+          editLink={paths.dashboard.post.edit(`${currentPost?._id}`)}
+          liveLink={paths.post.details(`${currentPost?._id}`)}
           publish={`${publish}`}
           onChangePublish={handleChangePublish}
           publishOptions={POST_PUBLISH_OPTIONS}
-          postId={post._id}
+          postId={currentPost._id}
         />
       </Container>
 
-      <PostDetailsHero title={`${post?.title}`} coverUrl={`${formatImageUrl(post?.coverUrl)}`} />
+      <PostDetailsHero title={`${currentPost?.title}`} coverUrl={`${formatImageUrl(currentPost?.coverUrl)}`} />
 
       <Stack
         sx={{
@@ -75,9 +83,9 @@ export function PostDetailsView({ post }) {
           px: { xs: 2, sm: 3 },
         }}
       >
-        <Typography variant="subtitle1">{post?.description}</Typography>
+        <Typography variant="subtitle1">{currentPost?.description}</Typography>
 
-        <Markdown children={post?.content} />
+        <Markdown children={currentPost?.content} />
 
         <Stack
           spacing={3}
@@ -88,7 +96,7 @@ export function PostDetailsView({ post }) {
           }}
         >
           <Stack direction="row" flexWrap="wrap" spacing={1}>
-            {post?.tags.map((tag) => (
+            {currentPost?.tags.map((tag) => (
               <Chip key={tag} label={tag} variant="soft" />
             ))}
           </Stack>
@@ -105,12 +113,12 @@ export function PostDetailsView({ post }) {
                   inputProps={{ id: 'favorite-checkbox', 'aria-label': 'Favorite checkbox' }}
                 />
               }
-              label={fShortenNumber(post?.totalFavorites)}
+              label={fShortenNumber(currentPost?.totalFavorites)}
               sx={{ mr: 1 }}
             />
 
             <AvatarGroup sx={{ [`& .${avatarGroupClasses.avatar}`]: { width: 32, height: 32 } }}>
-              {post?.favoritePerson.map((person) => (
+              {currentPost?.favoritePerson.map((person) => (
                 <Avatar key={person.name} alt={person.name} src={person.avatarUrl} />
               ))}
             </AvatarGroup>
@@ -121,15 +129,15 @@ export function PostDetailsView({ post }) {
           <Typography variant="h4">Comments</Typography>
 
           <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-            ({post?.comments.length})
+            ({currentPost?.comments.length})
           </Typography>
         </Stack>
 
-        <PostCommentForm />
+        <PostCommentForm postId={currentPost?._id} />
 
         <Divider sx={{ mt: 5, mb: 2 }} />
 
-        <PostCommentList comments={post?.comments ?? []} postId={post?._id} />
+        <PostCommentList comments={currentPost?.comments ?? []} postId={currentPost?._id} />
       </Stack>
     </DashboardContent>
   );

@@ -7,7 +7,7 @@ export const metadata = { title: `Post details | Dashboard - ${CONFIG.site.name}
 export default async function Page({ params }) {
   const { id } = params;
   const { post } = await getPost(id);
-  return <PostDetailsView post={post} />;
+  return <PostDetailsView initialPost={post} />
 }
 
 async function getPost(id) {
