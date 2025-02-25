@@ -103,17 +103,17 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
 
         <Stack direction="row" alignItems="center">
           <Stack direction="row" alignItems="center" flexGrow={1}>
-            <IconButton>
-              <Iconify icon="solar:gallery-add-bold" />
-            </IconButton>
+            {/*<IconButton>*/}
+            {/*  <Iconify icon="solar:gallery-add-bold" />*/}
+            {/*</IconButton>*/}
 
-            <IconButton>
-              <Iconify icon="eva:attach-2-fill" />
-            </IconButton>
+            {/*<IconButton>*/}
+            {/*  <Iconify icon="eva:attach-2-fill" />*/}
+            {/*</IconButton>*/}
 
-            <IconButton>
-              <Iconify icon="eva:smiling-face-fill" />
-            </IconButton>
+            {/*<IconButton>*/}
+            {/*  <Iconify icon="eva:smiling-face-fill" />*/}
+            {/*</IconButton>*/}
           </Stack>
 
           <LoadingButton
