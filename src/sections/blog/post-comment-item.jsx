@@ -5,6 +5,8 @@ import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
+import IconButton from '@mui/material/IconButton';
+import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 
@@ -14,6 +16,7 @@ import { useAuthContext } from 'src/auth/hooks/use-auth-context';
 import { fDate } from 'src/utils/format-time';
 
 import { Iconify } from 'src/components/iconify';
+import { usePopover, CustomPopover } from 'src/components/custom-popover';
 
 import { deleteComment, updateComment } from 'src/actions/blog-ssr';
 import { PostCommentForm } from './post-comment-form';
@@ -34,25 +37,21 @@ export default function PostCommentItem({
   const { user } = useAuthContext();
   const params = useParams();
   const postId = params?.id;
+  const popover = usePopover();
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
-  const [isLoading, setIsLoading] = useState(false);
 
   const postCacheKey = `${endpoints.post.details}?id=${postId}`;
 
   const handleEdit = async () => {
     if (isEditing && editedMessage.trim()) {
       try {
-        setIsLoading(true);
         await updateComment(postId, comment.id, {
           message: editedMessage,
           isReply: hasReply,
           parentCommentId,
         });
-
-        // Directly trigger a revalidation of the post data
-        await mutate(postCacheKey);
 
         if (onCommentUpdated) {
           onCommentUpdated();
@@ -60,33 +59,28 @@ export default function PostCommentItem({
         setIsEditing(false);
       } catch (error) {
         console.error('Ошибка обновления комментария:', error);
-      } finally {
-        setIsLoading(false);
       }
     } else {
       setIsEditing(true);
     }
+    popover.onClose();
   };
 
   const handleDelete = async () => {
     try {
-      setIsLoading(true);
       await deleteComment(postId, comment.id, {
         isReply: hasReply,
         parentCommentId,
       });
-
-      // Directly trigger a revalidation of the post data
-      await mutate(postCacheKey);
 
       if (onCommentUpdated) {
         onCommentUpdated();
       }
     } catch (error) {
       console.error('Ошибка удаления комментария:', error);
-    } finally {
-      setIsLoading(false);
     }
+
+    popover.onClose();
   };
 
   const isCommentOwner = user?._id && comment.userId && String(user._id) === String(comment.userId);
@@ -102,76 +96,87 @@ export default function PostCommentItem({
     >
       <Avatar alt={name} src={avatarUrl} sx={{ mr: 2, width: 48, height: 48 }} />
 
-      <Stack
-        flexGrow={1}
-        sx={{
-          pb: 3,
-          borderBottom: (theme) => `solid 1px ${theme.vars.palette.divider}`,
-        }}
-      >
-        <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
-          {name}
-        </Typography>
-        <Typography variant="caption" sx={{ color: 'text.disabled' }}>
-          {fDate(postedAt)}
-        </Typography>
-        <Typography variant="body2" sx={{ mt: 1 }}>
-          {tagUser && (
-            <Box component="strong" sx={{ mr: 0.5 }}>
-              @{tagUser}
-            </Box>
-          )}
-          {isEditing ? (
-            <TextField
-              fullWidth
-              multiline
-              size="small"
-              value={editedMessage}
-              onChange={(e) => setEditedMessage(e.target.value)}
-              sx={{ mt: 1 }}
-            />
-          ) : (
-            message
-          )}
-        </Typography>
+      <Stack flexGrow={1}>
+        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
+          <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
+            {name}
+            {tagUser && (
+              <Box component="span" sx={{ typography: 'subtitle2', color: 'primary.main' }}>
+                {tagUser}
+              </Box>
+            )}
+          </Typography>
 
-        <Stack direction="row" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+          {isCommentOwner && (
+            <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
+              <Iconify icon="eva:more-horizontal-fill" />
+            </IconButton>
+          )}
+        </Stack>
+
+        {isEditing ? (
+          <TextField
+            fullWidth
+            multiline
+            size="small"
+            value={editedMessage}
+            onChange={(e) => setEditedMessage(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+        ) : (
+          <Typography
+            variant="body2"
+            sx={{
+              mb: 1,
+            }}
+          >
+            {message}
+          </Typography>
+        )}
+
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Typography variant="caption" sx={{ color: 'text.disabled' }}>
+            {fDate(postedAt)}
+          </Typography>
+
           {!hasReply && (
             <Button
               size="small"
-              color="inherit"
-              startIcon={<Iconify icon="solar:pen-bold" />}
+              variant="text"
               onClick={reply.onTrue}
+              sx={{ color: 'text.disabled' }}
+              startIcon={<Iconify icon="solar:reply-bold" width={24} />}
             >
               Reply
             </Button>
           )}
-          {isCommentOwner && (
-            <>
-              <LoadingButton
-                size="small"
-                color={isEditing ? 'primary' : 'inherit'}
-                startIcon={<Iconify icon={isEditing ? 'solar:disk-bold' : 'solar:pen-bold'} />}
-                onClick={handleEdit}
-                loading={isLoading && isEditing}
-              >
-                {isEditing ? 'Save' : 'Edit'}
-              </LoadingButton>
-              <LoadingButton
-                size="small"
-                color="error"
-                startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
-                onClick={handleDelete}
-                loading={isLoading && !isEditing}
-              >
-                Delete
-              </LoadingButton>
-            </>
-          )}
         </Stack>
 
-        {reply.value && <PostCommentForm hasReply onClose={reply.onFalse} />}
+        {reply.value && <PostCommentForm onCommentUpdated={onCommentUpdated} />}
       </Stack>
+
+      <CustomPopover
+        open={popover.open}
+        onClose={popover.onClose}
+        anchorEl={popover.anchorEl}
+        slotProps={{ arrow: { placement: 'bottom-center' } }}
+      >
+        <MenuItem
+          onClick={handleEdit}
+          sx={{ color: isEditing ? 'success.main' : 'text.primary' }}
+        >
+          <Iconify
+            icon={isEditing ? 'eva:checkmark-fill' : 'solar:pen-bold'}
+            sx={{ mr: 1 }}
+          />
+          {isEditing ? 'Save' : 'Edit'}
+        </MenuItem>
+
+        <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
+          <Iconify icon="solar:trash-bin-trash-bold" sx={{ mr: 1 }} />
+          Delete
+        </MenuItem>
+      </CustomPopover>
     </Box>
   );
 }
