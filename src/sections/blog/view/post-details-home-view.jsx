@@ -18,6 +18,7 @@ import { fShortenNumber } from 'src/utils/format-number';
 import { Iconify } from 'src/components/iconify';
 import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { useGetPost } from 'src/actions/blog';
 
 import { PostItem } from '../post-item';
 import { PostCommentList } from '../post-comment-list';
@@ -26,14 +27,16 @@ import { PostDetailsHero } from '../post-details-hero';
 
 // ----------------------------------------------------------------------
 
-export function PostDetailsHomeView({ post, latestPosts }) {
+export function PostDetailsHomeView({ post: initialPost, latestPosts }) {
+  const { post } = useGetPost(initialPost?._id);
+  const currentPost = post || initialPost;
   return (
     <>
       <PostDetailsHero
-        title={post?.title ?? ''}
-        author={post?.author}
-        coverUrl={post?.coverUrl ?? ''}
-        createdAt={post?.createdAt}
+        title={currentPost?.title ?? ''}
+        author={currentPost?.author}
+        coverUrl={currentPost?.coverUrl ?? ''}
+        createdAt={currentPost?.createdAt}
       />
 
       <Container
@@ -44,7 +47,7 @@ export function PostDetailsHomeView({ post, latestPosts }) {
           links={[
             { name: 'Home', href: '/' },
             { name: 'Blog', href: paths.post.root },
-            { name: post?.title },
+            { name: currentPost?.title },
           ]}
           sx={{ maxWidth: 720, mx: 'auto' }}
         />
@@ -52,9 +55,9 @@ export function PostDetailsHomeView({ post, latestPosts }) {
 
       <Container maxWidth={false}>
         <Stack sx={{ maxWidth: 720, mx: 'auto' }}>
-          <Typography variant="subtitle1">{post?.description}</Typography>
+          <Typography variant="subtitle1">{currentPost?.description}</Typography>
 
-          <Markdown children={post?.content} />
+          <Markdown children={currentPost?.content} />
 
           <Stack
             spacing={3}
@@ -65,7 +68,7 @@ export function PostDetailsHomeView({ post, latestPosts }) {
             }}
           >
             <Stack direction="row" flexWrap="wrap" spacing={1}>
-              {post?.tags.map((tag) => (
+              {currentPost?.tags.map((tag) => (
                 <Chip key={tag} label={tag} variant="soft" />
               ))}
             </Stack>
@@ -82,12 +85,12 @@ export function PostDetailsHomeView({ post, latestPosts }) {
                     inputProps={{ id: 'favorite-checkbox', 'aria-label': 'Favorite checkbox' }}
                   />
                 }
-                label={fShortenNumber(post?.totalFavorites)}
+                label={fShortenNumber(currentPost?.totalFavorites)}
                 sx={{ mr: 1 }}
               />
 
               <AvatarGroup>
-                {post?.favoritePerson.map((person) => (
+                {currentPost?.favoritePerson.map((person) => (
                   <Avatar key={person.name} alt={person.name} src={person.avatarUrl} />
                 ))}
               </AvatarGroup>
@@ -98,15 +101,15 @@ export function PostDetailsHomeView({ post, latestPosts }) {
             <Typography variant="h4">Comments</Typography>
 
             <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
-              ({post?.comments.length})
+              ({currentPost?.comments.length})
             </Typography>
           </Stack>
 
-          <PostCommentForm />
+          <PostCommentForm postId={currentPost?._id} />
 
           <Divider sx={{ mt: 5, mb: 2 }} />
 
-          <PostCommentList comments={post?.comments} />
+          <PostCommentList comments={currentPost?.comments} postId={currentPost?._id} />
         </Stack>
       </Container>
 

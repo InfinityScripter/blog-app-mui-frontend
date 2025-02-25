@@ -35,8 +35,8 @@ import {formatImageUrl} from "../../../utils/format-image-url";
 
 export function PostDetailsView({ initialPost }) {
   const [publish, setPublish] = useState('');
-  
-  const { post, postLoading } = useGetPost(initialPost?._id);
+
+  const { post } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
 
   const handleChangePublish = useCallback(async (newValue) => {
@@ -54,9 +54,7 @@ export function PostDetailsView({ initialPost }) {
     }
   }, [currentPost]);
 
-  if (postLoading) {
-    return <div>Loading...</div>;
-  }
+
 
   return (
     <DashboardContent maxWidth={false} disablePadding>
