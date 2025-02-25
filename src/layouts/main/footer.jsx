@@ -20,10 +20,8 @@ import { SocialIcon } from 'src/components/iconify';
 
 const LINKS = [
   {
-    headline: 'Minimal',
+    headline: 'Product',
     children: [
-      { name: 'About us', href: paths.about },
-      { name: 'Contact us', href: paths.contact },
       { name: 'FAQs', href: paths.faqs },
     ],
   },
@@ -34,7 +32,30 @@ const LINKS = [
       { name: 'Privacy policy', href: '#' },
     ],
   },
-  { headline: 'Contact', children: [{ name: 'support@minimals.cc', href: '#' }] },
+  { headline: 'Contact', children: [{ name: 'talalaev.misha@gmail.com', href: 'mailto:talalaev.misha@gmail.com' }] },
+];
+
+ const socials = [
+  {
+    value: 'telegram',
+    name: 'Telegram',
+    path: 'https://t.me/sh0ny/',
+  },
+  {
+    value: 'github',
+    name: 'GitHub',
+    path: 'https://github.com/InfinityScripter',
+  },
+   {
+     value: 'linkedin',
+     name: 'Linkedin',
+     path: 'https://www.linkedin.com/in/talalaevs/',
+   },
+   {
+     value: 'vk',
+     name: 'VK',
+     path: 'https://vk.com/sh0ny',
+   }
 ];
 
 // ----------------------------------------------------------------------
@@ -73,8 +94,7 @@ export function Footer({ layoutQuery, sx }) {
                 [theme.breakpoints.up(layoutQuery)]: { mx: 'unset' },
               }}
             >
-              The starting point for your next project with Minimal UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
+ Hello from my portfolio project, please contact me if you have any questions
             </Typography>
 
             <Stack
@@ -86,8 +106,8 @@ export function Footer({ layoutQuery, sx }) {
                 [theme.breakpoints.up(layoutQuery)]: { mb: 0, justifyContent: 'flex-start' },
               }}
             >
-              {_socials.map((social) => (
-                <IconButton key={social.name}>
+              {socials.map((social) => (
+                <IconButton key={social.name} href={social.path} target="_blank" >
                   <SocialIcon icon={social.name} />
                 </IconButton>
               ))}
@@ -160,7 +180,7 @@ export function HomeFooter({ sx }) {
         <Box sx={{ mt: 1, typography: 'caption' }}>
           © All rights reserved.
           <br /> made by
-          <Link href="https://minimals.cc/"> minimals.cc </Link>
+          <Link href="https://t.me/sh0ny/"> Mikhail Talalaev </Link>
         </Box>
       </Container>
     </Box>
