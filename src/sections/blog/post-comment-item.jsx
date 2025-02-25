@@ -81,10 +81,6 @@ export default function PostCommentItem({
     }
   };
 
-  // For debugging
-  console.log('Current user ID:', user?._id);
-  console.log('Comment user ID:', comment.userId);
-  console.log('Post user ID:', postId?.user);
 
   const isCommentOwner =
     user?._id && comment.userId && String(user._id) === String(comment.userId);
