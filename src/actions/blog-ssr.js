@@ -84,17 +84,12 @@ export async function addComment(postId, commentData) {
 }
 
 export async function updateComment(postId, commentId, commentData) {
-  if (!postId || !commentId) {
-    throw new Error('Post ID and Comment ID are required');
-  }
-  try {
-    const res = await axios.put(`${endpoints.post.comments.update(postId, commentId)}?postId=${postId}`, commentData);
-    await mutate(`${endpoints.post.details}?id=${postId}`);
-    return res.data;
-  } catch (error) {
-    console.error('Ошибка обновления комментария:', error);
-    throw error;
-  }
+  // Формируем URL без commentId в пути
+  const url = `${endpoints.post.comments.update(postId)}`; // где update(postId) возвращает `/api/post/${postId}/comments`
+  // Передаём commentId в теле запроса
+  const res = await axios.put(`${url}?postId=${postId}`, { commentId, ...commentData });
+  await mutate(`${endpoints.post.details}?id=${postId}`);
+  return res.data;
 }
 
 export async function deleteComment(postId, commentId, options = {}) {
@@ -102,7 +97,9 @@ export async function deleteComment(postId, commentId, options = {}) {
     throw new Error('Post ID and Comment ID are required');
   }
   try {
-    const res = await axios.delete(`${endpoints.post.comments.delete(postId, commentId)}?postId=${postId}`, { data: options });
+    // Используем URL без commentId в пути
+    const url = `${endpoints.post.comments.delete(postId)}`;
+    const res = await axios.delete(`${url}?postId=${postId}`, { data: { commentId, ...options } });
     await mutate(`${endpoints.post.details}?id=${postId}`);
     return res.data;
   } catch (error) {

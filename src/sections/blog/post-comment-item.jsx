@@ -6,6 +6,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 import { useAuthContext } from 'src/auth/hooks/use-auth-context';
@@ -15,24 +16,23 @@ import { fDate } from 'src/utils/format-time';
 import { Iconify } from 'src/components/iconify';
 
 import { updateComment, deleteComment } from 'src/actions/blog-ssr';
-import { PostCommentForm } from "./post-comment-form";
+import { PostCommentForm } from './post-comment-form';
 
-// ----------------------------------------------------------------------
-
-export function PostCommentItem({
-  name,
-  avatarUrl,
-  message,
-  tagUser,
-  postedAt,
-  hasReply,
-  comment,
-  postId,
-  parentCommentId,
-  onCommentUpdated,
-}) {
+export default function PostCommentItem({
+                                  name,
+                                  avatarUrl,
+                                  message,
+                                  tagUser,
+                                  postedAt,
+                                  hasReply,
+                                  comment,
+                                  parentCommentId,
+                                  onCommentUpdated,
+                                }) {
   const reply = useBoolean();
   const { user } = useAuthContext();
+  const params = useParams();
+  const PostId = params?.id;
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
@@ -40,9 +40,10 @@ export function PostCommentItem({
 
   const handleEdit = async () => {
     if (isEditing && editedMessage.trim()) {
+      console.log('Сохранение отредактированного комментария. PostId:', PostId, 'comment id:', comment.id);
       try {
         setIsLoading(true);
-        await updateComment(postId, comment.id, {
+        await updateComment(PostId, comment.id, {
           message: editedMessage,
           isReply: hasReply,
           parentCommentId,
@@ -52,19 +53,21 @@ export function PostCommentItem({
         }
         setIsEditing(false);
       } catch (error) {
-        console.error('Failed to update comment:', error);
+        console.error('Ошибка обновления комментария:', error);
       } finally {
         setIsLoading(false);
       }
     } else {
+      console.log('Переключение в режим редактирования');
       setIsEditing(true);
     }
   };
 
   const handleDelete = async () => {
+    console.log('Удаление комментария. PostId:', PostId, 'comment id:', comment.id);
     try {
       setIsLoading(true);
-      await deleteComment(postId, comment.id, {
+      await deleteComment(PostId, comment.id, {
         isReply: hasReply,
         parentCommentId,
       });
@@ -72,7 +75,7 @@ export function PostCommentItem({
         onCommentUpdated();
       }
     } catch (error) {
-      console.error('Failed to delete comment:', error);
+      console.error('Ошибка удаления комментария:', error);
     } finally {
       setIsLoading(false);
     }
@@ -83,8 +86,8 @@ export function PostCommentItem({
   console.log('Comment user ID:', comment.userId);
   console.log('Post user ID:', postId?.user);
 
-  // Check if the current user is the creator of the comment
-  const isCommentOwner = user?._id && comment.userId && String(user._id) === String(comment.userId);
+  const isCommentOwner =
+    user?._id && comment.userId && String(user._id) === String(comment.userId);
 
   return (
     <Box
@@ -99,16 +102,17 @@ export function PostCommentItem({
 
       <Stack
         flexGrow={1}
-        sx={{ pb: 3, borderBottom: (theme) => `solid 1px ${theme.vars.palette.divider}` }}
+        sx={{
+          pb: 3,
+          borderBottom: (theme) => `solid 1px ${theme.vars.palette.divider}`,
+        }}
       >
         <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
           {name}
         </Typography>
-
         <Typography variant="caption" sx={{ color: 'text.disabled' }}>
           {fDate(postedAt)}
         </Typography>
-
         <Typography variant="body2" sx={{ mt: 1 }}>
           {tagUser && (
             <Box component="strong" sx={{ mr: 0.5 }}>
@@ -140,7 +144,6 @@ export function PostCommentItem({
               Reply
             </Button>
           )}
-
           {isCommentOwner && (
             <>
               <LoadingButton
@@ -152,7 +155,6 @@ export function PostCommentItem({
               >
                 {isEditing ? 'Save' : 'Edit'}
               </LoadingButton>
-
               <LoadingButton
                 size="small"
                 color="error"

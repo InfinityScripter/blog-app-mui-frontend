@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Pagination from '@mui/material/Pagination';
+import PostCommentItem from "./post-comment-item";
 
-import { PostCommentItem } from './post-comment-item';
 
 // ----------------------------------------------------------------------
 

@@ -1,5 +1,4 @@
 import { z as zod } from 'zod';
-import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
@@ -76,7 +75,7 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
 
       const result = await addComment(postId, commentData);
       reset();
-      
+
       if (onCommentAdded) {
         onCommentAdded(result);
       }
@@ -117,9 +116,9 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
             </IconButton>
           </Stack>
 
-          <LoadingButton 
-            type="submit" 
-            variant="contained" 
+          <LoadingButton
+            type="submit"
+            variant="contained"
             loading={isSubmitting}
             disabled={!currentUser}
           >
@@ -131,7 +130,3 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
   );
 }
 
-PostCommentForm.propTypes = {
-  postId: PropTypes.string,
-  onCommentAdded: PropTypes.func,
-};

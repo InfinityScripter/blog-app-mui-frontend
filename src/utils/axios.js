@@ -63,8 +63,8 @@ export const endpoints = {
     comments: {
       list: (postId) => `/api/post/${postId}/comments`,
       add: (postId) => `/api/post/${postId}/comments`,
-      update: (postId, commentId) => `/api/post/${postId}/comments/${commentId}`,
-      delete: (postId, commentId) => `/api/post/${postId}/comments/${commentId}`,
+      update: (postId) => `/api/post/${postId}/comments`,
+      delete: (postId) => `/api/post/${postId}/comments`,
       reply: (postId, commentId) => `/api/post/${postId}/comments/${commentId}/reply`,
     },
   },
