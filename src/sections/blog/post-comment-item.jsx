@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
 import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
@@ -42,10 +41,8 @@ export default function PostCommentItem({
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
 
-  const postCacheKey = `${endpoints.post.details}?id=${postId}`;
-
-  const handleEdit = async () => {
-    if (isEditing && editedMessage.trim()) {
+  const handleSave = async () => {
+    if (editedMessage.trim()) {
       try {
         await updateComment(postId, comment.id, {
           message: editedMessage,
@@ -57,13 +54,28 @@ export default function PostCommentItem({
           onCommentUpdated();
         }
         setIsEditing(false);
+        popover.onClose();
       } catch (error) {
         console.error('Ошибка обновления комментария:', error);
       }
-    } else {
-      setIsEditing(true);
     }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSave();
+    }
+  };
+
+  const handleStartEdit = () => {
+    setIsEditing(true);
     popover.onClose();
+  };
+
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setEditedMessage(message);
   };
 
   const handleDelete = async () => {
@@ -79,7 +91,6 @@ export default function PostCommentItem({
     } catch (error) {
       console.error('Ошибка удаления комментария:', error);
     }
-
     popover.onClose();
   };
 
@@ -107,7 +118,7 @@ export default function PostCommentItem({
             )}
           </Typography>
 
-          {isCommentOwner && (
+          {isCommentOwner && !isEditing && (
             <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
               <Iconify icon="eva:more-horizontal-fill" />
             </IconButton>
@@ -115,14 +126,36 @@ export default function PostCommentItem({
         </Stack>
 
         {isEditing ? (
-          <TextField
-            fullWidth
-            multiline
-            size="small"
-            value={editedMessage}
-            onChange={(e) => setEditedMessage(e.target.value)}
-            sx={{ mb: 2 }}
-          />
+          <Stack spacing={2}>
+            <TextField
+              fullWidth
+              multiline
+              size="small"
+              value={editedMessage}
+              onChange={(e) => setEditedMessage(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Press Enter to save or Shift+Enter for new line"
+              sx={{ mb: 1 }}
+            />
+            <Stack direction="row" spacing={2} justifyContent="flex-end">
+              <Button
+                size="small"
+                color="inherit"
+                onClick={handleCancelEdit}
+                startIcon={<Iconify icon="eva:close-fill" />}
+              >
+                Cancel
+              </Button>
+              <Button
+                size="small"
+                onClick={handleSave}
+                startIcon={<Iconify icon="eva:checkmark-fill" />}
+                color='success'
+              >
+                Save
+              </Button>
+            </Stack>
+          </Stack>
         ) : (
           <Typography
             variant="body2"
@@ -161,15 +194,9 @@ export default function PostCommentItem({
         anchorEl={popover.anchorEl}
         slotProps={{ arrow: { placement: 'bottom-center' } }}
       >
-        <MenuItem
-          onClick={handleEdit}
-          sx={{ color: isEditing ? 'success.main' : 'text.primary' }}
-        >
-          <Iconify
-            icon={isEditing ? 'eva:checkmark-fill' : 'solar:pen-bold'}
-            sx={{ mr: 1 }}
-          />
-          {isEditing ? 'Save' : 'Edit'}
+        <MenuItem onClick={handleStartEdit}>
+          <Iconify icon="solar:pen-bold" sx={{ mr: 1 }} />
+          Edit
         </MenuItem>
 
         <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
