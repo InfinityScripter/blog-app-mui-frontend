@@ -3,7 +3,11 @@ import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
-const axiosInstance = axios.create({ baseURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:7272' });
+const axiosInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+});
+
+// Для отладки можно добавить такой логгинг в axiosInstance
 
 axiosInstance.interceptors.response.use(
   (response) => response,
@@ -11,11 +15,12 @@ axiosInstance.interceptors.response.use(
     if (error.response?.data?.message) {
       return Promise.reject(new Error(error.response.data.message));
     }
-    return Promise.reject(new Error('Something went wrong. Please try again.'));
+    return Promise.reject(new Error('Что-то пошло не так. Попробуйте снова.'));
   }
 );
 
 export default axiosInstance;
+console.log('NEXT_PUBLIC_SERVER_URL:', process.env.NEXT_PUBLIC_SERVER_URL);
 
 // ----------------------------------------------------------------------
 
