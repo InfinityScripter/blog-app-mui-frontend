@@ -35,6 +35,7 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
       try {
         const user = await getCurrentUser();
         setCurrentUser(user);
+        // eslint-disable-next-line no-shadow
       } catch (error) {
         console.error('Failed to fetch user:', error);
         setError('Please login to comment');
@@ -78,6 +79,7 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
       if (onCommentAdded) {
         onCommentAdded(result);
       }
+      // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error('Failed to add comment:', error);
       setError(error.message || 'Failed to add comment');

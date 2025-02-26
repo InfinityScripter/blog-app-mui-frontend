@@ -2,9 +2,9 @@ import dynamic from 'next/dynamic';
 
 import Box from '@mui/material/Box';
 
-import { withLoadingProps } from 'src/utils/with-loading-props';
 
 import { ChartLoading } from './chart-loading';
+import {withLoadingProps} from "../../utils/with-loading-props";
 
 const ApexChart = withLoadingProps((props) =>
   dynamic(() => import('react-apexcharts').then((mod) => mod.default), {

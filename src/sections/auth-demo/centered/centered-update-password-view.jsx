@@ -85,11 +85,12 @@ export function CenteredUpdatePasswordView() {
       });
 
       setSuccess('Password updated successfully!');
-      
+
       // Redirect to login after short delay
       setTimeout(() => {
         window.location.href = paths.auth.jwt.signIn;
       }, 1500);
+      // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error('Error updating password:', error);
       setError(error.response?.data?.message || 'Failed to update password. Please try again.');
@@ -120,7 +121,7 @@ export function CenteredUpdatePasswordView() {
         disabled
       />
 
-      <Field.Code 
+      <Field.Code
         name="code"
         defaultValue={codeFromUrl}
       />

@@ -93,6 +93,7 @@ export function SplitVerifyView() {
       setTimeout(() => {
         router.push(paths.dashboard.root);
       }, 2000);
+      // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error('Verification error:', error);
       setError(error.message || 'Failed to verify email');
@@ -123,6 +124,7 @@ export function SplitVerifyView() {
 
       const result = await response.json();
       setSuccess(result.message || 'Verification code resent successfully!');
+      // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error('Resend code error:', error);
       setError(error.message || 'Failed to resend code');

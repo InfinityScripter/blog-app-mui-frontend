@@ -58,6 +58,7 @@ export function CenteredResetPasswordView() {
       });
 
       setSuccess(response.data.message || 'Reset password instructions have been sent to your email');
+      // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error('Reset password error:', error);
       setError(error.message || 'Failed to send reset password email');
