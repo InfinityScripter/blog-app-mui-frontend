@@ -10,7 +10,7 @@ export function PostCommentList({ comments = [], postId, onCommentUpdated }) {
   return (
     <>
       {comments.map((comment) => {
-        const hasReply = !!comment.replyComment.length;
+        const hasReply = !!comment.replyComment?.length;
 
         return (
           <Box key={comment.id}>
@@ -24,25 +24,21 @@ export function PostCommentList({ comments = [], postId, onCommentUpdated }) {
               onCommentUpdated={onCommentUpdated}
             />
             {hasReply &&
-              comment.replyComment.map((reply) => {
-                const userReply = comment.users.find((user) => user.id === reply.userId);
-
-                return (
-                  <PostCommentItem
-                    key={reply.id}
-                    name={userReply?.name || ''}
-                    message={reply.message}
-                    postedAt={reply.postedAt}
-                    avatarUrl={userReply?.avatarUrl || ''}
-                    tagUser={reply.tagUser}
-                    hasReply
-                    comment={reply}
-                    postId={postId}
-                    parentCommentId={comment.id}
-                    onCommentUpdated={onCommentUpdated}
-                  />
-                );
-              })}
+              comment.replyComment.map((reply) => (
+                <PostCommentItem
+                  key={reply.id}
+                  name={reply.name}
+                  message={reply.message}
+                  postedAt={reply.postedAt}
+                  avatarUrl={reply.avatarUrl}
+                  tagUser={reply.tagUser}
+                  hasReply
+                  comment={reply}
+                  postId={postId}
+                  parentCommentId={comment.id}
+                  onCommentUpdated={onCommentUpdated}
+                />
+              ))}
           </Box>
         );
       })}

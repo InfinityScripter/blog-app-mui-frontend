@@ -20,7 +20,7 @@ export const CommentSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
+export function PostCommentForm({ postId: propPostId, onCommentAdded, onCommentUpdated, parentCommentId }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState(null);
   const params = useParams();
@@ -29,6 +29,17 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
   const postId = propPostId || params?.id;
 
   const defaultValues = { comment: '' };
+
+  const methods = useForm({
+    resolver: zodResolver(CommentSchema),
+    defaultValues,
+  });
+
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = methods;
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -43,17 +54,6 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
     };
     fetchUser();
   }, []);
-
-  const methods = useForm({
-    resolver: zodResolver(CommentSchema),
-    defaultValues,
-  });
-
-  const {
-    reset,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -71,6 +71,7 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
 
       const commentData = {
         message: data.comment,
+        parentCommentId: parentCommentId || null,
       };
 
       const result = await addComment(postId, commentData);
@@ -78,6 +79,10 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
 
       if (onCommentAdded) {
         onCommentAdded(result);
+      }
+      
+      if (onCommentUpdated) {
+        onCommentUpdated();
       }
       // eslint-disable-next-line no-shadow
     } catch (error) {
@@ -123,11 +128,10 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
             loading={isSubmitting}
             disabled={!currentUser}
           >
-            Post comment
+            {parentCommentId ? 'Post reply' : 'Post comment'}
           </LoadingButton>
         </Stack>
       </Stack>
     </Form>
   );
 }
-

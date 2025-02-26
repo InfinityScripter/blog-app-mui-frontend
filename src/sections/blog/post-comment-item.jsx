@@ -187,7 +187,12 @@ export default function PostCommentItem({
           )}
         </Stack>
 
-        {reply.value && <PostCommentForm onCommentUpdated={onCommentUpdated} />}
+        {reply.value && (
+          <PostCommentForm 
+            onCommentUpdated={onCommentUpdated} 
+            parentCommentId={comment.id} 
+          />
+        )}
       </Stack>
 
       <CustomPopover
