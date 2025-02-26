@@ -8,6 +8,7 @@
     "dev": "next dev -p 3033",
     "start": "next start -p 3033",
     "build": "next build",
+    "export": "BUILD_STATIC_EXPORT=true next build",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
     "fm:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
