@@ -3,15 +3,31 @@ import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
+// Determine if we're running on Vercel by checking the hostname
+const isVercelEnvironment = typeof window !== 'undefined' && 
+  (window.location.hostname.includes('vercel.app') || 
+   window.location.hostname.includes('blog-app-mui-frontend'));
+
+// Set the correct baseURL based on the environment
+const baseURL = isVercelEnvironment 
+  ? 'https://blog-app-mui-backend.vercel.app' 
+  : process.env.NEXT_PUBLIC_SERVER_URL;
+
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  baseURL,
 });
 
-// Для отладки можно добавить такой логгинг в axiosInstance
+// For debugging
+if (typeof window !== 'undefined') {
+  console.log('Current hostname:', window.location.hostname);
+  console.log('Is Vercel environment:', isVercelEnvironment);
+  console.log('Using baseURL:', baseURL);
+}
 
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.error('Axios error:', error);
     if (error.response?.data?.message) {
       return Promise.reject(new Error(error.response.data.message));
     }
