@@ -4,13 +4,13 @@ import axios from 'axios';
 // ----------------------------------------------------------------------
 
 // Determine if we're running on Vercel by checking the hostname
-const isVercelEnvironment = typeof window !== 'undefined' && 
-  (window.location.hostname.includes('vercel.app') || 
+const isVercelEnvironment = typeof window !== 'undefined' &&
+  (window.location.hostname.includes('onrender.com') ||
    window.location.hostname.includes('blog-app-mui-frontend'));
 
 // Set the correct baseURL based on the environment
-const baseURL = isVercelEnvironment 
-  ? 'https://blog-app-mui-backend.vercel.app' 
+const baseURL = isVercelEnvironment
+  ? 'https://blog-app-mui-backend.onrender.com'
   : process.env.NEXT_PUBLIC_SERVER_URL;
 
 const axiosInstance = axios.create({
