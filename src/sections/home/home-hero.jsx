@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { m, useMotionValueEvent, useScroll, useSpring, useTransform } from 'framer-motion';
+import { m, useScroll, useSpring, useTransform, useMotionValueEvent } from 'framer-motion';
 
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
@@ -8,11 +8,13 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+
 import { useResponsive } from 'src/hooks/use-responsive';
+
 import { textGradient } from 'src/theme/styles';
 
 import { Iconify } from 'src/components/iconify';
-import { MotionContainer, varFade } from 'src/components/animate';
+import { varFade, MotionContainer } from 'src/components/animate';
 
 import { HeroBackground } from './components/hero-background';
 

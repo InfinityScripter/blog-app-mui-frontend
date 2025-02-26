@@ -1,20 +1,19 @@
 import { m } from 'framer-motion';
 
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Timeline from '@mui/lab/Timeline';
+import TimelineDot from '@mui/lab/TimelineDot';
+import Container from '@mui/material/Container';
+import { useTheme } from '@mui/material/styles';
 import TimelineItem from '@mui/lab/TimelineItem';
+import Typography from '@mui/material/Typography';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineDot from '@mui/lab/TimelineDot';
-import { useTheme } from '@mui/material/styles';
 
-import { varFade, MotionViewport } from 'src/components/animate';
 import { Iconify } from 'src/components/iconify';
+import { varFade, MotionViewport } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 

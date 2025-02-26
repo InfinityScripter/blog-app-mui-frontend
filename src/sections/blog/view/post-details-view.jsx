@@ -16,19 +16,18 @@ import { paths } from 'src/routes/paths';
 
 import { fShortenNumber } from 'src/utils/format-number';
 
+import { useGetPost } from 'src/actions/blog';
 import { POST_PUBLISH_OPTIONS } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
+import { updatePostPublish } from 'src/actions/blog-ssr';
 
 import { Iconify } from 'src/components/iconify';
 import { Markdown } from 'src/components/markdown';
 
-import { updatePostPublish } from 'src/actions/blog-ssr';
-import { useGetPost } from 'src/actions/blog';
 import { PostDetailsHero } from '../post-details-hero';
 import { PostCommentList } from '../post-comment-list';
 import { PostCommentForm } from '../post-comment-form';
 import { PostDetailsToolbar } from '../post-details-toolbar';
-
 import {formatImageUrl} from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------

@@ -5,13 +5,12 @@ import { useParams } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
-import LoadingButton from '@mui/lab/LoadingButton';
 import Alert from '@mui/material/Alert';
+import LoadingButton from '@mui/lab/LoadingButton';
 
-import { Iconify } from 'src/components/iconify';
-import { Form, Field } from 'src/components/hook-form';
 import { addComment, getCurrentUser } from 'src/actions/blog-ssr';
+
+import { Form, Field } from 'src/components/hook-form';
 
 // ----------------------------------------------------------------------
 
@@ -103,17 +102,17 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded }) {
 
         <Stack direction="row" alignItems="center">
           <Stack direction="row" alignItems="center" flexGrow={1}>
-            {/*<IconButton>*/}
-            {/*  <Iconify icon="solar:gallery-add-bold" />*/}
-            {/*</IconButton>*/}
+            {/* <IconButton> */}
+            {/*  <Iconify icon="solar:gallery-add-bold" /> */}
+            {/* </IconButton> */}
 
-            {/*<IconButton>*/}
-            {/*  <Iconify icon="eva:attach-2-fill" />*/}
-            {/*</IconButton>*/}
+            {/* <IconButton> */}
+            {/*  <Iconify icon="eva:attach-2-fill" /> */}
+            {/* </IconButton> */}
 
-            {/*<IconButton>*/}
-            {/*  <Iconify icon="eva:smiling-face-fill" />*/}
-            {/*</IconButton>*/}
+            {/* <IconButton> */}
+            {/*  <Iconify icon="eva:smiling-face-fill" /> */}
+            {/* </IconButton> */}
           </Stack>
 
           <LoadingButton

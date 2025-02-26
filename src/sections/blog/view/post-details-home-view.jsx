@@ -15,10 +15,11 @@ import { paths } from 'src/routes/paths';
 
 import { fShortenNumber } from 'src/utils/format-number';
 
+import { useGetPost } from 'src/actions/blog';
+
 import { Iconify } from 'src/components/iconify';
 import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { useGetPost } from 'src/actions/blog';
 
 import { PostItem } from '../post-item';
 import { PostCommentList } from '../post-comment-list';

@@ -1,5 +1,7 @@
 import axios, { endpoints } from 'src/utils/axios';
+
 import { CONFIG } from 'src/config-global';
+
 import { PostDetailsView } from 'src/sections/blog/view';
 
 export const metadata = { title: `Post details | Dashboard - ${CONFIG.site.name}` };

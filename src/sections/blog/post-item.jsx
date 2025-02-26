@@ -9,7 +9,6 @@ import CardContent from '@mui/material/CardContent';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
-import { useRouter } from 'src/routes/hooks';
 
 import { fDate } from 'src/utils/format-time';
 import { fShortenNumber } from 'src/utils/format-number';

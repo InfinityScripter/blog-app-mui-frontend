@@ -12,6 +12,7 @@ import { useRouter } from 'src/routes/hooks';
 
 import { Iconify } from 'src/components/iconify';
 import { SearchNotFound } from 'src/components/search-not-found';
+
 import {formatImageUrl} from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------

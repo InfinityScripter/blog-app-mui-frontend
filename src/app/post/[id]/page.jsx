@@ -2,7 +2,7 @@ import { paramCase } from 'src/utils/change-case';
 import axios, { endpoints } from 'src/utils/axios';
 
 import { CONFIG } from 'src/config-global';
-import { getPost, getLatestPosts } from 'src/actions/blog-ssr';
+import { getPost } from 'src/actions/blog-ssr';
 
 import { PostDetailsHomeView } from 'src/sections/blog/view';
 

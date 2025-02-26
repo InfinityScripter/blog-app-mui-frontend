@@ -1,5 +1,4 @@
 import {MainLayout} from "../../layouts/main";
-import {SimpleLayout} from "../../layouts/simple";
 
 // ----------------------------------------------------------------------
 

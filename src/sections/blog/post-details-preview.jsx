@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -8,12 +9,11 @@ import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
 import DialogActions from '@mui/material/DialogActions';
 
+import { formatImageUrl } from 'src/utils/format-image-url';
+
 import { Markdown } from 'src/components/markdown';
 import { Scrollbar } from 'src/components/scrollbar';
 import { EmptyContent } from 'src/components/empty-content';
-
-import { useResponsive } from 'src/hooks/use-responsive';
-import { formatImageUrl } from 'src/utils/format-image-url';
 
 import { PostDetailsHero } from './post-details-hero';
 

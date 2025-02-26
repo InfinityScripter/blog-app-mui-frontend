@@ -94,7 +94,7 @@ export function PostListView() {
           onSearch={handleSearch}
           loading={searchLoading}
           hrefItem={(title) => paths.dashboard.post.details(title)}
-          dashboard={true}
+          dashboard
         />
 
         <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
