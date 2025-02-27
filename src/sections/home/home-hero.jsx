@@ -61,11 +61,12 @@ const lgKey = 'lg';
 
 // Данные обо мне
 const myName = 'Mikhail Talalaev';
-const myTitle = 'Frontend Developer';
+const myTitle = 'Web Developer';
 const mySummary =
-  '3 years of experience in developing modern web applications using JavaScript and TypeScript. ' +
-  'Specializing in React and Angular. Based in Saint Petersburg, Russia. ' +
-  'Open to relocation to Moscow and business trips.';
+  'Love developing modern web applications using JavaScript and TypeScript. ' +
+  'Specializing in React and Angular.' +
+  'Passionate about clean code, responsive design, and user experience.';
+
 
 const techIcons = [
   'logos:javascript',
@@ -74,6 +75,19 @@ const techIcons = [
   'logos:angular-icon',
   'logos:html-5',
   'logos:css-3',
+  'logos:tailwindcss-icon',
+  'logos:material-ui',
+  'logos:nodejs-icon',
+  'logos:express',
+  'logos:mariadb',
+  'logos:mongodb',
+  'logos:github-icon',
+  'logos:git-icon',
+  'logos:visual-studio-code',
+  'logos:postman-icon',
+  'logos:figma',
+  'logos:docker',
+  'logos:vercel',
 ];
 
 export function HomeHero({ sx, ...other }) {
@@ -191,10 +205,11 @@ export function HomeHero({ sx, ...other }) {
           </Button>
           <Button
             component={Link}
-            href="mailto:talalaev.m@yahoo.com"
+            href="t.me/Sh0ny"
             color="inherit"
             size="large"
             variant="outlined"
+            startIcon={<Iconify width={24} icon="akar-icons:telegram-fill" />}
           >
             Contact
           </Button>

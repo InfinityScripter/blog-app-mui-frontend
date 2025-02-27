@@ -22,7 +22,7 @@ const SKILLS = [
   {
     name: 'Backend Development',
     description: 'Server-side development and API implementation',
-    icon: 'carbon:server',
+    icon: 'carbon:Module',
     items: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'REST API', 'GraphQL']
   },
   {
