@@ -99,20 +99,6 @@ export function PostDetailsView({ initialPost }) {
           </Stack>
 
           <Stack direction="row" alignItems="center">
-            {/*<FormControlLabel*/}
-            {/*  control={*/}
-            {/*    <Checkbox*/}
-            {/*      defaultChecked*/}
-            {/*      size="small"*/}
-            {/*      color="error"*/}
-            {/*      icon={<Iconify icon="solar:heart-bold" />}*/}
-            {/*      checkedIcon={<Iconify icon="solar:heart-bold" />}*/}
-            {/*      inputProps={{ id: 'favorite-checkbox', 'aria-label': 'Favorite checkbox' }}*/}
-            {/*    />*/}
-            {/*  }*/}
-            {/*  label={fShortenNumber(currentPost?.totalFavorites)}*/}
-            {/*  sx={{ mr: 1 }}*/}
-            {/*/>*/}
 
             <AvatarGroup sx={{ [`& .${avatarGroupClasses.avatar}`]: { width: 32, height: 32 } }}>
               {currentPost?.favoritePerson.map((person) => (
