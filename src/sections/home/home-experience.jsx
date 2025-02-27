@@ -122,12 +122,12 @@ export default function HomeExperience() {
         }}
       >
         <m.div variants={varFade().inDown}>
-          <Typography variant="h2">Work Experience</Typography>
+          <Typography variant="h2">Опыт работы</Typography>
         </m.div>
 
         <m.div variants={varFade().inDown}>
           <Typography sx={{ color: "text.secondary" }}>
-            My professional journey as a web developer
+            Мой профессиональный путь как веб-разработчика
           </Typography>
         </m.div>
       </Stack>
@@ -147,8 +147,8 @@ export default function HomeExperience() {
       >
         {EXPERIENCE.sort(
           (a, b) =>
-            new Date(a.period.split(" — ")[1]) -
-            new Date(b.period.split(" — ")[1]),
+            new Date(b.period.split(" — ")[0]) -
+            new Date(a.period.split(" — ")[0]),
         ).map((item, index) => (
           <TimelineItem key={index}>
             <TimelineOppositeContent
@@ -202,15 +202,14 @@ export default function HomeExperience() {
                   rel="noopener"
                   underline="none"
                   sx={{
-
-                    '&:hover': {
-                      '& .MuiPaper-root': {
+                    "&:hover": {
+                      "& .MuiPaper-root": {
                         boxShadow: theme.customShadows.z24,
-                        transition: theme.transitions.create('box-shadow', {
+                        transition: theme.transitions.create("box-shadow", {
                           duration: theme.transitions.duration.shorter,
                         }),
                       },
-                    }
+                    },
                   }}
                 >
                   <Paper
@@ -264,7 +263,7 @@ export default function HomeExperience() {
                         fontSize: { xs: "0.7rem", sm: "0.75rem" },
                       }}
                     >
-                      <strong>Tech stack:</strong> {item.technologies}
+                      <strong>Технологии:</strong> {item.technologies}
                     </Typography>
                   </Paper>
                 </Link>

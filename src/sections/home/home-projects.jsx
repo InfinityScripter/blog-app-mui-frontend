@@ -18,48 +18,48 @@ import { varFade, MotionViewport } from 'src/components/animate';
 
 const PROJECTS = [
   {
-    title: 'Blog App',
-    description: 'A full-featured blog platform with Material UI components, user authentication, and responsive design.',
+    title: 'Блог-платформа',
+    description: 'Полнофункциональная блог-платформа с компонентами Material UI, аутентификацией пользователей и адаптивным дизайном.',
     icon: 'mdi:blog',
     iconColor:'primary.main',
     link: 'https://github.com/InfinityScripter/blog-app-mui-frontend',
     demoLink: 'https://sh0ny.online/post',
     tech: ['React', 'Material UI', 'Node.js'],
     features: [
-      'User authentication',
-      'Responsive design',
-      'Blog post management',
-      'Material UI components',
+      'Аутентификация пользователей',
+      'Адаптивный дизайн',
+      'Управление постами',
+      'Компоненты Material UI',
     ]
   },
   {
-    title: 'Weather App',
-    description: 'Interactive weather application with real-time weather data, forecasts, and location search.',
+    title: 'Погодное приложение',
+    description: 'Интерактивное погодное приложение с данными о погоде в реальном времени, прогнозами и поиском по местоположению.',
     icon: 'mdi:weather-partly-cloudy',
     iconColor: 'primary.main',
     link: 'https://github.com/InfinityScripter/weather-app',
     demoLink: 'https://weather-app-blue-nine-95.vercel.app/',
     tech: ['React', 'Weather API', 'CSS'],
     features: [
-      'Real-time weather data',
-      'Location search',
-      'Forecast visualization',
-      'Responsive design',
+      'Данные о погоде в реальном времени',
+      'Поиск по местоположению',
+      'Визуализация прогноза',
+      'Адаптивный дизайн',
     ]
   },
   {
-    title: 'Dashboard Next.js',
-    description: 'Modern admin dashboard built with Next.js featuring analytics, user management, and data visualization.',
+    title: 'Панель управления Next.js',
+    description: 'Современная панель администратора, созданная с использованием Next.js, с аналитикой, управлением пользователями и визуализацией данных.',
     icon: 'mdi:chart-box',
     iconColor: 'primary.main',
     link: 'https://github.com/InfinityScripter/dashboard-next-js',
     demoLink: 'https://dashboard-plum-zeta-47.vercel.app/',
     tech: ['Next.js', 'Material UI', 'Chart.js'],
     features: [
-      'Data visualization',
-      'User management',
-      'Analytics dashboard',
-      'Dark/Light theme',
+      'Визуализация данных',
+      'Управление пользователями',
+      'Аналитическая панель',
+      'Темная/Светлая тема',
     ]
   }
 ];
@@ -82,12 +82,12 @@ export function HomeProjects() {
         }}
       >
         <m.div variants={varFade().inDown}>
-          <Typography variant="h2">Projects</Typography>
+          <Typography variant="h2">Проекты</Typography>
         </m.div>
 
         <m.div variants={varFade().inDown}>
           <Typography sx={{ color: 'text.secondary' }}>
-            Some of my recent projects
+            Некоторые из моих недавних проектов
           </Typography>
         </m.div>
       </Stack>
@@ -204,7 +204,7 @@ export function HomeProjects() {
                   startIcon={<Iconify icon="eva:github-fill" />}
                   sx={{ flex: 1 }}
                 >
-                  Code
+                  Код
                 </Button>
 
                 <Button
@@ -218,7 +218,7 @@ export function HomeProjects() {
                   startIcon={<Iconify icon="eva:external-link-fill" />}
                   sx={{ flex: 1 }}
                 >
-                  Demo
+                  Демо
                 </Button>
               </Stack>
             </Card>

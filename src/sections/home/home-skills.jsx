@@ -14,20 +14,20 @@ import { varFade, MotionViewport } from 'src/components/animate';
 
 const SKILLS = [
   {
-    name: 'Frontend Development',
-    description: 'Creating modern and responsive web interfaces',
+    name: 'Frontend Разработка',
+    description: 'Создание современных и адаптивных веб-интерфейсов',
     icon: 'mdi:react',
     items: ['React', 'TypeScript', 'Next.js', 'Angular', 'Material UI', 'Redux','Tailwind CSS']
   },
   {
-    name: 'Backend Development',
-    description: 'Server-side development and API implementation',
+    name: 'Backend Разработка',
+    description: 'Серверная разработка и реализация API',
     icon: 'mdi:database',
     items: ['Node.js', 'REST API', 'Symfony', 'Docker', 'CI/CD','Express', 'MongoDB', 'PostgreSQL' ]
   },
   {
-    name: 'Tools & DevOps',
-    description: 'Development tools and deployment',
+    name: 'Инструменты и DevOps',
+    description: 'Инструменты разработки и развертывания',
     icon: 'mdi:tools',
     items: ['Git', 'Webpack', 'Figma', 'Docker', 'AWS', 'CI/CD', 'Jest', 'Cypress']
   }
@@ -51,12 +51,12 @@ export default function HomeSkills() {
         }}
       >
         <m.div variants={varFade().inDown}>
-          <Typography variant="h2">My Skills</Typography>
+          <Typography variant="h2">Мои навыки</Typography>
         </m.div>
 
         <m.div variants={varFade().inDown}>
           <Typography sx={{ color: 'text.secondary' }}>
-            Professional skills and technologies I use in my work
+            Профессиональные навыки и технологии, которые я использую в своей работе
           </Typography>
         </m.div>
       </Stack>
