@@ -1,59 +1,55 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import Checkbox from '@mui/material/Checkbox';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import AvatarGroup, { avatarGroupClasses } from '@mui/material/AvatarGroup';
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { useGetPost } from "src/actions/blog";
+import { POST_PUBLISH_OPTIONS } from "src/_mock";
+import { DashboardContent } from "src/layouts/dashboard";
+import { updatePostPublish } from "src/actions/blog-ssr";
 
-import { useGetPost } from 'src/actions/blog';
-import { POST_PUBLISH_OPTIONS } from 'src/_mock';
-import { DashboardContent } from 'src/layouts/dashboard';
-import { updatePostPublish } from 'src/actions/blog-ssr';
+import { Markdown } from "src/components/markdown";
 
-import { Iconify } from 'src/components/iconify';
-import { Markdown } from 'src/components/markdown';
-
-import { PostDetailsHero } from '../post-details-hero';
-import { PostCommentList } from '../post-comment-list';
-import { PostCommentForm } from '../post-comment-form';
-import { PostDetailsToolbar } from '../post-details-toolbar';
-import {formatImageUrl} from "../../../utils/format-image-url";
+import { PostDetailsHero } from "../post-details-hero";
+import { PostCommentList } from "../post-comment-list";
+import { PostCommentForm } from "../post-comment-form";
+import { PostDetailsToolbar } from "../post-details-toolbar";
+import { formatImageUrl } from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
 export function PostDetailsView({ initialPost }) {
-  const [publish, setPublish] = useState('');
+  const [publish, setPublish] = useState("");
 
   const { post } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
 
-  const handleChangePublish = useCallback(async (newValue) => {
-    try {
-      await updatePostPublish(currentPost._id, newValue);
-      setPublish(newValue);
-    } catch (error) {
-      console.error('Failed to update publish status:', error);
-    }
-  }, [currentPost._id]);
+  const handleChangePublish = useCallback(
+    async (newValue) => {
+      try {
+        await updatePostPublish(currentPost._id, newValue);
+        setPublish(newValue);
+      } catch (error) {
+        console.error("Failed to update publish status:", error);
+      }
+    },
+    [currentPost._id],
+  );
 
   useEffect(() => {
     if (currentPost) {
       setPublish(currentPost?.publish);
     }
   }, [currentPost]);
-
-
 
   return (
     <DashboardContent maxWidth={false} disablePadding>
@@ -69,12 +65,15 @@ export function PostDetailsView({ initialPost }) {
         />
       </Container>
 
-      <PostDetailsHero title={`${currentPost?.title}`} coverUrl={`${formatImageUrl(currentPost?.coverUrl)}`} />
+      <PostDetailsHero
+        title={`${currentPost?.title}`}
+        coverUrl={`${formatImageUrl(currentPost?.coverUrl)}`}
+      />
 
       <Stack
         sx={{
           pb: 5,
-          mx: 'auto',
+          mx: "auto",
           maxWidth: 720,
           mt: { xs: 5, md: 10 },
           px: { xs: 2, sm: 3 },
@@ -99,10 +98,17 @@ export function PostDetailsView({ initialPost }) {
           </Stack>
 
           <Stack direction="row" alignItems="center">
-
-            <AvatarGroup sx={{ [`& .${avatarGroupClasses.avatar}`]: { width: 32, height: 32 } }}>
+            <AvatarGroup
+              sx={{
+                [`& .${avatarGroupClasses.avatar}`]: { width: 32, height: 32 },
+              }}
+            >
               {currentPost?.favoritePerson.map((person) => (
-                <Avatar key={person.name} alt={person.name} src={person.avatarUrl} />
+                <Avatar
+                  key={person.name}
+                  alt={person.name}
+                  src={person.avatarUrl}
+                />
               ))}
             </AvatarGroup>
           </Stack>
@@ -111,7 +117,7 @@ export function PostDetailsView({ initialPost }) {
         <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
           <Typography variant="h4">Comments</Typography>
 
-          <Typography variant="subtitle2" sx={{ color: 'text.disabled' }}>
+          <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
             ({currentPost?.comments.length})
           </Typography>
         </Stack>
@@ -120,7 +126,10 @@ export function PostDetailsView({ initialPost }) {
 
         <Divider sx={{ mt: 5, mb: 2 }} />
 
-        <PostCommentList comments={currentPost?.comments ?? []} postId={currentPost?._id} />
+        <PostCommentList
+          comments={currentPost?.comments ?? []}
+          postId={currentPost?._id}
+        />
       </Stack>
     </DashboardContent>
   );
