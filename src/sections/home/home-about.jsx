@@ -117,30 +117,6 @@ export default function HomeAbout() {
               где смогу принести максимальную пользу вашему бизнесу.
             </Typography>
 
-            <Stack direction="row" alignItems="center" spacing={2.5}>
-              <Button
-                component={Link}
-                href="https://github.com/InfinityScripter"
-                target="_blank"
-                color="inherit"
-                variant="outlined"
-                size="large"
-                startIcon={<Iconify width={24}  icon="mdi:github" />}
-              >
-                GitHub
-              </Button>
-              <Button
-                size="large"
-                component={Link}
-                href="https://www.linkedin.com/in/talalaevs"
-                target="_blank"
-                color="info"
-                variant="outlined"
-                startIcon={<Iconify icon="mdi:linkedin" />}
-              >
-                LinkedIn
-              </Button>
-            </Stack>
           </m.div>
         </Grid>
       </Grid>
