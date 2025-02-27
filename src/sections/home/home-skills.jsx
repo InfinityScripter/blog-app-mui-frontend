@@ -23,7 +23,7 @@ const SKILLS = [
     name: 'Backend Development',
     description: 'Server-side development and API implementation',
     icon: 'mdi:database',
-    items: ['Node.js', 'REST API', 'PHP', 'Symfony', 'Docker', 'CI/CD','Express', 'MongoDB', 'PostgreSQL' ]
+    items: ['Node.js', 'REST API', 'Symfony', 'Docker', 'CI/CD','Express', 'MongoDB', 'PostgreSQL' ]
   },
   {
     name: 'Tools & DevOps',

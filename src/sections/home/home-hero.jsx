@@ -205,7 +205,9 @@ export function HomeHero({ sx, ...other }) {
           </Button>
           <Button
             component={Link}
-            href="t.me/Sh0ny"
+            href="https://t.me/Sh0ny"
+            target="_blank"
+            rel="noopener"
             color="inherit"
             size="large"
             variant="outlined"

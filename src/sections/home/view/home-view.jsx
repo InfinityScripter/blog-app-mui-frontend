@@ -49,14 +49,6 @@ export function HomeView() {
 
           <Box sx={{ height: { xs: 40, md: 80 } }} />
 
-          <HomeEducation />
-
-          <Box sx={{ height: { xs: 40, md: 80 } }} />
-
-          <HomeLanguages />
-
-          <Box sx={{ height: { xs: 40, md: 80 } }} />
-
           <HomeProjects />
 
           <Box sx={{ height: { xs: 40, md: 80 } }} />
