@@ -66,15 +66,16 @@ const mdKey = "md";
 const lgKey = "lg";
 
 // Данные обо мне
-const myName = "Mikhail Talalaev";
-const myTitle = "Web Developer";
+const myName = "Михаил Талалаев";
+const myTitle = "Web Разработчик";
 const mySummary =
-  "Experienced Frontend Developer with 3+ years of expertise in React, Angular, and TypeScript. " +
-  "Specializing in building responsive web applications, optimizing UI performance, and implementing modern design systems. " +
-  "Background in IT systems implementation and configuration with 13+ years of experience in the oil and gas industry.";
+  "Опытный Frontend разработчик с более чем 3-летним опытом работы с React, Angular и TypeScript. " +
+  "Специализируюсь на создании адаптивных веб-приложений, оптимизации UI производительности и внедрении современных систем дизайна. " +
+  "Имею 10-летний опыт внедрения и настройки IT-систем в нефтегазовой отрасли.";
 
-const myExperience = "13+ years in IT";
-const myLocation = "Saint Petersburg, Russia";
+const myExperience = "3+ года в Web-разработке";
+const myExperienceTotal = "10+ лет во внедрении IT-систем";
+const myLocation = "Санкт-Петербург, Россия";
 const myEmail = "talalaev.misha@gmail.com";
 const myPhone = "+7 (922) 248-3750";
 
@@ -133,7 +134,7 @@ export function HomeHero({ sx, ...other }) {
         }}
       >
         <Box component="span" sx={{ width: 1, opacity: 0.24, mr: 1 }}>
-          Development Blog
+          Персональный блог
         </Box>
         <Box
           component={m.span}
@@ -201,6 +202,16 @@ export function HomeHero({ sx, ...other }) {
           justifyContent="center"
           sx={{ typography: "subtitle2" }}
         >
+          <Iconify icon="mdi:briefcase" width={24} />
+          <Box component="span">{myExperienceTotal}</Box>
+        </Box>
+        <Box
+          gap={1.5}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          sx={{ typography: "subtitle2" }}
+        >
           <Iconify icon="mdi:map-marker" width={24} />
           <Box component="span">{myLocation}</Box>
         </Box>
@@ -256,7 +267,7 @@ export function HomeHero({ sx, ...other }) {
             variant="contained"
             startIcon={<Iconify width={24} icon="mdi:email" />}
           >
-            Email
+            Почта
           </Button>
           <Button
             component={Link}
@@ -268,7 +279,7 @@ export function HomeHero({ sx, ...other }) {
             variant="outlined"
             startIcon={<Iconify width={24} icon="mdi:phone" />}
           >
-            Call
+            Телефон
           </Button>
         </Stack>
       </MInview>
@@ -290,7 +301,7 @@ export function HomeHero({ sx, ...other }) {
     <Stack spacing={3} sx={{ textAlign: "center" }}>
       <MInview>
         <Typography variant="overline" sx={{ opacity: 0.4 }}>
-          Technologies:
+          Технологии:
         </Typography>
       </MInview>
       {renderTechIcons}
