@@ -18,42 +18,48 @@ import { varFade, MotionViewport } from 'src/components/animate';
 
 const PROJECTS = [
   {
-    title: 'Blog Platform',
-    description: 'A full-featured blog platform with markdown support, commenting system, and admin panel.',
-    image: '/assets/images/projects/blog.jpg',
-    link: 'https://github.com/InfinityScripter/blog-platform',
-    tech: ['Next.js', 'Material UI', 'MongoDB'],
+    title: 'Blog App',
+    description: 'A full-featured blog platform with Material UI components, user authentication, and responsive design.',
+    icon: 'mdi:blog',
+    iconColor:'primary.main',
+    link: 'https://github.com/InfinityScripter/blog-app-mui-frontend',
+    demoLink: 'https://sh0ny.online/post',
+    tech: ['React', 'Material UI', 'Node.js'],
     features: [
       'User authentication',
-      'Markdown editor',
-      'Comments and likes',
-      'Admin panel',
+      'Responsive design',
+      'Blog post management',
+      'Material UI components',
     ]
   },
   {
-    title: 'E-commerce Dashboard',
-    description: 'Admin dashboard for e-commerce with real-time analytics and order management.',
-    image: '/assets/images/projects/dashboard.jpg',
-    link: 'https://github.com/InfinityScripter/ecommerce-dashboard',
-    tech: ['React', 'TypeScript', 'Node.js'],
+    title: 'Weather App',
+    description: 'Interactive weather application with real-time weather data, forecasts, and location search.',
+    icon: 'mdi:weather-partly-cloudy',
+    iconColor: 'primary.main',
+    link: 'https://github.com/InfinityScripter/weather-app',
+    demoLink: 'https://weather-app-blue-nine-95.vercel.app/',
+    tech: ['React', 'Weather API', 'CSS'],
     features: [
-      'Real-time analytics',
-      'Order management',
-      'Payment system integration',
-      'Multi-language support',
+      'Real-time weather data',
+      'Location search',
+      'Forecast visualization',
+      'Responsive design',
     ]
   },
   {
-    title: 'Task Manager',
-    description: 'Task management application with team collaboration support and integration with popular services.',
-    image: '/assets/images/projects/tasks.jpg',
-    link: 'https://github.com/InfinityScripter/task-manager',
-    tech: ['Angular', 'Express', 'PostgreSQL'],
+    title: 'Dashboard Next.js',
+    description: 'Modern admin dashboard built with Next.js featuring analytics, user management, and data visualization.',
+    icon: 'mdi:chart-box',
+    iconColor: 'primary.main',
+    link: 'https://github.com/InfinityScripter/dashboard-next-js',
+    demoLink: 'https://dashboard-plum-zeta-47.vercel.app/',
+    tech: ['Next.js', 'Material UI', 'Chart.js'],
     features: [
-      'Team workspaces',
-      'Drag-and-drop interface',
-      'Real-time notifications',
-      'Calendar integration',
+      'Data visualization',
+      'User management',
+      'Analytics dashboard',
+      'Dark/Light theme',
     ]
   }
 ];
@@ -101,24 +107,34 @@ export function HomeProjects() {
                 textAlign: 'left',
                 p: 3,
                 height: 1,
+                display: 'flex',
+                flexDirection: 'column',  // Добавляем flex-направление как колонку
               }}
             >
-              {project.image && (
+              {/* Иконка проекта */}
+              {project.icon && (
                 <Box
-                  component="img"
-                  src={project.image}
-                  alt={project.title}
                   sx={{
-                    borderRadius: 1.5,
                     mb: 3,
-                    width: 1,
-                    height: 200,
-                    objectFit: 'cover',
+                    display: 'flex',
+                    justifyContent: 'end',
+                    alignItems: 'center',
+                    height: 24,
                   }}
-                />
+                >
+                  <Iconify
+                    icon={project.icon}
+                    width={24}
+                    height={24}
+                    sx={{
+                      color: project.iconColor || 'primary.main',
+                    }}
+                  />
+                </Box>
               )}
 
-              <Stack spacing={2}>
+              {/* Основное содержимое */}
+              <Stack spacing={2} sx={{ flexGrow: 1 }}> {/* Добавляем flexGrow: 1, чтобы этот компонент занимал все доступное пространство */}
                 <Link
                   component={RouterLink}
                   href={project.link}
@@ -165,33 +181,45 @@ export function HomeProjects() {
                     </Stack>
                   ))}
                 </Stack>
+              </Stack>
 
-                <Stack direction="row" spacing={2} sx={{ pt: 2 }}>
-                  <Button
-                    component={Link}
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener"
-                    size="small"
-                    color="inherit"
-                    variant="contained"
-                    startIcon={<Iconify icon="eva:github-fill" />}
-                  >
-                    Code
-                  </Button>
+              {/* Кнопки внизу */}
+              <Stack
+                direction="row"
+                spacing={2}
+                sx={{
+                  pt: 2,
+                  justifyContent: 'space-between',
+                  mt: 2,
+                }}
+              >
+                <Button
+                  component={Link}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener"
+                  size="small"
+                  color="inherit"
+                  variant="contained"
+                  startIcon={<Iconify icon="eva:github-fill" />}
+                  sx={{ flex: 1 }}
+                >
+                  Code
+                </Button>
 
-                  <Button
-                    component={Link}
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener"
-                    size="small"
-                    variant="soft"
-                    startIcon={<Iconify icon="eva:external-link-fill" />}
-                  >
-                    Demo
-                  </Button>
-                </Stack>
+                <Button
+                  component={Link}
+                  href={project.demoLink || project.link}
+                  target="_blank"
+                  rel="noopener"
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  startIcon={<Iconify icon="eva:external-link-fill" />}
+                  sx={{ flex: 1 }}
+                >
+                  Demo
+                </Button>
               </Stack>
             </Card>
           </m.div>
