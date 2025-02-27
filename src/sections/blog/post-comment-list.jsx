@@ -43,7 +43,7 @@ export function PostCommentList({ comments = [], postId, onCommentUpdated }) {
         );
       })}
 
-      <Pagination count={8} sx={{ my: { xs: 5, md: 8 }, mx: 'auto' }} />
+      {/*<Pagination count={8} sx={{ my: { xs: 5, md: 8 }, mx: 'auto' }} />*/}
     </>
   );
 }
