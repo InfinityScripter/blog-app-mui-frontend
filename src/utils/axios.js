@@ -3,40 +3,19 @@ import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
-// Determine if we're running on Vercel by checking the hostname
-const isVercelEnvironment = typeof window !== 'undefined' &&
-  (window.location.hostname.includes('onrender.com') ||
-   window.location.hostname.includes('blog-app-mui-frontend'));
-
-// Set the correct baseURL based on the environment
-const baseURL = isVercelEnvironment
-  ? 'https://blog-app-mui-backend.onrender.com'
-  : process.env.NEXT_PUBLIC_SERVER_URL;
-
-const axiosInstance = axios.create({
-  baseURL,
-});
-
-// For debugging
-if (typeof window !== 'undefined') {
-  console.log('Current hostname:', window.location.hostname);
-  console.log('Is Vercel environment:', isVercelEnvironment);
-  console.log('Using baseURL:', baseURL);
-}
+const axiosInstance = axios.create({ baseURL: process.env.NEXT_PUBLIC_SERVER_URL });
 
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.error('Axios error:', error);
     if (error.response?.data?.message) {
       return Promise.reject(new Error(error.response.data.message));
     }
-    return Promise.reject(new Error('Что-то пошло не так. Попробуйте снова.'));
+    return Promise.reject(new Error('Something went wrong. Please try again.'));
   }
 );
 
 export default axiosInstance;
-console.log('NEXT_PUBLIC_SERVER_URL:', process.env.NEXT_PUBLIC_SERVER_URL);
 
 // ----------------------------------------------------------------------
 
