@@ -16,20 +16,20 @@ const SKILLS = [
   {
     name: 'Frontend Development',
     description: 'Creating modern and responsive web interfaces',
-    icon: 'carbon:application-web',
-    items: ['React', 'TypeScript', 'Next.js', 'Angular', 'Material UI', 'Tailwind CSS']
+    icon: 'mdi:react',
+    items: ['React', 'TypeScript', 'Next.js', 'Angular', 'Material UI', 'Redux','Tailwind CSS']
   },
   {
     name: 'Backend Development',
     description: 'Server-side development and API implementation',
-    icon: 'carbon:Module',
-    items: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'REST API', 'GraphQL']
+    icon: 'mdi:database',
+    items: ['Node.js', 'REST API', 'PHP', 'Symfony', 'Docker', 'CI/CD','Express', 'MongoDB', 'PostgreSQL' ]
   },
   {
     name: 'Tools & DevOps',
     description: 'Development tools and deployment',
-    icon: 'carbon:tools',
-    items: ['Git', 'Docker', 'AWS', 'CI/CD', 'Jest', 'Cypress']
+    icon: 'mdi:tools',
+    items: ['Git', 'Webpack', 'Figma', 'Docker', 'AWS', 'CI/CD', 'Jest', 'Cypress']
   }
 ];
 

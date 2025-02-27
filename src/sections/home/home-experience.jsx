@@ -1,16 +1,18 @@
 import { m } from 'framer-motion';
 
-import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
 import Timeline from '@mui/lab/Timeline';
 import TimelineDot from '@mui/lab/TimelineDot';
 import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
 import TimelineItem from '@mui/lab/TimelineItem';
 import Typography from '@mui/material/Typography';
+import { useTheme, alpha } from '@mui/material/styles';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 
 import { Iconify } from 'src/components/iconify';
 import { varFade, MotionViewport } from 'src/components/animate';
@@ -19,41 +21,61 @@ import { varFade, MotionViewport } from 'src/components/animate';
 
 const EXPERIENCE = [
   {
-    year: '2022 - Present',
-    position: 'Senior Frontend Developer',
-    company: 'Tech Solutions Inc.',
-    location: 'Saint Petersburg, Russia',
+    position: 'Frontend Developer (Angular, TS)',
+    company: 'СТОМПЛАН',
+    location: 'Москва',
+    period: 'Май 2024 — настоящее время',
     description: [
-      'Lead developer in a team of 8 people',
-      'Development and maintenance of high-load web applications',
-      'Mentoring junior developers',
-      'Implementation of best practices and coding standards',
+      'Разработка мастера презентаций с возможностью выгрузки в PDF',
+      'Подготовка проекта к переходу на Angular',
+      'Внедрение новых интерактивных блоков',
+      'Успешный старт и запуск продукта в MVP'
     ],
+    technologies: 'JavaScript, TypeScript, Angular, Git, HTML, CSS, Figma, Webpack, REST API',
+    icon: 'mdi:angular'
   },
   {
-    year: '2020 - 2022',
-    position: 'Frontend Developer',
-    company: 'Digital Innovations Ltd.',
-    location: 'Moscow, Russia',
+    position: 'Frontend Developer (React, JS)',
+    company: 'ShurikMarket',
+    location: 'Санкт-Петербург',
+    period: 'Октябрь 2023 — Май 2024',
     description: [
-      'Development of React applications for corporate clients',
-      'Performance and UX optimization',
-      'Integration with REST API and GraphQL',
-      'Working in an agile team',
+      'Ускорение первичной загрузки страницы сайта',
+      'Разработка новых сервисов (новости, сертификаты, обратная связь, избранные товары)',
+      'Разработка и внедрение функционала регистрации и авторизации пользователей',
+      'Вёрстка нового лендинга по макетам Pixel Perfect',
+      'Внедрение внутреннего UI kit'
     ],
+    technologies: 'JavaScript, TypeScript, React JS, Next.js, Material UI, Git, HTML, CSS, Figma, Webpack, PHP, Twig, Symfony',
+    icon: 'mdi:react'
   },
   {
-    year: '2018 - 2020',
-    position: 'Junior Web Developer',
-    company: 'StartUp Solutions',
-    location: 'Yekaterinburg, Russia',
+    position: 'Frontend Developer (JS)',
+    company: 'Яндекс',
+    location: 'Санкт-Петербург',
+    period: 'Май 2023 — Октябрь 2023',
     description: [
-      'User interface development',
-      'Maintenance of existing projects',
-      'Working with JavaScript and React',
-      'Participation in code reviews',
+      'Оптимизация UI-документации для Userver, ведущего C++ фреймворка',
+      'Улучшение документации и кодовой базы',
+      'Перевод на новый UI-кит'
     ],
+    technologies: 'JavaScript, Git, HTML, CSS, Figma, jQuery',
+    icon: 'mdi:yandex'
   },
+  {
+    position: 'Frontend Developer (React, TS)',
+    company: 'QCup',
+    location: 'Санкт-Петербург',
+    period: 'Ноябрь 2022 — Май 2023',
+    description: [
+      'Проработка архитектуры приложения с нуля',
+      'Разработка клиент-серверных взаимодействий',
+      'Реализация приложения в рамках трёхуровневой архитектуры UI-BLL-DAL',
+      'Обработка ошибок и внедрение прелоадеров для улучшения UX'
+    ],
+    technologies: 'JavaScript, TypeScript, React, MUI UI, Git, HTML, CSS, Figma, REST API',
+    icon: 'mdi:code-braces'
+  }
 ];
 
 export default function HomeExperience() {
@@ -79,68 +101,71 @@ export default function HomeExperience() {
 
         <m.div variants={varFade().inDown}>
           <Typography sx={{ color: 'text.secondary' }}>
-            My professional journey in development
+            My professional journey as a frontend developer
           </Typography>
         </m.div>
       </Stack>
 
       <Timeline position="alternate">
         {EXPERIENCE.map((item, index) => (
-          <TimelineItem key={item.year}>
+          <TimelineItem key={index}>
+            <TimelineOppositeContent sx={{ m: 'auto 0' }}>
+              <m.div variants={varFade().inLeft}>
+                <Typography variant="subtitle1" color="text.primary">
+                  {item.period}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {item.location}
+                </Typography>
+              </m.div>
+            </TimelineOppositeContent>
+
             <TimelineSeparator>
-              <TimelineDot color="primary" />
-              {index !== EXPERIENCE.length - 1 && <TimelineConnector />}
+              <TimelineConnector />
+              <TimelineDot
+                sx={{
+                  bgcolor: theme.palette.primary.main,
+                  p: 1.5,
+                }}
+              >
+                <Iconify icon={item.icon} width={24} sx={{ color: '#fff' }} />
+              </TimelineDot>
+              <TimelineConnector />
             </TimelineSeparator>
 
-            <TimelineContent>
-              <m.div variants={varFade().inUp}>
-                <Card sx={{ p: 3 }}>
-                  <Typography
-                    variant="subtitle2"
-                    sx={{ mb: 0.5, color: 'text.disabled', fontSize: 12 }}
-                  >
-                    {item.year}
-                  </Typography>
-
-                  <Typography variant="h6" sx={{ mb: 1 }}>
+            <TimelineContent sx={{ py: '12px', px: 2 }}>
+              <m.div variants={varFade().inRight}>
+                <Paper
+                  sx={{
+                    p: 3,
+                    bgcolor: alpha(theme.palette.background.neutral, 0.8),
+                    borderRadius: 2,
+                    boxShadow: theme.customShadows.z8,
+                  }}
+                >
+                  <Typography variant="h6" component="div" gutterBottom>
                     {item.position}
                   </Typography>
-
-                  <Stack spacing={0.5} sx={{ mb: 2 }}>
-                    <Stack spacing={0.5} direction="row" alignItems="center">
-                      <Iconify icon="eva:briefcase-fill" width={16} sx={{ color: 'primary.main' }} />
-                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        {item.company}
-                      </Typography>
-                    </Stack>
-
-                    <Stack spacing={0.5} direction="row" alignItems="center">
-                      <Iconify icon="eva:pin-fill" width={16} sx={{ color: 'primary.main' }} />
-                      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                        {item.location}
-                      </Typography>
-                    </Stack>
-                  </Stack>
-
-                  <Stack spacing={1}>
-                    {item.description.map((desc) => (
-                      <Stack
-                        key={desc}
-                        spacing={1}
-                        direction="row"
-                        alignItems="flex-start"
-                        sx={{ typography: 'body2' }}
+                  <Typography variant="subtitle1" color="primary.main" gutterBottom>
+                    {item.company}
+                  </Typography>
+                  <Box component="ul" sx={{ pl: 2, mb: 2 }}>
+                    {item.description.map((desc, i) => (
+                      <Typography
+                        key={i}
+                        component="li"
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ mb: 0.5 }}
                       >
-                        <Iconify
-                          icon="eva:checkmark-circle-2-fill"
-                          width={16}
-                          sx={{ color: 'primary.main', mt: 0.25 }}
-                        />
                         {desc}
-                      </Stack>
+                      </Typography>
                     ))}
-                  </Stack>
-                </Card>
+                  </Box>
+                  <Typography variant="caption" color="text.secondary" sx={{ display: 'block' }}>
+                    <strong>Tech stack:</strong> {item.technologies}
+                  </Typography>
+                </Paper>
               </m.div>
             </TimelineContent>
           </TimelineItem>

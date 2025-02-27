@@ -14,6 +14,7 @@ import { RouterLink } from 'src/routes/components';
 
 import { Iconify } from 'src/components/iconify';
 import { varFade, MotionViewport } from 'src/components/animate';
+import Link from "@mui/material/Link";
 
 // ----------------------------------------------------------------------
 
@@ -116,28 +117,21 @@ export default function HomeAbout() {
               где смогу принести максимальную пользу вашему бизнесу.
             </Typography>
 
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" alignItems="center" spacing={2.5}>
               <Button
-                component={RouterLink}
-                href={paths.contact}
-                color="primary"
-                variant="contained"
-                endIcon={<Iconify icon="eva:arrow-forward-fill" />}
-              >
-                Связаться со мной
-              </Button>
-              <Button
-                component="a"
+                component={Link}
                 href="https://github.com/InfinityScripter"
                 target="_blank"
                 color="inherit"
                 variant="outlined"
-                startIcon={<Iconify icon="mdi:github" />}
+                size="large"
+                startIcon={<Iconify width={24}  icon="mdi:github" />}
               >
                 GitHub
               </Button>
               <Button
-                component="a"
+                size="large"
+                component={Link}
                 href="https://www.linkedin.com/in/talalaevs"
                 target="_blank"
                 color="info"
