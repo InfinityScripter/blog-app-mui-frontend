@@ -21,7 +21,8 @@ import { textGradient } from "src/theme/styles";
 
 import { Iconify } from "src/components/iconify";
 import { varFade, MotionContainer } from "src/components/animate";
-
+import RouterLink from "next/link";
+import {paths} from "../../routes/paths";
 import { HeroBackground } from "./components/hero-background";
 
 // Функции-хелперы остаются без изменений
@@ -69,7 +70,7 @@ const lgKey = "lg";
 const myName = "Михаил Талалаев";
 const myTitle = "Web Разработчик";
 const mySummary =
-  "Опытный Frontend разработчик с более чем 3-летним опытом работы с React, Angular и TypeScript. " +
+  "Web разработчик с более чем 3-летним опытом работы с React, Angular и TypeScript. " +
   "Специализируюсь на создании адаптивных веб-приложений, оптимизации UI производительности и внедрении современных систем дизайна. " +
   "Имею 10-летний опыт внедрения и настройки IT-систем в нефтегазовой отрасли.";
 
@@ -134,7 +135,7 @@ export function HomeHero({ sx, ...other }) {
         }}
       >
         <Box component="span" sx={{ width: 1, opacity: 0.24, mr: 1 }}>
-          Персональный блог
+          Web блог
         </Box>
         <Box
           component={m.span}
@@ -297,6 +298,30 @@ export function HomeHero({ sx, ...other }) {
     </Stack>
   );
 
+  // Информация о блоге
+  const renderBlogInfo = (
+    <MInview>
+      <Box sx={{ textAlign: 'center', maxWidth: 600, mx: 'auto', mt: 2 }}>
+        <Typography variant="subtitle1" sx={{ mb: 1 }}>
+          Хотите быть в курсе современных тенденций разработки?
+        </Typography>
+        <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
+          Читайте актуальные новости, статьи и руководства по веб-разработке в моем блоге
+        </Typography>
+        <Button
+          component={Link}
+          href="/post"
+          color="primary"
+          size="large"
+          variant="outlined"
+          startIcon={<Iconify width={24} icon="mdi:newspaper-variant-outline" />}
+        >
+          Перейти в блог
+        </Button>
+      </Box>
+    </MInview>
+  );
+
   const renderTech = (
     <Stack spacing={3} sx={{ textAlign: "center" }}>
       <MInview>
@@ -362,6 +387,7 @@ export function HomeHero({ sx, ...other }) {
           <Stack spacing={3} sx={{ textAlign: "center" }}>
             <m.div style={{ y: y1 }}>{renderHeading}</m.div>
             <m.div style={{ y: y2 }}>{renderText}</m.div>
+            <m.div style={{ y: y4 }}>{renderBlogInfo}</m.div>
           </Stack>
           <m.div style={{ y: y3 }}>{renderExperience}</m.div>
           <m.div style={{ y: y4 }}>{renderButtons}</m.div>

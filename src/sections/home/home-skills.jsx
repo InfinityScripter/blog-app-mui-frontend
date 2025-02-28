@@ -17,19 +17,22 @@ const SKILLS = [
     name: 'Frontend Разработка',
     description: 'Создание современных и адаптивных веб-интерфейсов',
     icon: 'mdi:react',
-    items: ['React', 'TypeScript', 'Next.js', 'Angular', 'Material UI', 'Redux','Tailwind CSS']
+    items: ['React', 'TypeScript', 'Next.js', 'Angular', 'Material UI', 'Redux','Tailwind CSS'],
+    iconSkill: ['logos:react', 'logos:typescript-icon', 'logos:nextjs-icon', 'logos:angular-icon', 'logos:material-ui', 'logos:redux', 'logos:tailwindcss-icon']
   },
   {
     name: 'Backend Разработка',
     description: 'Серверная разработка и реализация API',
     icon: 'mdi:database',
-    items: ['Node.js', 'REST API', 'Symfony', 'Docker', 'CI/CD','Express', 'MongoDB', 'PostgreSQL' ]
+    items: ['Node.js', 'REST API', 'Symfony', 'Docker','Express', 'MongoDB', 'PostgreSQL', 'Mariadb' ],
+    iconSkill: ['logos:nodejs-icon', 'logos:rest', 'logos:symfony', 'logos:docker', 'logos:express', 'logos:mongodb-icon', 'logos:postgresql', 'logos:mariadb']
   },
   {
     name: 'Инструменты и DevOps',
     description: 'Инструменты разработки и развертывания',
     icon: 'mdi:tools',
-    items: ['Git', 'Webpack', 'Figma', 'Docker', 'AWS', 'CI/CD', 'Jest', 'Cypress']
+    items: ['Git', 'Webpack', 'Figma', 'Docker', 'AWS', 'CI/CD', 'Jest', 'Cypress'],
+    iconSkill: ['logos:git-icon', 'logos:webpack', 'logos:figma', 'logos:docker', 'logos:aws', 'logos:jenkins', 'logos:jest', 'logos:cypress']
   }
 ];
 
@@ -98,7 +101,7 @@ export default function HomeSkills() {
                 </Typography>
 
                 <Stack spacing={1} sx={{ pt: 3 }}>
-                  {skill.items.map((item) => (
+                  {skill.items.map((item, index) => (
                     <Stack
                       key={item}
                       spacing={1}
@@ -108,7 +111,7 @@ export default function HomeSkills() {
                         typography: 'body2',
                       }}
                     >
-                      <Iconify icon="eva:checkmark-fill" width={16} sx={{ color: 'primary.main' }} />
+                      <Iconify icon={skill.iconSkill[index]} width={20} sx={{ color: 'primary.main' }} />
                       {item}
                     </Stack>
                   ))}
