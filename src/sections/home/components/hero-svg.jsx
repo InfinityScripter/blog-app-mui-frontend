@@ -212,7 +212,7 @@ export function Texts({ sx, ...other }) {
         left: 0,
         width: 1,
         bottom: 0,
-        zIndex: 99,
+        zIndex: 0,
         height: 200,
         position: 'absolute',
         ...sx,
@@ -243,7 +243,7 @@ export function Texts({ sx, ...other }) {
           animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 64, ease: 'linear', repeat: Infinity }}
         >
-          MIKHAIL TALALAEV
+          MIKHAIL TALALAEV  MIKHAIL TALALAEV
         </m.text>
       </Box>
     </Stack>
