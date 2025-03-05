@@ -4,13 +4,16 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { Iconify } from 'src/components/iconify';
+import { useInfiniteScroll } from 'src/hooks/use-infinite-scroll';
 
 import { PostItemSkeleton } from './post-skeleton';
 import { PostItem, PostItemLatest } from './post-item';
 
 // ----------------------------------------------------------------------
 
-export function PostList({ posts, loading }) {
+export function PostList({ posts, loading: initialLoading }) {
+  const { items, hasMore, loading, loadMore } = useInfiniteScroll(posts);
+
   const renderLoading = (
     <Box
       gap={3}
@@ -23,7 +26,7 @@ export function PostList({ posts, loading }) {
 
   const renderList = (
     <Grid container spacing={3}>
-      {posts.slice(0, 3).map((post, index) => (
+      {items.slice(0, 3).map((post, index) => (
         <Grid
           key={post._id}
           xs={12}
@@ -36,13 +39,13 @@ export function PostList({ posts, loading }) {
         </Grid>
       ))}
 
-      {posts.slice(0, 3).map((post) => (
+      {items.slice(0, 3).map((post) => (
         <Grid key={post._id} xs={12} sm={6} md={4} lg={3} sx={{ display: { lg: 'none' } }}>
           <PostItem post={post} />
         </Grid>
       ))}
 
-      {posts.slice(3, posts.length).map((post) => (
+      {items.slice(3, items.length).map((post) => (
         <Grid key={post._id} xs={12} sm={6} md={4} lg={3}>
           <PostItem post={post} />
         </Grid>
@@ -52,16 +55,17 @@ export function PostList({ posts, loading }) {
 
   return (
     <>
-      {loading ? renderLoading : renderList}
+      {initialLoading ? renderLoading : renderList}
 
-      {posts.length > 8 && (
+      {hasMore && (
         <Stack alignItems="center" sx={{ mt: 8, mb: { xs: 10, md: 15 } }}>
           <Button
             size="large"
             variant="outlined"
-            startIcon={<Iconify icon="svg-spinners:12-dots-scale-rotate" width={24} />}
+            startIcon={<Iconify icon={loading ? "svg-spinners:12-dots-scale-rotate" : "eva:arrow-down-outline"} width={24} />}
+            onClick={loadMore}
           >
-            Load More
+            {loading ? 'Loading...' : 'Load More'}
           </Button>
         </Stack>
       )}
