@@ -80,7 +80,7 @@ export const NavItem = forwardRef(
         )}
 
         {caption && (
-          <Tooltip title={caption} arrow>
+          <Tooltip title={caption} arrow classes={{ tooltip: 'tooltip-active' }}>
             <Iconify icon="eva:info-outline" className={navSectionClasses.item.caption} />
           </Tooltip>
         )}
