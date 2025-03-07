@@ -13,47 +13,50 @@ import { Chart, useChart, ChartSelect, ChartLegends } from 'src/components/chart
 export function EcommerceYearlySales({ title, subheader, chart, ...other }) {
   const theme = useTheme();
 
-  const [selectedSeries, setSelectedSeries] = useState('2023');
-
-  const chartColors = chart.colors ?? [theme.palette.primary.main, theme.palette.warning.main];
+  const chartColors = chart.colors ?? [theme.palette.primary.main, theme.palette.error.main];
 
   const chartOptions = useChart({
     colors: chartColors,
     xaxis: { categories: chart.categories },
+    yaxis: {
+      labels: {
+        formatter: (value) => `${value.toFixed(1)}%`,
+      },
+    },
+    tooltip: {
+      y: {
+        formatter: (value) => `${value.toFixed(1)}%`,
+      },
+    },
     ...chart.options,
   });
 
-  const handleChangeSeries = useCallback((newValue) => {
-    setSelectedSeries(newValue);
-  }, []);
-
-  const currentSeries = chart.series.find((i) => i.name === selectedSeries);
+  // Prepare data for display - both plan and fact simultaneously
+  const seriesData = chart.series.map((item) => ({
+    name: item.name,
+    data: item.data[0].data,
+  }));
 
   return (
     <Card {...other}>
       <CardHeader
         title={title}
         subheader={subheader}
-        action={
-          <ChartSelect
-            options={chart.series.map((item) => item.name)}
-            value={selectedSeries}
-            onChange={handleChangeSeries}
-          />
-        }
         sx={{ mb: 3 }}
       />
 
       <ChartLegends
         colors={chartOptions?.colors}
-        labels={chart.series[0].data.map((item) => item.name)}
-        values={[fShortenNumber(1234), fShortenNumber(6789)]}
+        labels={chart.series.map((item) => item.name)}
+        values={chart.series.map((item) =>
+          `${item.data[0].data[item.data[0].data.length - 1].toFixed(1)}%`
+        )}
         sx={{ px: 3, gap: 3 }}
       />
 
       <Chart
-        type="area"
-        series={currentSeries?.data}
+        type="line"
+        series={seriesData}
         options={chartOptions}
         height={320}
         loadingProps={{ sx: { p: 2.5 } }}

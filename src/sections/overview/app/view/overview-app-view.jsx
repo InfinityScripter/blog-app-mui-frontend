@@ -7,7 +7,15 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { DashboardContent } from 'src/layouts/dashboard';
 import { SeoIllustration } from 'src/assets/illustrations';
-import { _appAuthors, _appRelated, _appFeatured, _appInvoices, _appInstalled } from 'src/_mock';
+import {
+  _appAuthors,
+  _appRelated,
+  _appFeatured,
+  _appInvoices,
+  _appInstalled,
+  _ecommerceNewProducts,
+  _ecommerceSalesOverview, _ecommerceBestSalesman, _ecommerceLatestProducts
+} from 'src/_mock';
 
 import { svgColorClasses } from 'src/components/svg-color';
 
@@ -23,6 +31,13 @@ import { AppAreaInstalled } from '../app-area-installed';
 import { AppWidgetSummary } from '../app-widget-summary';
 import { AppCurrentDownload } from '../app-current-download';
 import { AppTopInstalledCountries } from '../app-top-installed-countries';
+import {EcommerceNewProducts} from "../../e-commerce/ecommerce-new-products";
+import {EcommerceWidgetSummary} from "../../e-commerce/ecommerce-widget-summary";
+import {EcommerceSaleByGender} from "../../e-commerce/ecommerce-sale-by-gender";
+import {EcommerceSalesOverview} from "../../e-commerce/ecommerce-sales-overview";
+import {EcommerceCurrentBalance} from "../../e-commerce/ecommerce-current-balance";
+import {EcommerceBestSalesman} from "../../e-commerce/ecommerce-best-salesman";
+import {EcommerceLatestProducts} from "../../e-commerce/ecommerce-latest-products";
 
 // ----------------------------------------------------------------------
 
@@ -36,6 +51,94 @@ export function OverviewAppView() {
       <Grid container spacing={3}>
 
 
+        <Grid xs={12} md={4}>
+          <EcommerceNewProducts list={_ecommerceNewProducts}/>
+        </Grid>
+
+        <Grid xs={12} md={4}>
+          <EcommerceWidgetSummary
+            title="Product sold"
+            percent={2.6}
+            total={765}
+            chart={{
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+              series: [22, 8, 35, 50, 82, 84, 77, 12],
+            }}
+          />
+        </Grid>
+
+        <Grid xs={12} md={4}>
+          <EcommerceWidgetSummary
+            title="Total balance"
+            percent={-0.1}
+            total={18765}
+            chart={{
+              colors: [theme.vars.palette.warning.light, theme.vars.palette.warning.main],
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+              series: [56, 47, 40, 62, 73, 30, 23, 54],
+            }}
+          />
+        </Grid>
+
+        <Grid xs={12} md={4}>
+          <EcommerceWidgetSummary
+            title="Sales profit"
+            percent={0.6}
+            total={4876}
+            chart={{
+              colors: [theme.vars.palette.error.light, theme.vars.palette.error.main],
+              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+              series: [40, 70, 75, 70, 50, 28, 7, 64],
+            }}
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={4}>
+          <EcommerceSaleByGender
+            title="Sale by gender"
+            total={2324}
+            chart={{
+              series: [
+                {label: 'Mens', value: 25},
+                {label: 'Womens', value: 50},
+                {label: 'Kids', value: 75},
+              ],
+            }}
+          />
+        </Grid>
+
+
+        <Grid xs={12} md={6} lg={8}>
+          <EcommerceSalesOverview title="Sales overview" data={_ecommerceSalesOverview}/>
+        </Grid>
+
+        <Grid xs={12} md={6} lg={4}>
+          <EcommerceCurrentBalance
+            title="Current balance"
+            earning={25500}
+            refunded={1600}
+            orderTotal={287650}
+            currentBalance={187650}
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={8}>
+          <EcommerceBestSalesman
+            title="Best salesman"
+            tableData={_ecommerceBestSalesman}
+            headLabel={[
+              {id: 'name', label: 'Seller'},
+              {id: 'category', label: 'Product'},
+              {id: 'country', label: 'Country', align: 'center'},
+              {id: 'totalAmount', label: 'Total', align: 'right'},
+              {id: 'rank', label: 'Rank', align: 'right'},
+            ]}
+          />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={4}>
+          <EcommerceLatestProducts title="Latest products" list={_ecommerceLatestProducts}/>
+        </Grid>
 
 
         <Grid xs={12} md={4}>
