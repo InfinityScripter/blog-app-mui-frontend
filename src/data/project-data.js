@@ -379,28 +379,3 @@ export const mobilizationData = [
   { date: '2025-02-23', subproject: 'ТСБ', category: 'Техника', plan: 222, fact: 231 }
 ];
 
-export const latestProgressData = {
-  totalProgress: { plan: 0.5154523194, fact: 0.5007375274 },
-  subprojects: {
-    'ГПЗ': { plan: 0.4679, fact: 0.4309, diff: -0.037 },
-    'СПГ': { plan: 0.2595, fact: 0.2598, diff: 0.0003 },
-    'ТСБ': { plan: 0.4912, fact: 0.4921, diff: 0.0009 },
-    'МОТ': { plan: 0.8927, fact: 0.9370, diff: 0.0443 },
-    'ОНН': { plan: 0.7895, fact: 0.7741, diff: -0.0154 },
-    'ЛО': { plan: 0.4600, fact: 0.4191, diff: -0.0409 }
-  },
-  mobilization: {
-    total: {
-      personnel: { plan: 24501, fact: 24011 },
-      equipment: { plan: 1627, fact: 1869 }
-    },
-    bySubproject: {
-      'ГПЗ': { personnel: { plan: 11878, fact: 10700 }, equipment: { plan: 872, fact: 909 } },
-      'СПГ': { personnel: { plan: 3713, fact: 4315 }, equipment: { plan: 194, fact: 256 } },
-      'ТСБ': { personnel: { plan: 4559, fact: 4574 }, equipment: { plan: 222, fact: 231 } },
-      'МОТ': { personnel: { plan: 400, fact: 579 }, equipment: { plan: 60, fact: 79 } },
-      'ОНН': { personnel: { plan: 2564, fact: 1878 }, equipment: { plan: 100, fact: 103 } },
-      'ЛО': { personnel: { plan: 1387, fact: 1965 }, equipment: { plan: 179, fact: 291 } }
-    }
-  }
-};

@@ -7,27 +7,35 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 
 import {DashboardContent} from 'src/layouts/dashboard';
-import { projectTotalProgress } from 'src/data/project-data';
+import {mobilizationData, projectProgressBySubprojects, projectTotalProgress} from 'src/data/project-data';
 
 import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
 import {ProjectColumnNegative} from '../project-column-negative';
+import {ProjectMobilizationWidget} from '../project-mobilization-widget';
+import {ProjectMobilizationSummary} from '../project-mobilization-summary';
+import {ProjectMobilizationAnalysis} from '../project-mobilization-analysis';
+import {ProjectProgressBySubprojects} from '../project-progress-by-subprojects';
 
 // ----------------------------------------------------------------------
 
 export function OverviewEcommerceView() {
-
   const theme = useTheme();
 
   return (
     <DashboardContent maxWidth="xl">
       <Grid container spacing={3}>
         <Grid xs={12}>
-          <Typography variant="h4" sx={{ mb: 3 }}>
-            Отклонения от плана
+          <Typography variant="h3" sx={{mb: {xs: 1, md: 2}}}>
+            Газоперерабатывающий комплекс
+          </Typography>
+          <Typography variant="h5" sx={{mb: {xs: 3, md: 5}}}>
+            В составе комплекса переработки этаносодержащего газа
           </Typography>
         </Grid>
-
-        <Grid xs={12} md={6} lg={8}>
+        <Grid xs={12} md={12} lg={12}>
+          <ProjectMobilizationSummary data={mobilizationData}/>
+        </Grid>
+        <Grid  xs={12} md={6} lg={6}>
           <EcommerceYearlySales
             title="Общий прогресс"
             subheader="План vs Факт"
@@ -65,10 +73,12 @@ export function OverviewEcommerceView() {
             }}
           />
         </Grid>
-
-        <Grid xs={12} md={6} lg={8}>
+        <Grid xs={12} md={6} lg={6}>
+          <ProjectProgressBySubprojects data={projectProgressBySubprojects}/>
+        </Grid>
+        <Grid xs={12} md={6} lg={6}>
           <Card>
-            <CardHeader title="Отклонение от плана по датам" subheader="Процент отклонения" />
+            <CardHeader title="Отклонение от плана Общий" subheader="Процент отклонения"/>
             <ProjectColumnNegative
               chart={{
                 categories: projectTotalProgress.map(item => item.date),
@@ -103,6 +113,20 @@ export function OverviewEcommerceView() {
               ]}
             />
           </Card>
+        </Grid>
+
+        <Grid xs={12}>
+          <ProjectMobilizationWidget
+            title="Мобилизация ресурсов"
+            subheader="Динамика мобилизации персонала и техники"
+            data={mobilizationData}
+            color="info"
+          />
+        </Grid>
+
+
+        <Grid xs={12}>
+          <ProjectMobilizationAnalysis data={mobilizationData}/>
         </Grid>
       </Grid>
     </DashboardContent>
