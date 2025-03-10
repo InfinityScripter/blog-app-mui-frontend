@@ -12,6 +12,7 @@ import {mobilizationData, projectProgressBySubprojects, projectTotalProgress} fr
 import {EcommerceYearlySales} from '../ecommerce-yearly-sales';
 import {ProjectColumnNegative} from '../project-column-negative';
 import {ProjectMobilizationWidget} from '../project-mobilization-widget';
+import {ProjectColumnNegativeBySubprojects} from '../project-column-negative-by-subprojects';
 import {ProjectMobilizationSummary} from '../project-mobilization-summary';
 import {ProjectMobilizationAnalysis} from '../project-mobilization-analysis';
 import {ProjectProgressBySubprojects} from '../project-progress-by-subprojects';
@@ -91,6 +92,11 @@ export function OverviewEcommerceView() {
               }}
               rangeSettings={[
                 {
+                  from: -20,
+                  to: -10,
+                  color: theme.palette.error.dark, // Значительное отставание
+                },
+                {
                   from: -10,
                   to: -2,
                   color: theme.palette.error.main, // Значительное отставание
@@ -103,16 +109,59 @@ export function OverviewEcommerceView() {
                 {
                   from: 0,
                   to: 2,
-                  color: theme.palette.info.main, // Небольшое опережение
+                  color: theme.palette.success.light, // Небольшое опережение
                 },
                 {
                   from: 2,
-                  to: 10,
-                  color: theme.palette.success.main, // Значительное опережение
+                  to: 5,
+                  color: theme.palette.success.main, // Опережение
                 },
+                {
+                  from: 5,
+                  to: 20,
+                  color: theme.palette.success.dark, // Значительное опережение
+                }
               ]}
             />
           </Card>
+        </Grid>
+
+        <Grid xs={12} md={6} lg={6}>
+          <ProjectColumnNegativeBySubprojects
+            data={projectProgressBySubprojects}
+            rangeSettings={[
+              {
+                from: -20,
+                to: -10,
+                color: theme.palette.error.dark, // Значительное отставание
+              },
+              {
+                from: -10,
+                to: -2,
+                color: theme.palette.error.main, // Значительное отставание
+              },
+              {
+                from: -2,
+                to: 0,
+                color: theme.palette.warning.main, // Небольшое отставание
+              },
+              {
+                from: 0,
+                to: 2,
+                color: theme.palette.success.light, // Небольшое опережение
+              },
+              {
+                from: 2,
+                to: 5,
+                color: theme.palette.success.main, // Опережение
+              },
+              {
+                from: 5,
+                to: 20,
+                color: theme.palette.success.dark, // Значительное опережение
+              }
+            ]}
+          />
         </Grid>
 
         <Grid xs={12}>

@@ -49,27 +49,27 @@ export function ProjectMobilizationAnalysis({ data }) {
 
   const filteredData = useMemo(() => {
     if (!date) return [];
-    
+
     let result = data.filter(item => item.date === date);
-    
+
     if (category !== 'all') {
       result = result.filter(item => item.category === category);
     }
-    
+
     return result;
   }, [data, date, category]);
 
   // Group data by subproject
   const subprojectData = useMemo(() => {
     const result = {};
-    
+
     filteredData.forEach(item => {
       if (!result[item.subproject]) {
         result[item.subproject] = [];
       }
       result[item.subproject].push(item);
     });
-    
+
     return result;
   }, [filteredData]);
 
@@ -78,26 +78,26 @@ export function ProjectMobilizationAnalysis({ data }) {
     const totalPlan = filteredData.reduce((sum, item) => sum + item.plan, 0);
     const totalFact = filteredData.reduce((sum, item) => sum + item.fact, 0);
     const percentComplete = totalPlan ? (totalFact / totalPlan) * 100 : 0;
-    
+
     return { plan: totalPlan, fact: totalFact, percent: percentComplete };
   }, [filteredData]);
 
   // Prepare chart data
   const chartData = useMemo(() => {
     const subprojects = Object.keys(subprojectData);
-    
+
     const planData = [];
     const factData = [];
-    
+
     subprojects.forEach(subproject => {
       const items = subprojectData[subproject];
       const planTotal = items.reduce((sum, item) => sum + item.plan, 0);
       const factTotal = items.reduce((sum, item) => sum + item.fact, 0);
-      
+
       planData.push(planTotal);
       factData.push(factTotal);
     });
-    
+
     return {
       categories: subprojects,
       series: [
@@ -202,9 +202,9 @@ export function ProjectMobilizationAnalysis({ data }) {
 
           <Stack spacing={1} sx={{ width: 1, textAlign: 'center' }}>
             <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
-              Выполнение
+              Выполнение %
             </Typography>
-            <Typography variant="h4">{fPercent(totals.percent / 100)}</Typography>
+            <Typography variant="h4">{fPercent(totals.percent )}</Typography>
           </Stack>
         </Stack>
 
@@ -224,7 +224,7 @@ export function ProjectMobilizationAnalysis({ data }) {
                 <TableCell align="right">План</TableCell>
                 <TableCell align="right">Факт</TableCell>
                 <TableCell align="right">Разница</TableCell>
-                <TableCell align="right">Выполнение</TableCell>
+                <TableCell align="right">Выполнение %</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -232,16 +232,16 @@ export function ProjectMobilizationAnalysis({ data }) {
                 const { subproject, category: rowCategory, plan, fact } = row;
                 const diff = fact - plan;
                 const percentComplete = plan ? (fact / plan) * 100 : 0;
-                
+
                 return (
                   <TableRow key={index}>
                     <TableCell>{subproject}</TableCell>
                     <TableCell>{rowCategory}</TableCell>
                     <TableCell align="right">{fNumber(plan)}</TableCell>
                     <TableCell align="right">{fNumber(fact)}</TableCell>
-                    <TableCell 
+                    <TableCell
                       align="right"
-                      sx={{ 
+                      sx={{
                         color: diff >= 0 ? 'success.main' : 'error.main',
                       }}
                     >
@@ -263,15 +263,15 @@ export function ProjectMobilizationAnalysis({ data }) {
                               width: `${Math.min(percentComplete, 100)}%`,
                               height: '100%',
                               borderRadius: 1,
-                              bgcolor: percentComplete >= 100 
-                                ? 'success.main' 
-                                : percentComplete >= 80 
-                                  ? 'warning.main' 
+                              bgcolor: percentComplete >= 100
+                                ? 'success.main'
+                                : percentComplete >= 80
+                                  ? 'warning.main'
                                   : 'error.main',
                             }}
                           />
                         </Box>
-                        <Typography variant="body2">{fPercent(percentComplete / 100)}</Typography>
+                        <Typography variant="body2">{fPercent(percentComplete )}</Typography>
                       </Stack>
                     </TableCell>
                   </TableRow>
