@@ -1,6 +1,6 @@
-import { tooltipClasses } from '@mui/material/Tooltip';
+import { tooltipClasses } from "@mui/material/Tooltip";
 
-import { stylesMode } from '../../styles';
+import { stylesMode } from "../../styles";
 
 // ----------------------------------------------------------------------
 
@@ -22,18 +22,22 @@ const MuiTooltip = {
       },
     }),
     popper: {
-      [`&.${tooltipClasses.popper}[data-popper-placement*="bottom"] .${tooltipClasses.tooltip}`]: {
-        marginTop: 12,
-      },
-      [`&.${tooltipClasses.popper}[data-popper-placement*="top"] .${tooltipClasses.tooltip}`]: {
-        marginBottom: 12,
-      },
-      [`&.${tooltipClasses.popper}[data-popper-placement*="right"] .${tooltipClasses.tooltip}`]: {
-        marginLeft: 12,
-      },
-      [`&.${tooltipClasses.popper}[data-popper-placement*="left"] .${tooltipClasses.tooltip}`]: {
-        marginRight: 12,
-      },
+      [`&.${tooltipClasses.popper}[data-popper-placement*="bottom"] .${tooltipClasses.tooltip}`]:
+        {
+          marginTop: 12,
+        },
+      [`&.${tooltipClasses.popper}[data-popper-placement*="top"] .${tooltipClasses.tooltip}`]:
+        {
+          marginBottom: 12,
+        },
+      [`&.${tooltipClasses.popper}[data-popper-placement*="right"] .${tooltipClasses.tooltip}`]:
+        {
+          marginLeft: 12,
+        },
+      [`&.${tooltipClasses.popper}[data-popper-placement*="left"] .${tooltipClasses.tooltip}`]:
+        {
+          marginRight: 12,
+        },
     },
   },
 };

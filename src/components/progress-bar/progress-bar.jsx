@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import './styles.css';
+import "./styles.css";
 
-import NProgress from 'nprogress';
-import { Suspense, useEffect } from 'react';
+import NProgress from "nprogress";
+import { Suspense, useEffect } from "react";
 
-import { useRouter, usePathname, useSearchParams } from 'src/routes/hooks';
+import { useRouter, usePathname, useSearchParams } from "src/routes/hooks";
 
 // ----------------------------------------------------------------------
 
@@ -24,19 +24,23 @@ export function ProgressBar() {
     };
 
     const handleMutation = () => {
-      const anchorElements = document.querySelectorAll('a[href]');
+      const anchorElements = document.querySelectorAll("a[href]");
 
       const filteredAnchors = Array.from(anchorElements).filter((element) => {
-        const rel = element.getAttribute('rel');
+        const rel = element.getAttribute("rel");
 
-        const href = element.getAttribute('href');
+        const href = element.getAttribute("href");
 
-        const target = element.getAttribute('target');
+        const target = element.getAttribute("target");
 
-        return href?.startsWith('/') && target !== '_blank' && rel !== 'noopener';
+        return (
+          href?.startsWith("/") && target !== "_blank" && rel !== "noopener"
+        );
       });
 
-      filteredAnchors.forEach((anchor) => anchor.addEventListener('click', handleAnchorClick));
+      filteredAnchors.forEach((anchor) =>
+        anchor.addEventListener("click", handleAnchorClick),
+      );
     };
 
     const mutationObserver = new MutationObserver(handleMutation);

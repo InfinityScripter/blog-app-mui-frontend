@@ -1,24 +1,27 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { fPercent } from 'src/utils/format-number';
+import { fPercent } from "src/utils/format-number";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ChartColumnNegative({ chart }) {
   const theme = useTheme();
 
-  const chartColors = chart.colors ?? [theme.palette.warning.main, theme.palette.info.main];
+  const chartColors = chart.colors ?? [
+    theme.palette.warning.main,
+    theme.palette.info.main,
+  ];
 
   const chartOptions = useChart({
     stroke: { width: 0 },
     xaxis: {
-      type: 'datetime',
+      type: "datetime",
       categories: chart.categories,
     },
     yaxis: { labels: { formatter: (value) => fPercent(value) } },
-    tooltip: { y: { title: { formatter: () => '' } } },
+    tooltip: { y: { title: { formatter: () => "" } } },
     plotOptions: {
       bar: {
         borderRadius: 2,
@@ -40,5 +43,12 @@ export function ChartColumnNegative({ chart }) {
     },
   });
 
-  return <Chart type="bar" series={chart.series} options={chartOptions} height={320} />;
+  return (
+    <Chart
+      type="bar"
+      series={chart.series}
+      options={chartOptions}
+      height={320}
+    />
+  );
 }

@@ -1,16 +1,21 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from "src/utils/format-number";
 
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function BankingExpensesCategories({ title, subheader, chart, ...other }) {
+export function BankingExpensesCategories({
+  title,
+  subheader,
+  chart,
+  ...other
+}) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [
@@ -47,10 +52,10 @@ export function BankingExpensesCategories({ title, subheader, chart, ...other })
           pb: 3,
           rowGap: 3,
           columnGap: 5,
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Chart
@@ -67,23 +72,37 @@ export function BankingExpensesCategories({ title, subheader, chart, ...other })
           labels={chartOptions?.labels}
           icons={chart.icons}
           sublabels={chart.series.map((item) => fCurrency(item.value))}
-          sx={{ gap: 2.5, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}
+          sx={{
+            gap: 2.5,
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+          }}
         />
       </Box>
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      <Divider sx={{ borderStyle: "dashed" }} />
 
       <Box
         display="grid"
         gridTemplateColumns="repeat(2, 1fr)"
-        sx={{ textAlign: 'center', typography: 'h4' }}
+        sx={{ textAlign: "center", typography: "h4" }}
       >
-        <Box sx={{ py: 2, borderRight: `dashed 1px ${theme.vars.palette.divider}` }}>
-          <Box sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>Categories</Box>9
+        <Box
+          sx={{
+            py: 2,
+            borderRight: `dashed 1px ${theme.vars.palette.divider}`,
+          }}
+        >
+          <Box sx={{ mb: 1, typography: "body2", color: "text.secondary" }}>
+            Categories
+          </Box>
+          9
         </Box>
 
         <Box sx={{ py: 2 }}>
-          <Box sx={{ mb: 1, typography: 'body2', color: 'text.secondary' }}>Categories</Box>
+          <Box sx={{ mb: 1, typography: "body2", color: "text.secondary" }}>
+            Categories
+          </Box>
           $18,765
         </Box>
       </Box>

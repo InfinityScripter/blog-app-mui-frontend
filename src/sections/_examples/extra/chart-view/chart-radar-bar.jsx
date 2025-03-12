@@ -1,6 +1,6 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ export function ChartRadarBar({ chart }) {
     legend: {
       show: true,
       floating: true,
-      position: 'right',
+      position: "right",
     },
     xaxis: {
       categories: chart.categories,
@@ -39,5 +39,12 @@ export function ChartRadarBar({ chart }) {
     },
   });
 
-  return <Chart type="radar" series={chart.series} options={chartOptions} height={280} />;
+  return (
+    <Chart
+      type="radar"
+      series={chart.series}
+      options={chartOptions}
+      height={280}
+    />
+  );
 }

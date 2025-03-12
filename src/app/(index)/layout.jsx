@@ -1,6 +1,6 @@
-import { MainLayout } from 'src/layouts/main';
+import { MainLayout } from "src/layouts/main";
 
-import { AuthProvider } from 'src/auth/context/jwt';
+import { AuthProvider } from "src/auth/context/jwt";
 
 // ----------------------------------------------------------------------
 

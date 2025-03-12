@@ -1,10 +1,10 @@
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { NavList } from './nav-list';
-import { NavUl } from '../../nav-section';
-import { navBasicClasses } from '../classes';
-import { navBasicCssVars } from '../css-vars';
+import { NavList } from "./nav-list";
+import { NavUl } from "../../nav-section";
+import { navBasicClasses } from "../classes";
+import { navBasicCssVars } from "../css-vars";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ export function NavBasicMobile({
       sx={{ ...cssVars, ...sx }}
       {...other}
     >
-      <NavUl sx={{ flex: '1 1 auto', gap: 'var(--nav-item-gap)' }}>
+      <NavUl sx={{ flex: "1 1 auto", gap: "var(--nav-item-gap)" }}>
         {data.map((list) => (
           <NavList
             key={list.title}

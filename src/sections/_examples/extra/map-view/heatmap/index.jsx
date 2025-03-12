@@ -1,10 +1,10 @@
-import { Layer, Source } from 'react-map-gl';
-import { useMemo, useState, useEffect } from 'react';
+import { Layer, Source } from "react-map-gl";
+import { useMemo, useState, useEffect } from "react";
 
-import { Map } from 'src/components/map';
+import { Map } from "src/components/map";
 
-import { heatmapLayer } from './map-style';
-import { ControlPanel } from './control-panel';
+import { heatmapLayer } from "./map-style";
+import { ControlPanel } from "./control-panel";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ export function MapHeatmap({ ...other }) {
   const [earthquakes, setEarthQuakes] = useState();
 
   useEffect(() => {
-    fetch('https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson')
+    fetch("https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson")
       .then((resp) => resp.json())
       .then((json) => {
         const { features } = json;
@@ -33,17 +33,21 @@ export function MapHeatmap({ ...other }) {
 
         selectTime(endTime);
       })
-      .catch((error) => console.error('Could not load data', error));
+      .catch((error) => console.error("Could not load data", error));
   }, []);
 
   const data = useMemo(
-    () => (allDays ? earthquakes : filterFeaturesByDay(earthquakes, selectedTime)),
-    [earthquakes, allDays, selectedTime]
+    () =>
+      allDays ? earthquakes : filterFeaturesByDay(earthquakes, selectedTime),
+    [earthquakes, allDays, selectedTime],
   );
 
   return (
     <>
-      <Map initialViewState={{ latitude: 40, longitude: -100, zoom: 3 }} {...other}>
+      <Map
+        initialViewState={{ latitude: 40, longitude: -100, zoom: 3 }}
+        {...other}
+      >
         {data && (
           <Source type="geojson" data={data}>
             <Layer {...heatmapLayer} />
@@ -83,5 +87,5 @@ function filterFeaturesByDay(featureCollection, time) {
       featureDate.getDate() === day
     );
   });
-  return { type: 'FeatureCollection', features };
+  return { type: "FeatureCollection", features };
 }

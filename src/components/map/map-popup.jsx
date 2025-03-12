@@ -1,6 +1,6 @@
-import { Popup } from 'react-map-gl';
+import { Popup } from "react-map-gl";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
 // ----------------------------------------------------------------------
 

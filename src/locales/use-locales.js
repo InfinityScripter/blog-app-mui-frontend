@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import dayjs from 'dayjs';
-import { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import dayjs from "dayjs";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
-import { useRouter } from 'src/routes/hooks';
+import { useRouter } from "src/routes/hooks";
 
-import { toast } from 'src/components/snackbar';
+import { toast } from "src/components/snackbar";
 
-import { allLangs } from './all-langs';
-import { fallbackLng, changeLangMessages as messages } from './config-locales';
+import { allLangs } from "./all-langs";
+import { fallbackLng, changeLangMessages as messages } from "./config-locales";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,9 @@ export function useTranslate(ns) {
 
   const fallback = allLangs.filter((lang) => lang.value === fallbackLng)[0];
 
-  const currentLang = allLangs.find((lang) => lang.value === i18n.resolvedLanguage);
+  const currentLang = allLangs.find(
+    (lang) => lang.value === i18n.resolvedLanguage,
+  );
 
   const onChangeLang = useCallback(
     async (newLang) => {
@@ -44,7 +46,7 @@ export function useTranslate(ns) {
         console.error(error);
       }
     },
-    [currentLang, i18n, router]
+    [currentLang, i18n, router],
   );
 
   return {

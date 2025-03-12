@@ -1,25 +1,31 @@
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-import { fDate } from 'src/utils/format-time';
+import { fDate } from "src/utils/format-time";
 
-import { useDateRangePicker, CustomDateRangePicker } from 'src/components/custom-date-range-picker';
+import {
+  useDateRangePicker,
+  CustomDateRangePicker,
+} from "src/components/custom-date-range-picker";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 export function PickerDateRange() {
   const rangeInputPicker = useDateRangePicker(dayjs(), dayjs());
 
-  const rangeCalendarPicker = useDateRangePicker(dayjs(new Date('2024/08/08')), null);
+  const rangeCalendarPicker = useDateRangePicker(
+    dayjs(new Date("2024/08/08")),
+    null,
+  );
 
   return (
     <>
-      <Stack sx={{ typography: 'body2', mb: 3, color: 'text.secondary' }}>
+      <Stack sx={{ typography: "body2", mb: 3, color: "text.secondary" }}>
         <div>This is the custom component from minimal.</div>
         <div>You can use more advanced components by MUI.</div>
 
@@ -28,13 +34,13 @@ export function PickerDateRange() {
         </Link>
       </Stack>
 
-      <Stack spacing={3} direction={{ xs: 'column', md: 'row' }}>
-        <ComponentBlock title="Input" sx={{ flexDirection: 'column' }}>
+      <Stack spacing={3} direction={{ xs: "column", md: "row" }}>
+        <ComponentBlock title="Input" sx={{ flexDirection: "column" }}>
           <Button variant="contained" onClick={rangeInputPicker.onOpen}>
             Click me!
           </Button>
 
-          <Stack sx={{ typography: 'body2', mt: 3 }}>
+          <Stack sx={{ typography: "body2", mt: 3 }}>
             <div>
               <strong>Start:</strong> {fDate(rangeInputPicker.startDate)}
             </div>
@@ -54,12 +60,12 @@ export function PickerDateRange() {
           />
         </ComponentBlock>
 
-        <ComponentBlock title="Calendar" sx={{ flexDirection: 'column' }}>
+        <ComponentBlock title="Calendar" sx={{ flexDirection: "column" }}>
           <Button variant="contained" onClick={rangeCalendarPicker.onOpen}>
             Click me!
           </Button>
 
-          <Stack sx={{ typography: 'body2', mt: 3 }}>
+          <Stack sx={{ typography: "body2", mt: 3 }}>
             <div>
               <strong>Start:</strong> {fDate(rangeCalendarPicker.startDate)}
             </div>

@@ -1,27 +1,30 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Badge from '@mui/material/Badge';
-import Stack from '@mui/material/Stack';
-import Switch from '@mui/material/Switch';
-import Divider from '@mui/material/Divider';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import ToggleButton from '@mui/material/ToggleButton';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Badge from "@mui/material/Badge";
+import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
+import Divider from "@mui/material/Divider";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import ToggleButton from "@mui/material/ToggleButton";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-import { isEqual } from 'src/utils/helper';
+import { isEqual } from "src/utils/helper";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
-import { NavSectionVertical, NavSectionVerticalItem } from 'src/components/nav-section';
+import { Iconify } from "src/components/iconify";
+import { SvgColor } from "src/components/svg-color";
+import {
+  NavSectionVertical,
+  NavSectionVerticalItem,
+} from "src/components/nav-section";
 
-import { NAV_ITEMS } from './data';
+import { NAV_ITEMS } from "./data";
 
 // ----------------------------------------------------------------------
 
@@ -31,9 +34,9 @@ const defaultConfig = {
   radius: 8,
   subItemHeight: 36,
   rootItemHeight: 44,
-  currentRole: 'admin',
+  currentRole: "admin",
   hiddenSubheader: false,
-  padding: '4px 8px 4px 12px',
+  padding: "4px 8px 4px 12px",
 };
 
 // ----------------------------------------------------------------------
@@ -60,15 +63,15 @@ export function NavVertical() {
           width: 1,
           maxWidth: 320,
           borderRadius: 2,
-          display: 'flex',
-          flexDirection: 'column',
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         <NavSectionVertical
           data={NAV_ITEMS}
-          sx={{ flex: '1 1 auto' }}
+          sx={{ flex: "1 1 auto" }}
           cssVars={{
-            '--nav-item-gap': `${config.gap}px`,
+            "--nav-item-gap": `${config.gap}px`,
           }}
           slotProps={{
             currentRole: config.currentRole,
@@ -81,7 +84,7 @@ export function NavVertical() {
               icon: {
                 width: config.icon,
                 height: config.icon,
-                ...(!config.icon && { display: 'none' }),
+                ...(!config.icon && { display: "none" }),
               },
               texts: {},
               title: {},
@@ -98,7 +101,7 @@ export function NavVertical() {
               icon: {
                 width: config.icon,
                 height: config.icon,
-                ...(!config.icon && { display: 'none' }),
+                ...(!config.icon && { display: "none" }),
               },
               texts: {},
               title: {},
@@ -106,7 +109,7 @@ export function NavVertical() {
               info: {},
               arrow: {},
             },
-            subheader: { ...(config.hiddenSubheader && { display: 'none' }) },
+            subheader: { ...(config.hiddenSubheader && { display: "none" }) },
           }}
         />
 
@@ -117,7 +120,11 @@ export function NavVertical() {
           path="#"
           title="Chat"
           caption="Praesent porttitor nulla vitae posuere"
-          icon={<SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`} />}
+          icon={
+            <SvgColor
+              src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`}
+            />
+          }
         />
       </Paper>
 
@@ -140,8 +147,8 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
       sx={{
         p: 3,
         borderRadius: 2,
-        position: 'relative',
-        bgcolor: 'background.neutral',
+        position: "relative",
+        bgcolor: "background.neutral",
       }}
     >
       <Box display="flex" alignItems="center">
@@ -152,7 +159,7 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
         {canReset && (
           <IconButton
             onClick={onReset}
-            sx={{ top: 16, right: 16, zIndex: 9, position: 'absolute' }}
+            sx={{ top: 16, right: 16, zIndex: 9, position: "absolute" }}
           >
             <Badge color="error" variant="dot" invisible={!canReset}>
               <Iconify icon="solar:restart-bold" />
@@ -170,7 +177,7 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
           value={config.gap}
           onChange={(event, newValue) => {
             if (newValue !== null) {
-              onChangeConfig('gap', newValue);
+              onChangeConfig("gap", newValue);
             }
           }}
         >
@@ -191,7 +198,7 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
           value={config.icon}
           onChange={(event, newValue) => {
             if (newValue !== null) {
-              onChangeConfig('icon', newValue);
+              onChangeConfig("icon", newValue);
             }
           }}
         >
@@ -212,7 +219,7 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
           value={config.radius}
           onChange={(event, newValue) => {
             if (newValue !== null) {
-              onChangeConfig('radius', newValue);
+              onChangeConfig("radius", newValue);
             }
           }}
         >
@@ -233,11 +240,11 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
           value={config.currentRole}
           onChange={(event, newValue) => {
             if (newValue !== null) {
-              onChangeConfig('currentRole', newValue);
+              onChangeConfig("currentRole", newValue);
             }
           }}
         >
-          {['admin', 'user'].map((i) => (
+          {["admin", "user"].map((i) => (
             <ToggleButton key={i} value={i} sx={{ width: 1 }}>
               {i}
             </ToggleButton>
@@ -254,7 +261,7 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
           value={config.rootItemHeight}
           onChange={(event, newValue) => {
             if (newValue !== null) {
-              onChangeConfig('rootItemHeight', newValue);
+              onChangeConfig("rootItemHeight", newValue);
             }
           }}
         >
@@ -275,7 +282,7 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
           value={config.subItemHeight}
           onChange={(event, newValue) => {
             if (newValue !== null) {
-              onChangeConfig('subItemHeight', newValue);
+              onChangeConfig("subItemHeight", newValue);
             }
           }}
         >
@@ -290,15 +297,17 @@ function ControlsPanel({ config, onChangeConfig, canReset, onReset }) {
       {/* Padding */}
       <TextField
         label="Item Padding"
-        value={config.padding || ''}
-        onChange={(event) => onChangeConfig('padding', event.target.value)}
+        value={config.padding || ""}
+        onChange={(event) => onChangeConfig("padding", event.target.value)}
       />
 
       <FormControlLabel
         control={
           <Switch
             checked={config.hiddenSubheader}
-            onClick={() => onChangeConfig('hiddenSubheader', !config.hiddenSubheader)}
+            onClick={() =>
+              onChangeConfig("hiddenSubheader", !config.hiddenSubheader)
+            }
           />
         }
         label="Hidden subheader"

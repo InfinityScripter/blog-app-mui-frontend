@@ -1,32 +1,32 @@
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import { useTheme } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import { useTheme } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
+import { paths } from "src/routes/paths";
+import { useRouter } from "src/routes/hooks";
+import { RouterLink } from "src/routes/components";
 
-import { usePostDelete } from 'src/hooks/use-post-delete';
+import { usePostDelete } from "src/hooks/use-post-delete";
 
-import { fDate } from 'src/utils/format-time';
-import { fShortenNumber } from 'src/utils/format-number';
+import { fDate } from "src/utils/format-time";
+import { fShortenNumber } from "src/utils/format-number";
 
-import { maxLine } from 'src/theme/styles';
+import { maxLine } from "src/theme/styles";
 
-import { Label } from 'src/components/label';
-import { Image } from 'src/components/image';
-import { Iconify } from 'src/components/iconify';
-import { ConfirmDialog } from 'src/components/confirm-dialog';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { Label } from "src/components/label";
+import { Image } from "src/components/image";
+import { Iconify } from "src/components/iconify";
+import { ConfirmDialog } from "src/components/confirm-dialog";
+import { usePopover, CustomPopover } from "src/components/custom-popover";
 
-import {formatImageUrl} from "../../utils/format-image-url";
+import { formatImageUrl } from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
@@ -34,8 +34,13 @@ export function PostItemHorizontal({ post }) {
   const theme = useTheme();
   const popover = usePopover();
   const router = useRouter();
-  const { openConfirm, loading, handleOpenConfirm, handleCloseConfirm, handleDelete } =
-    usePostDelete();
+  const {
+    openConfirm,
+    loading,
+    handleOpenConfirm,
+    handleCloseConfirm,
+    handleDelete,
+  } = usePostDelete();
 
   const {
     title,
@@ -61,14 +66,25 @@ export function PostItemHorizontal({ post }) {
 
   return (
     <>
-      <Card sx={{ display: 'flex' }}>
+      <Card sx={{ display: "flex" }}>
         <Stack spacing={1} sx={{ p: theme.spacing(3, 3, 2, 3) }}>
-          <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
-            <Label variant="soft" color={(publish === 'published' && 'info') || 'default'}>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ mb: 2 }}
+          >
+            <Label
+              variant="soft"
+              color={(publish === "published" && "info") || "default"}
+            >
               {publish}
             </Label>
 
-            <Box component="span" sx={{ typography: 'caption', color: 'text.disabled' }}>
+            <Box
+              component="span"
+              sx={{ typography: "caption", color: "text.disabled" }}
+            >
               {fDate(createdAt)}
             </Box>
           </Box>
@@ -84,13 +100,19 @@ export function PostItemHorizontal({ post }) {
               {title}
             </Link>
 
-            <Typography variant="body2" sx={{ ...maxLine({ line: 2 }), color: 'text.secondary' }}>
+            <Typography
+              variant="body2"
+              sx={{ ...maxLine({ line: 2 }), color: "text.secondary" }}
+            >
               {description}
             </Typography>
           </Stack>
 
           <Box display="flex" alignItems="center">
-            <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
+            <IconButton
+              color={popover.open ? "inherit" : "default"}
+              onClick={popover.onOpen}
+            >
               <Iconify icon="eva:more-horizontal-fill" />
             </IconButton>
 
@@ -100,7 +122,7 @@ export function PostItemHorizontal({ post }) {
               display="flex"
               flexWrap="wrap"
               justifyContent="flex-end"
-              sx={{ typography: 'caption', color: 'text.disabled' }}
+              sx={{ typography: "caption", color: "text.disabled" }}
             >
               <Box display="flex" alignItems="center" gap={0.5}>
                 <Iconify icon="eva:message-circle-fill" width={16} />
@@ -126,23 +148,27 @@ export function PostItemHorizontal({ post }) {
             width: 180,
             height: 240,
             flexShrink: 0,
-            position: 'relative',
-            display: { xs: 'none', sm: 'block' },
+            position: "relative",
+            display: { xs: "none", sm: "block" },
           }}
         >
           <Avatar
             alt={author?.name}
             src={author?.avatarUrl}
-            sx={{ top: 16, right: 16, zIndex: 9, position: 'absolute' }}
+            sx={{ top: 16, right: 16, zIndex: 9, position: "absolute" }}
           />
-          <Image alt={title} src={formatImageUrl(coverUrl)} sx={{ height: 1, borderRadius: 1.5 }} />
+          <Image
+            alt={title}
+            src={formatImageUrl(coverUrl)}
+            sx={{ height: 1, borderRadius: 1.5 }}
+          />
         </Box>
 
         <CustomPopover
           open={popover.open}
           onClose={popover.onClose}
           anchorEl={popover.anchorEl}
-          slotProps={{ arrow: { placement: 'bottom-center' } }}
+          slotProps={{ arrow: { placement: "bottom-center" } }}
         >
           <MenuList>
             <MenuItem
@@ -159,7 +185,7 @@ export function PostItemHorizontal({ post }) {
               Edit
             </MenuItem>
 
-            <MenuItem onClick={handleClickDelete} sx={{ color: 'error.main' }}>
+            <MenuItem onClick={handleClickDelete} sx={{ color: "error.main" }}>
               <Iconify icon="solar:trash-bin-trash-bold" />
               Delete
             </MenuItem>

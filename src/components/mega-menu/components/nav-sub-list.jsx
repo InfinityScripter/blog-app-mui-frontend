@@ -1,14 +1,14 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import { usePathname } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
-import { removeLastSlash } from 'src/routes/utils';
+import { usePathname } from "src/routes/hooks";
+import { RouterLink } from "src/routes/components";
+import { removeLastSlash } from "src/routes/utils";
 
-import { NavLi, NavUl } from '../../nav-section';
+import { NavLi, NavUl } from "../../nav-section";
 
 // ----------------------------------------------------------------------
 
@@ -49,29 +49,31 @@ export function NavSubList({ data, slotProps, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export const NavSubItem = forwardRef(({ title, path, active, slotProps }, ref) => (
-  <NavLi key={title}>
-    <Link
-      ref={ref}
-      component={RouterLink}
-      href={path}
-      noWrap
-      sx={{
-        position: 'relative',
-        color: 'text.secondary',
-        fontSize: (theme) => theme.typography.pxToRem(13),
-        lineHeight: (theme) => theme.typography.body2.lineHeight,
-        transition: (theme) => theme.transitions.create('color'),
-        '&:hover': { color: 'text.primary' },
-        ...(active && {
-          color: 'text.primary',
-          textDecoration: 'underline',
-          fontWeight: 'fontWeightSemiBold',
-        }),
-        ...slotProps,
-      }}
-    >
-      {title}
-    </Link>
-  </NavLi>
-));
+export const NavSubItem = forwardRef(
+  ({ title, path, active, slotProps }, ref) => (
+    <NavLi key={title}>
+      <Link
+        ref={ref}
+        component={RouterLink}
+        href={path}
+        noWrap
+        sx={{
+          position: "relative",
+          color: "text.secondary",
+          fontSize: (theme) => theme.typography.pxToRem(13),
+          lineHeight: (theme) => theme.typography.body2.lineHeight,
+          transition: (theme) => theme.transitions.create("color"),
+          "&:hover": { color: "text.primary" },
+          ...(active && {
+            color: "text.primary",
+            textDecoration: "underline",
+            fontWeight: "fontWeightSemiBold",
+          }),
+          ...slotProps,
+        }}
+      >
+        {title}
+      </Link>
+    </NavLi>
+  ),
+);

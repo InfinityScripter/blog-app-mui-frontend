@@ -1,5 +1,5 @@
-export * from './label';
+export * from "./label";
 
-export * from './styles';
+export * from "./styles";
 
-export * from './classes';
+export * from "./classes";

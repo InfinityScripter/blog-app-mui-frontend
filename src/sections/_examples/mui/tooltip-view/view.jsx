@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Fab from '@mui/material/Fab';
-import Zoom from '@mui/material/Zoom';
-import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Fab from "@mui/material/Fab";
+import Zoom from "@mui/material/Zoom";
+import Fade from "@mui/material/Fade";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Iconify } from 'src/components/iconify';
-import { varHover } from 'src/components/animate';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { varHover } from "src/components/animate";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
@@ -36,14 +36,14 @@ const CustomWidthTooltip = styled(({ className, ...props }) => (
 
 const NoMaxWidthTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
-))({ [`& .${tooltipClasses.tooltip}`]: { maxWidth: 'none' } });
+))({ [`& .${tooltipClasses.tooltip}`]: { maxWidth: "none" } });
 
 // ----------------------------------------------------------------------
 
 export function TooltipView() {
   const DEMO = [
     {
-      name: 'Simple',
+      name: "Simple",
       component: (
         <ComponentBlock>
           <Tooltip title="Delete">
@@ -85,7 +85,7 @@ export function TooltipView() {
       ),
     },
     {
-      name: 'Arrow',
+      name: "Arrow",
       component: (
         <ComponentBlock>
           <Tooltip title="Add" arrow>
@@ -97,7 +97,7 @@ export function TooltipView() {
       ),
     },
     {
-      name: 'Variable width',
+      name: "Variable width",
       component: (
         <ComponentBlock>
           <Tooltip title={LONG_TEXT}>
@@ -115,14 +115,18 @@ export function TooltipView() {
       ),
     },
     {
-      name: 'Transitions',
+      name: "Transitions",
       component: (
         <ComponentBlock>
           <Tooltip title="Add">
             <Button color="inherit">Grow</Button>
           </Tooltip>
 
-          <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Add">
+          <Tooltip
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
+            title="Add"
+          >
             <Button color="inherit">Fade</Button>
           </Tooltip>
 
@@ -133,7 +137,7 @@ export function TooltipView() {
       ),
     },
     {
-      name: 'Positioned',
+      name: "Positioned",
       component: (
         <ComponentBlock>
           <Tooltip title="Add" placement="top-start">
@@ -193,8 +197,11 @@ export function TooltipView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Tooltip"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Tooltip' }]}
-          moreLink={['https://mui.com/components/tooltips']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Tooltip" },
+          ]}
+          moreLink={["https://mui.com/components/tooltips"]}
         />
       </ComponentHero>
 

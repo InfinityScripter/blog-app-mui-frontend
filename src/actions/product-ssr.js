@@ -1,4 +1,4 @@
-import axios, { endpoints } from 'src/utils/axios';
+import axios, { endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +11,7 @@ export async function getProducts() {
 // ----------------------------------------------------------------------
 
 export async function getProduct(id) {
-  const URL = id ? `${endpoints.product.details}?productId=${id}` : '';
+  const URL = id ? `${endpoints.product.details}?productId=${id}` : "";
 
   const res = await axios.get(URL);
 

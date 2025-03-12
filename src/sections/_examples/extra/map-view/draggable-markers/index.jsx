@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import { Map, MapMarker, MapControl } from 'src/components/map';
+import { Map, MapMarker, MapControl } from "src/components/map";
 
-import { ControlPanel } from './control-panel';
+import { ControlPanel } from "./control-panel";
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +27,10 @@ export function MapDraggableMarkers({ ...other }) {
 
   return (
     <>
-      <Map initialViewState={{ latitude: 40, longitude: -100, zoom: 3.5 }} {...other}>
+      <Map
+        initialViewState={{ latitude: 40, longitude: -100, zoom: 3.5 }}
+        {...other}
+      >
         <MapControl />
 
         <MapMarker

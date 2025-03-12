@@ -4,12 +4,12 @@ const MuiAppBar = {
   /** **************************************
    * DEFAULT PROPS
    *************************************** */
-  defaultProps: { color: 'transparent' },
+  defaultProps: { color: "transparent" },
 
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: { boxShadow: 'none' } },
+  styleOverrides: { root: { boxShadow: "none" } },
 };
 
 // ----------------------------------------------------------------------

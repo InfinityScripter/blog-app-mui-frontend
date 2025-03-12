@@ -1,16 +1,20 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Collapse from '@mui/material/Collapse';
+import Collapse from "@mui/material/Collapse";
 
-import { isExternalLink } from 'src/routes/utils';
-import { useActiveLink } from 'src/routes/hooks/use-active-link';
+import { isExternalLink } from "src/routes/utils";
+import { useActiveLink } from "src/routes/hooks/use-active-link";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha } from "src/theme/styles";
 
-import { NavLi, navSectionClasses, NavSectionVertical } from 'src/components/nav-section';
+import {
+  NavLi,
+  navSectionClasses,
+  NavSectionVertical,
+} from "src/components/nav-section";
 
-import { NavItem } from './nav-mobile-item';
+import { NavItem } from "./nav-mobile-item";
 
 // ----------------------------------------------------------------------
 
@@ -53,15 +57,15 @@ export function NavList({ data }) {
               px: 1.5,
               [`& .${navSectionClasses.item.root}`]: {
                 '&[aria-label="Dashboard"]': {
-                  [`& .${navSectionClasses.item.title}`]: { display: 'none' },
+                  [`& .${navSectionClasses.item.title}`]: { display: "none" },
                   height: 180,
                   borderRadius: 1.5,
-                  backgroundSize: 'auto 88%',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: "auto 88%",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
                   backgroundImage: `url(${CONFIG.site.basePath}/assets/illustrations/illustration-dashboard.webp)`,
                   border: (theme) =>
-                    `solid 1px ${varAlpha(theme.palette.grey['500Channel'], 0.12)}`,
+                    `solid 1px ${varAlpha(theme.palette.grey["500Channel"], 0.12)}`,
                 },
               },
             }}

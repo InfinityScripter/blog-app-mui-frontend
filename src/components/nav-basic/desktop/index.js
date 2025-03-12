@@ -1,3 +1,3 @@
-export * from './nav-basic-desktop';
+export * from "./nav-basic-desktop";
 
-export { NavItem as NavBasicDesktopItem } from './nav-item';
+export { NavItem as NavBasicDesktopItem } from "./nav-item";

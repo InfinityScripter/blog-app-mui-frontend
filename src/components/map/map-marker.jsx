@@ -1,6 +1,6 @@
-import { Marker } from 'react-map-gl';
+import { Marker } from "react-map-gl";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
 // ----------------------------------------------------------------------
 
@@ -20,8 +20,8 @@ export function MapMarker({ ...other }) {
         viewBox="0 0 24 24"
         sx={{
           height: SIZE,
-          stroke: 'none',
-          cursor: 'pointer',
+          stroke: "none",
+          cursor: "pointer",
           fill: (theme) => theme.vars.palette.error.main,
           transform: `translate(${-SIZE / 2}px, ${-SIZE}px)`,
         }}

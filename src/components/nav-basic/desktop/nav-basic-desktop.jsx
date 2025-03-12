@@ -1,10 +1,10 @@
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { NavList } from './nav-list';
-import { NavUl } from '../../nav-section';
-import { navBasicClasses } from '../classes';
-import { navBasicCssVars } from '../css-vars';
+import { NavList } from "./nav-list";
+import { NavUl } from "../../nav-section";
+import { navBasicClasses } from "../classes";
+import { navBasicCssVars } from "../css-vars";
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ export function NavBasicDesktop({
       sx={{ ...cssVars, ...sx }}
       {...other}
     >
-      <NavUl sx={{ flexDirection: 'row', gap: 'var(--nav-item-gap)' }}>
+      <NavUl sx={{ flexDirection: "row", gap: "var(--nav-item-gap)" }}>
         {data.map((list) => (
           <NavList
             key={list.title}

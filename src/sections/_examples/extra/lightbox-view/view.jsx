@@ -1,46 +1,46 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Switch from '@mui/material/Switch';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { _mock } from 'src/_mock';
+import { _mock } from "src/_mock";
 
-import { Image } from 'src/components/image';
-import { Lightbox, useLightBox } from 'src/components/lightbox';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Image } from "src/components/image";
+import { Lightbox, useLightBox } from "src/components/lightbox";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentContainer } from '../../component-block';
+import { ComponentHero } from "../../component-hero";
+import { ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 const images = [...Array(4)].map((_, index) => ({
   src: _mock.image.cover(index + 1),
-  title: 'Flamingo',
-  description: 'Vicko Mozara \n Veliki zali, Dubravica, Croatia',
+  title: "Flamingo",
+  description: "Vicko Mozara \n Veliki zali, Dubravica, Croatia",
 }));
 
 const slides = [
   ...images,
   {
-    type: 'video',
+    type: "video",
     width: 1280,
     height: 720,
     poster:
-      'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg',
+      "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
     sources: [
       {
-        src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-        type: 'video/mp4',
+        src: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        type: "video/mp4",
       },
     ],
   },
@@ -70,25 +70,31 @@ export function LightboxView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Lightbox"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Lightbox' }]}
-          moreLink={['https://www.npmjs.com/package/yet-another-react-lightbox']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Lightbox" },
+          ]}
+          moreLink={[
+            "https://www.npmjs.com/package/yet-another-react-lightbox",
+          ]}
         />
       </ComponentHero>
 
       <ComponentContainer>
-        <Card sx={{ display: 'flex' }}>
+        <Card sx={{ display: "flex" }}>
           <Box
             gap={2}
             display="grid"
             gridTemplateColumns={{
-              xs: 'repeat(2, 1fr)',
-              sm: 'repeat(3, 1fr)',
-              md: 'repeat(4, 1fr)',
+              xs: "repeat(2, 1fr)",
+              sm: "repeat(3, 1fr)",
+              md: "repeat(4, 1fr)",
             }}
             sx={{ p: 3 }}
           >
             {slides.map((slide) => {
-              const thumbnail = slide.type === 'video' ? slide.poster : slide.src;
+              const thumbnail =
+                slide.type === "video" ? slide.poster : slide.src;
 
               return (
                 <Image
@@ -97,7 +103,7 @@ export function LightboxView() {
                   src={thumbnail}
                   ratio="1/1"
                   onClick={() => lightbox.onOpen(`${thumbnail}`)}
-                  sx={{ borderRadius: 1, cursor: 'pointer', width: 200 }}
+                  sx={{ borderRadius: 1, cursor: "pointer", width: 200 }}
                 />
               );
             })}
@@ -113,7 +119,7 @@ export function LightboxView() {
           >
             <FormControl component="fieldset" variant="standard">
               <Stack spacing={2}>
-                <FormLabel component="legend" sx={{ typography: 'body2' }}>
+                <FormLabel component="legend" sx={{ typography: "body2" }}>
                   Controls
                 </FormLabel>
 

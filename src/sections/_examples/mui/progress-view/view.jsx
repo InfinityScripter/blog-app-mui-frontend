@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from "react";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ProgressLinear } from './progress-linear';
-import { ComponentHero } from '../../component-hero';
-import { ProgressCircular } from './progress-circular';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ProgressLinear } from "./progress-linear";
+import { ComponentHero } from "../../component-hero";
+import { ProgressCircular } from "./progress-circular";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
@@ -61,8 +61,11 @@ export function ProgressView() {
   }, []);
 
   const DEMO = [
-    { name: 'Circular', component: <ProgressCircular progress={progress} /> },
-    { name: 'Linear', component: <ProgressLinear progress={progress} buffer={buffer} /> },
+    { name: "Circular", component: <ProgressCircular progress={progress} /> },
+    {
+      name: "Linear",
+      component: <ProgressLinear progress={progress} buffer={buffer} />,
+    },
   ];
 
   return (
@@ -70,8 +73,11 @@ export function ProgressView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Progress"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Progress' }]}
-          moreLink={['https://mui.com/components/progress']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Progress" },
+          ]}
+          moreLink={["https://mui.com/components/progress"]}
         />
       </ComponentHero>
 

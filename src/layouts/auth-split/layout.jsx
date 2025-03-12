@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { Section } from './section';
-import { Main, Content } from './main';
-import { HeaderBase } from '../core/header-base';
-import { LayoutSection } from '../core/layout-section';
+import { Section } from "./section";
+import { Main, Content } from "./main";
+import { HeaderBase } from "../core/header-base";
+import { LayoutSection } from "../core/layout-section";
 
 // ----------------------------------------------------------------------
 
 export function AuthSplitLayout({ sx, section, children }) {
   const mobileNavOpen = useBoolean();
 
-  const layoutQuery = 'md';
+  const layoutQuery = "md";
 
   return (
     <LayoutSection
@@ -41,13 +41,13 @@ export function AuthSplitLayout({ sx, section, children }) {
           }}
           slots={{
             topArea: (
-              <Alert severity="info" sx={{ display: 'none', borderRadius: 0 }}>
+              <Alert severity="info" sx={{ display: "none", borderRadius: 0 }}>
                 This is an info Alert.
               </Alert>
             ),
           }}
           slotProps={{ container: { maxWidth: false } }}
-          sx={{ position: { [layoutQuery]: 'fixed' } }}
+          sx={{ position: { [layoutQuery]: "fixed" } }}
         />
       }
       /** **************************************
@@ -59,7 +59,7 @@ export function AuthSplitLayout({ sx, section, children }) {
        *************************************** */
       sx={sx}
       cssVars={{
-        '--layout-auth-content-width': '420px',
+        "--layout-auth-content-width": "420px",
       }}
     >
       <Main layoutQuery={layoutQuery}>

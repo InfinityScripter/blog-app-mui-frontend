@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Radio from '@mui/material/Radio';
-import Button from '@mui/material/Button';
-import FormLabel from '@mui/material/FormLabel';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Radio from "@mui/material/Radio";
+import Button from "@mui/material/Button";
+import FormLabel from "@mui/material/FormLabel";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import { usePopover, CustomPopover } from "src/components/custom-popover";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock, ComponentContainer } from '../../component-block';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock, ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 export function PopoverView() {
-  const [arrow, setArrow] = useState('top-left');
+  const [arrow, setArrow] = useState("top-left");
 
   const clickPopover = usePopover();
 
@@ -51,8 +51,11 @@ export function PopoverView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Popover"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Popover' }]}
-          moreLink={['https://mui.com/components/popover']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Popover" },
+          ]}
+          moreLink={["https://mui.com/components/popover"]}
         />
       </ComponentHero>
 
@@ -60,8 +63,8 @@ export function PopoverView() {
         sx={{
           rowGap: 5,
           columnGap: 3,
-          display: 'grid',
-          gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+          display: "grid",
+          gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
         }}
       >
         <ComponentBlock title="Click & hover" sx={{ gap: 3 }}>
@@ -73,14 +76,15 @@ export function PopoverView() {
               open={clickPopover.open}
               onClose={clickPopover.onClose}
               anchorEl={clickPopover.anchorEl}
-              slotProps={{ arrow: { placement: 'top-center' } }}
+              slotProps={{ arrow: { placement: "top-center" } }}
             >
               <Box sx={{ p: 2, maxWidth: 280 }}>
                 <Typography variant="subtitle1" gutterBottom>
                   Etiam feugiat lorem non metus
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  Fusce vulputate eleifend sapien. Curabitur at lacus ac velit ornare lobortis.
+                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                  Fusce vulputate eleifend sapien. Curabitur at lacus ac velit
+                  ornare lobortis.
                 </Typography>
               </Box>
             </CustomPopover>
@@ -100,21 +104,22 @@ export function PopoverView() {
               open={hoverPopoverOpen}
               anchorEl={hoverPopoverRef.current}
               slotProps={{
-                arrow: { placement: 'bottom-center' },
+                arrow: { placement: "bottom-center" },
                 paper: {
                   onMouseEnter: handleHoverPopoverOpen,
                   onMouseLeave: handleHoverPopoverClose,
-                  sx: { ...(hoverPopoverOpen && { pointerEvents: 'auto' }) },
+                  sx: { ...(hoverPopoverOpen && { pointerEvents: "auto" }) },
                 },
               }}
-              sx={{ pointerEvents: 'none' }}
+              sx={{ pointerEvents: "none" }}
             >
               <Box sx={{ p: 2, maxWidth: 280 }}>
                 <Typography variant="subtitle1" gutterBottom>
                   Etiam feugiat lorem non metus
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  Fusce vulputate eleifend sapien. Curabitur at lacus ac velit ornare lobortis.
+                <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                  Fusce vulputate eleifend sapien. Curabitur at lacus ac velit
+                  ornare lobortis.
                 </Typography>
               </Box>
             </CustomPopover>
@@ -122,26 +127,29 @@ export function PopoverView() {
         </ComponentBlock>
 
         <ComponentBlock title="Customized" sx={{ gap: 5 }}>
-          <IconButton onClick={customizedPopover.onOpen} sx={{ bgcolor: 'action.hover' }}>
+          <IconButton
+            onClick={customizedPopover.onOpen}
+            sx={{ bgcolor: "action.hover" }}
+          >
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
 
           <FormControl>
-            <FormLabel sx={{ typography: 'body2' }}>Arrow</FormLabel>
+            <FormLabel sx={{ typography: "body2" }}>Arrow</FormLabel>
             <RadioGroup value={arrow} onChange={handleChangePopoverArrow}>
               {[
-                'top-left',
-                'top-center',
-                'top-right',
-                'bottom-left',
-                'bottom-center',
-                'bottom-right',
-                'left-top',
-                'left-center',
-                'left-bottom',
-                'right-top',
-                'right-center',
-                'right-bottom',
+                "top-left",
+                "top-center",
+                "top-right",
+                "bottom-left",
+                "bottom-center",
+                "bottom-right",
+                "left-top",
+                "left-center",
+                "left-bottom",
+                "right-top",
+                "right-center",
+                "right-bottom",
               ].map((position) => (
                 <FormControlLabel
                   key={position}
@@ -163,8 +171,9 @@ export function PopoverView() {
               <Typography variant="subtitle1" gutterBottom>
                 Etiam feugiat lorem non metus
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                Fusce vulputate eleifend sapien. Curabitur at lacus ac velit ornare lobortis.
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Fusce vulputate eleifend sapien. Curabitur at lacus ac velit
+                ornare lobortis.
               </Typography>
             </Box>
           </CustomPopover>

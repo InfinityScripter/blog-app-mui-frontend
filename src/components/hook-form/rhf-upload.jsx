@@ -1,8 +1,8 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from "react-hook-form";
 
-import FormHelperText from '@mui/material/FormHelperText';
+import FormHelperText from "@mui/material/FormHelperText";
 
-import { Upload, UploadBox, UploadAvatar } from '../upload';
+import { Upload, UploadBox, UploadAvatar } from "../upload";
 
 // ----------------------------------------------------------------------
 
@@ -22,10 +22,15 @@ export function RHFUploadAvatar({ name, ...other }) {
 
         return (
           <div>
-            <UploadAvatar value={field.value} error={!!error} onDrop={onDrop} {...other} />
+            <UploadAvatar
+              value={field.value}
+              error={!!error}
+              onDrop={onDrop}
+              {...other}
+            />
 
             {!!error && (
-              <FormHelperText error sx={{ px: 2, textAlign: 'center' }}>
+              <FormHelperText error sx={{ px: 2, textAlign: "center" }}>
                 {error.message}
               </FormHelperText>
             )}
@@ -64,18 +69,27 @@ export function RHFUpload({ name, multiple, helperText, ...other }) {
       render={({ field, fieldState: { error } }) => {
         const uploadProps = {
           multiple,
-          accept: { 'image/*': [] },
+          accept: { "image/*": [] },
           error: !!error,
           helperText: error?.message ?? helperText,
         };
 
         const onDrop = (acceptedFiles) => {
-          const value = multiple ? [...field.value, ...acceptedFiles] : acceptedFiles[0];
+          const value = multiple
+            ? [...field.value, ...acceptedFiles]
+            : acceptedFiles[0];
 
           setValue(name, value, { shouldValidate: true });
         };
 
-        return <Upload {...uploadProps} value={field.value} onDrop={onDrop} {...other} />;
+        return (
+          <Upload
+            {...uploadProps}
+            value={field.value}
+            onDrop={onDrop}
+            {...other}
+          />
+        );
       }}
     />
   );

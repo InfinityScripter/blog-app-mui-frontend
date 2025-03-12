@@ -1,50 +1,53 @@
-import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import PropTypes from "prop-types";
+import { useMemo, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ProjectProgressBySubprojects({ data }) {
-  const [subproject, setSubproject] = useState('all');
+  const [subproject, setSubproject] = useState("all");
   const theme = useTheme();
 
-  const subprojects = useMemo(() => 
-    ['all', ...new Set(data.map(item => item.subproject))], 
-  [data]);
+  const subprojects = useMemo(
+    () => ["all", ...new Set(data.map((item) => item.subproject))],
+    [data],
+  );
 
   const filteredData = useMemo(() => {
-    if (subproject === 'all') {
-      return data.filter(item => item.discipline === 'Total');
+    if (subproject === "all") {
+      return data.filter((item) => item.discipline === "Total");
     }
-    return data.filter(item => item.subproject === subproject && item.discipline === 'Total');
+    return data.filter(
+      (item) => item.subproject === subproject && item.discipline === "Total",
+    );
   }, [data, subproject]);
 
   const chartData = useMemo(() => {
-    const dates = [...new Set(filteredData.map(item => item.date))].sort();
-    
+    const dates = [...new Set(filteredData.map((item) => item.date))].sort();
+
     // Calculate totals for each date
     const planSeries = [];
     const factSeries = [];
-    
-    dates.forEach(date => {
-      const dateItems = filteredData.filter(item => item.date === date);
-      
-      if (subproject === 'all') {
+
+    dates.forEach((date) => {
+      const dateItems = filteredData.filter((item) => item.date === date);
+
+      if (subproject === "all") {
         // Calculate weighted average for all subprojects
         const totalPlan = dateItems.reduce((sum, item) => sum + item.plan, 0);
         const totalFact = dateItems.reduce((sum, item) => sum + item.fact, 0);
-        
+
         const avgPlan = totalPlan / dateItems.length;
         const avgFact = totalFact / dateItems.length;
-        
+
         planSeries.push(avgPlan * 100);
         factSeries.push(avgFact * 100);
       } else {
@@ -54,22 +57,22 @@ export function ProjectProgressBySubprojects({ data }) {
         factSeries.push(item.fact * 100);
       }
     });
-    
+
     // Format dates for display
-    const formattedDates = dates.map(date => {
-      const [year, month, day] = date.split('-');
+    const formattedDates = dates.map((date) => {
+      const [year, month, day] = date.split("-");
       return `${day}/${month}`;
     });
-    
+
     return {
       categories: formattedDates,
       series: [
         {
-          name: 'План',
+          name: "План",
           data: planSeries,
         },
         {
-          name: 'Факт',
+          name: "Факт",
           data: factSeries,
         },
       ],
@@ -80,10 +83,10 @@ export function ProjectProgressBySubprojects({ data }) {
     colors: [theme.palette.primary.main, theme.palette.error.main],
     stroke: {
       width: 2,
-      curve: 'smooth',
+      curve: "smooth",
     },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       opacity: 0.25,
     },
     xaxis: {
@@ -118,7 +121,7 @@ export function ProjectProgressBySubprojects({ data }) {
           >
             {subprojects.map((option) => (
               <MenuItem key={option} value={option}>
-                {option === 'all' ? 'Все подпроекты' : option}
+                {option === "all" ? "Все подпроекты" : option}
               </MenuItem>
             ))}
           </TextField>
@@ -145,6 +148,6 @@ ProjectProgressBySubprojects.propTypes = {
       discipline: PropTypes.string.isRequired,
       plan: PropTypes.number.isRequired,
       fact: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
 };

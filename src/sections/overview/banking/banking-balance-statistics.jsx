@@ -1,19 +1,29 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
+import Card from "@mui/material/Card";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import { fPercent, fCurrency } from 'src/utils/format-number';
+import { fPercent, fCurrency } from "src/utils/format-number";
 
-import { Chart, useChart, ChartSelect, ChartLegends } from 'src/components/chart';
+import {
+  Chart,
+  useChart,
+  ChartSelect,
+  ChartLegends,
+} from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function BankingBalanceStatistics({ title, subheader, chart, ...other }) {
+export function BankingBalanceStatistics({
+  title,
+  subheader,
+  chart,
+  ...other
+}) {
   const theme = useTheme();
 
-  const [selectedSeries, setSelectedSeries] = useState('Yearly');
+  const [selectedSeries, setSelectedSeries] = useState("Yearly");
 
   const currentSeries = chart.series.find((i) => i.name === selectedSeries);
 
@@ -24,7 +34,7 @@ export function BankingBalanceStatistics({ title, subheader, chart, ...other }) 
   ];
 
   const chartOptions = useChart({
-    stroke: { width: 2, colors: ['transparent'] },
+    stroke: { width: 2, colors: ["transparent"] },
     colors: chartColors,
     xaxis: { categories: currentSeries?.categories },
     tooltip: { y: { formatter: (value) => fCurrency(value) } },

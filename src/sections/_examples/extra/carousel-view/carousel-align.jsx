@@ -1,22 +1,22 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { Image } from 'src/components/image';
+import { Image } from "src/components/image";
 import {
   Carousel,
   useCarousel,
   CarouselDotButtons,
   CarouselArrowBasicButtons,
-} from 'src/components/carousel';
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
 export function CarouselAlign({ data }) {
   const carousel = useCarousel({
     containScroll: false,
-    slidesToShow: '70%',
-    slideSpacing: '20px',
+    slidesToShow: "70%",
+    slideSpacing: "20px",
   });
 
   return (
@@ -27,8 +27,16 @@ export function CarouselAlign({ data }) {
         ))}
       </Carousel>
 
-      <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ mt: 3 }}>
-        <CarouselArrowBasicButtons {...carousel.arrows} options={carousel.options} />
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ mt: 3 }}
+      >
+        <CarouselArrowBasicButtons
+          {...carousel.arrows}
+          options={carousel.options}
+        />
 
         <CarouselDotButtons
           scrollSnaps={carousel.dots.scrollSnaps}
@@ -42,7 +50,7 @@ export function CarouselAlign({ data }) {
 
 function CarouselItem({ item, index }) {
   return (
-    <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
+    <Box sx={{ borderRadius: 2, overflow: "hidden", position: "relative" }}>
       <IndexLabel index={index + 1} />
       <Image alt={item.title} src={item.coverUrl} ratio="4/3" />
     </Box>

@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
 
-import { _mock } from 'src/_mock';
-import { varAlpha } from 'src/theme/styles';
+import { _mock } from "src/_mock";
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { AnimateLogo1, AnimateLogo2, AnimateBorder, AnimateAvatar } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import {
+  AnimateLogo1,
+  AnimateLogo2,
+  AnimateBorder,
+  AnimateAvatar,
+} from "src/components/animate";
 
-import { SvgPath } from './svg-path';
-import { AnimateButton } from './buttons';
-import { AnimateCountUpNumber } from './count-up-number';
-import { ComponentBlock } from '../../../component-block';
+import { SvgPath } from "./svg-path";
+import { AnimateButton } from "./buttons";
+import { AnimateCountUpNumber } from "./count-up-number";
+import { ComponentBlock } from "../../../component-block";
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +31,7 @@ export function AnimateOther() {
     <Box
       gap={3}
       display="grid"
-      gridTemplateColumns={{ xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)' }}
+      gridTemplateColumns={{ xs: "repeat(1, 1fr)", sm: "repeat(2, 1fr)" }}
     >
       <ComponentBlock title="Button Click" sx={{ gap: 3 }}>
         <AnimateButton />
@@ -35,7 +40,7 @@ export function AnimateOther() {
       <ComponentBlock title="Path">
         <IconButton
           onClick={() => setCount(count + 1)}
-          sx={{ position: 'absolute', right: 16, top: 16 }}
+          sx={{ position: "absolute", right: 16, top: 16 }}
         >
           <Iconify icon="eva:refresh-fill" />
         </IconButton>
@@ -43,10 +48,10 @@ export function AnimateOther() {
         <SvgPath key={count} />
       </ComponentBlock>
 
-      <ComponentBlock title="Path" sx={{ flexDirection: 'column' }}>
+      <ComponentBlock title="Path" sx={{ flexDirection: "column" }}>
         <IconButton
           onClick={() => setCount(count + 1)}
-          sx={{ position: 'absolute', right: 16, top: 16 }}
+          sx={{ position: "absolute", right: 16, top: 16 }}
         >
           <Iconify icon="eva:refresh-fill" />
         </IconButton>
@@ -64,7 +69,7 @@ export function AnimateOther() {
           width={120}
           slotProps={{
             avatar: {
-              alt: 'My avatar',
+              alt: "My avatar",
               src: _mock.image.avatar(24),
             },
             overlay: {
@@ -76,10 +81,13 @@ export function AnimateOther() {
       </ComponentBlock>
 
       <ComponentBlock title="Border" sx={{ gap: 5 }}>
-        <AnimateBorder animate={{ disableDoubleline: true }} sx={{ width: 160, height: 160 }} />
+        <AnimateBorder
+          animate={{ disableDoubleline: true }}
+          sx={{ width: 160, height: 160 }}
+        />
         <AnimateBorder
           animate={{
-            width: '4px',
+            width: "4px",
             color: theme.vars.palette.primary.dark,
             outline: `135deg, ${varAlpha(theme.vars.palette.warning.mainChannel, 0.24)}, ${varAlpha(theme.vars.palette.primary.mainChannel, 0.24)}`,
           }}

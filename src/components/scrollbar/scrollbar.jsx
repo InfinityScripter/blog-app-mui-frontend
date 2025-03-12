@@ -1,9 +1,9 @@
-import { forwardRef } from 'react';
-import SimpleBar from 'simplebar-react';
+import { forwardRef } from "react";
+import SimpleBar from "simplebar-react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { scrollbarClasses } from './classes';
+import { scrollbarClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
@@ -18,16 +18,16 @@ export const Scrollbar = forwardRef(
         minWidth: 0,
         minHeight: 0,
         flexGrow: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        '& .simplebar-wrapper': slotProps?.wrapper,
-        '& .simplebar-content-wrapper': slotProps?.contentWrapper,
-        '& .simplebar-content': {
+        display: "flex",
+        flexDirection: "column",
+        "& .simplebar-wrapper": slotProps?.wrapper,
+        "& .simplebar-content-wrapper": slotProps?.contentWrapper,
+        "& .simplebar-content": {
           ...(fillContent && {
             minHeight: 1,
-            display: 'flex',
-            flex: '1 1 auto',
-            flexDirection: 'column',
+            display: "flex",
+            flex: "1 1 auto",
+            flexDirection: "column",
           }),
 
           ...slotProps?.content,
@@ -38,5 +38,5 @@ export const Scrollbar = forwardRef(
     >
       {children}
     </Box>
-  )
+  ),
 );

@@ -1,21 +1,27 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from "react";
 
-import Paper from '@mui/material/Paper';
-import Popover from '@mui/material/Popover';
-import { useTheme } from '@mui/material/styles';
+import Paper from "@mui/material/Paper";
+import Popover from "@mui/material/Popover";
+import { useTheme } from "@mui/material/styles";
 
-import { isExternalLink } from 'src/routes/utils';
-import { usePathname, useActiveLink } from 'src/routes/hooks';
+import { isExternalLink } from "src/routes/utils";
+import { usePathname, useActiveLink } from "src/routes/hooks";
 
-import { paper } from 'src/theme/styles';
+import { paper } from "src/theme/styles";
 
-import { NavItem } from './nav-item';
-import { NavLi } from '../../nav-section';
-import { NavContent } from '../components/nav-content';
+import { NavItem } from "./nav-item";
+import { NavLi } from "../../nav-section";
+import { NavContent } from "../components/nav-content";
 
 // ----------------------------------------------------------------------
 
-export function NavList({ data, render, slotProps, enabledRootRedirect, cssVars }) {
+export function NavList({
+  data,
+  render,
+  slotProps,
+  enabledRootRedirect,
+  cssVars,
+}) {
   const theme = useTheme();
 
   const pathname = usePathname();
@@ -51,10 +57,10 @@ export function NavList({ data, render, slotProps, enabledRootRedirect, cssVars 
   useEffect(() => {
     handleGetClientRect();
 
-    window.addEventListener('scroll', handleGetClientRect);
+    window.addEventListener("scroll", handleGetClientRect);
 
     return () => {
-      window.removeEventListener('scroll', handleGetClientRect);
+      window.removeEventListener("scroll", handleGetClientRect);
     };
   }, [handleGetClientRect]);
 
@@ -101,35 +107,35 @@ export function NavList({ data, render, slotProps, enabledRootRedirect, cssVars 
           disableScrollLock
           open={openMenu}
           anchorEl={navItemRef.current}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-          transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+          transformOrigin={{ vertical: "top", horizontal: "left" }}
           slotProps={{
             paper: {
               onMouseEnter: handleOpenMenu,
               onMouseLeave: handleCloseMenu,
               sx: {
                 /* Reset */
-                boxShadow: 'none',
-                overflow: 'unset',
-                backdropFilter: 'none',
-                background: 'transparent',
+                boxShadow: "none",
+                overflow: "unset",
+                backdropFilter: "none",
+                background: "transparent",
                 /**/
                 ...(multiList && {
                   right: 0,
-                  mx: 'auto',
-                  left: '0 !important',
+                  mx: "auto",
+                  left: "0 !important",
                   top: `${clientRect.top + clientRect.height}px !important`,
                   maxWidth: {
                     xs: theme.breakpoints.values.lg,
                     xl: theme.breakpoints.values.xl,
                   },
                 }),
-                ...(openMenu && { pointerEvents: 'auto' }),
+                ...(openMenu && { pointerEvents: "auto" }),
                 ...slotProps?.paper,
               },
             },
           }}
-          sx={{ ...cssVars, pointerEvents: 'none' }}
+          sx={{ ...cssVars, pointerEvents: "none" }}
         >
           <Paper
             sx={{
@@ -141,7 +147,11 @@ export function NavList({ data, render, slotProps, enabledRootRedirect, cssVars 
               ...slotProps?.paper,
             }}
           >
-            <NavContent singleList={singleList} data={data} slotProps={slotProps} />
+            <NavContent
+              singleList={singleList}
+              data={data}
+              slotProps={slotProps}
+            />
           </Paper>
         </Popover>
       </NavLi>

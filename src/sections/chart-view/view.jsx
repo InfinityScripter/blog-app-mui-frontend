@@ -1,165 +1,196 @@
-'use client';
+"use client";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ChartPie } from './chart-pie';
-import { ChartBar } from './chart-bar';
-import { ChartLine } from './chart-line';
-import { ChartArea } from './chart-area';
-import { ChartMixed } from './chart-mixed';
-import { ChartDonut } from './chart-donut';
-import { ChartScatter } from './chart-scatter';
-import { ChartTreemap } from './chart-treemap';
-import { ChartHeatmap } from './chart-heatmap';
-import { ChartBoxPlot } from './chart-box-plot';
-import { ChartRadarBar } from './chart-radar-bar';
-import { ChartRadialBar } from './chart-radial-bar';
-import { ChartStrokedGauge } from './chart-stroked-gauge';
-import { ChartColumnSingle } from './chart-column-single';
-import {ComponentHero} from "../_examples/component-hero";
-import { ChartColumnStacked } from './chart-column-stacked';
-import { ChartColumnNegative } from './chart-column-negative';
-import { ChartColumnMultiple } from './chart-column-multiple';
-import { ChartSemiCircleGauge } from './chart-semi-circle-gauge';
-import {ScrollToViewTemplate} from "../_examples/component-template";
+import { ChartPie } from "./chart-pie";
+import { ChartBar } from "./chart-bar";
+import { ChartLine } from "./chart-line";
+import { ChartArea } from "./chart-area";
+import { ChartMixed } from "./chart-mixed";
+import { ChartDonut } from "./chart-donut";
+import { ChartScatter } from "./chart-scatter";
+import { ChartTreemap } from "./chart-treemap";
+import { ChartHeatmap } from "./chart-heatmap";
+import { ChartBoxPlot } from "./chart-box-plot";
+import { ChartRadarBar } from "./chart-radar-bar";
+import { ChartRadialBar } from "./chart-radial-bar";
+import { ChartStrokedGauge } from "./chart-stroked-gauge";
+import { ChartColumnSingle } from "./chart-column-single";
+import { ComponentHero } from "../_examples/component-hero";
+import { ChartColumnStacked } from "./chart-column-stacked";
+import { ChartColumnNegative } from "./chart-column-negative";
+import { ChartColumnMultiple } from "./chart-column-multiple";
+import { ChartSemiCircleGauge } from "./chart-semi-circle-gauge";
+import { ScrollToViewTemplate } from "../_examples/component-template";
 
 // ----------------------------------------------------------------------
 
 const DEMO = [
   {
-    name: 'Line',
+    name: "Line",
     component: (
       <ChartLine
         chart={{
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+          ],
           series: [
-            { name: 'Series A', data: [32, 40, 28, 42, 64, 72, 56, 80, 100] },
-            { name: 'Series B', data: [12, 32, 45, 32, 34, 52, 40, 60, 60] },
+            { name: "Series A", data: [32, 40, 28, 42, 64, 72, 56, 80, 100] },
+            { name: "Series B", data: [12, 32, 45, 32, 34, 52, 40, 60, 60] },
           ],
         }}
       />
     ),
   },
   {
-    name: 'Area',
+    name: "Area",
     component: (
       <ChartArea
         chart={{
           categories: [
-            '2023-09-19T00:00:00.000Z',
-            '2023-09-19T01:30:00.000Z',
-            '2023-09-19T02:30:00.000Z',
-            '2023-09-19T03:30:00.000Z',
-            '2023-09-19T04:30:00.000Z',
-            '2023-09-19T05:30:00.000Z',
-            '2023-09-19T06:30:00.000Z',
-            '2023-09-19T07:30:00.000Z',
-            '2023-09-19T08:30:00.000Z',
+            "2023-09-19T00:00:00.000Z",
+            "2023-09-19T01:30:00.000Z",
+            "2023-09-19T02:30:00.000Z",
+            "2023-09-19T03:30:00.000Z",
+            "2023-09-19T04:30:00.000Z",
+            "2023-09-19T05:30:00.000Z",
+            "2023-09-19T06:30:00.000Z",
+            "2023-09-19T07:30:00.000Z",
+            "2023-09-19T08:30:00.000Z",
           ],
           series: [
-            { name: 'Series A', data: [32, 40, 28, 42, 64, 72, 56, 80, 100] },
-            { name: 'Series B', data: [12, 32, 45, 32, 34, 52, 40, 60, 60] },
+            { name: "Series A", data: [32, 40, 28, 42, 64, 72, 56, 80, 100] },
+            { name: "Series B", data: [12, 32, 45, 32, 34, 52, 40, 60, 60] },
           ],
         }}
       />
     ),
   },
   {
-    name: 'Column single',
+    name: "Column single",
     component: (
       <ChartColumnSingle
         chart={{
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+          ],
           series: [{ data: [32, 40, 28, 42, 64, 72, 56, 80, 100] }],
         }}
       />
     ),
   },
   {
-    name: 'Column multiple',
+    name: "Column multiple",
     component: (
       <ChartColumnMultiple
         chart={{
-          categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          categories: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+          ],
           series: [
-            { name: 'Series A', data: [32, 40, 28, 42, 64, 72, 56, 80, 100] },
-            { name: 'Series B', data: [12, 32, 45, 32, 34, 52, 40, 60, 60] },
+            { name: "Series A", data: [32, 40, 28, 42, 64, 72, 56, 80, 100] },
+            { name: "Series B", data: [12, 32, 45, 32, 34, 52, 40, 60, 60] },
           ],
         }}
       />
     ),
   },
   {
-    name: 'Column stacked',
+    name: "Column stacked",
     component: (
       <ChartColumnStacked
         chart={{
           categories: [
-            '01/01/2011 GMT',
-            '01/02/2011 GMT',
-            '01/03/2011 GMT',
-            '01/04/2011 GMT',
-            '01/05/2011 GMT',
-            '01/06/2011 GMT',
+            "01/01/2011 GMT",
+            "01/02/2011 GMT",
+            "01/03/2011 GMT",
+            "01/04/2011 GMT",
+            "01/05/2011 GMT",
+            "01/06/2011 GMT",
           ],
           series: [
-            { name: 'Series A', data: [44, 55, 41, 67, 22, 43] },
-            { name: 'Series B', data: [13, 23, 20, 8, 13, 27] },
-            { name: 'Series C', data: [11, 17, 15, 15, 21, 14] },
-            { name: 'Series D', data: [21, 7, 25, 13, 22, 8] },
+            { name: "Series A", data: [44, 55, 41, 67, 22, 43] },
+            { name: "Series B", data: [13, 23, 20, 8, 13, 27] },
+            { name: "Series C", data: [11, 17, 15, 15, 21, 14] },
+            { name: "Series D", data: [21, 7, 25, 13, 22, 8] },
           ],
         }}
       />
     ),
   },
   {
-    name: 'Column negative',
+    name: "Column negative",
     component: (
       <ChartColumnNegative
         chart={{
           categories: [
-            '2011-01-01',
-            '2011-02-01',
-            '2011-03-01',
-            '2011-04-01',
-            '2011-05-01',
-            '2011-06-01',
-            '2011-07-01',
-            '2011-08-01',
-            '2011-09-01',
-            '2011-10-01',
-            '2011-11-01',
-            '2011-12-01',
-            '2012-01-01',
-            '2012-02-01',
-            '2012-03-01',
-            '2012-04-01',
-            '2012-05-01',
-            '2012-06-01',
-            '2012-07-01',
-            '2012-08-01',
-            '2012-09-01',
-            '2012-10-01',
-            '2012-11-01',
-            '2012-12-01',
-            '2013-01-01',
-            '2013-02-01',
-            '2013-03-01',
-            '2013-04-01',
-            '2013-05-01',
-            '2013-06-01',
-            '2013-07-01',
-            '2013-08-01',
-            '2013-09-01',
+            "2011-01-01",
+            "2011-02-01",
+            "2011-03-01",
+            "2011-04-01",
+            "2011-05-01",
+            "2011-06-01",
+            "2011-07-01",
+            "2011-08-01",
+            "2011-09-01",
+            "2011-10-01",
+            "2011-11-01",
+            "2011-12-01",
+            "2012-01-01",
+            "2012-02-01",
+            "2012-03-01",
+            "2012-04-01",
+            "2012-05-01",
+            "2012-06-01",
+            "2012-07-01",
+            "2012-08-01",
+            "2012-09-01",
+            "2012-10-01",
+            "2012-11-01",
+            "2012-12-01",
+            "2013-01-01",
+            "2013-02-01",
+            "2013-03-01",
+            "2013-04-01",
+            "2013-05-01",
+            "2013-06-01",
+            "2013-07-01",
+            "2013-08-01",
+            "2013-09-01",
           ],
           series: [
             {
               data: [
-                1.45, 5.42, 5.9, -0.42, -12.6, -18.1, -18.2, -14.16, -11.1, -6.09, 0.34, 3.88,
-                13.07, 5.8, 2, 7.37, 8.1, 13.57, 15.75, 17.1, 19.8, -27.03, -54.4, -47.2, -43.3,
-                -18.6, -48.6, -41.1, -39.6, -37.6, -29.4, -21.4, -2.4,
+                1.45, 5.42, 5.9, -0.42, -12.6, -18.1, -18.2, -14.16, -11.1,
+                -6.09, 0.34, 3.88, 13.07, 5.8, 2, 7.37, 8.1, 13.57, 15.75, 17.1,
+                19.8, -27.03, -54.4, -47.2, -43.3, -18.6, -48.6, -41.1, -39.6,
+                -37.6, -29.4, -21.4, -2.4,
               ],
             },
           ],
@@ -168,21 +199,21 @@ const DEMO = [
     ),
   },
   {
-    name: 'Bar',
+    name: "Bar",
     component: (
       <ChartBar
         chart={{
           categories: [
-            'Italy',
-            'Japan',
-            'China',
-            'Canada',
-            'France',
-            'Germany',
-            'South Korea',
-            'Netherlands',
-            'United States',
-            'United Kingdom',
+            "Italy",
+            "Japan",
+            "China",
+            "Canada",
+            "France",
+            "Germany",
+            "South Korea",
+            "Netherlands",
+            "United States",
+            "United Kingdom",
           ],
           series: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380],
         }}
@@ -190,44 +221,52 @@ const DEMO = [
     ),
   },
   {
-    name: 'Mixed',
+    name: "Mixed",
     component: (
       <ChartMixed
         chart={{
           categories: [
-            '01/01/2023',
-            '02/01/2023',
-            '03/01/2023',
-            '04/01/2023',
-            '05/01/2023',
-            '06/01/2023',
-            '07/01/2023',
-            '08/01/2023',
-            '09/01/2023',
-            '10/01/2023',
-            '11/01/2023',
+            "01/01/2023",
+            "02/01/2023",
+            "03/01/2023",
+            "04/01/2023",
+            "05/01/2023",
+            "06/01/2023",
+            "07/01/2023",
+            "08/01/2023",
+            "09/01/2023",
+            "10/01/2023",
+            "11/01/2023",
           ],
           series: [
             {
-              name: 'Series A',
-              type: 'column',
+              name: "Series A",
+              type: "column",
               data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30],
             },
-            { name: 'Series B', type: 'area', data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43] },
-            { name: 'Series C', type: 'line', data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39] },
+            {
+              name: "Series B",
+              type: "area",
+              data: [44, 55, 41, 67, 22, 43, 21, 41, 56, 27, 43],
+            },
+            {
+              name: "Series C",
+              type: "line",
+              data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39],
+            },
           ],
         }}
       />
     ),
   },
   {
-    name: 'Scatter',
+    name: "Scatter",
     component: (
       <ChartScatter
         chart={{
           series: [
             {
-              name: 'Series A',
+              name: "Series A",
               data: [
                 [16.4, 5.4],
                 [21.7, 2],
@@ -252,7 +291,7 @@ const DEMO = [
               ],
             },
             {
-              name: 'Series B',
+              name: "Series B",
               data: [
                 [36.4, 13.4],
                 [1.7, 11],
@@ -277,7 +316,7 @@ const DEMO = [
               ],
             },
             {
-              name: 'Series C',
+              name: "Series C",
               data: [
                 [21.7, 3],
                 [23.6, 3.5],
@@ -307,63 +346,73 @@ const DEMO = [
     ),
   },
   {
-    name: 'Pie',
+    name: "Pie",
     component: (
       <ChartPie
         chart={{
-          categories: ['Series A', 'Series B', 'Series C', 'Series D'],
+          categories: ["Series A", "Series B", "Series C", "Series D"],
           series: [44, 55, 13, 43],
         }}
       />
     ),
   },
   {
-    name: 'Donut',
+    name: "Donut",
     component: (
       <ChartDonut
         chart={{
-          categories: ['Series A', 'Series B', 'Series C', 'Series D'],
+          categories: ["Series A", "Series B", "Series C", "Series D"],
           series: [44, 55, 13, 43],
         }}
       />
     ),
   },
   {
-    name: 'Radial bar',
-    component: <ChartRadialBar chart={{ categories: ['Apples', 'Oranges'], series: [24, 50] }} />,
+    name: "Radial bar",
+    component: (
+      <ChartRadialBar
+        chart={{ categories: ["Apples", "Oranges"], series: [24, 50] }}
+      />
+    ),
   },
   {
-    name: 'Radar bar',
+    name: "Radar bar",
     component: (
       <ChartRadarBar
         chart={{
-          categories: ['2011', '2012', '2013', '2014', '2015', '2016'],
+          categories: ["2011", "2012", "2013", "2014", "2015", "2016"],
           series: [
-            { name: 'Series A', data: [80, 50, 30, 40, 100, 20] },
-            { name: 'Series B', data: [20, 30, 40, 80, 20, 80] },
-            { name: 'Series C', data: [44, 76, 78, 13, 43, 10] },
+            { name: "Series A", data: [80, 50, 30, 40, 100, 20] },
+            { name: "Series B", data: [20, 30, 40, 80, 20, 80] },
+            { name: "Series C", data: [44, 76, 78, 13, 43, 10] },
           ],
         }}
       />
     ),
   },
-  { name: 'Semi circle gauge', component: <ChartSemiCircleGauge chart={{ series: [75] }} /> },
-  { name: 'Stroked gauge', component: <ChartStrokedGauge chart={{ series: [75] }} /> },
   {
-    name: 'BoxPlot',
+    name: "Semi circle gauge",
+    component: <ChartSemiCircleGauge chart={{ series: [75] }} />,
+  },
+  {
+    name: "Stroked gauge",
+    component: <ChartStrokedGauge chart={{ series: [75] }} />,
+  },
+  {
+    name: "BoxPlot",
     component: (
       <ChartBoxPlot
         chart={{
           series: [
             {
               data: [
-                { x: 'Jan 2015', y: [54, 66, 69, 75, 88] },
-                { x: 'Jan 2016', y: [43, 65, 69, 76, 81] },
-                { x: 'Jan 2017', y: [31, 39, 45, 51, 59] },
-                { x: 'Jan 2018', y: [39, 46, 55, 65, 71] },
-                { x: 'Jan 2019', y: [29, 31, 35, 39, 44] },
-                { x: 'Jan 2020', y: [41, 49, 58, 61, 67] },
-                { x: 'Jan 2021', y: [54, 59, 66, 71, 88] },
+                { x: "Jan 2015", y: [54, 66, 69, 75, 88] },
+                { x: "Jan 2016", y: [43, 65, 69, 76, 81] },
+                { x: "Jan 2017", y: [31, 39, 45, 51, 59] },
+                { x: "Jan 2018", y: [39, 46, 55, 65, 71] },
+                { x: "Jan 2019", y: [29, 31, 35, 39, 44] },
+                { x: "Jan 2020", y: [41, 49, 58, 61, 67] },
+                { x: "Jan 2021", y: [54, 59, 66, 71, 88] },
               ],
             },
           ],
@@ -372,34 +421,42 @@ const DEMO = [
     ),
   },
   {
-    name: 'Heatmap',
+    name: "Heatmap",
     component: (
       <ChartHeatmap
         chart={{
-          categories: ['10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '01:00'],
+          categories: [
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "01:00",
+          ],
           series: [
             {
-              name: 'Metric 1',
+              name: "Metric 1",
               data: [45, 52, 38, 45, 19, 23, 2],
             },
             {
-              name: 'Metric 2',
+              name: "Metric 2",
               data: [26, 21, 20, 6, 8, 15, 12],
             },
             {
-              name: 'Metric 3',
+              name: "Metric 3",
               data: [30, 22, 16, 29, 15, 10, 20],
             },
             {
-              name: 'Metric 4',
+              name: "Metric 4",
               data: [44, 55, 41, 37, 22, 43, 21],
             },
             {
-              name: 'Metric 5',
+              name: "Metric 5",
               data: [35, 41, 36, 26, 45, 48, 52],
             },
             {
-              name: 'Metric 6',
+              name: "Metric 6",
               data: [21, 35, 22, 27, 13, 28, 37],
             },
           ],
@@ -408,28 +465,28 @@ const DEMO = [
     ),
   },
   {
-    name: 'Treemap',
+    name: "Treemap",
     component: (
       <ChartTreemap
         chart={{
           series: [
             {
-              name: 'Desktops',
+              name: "Desktops",
               data: [
-                { x: 'ABC', y: 10 },
-                { x: 'DEF', y: 60 },
-                { x: 'XYZ', y: 41 },
+                { x: "ABC", y: 10 },
+                { x: "DEF", y: 60 },
+                { x: "XYZ", y: 41 },
               ],
             },
             {
-              name: 'Mobile',
+              name: "Mobile",
               data: [
-                { x: 'ABCD', y: 10 },
-                { x: 'DEFG', y: 20 },
-                { x: 'WXYZ', y: 51 },
-                { x: 'PQR', y: 30 },
-                { x: 'MNO', y: 20 },
-                { x: 'CDE', y: 30 },
+                { x: "ABCD", y: 10 },
+                { x: "DEFG", y: 20 },
+                { x: "WXYZ", y: 51 },
+                { x: "PQR", y: 30 },
+                { x: "MNO", y: 20 },
+                { x: "CDE", y: 30 },
               ],
             },
           ],
@@ -445,8 +502,11 @@ export function ChartView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Chart"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Chart' }]}
-          moreLink={['https://apexcharts.com']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Chart" },
+          ]}
+          moreLink={["https://apexcharts.com"]}
         />
       </ComponentHero>
 

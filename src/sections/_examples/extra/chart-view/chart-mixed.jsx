@@ -1,6 +1,6 @@
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -16,15 +16,15 @@ export function ChartMixed({ chart }) {
   const chartOptions = useChart({
     colors: chartColors,
     stroke: { width: [0, 2, 2] },
-    fill: { type: ['solid', 'gradient', 'solid'] },
+    fill: { type: ["solid", "gradient", "solid"] },
     legend: { show: true },
     xaxis: {
-      type: 'datetime',
+      type: "datetime",
       categories: chart.categories,
     },
     yaxis: {
       min: 0,
-      title: { text: 'Points' },
+      title: { text: "Points" },
     },
     tooltip: {
       shared: true,
@@ -33,5 +33,12 @@ export function ChartMixed({ chart }) {
     },
   });
 
-  return <Chart type="line" series={chart.series} options={chartOptions} height={320} />;
+  return (
+    <Chart
+      type="line"
+      series={chart.series}
+      options={chartOptions}
+      height={320}
+    />
+  );
 }

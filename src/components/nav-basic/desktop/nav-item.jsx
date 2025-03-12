@@ -1,11 +1,16 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import ButtonBase from "@mui/material/ButtonBase";
 
-import { Iconify } from '../../iconify';
-import { useNavItem, stateClasses, sharedStyles, navSectionClasses } from '../../nav-section';
+import { Iconify } from "../../iconify";
+import {
+  useNavItem,
+  stateClasses,
+  sharedStyles,
+  navSectionClasses,
+} from "../../nav-section";
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +34,7 @@ export const NavItem = forwardRef(
       enabledRootRedirect,
       ...other
     },
-    ref
+    ref,
   ) => {
     const navItem = useNavItem({
       path,
@@ -91,20 +96,27 @@ export const NavItem = forwardRef(
         {hasChild && (
           <Iconify
             width={16}
-            icon={navItem.subItem ? 'eva:arrow-ios-forward-fill' : 'eva:arrow-ios-downward-fill'}
+            icon={
+              navItem.subItem
+                ? "eva:arrow-ios-forward-fill"
+                : "eva:arrow-ios-downward-fill"
+            }
             className={navSectionClasses.item.arrow}
           />
         )}
       </StyledNavItem>
     );
-  }
+  },
 );
 
 // ----------------------------------------------------------------------
 
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
-    prop !== 'active' && prop !== 'open' && prop !== 'disabled' && prop !== 'depth',
+    prop !== "active" &&
+    prop !== "open" &&
+    prop !== "disabled" &&
+    prop !== "depth",
 })(({ active, open, disabled, depth, theme }) => {
   const rootItem = depth === 1;
 
@@ -115,25 +127,27 @@ const StyledNavItem = styled(ButtonBase, {
 
     icon: {
       ...sharedStyles.icon,
-      width: 'var(--nav-icon-size)',
-      height: 'var(--nav-icon-size)',
-      margin: 'var(--nav-icon-margin)',
+      width: "var(--nav-icon-size)",
+      height: "var(--nav-icon-size)",
+      margin: "var(--nav-icon-margin)",
     },
 
     texts: {
-      display: 'flex',
-      flex: '1 1 auto',
-      flexDirection: 'column',
+      display: "flex",
+      flex: "1 1 auto",
+      flexDirection: "column",
     },
 
     title: {
       ...theme.typography.body2,
-      fontWeight: active ? theme.typography.fontWeightSemiBold : theme.typography.fontWeightMedium,
+      fontWeight: active
+        ? theme.typography.fontWeightSemiBold
+        : theme.typography.fontWeightMedium,
     },
 
     caption: {
       ...theme.typography.caption,
-      color: 'var(--nav-item-caption-color)',
+      color: "var(--nav-item-caption-color)",
     },
 
     arrow: {
@@ -151,12 +165,12 @@ const StyledNavItem = styled(ButtonBase, {
      */
     ...(rootItem && {
       ...baseStyles.item,
-      padding: 'var(--nav-item-root-padding)',
-      borderRadius: 'var(--nav-item-radius)',
-      transition: theme.transitions.create(['all'], {
+      padding: "var(--nav-item-root-padding)",
+      borderRadius: "var(--nav-item-radius)",
+      transition: theme.transitions.create(["all"], {
         duration: theme.transitions.duration.shorter,
       }),
-      '&:hover': { opacity: 0.64 },
+      "&:hover": { opacity: 0.64 },
       [`& .${navSectionClasses.item.icon}`]: { ...baseStyles.icon },
       [`& .${navSectionClasses.item.texts}`]: { ...baseStyles.texts },
       [`& .${navSectionClasses.item.title}`]: { ...baseStyles.title },
@@ -164,7 +178,7 @@ const StyledNavItem = styled(ButtonBase, {
       [`& .${navSectionClasses.item.info}`]: { ...baseStyles.info },
       // State
       ...(active && {
-        color: 'var(--nav-item-root-active-color)',
+        color: "var(--nav-item-root-active-color)",
       }),
       ...(open && {
         opacity: 0.64,
@@ -177,13 +191,13 @@ const StyledNavItem = styled(ButtonBase, {
     ...(subItem && {
       ...baseStyles.item,
       fontSize: theme.typography.pxToRem(13),
-      borderRadius: 'var(--nav-item-sub-radius)',
-      padding: 'var(--nav-item-sub-padding)',
-      '&:hover': {
-        color: 'var(--nav-item-sub-hover-color)',
-        backgroundColor: 'var(--nav-item-sub-hover-bg)',
+      borderRadius: "var(--nav-item-sub-radius)",
+      padding: "var(--nav-item-sub-padding)",
+      "&:hover": {
+        color: "var(--nav-item-sub-hover-color)",
+        backgroundColor: "var(--nav-item-sub-hover-bg)",
       },
-      color: 'var(--nav-item-sub-color)',
+      color: "var(--nav-item-sub-color)",
       [`& .${navSectionClasses.item.icon}`]: { ...baseStyles.icon },
       [`& .${navSectionClasses.item.texts}`]: { ...baseStyles.texts },
       [`& .${navSectionClasses.item.title}`]: { ...baseStyles.title },
@@ -195,12 +209,12 @@ const StyledNavItem = styled(ButtonBase, {
       [`& .${navSectionClasses.item.info}`]: { ...baseStyles.info },
       // State
       ...(active && {
-        color: 'var(--nav-item-sub-active-color)',
-        backgroundColor: 'var(--nav-item-sub-active-bg)',
+        color: "var(--nav-item-sub-active-color)",
+        backgroundColor: "var(--nav-item-sub-active-bg)",
       }),
       ...(open && {
-        color: 'var(--nav-item-sub-open-color)',
-        backgroundColor: 'var(--nav-item-sub-open-bg)',
+        color: "var(--nav-item-sub-open-color)",
+        backgroundColor: "var(--nav-item-sub-open-bg)",
       }),
     }),
 

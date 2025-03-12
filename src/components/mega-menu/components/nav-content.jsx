@@ -1,11 +1,11 @@
-import Masonry from '@mui/lab/Masonry';
-import Divider from '@mui/material/Divider';
+import Masonry from "@mui/lab/Masonry";
+import Divider from "@mui/material/Divider";
 
-import { MenuTags } from './menu-tags';
-import { NavSubList } from './nav-sub-list';
-import { MenuCarousel } from './menu-carousel';
-import { MenuMoreLink } from './menu-more-link';
-import { NavUl, navSectionClasses } from '../../nav-section';
+import { MenuTags } from "./menu-tags";
+import { NavSubList } from "./nav-sub-list";
+import { MenuCarousel } from "./menu-carousel";
+import { MenuMoreLink } from "./menu-more-link";
+import { NavUl, navSectionClasses } from "../../nav-section";
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ export function NavContent({ data, slotProps, singleList }) {
 
           {!!data.slides && (
             <>
-              <Divider sx={{ borderStyle: 'dashed', my: 3 }} />
+              <Divider sx={{ borderStyle: "dashed", my: 3 }} />
               <MenuCarousel
                 slides={data.slides}
                 displayCount={slotProps?.carousel?.displayCount}
@@ -55,7 +55,7 @@ export function NavContent({ data, slotProps, singleList }) {
 
           {!!data.tags && (
             <>
-              <Divider sx={{ borderStyle: 'dashed', my: 3 }} />
+              <Divider sx={{ borderStyle: "dashed", my: 3 }} />
               <MenuTags tags={data.tags} sx={slotProps?.tags} />
             </>
           )}

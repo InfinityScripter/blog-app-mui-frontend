@@ -1,8 +1,8 @@
-import { formatNumberLocale } from 'src/locales';
+import { formatNumberLocale } from "src/locales";
 
 // ----------------------------------------------------------------------
 
-const DEFAULT_LOCALE = { code: 'en-US', currency: 'USD' };
+const DEFAULT_LOCALE = { code: "en-US", currency: "USD" };
 
 function processInput(inputValue) {
   if (inputValue == null || Number.isNaN(inputValue)) return null;
@@ -15,7 +15,7 @@ export function fNumber(inputValue, options) {
   const locale = formatNumberLocale() || DEFAULT_LOCALE;
 
   const number = processInput(inputValue);
-  if (number === null) return '';
+  if (number === null) return "";
 
   const fm = new Intl.NumberFormat(locale.code, {
     minimumFractionDigits: 0,
@@ -32,10 +32,10 @@ export function fCurrency(inputValue, options) {
   const locale = formatNumberLocale() || DEFAULT_LOCALE;
 
   const number = processInput(inputValue);
-  if (number === null) return '';
+  if (number === null) return "";
 
   const fm = new Intl.NumberFormat(locale.code, {
-    style: 'currency',
+    style: "currency",
     currency: locale.currency,
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
@@ -51,10 +51,10 @@ export function fPercent(inputValue, options) {
   const locale = formatNumberLocale() || DEFAULT_LOCALE;
 
   const number = processInput(inputValue);
-  if (number === null) return '';
+  if (number === null) return "";
 
   const fm = new Intl.NumberFormat(locale.code, {
-    style: 'percent',
+    style: "percent",
     minimumFractionDigits: 0,
     maximumFractionDigits: 1,
     ...options,
@@ -69,10 +69,10 @@ export function fShortenNumber(inputValue, options) {
   const locale = formatNumberLocale() || DEFAULT_LOCALE;
 
   const number = processInput(inputValue);
-  if (number === null) return '';
+  if (number === null) return "";
 
   const fm = new Intl.NumberFormat(locale.code, {
-    notation: 'compact',
+    notation: "compact",
     maximumFractionDigits: 2,
     ...options,
   }).format(number);
@@ -84,9 +84,9 @@ export function fShortenNumber(inputValue, options) {
 
 export function fData(inputValue) {
   const number = processInput(inputValue);
-  if (number === null || number === 0) return '0 bytes';
+  if (number === null || number === 0) return "0 bytes";
 
-  const units = ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb', 'Eb', 'Zb', 'Yb'];
+  const units = ["bytes", "Kb", "Mb", "Gb", "Tb", "Pb", "Eb", "Zb", "Yb"];
   const decimal = 2;
   const baseValue = 1024;
 

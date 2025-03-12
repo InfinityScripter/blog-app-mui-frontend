@@ -1,12 +1,12 @@
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import ButtonBase from '@mui/material/ButtonBase';
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import ButtonBase from "@mui/material/ButtonBase";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
-import { usePopover, CustomPopover } from '../custom-popover';
+import { usePopover, CustomPopover } from "../custom-popover";
 
 // ----------------------------------------------------------------------
 
@@ -23,8 +23,9 @@ export function ChartSelect({ options, value, onChange, slotProps, ...other }) {
           gap: 1.5,
           height: 34,
           borderRadius: 1,
-          typography: 'subtitle2',
-          border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.24)}`,
+          typography: "subtitle2",
+          border: (theme) =>
+            `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.24)}`,
           ...slotProps?.button,
         }}
         {...other}
@@ -33,11 +34,19 @@ export function ChartSelect({ options, value, onChange, slotProps, ...other }) {
 
         <Iconify
           width={16}
-          icon={popover.open ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'}
+          icon={
+            popover.open
+              ? "eva:arrow-ios-upward-fill"
+              : "eva:arrow-ios-downward-fill"
+          }
         />
       </ButtonBase>
 
-      <CustomPopover open={popover.open} anchorEl={popover.anchorEl} onClose={popover.onClose}>
+      <CustomPopover
+        open={popover.open}
+        anchorEl={popover.anchorEl}
+        onClose={popover.onClose}
+      >
         <MenuList sx={slotProps?.popover}>
           {options.map((option) => (
             <MenuItem

@@ -1,10 +1,10 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Logo } from '../logo';
+import { Logo } from "../logo";
 
 // ----------------------------------------------------------------------
 
@@ -14,10 +14,10 @@ export function AnimateLogo1({ logo, sx, ...other }) {
       sx={{
         width: 120,
         height: 120,
-        alignItems: 'center',
-        position: 'relative',
-        display: 'inline-flex',
-        justifyContent: 'center',
+        alignItems: "center",
+        position: "relative",
+        display: "inline-flex",
+        justifyContent: "center",
         ...sx,
       }}
       {...other}
@@ -29,9 +29,9 @@ export function AnimateLogo1({ logo, sx, ...other }) {
           duration: 2,
           repeatDelay: 1,
           repeat: Infinity,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
-        sx={{ display: 'inline-flex' }}
+        sx={{ display: "inline-flex" }}
       >
         {logo ?? <Logo disableLink width={64} height={64} />}
       </Box>
@@ -42,14 +42,15 @@ export function AnimateLogo1({ logo, sx, ...other }) {
           scale: [1.6, 1, 1, 1.6, 1.6],
           rotate: [270, 0, 0, 270, 270],
           opacity: [0.25, 1, 1, 1, 0.25],
-          borderRadius: ['25%', '25%', '50%', '50%', '25%'],
+          borderRadius: ["25%", "25%", "50%", "50%", "25%"],
         }}
-        transition={{ ease: 'linear', duration: 3.2, repeat: Infinity }}
+        transition={{ ease: "linear", duration: 3.2, repeat: Infinity }}
         sx={{
-          position: 'absolute',
-          width: 'calc(100% - 20px)',
-          height: 'calc(100% - 20px)',
-          border: (theme) => `solid 3px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+          position: "absolute",
+          width: "calc(100% - 20px)",
+          height: "calc(100% - 20px)",
+          border: (theme) =>
+            `solid 3px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
         }}
       />
 
@@ -59,14 +60,15 @@ export function AnimateLogo1({ logo, sx, ...other }) {
           scale: [1, 1.2, 1.2, 1, 1],
           rotate: [0, 270, 270, 0, 0],
           opacity: [1, 0.25, 0.25, 0.25, 1],
-          borderRadius: ['25%', '25%', '50%', '50%', '25%'],
+          borderRadius: ["25%", "25%", "50%", "50%", "25%"],
         }}
-        transition={{ ease: 'linear', duration: 3.2, repeat: Infinity }}
+        transition={{ ease: "linear", duration: 3.2, repeat: Infinity }}
         sx={{
           width: 1,
           height: 1,
-          position: 'absolute',
-          border: (theme) => `solid 8px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+          position: "absolute",
+          border: (theme) =>
+            `solid 8px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
         }}
       />
     </Box>
@@ -83,10 +85,10 @@ export function AnimateLogo2({ logo, sx, ...other }) {
       sx={{
         width: 96,
         height: 96,
-        position: 'relative',
-        alignItems: 'center',
-        display: 'inline-flex',
-        justifyContent: 'center',
+        position: "relative",
+        alignItems: "center",
+        display: "inline-flex",
+        justifyContent: "center",
         ...sx,
       }}
       {...other}
@@ -96,15 +98,15 @@ export function AnimateLogo2({ logo, sx, ...other }) {
       <Box
         component={m.div}
         animate={{ rotate: 360 }}
-        transition={{ duration: 10, ease: 'linear', repeat: Infinity }}
+        transition={{ duration: 10, ease: "linear", repeat: Infinity }}
         sx={{
           width: 1,
           height: 1,
           opacity: 0.16,
-          borderRadius: '50%',
-          position: 'absolute',
+          borderRadius: "50%",
+          position: "absolute",
           transition: (theme) =>
-            theme.transitions.create(['opacity'], {
+            theme.transitions.create(["opacity"], {
               easing: theme.transitions.easing.easeInOut,
               duration: theme.transitions.duration.shorter,
             }),

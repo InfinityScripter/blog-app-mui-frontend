@@ -1,3 +1,3 @@
-export * from './color-picker';
+export * from "./color-picker";
 
-export * from './color-preview';
+export * from "./color-preview";

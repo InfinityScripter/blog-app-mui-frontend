@@ -1,69 +1,71 @@
-import { Children, forwardRef, isValidElement } from 'react';
+import { Children, forwardRef, isValidElement } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import ButtonBase from "@mui/material/ButtonBase";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { carouselClasses } from '../classes';
-import { CarouselSlide } from './carousel-slide';
-import { StyledRoot, StyledContainer } from '../carousel';
+import { carouselClasses } from "../classes";
+import { CarouselSlide } from "./carousel-slide";
+import { StyledRoot, StyledContainer } from "../carousel";
 
 // ----------------------------------------------------------------------
 
-export const CarouselThumbs = forwardRef(({ children, slotProps, options, sx, ...other }, ref) => {
-  const axis = options?.axis ?? 'x';
+export const CarouselThumbs = forwardRef(
+  ({ children, slotProps, options, sx, ...other }, ref) => {
+    const axis = options?.axis ?? "x";
 
-  const slideSpacing = options?.slideSpacing ?? '12px';
+    const slideSpacing = options?.slideSpacing ?? "12px";
 
-  const maskStyles = useMaskStyle(axis);
+    const maskStyles = useMaskStyle(axis);
 
-  const renderChildren = Children.map(children, (child) => {
-    if (isValidElement(child)) {
-      const reactChild = child;
+    const renderChildren = Children.map(children, (child) => {
+      if (isValidElement(child)) {
+        const reactChild = child;
 
-      return (
-        <CarouselSlide
-          key={reactChild.key}
-          options={{ ...options, slideSpacing }}
-          sx={slotProps?.slide}
-        >
-          {child}
-        </CarouselSlide>
-      );
-    }
-    return null;
-  });
+        return (
+          <CarouselSlide
+            key={reactChild.key}
+            options={{ ...options, slideSpacing }}
+            sx={slotProps?.slide}
+          >
+            {child}
+          </CarouselSlide>
+        );
+      }
+      return null;
+    });
 
-  return (
-    <StyledRoot
-      ref={ref}
-      axis={axis}
-      className={carouselClasses.thumbs}
-      sx={{
-        flexShrink: 0,
-        ...(axis === 'x' && { p: 0.5, maxWidth: 1 }),
-        ...(axis === 'y' && { p: 0.5, maxHeight: 1 }),
-        ...(!slotProps?.disableMask && maskStyles),
-        ...sx,
-      }}
-      {...other}
-    >
-      <StyledContainer
-        component="ul"
+    return (
+      <StyledRoot
+        ref={ref}
         axis={axis}
-        slideSpacing={slideSpacing}
-        className={carouselClasses.thumbContainer}
+        className={carouselClasses.thumbs}
         sx={{
-          ...slotProps?.container,
+          flexShrink: 0,
+          ...(axis === "x" && { p: 0.5, maxWidth: 1 }),
+          ...(axis === "y" && { p: 0.5, maxHeight: 1 }),
+          ...(!slotProps?.disableMask && maskStyles),
+          ...sx,
         }}
+        {...other}
       >
-        {renderChildren}
-      </StyledContainer>
-    </StyledRoot>
-  );
-});
+        <StyledContainer
+          component="ul"
+          axis={axis}
+          slideSpacing={slideSpacing}
+          className={carouselClasses.thumbContainer}
+          sx={{
+            ...slotProps?.container,
+          }}
+        >
+          {renderChildren}
+        </StyledContainer>
+      </StyledRoot>
+    );
+  },
+);
 
 // ----------------------------------------------------------------------
 
@@ -76,10 +78,10 @@ export function CarouselThumb({ sx, src, index, selected, ...other }) {
         height: 64,
         opacity: 0.48,
         flexShrink: 0,
-        cursor: 'pointer',
+        cursor: "pointer",
         borderRadius: 1.25,
         transition: (theme) =>
-          theme.transitions.create(['opacity', 'box-shadow'], {
+          theme.transitions.create(["opacity", "box-shadow"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.short,
           }),
@@ -99,8 +101,8 @@ export function CarouselThumb({ sx, src, index, selected, ...other }) {
         sx={{
           width: 1,
           height: 1,
-          objectFit: 'cover',
-          borderRadius: 'inherit',
+          objectFit: "cover",
+          borderRadius: "inherit",
         }}
       />
     </ButtonBase>
@@ -115,24 +117,24 @@ function useMaskStyle(axis) {
   const baseStyles = {
     zIndex: 9,
     content: '""',
-    position: 'absolute',
+    position: "absolute",
   };
 
   const bgcolor = `${theme.vars.palette.background.paper} 20%, ${varAlpha(theme.vars.palette.background.paperChannel, 0)} 100%)`;
 
-  if (axis === 'y') {
+  if (axis === "y") {
     return {
-      '&::before, &::after': {
+      "&::before, &::after": {
         ...baseStyles,
         left: 0,
         height: 40,
-        width: '100%',
+        width: "100%",
       },
-      '&::before': {
+      "&::before": {
         top: -8,
         background: `linear-gradient(to bottom, ${bgcolor}`,
       },
-      '&::after': {
+      "&::after": {
         bottom: -8,
         background: `linear-gradient(to top, ${bgcolor}`,
       },
@@ -140,17 +142,17 @@ function useMaskStyle(axis) {
   }
 
   return {
-    '&::before, &::after': {
+    "&::before, &::after": {
       ...baseStyles,
       top: 0,
       width: 40,
-      height: '100%',
+      height: "100%",
     },
-    '&::before': {
+    "&::before": {
       left: -8,
       background: `linear-gradient(to right, ${bgcolor}`,
     },
-    '&::after': {
+    "&::after": {
       right: -8,
       background: `linear-gradient(to left, ${bgcolor}`,
     },

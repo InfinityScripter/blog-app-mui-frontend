@@ -1,19 +1,19 @@
-import './code-highlight-block.css';
+import "./code-highlight-block.css";
 
-import { useMemo } from 'react';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
+import { useMemo } from "react";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
 
-import Link from '@mui/material/Link';
+import Link from "@mui/material/Link";
 
-import { isExternalLink } from 'src/routes/utils';
-import { RouterLink } from 'src/routes/components';
+import { isExternalLink } from "src/routes/utils";
+import { RouterLink } from "src/routes/components";
 
-import { Image } from '../image';
-import { StyledRoot } from './styles';
-import { markdownClasses } from './classes';
-import { htmlToMarkdown, isMarkdownContent } from './html-to-markdown';
+import { Image } from "../image";
+import { StyledRoot } from "./styles";
+import { markdownClasses } from "./classes";
+import { htmlToMarkdown, isMarkdownContent } from "./html-to-markdown";
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +41,11 @@ export function Markdown({ children, sx, ...other }) {
   );
 }
 
-const rehypePlugins = [rehypeRaw, rehypeHighlight, [remarkGfm, { singleTilde: false }]];
+const rehypePlugins = [
+  rehypeRaw,
+  rehypeHighlight,
+  [remarkGfm, { singleTilde: false }],
+];
 
 const components = {
   img: ({ node, ...other }) => (
@@ -54,11 +58,16 @@ const components = {
   ),
   a: ({ href, children, node, ...other }) => {
     const linkProps = isExternalLink(href)
-      ? { target: '_blank', rel: 'noopener' }
+      ? { target: "_blank", rel: "noopener" }
       : { component: RouterLink };
 
     return (
-      <Link {...linkProps} href={href} className={markdownClasses.content.link} {...other}>
+      <Link
+        {...linkProps}
+        href={href}
+        className={markdownClasses.content.link}
+        {...other}
+      >
         {children}
       </Link>
     );
@@ -69,7 +78,7 @@ const components = {
     </div>
   ),
   code({ className, children, node, ...other }) {
-    const language = /language-(\w+)/.exec(className || '');
+    const language = /language-(\w+)/.exec(className || "");
 
     return language ? (
       <code {...other} className={className}>

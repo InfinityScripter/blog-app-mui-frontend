@@ -1,16 +1,17 @@
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from '../../iconify';
-import {formatImageUrl} from "../../../utils/format-image-url";
+import { Iconify } from "../../iconify";
+import { formatImageUrl } from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
 export function SingleFilePreview({ file }) {
-  const fileName = typeof file === 'string' ? file : file.name;
-  const previewUrl = typeof file === 'string' ? formatImageUrl(file) : URL.createObjectURL(file);
+  const fileName = typeof file === "string" ? file : file.name;
+  const previewUrl =
+    typeof file === "string" ? formatImageUrl(file) : URL.createObjectURL(file);
 
   return (
     <Box
@@ -20,7 +21,7 @@ export function SingleFilePreview({ file }) {
         left: 0,
         width: 1,
         height: 1,
-        position: 'absolute',
+        position: "absolute",
       }}
     >
       <Box
@@ -31,7 +32,7 @@ export function SingleFilePreview({ file }) {
           width: 1,
           height: 1,
           borderRadius: 1,
-          objectFit: 'cover',
+          objectFit: "cover",
         }}
       />
     </Box>
@@ -48,10 +49,14 @@ export function DeleteButton({ sx, ...other }) {
         top: 16,
         right: 16,
         zIndex: 9,
-        position: 'absolute',
+        position: "absolute",
         color: (theme) => varAlpha(theme.vars.palette.common.whiteChannel, 0.8),
-        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.72),
-        '&:hover': { bgcolor: (theme) => varAlpha(theme.vars.palette.grey['900Channel'], 0.48) },
+        bgcolor: (theme) =>
+          varAlpha(theme.vars.palette.grey["900Channel"], 0.72),
+        "&:hover": {
+          bgcolor: (theme) =>
+            varAlpha(theme.vars.palette.grey["900Channel"], 0.48),
+        },
         ...sx,
       }}
       {...other}

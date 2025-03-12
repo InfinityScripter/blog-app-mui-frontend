@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -8,12 +8,14 @@ export function useLightBox(slides) {
   const handleOpen = useCallback(
     (slideUrl) => {
       const slideIndex = slides.findIndex((slide) =>
-        slide.type === 'video' ? slide.poster === slideUrl : slide.src === slideUrl
+        slide.type === "video"
+          ? slide.poster === slideUrl
+          : slide.src === slideUrl,
       );
 
       setSelected(slideIndex);
     },
-    [slides]
+    [slides],
   );
 
   const handleClose = useCallback(() => {

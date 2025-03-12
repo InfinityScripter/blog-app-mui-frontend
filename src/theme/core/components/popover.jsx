@@ -1,6 +1,6 @@
-import { listClasses } from '@mui/material/List';
+import { listClasses } from "@mui/material/List";
 
-import { paper } from '../../styles';
+import { paper } from "../../styles";
 
 // ----------------------------------------------------------------------
 

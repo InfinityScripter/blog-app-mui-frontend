@@ -1,6 +1,6 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback } from "react";
 
-import { isEqual } from 'src/utils/helper';
+import { isEqual } from "src/utils/helper";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ export function useSetState(initialState) {
         [name]: updateValue,
       });
     },
-    [setState]
+    [setState],
   );
 
   const onResetState = useCallback(() => {
@@ -34,7 +34,7 @@ export function useSetState(initialState) {
       onResetState,
       canReset,
     }),
-    [canReset, onResetState, setField, setState, state]
+    [canReset, onResetState, setField, setState, state],
   );
 
   return memoizedValue;

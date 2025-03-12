@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
+import { paths } from "src/routes/paths";
+import { RouterLink } from "src/routes/components";
 
-import { Iconify } from 'src/components/iconify';
-import { EmptyContent } from 'src/components/empty-content';
+import { Iconify } from "src/components/iconify";
+import { EmptyContent } from "src/components/empty-content";
 
 // ----------------------------------------------------------------------
 

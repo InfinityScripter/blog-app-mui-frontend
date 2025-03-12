@@ -1,6 +1,6 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { Image } from 'src/components/image';
+import { Image } from "src/components/image";
 import {
   Carousel,
   useCarousel,
@@ -8,22 +8,22 @@ import {
   CarouselArrowBasicButtons,
   CarouselArrowFloatButtons,
   CarouselArrowNumberButtons,
-} from 'src/components/carousel';
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
 export function CarouselCustoms({ data }) {
   const carousel = useCarousel({
-    align: 'start',
-    slideSpacing: '20px',
+    align: "start",
+    slideSpacing: "20px",
     slidesToShow: { xs: 1, sm: 2 },
   });
 
   return (
     <>
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: "relative" }}>
         <Carousel carousel={carousel} sx={{ maxWidth: 640 }}>
           {data.map((item, index) => (
             <CarouselItem key={item.id} index={index} item={item} />
@@ -35,7 +35,7 @@ export function CarouselCustoms({ data }) {
           options={carousel.options}
           slotProps={{
             prevBtn: {
-              sx: { bgcolor: 'primary.main', color: 'primary.contrastText' },
+              sx: { bgcolor: "primary.main", color: "primary.contrastText" },
               svgIcon: (
                 <path
                   fill="currentColor"
@@ -44,7 +44,7 @@ export function CarouselCustoms({ data }) {
               ),
             },
             nextBtn: {
-              sx: { bgcolor: 'primary.main', color: 'primary.contrastText' },
+              sx: { bgcolor: "primary.main", color: "primary.contrastText" },
               svgIcon: (
                 <path
                   fill="currentColor"
@@ -65,13 +65,13 @@ export function CarouselCustoms({ data }) {
           p: 5,
           mt: 5,
           borderRadius: 2,
-          bgcolor: 'background.neutral',
+          bgcolor: "background.neutral",
         }}
       >
         <CarouselArrowBasicButtons
           {...carousel.arrows}
           options={carousel.options}
-          sx={{ color: 'secondary.main' }}
+          sx={{ color: "secondary.main" }}
         />
 
         <CarouselArrowNumberButtons
@@ -97,7 +97,7 @@ export function CarouselCustoms({ data }) {
               ),
             },
           }}
-          sx={{ bgcolor: 'info.main', color: 'info.contrastText' }}
+          sx={{ bgcolor: "info.main", color: "info.contrastText" }}
         />
 
         <CarouselDotButtons
@@ -105,7 +105,7 @@ export function CarouselCustoms({ data }) {
           selectedIndex={carousel.dots.selectedIndex}
           onClickDot={carousel.dots.onClickDot}
           fallbackCount={5}
-          sx={{ color: 'primary.main' }}
+          sx={{ color: "primary.main" }}
         />
 
         <CarouselDotButtons
@@ -114,7 +114,7 @@ export function CarouselCustoms({ data }) {
           selectedIndex={carousel.dots.selectedIndex}
           onClickDot={carousel.dots.onClickDot}
           fallbackCount={5}
-          sx={{ color: 'info.main' }}
+          sx={{ color: "info.main" }}
         />
 
         <CarouselDotButtons
@@ -126,8 +126,8 @@ export function CarouselCustoms({ data }) {
           slotProps={{
             dot: {
               selected: {
-                bgcolor: 'warning.main',
-                color: 'warning.contrastText',
+                bgcolor: "warning.main",
+                color: "warning.contrastText",
               },
             },
           }}
@@ -139,9 +139,14 @@ export function CarouselCustoms({ data }) {
 
 function CarouselItem({ item, index }) {
   return (
-    <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
+    <Box sx={{ borderRadius: 2, overflow: "hidden", position: "relative" }}>
       <IndexLabel index={index + 1} />
-      <Image visibleByDefault alt={item.title} src={item.coverUrl} ratio="4/3" />
+      <Image
+        visibleByDefault
+        alt={item.title}
+        src={item.coverUrl}
+        ratio="4/3"
+      />
     </Box>
   );
 }

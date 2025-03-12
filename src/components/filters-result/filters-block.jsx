@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ export function FiltersBlock({ label, children, isShow, sx }) {
       sx={{
         p: 1,
         borderRadius: 1,
-        overflow: 'hidden',
+        overflow: "hidden",
         border: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
         ...sx,
       }}
@@ -23,7 +23,7 @@ export function FiltersBlock({ label, children, isShow, sx }) {
         component="span"
         sx={{
           height: 24,
-          lineHeight: '24px',
+          lineHeight: "24px",
           fontSize: (theme) => theme.typography.subtitle2.fontSize,
           fontWeight: (theme) => theme.typography.subtitle2.fontWeight,
         }}

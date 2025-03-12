@@ -1,14 +1,14 @@
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useMemo, useState, useEffect, useCallback } from "react";
 
-import { isEqual } from 'src/utils/helper';
-import { localStorageGetItem } from 'src/utils/storage-available';
+import { isEqual } from "src/utils/helper";
+import { localStorageGetItem } from "src/utils/storage-available";
 
 // ----------------------------------------------------------------------
 
 export function useLocalStorage(key, initialState) {
   const [state, set] = useState(initialState);
 
-  const multiValue = initialState && typeof initialState === 'object';
+  const multiValue = initialState && typeof initialState === "object";
 
   const canReset = !isEqual(state, initialState);
 
@@ -36,7 +36,7 @@ export function useLocalStorage(key, initialState) {
         set(updateState);
       }
     },
-    [key, multiValue]
+    [key, multiValue],
   );
 
   const setField = useCallback(
@@ -47,7 +47,7 @@ export function useLocalStorage(key, initialState) {
         });
       }
     },
-    [multiValue, setState]
+    [multiValue, setState],
   );
 
   const resetState = useCallback(() => {
@@ -63,7 +63,7 @@ export function useLocalStorage(key, initialState) {
       resetState,
       canReset,
     }),
-    [canReset, resetState, setField, setState, state]
+    [canReset, resetState, setField, setState, state],
   );
 
   return memoizedValue;
@@ -79,7 +79,7 @@ export function getStorage(key) {
       return JSON.parse(result);
     }
   } catch (error) {
-    console.error('Error while getting from storage:', error);
+    console.error("Error while getting from storage:", error);
   }
 
   return null;
@@ -92,7 +92,7 @@ export function setStorage(key, value) {
     const serializedValue = JSON.stringify(value);
     window.localStorage.setItem(key, serializedValue);
   } catch (error) {
-    console.error('Error while setting storage:', error);
+    console.error("Error while setting storage:", error);
   }
 }
 
@@ -102,6 +102,6 @@ export function removeStorage(key) {
   try {
     window.localStorage.removeItem(key);
   } catch (error) {
-    console.error('Error while removing from storage:', error);
+    console.error("Error while removing from storage:", error);
   }
 }

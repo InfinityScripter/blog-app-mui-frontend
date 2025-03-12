@@ -31,7 +31,7 @@ function descendingComparator(a, b, orderBy) {
 // ----------------------------------------------------------------------
 
 export function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }

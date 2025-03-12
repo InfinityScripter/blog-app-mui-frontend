@@ -1,6 +1,6 @@
-import { cookies } from 'next/headers';
+import { cookies } from "next/headers";
 
-import { STORAGE_KEY, defaultSettings } from './config-settings';
+import { STORAGE_KEY, defaultSettings } from "./config-settings";
 
 // ----------------------------------------------------------------------
 

@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { m } from 'framer-motion';
-import { useState, useCallback } from 'react';
+import { m } from "framer-motion";
+import { useState, useCallback } from "react";
 
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
 
-import { varHover } from 'src/components/animate';
-import { FlagIcon } from 'src/components/iconify';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { varHover } from "src/components/animate";
+import { FlagIcon } from "src/components/iconify";
+import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ export function LanguagePopover({ data = [], sx, ...other }) {
       setLocale(newLang);
       popover.onClose();
     },
-    [popover]
+    [popover],
   );
 
   return (
@@ -40,7 +40,7 @@ export function LanguagePopover({ data = [], sx, ...other }) {
           p: 0,
           width: 40,
           height: 40,
-          ...(popover.open && { bgcolor: 'action.selected' }),
+          ...(popover.open && { bgcolor: "action.selected" }),
           ...sx,
         }}
         {...other}
@@ -48,7 +48,11 @@ export function LanguagePopover({ data = [], sx, ...other }) {
         <FlagIcon code={currentLang?.countryCode} />
       </IconButton>
 
-      <CustomPopover open={popover.open} anchorEl={popover.anchorEl} onClose={popover.onClose}>
+      <CustomPopover
+        open={popover.open}
+        anchorEl={popover.anchorEl}
+        onClose={popover.onClose}
+      >
         <MenuList sx={{ width: 160, minHeight: 72 }}>
           {data?.map((option) => (
             <MenuItem

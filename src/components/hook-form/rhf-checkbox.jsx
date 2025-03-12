@@ -1,12 +1,12 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from "react-hook-form";
 
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ export function RHFCheckbox({ name, helperText, label, slotProps, ...other }) {
                 checked={field.value}
                 {...slotProps?.checkbox}
                 inputProps={{
-                  ...(!label && { 'aria-label': ariaLabel }),
+                  ...(!label && { "aria-label": ariaLabel }),
                   ...slotProps?.checkbox?.inputProps,
                 }}
               />
@@ -50,7 +50,14 @@ export function RHFCheckbox({ name, helperText, label, slotProps, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RHFMultiCheckbox({ name, label, options, slotProps, helperText, ...other }) {
+export function RHFMultiCheckbox({
+  name,
+  label,
+  options,
+  slotProps,
+  helperText,
+  ...other
+}) {
   const { control } = useFormContext();
 
   const getSelected = (selectedItems, item) =>
@@ -71,7 +78,7 @@ export function RHFMultiCheckbox({ name, label, options, slotProps, helperText, 
             <FormLabel
               component="legend"
               {...slotProps?.formLabel}
-              sx={{ mb: 1, typography: 'body2', ...slotProps?.formLabel?.sx }}
+              sx={{ mb: 1, typography: "body2", ...slotProps?.formLabel?.sx }}
             >
               {label}
             </FormLabel>
@@ -84,11 +91,15 @@ export function RHFMultiCheckbox({ name, label, options, slotProps, helperText, 
                 control={
                   <Checkbox
                     checked={field.value.includes(option.value)}
-                    onChange={() => field.onChange(getSelected(field.value, option.value))}
+                    onChange={() =>
+                      field.onChange(getSelected(field.value, option.value))
+                    }
                     name={accessibility(option.label)}
                     {...slotProps?.checkbox}
                     inputProps={{
-                      ...(!option.label && { 'aria-label': ariaLabel(option.label) }),
+                      ...(!option.label && {
+                        "aria-label": ariaLabel(option.label),
+                      }),
                       ...slotProps?.checkbox?.inputProps,
                     }}
                   />
@@ -99,7 +110,11 @@ export function RHFMultiCheckbox({ name, label, options, slotProps, helperText, 
           </FormGroup>
 
           {(!!error || helperText) && (
-            <FormHelperText error={!!error} sx={{ mx: 0 }} {...slotProps?.formHelperText}>
+            <FormHelperText
+              error={!!error}
+              sx={{ mx: 0 }}
+              {...slotProps?.formHelperText}
+            >
               {error ? error?.message : helperText}
             </FormHelperText>
           )}

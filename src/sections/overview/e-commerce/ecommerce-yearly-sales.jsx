@@ -1,16 +1,18 @@
+import Card from "@mui/material/Card";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
-
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function EcommerceYearlySales({ title, subheader, chart, ...other }) {
   const theme = useTheme();
 
-  const chartColors = chart.colors ?? [theme.palette.primary.main, theme.palette.error.main];
+  const chartColors = chart.colors ?? [
+    theme.palette.primary.main,
+    theme.palette.error.main,
+  ];
 
   const chartOptions = useChart({
     colors: chartColors,
@@ -36,17 +38,14 @@ export function EcommerceYearlySales({ title, subheader, chart, ...other }) {
 
   return (
     <Card {...other}>
-      <CardHeader
-        title={title}
-        subheader={subheader}
-        sx={{ mb: 3 }}
-      />
+      <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
 
       <ChartLegends
         colors={chartOptions?.colors}
         labels={chart.series.map((item) => item.name)}
-        values={chart.series.map((item) =>
-          `${item.data[0].data[item.data[0].data.length - 1].toFixed(1)}%`
+        values={chart.series.map(
+          (item) =>
+            `${item.data[0].data[item.data[0].data.length - 1].toFixed(1)}%`,
         )}
         sx={{ px: 3, gap: 3 }}
       />

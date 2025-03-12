@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import CardHeader from '@mui/material/CardHeader';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import CardHeader from "@mui/material/CardHeader";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { Iconify } from 'src/components/iconify';
-import { Scrollbar } from 'src/components/scrollbar';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { Iconify } from "src/components/iconify";
+import { Scrollbar } from "src/components/scrollbar";
+import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
 export function AnalyticsTasks({ title, subheader, list, ...other }) {
-  const [selected, setSelected] = useState(['2']);
+  const [selected, setSelected] = useState(["2"]);
 
   const handleClickComplete = (taskId) => {
     const tasksCompleted = selected.includes(taskId)
@@ -33,7 +33,10 @@ export function AnalyticsTasks({ title, subheader, list, ...other }) {
       <CardHeader title={title} subheader={subheader} sx={{ mb: 1 }} />
 
       <Scrollbar sx={{ minHeight: 304 }}>
-        <Stack divider={<Divider sx={{ borderStyle: 'dashed' }} />} sx={{ minWidth: 560 }}>
+        <Stack
+          divider={<Divider sx={{ borderStyle: "dashed" }} />}
+          sx={{ minWidth: 560 }}
+        >
           {list.map((item) => (
             <Item
               key={item.id}
@@ -53,22 +56,22 @@ function Item({ item, checked, onChange, sx, ...other }) {
 
   const handleMarkComplete = () => {
     popover.onClose();
-    console.info('MARK COMPLETE', item.id);
+    console.info("MARK COMPLETE", item.id);
   };
 
   const handleShare = () => {
     popover.onClose();
-    console.info('SHARE', item.id);
+    console.info("SHARE", item.id);
   };
 
   const handleEdit = () => {
     popover.onClose();
-    console.info('EDIT', item.id);
+    console.info("EDIT", item.id);
   };
 
   const handleDelete = () => {
     popover.onClose();
-    console.info('DELETE', item.id);
+    console.info("DELETE", item.id);
   };
 
   return (
@@ -78,8 +81,11 @@ function Item({ item, checked, onChange, sx, ...other }) {
           pl: 2,
           pr: 1,
           py: 1.5,
-          display: 'flex',
-          ...(checked && { color: 'text.disabled', textDecoration: 'line-through' }),
+          display: "flex",
+          ...(checked && {
+            color: "text.disabled",
+            textDecoration: "line-through",
+          }),
           ...sx,
         }}
         {...other}
@@ -92,7 +98,7 @@ function Item({ item, checked, onChange, sx, ...other }) {
               onChange={onChange}
               inputProps={{
                 name: item.name,
-                'aria-label': 'Checkbox demo',
+                "aria-label": "Checkbox demo",
               }}
             />
           }
@@ -100,7 +106,10 @@ function Item({ item, checked, onChange, sx, ...other }) {
           sx={{ flexGrow: 1, m: 0 }}
         />
 
-        <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
+        <IconButton
+          color={popover.open ? "inherit" : "default"}
+          onClick={popover.onOpen}
+        >
           <Iconify icon="eva:more-vertical-fill" />
         </IconButton>
       </Box>
@@ -109,7 +118,7 @@ function Item({ item, checked, onChange, sx, ...other }) {
         open={popover.open}
         anchorEl={popover.anchorEl}
         onClose={popover.onClose}
-        slotProps={{ arrow: { placement: 'right-top' } }}
+        slotProps={{ arrow: { placement: "right-top" } }}
       >
         <MenuList>
           <MenuItem onClick={handleMarkComplete}>
@@ -127,9 +136,9 @@ function Item({ item, checked, onChange, sx, ...other }) {
             Share
           </MenuItem>
 
-          <Divider sx={{ borderStyle: 'dashed' }} />
+          <Divider sx={{ borderStyle: "dashed" }} />
 
-          <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
+          <MenuItem onClick={handleDelete} sx={{ color: "error.main" }}>
             <Iconify icon="solar:trash-bin-trash-bold" />
             Delete
           </MenuItem>

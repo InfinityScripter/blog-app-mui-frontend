@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import Alert from '@mui/material/Alert';
-import { useTheme } from '@mui/material/styles';
+import Alert from "@mui/material/Alert";
+import { useTheme } from "@mui/material/styles";
 
-import { usePathname } from 'src/routes/hooks';
+import { usePathname } from "src/routes/hooks";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { Main } from './main';
-import { NavMobile } from './nav/mobile';
-import { NavDesktop } from './nav/desktop';
-import { Footer, HomeFooter } from './footer';
-import { HeaderBase } from '../core/header-base';
-import { LayoutSection } from '../core/layout-section';
-import { navData as mainNavData } from '../config-nav-main';
+import { Main } from "./main";
+import { NavMobile } from "./nav/mobile";
+import { NavDesktop } from "./nav/desktop";
+import { Footer, HomeFooter } from "./footer";
+import { HeaderBase } from "../core/header-base";
+import { LayoutSection } from "../core/layout-section";
+import { navData as mainNavData } from "../config-nav-main";
 
 // ----------------------------------------------------------------------
 
@@ -24,15 +24,19 @@ export function MainLayout({ sx, data, children }) {
 
   const mobileNavOpen = useBoolean();
 
-  const homePage = pathname === '/';
+  const homePage = pathname === "/";
 
-  const layoutQuery = 'md';
+  const layoutQuery = "md";
 
   const navData = data?.nav ?? mainNavData;
 
   return (
     <>
-      <NavMobile data={navData} open={mobileNavOpen.value} onClose={mobileNavOpen.onFalse} />
+      <NavMobile
+        data={navData}
+        open={mobileNavOpen.value}
+        onClose={mobileNavOpen.onFalse}
+      />
 
       <LayoutSection
         /** **************************************
@@ -53,7 +57,10 @@ export function MainLayout({ sx, data, children }) {
             }}
             slots={{
               topArea: (
-                <Alert severity="info" sx={{ display: 'none', borderRadius: 0 }}>
+                <Alert
+                  severity="info"
+                  sx={{ display: "none", borderRadius: 0 }}
+                >
                   This is an info Alert.
                 </Alert>
               ),
@@ -61,10 +68,10 @@ export function MainLayout({ sx, data, children }) {
                 <NavDesktop
                   data={navData}
                   sx={{
-                    display: 'none',
+                    display: "none",
                     [theme.breakpoints.up(layoutQuery)]: {
                       mr: 2.5,
-                      display: 'flex',
+                      display: "flex",
                     },
                   }}
                 />
@@ -75,7 +82,9 @@ export function MainLayout({ sx, data, children }) {
         /** **************************************
          * Footer
          *************************************** */
-        footerSection={homePage ? <HomeFooter /> : <Footer layoutQuery={layoutQuery} />}
+        footerSection={
+          homePage ? <HomeFooter /> : <Footer layoutQuery={layoutQuery} />
+        }
         /** **************************************
          * Style
          *************************************** */

@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
+import { paths } from "src/routes/paths";
+import { RouterLink } from "src/routes/components";
 
-import { DashboardContent } from 'src/layouts/dashboard';
+import { DashboardContent } from "src/layouts/dashboard";
 
-import { Iconify } from 'src/components/iconify';
-import { EmptyContent } from 'src/components/empty-content';
+import { Iconify } from "src/components/iconify";
+import { EmptyContent } from "src/components/empty-content";
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ export default function Error({ error, reset }) {
             Back to list
           </Button>
         }
-        sx={{ py: 10, height: 'auto', flexGrow: 'unset' }}
+        sx={{ py: 10, height: "auto", flexGrow: "unset" }}
       />
     </DashboardContent>
   );

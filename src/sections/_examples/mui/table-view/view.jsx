@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { BasicTable } from './basic';
-import { CollapsibleTable } from './collapsible';
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { SortingSelectingTable } from './sorting-selecting';
-import { ScrollToViewTemplate } from '../../component-template';
-import { GroupingFixedHeaderTable } from './grouping-fixed-header';
+import { BasicTable } from "./basic";
+import { CollapsibleTable } from "./collapsible";
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { SortingSelectingTable } from "./sorting-selecting";
+import { ScrollToViewTemplate } from "../../component-template";
+import { GroupingFixedHeaderTable } from "./grouping-fixed-header";
 
 // ----------------------------------------------------------------------
 
 const blockProps = {
   p: 0,
-  overflow: 'hidden',
-  alignItems: 'unset',
-  flexDirection: 'column',
-  bgcolor: 'background.paper',
+  overflow: "hidden",
+  alignItems: "unset",
+  flexDirection: "column",
+  bgcolor: "background.paper",
 };
 
 const DEMO = [
   {
-    name: 'Basic Table',
+    name: "Basic Table",
     component: (
       <ComponentBlock sx={blockProps}>
         <BasicTable />
@@ -32,7 +32,7 @@ const DEMO = [
     ),
   },
   {
-    name: 'Sorting & selecting',
+    name: "Sorting & selecting",
     component: (
       <ComponentBlock sx={blockProps}>
         <SortingSelectingTable />
@@ -40,7 +40,7 @@ const DEMO = [
     ),
   },
   {
-    name: 'Grouping & fixed header',
+    name: "Grouping & fixed header",
     component: (
       <ComponentBlock sx={blockProps}>
         <GroupingFixedHeaderTable />
@@ -48,7 +48,7 @@ const DEMO = [
     ),
   },
   {
-    name: 'Collapsible table',
+    name: "Collapsible table",
     component: (
       <ComponentBlock sx={blockProps}>
         <CollapsibleTable />
@@ -65,8 +65,11 @@ export function TableView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Table"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Table' }]}
-          moreLink={['https://mui.com/components/tables']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Table" },
+          ]}
+          moreLink={["https://mui.com/components/tables"]}
         />
       </ComponentHero>
 

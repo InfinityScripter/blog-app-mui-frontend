@@ -1,22 +1,32 @@
-import { paginationItemClasses } from '@mui/material/PaginationItem';
+import { paginationItemClasses } from "@mui/material/PaginationItem";
 
-import { varAlpha, stylesMode } from '../../styles';
+import { varAlpha, stylesMode } from "../../styles";
 
-const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
 
 // ----------------------------------------------------------------------
 
 const softVariant = {
   colors: COLORS.map((color) => ({
     props: ({ ownerState }) =>
-      !ownerState.disabled && ownerState.variant === 'soft' && ownerState.color === color,
+      !ownerState.disabled &&
+      ownerState.variant === "soft" &&
+      ownerState.color === color,
     style: ({ theme }) => ({
       [`& .${paginationItemClasses.root}`]: {
         [`&.${paginationItemClasses.selected}`]: {
           fontWeight: theme.typography.fontWeightSemiBold,
           color: theme.vars.palette[color].dark,
-          backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.08),
-          '&:hover': { backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.16) },
+          backgroundColor: varAlpha(
+            theme.vars.palette[color].mainChannel,
+            0.08,
+          ),
+          "&:hover": {
+            backgroundColor: varAlpha(
+              theme.vars.palette[color].mainChannel,
+              0.16,
+            ),
+          },
           [stylesMode.dark]: { color: theme.vars.palette[color].light },
         },
       },
@@ -24,13 +34,22 @@ const softVariant = {
   })),
   standardColor: [
     {
-      props: ({ ownerState }) => ownerState.variant === 'soft' && ownerState.color === 'standard',
+      props: ({ ownerState }) =>
+        ownerState.variant === "soft" && ownerState.color === "standard",
       style: ({ theme }) => ({
         [`& .${paginationItemClasses.root}`]: {
           [`&.${paginationItemClasses.selected}`]: {
             fontWeight: theme.typography.fontWeightSemiBold,
-            backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
-            '&:hover': { backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16) },
+            backgroundColor: varAlpha(
+              theme.vars.palette.grey["500Channel"],
+              0.08,
+            ),
+            "&:hover": {
+              backgroundColor: varAlpha(
+                theme.vars.palette.grey["500Channel"],
+                0.16,
+              ),
+            },
           },
         },
       }),
@@ -62,13 +81,13 @@ const MuiPagination = {
       [`& .${paginationItemClasses.root}`]: {
         [`&.${paginationItemClasses.selected}`]: {
           fontWeight: theme.typography.fontWeightSemiBold,
-          ...(ownerState.color === 'standard' && {
+          ...(ownerState.color === "standard" && {
             color: theme.vars.palette.common.white,
             backgroundColor: theme.vars.palette.text.primary,
-            '&:hover': { backgroundColor: theme.vars.palette.grey[700] },
+            "&:hover": { backgroundColor: theme.vars.palette.grey[700] },
             [stylesMode.dark]: {
               color: theme.vars.palette.grey[800],
-              '&:hover': { backgroundColor: theme.vars.palette.grey[100] },
+              "&:hover": { backgroundColor: theme.vars.palette.grey[100] },
             },
           }),
         },
@@ -79,12 +98,15 @@ const MuiPagination = {
      */
     outlined: ({ ownerState, theme }) => ({
       [`& .${paginationItemClasses.root}`]: {
-        borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.24),
+        borderColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.24),
         [`&.${paginationItemClasses.selected}`]: {
-          borderColor: 'currentColor',
+          borderColor: "currentColor",
           fontWeight: theme.typography.fontWeightSemiBold,
-          ...(ownerState.color === 'standard' && {
-            backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+          ...(ownerState.color === "standard" && {
+            backgroundColor: varAlpha(
+              theme.vars.palette.grey["500Channel"],
+              0.08,
+            ),
           }),
         },
       },

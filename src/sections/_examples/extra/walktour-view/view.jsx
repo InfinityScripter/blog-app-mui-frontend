@@ -1,43 +1,43 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
-import { useTheme } from '@mui/material/styles';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import Switch from "@mui/material/Switch";
+import { useTheme } from "@mui/material/styles";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Unstable_Grid2";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from "src/routes/paths";
+import { useRouter } from "src/routes/hooks";
 
-import { MotivationIllustration } from 'src/assets/illustrations';
+import { MotivationIllustration } from "src/assets/illustrations";
 import {
   _mock,
   _ecommerceNewProducts,
   _ecommerceBestSalesman,
   _ecommerceSalesOverview,
   _ecommerceLatestProducts,
-} from 'src/_mock';
+} from "src/_mock";
 
-import { Iconify } from 'src/components/iconify';
-import { Walktour, useWalktour } from 'src/components/walktour';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { Walktour, useWalktour } from "src/components/walktour";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { EcommerceWelcome } from 'src/sections/overview/e-commerce/ecommerce-welcome';
-import { EcommerceNewProducts } from 'src/sections/overview/e-commerce/ecommerce-new-products';
-import { EcommerceYearlySales } from 'src/sections/overview/e-commerce/ecommerce-yearly-sales';
-import { EcommerceBestSalesman } from 'src/sections/overview/e-commerce/ecommerce-best-salesman';
-import { EcommerceSaleByGender } from 'src/sections/overview/e-commerce/ecommerce-sale-by-gender';
-import { EcommerceSalesOverview } from 'src/sections/overview/e-commerce/ecommerce-sales-overview';
-import { EcommerceWidgetSummary } from 'src/sections/overview/e-commerce/ecommerce-widget-summary';
-import { EcommerceLatestProducts } from 'src/sections/overview/e-commerce/ecommerce-latest-products';
-import { EcommerceCurrentBalance } from 'src/sections/overview/e-commerce/ecommerce-current-balance';
+import { EcommerceWelcome } from "src/sections/overview/e-commerce/ecommerce-welcome";
+import { EcommerceNewProducts } from "src/sections/overview/e-commerce/ecommerce-new-products";
+import { EcommerceYearlySales } from "src/sections/overview/e-commerce/ecommerce-yearly-sales";
+import { EcommerceBestSalesman } from "src/sections/overview/e-commerce/ecommerce-best-salesman";
+import { EcommerceSaleByGender } from "src/sections/overview/e-commerce/ecommerce-sale-by-gender";
+import { EcommerceSalesOverview } from "src/sections/overview/e-commerce/ecommerce-sales-overview";
+import { EcommerceWidgetSummary } from "src/sections/overview/e-commerce/ecommerce-widget-summary";
+import { EcommerceLatestProducts } from "src/sections/overview/e-commerce/ecommerce-latest-products";
+import { EcommerceCurrentBalance } from "src/sections/overview/e-commerce/ecommerce-current-balance";
 
-import { ComponentHero } from '../../component-hero';
+import { ComponentHero } from "../../component-hero";
 
 // ----------------------------------------------------------------------
 
@@ -50,43 +50,48 @@ export function WalktourView() {
     defaultRun: true,
     steps: [
       {
-        target: 'body',
+        target: "body",
         title: `Let's begin our journey!`,
-        placement: 'center',
+        placement: "center",
         hideCloseButton: true,
         content: (
-          <Typography sx={{ color: 'text.secondary' }}>
-            Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna
-            dolor sagittis lacus.
+          <Typography sx={{ color: "text.secondary" }}>
+            Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc,
+            eu sollicitudin urna dolor sagittis lacus.
           </Typography>
         ),
       },
       {
-        target: '#demo__2',
-        title: 'Step 2',
-        placement: 'left-start',
+        target: "#demo__2",
+        title: "Step 2",
+        placement: "left-start",
         content: (
           <>
-            <Typography sx={{ mb: 2, color: 'text.secondary' }}>
-              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin
-              urna dolor sagittis lacus.
+            <Typography sx={{ mb: 2, color: "text.secondary" }}>
+              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit
+              nunc, eu sollicitudin urna dolor sagittis lacus.
             </Typography>
             <Box
               component="img"
               alt="cover"
               src={_mock.image.cover(3)}
-              sx={{ width: 400, borderRadius: 2, aspectRatio: '5/3', objectFit: 'cover' }}
+              sx={{
+                width: 400,
+                borderRadius: 2,
+                aspectRatio: "5/3",
+                objectFit: "cover",
+              }}
             />
           </>
         ),
       },
       {
-        target: '#demo__3',
-        title: 'Step 3',
-        placement: 'bottom',
+        target: "#demo__3",
+        title: "Step 3",
+        placement: "bottom",
         content: (
           <>
-            <Typography sx={{ mb: 2, color: 'text.secondary' }}>
+            <Typography sx={{ mb: 2, color: "text.secondary" }}>
               Weekly magic on your inbox
             </Typography>
             <TextField
@@ -107,36 +112,52 @@ export function WalktourView() {
         ),
       },
       {
-        target: '#demo__4',
-        title: 'Step 4',
-        placement: 'left',
+        target: "#demo__4",
+        title: "Step 4",
+        placement: "left",
         content: (
           <Stack spacing={3}>
-            <Typography sx={{ color: 'text.secondary' }}>
-              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin
-              urna dolor sagittis lacus.
+            <Typography sx={{ color: "text.secondary" }}>
+              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit
+              nunc, eu sollicitudin urna dolor sagittis lacus.
             </Typography>
             <Paper component="ul" variant="outlined">
               {[
-                { label: 'Wi-Fi', icon: 'solar:home-wifi-bold-duotone', defaultChecked: true },
                 {
-                  label: 'Bluetooth',
-                  icon: 'solar:bluetooth-square-bold-duotone',
+                  label: "Wi-Fi",
+                  icon: "solar:home-wifi-bold-duotone",
                   defaultChecked: true,
                 },
-                { label: 'Airbuds', icon: 'solar:airbuds-bold-duotone', defaultChecked: false },
-                { label: 'Alarm', icon: 'solar:alarm-bold-duotone', defaultChecked: false },
+                {
+                  label: "Bluetooth",
+                  icon: "solar:bluetooth-square-bold-duotone",
+                  defaultChecked: true,
+                },
+                {
+                  label: "Airbuds",
+                  icon: "solar:airbuds-bold-duotone",
+                  defaultChecked: false,
+                },
+                {
+                  label: "Alarm",
+                  icon: "solar:alarm-bold-duotone",
+                  defaultChecked: false,
+                },
               ].map((option) => (
                 <Box
                   component="li"
                   key={option.label}
-                  sx={{ py: 1, px: 2, display: 'flex', alignItems: 'center' }}
+                  sx={{ py: 1, px: 2, display: "flex", alignItems: "center" }}
                 >
-                  <Iconify width={26} icon={option.icon} sx={{ color: 'text.secondary', mr: 2 }} />
+                  <Iconify
+                    width={26}
+                    icon={option.icon}
+                    sx={{ color: "text.secondary", mr: 2 }}
+                  />
                   <Box
                     component="span"
                     id={`switch-list-label-${option.label}`}
-                    sx={{ typography: 'subtitle2', flexGrow: 1 }}
+                    sx={{ typography: "subtitle2", flexGrow: 1 }}
                   >
                     {option.label}
                   </Box>
@@ -146,7 +167,7 @@ export function WalktourView() {
                     edge="end"
                     inputProps={{
                       name: option.label,
-                      'aria-labelledby': `switch-list-label-${option.label}`,
+                      "aria-labelledby": `switch-list-label-${option.label}`,
                     }}
                   />
                 </Box>
@@ -156,9 +177,9 @@ export function WalktourView() {
         ),
       },
       {
-        target: '#demo__5',
-        title: 'Step 5',
-        placement: 'left',
+        target: "#demo__5",
+        title: "Step 5",
+        placement: "left",
         styles: { options: { arrowColor: theme.vars.palette.grey[800] } },
         slotProps: {
           root: {
@@ -169,16 +190,16 @@ export function WalktourView() {
         },
         content: (
           <Stack spacing={3}>
-            <Typography sx={{ color: 'text.disabled' }}>
-              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin
-              urna dolor sagittis lacus.
+            <Typography sx={{ color: "text.disabled" }}>
+              Aenean posuere, tortor sed cursus feugiat, nunc augue blandit
+              nunc, eu sollicitudin urna dolor sagittis lacus.
             </Typography>
             <Box
               sx={{
                 gap: 1,
                 width: 1,
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3, 1fr)',
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
               }}
             >
               {[...Array(6)].map((_, index) => (
@@ -209,8 +230,11 @@ export function WalktourView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Walktour"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Walktour' }]}
-          moreLink={['https://docs.react-joyride.com/']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Walktour" },
+          ]}
+          moreLink={["https://docs.react-joyride.com/"]}
         />
       </ComponentHero>
 
@@ -251,7 +275,16 @@ export function WalktourView() {
               percent={2.6}
               total={765}
               chart={{
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                categories: [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                ],
                 series: [22, 8, 35, 50, 82, 84, 77, 12],
               }}
             />
@@ -264,8 +297,20 @@ export function WalktourView() {
               percent={-0.1}
               total={18765}
               chart={{
-                colors: [theme.vars.palette.warning.light, theme.vars.palette.warning.main],
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                colors: [
+                  theme.vars.palette.warning.light,
+                  theme.vars.palette.warning.main,
+                ],
+                categories: [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                ],
                 series: [56, 47, 40, 62, 73, 30, 23, 54],
               }}
             />
@@ -277,8 +322,20 @@ export function WalktourView() {
               percent={0.6}
               total={4876}
               chart={{
-                colors: [theme.vars.palette.error.light, theme.vars.palette.error.main],
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                colors: [
+                  theme.vars.palette.error.light,
+                  theme.vars.palette.error.main,
+                ],
+                categories: [
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                ],
                 series: [40, 70, 75, 70, 50, 28, 7, 64],
               }}
             />
@@ -290,9 +347,9 @@ export function WalktourView() {
               total={2324}
               chart={{
                 series: [
-                  { label: 'Mens', value: 25 },
-                  { label: 'Womens', value: 50 },
-                  { label: 'Kids', value: 75 },
+                  { label: "Mens", value: 25 },
+                  { label: "Womens", value: 50 },
+                  { label: "Kids", value: 75 },
                 ],
               }}
             />
@@ -305,42 +362,42 @@ export function WalktourView() {
               subheader="(+43%) than last year"
               chart={{
                 categories: [
-                  'Jan',
-                  'Feb',
-                  'Mar',
-                  'Apr',
-                  'May',
-                  'Jun',
-                  'Jul',
-                  'Aug',
-                  'Sep',
-                  'Oct',
-                  'Nov',
-                  'Dec',
+                  "Jan",
+                  "Feb",
+                  "Mar",
+                  "Apr",
+                  "May",
+                  "Jun",
+                  "Jul",
+                  "Aug",
+                  "Sep",
+                  "Oct",
+                  "Nov",
+                  "Dec",
                 ],
                 series: [
                   {
-                    name: '2022',
+                    name: "2022",
                     data: [
                       {
-                        name: 'Total income',
+                        name: "Total income",
                         data: [10, 41, 35, 51, 49, 62, 69, 91, 148, 35, 51, 49],
                       },
                       {
-                        name: 'Total expenses',
+                        name: "Total expenses",
                         data: [10, 34, 13, 56, 77, 88, 99, 77, 45, 13, 56, 77],
                       },
                     ],
                   },
                   {
-                    name: '2023',
+                    name: "2023",
                     data: [
                       {
-                        name: 'Total income',
+                        name: "Total income",
                         data: [51, 35, 41, 10, 91, 69, 62, 148, 91, 69, 62, 49],
                       },
                       {
-                        name: 'Total expenses',
+                        name: "Total expenses",
                         data: [56, 13, 34, 10, 77, 99, 88, 45, 77, 99, 88, 77],
                       },
                     ],
@@ -351,7 +408,10 @@ export function WalktourView() {
           </Grid>
 
           <Grid xs={12} md={6} lg={8}>
-            <EcommerceSalesOverview title="Sales overview" data={_ecommerceSalesOverview} />
+            <EcommerceSalesOverview
+              title="Sales overview"
+              data={_ecommerceSalesOverview}
+            />
           </Grid>
 
           <Grid xs={12} md={6} lg={4}>
@@ -369,11 +429,11 @@ export function WalktourView() {
               title="Best salesman"
               tableData={_ecommerceBestSalesman}
               headLabel={[
-                { id: 'name', label: 'Seller' },
-                { id: 'category', label: 'Product' },
-                { id: 'country', label: 'Country', align: 'center' },
-                { id: 'totalAmount', label: 'Total', align: 'right' },
-                { id: 'rank', label: 'Rank', align: 'right' },
+                { id: "name", label: "Seller" },
+                { id: "category", label: "Product" },
+                { id: "country", label: "Country", align: "center" },
+                { id: "totalAmount", label: "Total", align: "right" },
+                { id: "rank", label: "Rank", align: "right" },
               ]}
             />
           </Grid>

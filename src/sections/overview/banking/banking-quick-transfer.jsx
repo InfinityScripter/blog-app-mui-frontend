@@ -1,28 +1,32 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import Slider from '@mui/material/Slider';
-import Dialog from '@mui/material/Dialog';
-import Tooltip from '@mui/material/Tooltip';
-import TextField from '@mui/material/TextField';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
-import Typography from '@mui/material/Typography';
-import DialogTitle from '@mui/material/DialogTitle';
-import ListItemText from '@mui/material/ListItemText';
-import DialogActions from '@mui/material/DialogActions';
-import Input, { inputClasses } from '@mui/material/Input';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Slider from "@mui/material/Slider";
+import Dialog from "@mui/material/Dialog";
+import Tooltip from "@mui/material/Tooltip";
+import TextField from "@mui/material/TextField";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import DialogTitle from "@mui/material/DialogTitle";
+import ListItemText from "@mui/material/ListItemText";
+import DialogActions from "@mui/material/DialogActions";
+import Input, { inputClasses } from "@mui/material/Input";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from "src/utils/format-number";
 
-import { varAlpha, stylesMode } from 'src/theme/styles';
+import { varAlpha, stylesMode } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { Carousel, useCarousel, CarouselArrowFloatButtons } from 'src/components/carousel';
+import { Iconify } from "src/components/iconify";
+import {
+  Carousel,
+  useCarousel,
+  CarouselArrowFloatButtons,
+} from "src/components/carousel";
 
 // ----------------------------------------------------------------------
 
@@ -40,8 +44,8 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
   const carousel = useCarousel({
     loop: true,
     dragFree: true,
-    slidesToShow: 'auto',
-    slideSpacing: '20px',
+    slidesToShow: "auto",
+    slideSpacing: "20px",
   });
 
   const confirm = useBoolean();
@@ -50,7 +54,9 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
 
   const [autoWidth, setAutoWidth] = useState(24);
 
-  const contactInfo = list.find((_, index) => index === carousel.dots.selectedIndex);
+  const contactInfo = list.find(
+    (_, index) => index === carousel.dots.selectedIndex,
+  );
 
   useEffect(() => {
     if (amount) {
@@ -81,7 +87,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
   }, [amount]);
 
   const renderCarousel = (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: "relative" }}>
       <CarouselArrowFloatButtons
         {...carousel.arrows}
         options={carousel.options}
@@ -90,18 +96,18 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
             svgSize: 14,
             sx: {
               p: 0.5,
-              borderRadius: '50%',
+              borderRadius: "50%",
               bgcolor: varAlpha(theme.vars.palette.text.primaryChannel, 0.48),
-              '&:hover': { bgcolor: theme.vars.palette.text.primary },
+              "&:hover": { bgcolor: theme.vars.palette.text.primary },
             },
           },
           nextBtn: {
             svgSize: 14,
             sx: {
               p: 0.5,
-              borderRadius: '50%',
+              borderRadius: "50%",
               bgcolor: varAlpha(theme.vars.palette.text.primaryChannel, 0.48),
-              '&:hover': { bgcolor: theme.vars.palette.text.primary },
+              "&:hover": { bgcolor: theme.vars.palette.text.primary },
             },
           },
         }}
@@ -114,13 +120,13 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
               src={contact.avatarUrl}
               onClick={() => carousel.dots.onClickDot(index)}
               sx={{
-                mx: 'auto',
+                mx: "auto",
                 opacity: 0.48,
-                cursor: 'pointer',
-                transition: theme.transitions.create('all'),
+                cursor: "pointer",
+                transition: theme.transitions.create("all"),
                 ...(index === carousel.dots.selectedIndex && {
                   opacity: 1,
-                  transform: 'scale(1.25)',
+                  transform: "scale(1.25)",
                   boxShadow: `-4px 12px 24px 0 ${varAlpha(theme.vars.palette.common.blackChannel, 0.12)}`,
                   [stylesMode.dark]: {
                     boxShadow: `-4px 12px 24px 0 ${varAlpha(theme.vars.palette.common.blackChannel, 0.24)}`,
@@ -136,7 +142,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
 
   const renderInput = (
     <>
-      <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+      <Typography variant="overline" sx={{ color: "text.secondary" }}>
         insert amount
       </Typography>
 
@@ -149,7 +155,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
       />
 
       <Slider
-        value={typeof amount === 'number' ? amount : 0}
+        value={typeof amount === "number" ? amount : 0}
         valueLabelDisplay="auto"
         step={STEP}
         marks
@@ -158,7 +164,14 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
         onChange={handleChangeSlider}
       />
 
-      <Box sx={{ my: 4, display: 'flex', alignItems: 'center', typography: 'subtitle1' }}>
+      <Box
+        sx={{
+          my: 4,
+          display: "flex",
+          alignItems: "center",
+          typography: "subtitle1",
+        }}
+      >
         <Box component="span" sx={{ flexGrow: 1 }}>
           Your balance
         </Box>
@@ -180,19 +193,34 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
 
   return (
     <>
-      <Box sx={{ borderRadius: 2, bgcolor: 'background.neutral', ...sx }} {...other}>
+      <Box
+        sx={{ borderRadius: 2, bgcolor: "background.neutral", ...sx }}
+        {...other}
+      >
         <CardHeader title={title} subheader={subheader} />
 
         <Box sx={{ p: 3 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <Typography variant="overline" sx={{ color: 'text.secondary' }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography variant="overline" sx={{ color: "text.secondary" }}>
               Recent
             </Typography>
 
             <Button
               size="small"
               color="inherit"
-              endIcon={<Iconify icon="eva:arrow-ios-forward-fill" width={18} sx={{ ml: -0.5 }} />}
+              endIcon={
+                <Iconify
+                  icon="eva:arrow-ios-forward-fill"
+                  width={18}
+                  sx={{ ml: -0.5 }}
+                />
+              }
               sx={{ mr: -1 }}
             >
               View all
@@ -220,8 +248,8 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
 
 function InputAmount({ autoWidth, amount, onBlur, onChange, sx, ...other }) {
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', ...sx }}>
-      <Box component="span" sx={{ typography: 'h5' }}>
+    <Box sx={{ display: "flex", justifyContent: "center", ...sx }}>
+      <Box component="span" sx={{ typography: "h5" }}>
         $
       </Box>
 
@@ -235,14 +263,14 @@ function InputAmount({ autoWidth, amount, onBlur, onChange, sx, ...other }) {
           step: STEP,
           min: MIN_AMOUNT,
           max: MAX_AMOUNT,
-          type: 'number',
-          id: 'input-amount',
+          type: "number",
+          id: "input-amount",
         }}
         sx={{
           [`& .${inputClasses.input}`]: {
             p: 0,
-            typography: 'h3',
-            textAlign: 'center',
+            typography: "h3",
+            textAlign: "center",
             width: autoWidth,
           },
         }}
@@ -265,14 +293,14 @@ function ConfirmTransferDialog({
     <Dialog open={open} fullWidth maxWidth="xs" onClose={onClose}>
       <DialogTitle>Transfer to</DialogTitle>
 
-      <Box sx={{ px: 3, gap: 3, display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
+      <Box sx={{ px: 3, gap: 3, display: "flex", flexDirection: "column" }}>
+        <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
           <Avatar src={contactInfo?.avatarUrl} sx={{ width: 48, height: 48 }} />
 
           <ListItemText
             primary={contactInfo?.name}
             secondary={contactInfo?.email}
-            secondaryTypographyProps={{ component: 'span', mt: 0.5 }}
+            secondaryTypographyProps={{ component: "span", mt: 0.5 }}
           />
         </Box>
 
@@ -282,10 +310,15 @@ function ConfirmTransferDialog({
           autoWidth={autoWidth}
           amount={amount}
           disableUnderline={false}
-          sx={{ justifyContent: 'flex-end' }}
+          sx={{ justifyContent: "flex-end" }}
         />
 
-        <TextField fullWidth multiline rows={3} placeholder="Write a message..." />
+        <TextField
+          fullWidth
+          multiline
+          rows={3}
+          placeholder="Write a message..."
+        />
       </Box>
 
       <DialogActions>

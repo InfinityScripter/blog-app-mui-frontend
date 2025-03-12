@@ -1,7 +1,7 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ function SentIcon({ sx, ...other }) {
       fill="none"
       viewBox="0 0 96 96"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 96, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 96, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       <path
@@ -34,7 +34,7 @@ function SentIcon({ sx, ...other }) {
       />
 
       <g
-        style={{ mixBlendMode: 'overlay' }}
+        style={{ mixBlendMode: "overlay" }}
         fill="#fff"
         fillOpacity="0.04"
         filter="url(#filter0_i_1870_134242)"

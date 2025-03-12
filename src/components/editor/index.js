@@ -1,3 +1,3 @@
-export * from './editor';
+export * from "./editor";
 
-export * from './classes';
+export * from "./classes";

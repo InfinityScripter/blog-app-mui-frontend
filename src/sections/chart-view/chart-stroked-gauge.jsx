@@ -1,15 +1,18 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ChartStrokedGauge({ chart }) {
   const theme = useTheme();
 
-  const chartColors = chart.colors ?? [theme.palette.error.main, theme.palette.error.light];
+  const chartColors = chart.colors ?? [
+    theme.palette.error.main,
+    theme.palette.error.light,
+  ];
 
   const chartOptions = useChart({
     chart: {
@@ -17,7 +20,7 @@ export function ChartStrokedGauge({ chart }) {
       sparkline: { enabled: true },
     },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         colorStops: [
           {
@@ -35,8 +38,8 @@ export function ChartStrokedGauge({ chart }) {
     },
     stroke: {
       dashArray: 4,
-      curve: 'straight',
-      lineCap: 'butt',
+      curve: "straight",
+      lineCap: "butt",
     },
     plotOptions: {
       radialBar: {
@@ -45,14 +48,14 @@ export function ChartStrokedGauge({ chart }) {
         hollow: { margin: -24 },
         track: {
           margin: -24,
-          strokeWidth: '100%',
-          background: varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+          strokeWidth: "100%",
+          background: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
         },
         dataLabels: {
           name: { offsetY: 96 },
           value: { offsetY: 48 },
           total: {
-            label: 'Median Ratio',
+            label: "Median Ratio",
             color: theme.vars.palette.error.main,
             fontSize: theme.typography.subtitle2.fontSize,
             fontWeight: theme.typography.subtitle2.fontWeight,
@@ -69,7 +72,7 @@ export function ChartStrokedGauge({ chart }) {
       options={chartOptions}
       width={260}
       height={260}
-      sx={{ mx: 'auto' }}
+      sx={{ mx: "auto" }}
     />
   );
 }

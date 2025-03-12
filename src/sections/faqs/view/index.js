@@ -1,1 +1,1 @@
-export * from './faqs-view';
+export * from "./faqs-view";

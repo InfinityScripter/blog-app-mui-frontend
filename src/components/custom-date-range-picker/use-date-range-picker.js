@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import { fIsAfter, fDateRangeShortLabel } from 'src/utils/format-time';
+import { fIsAfter, fDateRangeShortLabel } from "src/utils/format-time";
 
 // ----------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ export function useDateRangePicker(start, end) {
       }
       setEndDate(newValue);
     },
-    [error]
+    [error],
   );
 
   const onReset = useCallback(() => {

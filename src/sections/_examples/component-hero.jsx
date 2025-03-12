@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -15,9 +15,9 @@ export function ComponentHero({ children, sx, ...other }) {
       sx={{
         py: 5,
         minHeight: 240,
-        display: 'flex',
-        position: 'relative',
-        alignItems: 'center',
+        display: "flex",
+        position: "relative",
+        alignItems: "center",
         ...sx,
       }}
       {...other}
@@ -35,8 +35,8 @@ export function ComponentHero({ children, sx, ...other }) {
           width: 1,
           height: 1,
           zIndex: -1,
-          position: 'absolute',
-          transform: 'scaleX(-1)',
+          position: "absolute",
+          transform: "scaleX(-1)",
         }}
       />
     </Box>

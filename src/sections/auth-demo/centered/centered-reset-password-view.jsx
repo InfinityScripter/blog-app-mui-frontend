@@ -1,41 +1,41 @@
-'use client';
+"use client";
 
-import { z as zod } from 'zod';
-import {useState} from "react";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z as zod } from "zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
-import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
+import Typography from "@mui/material/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
+import { paths } from "src/routes/paths";
+import { RouterLink } from "src/routes/components";
 
-import { PasswordIcon } from 'src/assets/icons';
+import { PasswordIcon } from "src/assets/icons";
 
-import { Iconify } from 'src/components/iconify';
-import { Form, Field } from 'src/components/hook-form';
+import { Iconify } from "src/components/iconify";
+import { Form, Field } from "src/components/hook-form";
 
-import axios, {endpoints} from "../../../utils/axios";
+import axios, { endpoints } from "../../../utils/axios";
 
 // ----------------------------------------------------------------------
 
 export const ResetPasswordSchema = zod.object({
   email: zod
     .string()
-    .min(1, { message: 'Email is required!' })
-    .email({ message: 'Email must be a valid email address!' }),
+    .min(1, { message: "Email is required!" })
+    .email({ message: "Email must be a valid email address!" }),
 });
 
 // ----------------------------------------------------------------------
 
 export function CenteredResetPasswordView() {
-  const defaultValues = { email: '' };
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const defaultValues = { email: "" };
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const methods = useForm({
     resolver: zodResolver(ResetPasswordSchema),
@@ -48,31 +48,37 @@ export function CenteredResetPasswordView() {
   } = methods;
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data,"data")
+    console.log(data, "data");
     try {
-      setError('');
-      setSuccess('');
+      setError("");
+      setSuccess("");
 
       const response = await axios.post(endpoints.auth.resetPassword, {
         email: data.email,
       });
 
-      setSuccess(response.data.message || 'Reset password instructions have been sent to your email');
+      setSuccess(
+        response.data.message ||
+          "Reset password instructions have been sent to your email",
+      );
       // eslint-disable-next-line no-shadow
     } catch (error) {
-      console.error('Reset password error:', error);
-      setError(error.message || 'Failed to send reset password email');
+      console.error("Reset password error:", error);
+      setError(error.message || "Failed to send reset password email");
     }
   });
 
   const renderHead = (
     <>
-      <PasswordIcon sx={{ mx: 'auto' }} />
+      <PasswordIcon sx={{ mx: "auto" }} />
 
-      <Stack spacing={1} sx={{ mt: 3, mb: 5, textAlign: 'center', whiteSpace: 'pre-line' }}>
+      <Stack
+        spacing={1}
+        sx={{ mt: 3, mb: 5, textAlign: "center", whiteSpace: "pre-line" }}
+      >
         <Typography variant="h5">Forgot your password?</Typography>
 
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {`Please enter the email address associated with your account and we'll email you a link to reset your password.`}
         </Typography>
       </Stack>
@@ -107,7 +113,7 @@ export function CenteredResetPasswordView() {
         href={paths.auth.jwt.signIn}
         color="inherit"
         variant="subtitle2"
-        sx={{ mx: 'auto', alignItems: 'center', display: 'inline-flex' }}
+        sx={{ mx: "auto", alignItems: "center", display: "inline-flex" }}
       >
         <Iconify icon="eva:arrow-ios-back-fill" width={16} sx={{ mr: 0.5 }} />
         Return to sign in

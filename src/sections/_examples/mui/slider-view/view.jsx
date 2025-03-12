@@ -1,39 +1,47 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Slider, { sliderClasses } from '@mui/material/Slider';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Slider, { sliderClasses } from "@mui/material/Slider";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['inherit', 'primary', 'secondary', 'error', 'info', 'success', 'warning'];
+const COLORS = [
+  "inherit",
+  "primary",
+  "secondary",
+  "error",
+  "info",
+  "success",
+  "warning",
+];
 
 const marks = [
-  { value: 0, label: '0°C' },
-  { value: 20, label: '20°C' },
-  { value: 37, label: '37°C' },
-  { value: 100, label: '100°C' },
+  { value: 0, label: "0°C" },
+  { value: 20, label: "20°C" },
+  { value: 37, label: "37°C" },
+  { value: 100, label: "100°C" },
 ];
 
 const prices = [
-  { value: 0, label: '$0' },
-  { value: 25, label: '250' },
-  { value: 50, label: '500' },
-  { value: 75, label: '750' },
-  { value: 100, label: '1000' },
+  { value: 0, label: "$0" },
+  { value: 25, label: "250" },
+  { value: 50, label: "500" },
+  { value: 75, label: "750" },
+  { value: 100, label: "1000" },
 ];
 
 // ----------------------------------------------------------------------
@@ -71,19 +79,23 @@ export function SliderView() {
 
   const DEMO = [
     {
-      name: 'Volume',
+      name: "Volume",
       component: (
         <ComponentBlock>
           <Stack direction="row" alignItems="center" spacing={1} width={1}>
             <Iconify icon="eva:volume-mute-fill" width={24} />
-            <Slider value={value} onChange={handleChange} aria-labelledby="continuous-slider" />
+            <Slider
+              value={value}
+              onChange={handleChange}
+              aria-labelledby="continuous-slider"
+            />
             <Iconify icon="eva:volume-up-fill" width={24} />
           </Stack>
         </ComponentBlock>
       ),
     },
     {
-      name: 'Disabled',
+      name: "Disabled",
       component: (
         <ComponentBlock>
           <Slider disabled defaultValue={30} />
@@ -91,7 +103,7 @@ export function SliderView() {
       ),
     },
     {
-      name: 'Temperature',
+      name: "Temperature",
       component: (
         <ComponentBlock>
           <Slider
@@ -102,13 +114,17 @@ export function SliderView() {
             marks
             min={10}
             max={110}
-            sx={{ [`& .${sliderClasses.mark}[data-index="10"]`]: { display: 'none' } }}
+            sx={{
+              [`& .${sliderClasses.mark}[data-index="10"]`]: {
+                display: "none",
+              },
+            }}
           />
         </ComponentBlock>
       ),
     },
     {
-      name: 'Sizes',
+      name: "Sizes",
       component: (
         <ComponentBlock>
           <Slider
@@ -120,7 +136,11 @@ export function SliderView() {
             defaultValue={30}
             valueLabelDisplay="auto"
             getAriaValueText={valuetext}
-            sx={{ [`& .${sliderClasses.mark}[data-index="10"]`]: { display: 'none' } }}
+            sx={{
+              [`& .${sliderClasses.mark}[data-index="10"]`]: {
+                display: "none",
+              },
+            }}
           />
           <Slider
             size="small"
@@ -131,13 +151,17 @@ export function SliderView() {
             defaultValue={30}
             valueLabelDisplay="auto"
             getAriaValueText={valuetext}
-            sx={{ [`& .${sliderClasses.mark}[data-index="10"]`]: { display: 'none' } }}
+            sx={{
+              [`& .${sliderClasses.mark}[data-index="10"]`]: {
+                display: "none",
+              },
+            }}
           />
         </ComponentBlock>
       ),
     },
     {
-      name: 'Small steps',
+      name: "Small steps",
       component: (
         <ComponentBlock>
           <Slider
@@ -153,7 +177,7 @@ export function SliderView() {
       ),
     },
     {
-      name: 'Custom marks',
+      name: "Custom marks",
       component: (
         <ComponentBlock>
           <Slider
@@ -162,13 +186,15 @@ export function SliderView() {
             step={10}
             valueLabelDisplay="auto"
             marks={marks}
-            sx={{ [`& .${sliderClasses.mark}[data-index="3"]`]: { display: 'none' } }}
+            sx={{
+              [`& .${sliderClasses.mark}[data-index="3"]`]: { display: "none" },
+            }}
           />
         </ComponentBlock>
       ),
     },
     {
-      name: 'Restricted values',
+      name: "Restricted values",
       component: (
         <ComponentBlock>
           <Slider
@@ -178,15 +204,17 @@ export function SliderView() {
             step={null}
             valueLabelDisplay="auto"
             marks={marks}
-            sx={{ [`& .${sliderClasses.mark}[data-index="3"]`]: { display: 'none' } }}
+            sx={{
+              [`& .${sliderClasses.mark}[data-index="3"]`]: { display: "none" },
+            }}
           />
         </ComponentBlock>
       ),
     },
     {
-      name: 'Range',
+      name: "Range",
       component: (
-        <ComponentBlock sx={{ gap: 8, flexDirection: 'column' }}>
+        <ComponentBlock sx={{ gap: 8, flexDirection: "column" }}>
           <Slider
             scale={(x) => x * 10}
             step={10}
@@ -196,7 +224,9 @@ export function SliderView() {
             valueLabelDisplay="on"
             getAriaValueText={valuePrice}
             valueLabelFormat={valueLabelFormatPrice}
-            sx={{ [`& .${sliderClasses.mark}[data-index="4"]`]: { display: 'none' } }}
+            sx={{
+              [`& .${sliderClasses.mark}[data-index="4"]`]: { display: "none" },
+            }}
           />
 
           <Stack
@@ -205,8 +235,9 @@ export function SliderView() {
             sx={{
               p: 2,
               borderRadius: 1,
-              typography: 'subtitle2',
-              bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.12),
+              typography: "subtitle2",
+              bgcolor: (theme) =>
+                varAlpha(theme.vars.palette.grey["500Channel"], 0.12),
             }}
           >
             <Box component="span">Min: {valuePrice(price[0])}</Box>
@@ -216,9 +247,9 @@ export function SliderView() {
       ),
     },
     {
-      name: 'Color',
+      name: "Color",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column' }}>
+        <ComponentBlock sx={{ flexDirection: "column" }}>
           {COLORS.map((color) => (
             <Slider
               key={color}
@@ -230,7 +261,11 @@ export function SliderView() {
               defaultValue={30}
               valueLabelDisplay="auto"
               getAriaValueText={valuetext}
-              sx={{ [`& .${sliderClasses.mark}[data-index="10"]`]: { display: 'none' } }}
+              sx={{
+                [`& .${sliderClasses.mark}[data-index="10"]`]: {
+                  display: "none",
+                },
+              }}
             />
           ))}
         </ComponentBlock>
@@ -243,8 +278,11 @@ export function SliderView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Slider"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Slider' }]}
-          moreLink={['https://mui.com/components/slider']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Slider" },
+          ]}
+          moreLink={["https://mui.com/components/slider"]}
         />
       </ComponentHero>
 

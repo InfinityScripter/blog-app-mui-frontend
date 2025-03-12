@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -7,23 +7,25 @@ export function useTable(props) {
 
   const [page, setPage] = useState(props?.defaultCurrentPage || 0);
 
-  const [orderBy, setOrderBy] = useState(props?.defaultOrderBy || 'name');
+  const [orderBy, setOrderBy] = useState(props?.defaultOrderBy || "name");
 
-  const [rowsPerPage, setRowsPerPage] = useState(props?.defaultRowsPerPage || 5);
+  const [rowsPerPage, setRowsPerPage] = useState(
+    props?.defaultRowsPerPage || 5,
+  );
 
-  const [order, setOrder] = useState(props?.defaultOrder || 'asc');
+  const [order, setOrder] = useState(props?.defaultOrder || "asc");
 
   const [selected, setSelected] = useState(props?.defaultSelected || []);
 
   const onSort = useCallback(
     (id) => {
-      const isAsc = orderBy === id && order === 'asc';
-      if (id !== '') {
-        setOrder(isAsc ? 'desc' : 'asc');
+      const isAsc = orderBy === id && order === "asc";
+      if (id !== "") {
+        setOrder(isAsc ? "desc" : "asc");
         setOrderBy(id);
       }
     },
-    [order, orderBy]
+    [order, orderBy],
   );
 
   const onSelectRow = useCallback(
@@ -34,7 +36,7 @@ export function useTable(props) {
 
       setSelected(newSelected);
     },
-    [selected]
+    [selected],
   );
 
   const onChangeRowsPerPage = useCallback((event) => {
@@ -71,7 +73,7 @@ export function useTable(props) {
         }
       }
     },
-    [page]
+    [page],
   );
 
   const onUpdatePageDeleteRows = useCallback(
@@ -86,13 +88,14 @@ export function useTable(props) {
         } else if (totalSelected === totalRowsFiltered) {
           setPage(0);
         } else if (totalSelected > totalRowsInPage) {
-          const newPage = Math.ceil((totalRowsFiltered - totalSelected) / rowsPerPage) - 1;
+          const newPage =
+            Math.ceil((totalRowsFiltered - totalSelected) / rowsPerPage) - 1;
 
           setPage(newPage);
         }
       }
     },
-    [page, rowsPerPage, selected.length]
+    [page, rowsPerPage, selected.length],
   );
 
   return {

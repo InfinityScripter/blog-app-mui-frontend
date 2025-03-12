@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Tooltip from '@mui/material/Tooltip';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputAdornment from '@mui/material/InputAdornment';
+import Tooltip from "@mui/material/Tooltip";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputAdornment from "@mui/material/InputAdornment";
 
-import { useDoubleClick } from 'src/hooks/use-double-click';
-import { useCopyToClipboard } from 'src/hooks/use-copy-to-clipboard';
+import { useDoubleClick } from "src/hooks/use-double-click";
+import { useCopyToClipboard } from "src/hooks/use-copy-to-clipboard";
 
-import { toast } from 'src/components/snackbar';
-import { Iconify } from 'src/components/iconify';
+import { toast } from "src/components/snackbar";
+import { Iconify } from "src/components/iconify";
 
-import { ComponentBlock, ComponentContainer } from '../../component-block';
+import { ComponentBlock, ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 export function CopyToClipboard() {
   const { copy } = useCopyToClipboard();
 
-  const [value, setValue] = useState('https://www.npmjs.com/package/');
+  const [value, setValue] = useState("https://www.npmjs.com/package/");
 
   const textOnClick = `Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
   Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat
@@ -31,14 +31,16 @@ export function CopyToClipboard() {
   const onCopy = useCallback(
     (text) => {
       if (text) {
-        toast.success('Copied!');
+        toast.success("Copied!");
         copy(text);
       }
     },
-    [copy]
+    [copy],
   );
 
-  const handleClick = useDoubleClick({ doubleClick: () => onCopy(textOnClick) });
+  const handleClick = useDoubleClick({
+    doubleClick: () => onCopy(textOnClick),
+  });
 
   const handleChange = useCallback((event) => {
     setValue(event.target.value);
@@ -49,8 +51,8 @@ export function CopyToClipboard() {
       sx={{
         rowGap: 5,
         columnGap: 3,
-        display: 'grid',
-        gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+        display: "grid",
+        gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
       }}
     >
       <ComponentBlock title="onChange">

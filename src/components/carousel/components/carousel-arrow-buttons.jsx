@@ -1,12 +1,12 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import SvgIcon from '@mui/material/SvgIcon';
-import { useTheme } from '@mui/material/styles';
-import ButtonBase, { buttonBaseClasses } from '@mui/material/ButtonBase';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import SvgIcon from "@mui/material/SvgIcon";
+import { useTheme } from "@mui/material/styles";
+import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 
-import { varAlpha, stylesMode } from 'src/theme/styles';
+import { varAlpha, stylesMode } from "src/theme/styles";
 
-import { carouselClasses } from '../classes';
+import { carouselClasses } from "../classes";
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ export function CarouselArrowBasicButtons({
       sx={{
         gap: 0.5,
         zIndex: 9,
-        color: 'action.active',
+        color: "action.active",
         ...sx,
       }}
       {...other}
@@ -92,8 +92,8 @@ export function CarouselArrowNumberButtons({
         gap: 0.25,
         zIndex: 9,
         borderRadius: 1.25,
-        color: 'common.white',
-        bgcolor: varAlpha(theme.vars.palette.grey['900Channel'], 0.48),
+        color: "common.white",
+        bgcolor: varAlpha(theme.vars.palette.grey["900Channel"], 0.48),
         ...sx,
       }}
       {...other}
@@ -103,7 +103,7 @@ export function CarouselArrowNumberButtons({
         options={options}
         disabled={disablePrev}
         onClick={onClickPrev}
-        sx={{ p: 0.75, borderRadius: 'inherit', ...slotProps?.prevBtn?.sx }}
+        sx={{ p: 0.75, borderRadius: "inherit", ...slotProps?.prevBtn?.sx }}
         svgIcon={slotProps?.prevBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize ?? 16}
       />
@@ -111,7 +111,7 @@ export function CarouselArrowNumberButtons({
       <Box
         component="span"
         className={carouselClasses.arrowsLabel}
-        sx={{ mx: 0.5, typography: 'subtitle2' }}
+        sx={{ mx: 0.5, typography: "subtitle2" }}
       >
         {selectedIndex}/{totalSlides}
       </Box>
@@ -121,7 +121,7 @@ export function CarouselArrowNumberButtons({
         options={options}
         disabled={disableNext}
         onClick={onClickNext}
-        sx={{ p: 0.75, borderRadius: 'inherit', ...slotProps?.nextBtn?.sx }}
+        sx={{ p: 0.75, borderRadius: "inherit", ...slotProps?.nextBtn?.sx }}
         svgIcon={slotProps?.nextBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize ?? 16}
       />
@@ -141,14 +141,14 @@ export function CarouselArrowFloatButtons({
 }) {
   const baseStyles = {
     zIndex: 9,
-    top: '50%',
+    top: "50%",
     borderRadius: 1.5,
-    position: 'absolute',
-    color: 'common.white',
-    bgcolor: 'text.primary',
-    transform: 'translateY(-50%)',
-    '&:hover': { opacity: 0.8 },
-    [stylesMode.dark]: { color: 'grey.800' },
+    position: "absolute",
+    color: "common.white",
+    bgcolor: "text.primary",
+    transform: "translateY(-50%)",
+    "&:hover": { opacity: 0.8 },
+    [stylesMode.dark]: { color: "grey.800" },
   };
 
   return (
@@ -178,9 +178,16 @@ export function CarouselArrowFloatButtons({
 
 // ----------------------------------------------------------------------
 
-export function ArrowButton({ sx, svgIcon, svgSize, options, variant, ...other }) {
-  const arrowPrev = variant === 'prev';
-  const arrowNext = variant === 'next';
+export function ArrowButton({
+  sx,
+  svgIcon,
+  svgSize,
+  options,
+  variant,
+  ...other
+}) {
+  const arrowPrev = variant === "prev";
+  const arrowNext = variant === "next";
 
   const prevSvg = svgIcon || (
     <path
@@ -202,14 +209,16 @@ export function ArrowButton({ sx, svgIcon, svgSize, options, variant, ...other }
 
   return (
     <ButtonBase
-      className={arrowPrev ? carouselClasses.arrowPrev : carouselClasses.arrowPrev}
-      aria-label={arrowPrev ? 'Prev button' : 'Next button'}
+      className={
+        arrowPrev ? carouselClasses.arrowPrev : carouselClasses.arrowPrev
+      }
+      aria-label={arrowPrev ? "Prev button" : "Next button"}
       sx={{
         p: 1,
-        borderRadius: '50%',
-        boxSizing: 'content-box',
+        borderRadius: "50%",
+        boxSizing: "content-box",
         transition: (theme) =>
-          theme.transitions.create(['all'], {
+          theme.transitions.create(["all"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.short,
           }),
@@ -217,9 +226,9 @@ export function ArrowButton({ sx, svgIcon, svgSize, options, variant, ...other }
           opacity: 0.4,
         },
         ...sx,
-        ...(options?.direction === 'rtl' && {
-          ...(arrowPrev && { right: -16, left: 'auto' }),
-          ...(arrowNext && { left: -16, right: 'auto' }),
+        ...(options?.direction === "rtl" && {
+          ...(arrowPrev && { right: -16, left: "auto" }),
+          ...(arrowNext && { left: -16, right: "auto" }),
         }),
       }}
       {...other}
@@ -229,8 +238,8 @@ export function ArrowButton({ sx, svgIcon, svgSize, options, variant, ...other }
         sx={{
           width: svgSize ?? 20,
           height: svgSize ?? 20,
-          ...(options?.axis === 'y' && { transform: ' rotate(90deg)' }),
-          ...(options?.direction === 'rtl' && { transform: ' scaleX(-1)' }),
+          ...(options?.axis === "y" && { transform: " rotate(90deg)" }),
+          ...(options?.direction === "rtl" && { transform: " scaleX(-1)" }),
         }}
       >
         {arrowPrev ? prevSvg : nextSvg}

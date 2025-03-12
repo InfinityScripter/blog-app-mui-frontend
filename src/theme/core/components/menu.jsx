@@ -1,4 +1,4 @@
-import { menuItem } from '../../styles';
+import { menuItem } from "../../styles";
 
 // ----------------------------------------------------------------------
 

@@ -1,8 +1,8 @@
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback } from "react";
 
-import { Map, MapControl } from 'src/components/map';
+import { Map, MapControl } from "src/components/map";
 
-import { ControlPanel } from './control-panel';
+import { ControlPanel } from "./control-panel";
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +30,11 @@ export function MapViewportAnimation({ data, ...other }) {
     >
       <MapControl />
 
-      <ControlPanel data={data} selectedCity={selectedCity} onSelectCity={onSelectCity} />
+      <ControlPanel
+        data={data}
+        selectedCity={selectedCity}
+        onSelectCity={onSelectCity}
+      />
     </Map>
   );
 }

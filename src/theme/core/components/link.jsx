@@ -4,7 +4,7 @@ const MuiLink = {
   /** **************************************
    * DEFAULT PROPS
    *************************************** */
-  defaultProps: { underline: 'hover' },
+  defaultProps: { underline: "hover" },
 
   /** **************************************
    * STYLE

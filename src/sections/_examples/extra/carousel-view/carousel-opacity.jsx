@@ -1,22 +1,22 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { Image } from 'src/components/image';
+import { Image } from "src/components/image";
 import {
   Carousel,
   useCarousel,
   CarouselDotButtons,
   CarouselArrowBasicButtons,
-} from 'src/components/carousel';
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
 export function CarouselOpacity({ data }) {
   const carousel = useCarousel({
     loop: true,
-    slidesToShow: '70%',
-    slideSpacing: '20px',
+    slidesToShow: "70%",
+    slideSpacing: "20px",
   });
 
   return (
@@ -32,8 +32,16 @@ export function CarouselOpacity({ data }) {
         ))}
       </Carousel>
 
-      <Box display="flex" alignItems="center" justifyContent="space-between" sx={{ mt: 3 }}>
-        <CarouselArrowBasicButtons {...carousel.arrows} options={carousel.options} />
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ mt: 3 }}
+      >
+        <CarouselArrowBasicButtons
+          {...carousel.arrows}
+          options={carousel.options}
+        />
         <CarouselDotButtons
           scrollSnaps={carousel.dots.scrollSnaps}
           selectedIndex={carousel.dots.selectedIndex}
@@ -50,10 +58,10 @@ function CarouselItem({ item, index, selected }) {
       sx={{
         opacity: 0.24,
         borderRadius: 2,
-        overflow: 'hidden',
-        position: 'relative',
+        overflow: "hidden",
+        position: "relative",
         transition: (theme) =>
-          theme.transitions.create(['opacity'], {
+          theme.transitions.create(["opacity"], {
             easing: theme.transitions.easing.easeIn,
             duration: theme.transitions.duration.complex,
           }),
@@ -65,7 +73,7 @@ function CarouselItem({ item, index, selected }) {
         visibleByDefault
         alt={item.title}
         src={item.coverUrl}
-        ratio={{ xs: '4/3', sm: '16/10' }}
+        ratio={{ xs: "4/3", sm: "16/10" }}
       />
     </Box>
   );

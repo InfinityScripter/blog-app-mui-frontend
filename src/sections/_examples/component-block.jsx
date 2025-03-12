@@ -1,8 +1,8 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
 
-import { varAlpha, stylesMode } from 'src/theme/styles';
+import { varAlpha, stylesMode } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -14,14 +14,16 @@ export function ComponentBlock({ title, sx, children, ...other }) {
         py: 6,
         gap: 2,
         width: 1,
-        flexWrap: 'wrap',
+        flexWrap: "wrap",
         borderRadius: 1.5,
-        position: 'relative',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.04),
-        boxShadow: (theme) => `0 0 0 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
+        position: "relative",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        bgcolor: (theme) =>
+          varAlpha(theme.vars.palette.grey["500Channel"], 0.04),
+        boxShadow: (theme) =>
+          `0 0 0 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,
         ...sx,
       }}
       {...other}
@@ -36,14 +38,15 @@ export function ComponentBlock({ title, sx, children, ...other }) {
             left: 0,
             py: 0.25,
             borderRadius: 2,
-            position: 'absolute',
-            color: 'text.primary',
-            bgcolor: 'common.white',
-            transform: 'translateY(-50%)',
+            position: "absolute",
+            color: "text.primary",
+            bgcolor: "common.white",
+            transform: "translateY(-50%)",
             fontSize: (theme) => theme.typography.caption.fontSize,
             fontWeight: (theme) => theme.typography.fontWeightSemiBold,
-            border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.24)}`,
-            [stylesMode.dark]: { bgcolor: 'background.neutral' },
+            border: (theme) =>
+              `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.24)}`,
+            [stylesMode.dark]: { bgcolor: "background.neutral" },
           }}
         >
           {title}
@@ -64,8 +67,8 @@ export function ComponentContainer({ children, sx, ...other }) {
         mt: 10,
         mb: 15,
         gap: 5,
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         ...sx,
       }}
       {...other}

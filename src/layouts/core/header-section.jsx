@@ -1,27 +1,27 @@
-import Box from '@mui/material/Box';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
-import { styled, useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Container from "@mui/material/Container";
+import { styled, useTheme } from "@mui/material/styles";
 
-import { useScrollOffSetTop } from 'src/hooks/use-scroll-offset-top';
+import { useScrollOffSetTop } from "src/hooks/use-scroll-offset-top";
 
-import { bgBlur, varAlpha } from 'src/theme/styles';
+import { bgBlur, varAlpha } from "src/theme/styles";
 
-import { layoutClasses } from '../classes';
+import { layoutClasses } from "../classes";
 
 // ----------------------------------------------------------------------
 
-const StyledElevation = styled('span')(({ theme }) => ({
+const StyledElevation = styled("span")(({ theme }) => ({
   left: 0,
   right: 0,
   bottom: 0,
-  m: 'auto',
+  m: "auto",
   height: 24,
   zIndex: -1,
   opacity: 0.48,
-  borderRadius: '50%',
-  position: 'absolute',
+  borderRadius: "50%",
+  position: "absolute",
   width: `calc(100% - 48px)`,
   boxShadow: theme.customShadows.z8,
 }));
@@ -34,7 +34,7 @@ export function HeaderSection({
   slotProps,
   disableOffset,
   disableElevation,
-  layoutQuery = 'md',
+  layoutQuery = "md",
   ...other
 }) {
   const theme = useTheme();
@@ -43,17 +43,17 @@ export function HeaderSection({
 
   const toolbarStyles = {
     default: {
-      minHeight: 'auto',
-      height: 'var(--layout-header-mobile-height)',
-      transition: theme.transitions.create(['height', 'background-color'], {
+      minHeight: "auto",
+      height: "var(--layout-header-mobile-height)",
+      transition: theme.transitions.create(["height", "background-color"], {
         easing: theme.transitions.easing.easeInOut,
         duration: theme.transitions.duration.shorter,
       }),
-      [theme.breakpoints.up('sm')]: {
-        minHeight: 'auto',
+      [theme.breakpoints.up("sm")]: {
+        minHeight: "auto",
       },
       [theme.breakpoints.up(layoutQuery)]: {
-        height: 'var(--layout-header-desktop-height)',
+        height: "var(--layout-header-desktop-height)",
       },
     },
     offset: {
@@ -68,7 +68,7 @@ export function HeaderSection({
       position="sticky"
       className={layoutClasses.header}
       sx={{
-        zIndex: 'var(--layout-header-zIndex)',
+        zIndex: "var(--layout-header-zIndex)",
         ...sx,
       }}
       {...other}
@@ -88,14 +88,16 @@ export function HeaderSection({
           {...slotProps?.container}
           sx={{
             height: 1,
-            display: 'flex',
-            alignItems: 'center',
+            display: "flex",
+            alignItems: "center",
             ...slotProps?.container?.sx,
           }}
         >
           {slots?.leftArea}
 
-          <Box sx={{ display: 'flex', flex: '1 1 auto', justifyContent: 'center' }}>
+          <Box
+            sx={{ display: "flex", flex: "1 1 auto", justifyContent: "center" }}
+          >
             {slots?.centerArea}
           </Box>
 

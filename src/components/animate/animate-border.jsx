@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { m } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { m } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { borderGradient } from 'src/theme/styles';
+import { borderGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -24,12 +24,12 @@ export function AnimateBorder({ animate, sx }) {
     loop: animate?.loop ?? true,
     angle: animate?.angle ?? 315,
     length: animate?.length ?? 40,
-    width: animate?.width ?? '2px',
-    color: animate?.color ?? '#000',
-    ease: animate?.ease ?? 'linear',
+    width: animate?.width ?? "2px",
+    color: animate?.color ?? "#000",
+    ease: animate?.ease ?? "linear",
     duration: animate?.duration ?? 8,
     distance: animate?.distance ?? 20,
-    repeatType: animate?.repeatType ?? 'loop',
+    repeatType: animate?.repeatType ?? "loop",
     disableDoubleline: animate?.disableDoubleline,
     outline: animate?.outline ?? `135deg, rgba(0,0,0,0.08), rgba(0,0,0,0.08)`,
   };
@@ -91,9 +91,9 @@ export function AnimateBorder({ animate, sx }) {
       sx={{
         minWidth: 40,
         minHeight: 40,
-        position: 'relative',
-        borderRadius: 'inherit',
-        '&::before': {
+        position: "relative",
+        borderRadius: "inherit",
+        "&::before": {
           ...borderGradient({ color: values.outline, padding: values.width }),
         },
         ...sx,
@@ -107,7 +107,9 @@ export function AnimateBorder({ animate, sx }) {
           !values.disable
             ? {
                 background: background(
-                  typeof values.color === 'string' ? values.color : values.color[0]
+                  typeof values.color === "string"
+                    ? values.color
+                    : values.color[0],
                 ),
               }
             : undefined
@@ -123,12 +125,12 @@ export function AnimateBorder({ animate, sx }) {
           transition={transition}
           animate={{
             background: background(
-              typeof values.color === 'string' ? values.color : values.color[1]
+              typeof values.color === "string" ? values.color : values.color[1],
             ),
           }}
           sx={{
             ...borderGradient(),
-            transform: 'scale(-1)',
+            transform: "scale(-1)",
             ...(animateStyle && {
               paddingTop: animateStyle?.paddingBottom,
               paddingBottom: animateStyle?.paddingTop,

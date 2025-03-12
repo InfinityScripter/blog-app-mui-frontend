@@ -1,13 +1,13 @@
-import { useRef } from 'react';
-import { m } from 'framer-motion';
+import { useRef } from "react";
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import { varContainer, MotionViewport } from 'src/components/animate';
+import { varContainer, MotionViewport } from "src/components/animate";
 
-import { getVariant } from '../get-variant';
+import { getVariant } from "../get-variant";
 
 // ----------------------------------------------------------------------
 
@@ -23,9 +23,9 @@ export function ContainerView({ selectVariant, sx, ...other }) {
         py: 5,
         gap: 3,
         borderRadius: 2,
-        flex: '1 1 auto',
-        overflowX: 'auto',
-        bgcolor: 'background.neutral',
+        flex: "1 1 auto",
+        overflowX: "auto",
+        bgcolor: "background.neutral",
         ...sx,
       }}
       {...other}
@@ -40,12 +40,12 @@ export function ContainerView({ selectVariant, sx, ...other }) {
             sx={{
               py: 4,
               width: 1,
-              mx: 'auto',
+              mx: "auto",
               maxWidth: 480,
               flexShrink: 0,
               borderRadius: 1,
-              textAlign: 'center',
-              bgcolor: 'background.paper',
+              textAlign: "center",
+              bgcolor: "background.paper",
               boxShadow: (theme) => theme.customShadows.z8,
             }}
           >

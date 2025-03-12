@@ -1,17 +1,21 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { varAlpha, bgGradient } from "src/theme/styles";
 
-import { Image } from 'src/components/image';
-import { varFade, MotionContainer } from 'src/components/animate';
-import { Carousel, useCarousel, CarouselArrowNumberButtons } from 'src/components/carousel';
+import { Image } from "src/components/image";
+import { varFade, MotionContainer } from "src/components/animate";
+import {
+  Carousel,
+  useCarousel,
+  CarouselArrowNumberButtons,
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +23,7 @@ export function CarouselAnimation({ data }) {
   const carousel = useCarousel();
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: "relative" }}>
       <Carousel carousel={carousel} sx={{ borderRadius: 2 }}>
         {data.map((item, index) => (
           <CarouselItem
@@ -36,7 +40,7 @@ export function CarouselAnimation({ data }) {
         options={carousel.options}
         totalSlides={carousel.dots.dotCount}
         selectedIndex={carousel.dots.selectedIndex + 1}
-        sx={{ top: 16, right: 16, position: 'absolute' }}
+        sx={{ top: 16, right: 16, position: "absolute" }}
       />
     </Box>
   );
@@ -46,25 +50,25 @@ function CarouselItem({ item, index, selected }) {
   const theme = useTheme();
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: "relative" }}>
       <IndexLabel index={index + 1} />
 
       <Image
         visibleByDefault
         alt={item.title}
         src={item.coverUrl}
-        ratio={{ xs: '4/3', sm: '16/10' }}
+        ratio={{ xs: "4/3", sm: "16/10" }}
       />
 
       <Box
         sx={{
           ...bgGradient({
-            color: `to top, ${theme.vars.palette.grey[900]}, ${varAlpha(theme.vars.palette.grey['900Channel'], 0)}`,
+            color: `to top, ${theme.vars.palette.grey[900]}, ${varAlpha(theme.vars.palette.grey["900Channel"], 0)}`,
           }),
           top: 0,
           width: 1,
           height: 1,
-          position: 'absolute',
+          position: "absolute",
         }}
       />
 
@@ -77,8 +81,8 @@ function CarouselItem({ item, index, selected }) {
           left: 0,
           width: 1,
           bottom: 0,
-          position: 'absolute',
-          color: 'common.white',
+          position: "absolute",
+          color: "common.white",
         }}
       >
         <m.div variants={varFade().inRight}>
@@ -86,7 +90,7 @@ function CarouselItem({ item, index, selected }) {
             noWrap
             sx={{
               mb: 1,
-              typography: { xs: 'subtitle1', md: 'h3' },
+              typography: { xs: "subtitle1", md: "h3" },
             }}
           >
             {item.title}
@@ -103,7 +107,7 @@ function CarouselItem({ item, index, selected }) {
           <Button
             color="primary"
             variant="contained"
-            sx={{ mt: 3, display: { xs: 'none', sm: 'inline-flex' } }}
+            sx={{ mt: 3, display: { xs: "none", sm: "inline-flex" } }}
           >
             View More
           </Button>

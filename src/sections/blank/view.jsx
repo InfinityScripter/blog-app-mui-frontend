@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { varAlpha } from 'src/theme/styles';
-import { DashboardContent } from 'src/layouts/dashboard';
+import { varAlpha } from "src/theme/styles";
+import { DashboardContent } from "src/layouts/dashboard";
 
 // ----------------------------------------------------------------------
 
-export function BlankView({ title = 'Blank' }) {
+export function BlankView({ title = "Blank" }) {
   return (
     <DashboardContent maxWidth="xl">
       <Typography variant="h4"> {title} </Typography>
@@ -19,7 +19,8 @@ export function BlankView({ title = 'Blank' }) {
           width: 1,
           height: 320,
           borderRadius: 2,
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.04),
+          bgcolor: (theme) =>
+            varAlpha(theme.vars.palette.grey["500Channel"], 0.04),
           border: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
         }}
       />

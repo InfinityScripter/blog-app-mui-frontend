@@ -1,4 +1,4 @@
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon from "@mui/material/SvgIcon";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ const MuiSelect = {
       right: 10,
       width: 18,
       height: 18,
-      top: 'calc(50% - 9px)',
+      top: "calc(50% - 9px)",
     },
   },
 };
@@ -52,7 +52,7 @@ const MuiNativeSelect = {
       right: 10,
       width: 18,
       height: 18,
-      top: 'calc(50% - 9px)',
+      top: "calc(50% - 9px)",
     },
   },
 };

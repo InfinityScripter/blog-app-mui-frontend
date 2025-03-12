@@ -1,11 +1,18 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from "react-hook-form";
 
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
 
 // ----------------------------------------------------------------------
 
-export function RHFAutocomplete({ name, label, helperText, hiddenLabel, placeholder, ...other }) {
+export function RHFAutocomplete({
+  name,
+  label,
+  helperText,
+  hiddenLabel,
+  placeholder,
+  ...other
+}) {
   const { control, setValue } = useFormContext();
 
   return (
@@ -16,7 +23,9 @@ export function RHFAutocomplete({ name, label, helperText, hiddenLabel, placehol
         <Autocomplete
           {...field}
           id={`rhf-autocomplete-${name}`}
-          onChange={(event, newValue) => setValue(name, newValue, { shouldValidate: true })}
+          onChange={(event, newValue) =>
+            setValue(name, newValue, { shouldValidate: true })
+          }
           renderInput={(params) => (
             <TextField
               {...params}
@@ -26,7 +35,7 @@ export function RHFAutocomplete({ name, label, helperText, hiddenLabel, placehol
               helperText={error ? error?.message : helperText}
               inputProps={{
                 ...params.inputProps,
-                autoComplete: 'new-password',
+                autoComplete: "new-password",
               }}
             />
           )}

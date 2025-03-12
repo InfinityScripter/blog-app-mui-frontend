@@ -1,11 +1,11 @@
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from "src/utils/format-number";
 
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ export function AppCurrentDownload({ title, subheader, chart, ...other }) {
     plotOptions: {
       pie: {
         donut: {
-          size: '72%',
+          size: "72%",
           labels: {
             value: { formatter: (value) => fNumber(value) },
             total: {
@@ -61,15 +61,15 @@ export function AppCurrentDownload({ title, subheader, chart, ...other }) {
         options={chartOptions}
         width={{ xs: 240, xl: 260 }}
         height={{ xs: 240, xl: 260 }}
-        sx={{ my: 6, mx: 'auto' }}
+        sx={{ my: 6, mx: "auto" }}
       />
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      <Divider sx={{ borderStyle: "dashed" }} />
 
       <ChartLegends
         labels={chartOptions?.labels}
         colors={chartOptions?.colors}
-        sx={{ p: 3, justifyContent: 'center' }}
+        sx={{ p: 3, justifyContent: "center" }}
       />
     </Card>
   );

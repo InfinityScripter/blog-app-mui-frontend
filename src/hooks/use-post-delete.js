@@ -1,9 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hooks';
+import { paths } from "src/routes/paths";
+import { useRouter } from "src/routes/hooks";
 
-import { deletePost } from 'src/actions/blog-ssr';
+import { deletePost } from "src/actions/blog-ssr";
 
 export function usePostDelete() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export function usePostDelete() {
       router.push(paths.dashboard.post.root);
       router.refresh();
     } catch (error) {
-      console.error('Error deleting post:', error);
+      console.error("Error deleting post:", error);
     } finally {
       setLoading(false);
     }

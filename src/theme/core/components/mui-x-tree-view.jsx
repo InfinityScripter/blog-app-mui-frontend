@@ -6,7 +6,7 @@ const MuiTreeItem = {
    *************************************** */
   styleOverrides: {
     label: ({ theme }) => ({ ...theme.typography.body2 }),
-    iconContainer: { width: 'auto' },
+    iconContainer: { width: "auto" },
   },
 };
 

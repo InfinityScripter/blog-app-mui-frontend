@@ -1,28 +1,28 @@
-import Table from '@mui/material/Table';
-import Paper from '@mui/material/Paper';
-import TableRow from '@mui/material/TableRow';
-import Collapse from '@mui/material/Collapse';
-import TableHead from '@mui/material/TableHead';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import Table from "@mui/material/Table";
+import Paper from "@mui/material/Paper";
+import TableRow from "@mui/material/TableRow";
+import Collapse from "@mui/material/Collapse";
+import TableHead from "@mui/material/TableHead";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { Iconify } from 'src/components/iconify';
-import { Scrollbar } from 'src/components/scrollbar';
+import { Iconify } from "src/components/iconify";
+import { Scrollbar } from "src/components/scrollbar";
 
-import { createData } from './utils';
+import { createData } from "./utils";
 
 // ----------------------------------------------------------------------
 
 const TABLE_DATA = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-  createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
+  createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
+  createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
+  createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
 ];
 
 // ----------------------------------------------------------------------
@@ -57,15 +57,19 @@ function CollapsibleTableRow({ row }) {
 
   return (
     <>
-      <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             size="small"
-            color={collapsible.value ? 'inherit' : 'default'}
+            color={collapsible.value ? "inherit" : "default"}
             onClick={collapsible.onToggle}
           >
             <Iconify
-              icon={collapsible.value ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'}
+              icon={
+                collapsible.value
+                  ? "eva:arrow-ios-upward-fill"
+                  : "eva:arrow-ios-downward-fill"
+              }
             />
           </IconButton>
         </TableCell>
@@ -87,7 +91,9 @@ function CollapsibleTableRow({ row }) {
                 py: 2,
                 mb: 2,
                 borderRadius: 1.5,
-                ...(collapsible.value && { boxShadow: (theme) => theme.customShadows.z20 }),
+                ...(collapsible.value && {
+                  boxShadow: (theme) => theme.customShadows.z20,
+                }),
               }}
             >
               <Typography variant="h6" component="div" sx={{ p: 2 }}>

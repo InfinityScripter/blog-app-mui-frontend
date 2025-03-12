@@ -1,4 +1,4 @@
-import { varAlpha } from '../../styles';
+import { varAlpha } from "../../styles";
 
 // ----------------------------------------------------------------------
 
@@ -12,9 +12,9 @@ const MuiPaper = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: { backgroundImage: 'none' },
+    root: { backgroundImage: "none" },
     outlined: ({ theme }) => ({
-      borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
+      borderColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
     }),
   },
 };

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useScroll, useMotionValueEvent } from 'framer-motion';
-import { useRef, useMemo, useState, useCallback } from 'react';
+import { useScroll, useMotionValueEvent } from "framer-motion";
+import { useRef, useMemo, useState, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -25,13 +25,13 @@ export function useScrollOffSetTop(top = 0) {
         setOffsetTop(scrollHeight > top);
       }
     },
-    [elementRef, top]
+    [elementRef, top],
   );
 
   useMotionValueEvent(
     scrollY,
-    'change',
-    useMemo(() => handleScrollChange, [handleScrollChange])
+    "change",
+    useMemo(() => handleScrollChange, [handleScrollChange]),
   );
 
   const memoizedValue = useMemo(() => ({ elementRef, offsetTop }), [offsetTop]);

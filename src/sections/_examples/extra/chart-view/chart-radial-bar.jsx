@@ -1,10 +1,10 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from "src/utils/format-number";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ export function ChartRadialBar({ chart }) {
     labels: chart.categories,
     stroke: { width: 0 },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         colorStops: chartColors.map((color) => [
           {
@@ -48,11 +48,11 @@ export function ChartRadialBar({ chart }) {
       radialBar: {
         hollow: {
           margin: 14,
-          size: '32%',
+          size: "32%",
         },
         track: {
           margin: 14,
-          background: varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+          background: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
         },
         dataLabels: {
           total: { formatter: () => fNumber(2324) },
@@ -75,7 +75,7 @@ export function ChartRadialBar({ chart }) {
         width={320}
         height={320}
         loadingProps={{ sx: { p: 4 } }}
-        sx={{ mx: 'auto' }}
+        sx={{ mx: "auto" }}
       />
 
       <ChartLegends
@@ -83,7 +83,7 @@ export function ChartRadialBar({ chart }) {
         colors={chartOptions?.colors}
         sx={{
           p: 3,
-          justifyContent: 'center',
+          justifyContent: "center",
         }}
       />
     </>

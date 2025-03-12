@@ -1,30 +1,38 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Badge from '@mui/material/Badge';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Badge from "@mui/material/Badge";
+import Typography from "@mui/material/Typography";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['default', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = [
+  "default",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
-const STATUS = ['alway', 'online', 'busy', 'offline'];
+const STATUS = ["alway", "online", "busy", "offline"];
 
 // ----------------------------------------------------------------------
 
 export function BadgeView() {
   const DEMO = [
     {
-      name: 'Basic',
+      name: "Basic",
       component: (
         <ComponentBlock sx={{ gap: 4 }}>
           {COLORS.map((color) => (
@@ -36,7 +44,7 @@ export function BadgeView() {
       ),
     },
     {
-      name: 'Maximum value',
+      name: "Maximum value",
       component: (
         <ComponentBlock sx={{ gap: 4 }}>
           <Badge
@@ -59,7 +67,7 @@ export function BadgeView() {
       ),
     },
     {
-      name: 'Dot badge',
+      name: "Dot badge",
       component: (
         <ComponentBlock sx={{ gap: 4 }}>
           <Badge color="info" variant="dot">
@@ -72,22 +80,22 @@ export function BadgeView() {
       ),
     },
     {
-      name: 'Badge overlap',
+      name: "Badge overlap",
       component: (
         <ComponentBlock sx={{ gap: 4 }}>
           <Badge color="info" badgeContent=" ">
-            <Box sx={{ width: 40, height: 40, bgcolor: 'warning.main' }} />
+            <Box sx={{ width: 40, height: 40, bgcolor: "warning.main" }} />
           </Badge>
           <Badge color="info" badgeContent=" " variant="dot">
-            <Box sx={{ width: 40, height: 40, bgcolor: 'warning.main' }} />
+            <Box sx={{ width: 40, height: 40, bgcolor: "warning.main" }} />
           </Badge>
           <Badge color="info" overlap="circular" badgeContent=" ">
             <Box
               sx={{
                 width: 40,
                 height: 40,
-                borderRadius: '50%',
-                bgcolor: 'warning.main',
+                borderRadius: "50%",
+                bgcolor: "warning.main",
               }}
             />
           </Badge>
@@ -96,8 +104,8 @@ export function BadgeView() {
               sx={{
                 width: 40,
                 height: 40,
-                borderRadius: '50%',
-                bgcolor: 'warning.main',
+                borderRadius: "50%",
+                bgcolor: "warning.main",
               }}
             />
           </Badge>
@@ -105,21 +113,21 @@ export function BadgeView() {
       ),
     },
     {
-      name: 'Status',
+      name: "Status",
       component: (
         <ComponentBlock sx={{ gap: 4 }}>
           {STATUS.map((status) => (
             <Badge
               key={status}
               variant={status}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             >
               <Box
                 sx={{
                   width: 40,
                   height: 40,
-                  borderRadius: '50%',
-                  bgcolor: 'grey.400',
+                  borderRadius: "50%",
+                  bgcolor: "grey.400",
                 }}
               />
             </Badge>
@@ -134,8 +142,11 @@ export function BadgeView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Badge"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Badge' }]}
-          moreLink={['https://mui.com/components/badges']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Badge" },
+          ]}
+          moreLink={["https://mui.com/components/badges"]}
         />
       </ComponentHero>
 

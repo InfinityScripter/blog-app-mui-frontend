@@ -1,25 +1,31 @@
-import { useRef, useState, forwardRef } from 'react';
-import { m, useSpring, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { useRef, useState, forwardRef } from "react";
+import {
+  m,
+  useSpring,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
-import { styled, useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Unstable_Grid2";
+import Typography from "@mui/material/Typography";
+import { styled, useTheme } from "@mui/material/styles";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { useClientRect } from 'src/hooks/use-client-rect';
+import { useClientRect } from "src/hooks/use-client-rect";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { Iconify } from 'src/components/iconify';
-import { varFade, MotionViewport } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { varFade, MotionViewport } from "src/components/animate";
 
-import { SectionTitle, SectionCaption } from './components/section-title';
-import { FloatLine, FloatTriangleLeftIcon } from './components/svg-elements';
+import { SectionTitle, SectionCaption } from "./components/section-title";
+import { FloatLine, FloatTriangleLeftIcon } from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
@@ -32,11 +38,15 @@ export function HomeHugePackElements({ sx, ...other }) {
   );
 
   return (
-    <Stack component="section" sx={{ pt: 10, position: 'relative', ...sx }} {...other}>
+    <Stack
+      component="section"
+      sx={{ pt: 10, position: "relative", ...sx }}
+      {...other}
+    >
       <MotionViewport>
         {renderLines}
 
-        <Container sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+        <Container sx={{ textAlign: { xs: "center", md: "left" } }}>
           <Grid
             container
             disableEqualOverflow
@@ -45,23 +55,28 @@ export function HomeHugePackElements({ sx, ...other }) {
           >
             <Grid xs={12} md={6} lg={7}>
               <SectionCaption title="Interface Starter Kit" />
-              <SectionTitle title="Large bundle of" txtGradient="elements" sx={{ mt: 3 }} />
+              <SectionTitle
+                title="Large bundle of"
+                txtGradient="elements"
+                sx={{ mt: 3 }}
+              />
             </Grid>
 
             <Grid xs={12} md={6} lg={5}>
               <m.div variants={varFade({ distance: 24 }).inUp}>
                 <Typography
                   sx={{
-                    color: 'text.disabled',
+                    color: "text.disabled",
                     fontSize: { md: 20 },
                     lineHeight: { md: 36 / 20 },
                   }}
                 >
-                  <Box component="span" sx={{ color: 'text.primary' }}>
+                  <Box component="span" sx={{ color: "text.primary" }}>
                     Explore a comprehensive range of elements
                   </Box>
                   <br />
-                  like menus, sliders, buttons, inputs, and others, all conveniently gathered here.
+                  like menus, sliders, buttons, inputs, and others, all
+                  conveniently gathered here.
                 </Typography>
               </m.div>
             </Grid>
@@ -76,7 +91,7 @@ export function HomeHugePackElements({ sx, ...other }) {
               rel="noopener"
               href={paths.components}
               endIcon={<Iconify icon="eva:arrow-ios-forward-fill" />}
-              sx={{ mt: 5, mx: 'auto' }}
+              sx={{ mt: 5, mx: "auto" }}
             >
               Browse components
             </Button>
@@ -92,41 +107,48 @@ export function HomeHugePackElements({ sx, ...other }) {
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled(
-  forwardRef((props, ref) => <Box ref={ref} component={m.div} {...props} />)
+  forwardRef((props, ref) => <Box ref={ref} component={m.div} {...props} />),
 )(({ theme }) => ({
   zIndex: 9,
-  position: 'relative',
+  position: "relative",
   paddingTop: theme.spacing(5),
-  [theme.breakpoints.up('md')]: { paddingTop: theme.spacing(15) },
+  [theme.breakpoints.up("md")]: { paddingTop: theme.spacing(15) },
 }));
 
-const StyledContainer = styled((props) => <Box component={m.div} {...props} />)(({ theme }) => ({
-  top: 0,
-  height: '100vh',
-  display: 'flex',
-  position: 'sticky',
-  overflow: 'hidden',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  transition: theme.transitions.create(['background-color']),
-  '&[data-scrolling="true"]': { justifyContent: 'center' },
-}));
+const StyledContainer = styled((props) => <Box component={m.div} {...props} />)(
+  ({ theme }) => ({
+    top: 0,
+    height: "100vh",
+    display: "flex",
+    position: "sticky",
+    overflow: "hidden",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    transition: theme.transitions.create(["background-color"]),
+    '&[data-scrolling="true"]': { justifyContent: "center" },
+  }),
+);
 
 const StyledContent = styled(
   forwardRef((props, ref) => (
-    <Box ref={ref} component={m.div} transition={{ ease: 'linear', duration: 0.25 }} {...props} />
-  ))
+    <Box
+      ref={ref}
+      component={m.div}
+      transition={{ ease: "linear", duration: 0.25 }}
+      {...props}
+    />
+  )),
 )(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
+  display: "flex",
+  flexDirection: "column",
   gap: theme.spacing(3),
-  [theme.breakpoints.up('md')]: { gap: theme.spacing(5) },
+  [theme.breakpoints.up("md")]: { gap: theme.spacing(5) },
 }));
 
 const StyledItem = styled((props) => <Box component={m.div} {...props} />)({
-  backgroundSize: 'auto 100%',
-  backgroundRepeat: 'repeat-x',
-  backgroundPosition: 'center center',
+  backgroundSize: "auto 100%",
+  backgroundRepeat: "repeat-x",
+  backgroundPosition: "center center",
 });
 
 // ----------------------------------------------------------------------
@@ -148,8 +170,14 @@ function ScrollContent() {
 
   const scrollRange = -scrollRect.scrollWidth + containerRect.width;
 
-  const x1 = useSpring(useTransform(scrollYProgress, [0, 1], [0, scrollRange]), physics);
-  const x2 = useSpring(useTransform(scrollYProgress, [0, 1], [scrollRange, 0]), physics);
+  const x1 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [0, scrollRange]),
+    physics,
+  );
+  const x2 = useSpring(
+    useTransform(scrollYProgress, [0, 1], [scrollRange, 0]),
+    physics,
+  );
 
   const background = useTransform(
     scrollYProgress,
@@ -160,10 +188,10 @@ function ScrollContent() {
       theme.vars.palette.background.neutral,
       theme.vars.palette.background.neutral,
       theme.vars.palette.background.default,
-    ]
+    ],
   );
 
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (latest !== 0 && latest !== 1) {
       setStartScroll(true);
     } else {
@@ -172,14 +200,17 @@ function ScrollContent() {
   });
 
   return (
-    <StyledRoot ref={containerRef} sx={{ height: scrollRect.scrollWidth, minHeight: '100vh' }}>
+    <StyledRoot
+      ref={containerRef}
+      sx={{ height: scrollRect.scrollWidth, minHeight: "100vh" }}
+    >
       <StyledContainer style={{ background }} data-scrolling={startScroll}>
         <StyledContent ref={scrollRef} layout>
           <StyledItem
             style={{ x: x1 }}
             sx={{
               height: { xs: 160, md: 180 },
-              width: { xs: '600%', md: '400%' },
+              width: { xs: "600%", md: "400%" },
               backgroundImage: `url(${CONFIG.site.basePath}/assets/images/home/bundle-${theme.palette.mode}-1.webp)`,
             }}
           />
@@ -187,7 +218,7 @@ function ScrollContent() {
             style={{ x: x2 }}
             sx={{
               height: { xs: 400, md: 480 },
-              width: { xs: '600%', md: '400%' },
+              width: { xs: "600%", md: "400%" },
               backgroundImage: `url(${CONFIG.site.basePath}/assets/images/home/bundle-${theme.palette.mode}-2.webp)`,
             }}
           />

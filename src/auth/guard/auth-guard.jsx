@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
-import { paths } from 'src/routes/paths';
-import { useRouter, usePathname, useSearchParams } from 'src/routes/hooks';
+import { paths } from "src/routes/paths";
+import { useRouter, usePathname, useSearchParams } from "src/routes/hooks";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { SplashScreen } from 'src/components/loading-screen';
+import { SplashScreen } from "src/components/loading-screen";
 
-import { useAuthContext } from '../hooks';
+import { useAuthContext } from "../hooks";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ export function AuthGuard({ children }) {
 
       return params.toString();
     },
-    [searchParams]
+    [searchParams],
   );
 
   const checkPermissions = async () => {
@@ -46,7 +46,7 @@ export function AuthGuard({ children }) {
         jwt: paths.auth.jwt.signIn,
       }[method];
 
-      const href = `${signInPath}?${createQueryString('returnTo', pathname)}`;
+      const href = `${signInPath}?${createQueryString("returnTo", pathname)}`;
 
       router.replace(href);
       return;

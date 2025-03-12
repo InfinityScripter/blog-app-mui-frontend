@@ -1,19 +1,19 @@
-import { avatarGroupClasses } from '@mui/material/AvatarGroup';
+import { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
-import { varAlpha } from '../../styles';
+import { varAlpha } from "../../styles";
 
-const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
 
 const colorByName = (name) => {
   const charAt = name.charAt(0).toLowerCase();
 
-  if (['a', 'c', 'f'].includes(charAt)) return 'primary';
-  if (['e', 'd', 'h'].includes(charAt)) return 'secondary';
-  if (['i', 'k', 'l'].includes(charAt)) return 'info';
-  if (['m', 'n', 'p'].includes(charAt)) return 'success';
-  if (['q', 's', 't'].includes(charAt)) return 'warning';
-  if (['v', 'x', 'y'].includes(charAt)) return 'error';
-  return 'default';
+  if (["a", "c", "f"].includes(charAt)) return "primary";
+  if (["e", "d", "h"].includes(charAt)) return "secondary";
+  if (["i", "k", "l"].includes(charAt)) return "info";
+  if (["m", "n", "p"].includes(charAt)) return "success";
+  if (["q", "s", "t"].includes(charAt)) return "warning";
+  if (["v", "x", "y"].includes(charAt)) return "error";
+  return "default";
 };
 
 // ----------------------------------------------------------------------
@@ -28,10 +28,10 @@ const avatarColors = {
   })),
   defaultColor: [
     {
-      props: ({ ownerState }) => ownerState.color === 'default',
+      props: ({ ownerState }) => ownerState.color === "default",
       style: ({ theme }) => ({
         color: theme.vars.palette.text.secondary,
-        backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.24),
+        backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.24),
       }),
     },
   ],
@@ -53,14 +53,17 @@ const MuiAvatar = {
 
       return {
         ...(!!ownerState.alt && {
-          ...(color !== 'default'
+          ...(color !== "default"
             ? {
                 color: theme.vars.palette[color].contrastText,
                 backgroundColor: theme.vars.palette[color].main,
               }
             : {
                 color: theme.vars.palette.text.secondary,
-                backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.24),
+                backgroundColor: varAlpha(
+                  theme.vars.palette.grey["500Channel"],
+                  0.24,
+                ),
               }),
         }),
       };
@@ -81,25 +84,25 @@ const MuiAvatarGroup = {
    *************************************** */
   styleOverrides: {
     root: ({ ownerState }) => ({
-      justifyContent: 'flex-end',
-      ...(ownerState.variant === 'compact' && {
+      justifyContent: "flex-end",
+      ...(ownerState.variant === "compact" && {
         width: 40,
         height: 40,
-        position: 'relative',
+        position: "relative",
         [`& .${avatarGroupClasses.avatar}`]: {
           margin: 0,
           width: 28,
           height: 28,
-          position: 'absolute',
-          '&:first-of-type': { left: 0, bottom: 0, zIndex: 9 },
-          '&:last-of-type': { top: 0, right: 0 },
+          position: "absolute",
+          "&:first-of-type": { left: 0, bottom: 0, zIndex: 9 },
+          "&:last-of-type": { top: 0, right: 0 },
         },
       }),
     }),
     avatar: ({ theme }) => ({
       fontSize: 16,
       fontWeight: theme.typography.fontWeightSemiBold,
-      '&:first-of-type': {
+      "&:first-of-type": {
         fontSize: 12,
         color: theme.vars.palette.primary.dark,
         backgroundColor: theme.vars.palette.primary.lighter,

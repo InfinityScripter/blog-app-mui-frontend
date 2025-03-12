@@ -1,11 +1,19 @@
-import Stack from '@mui/material/Stack';
-import LinearProgress from '@mui/material/LinearProgress';
+import Stack from "@mui/material/Stack";
+import LinearProgress from "@mui/material/LinearProgress";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['inherit', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = [
+  "inherit",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
 // ----------------------------------------------------------------------
 
@@ -15,17 +23,17 @@ export function ProgressLinear({ progress, buffer }) {
       sx={{
         rowGap: 5,
         columnGap: 3,
-        display: 'grid',
-        gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+        display: "grid",
+        gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
       }}
     >
-      <ComponentBlock title="Indeterminate" sx={{ flexDirection: 'column' }}>
+      <ComponentBlock title="Indeterminate" sx={{ flexDirection: "column" }}>
         {COLORS.map((color) => (
           <LinearProgress key={color} color={color} sx={{ mb: 2, width: 1 }} />
         ))}
       </ComponentBlock>
 
-      <ComponentBlock title="Determinate" sx={{ flexDirection: 'column' }}>
+      <ComponentBlock title="Determinate" sx={{ flexDirection: "column" }}>
         {COLORS.map((color) => (
           <LinearProgress
             key={color}
@@ -37,7 +45,7 @@ export function ProgressLinear({ progress, buffer }) {
         ))}
       </ComponentBlock>
 
-      <ComponentBlock title="Buffer" sx={{ flexDirection: 'column' }}>
+      <ComponentBlock title="Buffer" sx={{ flexDirection: "column" }}>
         {COLORS.map((color) => (
           <LinearProgress
             key={color}
@@ -50,7 +58,7 @@ export function ProgressLinear({ progress, buffer }) {
         ))}
       </ComponentBlock>
 
-      <ComponentBlock title="Query" sx={{ flexDirection: 'column' }}>
+      <ComponentBlock title="Query" sx={{ flexDirection: "column" }}>
         {COLORS.map((color) => (
           <LinearProgress
             key={color}

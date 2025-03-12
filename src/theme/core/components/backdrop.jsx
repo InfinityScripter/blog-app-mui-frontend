@@ -1,4 +1,4 @@
-import { varAlpha } from '../../styles';
+import { varAlpha } from "../../styles";
 
 // ----------------------------------------------------------------------
 
@@ -8,9 +8,9 @@ const MuiBackdrop = {
    *************************************** */
   styleOverrides: {
     root: ({ theme }) => ({
-      backgroundColor: varAlpha(theme.vars.palette.grey['800Channel'], 0.48),
+      backgroundColor: varAlpha(theme.vars.palette.grey["800Channel"], 0.48),
     }),
-    invisible: { background: 'transparent' },
+    invisible: { background: "transparent" },
   },
 };
 

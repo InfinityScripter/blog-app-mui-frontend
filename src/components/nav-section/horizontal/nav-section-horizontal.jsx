@@ -1,11 +1,11 @@
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { NavList } from './nav-list';
-import { NavUl, NavLi } from '../styles';
-import { Scrollbar } from '../../scrollbar';
-import { navSectionClasses } from '../classes';
-import { navSectionCssVars } from '../css-vars';
+import { NavList } from "./nav-list";
+import { NavUl, NavLi } from "../styles";
+import { Scrollbar } from "../../scrollbar";
+import { navSectionClasses } from "../classes";
+import { navSectionCssVars } from "../css-vars";
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ export function NavSectionHorizontal({
     <Scrollbar
       sx={{ height: 1 }}
       slotProps={{
-        content: { height: 1, display: 'flex', alignItems: 'center' },
+        content: { height: 1, display: "flex", alignItems: "center" },
       }}
     >
       <Stack
@@ -38,13 +38,13 @@ export function NavSectionHorizontal({
         className={navSectionClasses.horizontal.root}
         sx={{
           ...cssVars,
-          mx: 'auto',
+          mx: "auto",
           height: 1,
-          minHeight: 'var(--nav-height)',
+          minHeight: "var(--nav-height)",
           ...sx,
         }}
       >
-        <NavUl sx={{ flexDirection: 'row', gap: 'var(--nav-item-gap)' }}>
+        <NavUl sx={{ flexDirection: "row", gap: "var(--nav-item-gap)" }}>
           {data.map((group) => (
             <Group
               key={group.subheader ?? group.items[0].title}
@@ -66,7 +66,7 @@ export function NavSectionHorizontal({
 function Group({ items, render, slotProps, enabledRootRedirect, cssVars }) {
   return (
     <NavLi>
-      <NavUl sx={{ flexDirection: 'row', gap: 'var(--nav-item-gap)' }}>
+      <NavUl sx={{ flexDirection: "row", gap: "var(--nav-item-gap)" }}>
         {items.map((list) => (
           <NavList
             key={list.title}

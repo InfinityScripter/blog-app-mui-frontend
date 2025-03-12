@@ -1,5 +1,5 @@
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
 
@@ -13,8 +13,8 @@ export function SearchNotFound({ query, sx, ...other }) {
   }
 
   return (
-    <Box sx={{ textAlign: 'center', borderRadius: 1.5, ...sx }} {...other}>
-      <Box sx={{ mb: 1, typography: 'h6' }}>Not found</Box>
+    <Box sx={{ textAlign: "center", borderRadius: 1.5, ...sx }} {...other}>
+      <Box sx={{ mb: 1, typography: "h6" }}>Not found</Box>
 
       <Typography variant="body2">
         No results found for &nbsp;

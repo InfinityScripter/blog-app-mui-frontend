@@ -5,7 +5,7 @@
 
 // ----------------------------------------------------------------------
 
-export function flattenArray(list, key = 'children') {
+export function flattenArray(list, key = "children") {
   let children = [];
 
   const flatten = list?.map((item) => {
@@ -15,7 +15,9 @@ export function flattenArray(list, key = 'children') {
     return item;
   });
 
-  return flatten?.concat(children.length ? flattenArray(children, key) : children);
+  return flatten?.concat(
+    children.length ? flattenArray(children, key) : children,
+  );
 }
 
 // ----------------------------------------------------------------------
@@ -35,7 +37,7 @@ export function orderBy(array, properties, orders) {
   return array.slice().sort((a, b) => {
     for (let i = 0; i < properties.length; i += 1) {
       const property = properties[i];
-      const order = orders && orders[i] === 'desc' ? -1 : 1;
+      const order = orders && orders[i] === "desc" ? -1 : 1;
 
       const aValue = a[property];
       const bValue = b[property];
@@ -74,7 +76,11 @@ export function isEqual(a, b) {
     return false;
   }
 
-  if (typeof a === 'string' || typeof a === 'number' || typeof a === 'boolean') {
+  if (
+    typeof a === "string" ||
+    typeof a === "number" ||
+    typeof a === "boolean"
+  ) {
     return a === b;
   }
 
@@ -86,7 +92,7 @@ export function isEqual(a, b) {
     return a.every((item, index) => isEqual(item, b[index]));
   }
 
-  if (typeof a === 'object' && typeof b === 'object') {
+  if (typeof a === "object" && typeof b === "object") {
     const keysA = Object.keys(a);
     const keysB = Object.keys(b);
 
@@ -103,7 +109,7 @@ export function isEqual(a, b) {
 // ----------------------------------------------------------------------
 
 function isObject(item) {
-  return item && typeof item === 'object' && !Array.isArray(item);
+  return item && typeof item === "object" && !Array.isArray(item);
 }
 
 export const merge = (target, ...sources) => {

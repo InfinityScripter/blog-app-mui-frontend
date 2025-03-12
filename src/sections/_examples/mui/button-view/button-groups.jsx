@@ -1,16 +1,24 @@
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['inherit', 'primary', 'secondary', 'success', 'error', 'info', 'warning'];
+const COLORS = [
+  "inherit",
+  "primary",
+  "secondary",
+  "success",
+  "error",
+  "info",
+  "warning",
+];
 
-const SIZES = ['small', 'medium', 'large'];
+const SIZES = ["small", "medium", "large"];
 
-const VARIANTS = ['contained', 'outlined', 'text', 'soft'];
+const VARIANTS = ["contained", "outlined", "text", "soft"];
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +27,7 @@ export function ButtonGroups() {
     <Stack
       gap={2.5}
       display="grid"
-      gridTemplateColumns={{ xs: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}
+      gridTemplateColumns={{ xs: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
     >
       <ComponentBlock title="Contained">
         {COLORS.map((color) => (
@@ -104,7 +112,12 @@ export function ButtonGroups() {
           </ButtonGroup>
         ))}
 
-        <ButtonGroup disabled variant="soft" color="info" orientation="vertical">
+        <ButtonGroup
+          disabled
+          variant="soft"
+          color="info"
+          orientation="vertical"
+        >
           <Button>One</Button>
           <Button>Two</Button>
           <Button>Three</Button>

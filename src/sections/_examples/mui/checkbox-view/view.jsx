@@ -1,26 +1,34 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from "@mui/material/Checkbox";
+import FormGroup from "@mui/material/FormGroup";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['default', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = [
+  "default",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
-const PLACEMENTS = ['top', 'start', 'bottom', 'end'];
+const PLACEMENTS = ["top", "start", "bottom", "end"];
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +49,7 @@ export function CheckboxView() {
 
   const DEMO = [
     {
-      name: 'Basic',
+      name: "Basic",
       component: (
         <ComponentBlock>
           <Checkbox size="medium" />
@@ -54,11 +62,17 @@ export function CheckboxView() {
       ),
     },
     {
-      name: 'Size & custom icon',
+      name: "Size & custom icon",
       component: (
         <ComponentBlock>
-          <FormControlLabel label="Normal" control={<Checkbox size="medium" defaultChecked />} />
-          <FormControlLabel label="Small" control={<Checkbox size="small" defaultChecked />} />
+          <FormControlLabel
+            label="Normal"
+            control={<Checkbox size="medium" defaultChecked />}
+          />
+          <FormControlLabel
+            label="Small"
+            control={<Checkbox size="small" defaultChecked />}
+          />
           <FormControlLabel
             control={
               <Checkbox
@@ -66,7 +80,7 @@ export function CheckboxView() {
                 size="small"
                 icon={<Iconify icon="solar:heart-bold" />}
                 checkedIcon={<Iconify icon="solar:heart-bold" />}
-                inputProps={{ id: 'favorite-checkbox' }}
+                inputProps={{ id: "favorite-checkbox" }}
               />
             }
             label="Custom icon"
@@ -79,7 +93,7 @@ export function CheckboxView() {
                 size="small"
                 icon={<Iconify icon="eva:award-fill" />}
                 checkedIcon={<Iconify icon="eva:award-fill" />}
-                inputProps={{ id: 'award-checkbox' }}
+                inputProps={{ id: "award-checkbox" }}
               />
             }
             label="Custom icon"
@@ -88,7 +102,7 @@ export function CheckboxView() {
       ),
     },
     {
-      name: 'Placement',
+      name: "Placement",
       component: (
         <ComponentBlock>
           <FormControl component="fieldset">
@@ -100,7 +114,7 @@ export function CheckboxView() {
                   label={placement}
                   labelPlacement={placement}
                   control={<Checkbox size="medium" />}
-                  sx={{ textTransform: 'capitalize' }}
+                  sx={{ textTransform: "capitalize" }}
                 />
               ))}
             </FormGroup>
@@ -109,16 +123,18 @@ export function CheckboxView() {
       ),
     },
     {
-      name: 'Colors',
+      name: "Colors",
       component: (
         <ComponentBlock>
           <FormGroup>
             {COLORS.map((color) => (
               <FormControlLabel
                 key={color}
-                control={<Checkbox size="medium" defaultChecked color={color} />}
+                control={
+                  <Checkbox size="medium" defaultChecked color={color} />
+                }
                 label={color}
-                sx={{ textTransform: 'capitalize' }}
+                sx={{ textTransform: "capitalize" }}
               />
             ))}
 
@@ -134,15 +150,29 @@ export function CheckboxView() {
               {COLORS.map((color) => (
                 <FormControlLabel
                   key={color}
-                  control={<Checkbox size="medium" defaultChecked indeterminate color={color} />}
+                  control={
+                    <Checkbox
+                      size="medium"
+                      defaultChecked
+                      indeterminate
+                      color={color}
+                    />
+                  }
                   label={color}
-                  sx={{ textTransform: 'capitalize' }}
+                  sx={{ textTransform: "capitalize" }}
                 />
               ))}
 
               <FormControlLabel
                 disabled
-                control={<Checkbox size="medium" defaultChecked indeterminate color="error" />}
+                control={
+                  <Checkbox
+                    size="medium"
+                    defaultChecked
+                    indeterminate
+                    color="error"
+                  />
+                }
                 label="Disabled"
               />
             </FormGroup>
@@ -151,7 +181,7 @@ export function CheckboxView() {
       ),
     },
     {
-      name: 'Indeterminate',
+      name: "Indeterminate",
       component: (
         <ComponentBlock>
           <div>
@@ -169,11 +199,23 @@ export function CheckboxView() {
             <div>
               <FormControlLabel
                 label="Child 1"
-                control={<Checkbox size="medium" checked={checked[0]} onChange={handleChange2} />}
+                control={
+                  <Checkbox
+                    size="medium"
+                    checked={checked[0]}
+                    onChange={handleChange2}
+                  />
+                }
               />
               <FormControlLabel
                 label="Child 2"
-                control={<Checkbox size="medium" checked={checked[1]} onChange={handleChange3} />}
+                control={
+                  <Checkbox
+                    size="medium"
+                    checked={checked[1]}
+                    onChange={handleChange3}
+                  />
+                }
               />
             </div>
           </div>
@@ -187,8 +229,11 @@ export function CheckboxView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Checkboxes"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Checkboxes' }]}
-          moreLink={['https://mui.com/components/checkboxes']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Checkboxes" },
+          ]}
+          moreLink={["https://mui.com/components/checkboxes"]}
         />
       </ComponentHero>
 

@@ -1,8 +1,8 @@
-import { buttonGroupClasses } from '@mui/material/ButtonGroup';
+import { buttonGroupClasses } from "@mui/material/ButtonGroup";
 
-import { varAlpha, stylesMode } from '../../styles';
+import { varAlpha, stylesMode } from "../../styles";
 
-const COLORS = ['primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
 
 function styleColors(ownerState, styles) {
   const outputStyle = COLORS.reduce((acc, color) => {
@@ -20,11 +20,15 @@ const buttonClasses = `& .${buttonGroupClasses.firstButton}, & .${buttonGroupCla
 const softVariant = {
   colors: COLORS.map((color) => ({
     props: ({ ownerState }) =>
-      !ownerState.disabled && ownerState.variant === 'soft' && ownerState.color === color,
+      !ownerState.disabled &&
+      ownerState.variant === "soft" &&
+      ownerState.color === color,
     style: ({ theme }) => ({
       [buttonClasses]: {
         borderColor: varAlpha(theme.vars.palette[color].darkChannel, 0.24),
-        [stylesMode.dark]: { borderColor: varAlpha(theme.vars.palette[color].lightChannel, 0.24) },
+        [stylesMode.dark]: {
+          borderColor: varAlpha(theme.vars.palette[color].lightChannel, 0.24),
+        },
       },
       [`&.${buttonGroupClasses.vertical}`]: {
         [buttonClasses]: {
@@ -38,18 +42,18 @@ const softVariant = {
   })),
   base: [
     {
-      props: ({ ownerState }) => ownerState.variant === 'soft',
+      props: ({ ownerState }) => ownerState.variant === "soft",
       style: ({ theme }) => ({
         [buttonClasses]: {
-          borderRight: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.32)}`,
+          borderRight: `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.32)}`,
           [`&.${buttonGroupClasses.disabled}`]: {
             borderColor: theme.vars.palette.action.disabledBackground,
           },
         },
         [`&.${buttonGroupClasses.vertical}`]: {
           [buttonClasses]: {
-            borderRight: 'none',
-            borderBottom: `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.32)}`,
+            borderRight: "none",
+            borderBottom: `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.32)}`,
             [`&.${buttonGroupClasses.disabled}`]: {
               borderColor: theme.vars.palette.action.disabledBackground,
             },
@@ -88,11 +92,18 @@ const MuiButtonGroup = {
     contained: ({ theme, ownerState }) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
-          [buttonClasses]: { borderColor: varAlpha(theme.vars.palette[color].darkChannel, 0.48) },
+          [buttonClasses]: {
+            borderColor: varAlpha(theme.vars.palette[color].darkChannel, 0.48),
+          },
         })),
         inheritColor: {
-          ...(ownerState.color === 'inherit' && {
-            [buttonClasses]: { borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.32) },
+          ...(ownerState.color === "inherit" && {
+            [buttonClasses]: {
+              borderColor: varAlpha(
+                theme.vars.palette.grey["500Channel"],
+                0.32,
+              ),
+            },
           }),
         },
         disabled: {
@@ -114,11 +125,18 @@ const MuiButtonGroup = {
     text: ({ theme, ownerState }) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
-          [buttonClasses]: { borderColor: varAlpha(theme.vars.palette[color].mainChannel, 0.48) },
+          [buttonClasses]: {
+            borderColor: varAlpha(theme.vars.palette[color].mainChannel, 0.48),
+          },
         })),
         inheritColor: {
-          ...(ownerState.color === 'inherit' && {
-            [buttonClasses]: { borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.32) },
+          ...(ownerState.color === "inherit" && {
+            [buttonClasses]: {
+              borderColor: varAlpha(
+                theme.vars.palette.grey["500Channel"],
+                0.32,
+              ),
+            },
           }),
         },
         disabled: {

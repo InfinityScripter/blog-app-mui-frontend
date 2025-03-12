@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import Stack from '@mui/material/Stack';
-import Tooltip from '@mui/material/Tooltip';
-import TableRow from '@mui/material/TableRow';
-import Checkbox from '@mui/material/Checkbox';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
+import TableRow from "@mui/material/TableRow";
+import Checkbox from "@mui/material/Checkbox";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 
-import { Iconify } from 'src/components/iconify';
-import { Scrollbar } from 'src/components/scrollbar';
+import { Iconify } from "src/components/iconify";
+import { Scrollbar } from "src/components/scrollbar";
 import {
   useTable,
   emptyRows,
@@ -21,7 +21,7 @@ import {
   TableHeadCustom,
   TableSelectedAction,
   TablePaginationCustom,
-} from 'src/components/table';
+} from "src/components/table";
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -34,32 +34,32 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const TABLE_DATA = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Donut", 452, 25.0, 51, 4.9),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Honeycomb", 408, 3.2, 87, 6.5),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Jelly Bean", 375, 0.0, 94, 0.0),
+  createData("KitKat", 518, 26.0, 65, 7.0),
+  createData("Lollipop", 392, 0.2, 98, 0.0),
+  createData("Marshmallow", 318, 0, 81, 2.0),
+  createData("Nougat", 360, 19.0, 9, 37.0),
 ];
 
 const TABLE_HEAD = [
-  { id: 'name', label: 'Dessert (100g serving)', align: 'left' },
-  { id: 'calories', label: 'Calories', align: 'center' },
-  { id: 'fat', label: 'Fat (g)', align: 'center' },
-  { id: 'carbs', label: 'Carbs (g)', align: 'center' },
-  { id: 'protein', label: 'Protein (g)', align: 'center' },
+  { id: "name", label: "Dessert (100g serving)", align: "left" },
+  { id: "calories", label: "Calories", align: "center" },
+  { id: "fat", label: "Fat (g)", align: "center" },
+  { id: "carbs", label: "Carbs (g)", align: "center" },
+  { id: "protein", label: "Protein (g)", align: "center" },
 ];
 
 // ----------------------------------------------------------------------
 
 export function SortingSelectingTable() {
-  const table = useTable({ defaultOrderBy: 'calories' });
+  const table = useTable({ defaultOrderBy: "calories" });
 
   const [tableData, setTableData] = useState([]);
 
@@ -74,7 +74,12 @@ export function SortingSelectingTable() {
 
   return (
     <div>
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ p: 3 }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ p: 3 }}
+      >
         <Typography variant="h6"> Title</Typography>
 
         <Tooltip title="Filter list">
@@ -84,7 +89,7 @@ export function SortingSelectingTable() {
         </Tooltip>
       </Stack>
 
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: "relative" }}>
         <TableSelectedAction
           dense={table.dense}
           numSelected={table.selected.length}
@@ -92,7 +97,7 @@ export function SortingSelectingTable() {
           onSelectAllRows={(checked) =>
             table.onSelectAllRows(
               checked,
-              tableData.map((row) => row.name)
+              tableData.map((row) => row.name),
             )
           }
           action={
@@ -105,7 +110,7 @@ export function SortingSelectingTable() {
         />
 
         <Scrollbar>
-          <Table size={table.dense ? 'small' : 'medium'} sx={{ minWidth: 800 }}>
+          <Table size={table.dense ? "small" : "medium"} sx={{ minWidth: 800 }}>
             <TableHeadCustom
               order={table.order}
               orderBy={table.orderBy}
@@ -116,7 +121,7 @@ export function SortingSelectingTable() {
               onSelectAllRows={(checked) =>
                 table.onSelectAllRows(
                   checked,
-                  tableData.map((row) => row.name)
+                  tableData.map((row) => row.name),
                 )
               }
             />
@@ -125,7 +130,7 @@ export function SortingSelectingTable() {
               {dataFiltered
                 .slice(
                   table.page * table.rowsPerPage,
-                  table.page * table.rowsPerPage + table.rowsPerPage
+                  table.page * table.rowsPerPage + table.rowsPerPage,
                 )
                 .map((row) => (
                   <TableRow
@@ -147,7 +152,11 @@ export function SortingSelectingTable() {
 
               <TableEmptyRows
                 height={table.dense ? 34 : 34 + 20}
-                emptyRows={emptyRows(table.page, table.rowsPerPage, tableData.length)}
+                emptyRows={emptyRows(
+                  table.page,
+                  table.rowsPerPage,
+                  tableData.length,
+                )}
               />
             </TableBody>
           </Table>

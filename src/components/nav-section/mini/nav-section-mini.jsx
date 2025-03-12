@@ -1,10 +1,10 @@
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { NavList } from './nav-list';
-import { NavUl, NavLi } from '../styles';
-import { navSectionClasses } from '../classes';
-import { navSectionCssVars } from '../css-vars';
+import { NavList } from "./nav-list";
+import { NavUl, NavLi } from "../styles";
+import { navSectionClasses } from "../classes";
+import { navSectionCssVars } from "../css-vars";
 
 // ----------------------------------------------------------------------
 
@@ -24,8 +24,12 @@ export function NavSectionMini({
   };
 
   return (
-    <Stack component="nav" className={navSectionClasses.mini.root} sx={{ ...cssVars, ...sx }}>
-      <NavUl sx={{ flex: '1 1 auto', gap: 'var(--nav-item-gap)' }}>
+    <Stack
+      component="nav"
+      className={navSectionClasses.mini.root}
+      sx={{ ...cssVars, ...sx }}
+    >
+      <NavUl sx={{ flex: "1 1 auto", gap: "var(--nav-item-gap)" }}>
         {data.map((group) => (
           <Group
             key={group.subheader ?? group.items[0].title}
@@ -46,7 +50,7 @@ export function NavSectionMini({
 function Group({ items, render, slotProps, enabledRootRedirect, cssVars }) {
   return (
     <NavLi>
-      <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
+      <NavUl sx={{ gap: "var(--nav-item-gap)" }}>
         {items.map((list) => (
           <NavList
             key={list.title}

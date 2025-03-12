@@ -1,19 +1,23 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import Step from '@mui/material/Step';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Stepper from '@mui/material/Stepper';
-import StepLabel from '@mui/material/StepLabel';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Step from "@mui/material/Step";
+import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import Stepper from "@mui/material/Stepper";
+import StepLabel from "@mui/material/StepLabel";
+import Typography from "@mui/material/Typography";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
-const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+const steps = [
+  "Select campaign settings",
+  "Create an ad group",
+  "Create an ad",
+];
 
 // ----------------------------------------------------------------------
 
@@ -67,7 +71,9 @@ export function HorizontalLinearStepper() {
           const stepProps = {};
           const labelProps = {};
           if (isStepOptional(index)) {
-            labelProps.optional = <Typography variant="caption">Optional</Typography>;
+            labelProps.optional = (
+              <Typography variant="caption">Optional</Typography>
+            );
           }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
@@ -87,13 +93,16 @@ export function HorizontalLinearStepper() {
               p: 3,
               my: 3,
               minHeight: 120,
-              bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.12),
+              bgcolor: (theme) =>
+                varAlpha(theme.vars.palette.grey["500Channel"], 0.12),
             }}
           >
-            <Typography sx={{ my: 1 }}>All steps completed - you&apos;re finished</Typography>
+            <Typography sx={{ my: 1 }}>
+              All steps completed - you&apos;re finished
+            </Typography>
           </Paper>
 
-          <Box sx={{ display: 'flex' }}>
+          <Box sx={{ display: "flex" }}>
             <Box sx={{ flexGrow: 1 }} />
             <Button onClick={handleReset}>Reset</Button>
           </Box>
@@ -105,14 +114,20 @@ export function HorizontalLinearStepper() {
               p: 3,
               my: 3,
               minHeight: 120,
-              bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.12),
+              bgcolor: (theme) =>
+                varAlpha(theme.vars.palette.grey["500Channel"], 0.12),
             }}
           >
             <Typography sx={{ my: 1 }}> Step {activeStep + 1}</Typography>
           </Paper>
 
           <Stack direction="row">
-            <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+            <Button
+              color="inherit"
+              disabled={activeStep === 0}
+              onClick={handleBack}
+              sx={{ mr: 1 }}
+            >
               Back
             </Button>
 
@@ -123,7 +138,7 @@ export function HorizontalLinearStepper() {
               </Button>
             )}
             <Button variant="contained" onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
           </Stack>
         </>

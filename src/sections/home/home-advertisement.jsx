@@ -1,21 +1,21 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
-import Container from '@mui/material/Container';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha, textGradient } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha, textGradient } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
-import { varFade, MotionViewport } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { SvgColor } from "src/components/svg-color";
+import { varFade, MotionViewport } from "src/components/animate";
 
-import { FloatLine, FloatPlusIcon } from './components/svg-elements';
+import { FloatLine, FloatPlusIcon } from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
@@ -24,9 +24,12 @@ export function HomeAdvertisement({ sx, ...other }) {
 
   const renderLines = (
     <>
-      <FloatPlusIcon sx={{ left: 72, top: '50%', mt: -1 }} />
-      <FloatLine vertical sx={{ top: 0, left: 80, height: 'calc(50% + 64px)' }} />
-      <FloatLine sx={{ top: '50%', left: 0 }} />
+      <FloatPlusIcon sx={{ left: 72, top: "50%", mt: -1 }} />
+      <FloatLine
+        vertical
+        sx={{ top: 0, left: 80, height: "calc(50% + 64px)" }}
+      />
+      <FloatLine sx={{ top: "50%", left: 0 }} />
     </>
   );
 
@@ -35,7 +38,7 @@ export function HomeAdvertisement({ sx, ...other }) {
       <Box
         component={m.h2}
         variants={varFade({ distance: 24 }).inDown}
-        sx={{ m: 0, color: 'common.white', typography: { xs: 'h2', md: 'h1' } }}
+        sx={{ m: 0, color: "common.white", typography: { xs: "h2", md: "h1" } }}
       >
         Get started with
         <br /> Minimal kit
@@ -45,8 +48,8 @@ export function HomeAdvertisement({ sx, ...other }) {
             ...textGradient(
               `to right, ${theme.vars.palette.common.white}, ${varAlpha(
                 theme.vars.palette.common.whiteChannel,
-                0.4
-              )}`
+                0.4,
+              )}`,
             ),
             ml: 1,
           }}
@@ -59,7 +62,7 @@ export function HomeAdvertisement({ sx, ...other }) {
         spacing={2}
         direction="row"
         flexWrap="wrap"
-        justifyContent={{ xs: 'center', md: 'flex-start' }}
+        justifyContent={{ xs: "center", md: "flex-start" }}
       >
         <m.div variants={varFade({ distance: 24 }).inRight}>
           <Button
@@ -82,11 +85,17 @@ export function HomeAdvertisement({ sx, ...other }) {
             target="_blank"
             rel="noopener"
             href={paths.freeUI}
-            endIcon={<Iconify width={16} icon="eva:external-link-fill" sx={{ mr: 0.5 }} />}
+            endIcon={
+              <Iconify
+                width={16}
+                icon="eva:external-link-fill"
+                sx={{ mr: 0.5 }}
+              />
+            }
             sx={{
-              color: 'common.white',
-              borderColor: 'common.white',
-              '&:hover': { borderColor: 'currentColor' },
+              color: "common.white",
+              borderColor: "common.white",
+              "&:hover": { borderColor: "currentColor" },
             }}
           >
             Get free version
@@ -104,7 +113,7 @@ export function HomeAdvertisement({ sx, ...other }) {
         transition={{ duration: 4, repeat: Infinity }}
         alt="rocket"
         src={`${CONFIG.site.basePath}/assets/illustrations/illustration-rocket-large.webp`}
-        sx={{ zIndex: 9, width: 360, aspectRatio: '1/1' }}
+        sx={{ zIndex: 9, width: 360, aspectRatio: "1/1" }}
       />
     </m.div>
   );
@@ -120,9 +129,9 @@ export function HomeAdvertisement({ sx, ...other }) {
           height: 1,
           zIndex: 8,
           opacity: 0.08,
-          color: 'grey.500',
-          position: 'absolute',
-          maskSize: 'auto 100%',
+          color: "grey.500",
+          position: "absolute",
+          maskSize: "auto 100%",
         }}
       />
     </m.div>
@@ -136,31 +145,31 @@ export function HomeAdvertisement({ sx, ...other }) {
         zIndex: 7,
         width: 240,
         height: 240,
-        bgcolor: 'grey.500',
-        position: 'absolute',
-        filter: 'blur(200px)',
+        bgcolor: "grey.500",
+        position: "absolute",
+        filter: "blur(200px)",
       }}
     />
   );
 
   return (
-    <Stack component="section" sx={{ position: 'relative', ...sx }} {...other}>
+    <Stack component="section" sx={{ position: "relative", ...sx }} {...other}>
       <MotionViewport>
         {renderLines}
 
-        <Container sx={{ position: 'relative', zIndex: 9 }}>
+        <Container sx={{ position: "relative", zIndex: 9 }}>
           <Stack
             spacing={5}
             alignItems="center"
-            direction={{ xs: 'column', md: 'row' }}
+            direction={{ xs: "column", md: "row" }}
             sx={{
               py: 8,
               px: 5,
               borderRadius: 3,
-              overflow: 'hidden',
-              bgcolor: 'grey.900',
-              position: 'relative',
-              textAlign: { xs: 'center', md: 'left' },
+              overflow: "hidden",
+              bgcolor: "grey.900",
+              position: "relative",
+              textAlign: { xs: "center", md: "left" },
               border: `solid 1px ${theme.vars.palette.grey[800]}`,
             }}
           >

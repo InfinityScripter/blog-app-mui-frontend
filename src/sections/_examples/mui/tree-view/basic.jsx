@@ -1,25 +1,25 @@
-import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
-import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import { TreeItem } from "@mui/x-tree-view/TreeItem";
+import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
+import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 
 // ----------------------------------------------------------------------
 
 const MUI_X_PRODUCTS = [
   {
-    id: 'grid',
-    label: 'Data Grid',
+    id: "grid",
+    label: "Data Grid",
     children: [
-      { id: 'grid-community', label: '@mui/x-data-grid' },
-      { id: 'grid-pro', label: '@mui/x-data-grid-pro' },
-      { id: 'grid-premium', label: '@mui/x-data-grid-premium' },
+      { id: "grid-community", label: "@mui/x-data-grid" },
+      { id: "grid-pro", label: "@mui/x-data-grid-pro" },
+      { id: "grid-premium", label: "@mui/x-data-grid-premium" },
     ],
   },
   {
-    id: 'pickers',
-    label: 'Date and Time Pickers',
+    id: "pickers",
+    label: "Date and Time Pickers",
     children: [
-      { id: 'pickers-community', label: '@mui/x-date-pickers' },
-      { id: 'pickers-pro', label: '@mui/x-date-pickers-pro' },
+      { id: "pickers-community", label: "@mui/x-date-pickers" },
+      { id: "pickers-pro", label: "@mui/x-date-pickers-pro" },
     ],
   },
 ];
@@ -28,7 +28,10 @@ const MUI_X_PRODUCTS = [
 
 export function BasicRichTree() {
   return (
-    <RichTreeView items={MUI_X_PRODUCTS} sx={{ overflowX: 'hidden', minHeight: 240, width: 1 }} />
+    <RichTreeView
+      items={MUI_X_PRODUCTS}
+      sx={{ overflowX: "hidden", minHeight: 240, width: 1 }}
+    />
   );
 }
 
@@ -36,7 +39,7 @@ export function BasicRichTree() {
 
 export function BasicSimpleTree() {
   return (
-    <SimpleTreeView sx={{ overflowX: 'hidden', minHeight: 240, width: 1 }}>
+    <SimpleTreeView sx={{ overflowX: "hidden", minHeight: 240, width: 1 }}>
       <TreeItem itemId="grid" label="Data Grid">
         <TreeItem itemId="grid-community" label="@mui/x-data-grid" />
         <TreeItem itemId="grid-pro" label="@mui/x-data-grid-pro" />

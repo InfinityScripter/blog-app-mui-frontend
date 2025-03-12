@@ -1,6 +1,6 @@
-import { AuthSplitLayout } from 'src/layouts/auth-split';
+import { AuthSplitLayout } from "src/layouts/auth-split";
 
-import { GuestGuard } from 'src/auth/guard';
+import { GuestGuard } from "src/auth/guard";
 
 // ----------------------------------------------------------------------
 

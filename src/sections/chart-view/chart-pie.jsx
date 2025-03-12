@@ -1,6 +1,6 @@
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ export function ChartPie({ chart }) {
         colors={chartOptions?.colors}
         sx={{
           p: 3,
-          justifyContent: 'center',
+          justifyContent: "center",
         }}
       />
 
@@ -45,7 +45,7 @@ export function ChartPie({ chart }) {
         height={240}
         sx={{
           my: 3,
-          mx: 'auto',
+          mx: "auto",
         }}
       />
     </>

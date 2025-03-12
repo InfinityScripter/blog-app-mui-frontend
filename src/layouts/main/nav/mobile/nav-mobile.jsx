@@ -1,18 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
 
-import { paths } from 'src/routes/paths';
-import { usePathname } from 'src/routes/hooks';
+import { paths } from "src/routes/paths";
+import { usePathname } from "src/routes/hooks";
 
-import { Logo } from 'src/components/logo';
-import { NavUl } from 'src/components/nav-section';
-import { Scrollbar } from 'src/components/scrollbar';
+import { Logo } from "src/components/logo";
+import { NavUl } from "src/components/nav-section";
+import { Scrollbar } from "src/components/scrollbar";
 
-import { NavList } from './nav-mobile-list';
-import { SignInButton } from '../../../components/sign-in-button';
+import { NavList } from "./nav-mobile-list";
+import { SignInButton } from "../../../components/sign-in-button";
 
 // ----------------------------------------------------------------------
 
@@ -32,9 +32,9 @@ export function NavMobile({ data, open, onClose, slots, sx }) {
       onClose={onClose}
       PaperProps={{
         sx: {
-          display: 'flex',
-          flexDirection: 'column',
-          width: 'var(--layout-nav-mobile-width)',
+          display: "flex",
+          flexDirection: "column",
+          width: "var(--layout-nav-mobile-width)",
           ...sx,
         },
       }}
@@ -46,7 +46,13 @@ export function NavMobile({ data, open, onClose, slots, sx }) {
       )}
 
       <Scrollbar fillContent>
-        <Box component="nav" display="flex" flexDirection="column" flex="1 1 auto" sx={{ pb: 3 }}>
+        <Box
+          component="nav"
+          display="flex"
+          flexDirection="column"
+          flex="1 1 auto"
+          sx={{ pb: 3 }}
+        >
           <NavUl>
             {data.map((list) => (
               <NavList key={list.title} data={list} />

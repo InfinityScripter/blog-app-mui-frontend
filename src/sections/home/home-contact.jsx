@@ -1,36 +1,36 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Unstable_Grid2";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
 
-import { Iconify } from 'src/components/iconify';
-import { varFade, MotionViewport } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
 const CONTACT_INFO = [
   {
-    icon: 'eva:phone-fill',
-    label: 'Телефон',
-    value: '+7 (922) 248-3750',
+    icon: "eva:phone-fill",
+    label: "Телефон",
+    value: "+7 (922) 248-3750",
   },
   {
-    icon: 'eva:email-fill',
-    label: 'Email',
-    value: 'talalaev.misha@gmail.com',
+    icon: "eva:email-fill",
+    label: "Email",
+    value: "talalaev.misha@gmail.com",
   },
   {
-    icon: 'eva:pin-fill',
-    label: 'Местоположение',
-    value: 'Санкт-Петербург, Россия',
+    icon: "eva:pin-fill",
+    label: "Местоположение",
+    value: "Санкт-Петербург, Россия",
   },
 ];
 
@@ -48,7 +48,7 @@ export default function HomeContact() {
       <Stack
         spacing={3}
         sx={{
-          textAlign: 'center',
+          textAlign: "center",
           mb: { xs: 5, md: 10 },
         }}
       >
@@ -57,7 +57,7 @@ export default function HomeContact() {
         </m.div>
 
         <m.div variants={varFade().inDown}>
-          <Typography sx={{ color: 'text.secondary' }}>
+          <Typography sx={{ color: "text.secondary" }}>
             Готов обсудить ваш проект или вакансию
           </Typography>
         </m.div>
@@ -74,21 +74,16 @@ export default function HomeContact() {
                 </Typography>
 
                 <Stack spacing={3}>
-                  <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
                     <TextField fullWidth label="Имя" />
                     <TextField fullWidth label="Email" />
                   </Stack>
 
                   <TextField fullWidth label="Тема" />
 
-                  <TextField
-                    fullWidth
-                    label="Сообщение"
-                    multiline
-                    rows={4}
-                  />
+                  <TextField fullWidth label="Сообщение" multiline rows={4} />
 
-                  <Box sx={{ textAlign: 'right' }}>
+                  <Box sx={{ textAlign: "right" }}>
                     <Button size="large" variant="contained" color="primary">
                       Отправить
                     </Button>
@@ -107,9 +102,9 @@ export default function HomeContact() {
                 <Card
                   sx={{
                     boxShadow: theme.customShadows.z8,
-                    transition: 'transform 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-8px)',
+                    transition: "transform 0.3s ease",
+                    "&:hover": {
+                      transform: "translateY(-8px)",
                       boxShadow: theme.customShadows.z24,
                     },
                   }}
@@ -119,11 +114,11 @@ export default function HomeContact() {
                       <Box
                         sx={{
                           p: 1.5,
-                          borderRadius: '50%',
+                          borderRadius: "50%",
                           bgcolor: theme.palette.primary.lighter,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
                         <Iconify
@@ -134,7 +129,10 @@ export default function HomeContact() {
                       </Box>
 
                       <Box>
-                        <Typography variant="subtitle2" sx={{ color: 'text.secondary', mb: 0.5 }}>
+                        <Typography
+                          variant="subtitle2"
+                          sx={{ color: "text.secondary", mb: 0.5 }}
+                        >
                           {info.label}
                         </Typography>
                         <Typography variant="h6">{info.value}</Typography>
@@ -149,15 +147,18 @@ export default function HomeContact() {
               <Card
                 sx={{
                   boxShadow: theme.customShadows.z8,
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
+                  transition: "transform 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-8px)",
                     boxShadow: theme.customShadows.z24,
                   },
                 }}
               >
                 <CardContent>
-                  <Typography variant="subtitle2" sx={{ color: 'text.secondary', mb: 2 }}>
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ color: "text.secondary", mb: 2 }}
+                  >
                     Социальные сети
                   </Typography>
 
@@ -169,7 +170,7 @@ export default function HomeContact() {
                       variant="outlined"
                       color="inherit"
                       size="large"
-                      sx={{ minWidth: 'auto', p: 1.25 }}
+                      sx={{ minWidth: "auto", p: 1.25 }}
                     >
                       <Iconify icon="mdi:github" width={24} />
                     </Button>
@@ -181,7 +182,7 @@ export default function HomeContact() {
                       variant="outlined"
                       color="info"
                       size="large"
-                      sx={{ minWidth: 'auto', p: 1.25 }}
+                      sx={{ minWidth: "auto", p: 1.25 }}
                     >
                       <Iconify icon="mdi:linkedin" width={24} />
                     </Button>

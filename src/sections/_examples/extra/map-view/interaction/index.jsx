@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import { Map, MapControl } from 'src/components/map';
+import { Map, MapControl } from "src/components/map";
 
-import { ControlPanel } from './control-panel';
+import { ControlPanel } from "./control-panel";
 
 // ----------------------------------------------------------------------
 
@@ -25,8 +25,9 @@ export function MapInteraction({ ...other }) {
   });
 
   const updateSettings = useCallback(
-    (name, value) => setSettings((prevSettings) => ({ ...prevSettings, [name]: value })),
-    []
+    (name, value) =>
+      setSettings((prevSettings) => ({ ...prevSettings, [name]: value })),
+    [],
   );
 
   return (

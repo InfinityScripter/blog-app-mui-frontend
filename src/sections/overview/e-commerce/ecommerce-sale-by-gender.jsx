@@ -1,25 +1,37 @@
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
-import CardHeader from '@mui/material/CardHeader';
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+import CardHeader from "@mui/material/CardHeader";
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from "src/utils/format-number";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function EcommerceSaleByGender({ title, subheader, total, chart, ...other }) {
+export function EcommerceSaleByGender({
+  title,
+  subheader,
+  total,
+  chart,
+  ...other
+}) {
   const theme = useTheme();
 
   const chartSeries = chart.series.map((item) => item.value);
 
   const chartColors = chart.colors ?? [
     [theme.palette.primary.light, theme.palette.primary.main],
-    [hexAlpha(theme.palette.warning.light, 0.8), hexAlpha(theme.palette.warning.main, 0.8)],
-    [hexAlpha(theme.palette.error.light, 0.8), hexAlpha(theme.palette.error.main, 0.8)],
+    [
+      hexAlpha(theme.palette.warning.light, 0.8),
+      hexAlpha(theme.palette.warning.main, 0.8),
+    ],
+    [
+      hexAlpha(theme.palette.error.light, 0.8),
+      hexAlpha(theme.palette.error.main, 0.8),
+    ],
   ];
 
   const chartOptions = useChart({
@@ -28,7 +40,7 @@ export function EcommerceSaleByGender({ title, subheader, total, chart, ...other
     labels: chart.series.map((item) => item.label),
     stroke: { width: 0 },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         colorStops: chartColors.map((color) => [
           { offset: 0, color: color[0], opacity: 1 },
@@ -39,8 +51,11 @@ export function EcommerceSaleByGender({ title, subheader, total, chart, ...other
     grid: { padding: { top: -40, bottom: -40 } },
     plotOptions: {
       radialBar: {
-        hollow: { margin: 10, size: '32%' },
-        track: { margin: 10, background: varAlpha(theme.vars.palette.grey['500Channel'], 0.08) },
+        hollow: { margin: 10, size: "32%" },
+        track: {
+          margin: 10,
+          background: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
+        },
         dataLabels: {
           total: { formatter: () => fNumber(total) },
           value: { offsetY: 2, fontSize: theme.typography.h5.fontSize },
@@ -61,16 +76,16 @@ export function EcommerceSaleByGender({ title, subheader, total, chart, ...other
         options={chartOptions}
         width={{ xs: 300, xl: 320 }}
         height={{ xs: 300, xl: 320 }}
-        sx={{ my: 1.5, mx: 'auto' }}
+        sx={{ my: 1.5, mx: "auto" }}
         loadingProps={{ sx: { p: 4 } }}
       />
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      <Divider sx={{ borderStyle: "dashed" }} />
 
       <ChartLegends
         labels={chartOptions?.labels}
         colors={chartOptions?.colors}
-        sx={{ p: 3, justifyContent: 'center' }}
+        sx={{ p: 3, justifyContent: "center" }}
       />
     </Card>
   );

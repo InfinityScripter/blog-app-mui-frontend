@@ -1,8 +1,8 @@
-import Link from '@mui/material/Link';
+import Link from "@mui/material/Link";
 
-import { RouterLink } from 'src/routes/components';
+import { RouterLink } from "src/routes/components";
 
-import { Iconify } from '../../iconify';
+import { Iconify } from "../../iconify";
 
 // ----------------------------------------------------------------------
 
@@ -13,10 +13,10 @@ export function MenuMoreLink({ title, path, sx, ...other }) {
       href={path}
       color="inherit"
       sx={{
-        alignItems: 'center',
-        typography: 'caption',
-        display: 'inline-flex',
-        fontWeight: 'fontWeightSemiBold',
+        alignItems: "center",
+        typography: "caption",
+        display: "inline-flex",
+        fontWeight: "fontWeightSemiBold",
         ...sx,
       }}
       {...other}

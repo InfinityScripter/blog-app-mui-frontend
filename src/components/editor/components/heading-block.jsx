@@ -1,21 +1,21 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Menu from '@mui/material/Menu';
-import { listClasses } from '@mui/material/List';
-import ButtonBase, { buttonBaseClasses } from '@mui/material/ButtonBase';
+import Menu from "@mui/material/Menu";
+import { listClasses } from "@mui/material/List";
+import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from '../../iconify';
-import { ToolbarItem } from './toolbar-item';
+import { Iconify } from "../../iconify";
+import { ToolbarItem } from "./toolbar-item";
 
 const HEADING_OPTIONS = [
-  'Heading 1',
-  'Heading 2',
-  'Heading 3',
-  'Heading 4',
-  'Heading 5',
-  'Heading 6',
+  "Heading 1",
+  "Heading 2",
+  "Heading 3",
+  "Heading 4",
+  "Heading 5",
+  "Heading 6",
 ];
 
 // ----------------------------------------------------------------------
@@ -40,31 +40,36 @@ export function HeadingBlock({ editor }) {
       <ButtonBase
         id="heading-menu-button"
         aria-label="Heading menu button"
-        aria-controls={anchorEl ? 'heading-menu-button' : undefined}
+        aria-controls={anchorEl ? "heading-menu-button" : undefined}
         aria-haspopup="true"
-        aria-expanded={anchorEl ? 'true' : undefined}
+        aria-expanded={anchorEl ? "true" : undefined}
         onClick={handleClick}
         sx={{
           px: 1,
           width: 120,
           height: 32,
           borderRadius: 0.75,
-          typography: 'body2',
-          justifyContent: 'space-between',
-          border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
+          typography: "body2",
+          justifyContent: "space-between",
+          border: (theme) =>
+            `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.2)}`,
         }}
       >
-        {(editor.isActive('heading', { level: 1 }) && 'Heading 1') ||
-          (editor.isActive('heading', { level: 2 }) && 'Heading 2') ||
-          (editor.isActive('heading', { level: 3 }) && 'Heading 3') ||
-          (editor.isActive('heading', { level: 4 }) && 'Heading 4') ||
-          (editor.isActive('heading', { level: 5 }) && 'Heading 5') ||
-          (editor.isActive('heading', { level: 6 }) && 'Heading 6') ||
-          'Paragraph'}
+        {(editor.isActive("heading", { level: 1 }) && "Heading 1") ||
+          (editor.isActive("heading", { level: 2 }) && "Heading 2") ||
+          (editor.isActive("heading", { level: 3 }) && "Heading 3") ||
+          (editor.isActive("heading", { level: 4 }) && "Heading 4") ||
+          (editor.isActive("heading", { level: 5 }) && "Heading 5") ||
+          (editor.isActive("heading", { level: 6 }) && "Heading 6") ||
+          "Paragraph"}
 
         <Iconify
           width={16}
-          icon={anchorEl ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'}
+          icon={
+            anchorEl
+              ? "eva:arrow-ios-upward-fill"
+              : "eva:arrow-ios-downward-fill"
+          }
         />
       </ButtonBase>
 
@@ -73,19 +78,23 @@ export function HeadingBlock({ editor }) {
         anchorEl={anchorEl}
         open={!!anchorEl}
         onClose={handleClose}
-        MenuListProps={{ 'aria-labelledby': 'heading-button' }}
+        MenuListProps={{ "aria-labelledby": "heading-button" }}
         slotProps={{
           paper: {
             sx: {
               width: 120,
-              [`& .${listClasses.root}`]: { gap: 0.5, display: 'flex', flexDirection: 'column' },
+              [`& .${listClasses.root}`]: {
+                gap: 0.5,
+                display: "flex",
+                flexDirection: "column",
+              },
               [`& .${buttonBaseClasses.root}`]: {
                 px: 1,
                 width: 1,
                 height: 34,
                 borderRadius: 0.75,
-                justifyContent: 'flex-start',
-                '&:hover': { backgroundColor: 'action.hover' },
+                justifyContent: "flex-start",
+                "&:hover": { backgroundColor: "action.hover" },
               },
             },
           },
@@ -94,7 +103,7 @@ export function HeadingBlock({ editor }) {
         <ToolbarItem
           component="li"
           label="Paragraph"
-          active={editor.isActive('paragraph')}
+          active={editor.isActive("paragraph")}
           onClick={() => {
             handleClose();
             editor.chain().focus().setParagraph().run();
@@ -110,15 +119,15 @@ export function HeadingBlock({ editor }) {
               component="li"
               key={heading}
               label={heading}
-              active={editor.isActive('heading', { level })}
+              active={editor.isActive("heading", { level })}
               onClick={() => {
                 handleClose();
                 editor.chain().focus().toggleHeading({ level }).run();
               }}
               sx={{
-                ...(heading !== 'Paragraph' && {
+                ...(heading !== "Paragraph" && {
                   fontSize: 18 - index,
-                  fontWeight: 'fontWeightBold',
+                  fontWeight: "fontWeightBold",
                 }),
               }}
             />

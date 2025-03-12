@@ -1,7 +1,7 @@
-import useSWR from 'swr';
-import { useMemo } from 'react';
+import useSWR from "swr";
+import { useMemo } from "react";
 
-import { fetcher, endpoints } from 'src/utils/axios';
+import { fetcher, endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +16,11 @@ const swrOptions = {
 export function useGetProducts() {
   const url = endpoints.product.list;
 
-  const { data, isLoading, error, isValidating } = useSWR(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR(
+    url,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -26,7 +30,7 @@ export function useGetProducts() {
       productsValidating: isValidating,
       productsEmpty: !isLoading && !data?.products.length,
     }),
-    [data?.products, error, isLoading, isValidating]
+    [data?.products, error, isLoading, isValidating],
   );
 
   return memoizedValue;
@@ -35,9 +39,15 @@ export function useGetProducts() {
 // ----------------------------------------------------------------------
 
 export function useGetProduct(productId) {
-  const url = productId ? [endpoints.product.details, { params: { productId } }] : '';
+  const url = productId
+    ? [endpoints.product.details, { params: { productId } }]
+    : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR(
+    url,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -46,7 +56,7 @@ export function useGetProduct(productId) {
       productError: error,
       productValidating: isValidating,
     }),
-    [data?.product, error, isLoading, isValidating]
+    [data?.product, error, isLoading, isValidating],
   );
 
   return memoizedValue;
@@ -55,7 +65,7 @@ export function useGetProduct(productId) {
 // ----------------------------------------------------------------------
 
 export function useSearchProducts(query) {
-  const url = query ? [endpoints.product.search, { params: { query } }] : '';
+  const url = query ? [endpoints.product.search, { params: { query } }] : "";
 
   const { data, isLoading, error, isValidating } = useSWR(url, fetcher, {
     ...swrOptions,
@@ -70,7 +80,7 @@ export function useSearchProducts(query) {
       searchValidating: isValidating,
       searchEmpty: !isLoading && !data?.results.length,
     }),
-    [data?.results, error, isLoading, isValidating]
+    [data?.results, error, isLoading, isValidating],
   );
 
   return memoizedValue;

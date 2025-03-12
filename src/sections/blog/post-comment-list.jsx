@@ -1,7 +1,6 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
 import PostCommentItem from "./post-comment-item";
-
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +40,6 @@ export function PostCommentList({ comments = [], postId, onCommentUpdated }) {
           </Box>
         );
       })}
-
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -15,8 +15,8 @@ export function useCarouselProgress(mainApi) {
     if (!mainApi) return;
 
     onScroll(mainApi);
-    mainApi.on('reInit', onScroll);
-    mainApi.on('scroll', onScroll);
+    mainApi.on("reInit", onScroll);
+    mainApi.on("scroll", onScroll);
   }, [mainApi, onScroll]);
 
   return { value: scrollProgress };

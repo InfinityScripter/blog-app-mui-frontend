@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha, bgGradient, textGradient } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha, bgGradient, textGradient } from "src/theme/styles";
 
-import { ComponentBlock, ComponentContainer } from '../../component-block';
+import { ComponentBlock, ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
@@ -16,17 +16,17 @@ export function Gradient() {
       sx={{
         rowGap: 5,
         columnGap: 3,
-        display: 'grid',
-        gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+        display: "grid",
+        gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
       }}
     >
       <ComponentBlock title="Text">
         <Box
           component="h1"
           sx={{
-            typography: 'h1',
+            typography: "h1",
             ...textGradient(
-              `to right, ${theme.vars.palette.warning.light}, ${theme.vars.palette.primary.main}`
+              `to right, ${theme.vars.palette.warning.light}, ${theme.vars.palette.primary.main}`,
             ),
           }}
         >

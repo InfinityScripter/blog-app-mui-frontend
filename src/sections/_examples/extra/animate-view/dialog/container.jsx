@@ -1,28 +1,35 @@
-import { m, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from "framer-motion";
 
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
+import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 
-import { getVariant } from '../get-variant';
+import { getVariant } from "../get-variant";
 
 // ----------------------------------------------------------------------
 
-export function ContainerView({ open, onOpen, onClose, selectVariant, sx, ...other }) {
+export function ContainerView({
+  open,
+  onOpen,
+  onClose,
+  selectVariant,
+  sx,
+  ...other
+}) {
   return (
     <>
       <Stack
         sx={{
           borderRadius: 2,
-          flex: '1 1 auto',
-          overflow: 'hidden',
-          alignItems: 'center',
-          justifyContent: 'center',
-          bgcolor: 'background.neutral',
+          flex: "1 1 auto",
+          overflow: "hidden",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: "background.neutral",
           ...sx,
         }}
         {...other}
@@ -48,8 +55,8 @@ export function ContainerView({ open, onOpen, onClose, selectVariant, sx, ...oth
             <DialogTitle id="alert-dialog-title">{`Use Google's location service?`}</DialogTitle>
 
             <DialogContent>
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              Let Google help apps determine location. This means sending
+              anonymous location data to Google, even when no apps are running.
             </DialogContent>
 
             <DialogActions>

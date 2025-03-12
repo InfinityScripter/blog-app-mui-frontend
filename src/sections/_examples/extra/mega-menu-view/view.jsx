@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { DemoMegaMenuMobile } from './mobile';
-import { DemoMegaMenuVertical } from './vertical';
-import { ComponentHero } from '../../component-hero';
-import { DemoMegaMenuHorizontal } from './horizontal';
-import { ComponentContainer } from '../../component-block';
+import { DemoMegaMenuMobile } from "./mobile";
+import { DemoMegaMenuVertical } from "./vertical";
+import { ComponentHero } from "../../component-hero";
+import { DemoMegaMenuHorizontal } from "./horizontal";
+import { ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
@@ -18,13 +18,16 @@ export function MegaMenuView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Mega Menu"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Mega Menu' }]}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Mega Menu" },
+          ]}
         />
       </ComponentHero>
 
       <DemoMegaMenuHorizontal />
 
-      <ComponentContainer sx={{ alignItems: 'flex-start' }}>
+      <ComponentContainer sx={{ alignItems: "flex-start" }}>
         <DemoMegaMenuMobile />
         <DemoMegaMenuVertical />
       </ComponentContainer>

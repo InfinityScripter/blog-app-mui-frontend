@@ -1,10 +1,13 @@
-import TurndownService from 'turndown';
+import TurndownService from "turndown";
 
-import { htmlTags } from './html-tags';
+import { htmlTags } from "./html-tags";
 
-const excludeTags = ['pre', 'code'];
+const excludeTags = ["pre", "code"];
 
-const turndownService = new TurndownService({ codeBlockStyle: 'fenced', fence: '```' });
+const turndownService = new TurndownService({
+  codeBlockStyle: "fenced",
+  fence: "```",
+});
 
 const filterTags = htmlTags.filter((item) => !excludeTags.includes(item));
 
@@ -12,7 +15,7 @@ const filterTags = htmlTags.filter((item) => !excludeTags.includes(item));
  * Custom rule
  * https://github.com/mixmark-io/turndown/issues/241#issuecomment-400591362
  */
-turndownService.addRule('keep', {
+turndownService.addRule("keep", {
   filter: filterTags,
   replacement(content, node) {
     const { isBlock, outerHTML } = node;

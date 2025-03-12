@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Badge from '@mui/material/Badge';
-import SvgIcon from '@mui/material/SvgIcon';
-import IconButton from '@mui/material/IconButton';
+import Badge from "@mui/material/Badge";
+import SvgIcon from "@mui/material/SvgIcon";
+import IconButton from "@mui/material/IconButton";
 
-import { useSettingsContext } from 'src/components/settings/context';
+import { useSettingsContext } from "src/components/settings/context";
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ export function SettingsButton({ sx, ...other }) {
         <SvgIcon
           component={m.svg}
           animate={{ rotate: 360 }}
-          transition={{ duration: 8, ease: 'linear', repeat: Infinity }}
+          transition={{ duration: 8, ease: "linear", repeat: Infinity }}
         >
           {/* https://icon-sets.iconify.design/solar/settings-bold-duotone/ */}
           <path

@@ -1,11 +1,11 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { BackgroundShape } from './background-shape';
+import { BackgroundShape } from "./background-shape";
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ function ComingSoonIllustration({ hideBackground, sx, ...other }) {
       height="100%"
       viewBox="0 0 480 360"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 320, maxWidth: 1, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 320, maxWidth: 1, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       {!hideBackground && <BackgroundShape />}
@@ -50,7 +50,10 @@ function ComingSoonIllustration({ hideBackground, sx, ...other }) {
         opacity="0.24"
       />
 
-      <path fill={PRIMARY_DARK} d="M58.778 79.4l14.6-6 80.2 7.5v7.6l-94.8.3v-9.4z" />
+      <path
+        fill={PRIMARY_DARK}
+        d="M58.778 79.4l14.6-6 80.2 7.5v7.6l-94.8.3v-9.4z"
+      />
       <path fill={PRIMARY_MAIN} d="M85.279 71h-14.4v199.5h14.4V71z" />
       <path
         fill="#fff"

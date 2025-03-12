@@ -1,19 +1,19 @@
-import parse from 'autosuggest-highlight/parse';
-import match from 'autosuggest-highlight/match';
+import parse from "autosuggest-highlight/parse";
+import match from "autosuggest-highlight/match";
 
-import Link from '@mui/material/Link';
-import Avatar from '@mui/material/Avatar';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import InputAdornment from '@mui/material/InputAdornment';
-import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
+import Link from "@mui/material/Link";
+import Avatar from "@mui/material/Avatar";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import InputAdornment from "@mui/material/InputAdornment";
+import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
 
-import { useRouter } from 'src/routes/hooks';
+import { useRouter } from "src/routes/hooks";
 
-import { Iconify } from 'src/components/iconify';
-import { SearchNotFound } from 'src/components/search-not-found';
+import { Iconify } from "src/components/iconify";
+import { SearchNotFound } from "src/components/search-not-found";
 
-import {formatImageUrl} from "../../utils/format-image-url";
+import { formatImageUrl } from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
 
   const handleKeyUp = (event) => {
     if (query) {
-      if (event.key === 'Enter') {
+      if (event.key === "Enter") {
         // Используем ID первого найденного поста
         handleClick(results[0]._id);
       }
@@ -45,7 +45,7 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
       noOptionsText={<SearchNotFound query={query} />}
       isOptionEqualToValue={(option, value) => option._id === value._id}
       slotProps={{
-        popper: { placement: 'bottom-start', sx: { minWidth: 320 } },
+        popper: { placement: "bottom-start", sx: { minWidth: 320 } },
         paper: { sx: { [` .${autocompleteClasses.option}`]: { pl: 0.75 } } },
       }}
       renderInput={(params) => (
@@ -57,12 +57,17 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
             ...params.InputProps,
             startAdornment: (
               <InputAdornment position="start">
-                <Iconify icon="eva:search-fill" sx={{ ml: 1, color: 'text.disabled' }} />
+                <Iconify
+                  icon="eva:search-fill"
+                  sx={{ ml: 1, color: "text.disabled" }}
+                />
               </InputAdornment>
             ),
             endAdornment: (
               <>
-                {loading ? <Iconify icon="svg-spinners:8-dots-rotate" sx={{ mr: -3 }} /> : null}
+                {loading ? (
+                  <Iconify icon="svg-spinners:8-dots-rotate" sx={{ mr: -3 }} />
+                ) : null}
                 {params.InputProps.endAdornment}
               </>
             ),
@@ -94,10 +99,12 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
                 <Typography
                   key={`${post._id}-part-${index}`}
                   component="span"
-                  color={part.highlight ? 'primary' : 'textPrimary'}
+                  color={part.highlight ? "primary" : "textPrimary"}
                   sx={{
-                    typography: 'body2',
-                    fontWeight: part.highlight ? 'fontWeightSemiBold' : 'fontWeightMedium',
+                    typography: "body2",
+                    fontWeight: part.highlight
+                      ? "fontWeightSemiBold"
+                      : "fontWeightMedium",
                   }}
                 >
                   {part.text}

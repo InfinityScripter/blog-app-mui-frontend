@@ -1,17 +1,24 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
-import { varAlpha, textGradient } from 'src/theme/styles';
+import { varAlpha, textGradient } from "src/theme/styles";
 
-import { varFade } from 'src/components/animate';
+import { varFade } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
-export function SectionTitle({ title, caption, slotProps, txtGradient, description, ...other }) {
+export function SectionTitle({
+  title,
+  caption,
+  slotProps,
+  txtGradient,
+  description,
+  ...other
+}) {
   const theme = useTheme();
 
   return (
@@ -35,9 +42,9 @@ export function SectionTitle({ title, caption, slotProps, txtGradient, descripti
           component="span"
           sx={{
             opacity: 0.4,
-            display: 'inline-block',
+            display: "inline-block",
             ...textGradient(
-              `to right, ${theme.vars.palette.text.primary}, ${varAlpha(theme.vars.palette.text.primaryChannel, 0.2)}`
+              `to right, ${theme.vars.palette.text.primary}, ${varAlpha(theme.vars.palette.text.primaryChannel, 0.2)}`,
             ),
           }}
         >
@@ -48,8 +55,10 @@ export function SectionTitle({ title, caption, slotProps, txtGradient, descripti
       {description && (
         <Typography
           component={m.p}
-          variants={slotProps?.description?.variants ?? varFade({ distance: 24 }).inUp}
-          sx={{ color: 'text.secondary', ...slotProps?.description?.sx }}
+          variants={
+            slotProps?.description?.variants ?? varFade({ distance: 24 }).inUp
+          }
+          sx={{ color: "text.secondary", ...slotProps?.description?.sx }}
         >
           {description}
         </Typography>
@@ -65,7 +74,7 @@ export function SectionCaption({ title, variants, sx }) {
     <Stack
       component={m.span}
       variants={variants ?? varFade({ distance: 24 }).inUp}
-      sx={{ typography: 'overline', color: 'text.disabled', ...sx }}
+      sx={{ typography: "overline", color: "text.disabled", ...sx }}
     >
       {title}
     </Stack>

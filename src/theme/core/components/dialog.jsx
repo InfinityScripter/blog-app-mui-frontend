@@ -29,7 +29,7 @@ const MuiDialogContent = {
     root: ({ theme }) => ({ padding: theme.spacing(0, 3) }),
     dividers: ({ theme }) => ({
       borderTop: 0,
-      borderBottomStyle: 'dashed',
+      borderBottomStyle: "dashed",
       paddingBottom: theme.spacing(3),
     }),
   },
@@ -47,7 +47,7 @@ const MuiDialogActions = {
   styleOverrides: {
     root: ({ theme }) => ({
       padding: theme.spacing(3),
-      '& > :not(:first-of-type)': { marginLeft: theme.spacing(1.5) },
+      "& > :not(:first-of-type)": { marginLeft: theme.spacing(1.5) },
     }),
   },
 };

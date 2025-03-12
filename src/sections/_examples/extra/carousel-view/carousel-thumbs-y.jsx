@@ -1,38 +1,38 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { Image } from 'src/components/image';
+import { Image } from "src/components/image";
 import {
   Carousel,
   useCarousel,
   CarouselThumb,
   CarouselThumbs,
   CarouselArrowNumberButtons,
-} from 'src/components/carousel';
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
 export function CarouselThumbsY({ data }) {
   const carousel = useCarousel({
     thumbs: {
-      axis: 'y',
-      slideSpacing: '8px',
-      slidesToShow: 'auto',
+      axis: "y",
+      slideSpacing: "8px",
+      slidesToShow: "auto",
     },
   });
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: "relative" }}>
       <Carousel carousel={carousel} sx={{ borderRadius: 2 }}>
         {data.map((item, index) => (
-          <Box key={item.id} sx={{ position: 'relative' }}>
+          <Box key={item.id} sx={{ position: "relative" }}>
             <IndexLabel index={index + 1} />
             <Image
               visibleByDefault
               alt={item.title}
               src={item.coverUrl}
-              ratio={{ xs: '3/4', sm: '16/10' }}
+              ratio={{ xs: "3/4", sm: "16/10" }}
             />
           </Box>
         ))}
@@ -43,18 +43,18 @@ export function CarouselThumbsY({ data }) {
         options={carousel.options}
         totalSlides={carousel.dots.dotCount}
         selectedIndex={carousel.dots.selectedIndex + 1}
-        sx={{ left: 16, bottom: 16, position: 'absolute' }}
+        sx={{ left: 16, bottom: 16, position: "absolute" }}
       />
 
       <Box
         sx={{
           p: 0.5,
           right: 8,
-          top: '50%',
+          top: "50%",
           borderRadius: 1.25,
-          position: 'absolute',
-          bgcolor: 'background.paper',
-          transform: 'translateY(-50%)',
+          position: "absolute",
+          bgcolor: "background.paper",
+          transform: "translateY(-50%)",
         }}
       >
         <CarouselThumbs

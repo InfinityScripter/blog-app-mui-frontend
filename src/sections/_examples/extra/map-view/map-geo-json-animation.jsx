@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { Layer, Source } from 'react-map-gl';
+import { useState, useEffect } from "react";
+import { Layer, Source } from "react-map-gl";
 
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { Map, MapControl } from 'src/components/map';
+import { Map, MapControl } from "src/components/map";
 
 // ----------------------------------------------------------------------
 
@@ -11,16 +11,22 @@ export function MapGeoJSONAnimation({ ...other }) {
   const theme = useTheme();
 
   const pointLayer = {
-    id: 'point',
-    type: 'circle',
-    paint: { 'circle-radius': 10, 'circle-color': theme.palette.error.main },
+    id: "point",
+    type: "circle",
+    paint: { "circle-radius": 10, "circle-color": theme.palette.error.main },
   };
 
   const [pointData, setPointData] = useState(null);
 
   useEffect(() => {
     const animation = window.requestAnimationFrame(() =>
-      setPointData(pointOnCircle({ center: [-100, 0], angle: Date.now() / 1000, radius: 20 }))
+      setPointData(
+        pointOnCircle({
+          center: [-100, 0],
+          angle: Date.now() / 1000,
+          radius: 20,
+        }),
+      ),
     );
 
     return () => window.cancelAnimationFrame(animation);
@@ -47,7 +53,10 @@ export function MapGeoJSONAnimation({ ...other }) {
 
 function pointOnCircle({ center, angle, radius }) {
   return {
-    type: 'Point',
-    coordinates: [center[0] + Math.cos(angle) * radius, center[1] + Math.sin(angle) * radius],
+    type: "Point",
+    coordinates: [
+      center[0] + Math.cos(angle) * radius,
+      center[1] + Math.sin(angle) * radius,
+    ],
   };
 }

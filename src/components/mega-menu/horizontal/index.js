@@ -1,3 +1,3 @@
-export * from './mega-menu-horizontal';
+export * from "./mega-menu-horizontal";
 
-export { NavItem as MegaMenuHorizontalItem } from './nav-item';
+export { NavItem as MegaMenuHorizontalItem } from "./nav-item";

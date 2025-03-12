@@ -1,6 +1,6 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ export function useChart(options) {
 
   const LABEL_TOTAL = {
     show: true,
-    label: 'Total',
+    label: "Total",
     color: theme.vars.palette.text.secondary,
     fontSize: theme.typography.subtitle2.fontSize,
     fontWeight: theme.typography.subtitle2.fontWeight,
@@ -29,7 +29,7 @@ export function useChart(options) {
         plotOptions: {
           bar: {
             borderRadius: 3,
-            columnWidth: '80%',
+            columnWidth: "80%",
           },
         },
       },
@@ -39,7 +39,7 @@ export function useChart(options) {
       options: {
         plotOptions: {
           bar: {
-            columnWidth: '60%',
+            columnWidth: "60%",
           },
         },
       },
@@ -96,7 +96,7 @@ export function useChart(options) {
       hover: {
         ...options?.states?.hover,
         filter: {
-          type: 'darken',
+          type: "darken",
           value: 0.88,
           ...options?.states?.hover?.filter,
         },
@@ -104,7 +104,7 @@ export function useChart(options) {
       active: {
         ...options?.states?.active,
         filter: {
-          type: 'darken',
+          type: "darken",
           value: 0.88,
           ...options?.states?.active?.filter,
         },
@@ -118,7 +118,7 @@ export function useChart(options) {
       opacity: 1,
       ...options?.fill,
       gradient: {
-        type: 'vertical',
+        type: "vertical",
         shadeIntensity: 0,
         opacityFrom: 0.4,
         opacityTo: 0,
@@ -140,8 +140,8 @@ export function useChart(options) {
      *************************************** */
     stroke: {
       width: 2.5,
-      curve: 'smooth',
-      lineCap: 'round',
+      curve: "smooth",
+      lineCap: "round",
       ...options?.stroke,
     },
 
@@ -196,7 +196,7 @@ export function useChart(options) {
      * Tooltip
      *************************************** */
     tooltip: {
-      theme: 'false',
+      theme: "false",
       fillSeriesColor: false,
       x: {
         show: true,
@@ -209,10 +209,10 @@ export function useChart(options) {
      *************************************** */
     legend: {
       show: false,
-      position: 'top',
+      position: "top",
       fontWeight: 500,
-      fontSize: '13px',
-      horizontalAlign: 'right',
+      fontSize: "13px",
+      horizontalAlign: "right",
       markers: { radius: 12 },
       labels: {
         colors: theme.vars.palette.text.primary,
@@ -233,8 +233,8 @@ export function useChart(options) {
       // plotOptions: Bar
       bar: {
         borderRadius: 4,
-        columnWidth: '48%',
-        borderRadiusApplication: 'end',
+        columnWidth: "48%",
+        borderRadiusApplication: "end",
         ...options?.plotOptions?.bar,
       },
 
@@ -263,13 +263,13 @@ export function useChart(options) {
         ...options?.plotOptions?.radialBar,
         hollow: {
           margin: -8,
-          size: '100%',
+          size: "100%",
           ...options?.plotOptions?.radialBar?.hollow,
         },
         track: {
           margin: -8,
-          strokeWidth: '50%',
-          background: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
+          strokeWidth: "50%",
+          background: varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
           ...options?.plotOptions?.radialBar?.track,
         },
         dataLabels: {
@@ -290,7 +290,7 @@ export function useChart(options) {
         ...options?.plotOptions?.radar,
         polygons: {
           fill: {
-            colors: ['transparent'],
+            colors: ["transparent"],
           },
           strokeColors: theme.vars.palette.divider,
           connectorColors: theme.vars.palette.divider,

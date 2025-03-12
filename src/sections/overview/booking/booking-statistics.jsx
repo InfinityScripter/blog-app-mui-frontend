@@ -1,27 +1,35 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from "src/utils/format-number";
 
-import { Chart, useChart, ChartSelect, ChartLegends } from 'src/components/chart';
+import {
+  Chart,
+  useChart,
+  ChartSelect,
+  ChartLegends,
+} from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function BookingStatistics({ title, subheader, chart, ...other }) {
   const theme = useTheme();
 
-  const [selectedSeries, setSelectedSeries] = useState('Yearly');
+  const [selectedSeries, setSelectedSeries] = useState("Yearly");
 
   const currentSeries = chart.series.find((i) => i.name === selectedSeries);
 
-  const chartColors = [theme.palette.primary.dark, hexAlpha(theme.palette.error.main, 0.48)];
+  const chartColors = [
+    theme.palette.primary.dark,
+    hexAlpha(theme.palette.error.main, 0.48),
+  ];
 
   const chartOptions = useChart({
     colors: chartColors,
-    stroke: { width: 2, colors: ['transparent'] },
+    stroke: { width: 2, colors: ["transparent"] },
     xaxis: { categories: currentSeries?.categories },
     tooltip: { y: { formatter: (value) => `${value}` } },
     ...chart.options,

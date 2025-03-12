@@ -1,56 +1,64 @@
-'use client';
+"use client";
 
-import dayjs from 'dayjs';
-import { useState, useCallback } from 'react';
+import dayjs from "dayjs";
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Radio from '@mui/material/Radio';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import RadioGroup from '@mui/material/RadioGroup';
-import TablePagination from '@mui/material/TablePagination';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Radio from "@mui/material/Radio";
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import RadioGroup from "@mui/material/RadioGroup";
+import TablePagination from "@mui/material/TablePagination";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { fDate } from 'src/utils/format-time';
-import { fData, fNumber, fPercent, fCurrency, fShortenNumber } from 'src/utils/format-number';
+import { fDate } from "src/utils/format-time";
+import {
+  fData,
+  fNumber,
+  fPercent,
+  fCurrency,
+  fShortenNumber,
+} from "src/utils/format-number";
 
-import { allLangs, useTranslate } from 'src/locales';
+import { allLangs, useTranslate } from "src/locales";
 
-import { FlagIcon } from 'src/components/iconify';
-import { NavSectionVertical } from 'src/components/nav-section';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { FlagIcon } from "src/components/iconify";
+import { NavSectionVertical } from "src/components/nav-section";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { navData as clientNavData } from './config-nav';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { navData as clientNavData } from "./config-nav";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const StyledPaper = styled((props) => <Paper variant="outlined" {...props} />)(({ theme }) => ({
-  ...theme.typography.body2,
-  display: 'flex',
-  gap: theme.spacing(1),
-  flexDirection: 'column',
-  padding: theme.spacing(3),
-  borderRadius: theme.shape.borderRadius * 2,
-}));
+const StyledPaper = styled((props) => <Paper variant="outlined" {...props} />)(
+  ({ theme }) => ({
+    ...theme.typography.body2,
+    display: "flex",
+    gap: theme.spacing(1),
+    flexDirection: "column",
+    padding: theme.spacing(3),
+    borderRadius: theme.shape.borderRadius * 2,
+  }),
+);
 
 // ----------------------------------------------------------------------
 
 export function MultiLanguageView({ ssrNavData }) {
   const { t, onChangeLang, currentLang } = useTranslate();
 
-  const [date, setDate] = useState(dayjs('2022-04-17'));
+  const [date, setDate] = useState(dayjs("2022-04-17"));
 
   const [page, setPage] = useState(2);
 
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  const { t: tnav } = useTranslate('navbar');
+  const { t: tnav } = useTranslate("navbar");
 
   const navData = ssrNavData ?? clientNavData(tnav);
 
@@ -72,14 +80,14 @@ export function MultiLanguageView({ ssrNavData }) {
         px: 2,
         right: 0,
         zIndex: 1,
-        top: '25%',
-        position: 'fixed',
+        top: "25%",
+        position: "fixed",
         borderRadius: 1.5,
-        bgcolor: 'background.paper',
+        bgcolor: "background.paper",
         boxShadow: (theme) => theme.customShadows.dropdown,
       }}
     >
-      <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.sexcondary' }}>
+      <Typography variant="subtitle2" sx={{ mb: 1, color: "text.sexcondary" }}>
         Langs
       </Typography>
 
@@ -103,38 +111,40 @@ export function MultiLanguageView({ ssrNavData }) {
 
   const DEMO = [
     {
-      name: 'Flexible',
+      name: "Flexible",
       component: (
         <div>
           <Box
             sx={{
               gap: 1,
               mb: 2,
-              display: 'flex',
-              typography: 'h3',
-              alignItems: 'center',
+              display: "flex",
+              typography: "h3",
+              alignItems: "center",
             }}
           >
             <FlagIcon code={currentLang.countryCode} />
-            {t('demo.lang')}
+            {t("demo.lang")}
           </Box>
-          <Typography>{t('demo.description')}</Typography>
+          <Typography>{t("demo.description")}</Typography>
         </div>
       ),
     },
     {
-      name: 'System (MUI)',
+      name: "System (MUI)",
       component: (
         <div>
-          <Box sx={{ typography: 'subtitle2' }}>Supports other components including:</Box>
+          <Box sx={{ typography: "subtitle2" }}>
+            Supports other components including:
+          </Box>
           <Box
             component="ul"
             sx={{
               mt: 1,
               mb: 3,
               pl: 3,
-              typography: 'body2',
-              listStyleType: 'disc',
+              typography: "body2",
+              listStyleType: "disc",
             }}
           >
             <Box component="li"> Data Grid</Box>
@@ -156,21 +166,24 @@ export function MultiLanguageView({ ssrNavData }) {
       ),
     },
     {
-      name: 'Nav',
+      name: "Nav",
       component: (
-        <Paper variant="outlined" sx={{ p: 2, width: 1, maxWidth: 320, borderRadius: 2 }}>
+        <Paper
+          variant="outlined"
+          sx={{ p: 2, width: 1, maxWidth: 320, borderRadius: 2 }}
+        >
           <NavSectionVertical data={navData} />
         </Paper>
       ),
     },
     {
-      name: 'Numbers',
+      name: "Numbers",
       component: (
         <div>
           <Box
             gap={3}
             display="grid"
-            gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
+            gridTemplateColumns={{ xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
           >
             <NumberBlock
               title="Currency"
@@ -197,19 +210,50 @@ export function MultiLanguageView({ ssrNavData }) {
             <NumberBlock
               title="Shorten"
               type="shorten"
-              data={[719, 719.63, 3683.72, 5583407.51, 3345583407.51, undefined, null, NaN, 0]}
+              data={[
+                719,
+                719.63,
+                3683.72,
+                5583407.51,
+                3345583407.51,
+                undefined,
+                null,
+                NaN,
+                0,
+              ]}
             />
 
             <NumberBlock
               title="Data"
               type="data"
-              data={[719, 719.63, 3683.72, 5583407.51, 3345583407.51, undefined, null, NaN, 0]}
+              data={[
+                719,
+                719.63,
+                3683.72,
+                5583407.51,
+                3345583407.51,
+                undefined,
+                null,
+                NaN,
+                0,
+              ]}
             />
 
             <NumberBlock
               title="Number"
               type="number"
-              data={[451, 451.82, 1081.62, 27921.9, 600668.81, 7587054.86, undefined, null, NaN, 0]}
+              data={[
+                451,
+                451.82,
+                1081.62,
+                27921.9,
+                600668.81,
+                7587054.86,
+                undefined,
+                null,
+                NaN,
+                0,
+              ]}
             />
 
             <StyledPaper>
@@ -219,7 +263,9 @@ export function MultiLanguageView({ ssrNavData }) {
                 onChange={(newValue) => setDate(newValue)}
                 slotProps={{ textField: { fullWidth: true } }}
               />
-              <Box sx={{ mt: 2, typography: 'subtitle2' }}>Output: {fDate(new Date())}</Box>
+              <Box sx={{ mt: 2, typography: "subtitle2" }}>
+                Output: {fDate(new Date())}
+              </Box>
             </StyledPaper>
           </Box>
         </div>
@@ -232,10 +278,13 @@ export function MultiLanguageView({ ssrNavData }) {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Multi language"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Multi language' }]}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Multi language" },
+          ]}
           moreLink={[
-            'https://react.i18next.com',
-            'https://mui.com/guides/localization/#main-content',
+            "https://react.i18next.com",
+            "https://mui.com/guides/localization/#main-content",
           ]}
         />
       </ComponentHero>
@@ -252,13 +301,13 @@ export function MultiLanguageView({ ssrNavData }) {
 function NumberBlock({ data, type, title }) {
   const renderLabel = (value) => {
     if (value === undefined) {
-      return 'undefined';
+      return "undefined";
     }
     if (value === null) {
-      return 'null';
+      return "null";
     }
-    if (String(value) === 'NaN') {
-      return 'NaN';
+    if (String(value) === "NaN") {
+      return "NaN";
     }
 
     return value;
@@ -266,20 +315,20 @@ function NumberBlock({ data, type, title }) {
 
   return (
     <StyledPaper>
-      <Box sx={{ typography: 'subtitle2' }}>{title}</Box>
+      <Box sx={{ typography: "subtitle2" }}>{title}</Box>
 
       {data.map((numb, index) => (
         <Box key={String(index)}>
-          <Box component="span" sx={{ color: 'text.primary' }}>
+          <Box component="span" sx={{ color: "text.primary" }}>
             {renderLabel(numb)}
           </Box>
-          <Box component="span" sx={{ color: 'text.secondary' }}>
-            {' => '}
-            {(type === 'currency' && fCurrency(numb)) ||
-              (type === 'percent' && fPercent(numb)) ||
-              (type === 'shorten' && fShortenNumber(numb)) ||
-              (type === 'data' && fData(numb)) ||
-              (type === 'number' && fNumber(numb))}
+          <Box component="span" sx={{ color: "text.secondary" }}>
+            {" => "}
+            {(type === "currency" && fCurrency(numb)) ||
+              (type === "percent" && fPercent(numb)) ||
+              (type === "shorten" && fShortenNumber(numb)) ||
+              (type === "data" && fData(numb)) ||
+              (type === "number" && fNumber(numb))}
           </Box>
         </Box>
       ))}

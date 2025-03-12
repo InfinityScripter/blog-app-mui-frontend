@@ -1,7 +1,7 @@
-import SvgIcon from '@mui/material/SvgIcon';
-import { alertClasses } from '@mui/material/Alert';
+import SvgIcon from "@mui/material/SvgIcon";
+import { alertClasses } from "@mui/material/Alert";
 
-import { varAlpha, stylesMode } from '../../styles';
+import { varAlpha, stylesMode } from "../../styles";
 
 // ----------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ const AlertErrorIcon = (props) => (
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['info', 'success', 'warning', 'error'];
+const COLORS = ["info", "success", "warning", "error"];
 
 function styleColors(ownerState, styles) {
   const outputStyle = COLORS.reduce((acc, color) => {
@@ -130,11 +130,16 @@ const MuiAlert = {
     outlined: ({ ownerState, theme }) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
-          backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.08),
+          backgroundColor: varAlpha(
+            theme.vars.palette[color].mainChannel,
+            0.08,
+          ),
           color: theme.vars.palette[color].dark,
           border: `solid 1px ${varAlpha(theme.vars.palette[color].mainChannel, 0.16)}`,
           [stylesMode.dark]: { color: theme.vars.palette[color].light },
-          [`& .${alertClasses.icon}`]: { color: theme.vars.palette[color].main },
+          [`& .${alertClasses.icon}`]: {
+            color: theme.vars.palette[color].main,
+          },
         })),
       };
 

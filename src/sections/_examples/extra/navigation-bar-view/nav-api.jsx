@@ -1,21 +1,21 @@
-import useSWR from 'swr';
-import { useMemo } from 'react';
+import useSWR from "swr";
+import { useMemo } from "react";
 
-import Paper from '@mui/material/Paper';
-import Skeleton from '@mui/material/Skeleton';
+import Paper from "@mui/material/Paper";
+import Skeleton from "@mui/material/Skeleton";
 
-import { fetcher } from 'src/utils/axios';
+import { fetcher } from "src/utils/axios";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { Label } from 'src/components/label';
-import { SvgColor } from 'src/components/svg-color';
-import { NavSectionVertical } from 'src/components/nav-section';
+import { Label } from "src/components/label";
+import { SvgColor } from "src/components/svg-color";
+import { NavSectionVertical } from "src/components/nav-section";
 
 // ----------------------------------------------------------------------
 
 function useGetNavItems() {
-  const URL = '/api/navbar';
+  const URL = "/api/navbar";
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
@@ -27,7 +27,7 @@ function useGetNavItems() {
       isValidating,
       isEmpty: !isLoading && !data?.navItems.length,
     }),
-    [data?.navItems, error, isLoading, isValidating]
+    [data?.navItems, error, isLoading, isValidating],
   );
 
   return memoizedValue;
@@ -44,14 +44,19 @@ export function NavAPI() {
       sx={{
         p: 2,
         width: 1,
-        mx: 'auto',
+        mx: "auto",
         maxWidth: 320,
         borderRadius: 2,
       }}
     >
       {navItems.isLoading ? (
         [...Array(8)].map((i, index) => (
-          <Skeleton key={index} variant="rounded" height={48} sx={{ borderRadius: 1, my: 0.5 }} />
+          <Skeleton
+            key={index}
+            variant="rounded"
+            height={48}
+            sx={{ borderRadius: 1, my: 0.5 }}
+          />
         ))
       ) : (
         <NavSectionVertical
@@ -59,9 +64,9 @@ export function NavAPI() {
           render={{
             navIcon: NAV_ICONS,
             navInfo: (val) => ({
-              'info.landing': <Label color="error">{val}</Label>,
-              'info.blog': <Label color="info">{val}</Label>,
-              'info.blog.item1': <>{val}</>,
+              "info.landing": <Label color="error">{val}</Label>,
+              "info.blog": <Label color="info">{val}</Label>,
+              "info.blog.item1": <>{val}</>,
             }),
           }}
         />
@@ -73,15 +78,39 @@ export function NavAPI() {
 // ----------------------------------------------------------------------
 
 const NAV_ICONS = {
-  'icon.landing': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`} />,
-  'icon.services': (
-    <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-analytics.svg`} />
+  "icon.landing": (
+    <SvgColor
+      src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
+    />
   ),
-  'icon.blog': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-blog.svg`} />,
-  'icon.about': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-user.svg`} />,
-  'icon.tour': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-tour.svg`} />,
-  'icon.menu': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-menu-item.svg`} />,
-  'icon.level2a': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`} />,
-  'icon.level2b': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-mail.svg`} />,
-  'icon.level2c': <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-calendar.svg`} />,
+  "icon.services": (
+    <SvgColor
+      src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-analytics.svg`}
+    />
+  ),
+  "icon.blog": (
+    <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-blog.svg`} />
+  ),
+  "icon.about": (
+    <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-user.svg`} />
+  ),
+  "icon.tour": (
+    <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-tour.svg`} />
+  ),
+  "icon.menu": (
+    <SvgColor
+      src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-menu-item.svg`}
+    />
+  ),
+  "icon.level2a": (
+    <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`} />
+  ),
+  "icon.level2b": (
+    <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-mail.svg`} />
+  ),
+  "icon.level2c": (
+    <SvgColor
+      src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-calendar.svg`}
+    />
+  ),
 };

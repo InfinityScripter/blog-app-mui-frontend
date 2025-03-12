@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -11,12 +11,14 @@ export function useCarouselAutoPlay(mainApi) {
       if (!autoplay) return;
 
       const resetOrStop =
-        autoplay.options.stopOnInteraction === false ? autoplay.reset : autoplay.stop;
+        autoplay.options.stopOnInteraction === false
+          ? autoplay.reset
+          : autoplay.stop;
 
       resetOrStop();
       callback();
     },
-    [mainApi]
+    [mainApi],
   );
 
   const onTogglePlay = useCallback(() => {
@@ -33,9 +35,9 @@ export function useCarouselAutoPlay(mainApi) {
 
     setIsPlaying(autoplay.isPlaying());
     mainApi
-      .on('autoplay:play', () => setIsPlaying(true))
-      .on('autoplay:stop', () => setIsPlaying(false))
-      .on('reInit', () => setIsPlaying(false));
+      .on("autoplay:play", () => setIsPlaying(true))
+      .on("autoplay:stop", () => setIsPlaying(false))
+      .on("reInit", () => setIsPlaying(false));
   }, [mainApi]);
 
   return { isPlaying, onTogglePlay, onClickAutoplay };

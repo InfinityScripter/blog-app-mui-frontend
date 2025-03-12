@@ -1,11 +1,15 @@
-import AutoHeight from 'embla-carousel-auto-height';
+import AutoHeight from "embla-carousel-auto-height";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { Image } from 'src/components/image';
-import { Carousel, useCarousel, CarouselArrowBasicButtons } from 'src/components/carousel';
+import { Image } from "src/components/image";
+import {
+  Carousel,
+  useCarousel,
+  CarouselArrowBasicButtons,
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +21,7 @@ export function CarouselAutoHeight({ data }) {
       <CarouselArrowBasicButtons
         {...carousel.arrows}
         options={carousel.options}
-        sx={{ top: 20, right: 16, position: 'absolute' }}
+        sx={{ top: 20, right: 16, position: "absolute" }}
       />
 
       <Carousel carousel={carousel} sx={{ borderRadius: 2 }}>
@@ -31,7 +35,7 @@ export function CarouselAutoHeight({ data }) {
 
 function CarouselItem({ item, index }) {
   return (
-    <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 2 }}>
+    <Box sx={{ position: "relative", overflow: "hidden", borderRadius: 2 }}>
       <IndexLabel index={index + 1} />
       <Image
         alt={item.title}

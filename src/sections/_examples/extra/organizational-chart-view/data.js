@@ -1,13 +1,17 @@
-import { _mock } from 'src/_mock';
+import { _mock } from "src/_mock";
 
 const rootNode = {
-  group: 'root',
-  role: 'ceo, co-founder',
+  group: "root",
+  role: "ceo, co-founder",
   name: _mock.fullName(1),
   avatarUrl: _mock.image.avatar(1),
 };
 
-const group = { product: 'product design', development: 'development', marketing: 'marketing' };
+const group = {
+  product: "product design",
+  development: "development",
+  marketing: "marketing",
+};
 
 // ----------------------------------------------------------------------
 
@@ -15,13 +19,13 @@ export const SIMPLE_DATA = {
   ...rootNode,
   children: [
     {
-      role: 'Lead',
+      role: "Lead",
       id: _mock.id(2),
       name: _mock.fullName(2),
       avatarUrl: _mock.image.avatar(2),
       children: [
         {
-          role: 'Senior',
+          role: "Senior",
           id: _mock.id(3),
           name: _mock.fullName(3),
           avatarUrl: _mock.image.avatar(3),
@@ -29,25 +33,25 @@ export const SIMPLE_DATA = {
       ],
     },
     {
-      role: 'Lead',
+      role: "Lead",
       id: _mock.id(4),
       name: _mock.fullName(4),
       avatarUrl: _mock.image.avatar(4),
       children: [
         {
-          role: 'Senior',
+          role: "Senior",
           id: _mock.id(5),
           name: _mock.fullName(5),
           avatarUrl: _mock.image.avatar(5),
           children: [
             {
-              role: 'Back end developer',
+              role: "Back end developer",
               id: _mock.id(6),
               name: _mock.fullName(6),
               avatarUrl: _mock.image.avatar(6),
               children: [
                 {
-                  role: 'Back end developer',
+                  role: "Back end developer",
                   id: _mock.id(7),
                   name: _mock.fullName(7),
                   avatarUrl: _mock.image.avatar(7),
@@ -55,7 +59,7 @@ export const SIMPLE_DATA = {
               ],
             },
             {
-              role: 'Front end',
+              role: "Front end",
               id: _mock.id(8),
               name: _mock.fullName(8),
               avatarUrl: _mock.image.avatar(8),
@@ -65,19 +69,19 @@ export const SIMPLE_DATA = {
       ],
     },
     {
-      role: 'Lead',
+      role: "Lead",
       id: _mock.id(9),
       name: _mock.fullName(9),
       avatarUrl: _mock.image.avatar(9),
       children: [
         {
-          role: 'Support',
+          role: "Support",
           id: _mock.id(10),
           name: _mock.fullName(10),
           avatarUrl: _mock.image.avatar(10),
         },
         {
-          role: 'Content writer',
+          role: "Content writer",
           id: _mock.id(11),
           name: _mock.fullName(11),
           avatarUrl: _mock.image.avatar(11),
@@ -98,14 +102,14 @@ export const GROUP_DATA = {
       children: [
         {
           group: group.product,
-          role: 'Lead',
+          role: "Lead",
           id: _mock.id(2),
           name: _mock.fullName(2),
           avatarUrl: _mock.image.avatar(2),
           children: [
             {
               group: group.product,
-              role: 'Senior',
+              role: "Senior",
               id: _mock.id(3),
               name: _mock.fullName(3),
               avatarUrl: _mock.image.avatar(3),
@@ -120,28 +124,28 @@ export const GROUP_DATA = {
       children: [
         {
           group: group.development,
-          role: 'Lead',
+          role: "Lead",
           id: _mock.id(4),
           name: _mock.fullName(4),
           avatarUrl: _mock.image.avatar(4),
           children: [
             {
               group: group.development,
-              role: 'Senior',
+              role: "Senior",
               id: _mock.id(5),
               name: _mock.fullName(5),
               avatarUrl: _mock.image.avatar(5),
               children: [
                 {
                   group: group.development,
-                  role: 'Back end developer',
+                  role: "Back end developer",
                   id: _mock.id(6),
                   name: _mock.fullName(6),
                   avatarUrl: _mock.image.avatar(6),
                   children: [
                     {
                       group: group.development,
-                      role: 'Back end developer',
+                      role: "Back end developer",
                       id: _mock.id(7),
                       name: _mock.fullName(7),
                       avatarUrl: _mock.image.avatar(7),
@@ -150,7 +154,7 @@ export const GROUP_DATA = {
                 },
                 {
                   group: group.development,
-                  role: 'Front end',
+                  role: "Front end",
                   id: _mock.id(8),
                   name: _mock.fullName(8),
                   avatarUrl: _mock.image.avatar(8),
@@ -167,21 +171,21 @@ export const GROUP_DATA = {
       children: [
         {
           group: group.marketing,
-          role: 'Lead',
+          role: "Lead",
           id: _mock.id(9),
           name: _mock.fullName(9),
           avatarUrl: _mock.image.avatar(9),
           children: [
             {
               group: group.marketing,
-              role: 'Lead',
+              role: "Lead",
               id: _mock.id(10),
               name: _mock.fullName(10),
               avatarUrl: _mock.image.avatar(10),
             },
             {
               group: group.marketing,
-              role: 'Content writer',
+              role: "Content writer",
               id: _mock.id(11),
               name: _mock.fullName(11),
               avatarUrl: _mock.image.avatar(11),

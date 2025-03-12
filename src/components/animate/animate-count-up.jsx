@@ -1,7 +1,13 @@
-import { useRef, useEffect } from 'react';
-import { m, animate, useInView, useTransform, useMotionValue } from 'framer-motion';
+import { useRef, useEffect } from "react";
+import {
+  m,
+  animate,
+  useInView,
+  useTransform,
+  useMotionValue,
+} from "framer-motion";
 
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
 
@@ -9,12 +15,12 @@ export function AnimateCountUp({
   to,
   sx,
   from = 0,
-  unit = '',
+  unit = "",
   toFixed = 0,
   duration = 2,
   once = true,
   amount = 0.5,
-  component = 'p',
+  component = "p",
   ...other
 }) {
   const ref = useRef(null);
@@ -35,7 +41,7 @@ export function AnimateCountUp({
     <Typography
       component={component}
       sx={{
-        display: 'inline-flex',
+        display: "inline-flex",
         p: 0,
         m: 0,
         ...sx,

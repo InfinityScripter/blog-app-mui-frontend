@@ -1,7 +1,7 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ function NewPasswordIcon({ sx, ...other }) {
       fill="none"
       viewBox="0 0 96 96"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 96, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 96, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       <rect x="24" y="55" width="48" height="17" fill={WARNING_LIGHT} />
@@ -48,7 +48,10 @@ function NewPasswordIcon({ sx, ...other }) {
         d="M65.764 61.737L64.7445 60.2637L62.3336 61.9316V59H60.5419V61.9316L58.1309 60.2637L57.1115 61.737L59.8632 63.6408L57.1115 65.5448L58.1309 67.0182L60.5419 65.3502V68.2818H62.3336V65.3502L64.7445 67.0182L65.764 65.5448L63.0123 63.6408L65.764 61.737Z"
         fill={WARNING_DARK}
       />
-      <g style={{ mixBlendMode: 'overlay' }} filter="url(#filter0_i_3223_38505)">
+      <g
+        style={{ mixBlendMode: "overlay" }}
+        filter="url(#filter0_i_3223_38505)"
+      >
         <path
           d="M36.3238 29.3905V41.9535H26.7178V29.3905C26.7178 17.7136 36.1226 8.19195 47.7552 8.00268L48.1085 8C59.7856 8 69.3069 17.4049 69.4962 29.0373L69.499 29.3905V41.9535H59.8931V29.3905C59.8931 22.9575 54.7117 17.7118 48.3031 17.6075L48.1085 17.6059C41.6103 17.6059 36.3238 22.8925 36.3238 29.3905Z"
           fill="white"
@@ -88,7 +91,12 @@ function NewPasswordIcon({ sx, ...other }) {
           colorInterpolationFilters="sRGB"
         >
           <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
@@ -98,8 +106,15 @@ function NewPasswordIcon({ sx, ...other }) {
           <feOffset dx="-2" dy="-2" />
           <feGaussianBlur stdDeviation="2" />
           <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0" />
-          <feBlend mode="normal" in2="shape" result="effect1_innerShadow_3223_38505" />
+          <feColorMatrix
+            type="matrix"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"
+          />
+          <feBlend
+            mode="normal"
+            in2="shape"
+            result="effect1_innerShadow_3223_38505"
+          />
         </filter>
       </defs>
     </Box>

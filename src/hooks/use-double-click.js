@@ -1,4 +1,4 @@
-import { useRef, useMemo, useCallback } from 'react';
+import { useRef, useMemo, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ export function useDoubleClick({ click, doubleClick, timeout = 250 }) {
         doubleClick(event);
       }
     },
-    [click, doubleClick, timeout, clearClickTimeout]
+    [click, doubleClick, timeout, clearClickTimeout],
   );
 
   const memoizedValue = useMemo(() => handleEvent, [handleEvent]);

@@ -1,22 +1,29 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from "react";
 
-import Paper from '@mui/material/Paper';
-import Popover from '@mui/material/Popover';
-import { useTheme } from '@mui/material/styles';
+import Paper from "@mui/material/Paper";
+import Popover from "@mui/material/Popover";
+import { useTheme } from "@mui/material/styles";
 
-import { usePathname } from 'src/routes/hooks';
-import { isExternalLink } from 'src/routes/utils';
-import { useActiveLink } from 'src/routes/hooks/use-active-link';
+import { usePathname } from "src/routes/hooks";
+import { isExternalLink } from "src/routes/utils";
+import { useActiveLink } from "src/routes/hooks/use-active-link";
 
-import { paper } from 'src/theme/styles';
+import { paper } from "src/theme/styles";
 
-import { NavItem } from './nav-item';
-import { NavUl, NavLi } from '../styles';
-import { navSectionClasses } from '../classes';
+import { NavItem } from "./nav-item";
+import { NavUl, NavLi } from "../styles";
+import { navSectionClasses } from "../classes";
 
 // ----------------------------------------------------------------------
 
-export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRedirect }) {
+export function NavList({
+  data,
+  depth,
+  render,
+  cssVars,
+  slotProps,
+  enabledRootRedirect,
+}) {
   const theme = useTheme();
 
   const pathname = usePathname();
@@ -89,13 +96,13 @@ export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRe
           anchorEl={navItemRef.current}
           anchorOrigin={
             depth === 1
-              ? { vertical: 'bottom', horizontal: 'left' }
-              : { vertical: 'center', horizontal: 'right' }
+              ? { vertical: "bottom", horizontal: "left" }
+              : { vertical: "center", horizontal: "right" }
           }
           transformOrigin={
             depth === 1
-              ? { vertical: 'top', horizontal: 'left' }
-              : { vertical: 'center', horizontal: 'left' }
+              ? { vertical: "top", horizontal: "left" }
+              : { vertical: "center", horizontal: "left" }
           }
           slotProps={{
             paper: {
@@ -103,16 +110,16 @@ export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRe
               onMouseLeave: handleCloseMenu,
               sx: {
                 px: 0.75,
-                boxShadow: 'none',
-                overflow: 'unset',
-                backdropFilter: 'none',
-                background: 'transparent',
+                boxShadow: "none",
+                overflow: "unset",
+                backdropFilter: "none",
+                background: "transparent",
                 ...(depth === 1 && { ml: -0.75 }),
-                ...(openMenu && { pointerEvents: 'auto' }),
+                ...(openMenu && { pointerEvents: "auto" }),
               },
             },
           }}
-          sx={{ ...cssVars, pointerEvents: 'none' }}
+          sx={{ ...cssVars, pointerEvents: "none" }}
         >
           <Paper
             className={navSectionClasses.paper}
@@ -142,7 +149,14 @@ export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRe
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, depth, render, cssVars, slotProps, enabledRootRedirect }) {
+function NavSubList({
+  data,
+  depth,
+  render,
+  cssVars,
+  slotProps,
+  enabledRootRedirect,
+}) {
   return (
     <NavUl sx={{ gap: 0.5 }}>
       {data.map((list) => (

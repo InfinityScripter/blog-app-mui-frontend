@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ export function EmptyContent({
   filled,
   slotProps,
   description,
-  title = 'No data',
+  title = "No data",
   ...other
 }) {
   return (
@@ -27,8 +27,10 @@ export function EmptyContent({
         height: 1,
         ...(filled && {
           borderRadius: 2,
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.04),
-          border: (theme) => `dashed 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)}`,
+          bgcolor: (theme) =>
+            varAlpha(theme.vars.palette.grey["500Channel"], 0.04),
+          border: (theme) =>
+            `dashed 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.08)}`,
         }),
         ...sx,
       }}
@@ -37,7 +39,9 @@ export function EmptyContent({
       <Box
         component="img"
         alt="empty content"
-        src={imgUrl ?? `${CONFIG.site.basePath}/assets/icons/empty/ic-content.svg`}
+        src={
+          imgUrl ?? `${CONFIG.site.basePath}/assets/icons/empty/ic-content.svg`
+        }
         sx={{ width: 1, maxWidth: 160, ...slotProps?.img }}
       />
 
@@ -47,9 +51,9 @@ export function EmptyContent({
           component="span"
           sx={{
             mt: 1,
-            textAlign: 'center',
+            textAlign: "center",
             ...slotProps?.title,
-            color: 'text.disabled',
+            color: "text.disabled",
           }}
         >
           {title}
@@ -61,8 +65,8 @@ export function EmptyContent({
           variant="caption"
           sx={{
             mt: 1,
-            textAlign: 'center',
-            color: 'text.disabled',
+            textAlign: "center",
+            color: "text.disabled",
             ...slotProps?.description,
           }}
         >

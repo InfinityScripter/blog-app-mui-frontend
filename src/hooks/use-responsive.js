@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 // ----------------------------------------------------------------------
 
@@ -10,16 +10,16 @@ export function useResponsive(query, start, end) {
 
   const getQuery = useMemo(() => {
     switch (query) {
-      case 'up':
+      case "up":
         return theme.breakpoints.up(start);
-      case 'down':
+      case "down":
         return theme.breakpoints.down(start);
-      case 'between':
+      case "between":
         return theme.breakpoints.between(start, end);
-      case 'only':
+      case "only":
         return theme.breakpoints.only(start);
       default:
-        return theme.breakpoints.up('xs');
+        return theme.breakpoints.up("xs");
     }
   }, [theme, query, start, end]);
 
@@ -42,5 +42,5 @@ export function useWidth() {
     return !output && matches ? key : output;
   }, null);
 
-  return width || 'xs';
+  return width || "xs";
 }

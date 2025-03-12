@@ -1,6 +1,6 @@
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -19,10 +19,17 @@ export function ChartColumnMultiple({ chart }) {
     stroke: {
       show: true,
       width: 2,
-      colors: ['transparent'],
+      colors: ["transparent"],
     },
     tooltip: { y: { formatter: (value) => `$ ${value} thousands` } },
   });
 
-  return <Chart type="bar" series={chart.series} options={chartOptions} height={320} />;
+  return (
+    <Chart
+      type="bar"
+      series={chart.series}
+      options={chartOptions}
+      height={320}
+    />
+  );
 }

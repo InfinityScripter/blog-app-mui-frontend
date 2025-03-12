@@ -1,7 +1,7 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ function CheckInIllustration({ sx, ...other }) {
       height="100%"
       viewBox="0 0 200 200"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 120, maxWidth: 1, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 120, maxWidth: 1, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       <path

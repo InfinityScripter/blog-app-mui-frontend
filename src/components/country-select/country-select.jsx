@@ -1,14 +1,14 @@
-import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import InputAdornment from '@mui/material/InputAdornment';
-import { filledInputClasses } from '@mui/material/FilledInput';
+import Chip from "@mui/material/Chip";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import InputAdornment from "@mui/material/InputAdornment";
+import { filledInputClasses } from "@mui/material/FilledInput";
 
-import { countries } from 'src/assets/data';
+import { countries } from "src/assets/data";
 
-import { FlagIcon, iconifyClasses } from 'src/components/iconify';
+import { FlagIcon, iconifyClasses } from "src/components/iconify";
 
-import { getCountry, displayValueByCountryCode } from './utils';
+import { getCountry, displayValueByCountryCode } from "./utils";
 
 // ----------------------------------------------------------------------
 
@@ -20,10 +20,12 @@ export function CountrySelect({
   helperText,
   hiddenLabel,
   placeholder,
-  getValue = 'label',
+  getValue = "label",
   ...other
 }) {
-  const options = countries.map((country) => (getValue === 'label' ? country.label : country.code));
+  const options = countries.map((country) =>
+    getValue === "label" ? country.label : country.code,
+  );
 
   const renderOption = (props, option) => {
     const country = getCountry(option);
@@ -37,7 +39,7 @@ export function CountrySelect({
         <FlagIcon
           key={country.label}
           code={country.code}
-          sx={{ mr: 1, width: 22, height: 22, borderRadius: '50%' }}
+          sx={{ mr: 1, width: 22, height: 22, borderRadius: "50%" }}
         />
         {country.label} ({country.code}) +{country.phone}
       </li>
@@ -56,7 +58,7 @@ export function CountrySelect({
       error: !!error,
       inputProps: {
         ...params.inputProps,
-        autoComplete: 'new-password',
+        autoComplete: "new-password",
       },
     };
 
@@ -70,7 +72,10 @@ export function CountrySelect({
         InputProps={{
           ...params.InputProps,
           startAdornment: (
-            <InputAdornment position="start" sx={{ ...(!country.code && { display: 'none' }) }}>
+            <InputAdornment
+              position="start"
+              sx={{ ...(!country.code && { display: "none" }) }}
+            >
               <FlagIcon
                 key={country.label}
                 code={country.code}
@@ -79,7 +84,7 @@ export function CountrySelect({
                   mr: -0.5,
                   width: 22,
                   height: 22,
-                  borderRadius: '50%',
+                  borderRadius: "50%",
                 }}
               />
             </InputAdornment>
@@ -111,7 +116,7 @@ export function CountrySelect({
             <FlagIcon
               key={country.label}
               code={country.code}
-              sx={{ width: 16, height: 16, borderRadius: '50%' }}
+              sx={{ width: 16, height: 16, borderRadius: "50%" }}
             />
           }
         />
@@ -119,7 +124,7 @@ export function CountrySelect({
     });
 
   const getOptionLabel = (option) =>
-    getValue === 'label' ? option : displayValueByCountryCode(option);
+    getValue === "label" ? option : displayValueByCountryCode(option);
 
   return (
     <Autocomplete

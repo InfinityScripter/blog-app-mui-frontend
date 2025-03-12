@@ -1,13 +1,13 @@
-import { useMemo, useState, useEffect, useCallback } from 'react';
+import { useMemo, useState, useEffect, useCallback } from "react";
 
-import { isEqual } from 'src/utils/helper';
+import { isEqual } from "src/utils/helper";
 
 // ----------------------------------------------------------------------
 
 export function useCookies(key, initialState, defaultValues, options) {
   const [state, set] = useState(initialState);
 
-  const multiValue = initialState && typeof initialState === 'object';
+  const multiValue = initialState && typeof initialState === "object";
 
   const canReset = !isEqual(state, defaultValues);
 
@@ -27,7 +27,11 @@ export function useCookies(key, initialState, defaultValues, options) {
     (updateState) => {
       if (multiValue) {
         set((prevValue) => {
-          setStorage(key, { ...prevValue, ...updateState }, options?.daysUntilExpiration);
+          setStorage(
+            key,
+            { ...prevValue, ...updateState },
+            options?.daysUntilExpiration,
+          );
           return { ...prevValue, ...updateState };
         });
       } else {
@@ -36,7 +40,7 @@ export function useCookies(key, initialState, defaultValues, options) {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key, multiValue]
+    [key, multiValue],
   );
 
   const setField = useCallback(
@@ -47,7 +51,7 @@ export function useCookies(key, initialState, defaultValues, options) {
         });
       }
     },
-    [multiValue, setState]
+    [multiValue, setState],
   );
 
   const resetState = useCallback(() => {
@@ -63,7 +67,7 @@ export function useCookies(key, initialState, defaultValues, options) {
       resetState,
       canReset,
     }),
-    [canReset, resetState, setField, setState, state]
+    [canReset, resetState, setField, setState, state],
   );
 
   return memoizedValue;
@@ -77,7 +81,7 @@ function getStorage(key) {
 
     const cDecoded = decodeURIComponent(document.cookie);
 
-    const cArr = cDecoded.split('; ');
+    const cArr = cDecoded.split("; ");
 
     let res;
 
@@ -89,7 +93,7 @@ function getStorage(key) {
       return JSON.parse(res);
     }
   } catch (error) {
-    console.error('Error while getting from cookies:', error);
+    console.error("Error while getting from cookies:", error);
   }
 
   return null;
@@ -103,13 +107,15 @@ function setStorage(key, value, daysUntilExpiration = 0) {
     let cookieOptions = `${key}=${serializedValue}; path=/`;
 
     if (daysUntilExpiration > 0) {
-      const expirationDate = new Date(Date.now() + daysUntilExpiration * 24 * 60 * 60 * 1000);
+      const expirationDate = new Date(
+        Date.now() + daysUntilExpiration * 24 * 60 * 60 * 1000,
+      );
       cookieOptions += `; expires=${expirationDate.toUTCString()}`;
     }
 
     document.cookie = cookieOptions;
   } catch (error) {
-    console.error('Error while setting cookie:', error);
+    console.error("Error while setting cookie:", error);
   }
 }
 
@@ -119,6 +125,6 @@ function removeStorage(key) {
   try {
     document.cookie = `${key}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
   } catch (error) {
-    console.error('Error while removing cookie:', error);
+    console.error("Error while removing cookie:", error);
   }
 }

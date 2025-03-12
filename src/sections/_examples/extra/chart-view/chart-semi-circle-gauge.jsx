@@ -1,15 +1,18 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { fData } from 'src/utils/format-number';
+import { fData } from "src/utils/format-number";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ChartSemiCircleGauge({ chart }) {
   const theme = useTheme();
 
-  const chartColors = chart.colors ?? [theme.palette.secondary.main, theme.palette.secondary.light];
+  const chartColors = chart.colors ?? [
+    theme.palette.secondary.main,
+    theme.palette.secondary.light,
+  ];
 
   const chartOptions = useChart({
     chart: {
@@ -17,7 +20,7 @@ export function ChartSemiCircleGauge({ chart }) {
       sparkline: { enabled: true },
     },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         colorStops: [
           {
@@ -60,7 +63,7 @@ export function ChartSemiCircleGauge({ chart }) {
       options={chartOptions}
       width={260}
       height={260}
-      sx={{ mx: 'auto' }}
+      sx={{ mx: "auto" }}
     />
   );
 }

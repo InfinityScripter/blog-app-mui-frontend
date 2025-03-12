@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -26,8 +26,8 @@ export const useCarouselArrows = (mainApi) => {
     if (!mainApi) return;
 
     onSelect(mainApi);
-    mainApi.on('reInit', onSelect);
-    mainApi.on('select', onSelect);
+    mainApi.on("reInit", onSelect);
+    mainApi.on("select", onSelect);
   }, [mainApi, onSelect]);
 
   return {

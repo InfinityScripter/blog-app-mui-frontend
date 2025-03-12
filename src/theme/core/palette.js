@@ -1,5 +1,5 @@
-import COLORS from './colors.json';
-import { varAlpha, createPaletteChannel } from '../styles';
+import COLORS from "./colors.json";
+import { varAlpha, createPaletteChannel } from "../styles";
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ export const text = {
     disabled: grey[500],
   }),
   dark: createPaletteChannel({
-    primary: '#FFFFFF',
+    primary: "#FFFFFF",
     secondary: grey[500],
     disabled: grey[600],
   }),
@@ -44,24 +44,24 @@ export const text = {
 // Background
 export const background = {
   light: createPaletteChannel({
-    paper: '#FFFFFF',
-    default: '#FFFFFF',
+    paper: "#FFFFFF",
+    default: "#FFFFFF",
     neutral: grey[200],
   }),
   dark: createPaletteChannel({
     paper: grey[800],
     default: grey[900],
-    neutral: '#28323D',
+    neutral: "#28323D",
   }),
 };
 
 // Action
 export const baseAction = {
-  hover: varAlpha(grey['500Channel'], 0.08),
-  selected: varAlpha(grey['500Channel'], 0.16),
-  focus: varAlpha(grey['500Channel'], 0.24),
-  disabled: varAlpha(grey['500Channel'], 0.8),
-  disabledBackground: varAlpha(grey['500Channel'], 0.24),
+  hover: varAlpha(grey["500Channel"], 0.08),
+  selected: varAlpha(grey["500Channel"], 0.16),
+  focus: varAlpha(grey["500Channel"], 0.24),
+  disabled: varAlpha(grey["500Channel"], 0.8),
+  disabledBackground: varAlpha(grey["500Channel"], 0.24),
   hoverOpacity: 0.08,
   disabledOpacity: 0.48,
 };
@@ -83,7 +83,7 @@ export const basePalette = {
   error,
   grey,
   common,
-  divider: varAlpha(grey['500Channel'], 0.2),
+  divider: varAlpha(grey["500Channel"], 0.2),
   action,
 };
 

@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import useSWR, { mutate } from 'swr';
+import { useMemo } from "react";
+import useSWR, { mutate } from "swr";
 
-import axios, { fetcher, endpoints } from 'src/utils/axios';
+import axios, { fetcher, endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,11 @@ const swrOptions = {
 // ----------------------------------------------------------------------
 
 export function useGetBoard() {
-  const { data, isLoading, error, isValidating } = useSWR(KANBAN_ENDPOINT, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR(
+    KANBAN_ENDPOINT,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(() => {
     const tasks = data?.board.tasks ?? {};
@@ -44,7 +48,9 @@ export async function createColumn(columnData) {
    */
   if (enableServer) {
     const data = { columnData };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'create-column' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "create-column" },
+    });
   }
 
   /**
@@ -63,7 +69,7 @@ export async function createColumn(columnData) {
 
       return { ...currentData, board: { ...board, columns, tasks } };
     },
-    false
+    false,
   );
 }
 
@@ -75,7 +81,9 @@ export async function updateColumn(columnId, columnName) {
    */
   if (enableServer) {
     const data = { columnId, columnName };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'update-column' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "update-column" },
+    });
   }
 
   /**
@@ -93,12 +101,12 @@ export async function updateColumn(columnId, columnName) {
               ...column,
               name: columnName,
             }
-          : column
+          : column,
       );
 
       return { ...currentData, board: { ...board, columns } };
     },
-    false
+    false,
   );
 }
 
@@ -115,7 +123,7 @@ export async function moveColumn(updateColumns) {
 
       return { ...currentData, board: { ...board, columns: updateColumns } };
     },
-    false
+    false,
   );
 
   /**
@@ -123,7 +131,9 @@ export async function moveColumn(updateColumns) {
    */
   if (enableServer) {
     const data = { updateColumns };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'move-column' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "move-column" },
+    });
   }
 }
 
@@ -135,7 +145,9 @@ export async function clearColumn(columnId) {
    */
   if (enableServer) {
     const data = { columnId };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'clear-column' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "clear-column" },
+    });
   }
 
   /**
@@ -151,7 +163,7 @@ export async function clearColumn(columnId) {
 
       return { ...currentData, board: { ...board, tasks } };
     },
-    false
+    false,
   );
 }
 
@@ -163,7 +175,9 @@ export async function deleteColumn(columnId) {
    */
   if (enableServer) {
     const data = { columnId };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'delete-column' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "delete-column" },
+    });
   }
 
   /**
@@ -187,7 +201,7 @@ export async function deleteColumn(columnId) {
 
       return { ...currentData, board: { ...board, columns, tasks } };
     },
-    false
+    false,
   );
 }
 
@@ -199,7 +213,9 @@ export async function createTask(columnId, taskData) {
    */
   if (enableServer) {
     const data = { columnId, taskData };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'create-task' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "create-task" },
+    });
   }
 
   /**
@@ -211,11 +227,14 @@ export async function createTask(columnId, taskData) {
       const { board } = currentData;
 
       // add task in board.tasks
-      const tasks = { ...board.tasks, [columnId]: [taskData, ...board.tasks[columnId]] };
+      const tasks = {
+        ...board.tasks,
+        [columnId]: [taskData, ...board.tasks[columnId]],
+      };
 
       return { ...currentData, board: { ...board, tasks } };
     },
-    false
+    false,
   );
 }
 
@@ -227,7 +246,9 @@ export async function updateTask(columnId, taskData) {
    */
   if (enableServer) {
     const data = { columnId, taskData };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'update-task' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "update-task" },
+    });
   }
 
   /**
@@ -249,14 +270,14 @@ export async function updateTask(columnId, taskData) {
               ...task,
               ...taskData,
             }
-          : task
+          : task,
       );
 
       const tasks = { ...board.tasks, [columnId]: updateTasks };
 
       return { ...currentData, board: { ...board, tasks } };
     },
-    false
+    false,
   );
 }
 
@@ -276,7 +297,7 @@ export async function moveTask(updateTasks) {
 
       return { ...currentData, board: { ...board, tasks } };
     },
-    false
+    false,
   );
 
   /**
@@ -284,7 +305,9 @@ export async function moveTask(updateTasks) {
    */
   if (enableServer) {
     const data = { updateTasks };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'move-task' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "move-task" },
+    });
   }
 }
 
@@ -296,7 +319,9 @@ export async function deleteTask(columnId, taskId) {
    */
   if (enableServer) {
     const data = { columnId, taskId };
-    await axios.post(KANBAN_ENDPOINT, data, { params: { endpoint: 'delete-task' } });
+    await axios.post(KANBAN_ENDPOINT, data, {
+      params: { endpoint: "delete-task" },
+    });
   }
 
   /**
@@ -315,6 +340,6 @@ export async function deleteTask(columnId, taskId) {
 
       return { ...currentData, board: { ...board, tasks } };
     },
-    false
+    false,
   );
 }

@@ -1,11 +1,15 @@
-import AutoScroll from 'embla-carousel-auto-scroll';
+import AutoScroll from "embla-carousel-auto-scroll";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { Image } from 'src/components/image';
-import { Carousel, useCarousel, CarouselProgressBar } from 'src/components/carousel';
+import { Image } from "src/components/image";
+import {
+  Carousel,
+  useCarousel,
+  CarouselProgressBar,
+} from "src/components/carousel";
 
-import { IndexLabel, PlayButton } from './elements';
+import { IndexLabel, PlayButton } from "./elements";
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +18,7 @@ export function CarouselAutoScroll({ data }) {
     {
       loop: true,
     },
-    [AutoScroll({ playOnInit: false })]
+    [AutoScroll({ playOnInit: false })],
   );
 
   return (
@@ -24,7 +28,7 @@ export function CarouselAutoScroll({ data }) {
         onClick={carousel.autoScroll.onTogglePlay}
       />
 
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: "relative" }}>
         <Carousel carousel={carousel} sx={{ borderRadius: 2 }}>
           {data.map((item, index) => (
             <CarouselItem key={item.id} index={index} item={item} />
@@ -36,8 +40,8 @@ export function CarouselAutoScroll({ data }) {
           sx={{
             top: 20,
             right: 20,
-            color: 'info.light',
-            position: 'absolute',
+            color: "info.light",
+            position: "absolute",
           }}
         />
       </Box>
@@ -47,13 +51,13 @@ export function CarouselAutoScroll({ data }) {
 
 function CarouselItem({ item, index }) {
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: "relative" }}>
       <IndexLabel index={index + 1} />
       <Image
         visibleByDefault
         alt={item.title}
         src={item.coverUrl}
-        ratio={{ xs: '4/3', sm: '16/10' }}
+        ratio={{ xs: "4/3", sm: "16/10" }}
       />
     </Box>
   );

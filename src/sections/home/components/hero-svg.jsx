@@ -1,12 +1,12 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { stylesMode } from 'src/theme/styles';
+import { stylesMode } from "src/theme/styles";
 
-import { varFade } from 'src/components/animate';
+import { varFade } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +17,7 @@ export function Lines({ strokeCount }) {
       visible: (i) => {
         const delay = 1 + i * 0.5;
         return {
-          x2: '100%',
+          x2: "100%",
           strokeOpacity: 1,
           transition: {
             strokeOpacity: { delay, duration: 0.01 },
@@ -25,7 +25,7 @@ export function Lines({ strokeCount }) {
               delay,
               bounce: 0,
               duration: 1.5,
-              type: 'spring',
+              type: "spring",
             },
           },
         };
@@ -36,7 +36,7 @@ export function Lines({ strokeCount }) {
       visible: (i) => {
         const delay = 1 + i * 0.5;
         return {
-          y2: '100%',
+          y2: "100%",
           strokeOpacity: 1,
           transition: {
             strokeOpacity: { delay, duration: 0.01 },
@@ -44,7 +44,7 @@ export function Lines({ strokeCount }) {
               delay,
               bounce: 0,
               duration: 1.5,
-              type: 'spring',
+              type: "spring",
             },
           },
         };
@@ -69,9 +69,9 @@ export function Lines({ strokeCount }) {
           variants={draw.x}
           style={{
             transform: translateY(index),
-            stroke: 'var(--hero-line-stroke-color)',
-            strokeDasharray: 'var(--stroke-dasharray)',
-            strokeWidth: 'var(--hero-line-stroke-width)',
+            stroke: "var(--hero-line-stroke-color)",
+            strokeDasharray: "var(--stroke-dasharray)",
+            strokeWidth: "var(--hero-line-stroke-width)",
           }}
         />
       ))}
@@ -95,9 +95,9 @@ export function Lines({ strokeCount }) {
           variants={draw.y}
           style={{
             transform: translateX(index),
-            stroke: 'var(--hero-line-stroke-color)',
-            strokeDasharray: 'var(--stroke-dasharray)',
-            strokeWidth: 'var(--hero-line-stroke-width)',
+            stroke: "var(--hero-line-stroke-color)",
+            strokeDasharray: "var(--stroke-dasharray)",
+            strokeWidth: "var(--hero-line-stroke-width)",
           }}
         />
       ))}
@@ -129,10 +129,10 @@ export function Circles() {
         variants={drawCircle}
         d="M1 41C1 63.0914 18.9086 81 41 81C63.0914 81 81 63.0914 81 41C81 18.9086 63.0914 1 41 1"
         style={{
-          strokeDasharray: 'var(--stroke-dasharray)',
-          stroke: 'var(--hero-circle-stroke-color)',
-          strokeWidth: 'var(--hero-circle-stroke-width)',
-          transform: 'translate(calc(50% - 480px), calc(50% - 80px))',
+          strokeDasharray: "var(--stroke-dasharray)",
+          stroke: "var(--hero-circle-stroke-color)",
+          strokeWidth: "var(--hero-circle-stroke-width)",
+          transform: "translate(calc(50% - 480px), calc(50% - 80px))",
         }}
       />
 
@@ -140,10 +140,10 @@ export function Circles() {
         variants={drawCircle}
         d="M1 41C1 63.0914 18.9086 81 41 81C63.0914 81 81 63.0914 81 41C81 18.9086 63.0914 1 41 1"
         style={{
-          strokeDasharray: 'var(--stroke-dasharray)',
-          stroke: 'var(--hero-circle-stroke-color)',
-          strokeWidth: 'var(--hero-circle-stroke-width)',
-          transform: 'translate(calc(50% + 400px), calc(50% + 80px))',
+          strokeDasharray: "var(--stroke-dasharray)",
+          stroke: "var(--hero-circle-stroke-color)",
+          strokeWidth: "var(--hero-circle-stroke-width)",
+          transform: "translate(calc(50% + 400px), calc(50% + 80px))",
         }}
       />
 
@@ -151,7 +151,7 @@ export function Circles() {
         cx="50%"
         cy="50%"
         fill="var(--hero-circle-stroke-color)"
-        style={{ transform: 'translate(calc(0% - 200px), calc(0% + 200px))' }}
+        style={{ transform: "translate(calc(0% - 200px), calc(0% + 200px))" }}
         initial={{ r: 0 }}
         animate={{ r: 5 }}
       />
@@ -175,7 +175,7 @@ export function PlusIcon() {
             delay,
             bounce: 0,
             duration: 1.5,
-            type: 'spring',
+            type: "spring",
           },
         },
       };
@@ -188,14 +188,14 @@ export function PlusIcon() {
         variants={drawPlus}
         d="M8 0V16M16 8.08889H0"
         stroke="var(--hero-plus-stroke-color)"
-        style={{ transform: 'translate(calc(50% - 448px), calc(50% - 128px))' }}
+        style={{ transform: "translate(calc(50% - 448px), calc(50% - 128px))" }}
       />
 
       <m.path
         variants={drawPlus}
         d="M8 0V16M16 8.08889H0"
         stroke="var(--hero-plus-stroke-color)"
-        style={{ transform: 'translate(calc(50% + 432px), calc(50% + 192px))' }}
+        style={{ transform: "translate(calc(50% + 432px), calc(50% + 192px))" }}
       />
     </>
   );
@@ -214,7 +214,7 @@ export function Texts({ sx, ...other }) {
         bottom: 0,
         zIndex: 0,
         height: 200,
-        position: 'absolute',
+        position: "absolute",
         ...sx,
       }}
       {...other}
@@ -224,14 +224,14 @@ export function Texts({ sx, ...other }) {
         width="100%"
         height="100%"
         sx={{
-          '& text': {
-            fill: 'none',
+          "& text": {
+            fill: "none",
             fontSize: 200,
             fontWeight: 800,
             strokeDasharray: 4,
-            textTransform: 'uppercase',
-            stroke: 'var(--hero-text-stroke-color)',
-            strokeWidth: 'var(--hero-text-stroke-width)',
+            textTransform: "uppercase",
+            stroke: "var(--hero-text-stroke-color)",
+            strokeWidth: "var(--hero-text-stroke-width)",
             fontFamily: (theme) => theme.typography.fontSecondaryFamily,
           },
         }}
@@ -240,17 +240,17 @@ export function Texts({ sx, ...other }) {
           x="0"
           y="12px"
           dominantBaseline="hanging"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 64, ease: 'linear', repeat: Infinity }}
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 64, ease: "linear", repeat: Infinity }}
         >
-          MIKHAIL TALALAEV  MIKHAIL TALALAEV
+          MIKHAIL TALALAEV MIKHAIL TALALAEV
         </m.text>
       </Box>
     </Stack>
   );
 }
 
-function Dot({ color = 'primary', animate, transition, sx, ...other }) {
+function Dot({ color = "primary", animate, transition, sx, ...other }) {
   const theme = useTheme();
 
   return (
@@ -258,14 +258,17 @@ function Dot({ color = 'primary', animate, transition, sx, ...other }) {
       component={m.div}
       variants={{
         initial: { opacity: 0 },
-        animate: { opacity: 1, transition: { duration: 0.64, ease: [0.43, 0.13, 0.23, 0.96] } },
+        animate: {
+          opacity: 1,
+          transition: { duration: 0.64, ease: [0.43, 0.13, 0.23, 0.96] },
+        },
       }}
       sx={{
         width: 12,
         height: 12,
-        top: '50%',
-        left: '50%',
-        position: 'absolute',
+        top: "50%",
+        left: "50%",
+        position: "absolute",
         ...sx,
       }}
       {...other}
@@ -276,15 +279,15 @@ function Dot({ color = 'primary', animate, transition, sx, ...other }) {
         transition={
           transition ?? {
             duration: 6,
-            ease: 'linear',
+            ease: "linear",
             repeat: Infinity,
-            repeatType: 'reverse',
+            repeatType: "reverse",
           }
         }
         sx={{
           width: 1,
           height: 1,
-          borderRadius: '50%',
+          borderRadius: "50%",
           boxShadow: `0px -2px 4px 0px ${theme.vars.palette[color].main} inset`,
           background: `linear-gradient(135deg, ${theme.vars.palette[color].lighter}, ${theme.vars.palette[color].light})`,
           [stylesMode.dark]: {
@@ -305,31 +308,35 @@ export function Dots() {
       <Dot
         color="error"
         animate={{ x: 24 }}
-        sx={{ width: 14, height: 14, transform: 'translate(calc(50% - 457px), calc(50% - 259px))' }}
+        sx={{
+          width: 14,
+          height: 14,
+          transform: "translate(calc(50% - 457px), calc(50% - 259px))",
+        }}
       />
 
       <Dot
         color="warning"
         animate={{ y: 24 }}
-        sx={{ transform: 'translate(calc(50% - 356px), calc(50% + 37px))' }}
+        sx={{ transform: "translate(calc(50% - 356px), calc(50% + 37px))" }}
       />
 
       <Dot
         color="info"
         animate={{ x: 24 }}
-        sx={{ transform: 'translate(calc(50% + 332px), calc(50% + 135px))' }}
+        sx={{ transform: "translate(calc(50% + 332px), calc(50% + 135px))" }}
       />
 
       <Dot
         color="secondary"
         animate={{ x: 24 }}
-        sx={{ transform: 'translate(calc(50% + 430px), calc(50% - 160px))' }}
+        sx={{ transform: "translate(calc(50% + 430px), calc(50% - 160px))" }}
       />
 
       <Dot
         color="success"
         animate={{ y: 24 }}
-        sx={{ transform: 'translate(calc(50% + 136px), calc(50% + 332px))' }}
+        sx={{ transform: "translate(calc(50% + 136px), calc(50% + 332px))" }}
       />
     </>
   );

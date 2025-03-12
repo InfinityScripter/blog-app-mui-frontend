@@ -1,6 +1,13 @@
-import { useRef, useMemo, useState, useEffect, useCallback, useLayoutEffect } from 'react';
+import {
+  useRef,
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from "react";
 
-import { useEventListener } from './use-event-listener';
+import { useEventListener } from "./use-event-listener";
 
 // ----------------------------------------------------------------------
 
@@ -13,7 +20,8 @@ export function useClientRect(inputRef) {
 
   const [scroll, setScroll] = useState(undefined);
 
-  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+  const useIsomorphicLayoutEffect =
+    typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
   const handleResize = useCallback(() => {
     if (elementRef?.current) {
@@ -28,7 +36,7 @@ export function useClientRect(inputRef) {
     }
   }, [elementRef]);
 
-  useEventListener('resize', handleResize);
+  useEventListener("resize", handleResize);
 
   useIsomorphicLayoutEffect(() => {
     handleResize();

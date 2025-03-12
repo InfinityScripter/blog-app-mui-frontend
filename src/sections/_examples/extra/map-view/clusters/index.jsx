@@ -1,9 +1,13 @@
-import { useRef } from 'react';
-import { Layer, Source } from 'react-map-gl';
+import { useRef } from "react";
+import { Layer, Source } from "react-map-gl";
 
-import { Map } from 'src/components/map';
+import { Map } from "src/components/map";
 
-import { clusterLayer, clusterCountLayer, unclusteredPointLayer } from './layers';
+import {
+  clusterLayer,
+  clusterCountLayer,
+  unclusteredPointLayer,
+} from "./layers";
 
 // ----------------------------------------------------------------------
 
@@ -15,14 +19,14 @@ export function MapClusters({ ...other }) {
 
     const clusterId = feature?.properties?.cluster_id;
 
-    const mapboxSource = mapRef.current?.getSource('earthquakes');
+    const mapboxSource = mapRef.current?.getSource("earthquakes");
 
     mapboxSource.getClusterExpansionZoom(clusterId, (error, zoom) => {
       if (error) {
         return;
       }
 
-      if (feature?.geometry.type === 'Point') {
+      if (feature?.geometry.type === "Point") {
         mapRef.current?.easeTo({
           center: feature?.geometry.coordinates,
           zoom: Number.isNaN(zoom) ? 3 : zoom,
@@ -35,7 +39,7 @@ export function MapClusters({ ...other }) {
   return (
     <Map
       initialViewState={{ latitude: 40.67, longitude: -103.59, zoom: 3 }}
-      interactiveLayerIds={[clusterLayer.id || '']}
+      interactiveLayerIds={[clusterLayer.id || ""]}
       onClick={onClick}
       ref={mapRef}
       {...other}

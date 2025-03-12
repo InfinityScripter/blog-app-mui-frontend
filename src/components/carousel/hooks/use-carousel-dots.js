@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ export function useCarouselDots(mainApi) {
       if (!mainApi) return;
       mainApi.scrollTo(index);
     },
-    [mainApi]
+    [mainApi],
   );
 
   const onInit = useCallback((_mainApi) => {
@@ -31,9 +31,9 @@ export function useCarouselDots(mainApi) {
 
     onInit(mainApi);
     onSelect(mainApi);
-    mainApi.on('reInit', onInit);
-    mainApi.on('reInit', onSelect);
-    mainApi.on('select', onSelect);
+    mainApi.on("reInit", onInit);
+    mainApi.on("reInit", onSelect);
+    mainApi.on("select", onSelect);
   }, [mainApi, onInit, onSelect]);
 
   return {

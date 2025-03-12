@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -7,19 +7,20 @@ export function useParallax(mainApi, parallax) {
 
   const tweenNodes = useRef([]);
 
-  const TWEEN_FACTOR_BASE = typeof parallax === 'number' ? parallax : 0.24;
+  const TWEEN_FACTOR_BASE = typeof parallax === "number" ? parallax : 0.24;
 
   const setTweenNodes = useCallback((_mainApi) => {
     tweenNodes.current = _mainApi
       .slideNodes()
-      .map((slideNode) => slideNode.querySelector('.slide__parallax__layer'));
+      .map((slideNode) => slideNode.querySelector(".slide__parallax__layer"));
   }, []);
 
   const setTweenFactor = useCallback(
     (_mainApi) => {
-      tweenFactor.current = TWEEN_FACTOR_BASE * _mainApi.scrollSnapList().length;
+      tweenFactor.current =
+        TWEEN_FACTOR_BASE * _mainApi.scrollSnapList().length;
     },
-    [TWEEN_FACTOR_BASE]
+    [TWEEN_FACTOR_BASE],
   );
 
   const tweenParallax = useCallback((_mainApi, eventName) => {
@@ -29,7 +30,7 @@ export function useParallax(mainApi, parallax) {
 
     const slidesInView = _mainApi.slidesInView();
 
-    const isScrollEvent = eventName === 'scroll';
+    const isScrollEvent = eventName === "scroll";
 
     _mainApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
       let diffToTarget = scrollSnap - scrollProgress;
@@ -75,10 +76,10 @@ export function useParallax(mainApi, parallax) {
     tweenParallax(mainApi);
 
     mainApi
-      .on('reInit', setTweenNodes)
-      .on('reInit', setTweenFactor)
-      .on('reInit', tweenParallax)
-      .on('scroll', tweenParallax);
+      .on("reInit", setTweenNodes)
+      .on("reInit", setTweenFactor)
+      .on("reInit", tweenParallax)
+      .on("scroll", tweenParallax);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainApi, tweenParallax]);
 

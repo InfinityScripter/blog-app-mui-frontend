@@ -1,11 +1,11 @@
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import Switch from '@mui/material/Switch';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Slider from "@mui/material/Slider";
+import Switch from "@mui/material/Switch";
+import Typography from "@mui/material/Typography";
 
-import { fDate } from 'src/utils/format-time';
+import { fDate } from "src/utils/format-time";
 
-import { StyledControlPanel } from '../styles';
+import { StyledControlPanel } from "../styles";
 
 // ----------------------------------------------------------------------
 
@@ -35,13 +35,13 @@ export function ControlPanel({
     <StyledControlPanel>
       <Box
         sx={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        <Typography variant="subtitle2" sx={{ color: 'common.white' }}>
+        <Typography variant="subtitle2" sx={{ color: "common.white" }}>
           All days
         </Typography>
 
@@ -57,7 +57,7 @@ export function ControlPanel({
       <Typography
         gutterBottom
         variant="body2"
-        sx={{ color: allDays ? 'text.disabled' : 'common.white' }}
+        sx={{ color: allDays ? "text.disabled" : "common.white" }}
       >
         Each day: {fDate(selectedTime)}
       </Typography>
@@ -69,7 +69,7 @@ export function ControlPanel({
         disabled={allDays}
         value={selectedDay}
         onChange={(event, newValue) => {
-          if (typeof newValue === 'number') handleChangeDays(newValue);
+          if (typeof newValue === "number") handleChangeDays(newValue);
         }}
       />
     </StyledControlPanel>

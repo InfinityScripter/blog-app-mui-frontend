@@ -1,21 +1,25 @@
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
-import CardHeader from '@mui/material/CardHeader';
-import ListItemText from '@mui/material/ListItemText';
+import Box from "@mui/material/Box";
+import Avatar from "@mui/material/Avatar";
+import CardHeader from "@mui/material/CardHeader";
+import ListItemText from "@mui/material/ListItemText";
 
-import { fDateTime } from 'src/utils/format-time';
+import { fDateTime } from "src/utils/format-time";
 
-import { Label } from 'src/components/label';
-import { Image } from 'src/components/image';
-import { Iconify } from 'src/components/iconify';
-import { Carousel, useCarousel, CarouselArrowBasicButtons } from 'src/components/carousel';
+import { Label } from "src/components/label";
+import { Image } from "src/components/image";
+import { Iconify } from "src/components/iconify";
+import {
+  Carousel,
+  useCarousel,
+  CarouselArrowBasicButtons,
+} from "src/components/carousel";
 
 // ----------------------------------------------------------------------
 
 export function BookingNewest({ title, subheader, list, sx, ...other }) {
   const carousel = useCarousel({
-    align: 'start',
-    slideSpacing: '24px',
+    align: "start",
+    slideSpacing: "24px",
     slidesToShow: { xs: 1, sm: 2, md: 3, lg: 4 },
   });
 
@@ -43,23 +47,32 @@ function Item({ item, sx, ...other }) {
       sx={{
         width: 1,
         borderRadius: 2,
-        position: 'relative',
-        bgcolor: 'background.neutral',
+        position: "relative",
+        bgcolor: "background.neutral",
         ...sx,
       }}
       {...other}
     >
-      <Box sx={{ px: 2, pb: 1, gap: 2, pt: 2.5, display: 'flex', flexDirection: 'column' }}>
-        <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
+      <Box
+        sx={{
+          px: 2,
+          pb: 1,
+          gap: 2,
+          pt: 2.5,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
           <Avatar alt={item.name} src={item.avatarUrl} />
           <ListItemText
             primary={item.name}
             secondary={fDateTime(item.bookedAt)}
             secondaryTypographyProps={{
               mt: 0.5,
-              component: 'span',
-              typography: 'caption',
-              color: 'text.disabled',
+              component: "span",
+              typography: "caption",
+              color: "text.disabled",
             }}
           />
         </Box>
@@ -68,20 +81,28 @@ function Item({ item, sx, ...other }) {
           sx={{
             rowGap: 1.5,
             columnGap: 2,
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            typography: 'caption',
-            color: 'text.secondary',
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            typography: "caption",
+            color: "text.secondary",
           }}
         >
-          <Box sx={{ gap: 0.5, display: 'flex', alignItems: 'center' }}>
-            <Iconify width={16} icon="solar:calendar-date-bold" sx={{ flexShrink: 0 }} />
+          <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
+            <Iconify
+              width={16}
+              icon="solar:calendar-date-bold"
+              sx={{ flexShrink: 0 }}
+            />
             {item.duration}
           </Box>
 
-          <Box sx={{ gap: 0.5, display: 'flex', alignItems: 'center' }}>
-            <Iconify width={16} icon="solar:users-group-rounded-bold" sx={{ flexShrink: 0 }} />
+          <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
+            <Iconify
+              width={16}
+              icon="solar:users-group-rounded-bold"
+              sx={{ flexShrink: 0 }}
+            />
             {item.guests} guests
           </Box>
         </Box>
@@ -93,14 +114,19 @@ function Item({ item, sx, ...other }) {
           right: 16,
           zIndex: 9,
           bottom: 16,
-          position: 'absolute',
+          position: "absolute",
         }}
       >
-        {item.isHot && '🔥'} ${item.price}
+        {item.isHot && "🔥"} ${item.price}
       </Label>
 
-      <Box sx={{ p: 1, position: 'relative' }}>
-        <Image alt={item.coverUrl} src={item.coverUrl} ratio="1/1" sx={{ borderRadius: 1.5 }} />
+      <Box sx={{ p: 1, position: "relative" }}>
+        <Image
+          alt={item.coverUrl}
+          src={item.coverUrl}
+          ratio="1/1"
+          sx={{ borderRadius: 1.5 }}
+        />
       </Box>
     </Box>
   );

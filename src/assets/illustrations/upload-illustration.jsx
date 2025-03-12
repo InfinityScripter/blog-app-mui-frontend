@@ -1,9 +1,9 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
-import { BackgroundShape } from './background-shape';
+import { BackgroundShape } from "./background-shape";
 
 // ----------------------------------------------------------------------
 
@@ -23,13 +23,19 @@ function UploadIllustration({ hideBackground, sx, ...other }) {
       height="100%"
       viewBox="0 0 480 360"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 320, maxWidth: 1, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 320, maxWidth: 1, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       {!hideBackground && <BackgroundShape />}
 
       <defs>
-        <linearGradient id="linearGradient-2" x1="30.113%" x2="30.113%" y1="0%" y2="100%">
+        <linearGradient
+          id="linearGradient-2"
+          x1="30.113%"
+          x2="30.113%"
+          y1="0%"
+          y2="100%"
+        >
           <stop offset="0%" stopOpacity="0" />
           <stop offset="100%" />
         </linearGradient>

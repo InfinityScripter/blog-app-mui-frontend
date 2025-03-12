@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Stack from '@mui/material/Stack';
-import Switch from '@mui/material/Switch';
-import Typography from '@mui/material/Typography';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
+import Typography from "@mui/material/Typography";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { fData } from 'src/utils/format-number';
+import { fData } from "src/utils/format-number";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { Upload, UploadBox, UploadAvatar } from 'src/components/upload';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import { Upload, UploadBox, UploadAvatar } from "src/components/upload";
 
-import { ComponentHero } from '../../component-hero';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
@@ -45,11 +45,13 @@ export function UploadView() {
     (acceptedFiles) => {
       setFiles([...files, ...acceptedFiles]);
     },
-    [files]
+    [files],
   );
 
   const handleRemoveFile = (inputFile) => {
-    const filesFiltered = files.filter((fileFiltered) => fileFiltered !== inputFile);
+    const filesFiltered = files.filter(
+      (fileFiltered) => fileFiltered !== inputFile,
+    );
     setFiles(filesFiltered);
   };
 
@@ -59,13 +61,15 @@ export function UploadView() {
 
   const DEMO = [
     {
-      name: 'Upload multi file',
+      name: "Upload multi file",
       component: (
         <>
           <FormControlLabel
-            control={<Switch checked={preview.value} onClick={preview.onToggle} />}
+            control={
+              <Switch checked={preview.value} onClick={preview.onToggle} />
+            }
             label="Show Thumbnail"
-            sx={{ mb: 3, width: 1, justifyContent: 'flex-end' }}
+            sx={{ mb: 3, width: 1, justifyContent: "flex-end" }}
           />
           <Upload
             multiple
@@ -74,26 +78,33 @@ export function UploadView() {
             onDrop={handleDropMultiFile}
             onRemove={handleRemoveFile}
             onRemoveAll={handleRemoveAllFiles}
-            onUpload={() => console.info('ON UPLOAD')}
+            onUpload={() => console.info("ON UPLOAD")}
           />
         </>
       ),
     },
     {
-      name: 'Upload single file',
+      name: "Upload single file",
       component: (
-        <Upload value={file} onDrop={handleDropSingleFile} onDelete={() => setFile(null)} />
+        <Upload
+          value={file}
+          onDrop={handleDropSingleFile}
+          onDelete={() => setFile(null)}
+        />
       ),
     },
     {
-      name: 'Upload avatar',
+      name: "Upload avatar",
       component: (
         <UploadAvatar
           value={avatarUrl}
           onDrop={handleDropAvatar}
           validator={(fileData) => {
             if (fileData.size > 1000000) {
-              return { code: 'file-too-large', message: `File is larger than ${fData(1000000)}` };
+              return {
+                code: "file-too-large",
+                message: `File is larger than ${fData(1000000)}`,
+              };
             }
             return null;
           }}
@@ -102,10 +113,10 @@ export function UploadView() {
               variant="caption"
               sx={{
                 mt: 3,
-                mx: 'auto',
-                display: 'block',
-                textAlign: 'center',
-                color: 'text.disabled',
+                mx: "auto",
+                display: "block",
+                textAlign: "center",
+                color: "text.disabled",
               }}
             >
               Allowed *.jpeg, *.jpg, *.png, *.gif
@@ -116,7 +127,7 @@ export function UploadView() {
       ),
     },
     {
-      name: 'Upload box',
+      name: "Upload box",
       component: (
         <Stack direction="row" spacing={2}>
           <UploadBox />
@@ -127,7 +138,7 @@ export function UploadView() {
                 <Typography variant="body2">Upload file</Typography>
               </Stack>
             }
-            sx={{ mb: 3, py: 2.5, flexGrow: 1, height: 'auto' }}
+            sx={{ mb: 3, py: 2.5, flexGrow: 1, height: "auto" }}
           />
         </Stack>
       ),
@@ -139,8 +150,11 @@ export function UploadView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Upload"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Upload' }]}
-          moreLink={['https://react-dropzone.js.org/#section-basic-example']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Upload" },
+          ]}
+          moreLink={["https://react-dropzone.js.org/#section-basic-example"]}
         />
       </ComponentHero>
 

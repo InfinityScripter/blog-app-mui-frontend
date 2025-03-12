@@ -1,4 +1,4 @@
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -7,7 +7,7 @@ export function ChartScatter({ chart }) {
     chart: {
       zoom: {
         enabled: true,
-        type: 'xy',
+        type: "xy",
       },
     },
     legend: { show: true },
@@ -18,5 +18,12 @@ export function ChartScatter({ chart }) {
     markers: { size: 6 },
   });
 
-  return <Chart type="scatter" series={chart.series} options={chartOptions} height={350} />;
+  return (
+    <Chart
+      type="scatter"
+      series={chart.series}
+      options={chartOptions}
+      height={350}
+    />
+  );
 }

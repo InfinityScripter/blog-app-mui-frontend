@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { SimpleTransferList } from './simple-transfer-list';
-import { ScrollToViewTemplate } from '../../component-template';
-import { EnhancedTransferList } from './enhanced-transfer-list';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { SimpleTransferList } from "./simple-transfer-list";
+import { ScrollToViewTemplate } from "../../component-template";
+import { EnhancedTransferList } from "./enhanced-transfer-list";
 
 // ----------------------------------------------------------------------
 
 export function TransferListView() {
   const DEMO = [
     {
-      name: 'Simple',
+      name: "Simple",
       component: (
         <ComponentBlock>
           <SimpleTransferList />
@@ -23,7 +23,7 @@ export function TransferListView() {
       ),
     },
     {
-      name: 'Enhanced',
+      name: "Enhanced",
       component: (
         <ComponentBlock>
           <EnhancedTransferList />
@@ -37,8 +37,11 @@ export function TransferListView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Transfer List"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Transfer List' }]}
-          moreLink={['https://mui.com/components/transfer-list']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Transfer List" },
+          ]}
+          moreLink={["https://mui.com/components/transfer-list"]}
         />
       </ComponentHero>
 

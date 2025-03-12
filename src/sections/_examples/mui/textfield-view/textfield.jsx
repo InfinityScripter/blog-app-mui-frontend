@@ -1,34 +1,34 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Stack from '@mui/material/Stack';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
+import Stack from "@mui/material/Stack";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 const CURRENCIES = [
-  { value: 'USD', label: '$' },
-  { value: 'EUR', label: '€' },
-  { value: 'BTC', label: '฿' },
-  { value: 'JPY', label: '¥' },
+  { value: "USD", label: "$" },
+  { value: "EUR", label: "€" },
+  { value: "BTC", label: "฿" },
+  { value: "JPY", label: "¥" },
 ];
 
 // ----------------------------------------------------------------------
 
 export function Textfields({ variant }) {
-  const [currency, setCurrency] = useState('EUR');
+  const [currency, setCurrency] = useState("EUR");
 
   const [values, setValues] = useState({
-    amount: '',
-    password: '',
-    weight: '',
-    weightRange: '',
+    amount: "",
+    password: "",
+    weight: "",
+    weightRange: "",
     showPassword: false,
   });
 
@@ -50,7 +50,7 @@ export function Textfields({ variant }) {
 
   const blockProps = {
     gap: 3,
-    flexDirection: 'column',
+    flexDirection: "column",
   };
 
   return (
@@ -58,8 +58,8 @@ export function Textfields({ variant }) {
       sx={{
         rowGap: 5,
         columnGap: 3,
-        display: 'grid',
-        gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+        display: "grid",
+        gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
       }}
     >
       <ComponentBlock title="General" sx={blockProps}>
@@ -123,24 +123,30 @@ export function Textfields({ variant }) {
           variant={variant}
           fullWidth
           label="With normal TextField"
-          InputProps={{ startAdornment: <InputAdornment position="start">Kg</InputAdornment> }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">Kg</InputAdornment>
+            ),
+          }}
         />
 
         <TextField
           variant={variant}
           fullWidth
           value={values.weight}
-          onChange={handleChange('weight')}
+          onChange={handleChange("weight")}
           helperText="Weight"
-          InputProps={{ endAdornment: <InputAdornment position="end">Kg</InputAdornment> }}
+          InputProps={{
+            endAdornment: <InputAdornment position="end">Kg</InputAdornment>,
+          }}
         />
 
         <TextField
           variant={variant}
           fullWidth
-          type={values.showPassword ? 'text' : 'password'}
+          type={values.showPassword ? "text" : "password"}
           value={values.password}
-          onChange={handleChange('password')}
+          onChange={handleChange("password")}
           label="Password"
           InputProps={{
             startAdornment: (
@@ -208,9 +214,20 @@ export function Textfields({ variant }) {
       </ComponentBlock>
 
       <ComponentBlock title="Sizes" sx={blockProps}>
-        <TextField variant={variant} fullWidth label="Size" size="small" defaultValue="Small" />
+        <TextField
+          variant={variant}
+          fullWidth
+          label="Size"
+          size="small"
+          defaultValue="Small"
+        />
 
-        <TextField variant={variant} fullWidth label="Size" defaultValue="Normal" />
+        <TextField
+          variant={variant}
+          fullWidth
+          label="Size"
+          defaultValue="Normal"
+        />
       </ComponentBlock>
 
       <ComponentBlock title="Select" sx={blockProps}>
@@ -243,7 +260,9 @@ export function Textfields({ variant }) {
           SelectProps={{ native: true }}
           onChange={handleChangeCurrency}
           helperText="Please select your currency"
-          InputLabelProps={{ htmlFor: `${variant}-native-select-currency-label` }}
+          InputLabelProps={{
+            htmlFor: `${variant}-native-select-currency-label`,
+          }}
           inputProps={{ id: `${variant}-native-select-currency-label` }}
         >
           {CURRENCIES.map((option) => (

@@ -1,19 +1,21 @@
-import dayjs from 'dayjs';
-import { useState } from 'react';
+import dayjs from "dayjs";
+import { useState } from "react";
 
-import Stack from '@mui/material/Stack';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { MobileDateTimePicker } from '@mui/x-date-pickers/MobileDateTimePicker';
-import { DesktopDateTimePicker } from '@mui/x-date-pickers/DesktopDateTimePicker';
+import Stack from "@mui/material/Stack";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
+import { DesktopDateTimePicker } from "@mui/x-date-pickers/DesktopDateTimePicker";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 export function PickerDateTime() {
   const [value, setValue] = useState(dayjs(new Date()));
 
-  const [valueResponsive, setValueResponsive] = useState(dayjs('2018-01-01T00:00:00.000Z'));
+  const [valueResponsive, setValueResponsive] = useState(
+    dayjs("2018-01-01T00:00:00.000Z"),
+  );
 
   return (
     <Stack spacing={5}>

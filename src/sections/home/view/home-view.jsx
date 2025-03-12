@@ -49,7 +49,6 @@ export function HomeView() {
           <HomeProjects />
 
           <Box sx={{ height: { xs: 40, md: 80 } }} />
-
         </Container>
       </Box>
     </>

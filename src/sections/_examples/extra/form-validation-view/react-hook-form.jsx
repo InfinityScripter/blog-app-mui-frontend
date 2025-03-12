@@ -1,66 +1,66 @@
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
-import MenuItem from '@mui/material/MenuItem';
-import Backdrop from '@mui/material/Backdrop';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import CircularProgress from '@mui/material/CircularProgress';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
+import MenuItem from "@mui/material/MenuItem";
+import Backdrop from "@mui/material/Backdrop";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { today } from 'src/utils/format-time';
+import { today } from "src/utils/format-time";
 
-import { Iconify } from 'src/components/iconify';
-import { Form, Field } from 'src/components/hook-form';
+import { Iconify } from "src/components/iconify";
+import { Form, Field } from "src/components/hook-form";
 
-import { FormSchema } from './schema';
-import { ValuesPreview } from './values-preview';
+import { FormSchema } from "./schema";
+import { ValuesPreview } from "./values-preview";
 
 // ----------------------------------------------------------------------
 
 const OPTIONS = [
-  { value: 'option 1', label: 'Option 1' },
-  { value: 'option 2', label: 'Option 2' },
-  { value: 'option 3', label: 'Option 3' },
-  { value: 'option 4', label: 'Option 4' },
-  { value: 'option 5', label: 'Option 5' },
-  { value: 'option 6', label: 'Option 6' },
-  { value: 'option 7', label: 'Option 7' },
-  { value: 'option 8', label: 'Option 8' },
+  { value: "option 1", label: "Option 1" },
+  { value: "option 2", label: "Option 2" },
+  { value: "option 3", label: "Option 3" },
+  { value: "option 4", label: "Option 4" },
+  { value: "option 5", label: "Option 5" },
+  { value: "option 6", label: "Option 6" },
+  { value: "option 7", label: "Option 7" },
+  { value: "option 8", label: "Option 8" },
 ];
 
 export const defaultValues = {
   age: 0,
-  email: '',
-  fullName: '',
-  phoneNumber: '',
+  email: "",
+  fullName: "",
+  phoneNumber: "",
   //
-  editor: '',
+  editor: "",
   autocomplete: null,
   //
-  password: '',
-  confirmPassword: '',
+  password: "",
+  confirmPassword: "",
   //
   startDate: today(),
   endDate: null,
   //
-  singleUpload: '',
+  singleUpload: "",
   multiUpload: [],
   //
-  singleSelect: '',
+  singleSelect: "",
   multiSelect: [],
   //
-  singleCountry: '',
+  singleCountry: "",
   multiCountry: [],
   //
   rating: 0,
-  radioGroup: '',
+  radioGroup: "",
   //
   switch: false,
   multiSwitch: [],
@@ -94,7 +94,7 @@ export function ReactHookForm({ debug }) {
     try {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       reset();
-      console.info('DATA', data);
+      console.info("DATA", data);
     } catch (error) {
       console.error(error);
     }
@@ -108,16 +108,18 @@ export function ReactHookForm({ debug }) {
         </Backdrop>
       )}
       <Form methods={methods} onSubmit={onSubmit}>
-        {debug && <ValuesPreview sx={{ display: { xs: 'none', lg: 'block' } }} />}
+        {debug && (
+          <ValuesPreview sx={{ display: { xs: "none", lg: "block" } }} />
+        )}
 
         <Box
           gap={5}
           display="flex"
           alignItems="flex-start"
-          flexDirection={{ xs: 'column', md: 'row' }}
+          flexDirection={{ xs: "column", md: "row" }}
           sx={{
             width: 1,
-            ...(debug && { pr: { lg: '320px' } }),
+            ...(debug && { pr: { lg: "320px" } }),
           }}
         >
           <Box
@@ -129,7 +131,11 @@ export function ReactHookForm({ debug }) {
           >
             <Grid2>
               <Block>
-                <Field.Text name="fullName" label="Full name" helperText="Helper text" />
+                <Field.Text
+                  name="fullName"
+                  label="Full name"
+                  helperText="Helper text"
+                />
               </Block>
 
               <Block>
@@ -157,13 +163,17 @@ export function ReactHookForm({ debug }) {
                 <Field.Text
                   name="password"
                   label="Password"
-                  type={password.value ? 'text' : 'password'}
+                  type={password.value ? "text" : "password"}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton onClick={password.onToggle} edge="end">
                           <Iconify
-                            icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'}
+                            icon={
+                              password.value
+                                ? "solar:eye-bold"
+                                : "solar:eye-closed-bold"
+                            }
                           />
                         </IconButton>
                       </InputAdornment>
@@ -176,13 +186,17 @@ export function ReactHookForm({ debug }) {
                 <Field.Text
                   name="confirmPassword"
                   label="Confirm password"
-                  type={password.value ? 'text' : 'password'}
+                  type={password.value ? "text" : "password"}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton onClick={password.onToggle} edge="end">
                           <Iconify
-                            icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'}
+                            icon={
+                              password.value
+                                ? "solar:eye-bold"
+                                : "solar:eye-closed-bold"
+                            }
                           />
                         </IconButton>
                       </InputAdornment>
@@ -198,7 +212,9 @@ export function ReactHookForm({ debug }) {
                 label="Autocomplete"
                 options={OPTIONS}
                 getOptionLabel={(option) => option.label}
-                isOptionEqualToValue={(option, value) => option.value === value.value}
+                isOptionEqualToValue={(option, value) =>
+                  option.value === value.value
+                }
                 renderOption={(props, option) => (
                   <li {...props} key={option.value}>
                     {option.label}
@@ -232,7 +248,7 @@ export function ReactHookForm({ debug }) {
               <Block label="RHFSelect">
                 <Field.Select name="singleSelect" label="Single select">
                   <MenuItem value="">None</MenuItem>
-                  <Divider sx={{ borderStyle: 'dashed' }} />
+                  <Divider sx={{ borderStyle: "dashed" }} />
                   {OPTIONS.map((option) => (
                     <MenuItem key={option.value} value={option.label}>
                       {option.label}
@@ -268,7 +284,9 @@ export function ReactHookForm({ debug }) {
               <Field.Upload
                 name="singleUpload"
                 maxSize={3145728}
-                onDelete={() => setValue('singleUpload', null, { shouldValidate: true })}
+                onDelete={() =>
+                  setValue("singleUpload", null, { shouldValidate: true })
+                }
               />
             </Block>
 
@@ -280,13 +298,15 @@ export function ReactHookForm({ debug }) {
                 maxSize={3145728}
                 onRemove={(inputFile) =>
                   setValue(
-                    'multiUpload',
+                    "multiUpload",
                     values.multiUpload.filter((file) => file !== inputFile),
-                    { shouldValidate: true }
+                    { shouldValidate: true },
                   )
                 }
-                onRemoveAll={() => setValue('multiUpload', [], { shouldValidate: true })}
-                onUpload={() => console.info('ON UPLOAD')}
+                onRemoveAll={() =>
+                  setValue("multiUpload", [], { shouldValidate: true })
+                }
+                onUpload={() => console.info("ON UPLOAD")}
               />
             </Block>
 
@@ -301,9 +321,9 @@ export function ReactHookForm({ debug }) {
               name="radioGroup"
               label="RHFRadioGroup"
               options={[
-                { label: 'Option 1', value: 'radio-1' },
-                { label: 'Option 2', value: 'radio-2' },
-                { label: 'Option 3', value: 'radio-3' },
+                { label: "Option 1", value: "radio-1" },
+                { label: "Option 2", value: "radio-2" },
+                { label: "Option 3", value: "radio-3" },
               ]}
               sx={{ gap: 4 }}
             />
@@ -313,9 +333,9 @@ export function ReactHookForm({ debug }) {
               name="multiCheckbox"
               label="RHFMultiCheckbox"
               options={[
-                { label: 'Option 1', value: 'checkbox-1' },
-                { label: 'Option 2', value: 'checkbox-2' },
-                { label: 'Option 3', value: 'checkbox-3' },
+                { label: "Option 1", value: "checkbox-1" },
+                { label: "Option 2", value: "checkbox-2" },
+                { label: "Option 3", value: "checkbox-3" },
               ]}
               sx={{ gap: 4 }}
             />
@@ -324,9 +344,9 @@ export function ReactHookForm({ debug }) {
               name="multiSwitch"
               label="RHFMultiSwitch"
               options={[
-                { label: 'Option 1', value: 'switch-1' },
-                { label: 'Option 2', value: 'switch-2' },
-                { label: 'Option 3', value: 'switch-3' },
+                { label: "Option 1", value: "switch-1" },
+                { label: "Option 2", value: "switch-2" },
+                { label: "Option 3", value: "switch-3" },
               ]}
             />
 
@@ -357,15 +377,15 @@ export function ReactHookForm({ debug }) {
 
 // ----------------------------------------------------------------------
 
-function Block({ sx, children, label = 'RHFTextField' }) {
+function Block({ sx, children, label = "RHFTextField" }) {
   return (
     <Stack spacing={1} sx={{ width: 1, ...sx }}>
       <Typography
         variant="caption"
         sx={{
-          textAlign: 'right',
-          fontStyle: 'italic',
-          color: 'text.disabled',
+          textAlign: "right",
+          fontStyle: "italic",
+          color: "text.disabled",
           fontSize: (theme) => theme.typography.pxToRem(10),
         }}
       >
@@ -384,7 +404,7 @@ function Grid2({ children, sx, ...other }) {
       rowGap={3}
       columnGap={2}
       display="grid"
-      gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
+      gridTemplateColumns={{ xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
       sx={{ ...sx }}
       {...other}
     >

@@ -1,46 +1,54 @@
-import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import PropTypes from "prop-types";
+import { useMemo, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
-  const [subproject, setSubproject] = useState('all');
+  const [subproject, setSubproject] = useState("all");
   const theme = useTheme();
 
-  const subprojects = useMemo(() => ['all', ...new Set(data.map(item => item.subproject))], [data]);
+  const subprojects = useMemo(
+    () => ["all", ...new Set(data.map((item) => item.subproject))],
+    [data],
+  );
 
   const filteredData = useMemo(() => {
-    if (subproject === 'all') {
-      return data.filter(item => item.discipline === 'Total');
+    if (subproject === "all") {
+      return data.filter((item) => item.discipline === "Total");
     }
-    return data.filter(item => item.subproject === subproject && item.discipline === 'Total');
+    return data.filter(
+      (item) => item.subproject === subproject && item.discipline === "Total",
+    );
   }, [data, subproject]);
 
   const chartData = useMemo(() => {
-    const dates = [...new Set(filteredData.map(item => item.date))].sort();
+    const dates = [...new Set(filteredData.map((item) => item.date))].sort();
 
     // Format dates for display
-    const formattedDates = dates.map(date => {
-      const [year, month, day] = date.split('-');
+    const formattedDates = dates.map((date) => {
+      const [year, month, day] = date.split("-");
       return `${day}/${month}`;
     });
 
     // Calculate deviation percentages
-    const deviations = dates.map(date => {
-      const dateItems = filteredData.filter(item => item.date === date);
+    const deviations = dates.map((date) => {
+      const dateItems = filteredData.filter((item) => item.date === date);
 
-      if (subproject === 'all') {
+      if (subproject === "all") {
         // Calculate average deviation for all subprojects
-        const totalDeviation = dateItems.reduce((sum, item) => sum + ((item.fact - item.plan) * 100), 0);
+        const totalDeviation = dateItems.reduce(
+          (sum, item) => sum + (item.fact - item.plan) * 100,
+          0,
+        );
 
         return parseFloat((totalDeviation / dateItems.length).toFixed(2));
       }
@@ -54,7 +62,7 @@ export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
       categories: formattedDates,
       series: [
         {
-          name: 'Отклонение',
+          name: "Отклонение",
           data: deviations,
         },
       ],
@@ -83,10 +91,10 @@ export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
     },
     plotOptions: {
       bar: {
-        columnWidth: '55%',
+        columnWidth: "55%",
         borderRadius: 2,
         dataLabels: {
-          position: 'top',
+          position: "top",
         },
         distributed: true,
         colors: {
@@ -96,14 +104,14 @@ export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
     },
     legend: {
       show: true,
-      position: 'top',
-      horizontalAlign: 'right',
+      position: "top",
+      horizontalAlign: "right",
       customLegendItems: [
-        '(-20% до -10%)',
-        '(-10% до -2%)',
-        '(-2% до 0%)',
-        '(0% до 2%)',
-        '(2% до 5%)',
+        "(-20% до -10%)",
+        "(-10% до -2%)",
+        "(-2% до 0%)",
+        "(0% до 2%)",
+        "(2% до 5%)",
       ],
       markers: {
         fillColors: [
@@ -112,7 +120,6 @@ export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
           theme.palette.warning.main,
           theme.palette.success.light,
           theme.palette.success.main,
-
         ],
       },
     },
@@ -133,7 +140,7 @@ export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
           >
             {subprojects.map((option) => (
               <MenuItem key={option} value={option}>
-                {option === 'all' ? 'Все подпроекты' : option}
+                {option === "all" ? "Все подпроекты" : option}
               </MenuItem>
             ))}
           </TextField>
@@ -160,13 +167,13 @@ ProjectColumnNegativeBySubprojects.propTypes = {
       discipline: PropTypes.string.isRequired,
       plan: PropTypes.number.isRequired,
       fact: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
   rangeSettings: PropTypes.arrayOf(
     PropTypes.shape({
       from: PropTypes.number.isRequired,
       to: PropTypes.number.isRequired,
       color: PropTypes.string.isRequired,
-    })
+    }),
   ),
 };

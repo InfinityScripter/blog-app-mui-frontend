@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { _mock } from 'src/_mock';
+import { _mock } from "src/_mock";
 
-import { Markdown } from 'src/components/markdown';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Markdown } from "src/components/markdown";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock, ComponentContainer } from '../../component-block';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock, ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
@@ -129,8 +129,11 @@ export function MarkdownView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Markdown"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Markdown' }]}
-          moreLink={['https://www.npmjs.com/package/react-markdown']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Markdown" },
+          ]}
+          moreLink={["https://www.npmjs.com/package/react-markdown"]}
         />
       </ComponentHero>
 
@@ -138,8 +141,8 @@ export function MarkdownView() {
         sx={{
           rowGap: 5,
           columnGap: 3,
-          display: 'grid',
-          gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+          display: "grid",
+          gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
         }}
       >
         <ComponentBlock title="Html content" sx={{ pt: 0 }}>

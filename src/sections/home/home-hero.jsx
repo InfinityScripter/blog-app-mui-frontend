@@ -300,12 +300,13 @@ export function HomeHero({ sx, ...other }) {
   // Информация о блоге
   const renderBlogInfo = (
     <MInview>
-      <Box sx={{ textAlign: 'center', maxWidth: 600, mx: 'auto', mt: 2 }}>
+      <Box sx={{ textAlign: "center", maxWidth: 600, mx: "auto", mt: 2 }}>
         <Typography variant="subtitle1" sx={{ mb: 1 }}>
           Хотите быть в курсе современных тенденций разработки?
         </Typography>
-        <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
-          Читайте актуальные новости, статьи и руководства по веб-разработке в моем блоге
+        <Typography variant="body2" sx={{ mb: 2, color: "text.secondary" }}>
+          Читайте актуальные новости, статьи и руководства по веб-разработке в
+          моем блоге
         </Typography>
         <Button
           component={Link}
@@ -313,7 +314,9 @@ export function HomeHero({ sx, ...other }) {
           color="primary"
           size="large"
           variant="outlined"
-          startIcon={<Iconify width={24} icon="mdi:newspaper-variant-outline" />}
+          startIcon={
+            <Iconify width={24} icon="mdi:newspaper-variant-outline" />
+          }
         >
           Перейти в блог
         </Button>

@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
-import AlertTitle from '@mui/material/AlertTitle';
+import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
+import AlertTitle from "@mui/material/AlertTitle";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['info', 'success', 'warning', 'error'];
+const COLORS = ["info", "success", "warning", "error"];
 
 // ----------------------------------------------------------------------
 
 export function AlertView() {
   const DEMO = [
     {
-      name: 'Standard',
+      name: "Standard",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
           {COLORS.map((color) => (
             <Alert key={color} severity={color} onClose={() => {}}>
               This is an {color} alert — check it out!
@@ -35,11 +35,16 @@ export function AlertView() {
       ),
     },
     {
-      name: 'Filled',
+      name: "Filled",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
           {COLORS.map((color) => (
-            <Alert key={color} severity={color} variant="filled" onClose={() => {}}>
+            <Alert
+              key={color}
+              severity={color}
+              variant="filled"
+              onClose={() => {}}
+            >
               This is an {color} alert — check it out!
             </Alert>
           ))}
@@ -47,11 +52,16 @@ export function AlertView() {
       ),
     },
     {
-      name: 'Outlined',
+      name: "Outlined",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
           {COLORS.map((color) => (
-            <Alert key={color} severity={color} variant="outlined" onClose={() => {}}>
+            <Alert
+              key={color}
+              severity={color}
+              variant="outlined"
+              onClose={() => {}}
+            >
               This is an {color} alert — check it out!
             </Alert>
           ))}
@@ -59,12 +69,15 @@ export function AlertView() {
       ),
     },
     {
-      name: 'Description',
+      name: "Description",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
           {COLORS.map((color) => (
             <Alert key={color} severity={color} onClose={() => {}}>
-              <AlertTitle sx={{ textTransform: 'capitalize' }}> {color} </AlertTitle>
+              <AlertTitle sx={{ textTransform: "capitalize" }}>
+                {" "}
+                {color}{" "}
+              </AlertTitle>
               This is an {color} alert — <strong>check it out!</strong>
             </Alert>
           ))}
@@ -72,9 +85,9 @@ export function AlertView() {
       ),
     },
     {
-      name: 'Actions',
+      name: "Actions",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
           <Alert
             severity="info"
             action={
@@ -103,7 +116,12 @@ export function AlertView() {
                 >
                   Undo
                 </Button>
-                <Button size="small" color="info" variant="contained" sx={{ bgcolor: 'info.dark' }}>
+                <Button
+                  size="small"
+                  color="info"
+                  variant="contained"
+                  sx={{ bgcolor: "info.dark" }}
+                >
                   Action
                 </Button>
               </>
@@ -117,10 +135,20 @@ export function AlertView() {
             variant="outlined"
             action={
               <>
-                <Button color="info" size="small" variant="outlined" sx={{ mr: 1 }}>
+                <Button
+                  color="info"
+                  size="small"
+                  variant="outlined"
+                  sx={{ mr: 1 }}
+                >
                   Undo
                 </Button>
-                <Button color="info" size="small" variant="contained" sx={{ bgcolor: 'info.dark' }}>
+                <Button
+                  color="info"
+                  size="small"
+                  variant="contained"
+                  sx={{ bgcolor: "info.dark" }}
+                >
                   Action
                 </Button>
               </>
@@ -138,8 +166,11 @@ export function AlertView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Alert"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Alert' }]}
-          moreLink={['https://mui.com/components/alert']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Alert" },
+          ]}
+          moreLink={["https://mui.com/components/alert"]}
         />
       </ComponentHero>
 

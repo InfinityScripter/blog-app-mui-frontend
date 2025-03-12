@@ -1,8 +1,8 @@
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { StyledControlPanel } from '../styles';
+import { StyledControlPanel } from "../styles";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ export function ControlPanel({ data, selectedCity, onSelectCity }) {
             value={city.city}
             label={city.city}
             control={<Radio size="small" />}
-            sx={{ color: 'common.white' }}
+            sx={{ color: "common.white" }}
           />
         </RadioGroup>
       ))}

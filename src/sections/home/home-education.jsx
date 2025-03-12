@@ -1,32 +1,35 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
 
-import { Iconify } from 'src/components/iconify';
-import { varFade, MotionViewport } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
 const EDUCATION = [
   {
-    school: 'Яндекс Практикум',
-    degree: 'Школа разработки интерфейсов',
-    year: '2021',
-    description: 'Профессиональная программа обучения frontend-разработке с фокусом на современные технологии и практики.',
-    icon: 'mdi:school',
+    school: "Яндекс Практикум",
+    degree: "Школа разработки интерфейсов",
+    year: "2021",
+    description:
+      "Профессиональная программа обучения frontend-разработке с фокусом на современные технологии и практики.",
+    icon: "mdi:school",
   },
   {
-    school: 'Тюменский государственный нефтегазовый университет',
-    degree: 'Специалист, Автоматизированные системы обработки информации и управления',
-    year: '2007 - 2012',
-    description: 'Изучение информационных технологий, программирования, баз данных и систем управления.',
-    icon: 'mdi:school',
+    school: "Тюменский государственный нефтегазовый университет",
+    degree:
+      "Специалист, Автоматизированные системы обработки информации и управления",
+    year: "2007 - 2012",
+    description:
+      "Изучение информационных технологий, программирования, баз данных и систем управления.",
+    icon: "mdi:school",
   },
 ];
 
@@ -43,7 +46,7 @@ export default function HomeEducation() {
       <Stack
         spacing={3}
         sx={{
-          textAlign: 'center',
+          textAlign: "center",
           mb: { xs: 5, md: 10 },
         }}
       >
@@ -52,7 +55,7 @@ export default function HomeEducation() {
         </m.div>
 
         <m.div variants={varFade().inDown}>
-          <Typography sx={{ color: 'text.secondary' }}>
+          <Typography sx={{ color: "text.secondary" }}>
             Мой образовательный путь и профессиональное развитие
           </Typography>
         </m.div>
@@ -62,8 +65,8 @@ export default function HomeEducation() {
         gap={4}
         display="grid"
         gridTemplateColumns={{
-          xs: 'repeat(1, 1fr)',
-          md: 'repeat(2, 1fr)',
+          xs: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
         }}
       >
         {EDUCATION.map((item) => (
@@ -71,9 +74,9 @@ export default function HomeEducation() {
             <Card
               sx={{
                 boxShadow: theme.customShadows.z8,
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
+                transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                "&:hover": {
+                  transform: "translateY(-8px)",
                   boxShadow: theme.customShadows.z24,
                 },
               }}
@@ -81,20 +84,25 @@ export default function HomeEducation() {
               <CardContent
                 sx={{
                   p: 3,
-                  display: 'flex',
-                  flexDirection: 'column',
+                  display: "flex",
+                  flexDirection: "column",
                   minHeight: 280,
                 }}
               >
-                <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={2}
+                  sx={{ mb: 3 }}
+                >
                   <Box
                     sx={{
                       p: 1.5,
-                      borderRadius: '50%',
+                      borderRadius: "50%",
                       bgcolor: theme.palette.primary.lighter,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     <Iconify
@@ -105,7 +113,10 @@ export default function HomeEducation() {
                   </Box>
 
                   <Box>
-                    <Typography variant="subtitle1" sx={{ color: 'text.primary' }}>
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ color: "text.primary" }}
+                    >
                       {item.year}
                     </Typography>
                   </Box>
@@ -115,14 +126,17 @@ export default function HomeEducation() {
                   {item.school}
                 </Typography>
 
-                <Typography variant="body2" sx={{ color: 'text.secondary', mb: 2 }}>
+                <Typography
+                  variant="body2"
+                  sx={{ color: "text.secondary", mb: 2 }}
+                >
                   {item.degree}
                 </Typography>
 
                 <Typography
                   variant="body2"
                   sx={{
-                    color: 'text.secondary',
+                    color: "text.secondary",
                     flexGrow: 1,
                   }}
                 >

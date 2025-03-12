@@ -1,9 +1,9 @@
-import Card from '@mui/material/Card';
-import Divider from '@mui/material/Divider';
-import { useTheme } from '@mui/material/styles';
-import CardHeader from '@mui/material/CardHeader';
+import Card from "@mui/material/Card";
+import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
+import CardHeader from "@mui/material/CardHeader";
 
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +22,11 @@ export function AnalyticsCurrentSubject({ title, subheader, chart, ...other }) {
     fill: { opacity: 0.48 },
     xaxis: {
       categories: chart.categories,
-      labels: { style: { colors: [...Array(6)].map(() => theme.palette.text.secondary) } },
+      labels: {
+        style: {
+          colors: [...Array(6)].map(() => theme.palette.text.secondary),
+        },
+      },
     },
     ...chart.options,
   });
@@ -38,15 +42,15 @@ export function AnalyticsCurrentSubject({ title, subheader, chart, ...other }) {
         width={300}
         height={300}
         loadingProps={{ sx: { py: 2.5 } }}
-        sx={{ my: 1, mx: 'auto' }}
+        sx={{ my: 1, mx: "auto" }}
       />
 
-      <Divider sx={{ borderStyle: 'dashed' }} />
+      <Divider sx={{ borderStyle: "dashed" }} />
 
       <ChartLegends
         labels={chart.series.map((item) => item.name)}
         colors={chartOptions?.colors}
-        sx={{ p: 3, justifyContent: 'center' }}
+        sx={{ p: 3, justifyContent: "center" }}
       />
     </Card>
   );

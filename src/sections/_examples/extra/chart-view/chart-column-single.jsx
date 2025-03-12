@@ -1,13 +1,15 @@
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ChartColumnSingle({ chart }) {
   const theme = useTheme();
 
-  const chartColors = chart.colors ?? [hexAlpha(theme.palette.primary.dark, 0.8)];
+  const chartColors = chart.colors ?? [
+    hexAlpha(theme.palette.primary.dark, 0.8),
+  ];
 
   const chartOptions = useChart({
     colors: chartColors,
@@ -16,11 +18,18 @@ export function ChartColumnSingle({ chart }) {
     tooltip: {
       y: {
         formatter: (value) => `${value} thousands`,
-        title: { formatter: () => '' },
+        title: { formatter: () => "" },
       },
     },
-    plotOptions: { bar: { columnWidth: '40%' } },
+    plotOptions: { bar: { columnWidth: "40%" } },
   });
 
-  return <Chart type="bar" series={chart.series} options={chartOptions} height={320} />;
+  return (
+    <Chart
+      type="bar"
+      series={chart.series}
+      options={chartOptions}
+      height={320}
+    />
+  );
 }

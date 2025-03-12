@@ -1,19 +1,21 @@
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { ChartLoading } from './chart-loading';
-import {withLoadingProps} from "../../utils/with-loading-props";
+import { ChartLoading } from "./chart-loading";
+import { withLoadingProps } from "../../utils/with-loading-props";
 
 const ApexChart = withLoadingProps((props) =>
-  dynamic(() => import('react-apexcharts').then((mod) => mod.default), {
+  dynamic(() => import("react-apexcharts").then((mod) => mod.default), {
     ssr: false,
     loading: () => {
       const { loading, type } = props();
 
-      return loading?.disabled ? null : <ChartLoading type={type} sx={loading?.sx} />;
+      return loading?.disabled ? null : (
+        <ChartLoading type={type} sx={loading?.sx} />
+      );
     },
-  })
+  }),
 );
 
 // ----------------------------------------------------------------------
@@ -25,7 +27,7 @@ export function Chart({
   height,
   options,
   loadingProps,
-  width = '100%',
+  width = "100%",
   ...other
 }) {
   return (
@@ -36,7 +38,7 @@ export function Chart({
         height,
         flexShrink: 0,
         borderRadius: 1.5,
-        position: 'relative',
+        position: "relative",
         ...sx,
       }}
       {...other}

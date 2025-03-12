@@ -1,16 +1,19 @@
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { WalktourTooltip } from './walktour-tooltip';
+import { WalktourTooltip } from "./walktour-tooltip";
 
 // ----------------------------------------------------------------------
 
-const Joyride = dynamic(() => import('react-joyride').then((mod) => mod.default), {
-  ssr: false,
-});
+const Joyride = dynamic(
+  () => import("react-joyride").then((mod) => mod.default),
+  {
+    ssr: false,
+  },
+);
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +37,7 @@ export function Walktour({
   return (
     <Joyride
       scrollOffset={100}
-      locale={{ last: 'Done', ...locale }}
+      locale={{ last: "Done", ...locale }}
       continuous={continuous}
       showProgress={showProgress}
       showSkipButton={showSkipButton}
@@ -43,7 +46,7 @@ export function Walktour({
       disableOverlayClose={disableOverlayClose}
       floaterProps={{
         styles: {
-          floater: { filter: 'none' },
+          floater: { filter: "none" },
           arrow: { spread: arrowStyles.width, length: arrowStyles.height },
         },
       }}
@@ -53,7 +56,7 @@ export function Walktour({
           arrowColor: arrowStyles.color,
         },
         overlay: {
-          backgroundColor: varAlpha(theme.vars.palette.grey['900Channel'], 0.8),
+          backgroundColor: varAlpha(theme.vars.palette.grey["900Channel"], 0.8),
         },
         spotlight: {
           borderRadius: theme.shape.borderRadius * 2,

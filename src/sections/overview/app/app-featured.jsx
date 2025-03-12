@@ -1,38 +1,40 @@
-import Autoplay from 'embla-carousel-autoplay';
+import Autoplay from "embla-carousel-autoplay";
 
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Card from "@mui/material/Card";
+import Typography from "@mui/material/Typography";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Image } from 'src/components/image';
+import { Image } from "src/components/image";
 import {
   Carousel,
   useCarousel,
   CarouselDotButtons,
   CarouselArrowBasicButtons,
-} from 'src/components/carousel';
+} from "src/components/carousel";
 
 // ----------------------------------------------------------------------
 
 export function AppFeatured({ list, sx, ...other }) {
-  const carousel = useCarousel({ loop: true }, [Autoplay({ playOnInit: true, delay: 8000 })]);
+  const carousel = useCarousel({ loop: true }, [
+    Autoplay({ playOnInit: true, delay: 8000 }),
+  ]);
 
   return (
-    <Card sx={{ bgcolor: 'common.black', ...sx }} {...other}>
+    <Card sx={{ bgcolor: "common.black", ...sx }} {...other}>
       <CarouselDotButtons
         scrollSnaps={carousel.dots.scrollSnaps}
         selectedIndex={carousel.dots.selectedIndex}
         onClickDot={carousel.dots.onClickDot}
-        sx={{ top: 16, left: 16, position: 'absolute', color: 'primary.light' }}
+        sx={{ top: 16, left: 16, position: "absolute", color: "primary.light" }}
       />
 
       <CarouselArrowBasicButtons
         {...carousel.arrows}
         options={carousel.options}
-        sx={{ top: 8, right: 8, position: 'absolute', color: 'common.white' }}
+        sx={{ top: 8, right: 8, position: "absolute", color: "common.white" }}
       />
 
       <Carousel carousel={carousel}>
@@ -48,7 +50,7 @@ export function AppFeatured({ list, sx, ...other }) {
 
 function CarouselItem({ item, ...other }) {
   return (
-    <Box sx={{ width: 1, position: 'relative', ...other }}>
+    <Box sx={{ width: 1, position: "relative", ...other }}>
       <Box
         sx={{
           p: 3,
@@ -56,13 +58,13 @@ function CarouselItem({ item, ...other }) {
           width: 1,
           bottom: 0,
           zIndex: 9,
-          display: 'flex',
-          position: 'absolute',
-          color: 'common.white',
-          flexDirection: 'column',
+          display: "flex",
+          position: "absolute",
+          color: "common.white",
+          flexDirection: "column",
         }}
       >
-        <Typography variant="overline" sx={{ color: 'primary.light' }}>
+        <Typography variant="overline" sx={{ color: "primary.light" }}>
           Featured App
         </Typography>
 

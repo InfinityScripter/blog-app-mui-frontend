@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Badge from '@mui/material/Badge';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Drawer, { drawerClasses } from '@mui/material/Drawer';
-import { useTheme, useColorScheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Badge from "@mui/material/Badge";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Drawer, { drawerClasses } from "@mui/material/Drawer";
+import { useTheme, useColorScheme } from "@mui/material/styles";
 
-import COLORS from 'src/theme/core/colors.json';
-import { paper, varAlpha } from 'src/theme/styles';
-import { defaultFont } from 'src/theme/core/typography';
-import PRIMARY_COLOR from 'src/theme/with-settings/primary-color.json';
+import COLORS from "src/theme/core/colors.json";
+import { paper, varAlpha } from "src/theme/styles";
+import { defaultFont } from "src/theme/core/typography";
+import PRIMARY_COLOR from "src/theme/with-settings/primary-color.json";
 
-import { Iconify } from '../../iconify';
-import { BaseOption } from './base-option';
-import { NavOptions } from './nav-options';
-import { Scrollbar } from '../../scrollbar';
-import { FontOptions } from './font-options';
-import { useSettingsContext } from '../context';
-import { PresetsOptions } from './presets-options';
-import { defaultSettings } from '../config-settings';
-import { FullScreenButton } from './fullscreen-button';
+import { Iconify } from "../../iconify";
+import { BaseOption } from "./base-option";
+import { NavOptions } from "./nav-options";
+import { Scrollbar } from "../../scrollbar";
+import { FontOptions } from "./font-options";
+import { useSettingsContext } from "../context";
+import { PresetsOptions } from "./presets-options";
+import { defaultSettings } from "../config-settings";
+import { FullScreenButton } from "./fullscreen-button";
 
 // ----------------------------------------------------------------------
 
@@ -76,10 +76,13 @@ export function SettingsDrawer({
     <BaseOption
       label="Dark mode"
       icon="moon"
-      selected={settings.colorScheme === 'dark'}
+      selected={settings.colorScheme === "dark"}
       onClick={() => {
-        settings.onUpdateField('colorScheme', mode === 'light' ? 'dark' : 'light');
-        setMode(mode === 'light' ? 'dark' : 'light');
+        settings.onUpdateField(
+          "colorScheme",
+          mode === "light" ? "dark" : "light",
+        );
+        setMode(mode === "light" ? "dark" : "light");
       }}
     />
   );
@@ -88,9 +91,12 @@ export function SettingsDrawer({
     <BaseOption
       label="Contrast"
       icon="contrast"
-      selected={settings.contrast === 'hight'}
+      selected={settings.contrast === "hight"}
       onClick={() =>
-        settings.onUpdateField('contrast', settings.contrast === 'default' ? 'hight' : 'default')
+        settings.onUpdateField(
+          "contrast",
+          settings.contrast === "default" ? "hight" : "default",
+        )
       }
     />
   );
@@ -99,9 +105,12 @@ export function SettingsDrawer({
     <BaseOption
       label="Right to left"
       icon="align-right"
-      selected={settings.direction === 'rtl'}
+      selected={settings.direction === "rtl"}
       onClick={() =>
-        settings.onUpdateField('direction', settings.direction === 'ltr' ? 'rtl' : 'ltr')
+        settings.onUpdateField(
+          "direction",
+          settings.direction === "ltr" ? "rtl" : "ltr",
+        )
       }
     />
   );
@@ -112,21 +121,25 @@ export function SettingsDrawer({
       label="Compact"
       icon="autofit-width"
       selected={settings.compactLayout}
-      onClick={() => settings.onUpdateField('compactLayout', !settings.compactLayout)}
+      onClick={() =>
+        settings.onUpdateField("compactLayout", !settings.compactLayout)
+      }
     />
   );
 
   const renderPresets = (
     <PresetsOptions
       value={settings.primaryColor}
-      onClickOption={(newValue) => settings.onUpdateField('primaryColor', newValue)}
+      onClickOption={(newValue) =>
+        settings.onUpdateField("primaryColor", newValue)
+      }
       options={[
-        { name: 'default', value: COLORS.primary.main },
-        { name: 'cyan', value: PRIMARY_COLOR.cyan.main },
-        { name: 'purple', value: PRIMARY_COLOR.purple.main },
-        { name: 'blue', value: PRIMARY_COLOR.blue.main },
-        { name: 'orange', value: PRIMARY_COLOR.orange.main },
-        { name: 'red', value: PRIMARY_COLOR.red.main },
+        { name: "default", value: COLORS.primary.main },
+        { name: "cyan", value: PRIMARY_COLOR.cyan.main },
+        { name: "purple", value: PRIMARY_COLOR.purple.main },
+        { name: "blue", value: PRIMARY_COLOR.blue.main },
+        { name: "orange", value: PRIMARY_COLOR.orange.main },
+        { name: "red", value: PRIMARY_COLOR.red.main },
       ]}
     />
   );
@@ -138,12 +151,12 @@ export function SettingsDrawer({
         layout: settings.navLayout,
       }}
       onClickOption={{
-        color: (newValue) => settings.onUpdateField('navColor', newValue),
-        layout: (newValue) => settings.onUpdateField('navLayout', newValue),
+        color: (newValue) => settings.onUpdateField("navColor", newValue),
+        layout: (newValue) => settings.onUpdateField("navLayout", newValue),
       }}
       options={{
-        colors: ['integrate', 'apparent'],
-        layouts: ['vertical', 'horizontal', 'mini'],
+        colors: ["integrate", "apparent"],
+        layouts: ["vertical", "horizontal", "mini"],
       }}
       hideNavColor={hideNavColor}
       hideNavLayout={hideNavLayout}
@@ -153,8 +166,10 @@ export function SettingsDrawer({
   const renderFont = (
     <FontOptions
       value={settings.fontFamily}
-      onClickOption={(newValue) => settings.onUpdateField('fontFamily', newValue)}
-      options={[defaultFont, 'Inter', 'DM Sans', 'Nunito Sans']}
+      onClickOption={(newValue) =>
+        settings.onUpdateField("fontFamily", newValue)
+      }
+      options={[defaultFont, "Inter", "DM Sans", "Nunito Sans"]}
     />
   );
 

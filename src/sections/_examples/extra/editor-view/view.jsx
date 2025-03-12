@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Switch from '@mui/material/Switch';
-import Typography from '@mui/material/Typography';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
+import Typography from "@mui/material/Typography";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Editor } from 'src/components/editor';
-import { Markdown } from 'src/components/markdown';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Editor } from "src/components/editor";
+import { Markdown } from "src/components/markdown";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentContainer } from '../../component-block';
+import { ComponentHero } from "../../component-hero";
+import { ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
@@ -52,8 +52,11 @@ export function EditorView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Editor"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Editor' }]}
-          moreLink={['https://tiptap.dev/docs/editor/introduction']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Editor" },
+          ]}
+          moreLink={["https://tiptap.dev/docs/editor/introduction"]}
         />
       </ComponentHero>
 
@@ -62,8 +65,8 @@ export function EditorView() {
         sx={{
           rowGap: 5,
           columnGap: 3,
-          display: 'grid',
-          gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
+          display: "grid",
+          gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
         }}
       >
         <Card
@@ -71,15 +74,21 @@ export function EditorView() {
             p: 3,
             gap: 2,
             flexShrink: 0,
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <FormControlLabel
-            control={<Switch name="fullItem" checked={checked} onChange={handleChange} />}
+            control={
+              <Switch
+                name="fullItem"
+                checked={checked}
+                onChange={handleChange}
+              />
+            }
             label="Full item"
             labelPlacement="start"
-            sx={{ ml: 'auto' }}
+            sx={{ ml: "auto" }}
           />
           <Editor
             fullItem={checked}
@@ -94,8 +103,8 @@ export function EditorView() {
           sx={{
             p: 3,
             borderRadius: 2,
-            overflowX: 'auto',
-            bgcolor: 'background.neutral',
+            overflowX: "auto",
+            bgcolor: "background.neutral",
           }}
         >
           <Typography variant="h6">Preview</Typography>

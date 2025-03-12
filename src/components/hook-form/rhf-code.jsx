@@ -1,7 +1,7 @@
-import { MuiOtpInput } from 'mui-one-time-password-input';
-import { Controller, useFormContext } from 'react-hook-form';
+import { MuiOtpInput } from "mui-one-time-password-input";
+import { Controller, useFormContext } from "react-hook-form";
 
-import FormHelperText from '@mui/material/FormHelperText';
+import FormHelperText from "@mui/material/FormHelperText";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ export function RHFCode({ name, ...other }) {
             autoFocus
             gap={1.5}
             length={6}
-            TextFieldsProps={{ error: !!error, placeholder: '-' }}
+            TextFieldsProps={{ error: !!error, placeholder: "-" }}
             {...other}
           />
 

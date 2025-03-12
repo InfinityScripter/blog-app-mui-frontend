@@ -1,22 +1,22 @@
-'use client';
+"use client";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { CustomIcons } from './custom-icon';
-import { CustomStyling } from './custom-styling';
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { BasicRichTree, BasicSimpleTree } from './basic';
-import { ScrollToViewTemplate } from '../../component-template';
+import { CustomIcons } from "./custom-icon";
+import { CustomStyling } from "./custom-styling";
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { BasicRichTree, BasicSimpleTree } from "./basic";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
 export function TreeView() {
   const DEMO = [
     {
-      name: 'Simple tree view',
+      name: "Simple tree view",
       component: (
         <ComponentBlock>
           <BasicSimpleTree />
@@ -24,7 +24,7 @@ export function TreeView() {
       ),
     },
     {
-      name: 'Rich tree view',
+      name: "Rich tree view",
       component: (
         <ComponentBlock>
           <BasicRichTree />
@@ -32,7 +32,7 @@ export function TreeView() {
       ),
     },
     {
-      name: 'Custom styling',
+      name: "Custom styling",
       component: (
         <ComponentBlock>
           <CustomStyling />
@@ -40,7 +40,7 @@ export function TreeView() {
       ),
     },
     {
-      name: 'Custom icon',
+      name: "Custom icon",
       component: (
         <ComponentBlock>
           <CustomIcons />
@@ -54,8 +54,11 @@ export function TreeView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Tree View"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Tree View' }]}
-          moreLink={['https://mui.com/x/react-tree-view/']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Tree View" },
+          ]}
+          moreLink={["https://mui.com/x/react-tree-view/"]}
         />
       </ComponentHero>
 

@@ -1,30 +1,30 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { useDebounce } from 'src/hooks/use-debounce';
+import { useDebounce } from "src/hooks/use-debounce";
 
-import { orderBy } from 'src/utils/helper';
+import { orderBy } from "src/utils/helper";
 
-import { POST_SORT_OPTIONS } from 'src/_mock';
-import { useSearchPosts } from 'src/actions/blog';
+import { POST_SORT_OPTIONS } from "src/_mock";
+import { useSearchPosts } from "src/actions/blog";
 
-import { PostList } from '../post-list';
-import { PostSort } from '../post-sort';
-import { PostSearch } from '../post-search';
+import { PostList } from "../post-list";
+import { PostSort } from "../post-sort";
+import { PostSearch } from "../post-search";
 
 // ----------------------------------------------------------------------
 
 export function PostListHomeView({ posts }) {
-  const [sortBy, setSortBy] = useState('latest');
+  const [sortBy, setSortBy] = useState("latest");
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const debouncedQuery = useDebounce(searchQuery);
 
@@ -49,8 +49,8 @@ export function PostListHomeView({ posts }) {
       <Stack
         spacing={3}
         justifyContent="space-between"
-        alignItems={{ xs: 'flex-end', sm: 'center' }}
-        direction={{ xs: 'column', sm: 'row' }}
+        alignItems={{ xs: "flex-end", sm: "center" }}
+        direction={{ xs: "column", sm: "row" }}
         sx={{ mb: { xs: 3, md: 5 } }}
       >
         <PostSearch
@@ -61,7 +61,11 @@ export function PostListHomeView({ posts }) {
           hrefItem={(title) => paths.post.details(title)}
         />
 
-        <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
+        <PostSort
+          sort={sortBy}
+          onSort={handleSortBy}
+          sortOptions={POST_SORT_OPTIONS}
+        />
       </Stack>
 
       <PostList posts={dataFiltered} />
@@ -70,17 +74,18 @@ export function PostListHomeView({ posts }) {
 }
 
 const applyFilter = ({ inputData, sortBy }) => {
+  const publishedPosts = inputData.filter(
+    (post) => post.publish === "published",
+  );
 
-  const publishedPosts = inputData.filter(post => post.publish === 'published');
-
-  if (sortBy === 'latest') {
-    return orderBy(publishedPosts, ['createdAt'], ['desc']);
+  if (sortBy === "latest") {
+    return orderBy(publishedPosts, ["createdAt"], ["desc"]);
   }
-  if (sortBy === 'oldest') {
-    return orderBy(publishedPosts, ['createdAt'], ['asc']);
+  if (sortBy === "oldest") {
+    return orderBy(publishedPosts, ["createdAt"], ["asc"]);
   }
-  if (sortBy === 'popular') {
-    return orderBy(publishedPosts, ['totalViews'], ['desc']);
+  if (sortBy === "popular") {
+    return orderBy(publishedPosts, ["totalViews"], ["desc"]);
   }
   return publishedPosts;
 };

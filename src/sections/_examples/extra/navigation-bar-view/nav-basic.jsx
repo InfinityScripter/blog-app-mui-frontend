@@ -1,17 +1,17 @@
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { Logo } from 'src/components/logo';
-import { Label } from 'src/components/label';
-import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
-import { NavBasicMobile, NavBasicDesktop } from 'src/components/nav-basic';
+import { Logo } from "src/components/logo";
+import { Label } from "src/components/label";
+import { Iconify } from "src/components/iconify";
+import { SvgColor } from "src/components/svg-color";
+import { NavBasicMobile, NavBasicDesktop } from "src/components/nav-basic";
 
 // ----------------------------------------------------------------------
 
@@ -27,10 +27,10 @@ export function NavBasic() {
           gap: 2,
           width: 1,
           borderRadius: 2,
-          display: 'flex',
-          overflowX: 'auto',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          display: "flex",
+          overflowX: "auto",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
         <IconButton onClick={mobileOpen.onTrue}>
@@ -40,7 +40,7 @@ export function NavBasic() {
         <NavBasicDesktop
           data={NAV_ITEMS}
           cssVars={{
-            '--nav-item-gap': '16px',
+            "--nav-item-gap": "16px",
           }}
           slotProps={{
             rootItem: {
@@ -79,7 +79,7 @@ export function NavBasic() {
           sx={{ px: 1.5 }}
           data={NAV_ITEMS}
           cssVars={{
-            '--nav-item-gap': '8px',
+            "--nav-item-gap": "8px",
           }}
           slotProps={{
             rootItem: {
@@ -115,67 +115,99 @@ export function NavBasic() {
 
 export const NAV_ITEMS = [
   {
-    title: 'Home',
-    path: '#',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-analytics.svg`} />,
+    title: "Home",
+    path: "#",
+    icon: (
+      <SvgColor
+        src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-analytics.svg`}
+      />
+    ),
   },
   {
-    title: 'Page',
-    path: '/basic/page',
-    caption: 'This is the caption',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-banking.svg`} />,
+    title: "Page",
+    path: "/basic/page",
+    caption: "This is the caption",
+    icon: (
+      <SvgColor
+        src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-banking.svg`}
+      />
+    ),
     info: <Label color="info">+2</Label>,
     children: [
       {
-        title: 'Page 1',
-        path: '/basic/page/1',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-booking.svg`} />,
-        caption: 'This is the caption',
-        info: '+3',
+        title: "Page 1",
+        path: "/basic/page/1",
+        icon: (
+          <SvgColor
+            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-booking.svg`}
+          />
+        ),
+        caption: "This is the caption",
+        info: "+3",
         children: [
-          { title: 'Page 1.1', path: '/basic/page/1/1' },
-          { title: 'Page 1.2', path: '/basic/page/1/2' },
+          { title: "Page 1.1", path: "/basic/page/1/1" },
+          { title: "Page 1.2", path: "/basic/page/1/2" },
         ],
       },
       {
-        title: 'Page 2',
-        path: '/basic/page/2',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`} />,
+        title: "Page 2",
+        path: "/basic/page/2",
+        icon: (
+          <SvgColor
+            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-chat.svg`}
+          />
+        ),
         children: [
-          { title: 'Page 2.1', path: '/basic/page/2/1' },
-          { title: 'Page 2.2', path: '/basic/page/2/2' },
+          { title: "Page 2.1", path: "/basic/page/2/1" },
+          { title: "Page 2.2", path: "/basic/page/2/2" },
           {
-            title: 'Page 2.3',
-            path: '/basic/page/2/3',
+            title: "Page 2.3",
+            path: "/basic/page/2/3",
             children: [
-              { title: 'Page 2.3.1', path: '/basic/page/2/3/1' },
-              { title: 'Page 2.3.2', path: '/basic/page/2/3/2' },
-              { title: 'Page 2.3.3', path: '/basic/page/2/3/3' },
+              { title: "Page 2.3.1", path: "/basic/page/2/3/1" },
+              { title: "Page 2.3.2", path: "/basic/page/2/3/2" },
+              { title: "Page 2.3.3", path: "/basic/page/2/3/3" },
             ],
           },
         ],
       },
       {
-        title: 'Page 3',
-        path: '#',
-        icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-lock.svg`} />,
+        title: "Page 3",
+        path: "#",
+        icon: (
+          <SvgColor
+            src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-lock.svg`}
+          />
+        ),
       },
     ],
   },
   {
-    title: 'Blog',
-    path: '#',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-mail.svg`} />,
+    title: "Blog",
+    path: "#",
+    icon: (
+      <SvgColor
+        src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-mail.svg`}
+      />
+    ),
   },
   {
-    title: 'Contact',
-    path: '#',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-user.svg`} />,
+    title: "Contact",
+    path: "#",
+    icon: (
+      <SvgColor
+        src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-user.svg`}
+      />
+    ),
     disabled: true,
   },
   {
-    title: 'External',
-    path: 'https://www.google.com/',
-    icon: <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-tour.svg`} />,
+    title: "External",
+    path: "https://www.google.com/",
+    icon: (
+      <SvgColor
+        src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-tour.svg`}
+      />
+    ),
   },
 ];

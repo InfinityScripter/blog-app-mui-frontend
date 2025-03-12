@@ -1,8 +1,8 @@
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
+import ButtonBase from "@mui/material/ButtonBase";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ export function WalktourProgressBar({ onGoStep, totalSteps, currentStep }) {
     height: 2,
     bottom: 0,
     content: '""',
-    position: 'absolute',
+    position: "absolute",
     width: `calc(100% / ${totalSteps} * ${currentStep})`,
     background: `linear-gradient(135deg, ${theme.vars.palette.primary.light} 0%, ${theme.vars.palette.primary.main} 100%)`,
   };
@@ -25,8 +25,8 @@ export function WalktourProgressBar({ onGoStep, totalSteps, currentStep }) {
         left: 0,
         width: 1,
         bottom: -1,
-        position: 'absolute',
-        '&::before': barStyles,
+        position: "absolute",
+        "&::before": barStyles,
       }}
     >
       {[...Array(totalSteps)].map((_, index) => {
@@ -44,12 +44,12 @@ export function WalktourProgressBar({ onGoStep, totalSteps, currentStep }) {
             sx={{
               pt: 1,
               width: `calc(100% / ${totalSteps})`,
-              '&:hover': {
-                bgcolor: 'action.hover',
+              "&:hover": {
+                bgcolor: "action.hover",
                 ...(currentStep >= stepIndex && {
                   bgcolor: varAlpha(
                     theme.vars.palette.primary.mainChannel,
-                    theme.vars.palette.action.hoverOpacity
+                    theme.vars.palette.action.hoverOpacity,
                   ),
                 }),
               },

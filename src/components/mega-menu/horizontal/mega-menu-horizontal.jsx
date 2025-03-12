@@ -1,10 +1,10 @@
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { NavList } from './nav-list';
-import { NavUl } from '../../nav-section';
-import { megaMenuClasses } from '../classes';
-import { megaMenuCssVars } from '../css-vars';
+import { NavList } from "./nav-list";
+import { NavUl } from "../../nav-section";
+import { megaMenuClasses } from "../classes";
+import { megaMenuCssVars } from "../css-vars";
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ export function MegaMenuHorizontal({
       sx={{ ...cssVars, ...sx }}
       {...other}
     >
-      <NavUl sx={{ gap: 'var(--nav-item-gap)', flexDirection: 'row' }}>
+      <NavUl sx={{ gap: "var(--nav-item-gap)", flexDirection: "row" }}>
         {data.map((list) => (
           <NavList
             key={list.title}

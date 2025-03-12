@@ -1,11 +1,16 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import ButtonBase from "@mui/material/ButtonBase";
 
-import { Iconify } from '../../iconify';
-import { useNavItem, stateClasses, sharedStyles, navSectionClasses } from '../../nav-section';
+import { Iconify } from "../../iconify";
+import {
+  useNavItem,
+  stateClasses,
+  sharedStyles,
+  navSectionClasses,
+} from "../../nav-section";
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +32,7 @@ export const NavItem = forwardRef(
       enabledRootRedirect,
       ...other
     },
-    ref
+    ref,
   ) => {
     const navItem = useNavItem({
       path,
@@ -76,51 +81,57 @@ export const NavItem = forwardRef(
         )}
 
         {hasChild && (
-          <Iconify icon="eva:arrow-ios-forward-fill" className={navSectionClasses.item.arrow} />
+          <Iconify
+            icon="eva:arrow-ios-forward-fill"
+            className={navSectionClasses.item.arrow}
+          />
         )}
       </StyledNavItem>
     );
-  }
+  },
 );
 
 // ----------------------------------------------------------------------
 
 const StyledNavItem = styled(ButtonBase, {
-  shouldForwardProp: (prop) => prop !== 'active' && prop !== 'open' && prop !== 'disabled',
+  shouldForwardProp: (prop) =>
+    prop !== "active" && prop !== "open" && prop !== "disabled",
 })(({ active, open, disabled, theme }) => ({
-  padding: 'var(--nav-item-padding)',
-  minHeight: 'var(--nav-item-height)',
-  borderRadius: 'var(--nav-item-radius)',
-  transition: theme.transitions.create(['background-color'], {
+  padding: "var(--nav-item-padding)",
+  minHeight: "var(--nav-item-height)",
+  borderRadius: "var(--nav-item-radius)",
+  transition: theme.transitions.create(["background-color"], {
     duration: theme.transitions.duration.standard,
   }),
-  '&:hover': {
-    backgroundColor: 'var(--nav-item-hover-bg)',
+  "&:hover": {
+    backgroundColor: "var(--nav-item-hover-bg)",
   },
   [`& .${navSectionClasses.item.title}`]: {
     ...theme.typography.body2,
-    flex: '1 1 auto',
-    fontWeight: active ? theme.typography.fontWeightSemiBold : theme.typography.fontWeightMedium,
+    flex: "1 1 auto",
+    fontWeight: active
+      ? theme.typography.fontWeightSemiBold
+      : theme.typography.fontWeightMedium,
   },
   [`& .${navSectionClasses.item.icon}`]: {
     ...sharedStyles.icon,
-    width: 'var(--nav-icon-size)',
-    height: 'var(--nav-icon-size)',
-    margin: 'var(--nav-icon-margin)',
+    width: "var(--nav-icon-size)",
+    height: "var(--nav-icon-size)",
+    margin: "var(--nav-icon-margin)",
   },
   [`& .${navSectionClasses.item.arrow}`]: { ...sharedStyles.arrow },
   [`& .${navSectionClasses.item.info}`]: { ...sharedStyles.info },
   // State
   ...(active && {
-    color: 'var(--nav-item-active-color)',
-    backgroundColor: 'var(--nav-item-active-bg)',
-    '&:hover': {
-      backgroundColor: 'var(--nav-item-active-hover-bg)',
+    color: "var(--nav-item-active-color)",
+    backgroundColor: "var(--nav-item-active-bg)",
+    "&:hover": {
+      backgroundColor: "var(--nav-item-active-hover-bg)",
     },
   }),
   ...(open && {
-    color: 'var(--nav-item-open-color)',
-    backgroundColor: 'var(--nav-item-open-bg)',
+    color: "var(--nav-item-open-color)",
+    backgroundColor: "var(--nav-item-open-bg)",
   }),
   ...(disabled && sharedStyles.disabled),
 }));

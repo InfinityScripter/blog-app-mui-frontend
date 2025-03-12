@@ -1,31 +1,31 @@
-import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
+import PropTypes from "prop-types";
+import { useMemo, useState } from "react";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Grid from '@mui/material/Grid';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import { useTheme } from "@mui/material/styles";
 
-import { fNumber, fPercent } from 'src/utils/format-number';
+import { fNumber, fPercent } from "src/utils/format-number";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha, bgGradient } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
-import { Chart, useChart } from 'src/components/chart';
+import { Iconify } from "src/components/iconify";
+import { SvgColor } from "src/components/svg-color";
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ProjectMobilizationSummary({ data }) {
-  const [subproject, setSubproject] = useState('all');
+  const [subproject, setSubproject] = useState("all");
   const theme = useTheme();
 
   const subprojects = useMemo(() => {
-    const uniqueSubprojects = [...new Set(data.map(item => item.subproject))];
-    return ['all', ...uniqueSubprojects];
+    const uniqueSubprojects = [...new Set(data.map((item) => item.subproject))];
+    return ["all", ...uniqueSubprojects];
   }, [data]);
 
   const handleChangeSubproject = (event) => {
@@ -35,8 +35,8 @@ export function ProjectMobilizationSummary({ data }) {
   const filteredData = useMemo(() => {
     let result = [...data];
 
-    if (subproject !== 'all') {
-      result = result.filter(item => item.subproject === subproject);
+    if (subproject !== "all") {
+      result = result.filter((item) => item.subproject === subproject);
     }
 
     return result;
@@ -44,8 +44,10 @@ export function ProjectMobilizationSummary({ data }) {
 
   // Get latest date data
   const latestData = useMemo(() => {
-    const latestDate = [...new Set(filteredData.map(item => item.date))].sort().pop();
-    return filteredData.filter(item => item.date === latestDate);
+    const latestDate = [...new Set(filteredData.map((item) => item.date))]
+      .sort()
+      .pop();
+    return filteredData.filter((item) => item.date === latestDate);
   }, [filteredData]);
 
   // Calculate totals
@@ -56,39 +58,65 @@ export function ProjectMobilizationSummary({ data }) {
     const totalPercent = ((totalFact - totalPlan) / totalPlan) * 100;
 
     // Personnel only
-    const personnelData = latestData.filter(item => item.category === 'Персонал');
-    const personnelPlan = personnelData.reduce((sum, item) => sum + item.plan, 0);
-    const personnelFact = personnelData.reduce((sum, item) => sum + item.fact, 0);
-    const personnelPercent = ((personnelFact - personnelPlan) / personnelPlan) * 100;
+    const personnelData = latestData.filter(
+      (item) => item.category === "Персонал",
+    );
+    const personnelPlan = personnelData.reduce(
+      (sum, item) => sum + item.plan,
+      0,
+    );
+    const personnelFact = personnelData.reduce(
+      (sum, item) => sum + item.fact,
+      0,
+    );
+    const personnelPercent =
+      ((personnelFact - personnelPlan) / personnelPlan) * 100;
 
     // Equipment only
-    const equipmentData = latestData.filter(item => item.category === 'Техника');
-    const equipmentPlan = equipmentData.reduce((sum, item) => sum + item.plan, 0);
-    const equipmentFact = equipmentData.reduce((sum, item) => sum + item.fact, 0);
-    const equipmentPercent = ((equipmentFact - equipmentPlan) / equipmentPlan) * 100;
+    const equipmentData = latestData.filter(
+      (item) => item.category === "Техника",
+    );
+    const equipmentPlan = equipmentData.reduce(
+      (sum, item) => sum + item.plan,
+      0,
+    );
+    const equipmentFact = equipmentData.reduce(
+      (sum, item) => sum + item.fact,
+      0,
+    );
+    const equipmentPercent =
+      ((equipmentFact - equipmentPlan) / equipmentPlan) * 100;
 
     return {
       total: { plan: totalPlan, fact: totalFact, percent: totalPercent },
-      personnel: { plan: personnelPlan, fact: personnelFact, percent: personnelPercent },
-      equipment: { plan: equipmentPlan, fact: equipmentFact, percent: equipmentPercent }
+      personnel: {
+        plan: personnelPlan,
+        fact: personnelFact,
+        percent: personnelPercent,
+      },
+      equipment: {
+        plan: equipmentPlan,
+        fact: equipmentFact,
+        percent: equipmentPercent,
+      },
     };
   }, [latestData]);
 
   // Prepare chart data for each widget
   const getChartData = (category = null) => {
-    const dates = [...new Set(filteredData.map(item => item.date))].sort();
+    const dates = [...new Set(filteredData.map((item) => item.date))].sort();
 
-    const formattedDates = dates.map(date => {
-      const [year, month, day] = date.split('-');
+    const formattedDates = dates.map((date) => {
+      const [year, month, day] = date.split("-");
       return `${day}/${month}`;
     });
 
-    const series = dates.map(date => {
-      const dateItems = filteredData.filter(item => item.date === date);
+    const series = dates.map((date) => {
+      const dateItems = filteredData.filter((item) => item.date === date);
 
       let items = dateItems;
       if (category) {
-        items = dateItems.filter(item => item.category === category);
+        items = dateItems.filter((item) => item.category === category);
       }
 
       return items.reduce((sum, item) => sum + item.fact, 0);
@@ -101,8 +129,8 @@ export function ProjectMobilizationSummary({ data }) {
   };
 
   const totalChartData = getChartData();
-  const personnelChartData = getChartData('Персонал');
-  const equipmentChartData = getChartData('Техника');
+  const personnelChartData = getChartData("Персонал");
+  const equipmentChartData = getChartData("Техника");
 
   return (
     <Box sx={{ pt: 3 }}>
@@ -116,7 +144,7 @@ export function ProjectMobilizationSummary({ data }) {
       >
         {subprojects.map((option) => (
           <MenuItem key={option} value={option}>
-            {option === 'all' ? 'Все подпроекты' : option}
+            {option === "all" ? "Все подпроекты" : option}
           </MenuItem>
         ))}
       </TextField>
@@ -128,7 +156,12 @@ export function ProjectMobilizationSummary({ data }) {
             total={totals.total.fact}
             percent={totals.total.percent}
             color="warning"
-            icon={<img alt="icon" src={`${CONFIG.site.basePath}/assets/icons/glass/ic-glass-buy.svg`} />}
+            icon={
+              <img
+                alt="icon"
+                src={`${CONFIG.site.basePath}/assets/icons/glass/ic-glass-buy.svg`}
+              />
+            }
             chart={totalChartData}
           />
         </Grid>
@@ -139,7 +172,12 @@ export function ProjectMobilizationSummary({ data }) {
             total={totals.personnel.fact}
             percent={totals.personnel.percent}
             color="secondary"
-            icon={<img alt="icon" src={`${CONFIG.site.basePath}/assets/icons/glass/ic-glass-users.svg`} />}
+            icon={
+              <img
+                alt="icon"
+                src={`${CONFIG.site.basePath}/assets/icons/glass/ic-glass-users.svg`}
+              />
+            }
             chart={personnelChartData}
           />
         </Grid>
@@ -150,7 +188,12 @@ export function ProjectMobilizationSummary({ data }) {
             total={totals.equipment.fact}
             percent={totals.equipment.percent}
             color="error"
-            icon={<img alt="icon" src={`${CONFIG.site.basePath}/assets/icons/glass/ic-glass-message.svg`} />}
+            icon={
+              <img
+                alt="icon"
+                src={`${CONFIG.site.basePath}/assets/icons/glass/ic-glass-message.svg`}
+              />
+            }
             chart={equipmentChartData}
           />
         </Grid>
@@ -167,13 +210,20 @@ ProjectMobilizationSummary.propTypes = {
       category: PropTypes.string.isRequired,
       plan: PropTypes.number.isRequired,
       fact: PropTypes.number.isRequired,
-    })
+    }),
   ).isRequired,
 };
 
 // ----------------------------------------------------------------------
 
-function MobilizationWidget({ title, total, percent, color = 'primary', icon, chart }) {
+function MobilizationWidget({
+  title,
+  total,
+  percent,
+  color = "primary",
+  icon,
+  chart,
+}) {
   const theme = useTheme();
 
   const chartColors = [theme.palette[color].main];
@@ -191,7 +241,10 @@ function MobilizationWidget({ title, total, percent, color = 'primary', icon, ch
       },
     },
     tooltip: {
-      y: { formatter: (value) => fNumber(value), title: { formatter: () => '' } },
+      y: {
+        formatter: (value) => fNumber(value),
+        title: { formatter: () => "" },
+      },
     },
   });
 
@@ -201,14 +254,17 @@ function MobilizationWidget({ title, total, percent, color = 'primary', icon, ch
         top: 16,
         gap: 0.5,
         right: 16,
-        display: 'flex',
-        position: 'absolute',
-        alignItems: 'center',
+        display: "flex",
+        position: "absolute",
+        alignItems: "center",
       }}
     >
-      <Iconify width={20} icon={percent < 0 ? 'eva:trending-down-fill' : 'eva:trending-up-fill'} />
-      <Box component="span" sx={{ typography: 'subtitle2' }}>
-        {percent > 0 && '+'}
+      <Iconify
+        width={20}
+        icon={percent < 0 ? "eva:trending-down-fill" : "eva:trending-up-fill"}
+      />
+      <Box component="span" sx={{ typography: "subtitle2" }}>
+        {percent > 0 && "+"}
         {fPercent(percent / 100)}
       </Box>
     </Box>
@@ -221,10 +277,10 @@ function MobilizationWidget({ title, total, percent, color = 'primary', icon, ch
           color: `135deg, ${varAlpha(theme.vars.palette[color].lighterChannel, 0.48)}, ${varAlpha(theme.vars.palette[color].lightChannel, 0.48)}`,
         }),
         p: 3,
-        boxShadow: 'none',
-        position: 'relative',
+        boxShadow: "none",
+        position: "relative",
         color: `${color}.darker`,
-        backgroundColor: 'common.white',
+        backgroundColor: "common.white",
       }}
     >
       <Box sx={{ width: 48, height: 48, mb: 3 }}>{icon}</Box>
@@ -233,15 +289,15 @@ function MobilizationWidget({ title, total, percent, color = 'primary', icon, ch
 
       <Box
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'flex-end',
-          justifyContent: 'flex-end',
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
         }}
       >
         <Box sx={{ flexGrow: 1, minWidth: 112 }}>
-          <Box sx={{ mb: 1, typography: 'subtitle2' }}>{title}</Box>
-          <Box sx={{ typography: 'h4' }}>{fNumber(total)}</Box>
+          <Box sx={{ mb: 1, typography: "subtitle2" }}>{title}</Box>
+          <Box sx={{ typography: "h4" }}>{fNumber(total)}</Box>
         </Box>
 
         <Chart
@@ -262,7 +318,7 @@ function MobilizationWidget({ title, total, percent, color = 'primary', icon, ch
           zIndex: -1,
           height: 240,
           opacity: 0.24,
-          position: 'absolute',
+          position: "absolute",
           color: `${color}.main`,
         }}
       />

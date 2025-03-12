@@ -1,9 +1,9 @@
-import NoSsr from '@mui/material/NoSsr';
-import { tabClasses } from '@mui/material/Tab';
-import { useTheme } from '@mui/material/styles';
-import Tabs, { tabsClasses } from '@mui/material/Tabs';
+import NoSsr from "@mui/material/NoSsr";
+import { tabClasses } from "@mui/material/Tab";
+import { useTheme } from "@mui/material/styles";
+import Tabs, { tabsClasses } from "@mui/material/Tabs";
 
-import { stylesMode } from 'src/theme/styles';
+import { stylesMode } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -16,8 +16,8 @@ export function CustomTabs({ children, slotProps, sx, ...other }) {
         gap: { sm: 0 },
         minHeight: 38,
         flexShrink: 0,
-        alignItems: 'center',
-        bgcolor: 'background.neutral',
+        alignItems: "center",
+        bgcolor: "background.neutral",
         [`& .${tabsClasses.scroller}`]: {
           p: 1,
           ...slotProps?.scroller,
@@ -28,21 +28,21 @@ export function CustomTabs({ children, slotProps, sx, ...other }) {
         },
         [`& .${tabsClasses.scrollButtons}`]: {
           borderRadius: 1,
-          minHeight: 'inherit',
+          minHeight: "inherit",
           ...slotProps?.scrollButtons,
         },
         [`& .${tabsClasses.indicator}`]: {
           py: 1,
           height: 1,
-          bgcolor: 'transparent',
-          '& > span': {
+          bgcolor: "transparent",
+          "& > span": {
             width: 1,
             height: 1,
             borderRadius: 1,
-            display: 'block',
-            bgcolor: 'common.white',
+            display: "block",
+            bgcolor: "common.white",
             boxShadow: theme.customShadows.z1,
-            [stylesMode.dark]: { bgcolor: 'grey.900' },
+            [stylesMode.dark]: { bgcolor: "grey.900" },
             ...slotProps?.indicator,
           },
         },
@@ -50,7 +50,7 @@ export function CustomTabs({ children, slotProps, sx, ...other }) {
           py: 1,
           px: 2,
           zIndex: 1,
-          minHeight: 'auto',
+          minHeight: "auto",
           ...slotProps?.tab,
           [`&.${tabClasses.selected}`]: {
             ...slotProps?.selected,

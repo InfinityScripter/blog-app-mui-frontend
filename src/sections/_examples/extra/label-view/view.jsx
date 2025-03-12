@@ -1,27 +1,35 @@
-'use client';
+"use client";
 
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip from "@mui/material/Tooltip";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Label } from 'src/components/label';
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Label } from "src/components/label";
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['default', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = [
+  "default",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
 // ----------------------------------------------------------------------
 
 export function LabelView() {
   const DEMO = [
     {
-      name: 'Filled',
+      name: "Filled",
       component: (
         <ComponentBlock sx={{ gap: 1 }}>
           {COLORS.map((color) => (
@@ -35,7 +43,7 @@ export function LabelView() {
       ),
     },
     {
-      name: 'Outlined',
+      name: "Outlined",
       component: (
         <ComponentBlock sx={{ gap: 1 }}>
           {COLORS.map((color) => (
@@ -47,7 +55,7 @@ export function LabelView() {
       ),
     },
     {
-      name: 'Soft',
+      name: "Soft",
       component: (
         <ComponentBlock sx={{ gap: 1 }}>
           {COLORS.map((color) => (
@@ -59,7 +67,7 @@ export function LabelView() {
       ),
     },
     {
-      name: 'Inverted',
+      name: "Inverted",
       component: (
         <ComponentBlock sx={{ gap: 1 }}>
           {COLORS.map((color) => (
@@ -71,7 +79,7 @@ export function LabelView() {
       ),
     },
     {
-      name: 'With icon',
+      name: "With icon",
       component: (
         <ComponentBlock sx={{ gap: 1 }}>
           <Label
@@ -106,11 +114,17 @@ export function LabelView() {
             End icon
           </Label>
 
-          <Label color="primary" startIcon={<Iconify icon="fluent:mail-24-filled" />}>
+          <Label
+            color="primary"
+            startIcon={<Iconify icon="fluent:mail-24-filled" />}
+          >
             Start icon
           </Label>
 
-          <Label color="primary" endIcon={<Iconify icon="fluent:mail-24-filled" />}>
+          <Label
+            color="primary"
+            endIcon={<Iconify icon="fluent:mail-24-filled" />}
+          >
             End icon
           </Label>
         </ComponentBlock>
@@ -123,7 +137,10 @@ export function LabelView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Label"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Label' }]}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Label" },
+          ]}
         />
       </ComponentHero>
 

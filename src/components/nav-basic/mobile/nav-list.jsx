@@ -1,17 +1,23 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
-import Collapse from '@mui/material/Collapse';
+import Collapse from "@mui/material/Collapse";
 
-import { usePathname } from 'src/routes/hooks';
-import { isExternalLink } from 'src/routes/utils';
-import { useActiveLink } from 'src/routes/hooks/use-active-link';
+import { usePathname } from "src/routes/hooks";
+import { isExternalLink } from "src/routes/utils";
+import { useActiveLink } from "src/routes/hooks/use-active-link";
 
-import { NavItem } from './nav-item';
-import { NavLi, NavUl, navSectionClasses } from '../../nav-section';
+import { NavItem } from "./nav-item";
+import { NavLi, NavUl, navSectionClasses } from "../../nav-section";
 
 // ----------------------------------------------------------------------
 
-export function NavList({ data, render, depth, slotProps, enabledRootRedirect }) {
+export function NavList({
+  data,
+  render,
+  depth,
+  slotProps,
+  enabledRootRedirect,
+}) {
   const pathname = usePathname();
 
   const active = useActiveLink(data.path, !!data.children);
@@ -63,7 +69,7 @@ export function NavList({ data, render, depth, slotProps, enabledRootRedirect })
         disabled={data.disabled}
         sx={{
           [`& .${navSectionClasses.li}`]: {
-            '&:first-of-type': { mt: 'var(--nav-item-gap)' },
+            "&:first-of-type": { mt: "var(--nav-item-gap)" },
           },
         }}
       >
@@ -73,19 +79,19 @@ export function NavList({ data, render, depth, slotProps, enabledRootRedirect })
           in={openMenu}
           sx={{
             ...(depth + 1 !== 1 && {
-              pl: 'calc(var(--nav-item-pl) - 2px + var(--nav-icon-size) / 2)',
+              pl: "calc(var(--nav-item-pl) - 2px + var(--nav-icon-size) / 2)",
               [`& .${navSectionClasses.ul}`]: {
-                position: 'relative',
-                pl: '12px',
-                '&::before': {
+                position: "relative",
+                pl: "12px",
+                "&::before": {
                   top: 0,
                   left: 0,
                   bottom: 0,
-                  width: '1px',
+                  width: "1px",
                   content: '""',
                   opacity: 0.24,
-                  bgcolor: 'grey.500',
-                  position: 'absolute',
+                  bgcolor: "grey.500",
+                  position: "absolute",
                 },
               },
             }),
@@ -110,7 +116,7 @@ export function NavList({ data, render, depth, slotProps, enabledRootRedirect })
 
 function NavSubList({ data, render, depth, slotProps, enabledRootRedirect }) {
   return (
-    <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
+    <NavUl sx={{ gap: "var(--nav-item-gap)" }}>
       {data.map((list) => (
         <NavList
           key={list.title}

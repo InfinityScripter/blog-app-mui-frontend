@@ -1,15 +1,15 @@
-import { listClasses } from '@mui/material/List';
-import { paperClasses } from '@mui/material/Paper';
-import { textFieldClasses } from '@mui/material/TextField';
-import { inputBaseClasses } from '@mui/material/InputBase';
-import { inputLabelClasses } from '@mui/material/InputLabel';
-import { iconButtonClasses } from '@mui/material/IconButton';
-import SvgIcon, { svgIconClasses } from '@mui/material/SvgIcon';
-import { listItemIconClasses } from '@mui/material/ListItemIcon';
-import { circularProgressClasses } from '@mui/material/CircularProgress';
-import { formControlLabelClasses } from '@mui/material/FormControlLabel';
+import { listClasses } from "@mui/material/List";
+import { paperClasses } from "@mui/material/Paper";
+import { textFieldClasses } from "@mui/material/TextField";
+import { inputBaseClasses } from "@mui/material/InputBase";
+import { inputLabelClasses } from "@mui/material/InputLabel";
+import { iconButtonClasses } from "@mui/material/IconButton";
+import SvgIcon, { svgIconClasses } from "@mui/material/SvgIcon";
+import { listItemIconClasses } from "@mui/material/ListItemIcon";
+import { circularProgressClasses } from "@mui/material/CircularProgress";
+import { formControlLabelClasses } from "@mui/material/FormControlLabel";
 
-import { paper, varAlpha } from '../../styles';
+import { paper, varAlpha } from "../../styles";
 
 // ----------------------------------------------------------------------
 
@@ -21,21 +21,25 @@ const MuiDataGrid = {
     slots: {
       /* Column */
       columnSortedAscendingIcon: (props) => (
-        <DataGridArrowUpIcon sx={{ color: 'text.primary' }} {...props} />
+        <DataGridArrowUpIcon sx={{ color: "text.primary" }} {...props} />
       ),
       columnSortedDescendingIcon: (props) => (
-        <DataGridArrowDownIcon sx={{ color: 'text.primary' }} {...props} />
+        <DataGridArrowDownIcon sx={{ color: "text.primary" }} {...props} />
       ),
       columnUnsortedIcon: (props) => (
         <DataGridArrowUpIcon
           fontSize={props.fontSize}
           className={props.className}
-          sx={{ color: 'text.disabled' }}
+          sx={{ color: "text.disabled" }}
         />
       ),
       columnMenuIcon: (props) => <DataGridMoreIcon width={20} {...props} />,
-      columnMenuSortAscendingIcon: (props) => <DataGridArrowUpIcon {...props} />,
-      columnMenuSortDescendingIcon: (props) => <DataGridArrowDownIcon {...props} />,
+      columnMenuSortAscendingIcon: (props) => (
+        <DataGridArrowUpIcon {...props} />
+      ),
+      columnMenuSortDescendingIcon: (props) => (
+        <DataGridArrowDownIcon {...props} />
+      ),
       columnMenuFilterIcon: (props) => <DataGridFilterIcon {...props} />,
       columnMenuHideIcon: (props) => <DataGridEyeCloseIcon {...props} />,
       columnMenuManageColumnsIcon: (props) => <DataGridEyeIcon {...props} />,
@@ -44,28 +48,38 @@ const MuiDataGrid = {
       filterPanelDeleteIcon: (props) => <DataGridCloseIcon {...props} />,
       openFilterButtonIcon: (props) => <DataGridFilterIcon {...props} />,
       columnFilteredIcon: (props) => (
-        <DataGridFilterIcon sx={{ width: 16, color: 'text.primary' }} {...props} />
+        <DataGridFilterIcon
+          sx={{ width: 16, color: "text.primary" }}
+          {...props}
+        />
       ),
       /* Density */
       densityCompactIcon: (props) => <DataGridDensityCompactIcon {...props} />,
-      densityStandardIcon: (props) => <DataGridDensityStandardIcon {...props} />,
-      densityComfortableIcon: (props) => <DataGridDensityComfortableIcon {...props} />,
+      densityStandardIcon: (props) => (
+        <DataGridDensityStandardIcon {...props} />
+      ),
+      densityComfortableIcon: (props) => (
+        <DataGridDensityComfortableIcon {...props} />
+      ),
       /* Export */
       exportIcon: (props) => <DataGridExportIcon {...props} />,
       /*  Quick Filter */
       quickFilterIcon: (props) => (
-        <DataGridSearchIcon sx={{ width: 24, height: 24, color: 'text.secondary' }} {...props} />
+        <DataGridSearchIcon
+          sx={{ width: 24, height: 24, color: "text.secondary" }}
+          {...props}
+        />
       ),
       quickFilterClearIcon: (props) => <DataGridCloseIcon {...props} />,
     },
     slotProps: {
-      basePopper: { placement: 'bottom-end' },
-      baseChip: { size: 'small' },
-      baseSwitch: { size: 'small' },
-      baseCheckbox: { size: 'small', disableRipple: true },
+      basePopper: { placement: "bottom-end" },
+      baseChip: { size: "small" },
+      baseSwitch: { size: "small" },
+      baseCheckbox: { size: "small", disableRipple: true },
       baseInputLabel: { shrink: true },
-      baseTextField: { variant: 'outlined' },
-      baseSelect: { native: true, variant: 'outlined' },
+      baseTextField: { variant: "outlined" },
+      baseSelect: { native: true, variant: "outlined" },
     },
   },
 
@@ -74,33 +88,33 @@ const MuiDataGrid = {
    *************************************** */
   styleOverrides: {
     root: ({ theme }) => ({
-      '--unstable_DataGrid-radius': 0,
-      '--DataGrid-rowBorderColor': theme.vars.palette.divider,
-      '--DataGrid-containerBackground': theme.vars.palette.background.neutral,
-      '--unstable_DataGrid-headWeight': theme.typography.fontWeightSemiBold,
+      "--unstable_DataGrid-radius": 0,
+      "--DataGrid-rowBorderColor": theme.vars.palette.divider,
+      "--DataGrid-containerBackground": theme.vars.palette.background.neutral,
+      "--unstable_DataGrid-headWeight": theme.typography.fontWeightSemiBold,
       borderWidth: 0,
-      scrollbarWidth: 'thin',
+      scrollbarWidth: "thin",
       scrollbarColor: `${varAlpha(theme.vars.palette.text.disabledChannel, 0.4)} ${varAlpha(theme.vars.palette.text.disabledChannel, 0.08)}`,
-      '& .MuiDataGrid-filler > div': { borderTopStyle: 'dashed' },
-      '& .MuiDataGrid-topContainer::after': { height: 0 },
+      "& .MuiDataGrid-filler > div": { borderTopStyle: "dashed" },
+      "& .MuiDataGrid-topContainer::after": { height: 0 },
     }),
-    withBorderColor: { borderColor: 'var(--DataGrid-rowBorderColor)' },
+    withBorderColor: { borderColor: "var(--DataGrid-rowBorderColor)" },
     /**
      * Column
      */
     columnHeader: ({ theme }) => ({
       fontSize: 14,
       color: theme.vars.palette.text.secondary,
-      '&--sorted': { color: theme.vars.palette.text.primary },
+      "&--sorted": { color: theme.vars.palette.text.primary },
     }),
-    columnSeparator: { color: 'var(--DataGrid-rowBorderColor)' },
+    columnSeparator: { color: "var(--DataGrid-rowBorderColor)" },
     /**
      * Row, Cell
      */
     cell: ({ theme }) => ({
-      borderTopStyle: 'dashed',
-      '&--editing': {
-        boxShadow: 'none',
+      borderTopStyle: "dashed",
+      "&--editing": {
+        boxShadow: "none",
         backgroundColor: varAlpha(theme.vars.palette.primary.mainChannel, 0.08),
       },
     }),
@@ -112,12 +126,12 @@ const MuiDataGrid = {
       padding: theme.spacing(2),
       [`& .${textFieldClasses.root}`]: {
         padding: 0,
-        width: '100%',
+        width: "100%",
         [`& .${inputBaseClasses.input}`]: {
           paddingTop: theme.spacing(2),
           paddingBottom: theme.spacing(2),
         },
-        [theme.breakpoints.up('md')]: { width: 'unset' },
+        [theme.breakpoints.up("md")]: { width: "unset" },
       },
     }),
     /**
@@ -158,10 +172,12 @@ const MuiDataGrid = {
     /**
      * Footer
      */
-    footerContainer: { minHeight: 'auto', borderTopStyle: 'dashed' },
-    selectedRowCount: { display: 'none', whiteSpace: 'nowrap' },
+    footerContainer: { minHeight: "auto", borderTopStyle: "dashed" },
+    selectedRowCount: { display: "none", whiteSpace: "nowrap" },
     overlay: ({ theme }) => ({
-      [`& .${circularProgressClasses.root}`]: { color: theme.vars.palette.text.primary },
+      [`& .${circularProgressClasses.root}`]: {
+        color: theme.vars.palette.text.primary,
+      },
     }),
     /**
      * Column panel
@@ -179,7 +195,7 @@ const MuiDataGrid = {
       [`& .${formControlLabelClasses.root}`]: { gap: 4, marginLeft: 0 },
     }),
     columnsManagementFooter: ({ theme }) => ({
-      borderTopStyle: 'dashed',
+      borderTopStyle: "dashed",
       padding: theme.spacing(1.5),
       [`& .${formControlLabelClasses.root}`]: { gap: 4, marginLeft: 0 },
     }),
@@ -187,16 +203,18 @@ const MuiDataGrid = {
      * Filter panel
      */
     filterForm: ({ theme }) => ({
-      alignItems: 'center',
+      alignItems: "center",
       gap: theme.spacing(1.5),
       padding: theme.spacing(2),
       /* Fix label with input variant === 'outlined' */
-      [`& .${inputLabelClasses.shrink}`]: { transform: 'translate(14px, -9px) scale(0.75)' },
+      [`& .${inputLabelClasses.shrink}`]: {
+        transform: "translate(14px, -9px) scale(0.75)",
+      },
     }),
     filterFormDeleteIcon: ({ theme }) => ({
       [`& .${iconButtonClasses.root}`]: {
         padding: theme.spacing(0.25),
-        backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
+        backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
         [`& .${svgIconClasses.root}`]: { width: 16, height: 16 },
       },
     }),
@@ -271,7 +289,10 @@ export const DataGridExportIcon = ({ ...props }) => (
 /* https://icon-sets.iconify.design/solar/eye-bold */
 export const DataGridEyeIcon = ({ ...props }) => (
   <SvgIcon sx={{ width: 20, height: 20, ...props.sx }} {...props}>
-    <path fill="currentColor" d="M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0" />
+    <path
+      fill="currentColor"
+      d="M9.75 12a2.25 2.25 0 1 1 4.5 0a2.25 2.25 0 0 1-4.5 0"
+    />
     <path
       fill="currentColor"
       fillRule="evenodd"

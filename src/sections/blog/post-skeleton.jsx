@@ -1,28 +1,37 @@
-import Stack from '@mui/material/Stack';
-import Skeleton from '@mui/material/Skeleton';
+import Stack from "@mui/material/Stack";
+import Skeleton from "@mui/material/Skeleton";
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from "src/hooks/use-responsive";
 
 // ----------------------------------------------------------------------
 
-export function PostItemSkeleton({ sx, amount = 16, variant = 'vertical', ...other }) {
-  const smUp = useResponsive('up', 'sm');
+export function PostItemSkeleton({
+  sx,
+  amount = 16,
+  variant = "vertical",
+  ...other
+}) {
+  const smUp = useResponsive("up", "sm");
 
-  if (variant === 'horizontal') {
+  if (variant === "horizontal") {
     return [...Array(amount)].map((_, index) => (
       <Stack
         key={index}
         direction="row"
         sx={{
           borderRadius: 2,
-          bgcolor: 'background.paper',
+          bgcolor: "background.paper",
           border: (theme) => `solid 1px ${theme.vars.palette.divider}`,
           ...sx,
         }}
         {...other}
       >
         <Stack spacing={2} flexGrow={1} sx={{ p: 3 }}>
-          <Stack direction="row" alignItems="center" justifyContent="space-between">
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+          >
             <Skeleton variant="circular" sx={{ width: 40, height: 40 }} />
             <Skeleton sx={{ width: 24, height: 12 }} />
           </Stack>
@@ -46,18 +55,26 @@ export function PostItemSkeleton({ sx, amount = 16, variant = 'vertical', ...oth
       key={index}
       sx={{
         borderRadius: 2,
-        bgcolor: 'background.paper',
+        bgcolor: "background.paper",
         border: (theme) => `solid 1px ${theme.vars.palette.divider}`,
         ...sx,
       }}
       {...other}
     >
       <Stack sx={{ p: 1 }}>
-        <Skeleton sx={{ pt: '100%' }} />
+        <Skeleton sx={{ pt: "100%" }} />
       </Stack>
 
-      <Stack spacing={2} direction="row" alignItems="center" sx={{ p: 3, pt: 2 }}>
-        <Skeleton variant="circular" sx={{ width: 40, height: 40, flexShrink: 0 }} />
+      <Stack
+        spacing={2}
+        direction="row"
+        alignItems="center"
+        sx={{ p: 3, pt: 2 }}
+      >
+        <Skeleton
+          variant="circular"
+          sx={{ width: 40, height: 40, flexShrink: 0 }}
+        />
         <Stack flexGrow={1} spacing={1}>
           <Skeleton sx={{ height: 10 }} />
           <Skeleton sx={{ width: 0.5, height: 10 }} />
@@ -74,7 +91,7 @@ export function PostDetailsSkeleton({ ...other }) {
     <Stack {...other}>
       <Skeleton variant="rectangular" sx={{ height: 480 }} />
 
-      <Stack sx={{ width: 1, maxWidth: 720, mx: 'auto' }}>
+      <Stack sx={{ width: 1, maxWidth: 720, mx: "auto" }}>
         <Stack spacing={1} sx={{ my: 8 }}>
           <Skeleton height={10} />
           <Skeleton height={10} sx={{ width: 0.9 }} />

@@ -1,8 +1,8 @@
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
 
-import { NavSectionHorizontal } from 'src/components/nav-section';
+import { NavSectionHorizontal } from "src/components/nav-section";
 
-import { NAV_ITEMS } from './data';
+import { NAV_ITEMS } from "./data";
 
 // ----------------------------------------------------------------------
 
@@ -19,13 +19,13 @@ export function NavHorizontal() {
       <NavSectionHorizontal
         data={NAV_ITEMS}
         cssVars={{
-          '--nav-item-gap': '24px',
+          "--nav-item-gap": "24px",
         }}
         slotProps={{
           paper: {},
           rootItem: {
             sx: {
-              typography: 'subtitle1',
+              typography: "subtitle1",
               fontFamily: (theme) => theme.typography.fontSecondaryFamily,
             },
             icon: {},

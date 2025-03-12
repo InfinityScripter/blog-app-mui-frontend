@@ -1,15 +1,15 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import Pagination from '@mui/material/Pagination';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Pagination from "@mui/material/Pagination";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -36,20 +36,28 @@ export function PaginationItems() {
       <Box
         gap={2}
         display="grid"
-        gridTemplateColumns={{ xs: 'repeat(1, 1fr)', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }}
+        gridTemplateColumns={{
+          xs: "repeat(1, 1fr)",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(4, 1fr)",
+        }}
         sx={{ width: 1 }}
       >
         {items
-          .slice((page - 1) * rowsPerPage, (page - 1) * rowsPerPage + rowsPerPage)
+          .slice(
+            (page - 1) * rowsPerPage,
+            (page - 1) * rowsPerPage + rowsPerPage,
+          )
           .map((item) => (
             <Card
               key={item}
               sx={{
                 py: 3,
-                typography: 'h3',
+                typography: "h3",
                 borderRadius: 1.5,
-                textAlign: 'center',
-                color: (theme) => varAlpha(theme.vars.palette.text.disabledChannel, 0.48),
+                textAlign: "center",
+                color: (theme) =>
+                  varAlpha(theme.vars.palette.text.disabledChannel, 0.48),
               }}
             >
               {item}
@@ -57,7 +65,12 @@ export function PaginationItems() {
           ))}
       </Box>
 
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ width: 1 }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ width: 1 }}
+      >
         <Pagination
           page={page}
           shape="circular"
@@ -66,12 +79,14 @@ export function PaginationItems() {
         />
 
         <FormControl size="small" sx={{ width: 120 }}>
-          <InputLabel htmlFor="demo-pagination-select-label">Items per page</InputLabel>
+          <InputLabel htmlFor="demo-pagination-select-label">
+            Items per page
+          </InputLabel>
           <Select
             value={String(rowsPerPage)}
             label="Item per page"
             onChange={handleChangeRowsPerPage}
-            inputProps={{ id: 'demo-pagination-select-label' }}
+            inputProps={{ id: "demo-pagination-select-label" }}
           >
             <MenuItem value={8}>8</MenuItem>
             <MenuItem value={12}>12</MenuItem>

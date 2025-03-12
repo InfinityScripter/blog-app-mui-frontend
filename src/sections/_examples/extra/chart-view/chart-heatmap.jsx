@@ -1,6 +1,6 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -23,5 +23,12 @@ export function ChartHeatmap({ chart }) {
     xaxis: { categories: chart.categories },
   });
 
-  return <Chart type="heatmap" series={chart.series} options={chartOptions} height={320} />;
+  return (
+    <Chart
+      type="heatmap"
+      series={chart.series}
+      options={chartOptions}
+      height={320}
+    />
+  );
 }

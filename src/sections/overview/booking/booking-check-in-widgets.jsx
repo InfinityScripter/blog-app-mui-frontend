@@ -1,21 +1,21 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
+import { useTheme } from "@mui/material/styles";
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { useResponsive } from "src/hooks/use-responsive";
 
-import { fNumber } from 'src/utils/format-number';
+import { fNumber } from "src/utils/format-number";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function BookingCheckInWidgets({ chart, ...other }) {
   const theme = useTheme();
 
-  const smUp = useResponsive('up', 'sm');
+  const smUp = useResponsive("up", "sm");
 
   const chartColors = chart.colors ?? [
     [theme.palette.primary.light, theme.palette.primary.main],
@@ -26,7 +26,7 @@ export function BookingCheckInWidgets({ chart, ...other }) {
     chart: { sparkline: { enabled: true } },
     stroke: { width: 0 },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         colorStops: [
           { offset: 0, color: chartColors[0][0], opacity: 1 },
@@ -52,12 +52,12 @@ export function BookingCheckInWidgets({ chart, ...other }) {
   return (
     <Card {...other}>
       <Stack
-        direction={{ xs: 'column', sm: 'row' }}
+        direction={{ xs: "column", sm: "row" }}
         divider={
           <Divider
             flexItem
-            orientation={smUp ? 'vertical' : 'horizontal'}
-            sx={{ borderStyle: 'dashed' }}
+            orientation={smUp ? "vertical" : "horizontal"}
+            sx={{ borderStyle: "dashed" }}
           />
         }
       >
@@ -68,10 +68,10 @@ export function BookingCheckInWidgets({ chart, ...other }) {
               py: 5,
               gap: 3,
               width: 1,
-              display: 'flex',
+              display: "flex",
               px: { xs: 3, sm: 0 },
-              alignItems: 'center',
-              justifyContent: { sm: 'center' },
+              alignItems: "center",
+              justifyContent: { sm: "center" },
             }}
           >
             <Chart
@@ -79,9 +79,9 @@ export function BookingCheckInWidgets({ chart, ...other }) {
               series={[item.percent]}
               options={{
                 ...chartOptions,
-                ...(item.label !== 'Sold' && {
+                ...(item.label !== "Sold" && {
                   fill: {
-                    type: 'gradient',
+                    type: "gradient",
                     gradient: {
                       colorStops: [
                         { offset: 0, color: chartColors[1][0], opacity: 1 },
@@ -96,8 +96,12 @@ export function BookingCheckInWidgets({ chart, ...other }) {
             />
 
             <div>
-              <Box sx={{ mb: 0.5, typography: 'h5' }}>{fNumber(item.total)}</Box>
-              <Box sx={{ typography: 'body2', color: 'text.secondary' }}>{item.label}</Box>
+              <Box sx={{ mb: 0.5, typography: "h5" }}>
+                {fNumber(item.total)}
+              </Box>
+              <Box sx={{ typography: "body2", color: "text.secondary" }}>
+                {item.label}
+              </Box>
             </div>
           </Box>
         ))}

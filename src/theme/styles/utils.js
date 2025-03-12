@@ -6,11 +6,11 @@ export const stylesMode = {
 };
 
 export const mediaQueries = {
-  upXs: '@media (min-width:0px)',
-  upSm: '@media (min-width:600px)',
-  upMd: '@media (min-width:900px)',
-  upLg: '@media (min-width:1200px)',
-  upXl: '@media (min-width:1536px)',
+  upXs: "@media (min-width:0px)",
+  upSm: "@media (min-width:600px)",
+  upMd: "@media (min-width:900px)",
+  upLg: "@media (min-width:1200px)",
+  upXl: "@media (min-width:1536px)",
 };
 
 /**
@@ -78,10 +78,10 @@ export function createPaletteChannel(hexPalette) {
  */
 export function varAlpha(color, opacity = 1) {
   const unsupported =
-    color.startsWith('#') ||
-    color.startsWith('rgb') ||
-    color.startsWith('rgba') ||
-    (!color.includes('var') && color.includes('Channel'));
+    color.startsWith("#") ||
+    color.startsWith("rgb") ||
+    color.startsWith("rgba") ||
+    (!color.includes("var") && color.includes("Channel"));
 
   if (unsupported) {
     throw new Error(`[Alpha]: Unsupported color format "${color}".

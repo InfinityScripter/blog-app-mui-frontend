@@ -1,19 +1,25 @@
-import dynamic from 'next/dynamic';
-import { cloneElement } from 'react';
+import dynamic from "next/dynamic";
+import { cloneElement } from "react";
 
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { flattenArray } from 'src/utils/helper';
+import { flattenArray } from "src/utils/helper";
 
 // ----------------------------------------------------------------------
 
-const Tree = dynamic(() => import('react-organizational-chart').then((mod) => mod.Tree), {
-  ssr: false,
-});
+const Tree = dynamic(
+  () => import("react-organizational-chart").then((mod) => mod.Tree),
+  {
+    ssr: false,
+  },
+);
 
-const TreeNode = dynamic(() => import('react-organizational-chart').then((mod) => mod.TreeNode), {
-  ssr: false,
-});
+const TreeNode = dynamic(
+  () => import("react-organizational-chart").then((mod) => mod.TreeNode),
+  {
+    ssr: false,
+  },
+);
 
 // ----------------------------------------------------------------------
 
@@ -59,7 +65,9 @@ export function TreeList({ data, depth, nodeItem }) {
 
   return (
     <TreeNode label={label}>
-      {childs && <TreeSubList data={childs} depth={depth} nodeItem={nodeItem} />}
+      {childs && (
+        <TreeSubList data={childs} depth={depth} nodeItem={nodeItem} />
+      )}
     </TreeNode>
   );
 }
@@ -70,7 +78,12 @@ function TreeSubList({ data, depth, nodeItem }) {
   return (
     <>
       {data.map((list, index) => (
-        <TreeList key={index} data={list} depth={depth + 1} nodeItem={nodeItem} />
+        <TreeList
+          key={index}
+          data={list}
+          depth={depth + 1}
+          nodeItem={nodeItem}
+        />
       ))}
     </>
   );

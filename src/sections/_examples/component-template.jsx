@@ -1,14 +1,14 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
 
-import { useEventListener } from 'src/hooks/use-event-listener';
+import { useEventListener } from "src/hooks/use-event-listener";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ export function ScrollToViewTemplate({
   // 0 ~ 1 => 0% => 100%
   offsetValue = 0.3,
 
-  queryClassName = 'scroll__to__view',
+  queryClassName = "scroll__to__view",
   ...other
 }) {
   const [activeSection, setActiveSection] = useState(0);
@@ -44,7 +44,7 @@ export function ScrollToViewTemplate({
     setActiveSection(newActiveSection);
   }, [offsetValue, queryClassName]);
 
-  useEventListener('scroll', handleScroll);
+  useEventListener("scroll", handleScroll);
 
   const scrollToView = useCallback(
     (index) => {
@@ -54,10 +54,10 @@ export function ScrollToViewTemplate({
         const element = sections[index];
         const offsetTop = element.offsetTop - 160;
 
-        window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+        window.scrollTo({ top: offsetTop, behavior: "smooth" });
       }
     },
-    [queryClassName]
+    [queryClassName],
   );
 
   const renderNav = (
@@ -67,8 +67,8 @@ export function ScrollToViewTemplate({
         top: 80,
         width: 240,
         flexShrink: 0,
-        position: 'sticky',
-        display: { xs: 'none', md: 'flex' },
+        position: "sticky",
+        display: { xs: "none", md: "flex" },
         ...slotProps?.nav,
       }}
     >
@@ -76,22 +76,22 @@ export function ScrollToViewTemplate({
         component="ul"
         sx={{
           gap: 1.5,
-          display: 'flex',
-          flexDirection: 'column',
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         {data.map((section, index) => (
-          <Box key={section.name} component="li" sx={{ display: 'flex' }}>
+          <Box key={section.name} component="li" sx={{ display: "flex" }}>
             <Link
               underline="none"
               onClick={() => scrollToView(index)}
               sx={{
-                cursor: 'pointer',
-                typography: 'body2',
-                color: 'text.disabled',
+                cursor: "pointer",
+                typography: "body2",
+                color: "text.disabled",
                 ...(activeSection === index && {
-                  color: 'text.primary',
-                  fontWeight: 'fontWeightSemiBold',
+                  color: "text.primary",
+                  fontWeight: "fontWeightSemiBold",
                 }),
               }}
             >
@@ -112,7 +112,7 @@ export function ScrollToViewTemplate({
         minWidth: 0,
         borderRadius: 2,
         p: { xs: 3, md: 5 },
-        bgcolor: 'background.neutral',
+        bgcolor: "background.neutral",
         ...slotProps?.section,
       }}
     >

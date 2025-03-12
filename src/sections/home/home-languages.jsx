@@ -1,55 +1,55 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Container from '@mui/material/Container';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
-import LinearProgress from '@mui/material/LinearProgress';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
+import LinearProgress from "@mui/material/LinearProgress";
 
-import { Iconify } from 'src/components/iconify';
-import { varFade, MotionViewport } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
 const LANGUAGES = [
   {
-    name: 'Русский',
-    level: 'Родной',
+    name: "Русский",
+    level: "Родной",
     proficiency: 100,
-    icon: 'emojione:flag-for-russia'
+    icon: "emojione:flag-for-russia",
   },
   {
-    name: 'Английский',
-    level: 'B2 — Средне-продвинутый',
+    name: "Английский",
+    level: "B2 — Средне-продвинутый",
     proficiency: 75,
-    icon: 'emojione:flag-for-united-kingdom'
-  }
+    icon: "emojione:flag-for-united-kingdom",
+  },
 ];
 
 const RECOMMENDATIONS = [
   {
     company: 'ООО "СТОМПЛАН"',
-    person: 'Максим Здобнов',
-    position: 'СЕО'
+    person: "Максим Здобнов",
+    position: "СЕО",
   },
   {
-    company: 'Яндекс',
-    person: 'Евгений Лоситский',
-    position: 'Старший разработчик'
+    company: "Яндекс",
+    person: "Евгений Лоситский",
+    position: "Старший разработчик",
   },
   {
-    company: 'QCup',
-    person: 'Дмитрий Галкин',
-    position: 'Тим-лид'
+    company: "QCup",
+    person: "Дмитрий Галкин",
+    position: "Тим-лид",
   },
   {
-    company: 'Shurik market',
-    person: 'Леонид Михеев',
-    position: 'Тим-лид'
-  }
+    company: "Shurik market",
+    person: "Леонид Михеев",
+    position: "Тим-лид",
+  },
 ];
 
 export default function HomeLanguages() {
@@ -65,7 +65,7 @@ export default function HomeLanguages() {
       <Stack
         spacing={3}
         sx={{
-          textAlign: 'center',
+          textAlign: "center",
           mb: { xs: 5, md: 10 },
         }}
       >
@@ -74,7 +74,7 @@ export default function HomeLanguages() {
         </m.div>
 
         <m.div variants={varFade().inDown}>
-          <Typography sx={{ color: 'text.secondary' }}>
+          <Typography sx={{ color: "text.secondary" }}>
             My language proficiency and professional recommendations
           </Typography>
         </m.div>
@@ -84,15 +84,15 @@ export default function HomeLanguages() {
         gap={4}
         display="grid"
         gridTemplateColumns={{
-          xs: 'repeat(1, 1fr)',
-          md: 'repeat(2, 1fr)',
+          xs: "repeat(1, 1fr)",
+          md: "repeat(2, 1fr)",
         }}
         sx={{ mb: 8 }}
       >
         <m.div variants={varFade().inLeft}>
           <Card
             sx={{
-              height: '100%',
+              height: "100%",
               boxShadow: theme.customShadows.z8,
             }}
           >
@@ -106,8 +106,13 @@ export default function HomeLanguages() {
                   <Stack key={language.name} spacing={1.5}>
                     <Stack direction="row" alignItems="center" spacing={1}>
                       <Iconify icon={language.icon} width={24} />
-                      <Typography variant="subtitle1">{language.name}</Typography>
-                      <Typography variant="body2" sx={{ color: 'text.secondary', ml: 'auto' }}>
+                      <Typography variant="subtitle1">
+                        {language.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary", ml: "auto" }}
+                      >
                         {language.level}
                       </Typography>
                     </Stack>
@@ -131,7 +136,7 @@ export default function HomeLanguages() {
         <m.div variants={varFade().inRight}>
           <Card
             sx={{
-              height: '100%',
+              height: "100%",
               boxShadow: theme.customShadows.z8,
             }}
           >
@@ -160,7 +165,10 @@ export default function HomeLanguages() {
                     />
                     <Box>
                       <Typography variant="subtitle2">{rec.person}</Typography>
-                      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                      <Typography
+                        variant="caption"
+                        sx={{ color: "text.secondary" }}
+                      >
                         {rec.position}, {rec.company}
                       </Typography>
                     </Box>

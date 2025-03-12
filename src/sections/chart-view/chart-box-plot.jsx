@@ -1,13 +1,16 @@
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
 export function ChartBoxPlot({ chart }) {
   const theme = useTheme();
 
-  const chartColors = chart.colors ?? [theme.palette.info.main, theme.palette.error.main];
+  const chartColors = chart.colors ?? [
+    theme.palette.info.main,
+    theme.palette.error.main,
+  ];
 
   const chartOptions = useChart({
     stroke: {
@@ -24,5 +27,12 @@ export function ChartBoxPlot({ chart }) {
     },
   });
 
-  return <Chart type="boxPlot" series={chart.series} options={chartOptions} height={320} />;
+  return (
+    <Chart
+      type="boxPlot"
+      series={chart.series}
+      options={chartOptions}
+      height={320}
+    />
+  );
 }

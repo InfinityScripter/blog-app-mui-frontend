@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { useRouter, useSearchParams } from 'src/routes/hooks';
+import { useRouter, useSearchParams } from "src/routes/hooks";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { SplashScreen } from 'src/components/loading-screen';
+import { SplashScreen } from "src/components/loading-screen";
 
-import { useAuthContext } from '../hooks';
+import { useAuthContext } from "../hooks";
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ export function GuestGuard({ children }) {
 
   const [isChecking, setIsChecking] = useState(true);
 
-  const returnTo = searchParams.get('returnTo') || CONFIG.auth.redirectPath;
+  const returnTo = searchParams.get("returnTo") || CONFIG.auth.redirectPath;
 
   const checkPermissions = async () => {
     if (loading) {

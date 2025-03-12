@@ -1,23 +1,23 @@
-import { setFont, pxToRem, responsiveFontSizes } from '../styles/utils';
+import { setFont, pxToRem, responsiveFontSizes } from "../styles/utils";
 
 // ----------------------------------------------------------------------
 
-export const defaultFont = 'Public Sans';
+export const defaultFont = "Public Sans";
 
 export const primaryFont = setFont(defaultFont);
 
-export const secondaryFont = setFont('Barlow');
+export const secondaryFont = setFont("Barlow");
 
 // ----------------------------------------------------------------------
 
 export const typography = {
   fontFamily: primaryFont,
   fontSecondaryFamily: secondaryFont,
-  fontWeightLight: '300',
-  fontWeightRegular: '400',
-  fontWeightMedium: '500',
-  fontWeightSemiBold: '600',
-  fontWeightBold: '700',
+  fontWeightLight: "300",
+  fontWeightRegular: "400",
+  fontWeightMedium: "500",
+  fontWeightSemiBold: "600",
+  fontWeightBold: "700",
   h1: {
     fontWeight: 800,
     lineHeight: 80 / 64,
@@ -83,12 +83,12 @@ export const typography = {
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: pxToRem(12),
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   button: {
     fontWeight: 700,
     lineHeight: 24 / 14,
     fontSize: pxToRem(14),
-    textTransform: 'unset',
+    textTransform: "unset",
   },
 };

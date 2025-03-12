@@ -1,21 +1,21 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Fade from '@mui/material/Fade';
-import Stack from '@mui/material/Stack';
-import Portal from '@mui/material/Portal';
-import { useTheme } from '@mui/material/styles';
-import ListSubheader from '@mui/material/ListSubheader';
+import Box from "@mui/material/Box";
+import Fade from "@mui/material/Fade";
+import Stack from "@mui/material/Stack";
+import Portal from "@mui/material/Portal";
+import { useTheme } from "@mui/material/styles";
+import ListSubheader from "@mui/material/ListSubheader";
 
-import { usePathname } from 'src/routes/hooks';
-import { useActiveLink } from 'src/routes/hooks/use-active-link';
-import { isExternalLink, removeLastSlash } from 'src/routes/utils';
+import { usePathname } from "src/routes/hooks";
+import { useActiveLink } from "src/routes/hooks/use-active-link";
+import { isExternalLink, removeLastSlash } from "src/routes/utils";
 
-import { paper } from 'src/theme/styles';
+import { paper } from "src/theme/styles";
 
-import { NavLi, NavUl } from 'src/components/nav-section';
+import { NavLi, NavUl } from "src/components/nav-section";
 
-import { NavItem, NavItemDashboard } from './nav-desktop-item';
+import { NavItem, NavItemDashboard } from "./nav-desktop-item";
 
 // ----------------------------------------------------------------------
 
@@ -78,10 +78,10 @@ export function NavList({ data }) {
   useEffect(() => {
     handleGetClientRect();
 
-    window.addEventListener('scroll', handleGetClientRect);
+    window.addEventListener("scroll", handleGetClientRect);
 
     return () => {
-      window.removeEventListener('scroll', handleGetClientRect);
+      window.removeEventListener("scroll", handleGetClientRect);
     };
   }, [handleGetClientRect]);
 
@@ -100,8 +100,8 @@ export function NavList({ data }) {
                   pt: 0.5,
                   left: 0,
                   right: 0,
-                  mx: 'auto',
-                  position: 'fixed',
+                  mx: "auto",
+                  position: "fixed",
                   zIndex: theme.zIndex.modal,
                   maxWidth: theme.breakpoints.values.lg,
                   top: Math.round(clientRect.top + clientRect.height),
@@ -119,8 +119,8 @@ export function NavList({ data }) {
                     sx={{
                       gap: 3,
                       width: 1,
-                      flexWrap: 'wrap',
-                      flexDirection: 'row',
+                      flexWrap: "wrap",
+                      flexDirection: "row",
                     }}
                   >
                     {data.children.map((list) => (
@@ -148,14 +148,14 @@ export function NavList({ data }) {
 function NavSubList({ data, subheader, sx, ...other }) {
   const pathname = usePathname();
 
-  const isDashboard = subheader === 'Dashboard';
+  const isDashboard = subheader === "Dashboard";
 
   return (
     <Stack
       component={NavLi}
       alignItems="flex-start"
       sx={{
-        flex: '1 1 auto',
+        flex: "1 1 auto",
         ...(isDashboard && { maxWidth: { md: 1 / 3, lg: 540 } }),
         ...sx,
       }}
@@ -165,7 +165,7 @@ function NavSubList({ data, subheader, sx, ...other }) {
         <ListSubheader
           disableSticky
           disableGutters
-          sx={{ fontSize: 11, color: 'text.primary', typography: 'overline' }}
+          sx={{ fontSize: 11, color: "text.primary", typography: "overline" }}
         >
           {subheader}
         </ListSubheader>
@@ -184,7 +184,7 @@ function NavSubList({ data, subheader, sx, ...other }) {
                 active={item.path === removeLastSlash(pathname)}
               />
             </NavLi>
-          )
+          ),
         )}
       </NavUl>
     </Stack>

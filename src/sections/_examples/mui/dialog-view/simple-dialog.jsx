@@ -1,21 +1,21 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
-import Dialog from '@mui/material/Dialog';
-import Typography from '@mui/material/Typography';
-import DialogTitle from '@mui/material/DialogTitle';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import Dialog from "@mui/material/Dialog";
+import Typography from "@mui/material/Typography";
+import DialogTitle from "@mui/material/DialogTitle";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
+const emails = ["username@gmail.com", "user02@gmail.com"];
 
 // ----------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ export function SimpleDialog() {
       dialog.onFalse();
       setSelectedValue(value);
     },
-    [dialog]
+    [dialog],
   );
 
   return (
@@ -45,9 +45,11 @@ export function SimpleDialog() {
 
         <Box component="ul">
           {emails.map((email) => (
-            <Box key={email} component="li" sx={{ display: 'flex' }}>
+            <Box key={email} component="li" sx={{ display: "flex" }}>
               <ListItemButton onClick={() => handleClose(email)}>
-                <Avatar sx={{ mr: 2, color: 'info.lighter', bgcolor: 'info.darker' }}>
+                <Avatar
+                  sx={{ mr: 2, color: "info.lighter", bgcolor: "info.darker" }}
+                >
                   <Iconify icon="solar:user-rounded-bold" />
                 </Avatar>
                 <ListItemText primary={email} />
@@ -55,8 +57,8 @@ export function SimpleDialog() {
             </Box>
           ))}
 
-          <Box component="li" sx={{ display: 'flex' }}>
-            <ListItemButton autoFocus onClick={() => handleClose('addAccount')}>
+          <Box component="li" sx={{ display: "flex" }}>
+            <ListItemButton autoFocus onClick={() => handleClose("addAccount")}>
               <Avatar sx={{ mr: 2 }}>
                 <Iconify icon="mingcute:add-line" />
               </Avatar>

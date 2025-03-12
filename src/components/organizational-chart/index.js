@@ -1,1 +1,1 @@
-export * from './organizational-chart';
+export * from "./organizational-chart";

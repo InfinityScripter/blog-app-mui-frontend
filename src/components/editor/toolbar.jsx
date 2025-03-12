@@ -1,13 +1,13 @@
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { editorClasses } from './classes';
-import { LinkBlock } from './components/link-block';
-import { ImageBlock } from './components/image-block';
-import { ToolbarItem } from './components/toolbar-item';
-import { HeadingBlock } from './components/heading-block';
+import { editorClasses } from "./classes";
+import { LinkBlock } from "./components/link-block";
+import { ImageBlock } from "./components/image-block";
+import { ToolbarItem } from "./components/toolbar-item";
+import { HeadingBlock } from "./components/heading-block";
 
 // ----------------------------------------------------------------------
 
@@ -28,15 +28,21 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
       direction="row"
       flexWrap="wrap"
       alignItems="center"
-      divider={<Divider orientation="vertical" flexItem sx={{ height: 16, my: 'auto' }} />}
+      divider={
+        <Divider
+          orientation="vertical"
+          flexItem
+          sx={{ height: 16, my: "auto" }}
+        />
+      }
       className={editorClasses.toolbar.root}
       sx={{
         p: 1.25,
-        bgcolor: 'background.paper',
-        borderTopRightRadius: 'inherit',
-        borderTopLeftRadius: 'inherit',
+        bgcolor: "background.paper",
+        borderTopRightRadius: "inherit",
+        borderTopLeftRadius: "inherit",
         borderBottom: (theme) =>
-          `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.2)}`,
+          `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.2)}`,
       }}
     >
       <HeadingBlock editor={editor} />
@@ -45,7 +51,7 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
       <Stack direction="row" spacing={0.5}>
         <ToolbarItem
           aria-label="Bold"
-          active={editor.isActive('bold')}
+          active={editor.isActive("bold")}
           className={editorClasses.toolbar.bold}
           onClick={() => editor.chain().focus().toggleBold().run()}
           icon={
@@ -54,14 +60,16 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
         />
         <ToolbarItem
           aria-label="Italic"
-          active={editor.isActive('italic')}
+          active={editor.isActive("italic")}
           className={editorClasses.toolbar.italic}
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          icon={<path d="M15 20H7V18H9.92661L12.0425 6H9V4H17V6H14.0734L11.9575 18H15V20Z" />}
+          icon={
+            <path d="M15 20H7V18H9.92661L12.0425 6H9V4H17V6H14.0734L11.9575 18H15V20Z" />
+          }
         />
         <ToolbarItem
           aria-label="Strike"
-          active={editor.isActive('strike')}
+          active={editor.isActive("strike")}
           className={editorClasses.toolbar.italic}
           onClick={() => editor.chain().focus().toggleStrike().run()}
           icon={
@@ -74,7 +82,7 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
       <Stack direction="row" spacing={0.5}>
         <ToolbarItem
           aria-label="Bullet list"
-          active={editor.isActive('bulletList')}
+          active={editor.isActive("bulletList")}
           className={editorClasses.toolbar.bulletList}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           icon={
@@ -83,7 +91,7 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
         />
         <ToolbarItem
           aria-label="Ordered list"
-          active={editor.isActive('orderedList')}
+          active={editor.isActive("orderedList")}
           className={editorClasses.toolbar.orderedList}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           icon={
@@ -96,31 +104,39 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
       <Stack direction="row" spacing={0.5}>
         <ToolbarItem
           aria-label="Align left"
-          active={editor.isActive({ textAlign: 'left' })}
+          active={editor.isActive({ textAlign: "left" })}
           className={editorClasses.toolbar.alignLeft}
-          onClick={() => editor.chain().focus().setTextAlign('left').run()}
-          icon={<path d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z" />}
+          onClick={() => editor.chain().focus().setTextAlign("left").run()}
+          icon={
+            <path d="M3 4H21V6H3V4ZM3 19H17V21H3V19ZM3 14H21V16H3V14ZM3 9H17V11H3V9Z" />
+          }
         />
         <ToolbarItem
           aria-label="Align center"
-          active={editor.isActive({ textAlign: 'center' })}
+          active={editor.isActive({ textAlign: "center" })}
           className={editorClasses.toolbar.alignCenter}
-          onClick={() => editor.chain().focus().setTextAlign('center').run()}
-          icon={<path d="M3 4H21V6H3V4ZM5 19H19V21H5V19ZM3 14H21V16H3V14ZM5 9H19V11H5V9Z" />}
+          onClick={() => editor.chain().focus().setTextAlign("center").run()}
+          icon={
+            <path d="M3 4H21V6H3V4ZM5 19H19V21H5V19ZM3 14H21V16H3V14ZM5 9H19V11H5V9Z" />
+          }
         />
         <ToolbarItem
           aria-label="Align right"
-          active={editor.isActive({ textAlign: 'right' })}
+          active={editor.isActive({ textAlign: "right" })}
           className={editorClasses.toolbar.alignRight}
-          onClick={() => editor.chain().focus().setTextAlign('right').run()}
-          icon={<path d="M3 4H21V6H3V4ZM7 19H21V21H7V19ZM3 14H21V16H3V14ZM7 9H21V11H7V9Z" />}
+          onClick={() => editor.chain().focus().setTextAlign("right").run()}
+          icon={
+            <path d="M3 4H21V6H3V4ZM7 19H21V21H7V19ZM3 14H21V16H3V14ZM7 9H21V11H7V9Z" />
+          }
         />
         <ToolbarItem
           aria-label="Align justify"
-          active={editor.isActive({ textAlign: 'justify' })}
+          active={editor.isActive({ textAlign: "justify" })}
           className={editorClasses.toolbar.alignJustify}
-          onClick={() => editor.chain().focus().setTextAlign('justify').run()}
-          icon={<path d="M3 4H21V6H3V4ZM3 19H21V21H3V19ZM3 14H21V16H3V14ZM3 9H21V11H3V9Z" />}
+          onClick={() => editor.chain().focus().setTextAlign("justify").run()}
+          icon={
+            <path d="M3 4H21V6H3V4ZM3 19H21V21H3V19ZM3 14H21V16H3V14ZM3 9H21V11H3V9Z" />
+          }
         />
       </Stack>
 
@@ -129,7 +145,7 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
         <Stack direction="row" spacing={0.5}>
           <ToolbarItem
             aria-label="Align justify"
-            active={editor.isActive('code')}
+            active={editor.isActive("code")}
             className={editorClasses.toolbar.code}
             onClick={() => editor.chain().focus().toggleCode().run()}
             icon={
@@ -138,7 +154,7 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
           />
           <ToolbarItem
             aria-label="Align justify"
-            active={editor.isActive('codeBlock')}
+            active={editor.isActive("codeBlock")}
             className={editorClasses.toolbar.codeBlock}
             onClick={() => editor.chain().focus().toggleCodeBlock().run()}
             icon={
@@ -153,7 +169,7 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
         <Stack direction="row" spacing={0.5}>
           <ToolbarItem
             aria-label="Blockquote"
-            active={editor.isActive('blockquote')}
+            active={editor.isActive("blockquote")}
             className={editorClasses.toolbar.blockquote}
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
             icon={
@@ -164,7 +180,9 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
             aria-label="Horizontal"
             className={editorClasses.toolbar.hr}
             onClick={() => editor.chain().focus().setHorizontalRule().run()}
-            icon={<path d="M2 11H4V13H2V11ZM6 11H18V13H6V11ZM20 11H22V13H20V11Z" />}
+            icon={
+              <path d="M2 11H4V13H2V11ZM6 11H18V13H6V11ZM20 11H22V13H20V11Z" />
+            }
           />
         </Stack>
       )}
@@ -188,7 +206,9 @@ export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
         <ToolbarItem
           aria-label="Clear"
           className={editorClasses.toolbar.clear}
-          onClick={() => editor.chain().focus().clearNodes().unsetAllMarks().run()}
+          onClick={() =>
+            editor.chain().focus().clearNodes().unsetAllMarks().run()
+          }
           icon={
             <path d="M12.6512 14.0654L11.6047 20H9.57389L10.9247 12.339L3.51465 4.92892L4.92886 3.51471L20.4852 19.0711L19.071 20.4853L12.6512 14.0654ZM11.7727 7.53009L12.0425 5.99999H10.2426L8.24257 3.99999H19.9999V5.99999H14.0733L13.4991 9.25652L11.7727 7.53009Z" />
           }

@@ -1,4 +1,4 @@
-import { tabClasses } from '@mui/material/Tab';
+import { tabClasses } from "@mui/material/Tab";
 
 // ----------------------------------------------------------------------
 
@@ -7,8 +7,8 @@ const MuiTabs = {
    * DEFAULT PROPS
    *************************************** */
   defaultProps: {
-    textColor: 'inherit',
-    variant: 'scrollable',
+    textColor: "inherit",
+    variant: "scrollable",
     allowScrollButtonsMobile: true,
   },
 
@@ -17,14 +17,14 @@ const MuiTabs = {
    *************************************** */
   styleOverrides: {
     flexContainer: ({ ownerState, theme }) => ({
-      ...(ownerState.variant !== 'fullWidth' && {
-        gap: '24px',
-        [theme.breakpoints.up('sm')]: {
-          gap: '40px',
+      ...(ownerState.variant !== "fullWidth" && {
+        gap: "24px",
+        [theme.breakpoints.up("sm")]: {
+          gap: "40px",
         },
       }),
     }),
-    indicator: { backgroundColor: 'currentColor' },
+    indicator: { backgroundColor: "currentColor" },
   },
 };
 
@@ -34,7 +34,7 @@ const MuiTab = {
   /** **************************************
    * DEFAULT PROPS
    *************************************** */
-  defaultProps: { disableRipple: true, iconPosition: 'start' },
+  defaultProps: { disableRipple: true, iconPosition: "start" },
 
   /** **************************************
    * STYLE

@@ -1,36 +1,36 @@
-import { styled } from '@mui/material/styles';
-import { RichTreeView } from '@mui/x-tree-view/RichTreeView';
-import { TreeItem, treeItemClasses } from '@mui/x-tree-view/TreeItem';
+import { styled } from "@mui/material/styles";
+import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
+import { TreeItem, treeItemClasses } from "@mui/x-tree-view/TreeItem";
 
-import { varAlpha, stylesMode } from 'src/theme/styles';
+import { varAlpha, stylesMode } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
 const ITEMS = [
   {
-    id: '1',
-    label: 'Main',
+    id: "1",
+    label: "Main",
     children: [
-      { id: '2', label: 'Hello' },
+      { id: "2", label: "Hello" },
       {
-        id: '3',
-        label: 'Subtree with children',
+        id: "3",
+        label: "Subtree with children",
         children: [
-          { id: '6', label: 'Hello' },
+          { id: "6", label: "Hello" },
           {
-            id: '7',
-            label: 'Sub-subtree with children',
+            id: "7",
+            label: "Sub-subtree with children",
             children: [
-              { id: '9', label: 'Child 1' },
-              { id: '10', label: 'Child 2' },
-              { id: '11', label: 'Child 3' },
+              { id: "9", label: "Child 1" },
+              { id: "10", label: "Child 2" },
+              { id: "11", label: "Child 3" },
             ],
           },
-          { id: '8', label: 'Hello' },
+          { id: "8", label: "Hello" },
         ],
       },
-      { id: '4', label: 'World' },
-      { id: '5', label: 'Something something' },
+      { id: "4", label: "World" },
+      { id: "5", label: "Something something" },
     ],
   },
 ];
@@ -42,10 +42,10 @@ const StyledTreeItem = styled(TreeItem)(({ theme }) => ({
     borderRadius: theme.spacing(0.5),
     padding: theme.spacing(0.5, 1),
     margin: theme.spacing(0.2, 0),
-    [`& .${treeItemClasses.label}`]: { fontSize: '0.8rem', fontWeight: 500 },
+    [`& .${treeItemClasses.label}`]: { fontSize: "0.8rem", fontWeight: 500 },
   },
   [`& .${treeItemClasses.iconContainer}`]: {
-    borderRadius: '50%',
+    borderRadius: "50%",
     backgroundColor: varAlpha(theme.vars.palette.primary.mainChannel, 0.25),
     [stylesMode.dark]: {
       color: theme.vars.palette.primary.contrastText,
@@ -65,8 +65,8 @@ export function CustomStyling() {
   return (
     <RichTreeView
       aria-label="customized"
-      defaultExpandedItems={['1']}
-      sx={{ overflowX: 'hidden', minHeight: 240, width: 1 }}
+      defaultExpandedItems={["1"]}
+      sx={{ overflowX: "hidden", minHeight: 240, width: 1 }}
       slots={{ item: StyledTreeItem }}
       items={ITEMS}
     />

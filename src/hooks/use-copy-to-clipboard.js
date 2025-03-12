@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -8,7 +8,7 @@ export function useCopyToClipboard() {
   const copy = useCallback(
     async (text) => {
       if (!navigator?.clipboard) {
-        console.warn('Clipboard not supported');
+        console.warn("Clipboard not supported");
         return false;
       }
 
@@ -17,15 +17,18 @@ export function useCopyToClipboard() {
         setCopiedText(text);
         return true;
       } catch (error) {
-        console.warn('Copy failed', error);
+        console.warn("Copy failed", error);
         setCopiedText(null);
         return false;
       }
     },
-    [setCopiedText]
+    [setCopiedText],
   );
 
-  const memoizedValue = useMemo(() => ({ copy, copiedText }), [copy, copiedText]);
+  const memoizedValue = useMemo(
+    () => ({ copy, copiedText }),
+    [copy, copiedText],
+  );
 
   return memoizedValue;
 }

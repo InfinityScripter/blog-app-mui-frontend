@@ -1,12 +1,12 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
 
-import { fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from "src/utils/format-number";
 
-import { Scrollbar } from 'src/components/scrollbar';
-import { Iconify, FlagIcon } from 'src/components/iconify';
+import { Scrollbar } from "src/components/scrollbar";
+import { Iconify, FlagIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
@@ -21,8 +21,8 @@ export function AppTopInstalledCountries({ title, subheader, list, ...other }) {
             p: 3,
             gap: 3,
             minWidth: 360,
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           {list.map((item) => (
@@ -42,8 +42,8 @@ function Item({ item, sx, ...other }) {
       sx={{
         gap: 1,
         minWidth: 120,
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
       }}
     >
       <FlagIcon code={item.countryCode} />
@@ -58,22 +58,25 @@ function Item({ item, sx, ...other }) {
       sx={{
         gap: 0.5,
         minWidth: 80,
-        display: 'flex',
-        typography: 'body2',
-        alignItems: 'center',
+        display: "flex",
+        typography: "body2",
+        alignItems: "center",
       }}
     >
-      <Iconify icon={icon} width={14} sx={{ color: 'text.secondary' }} />
+      <Iconify icon={icon} width={14} sx={{ color: "text.secondary" }} />
       {fShortenNumber(system)}
     </Box>
   );
 
   return (
-    <Box sx={{ gap: 2, display: 'flex', alignItems: 'center', ...sx }} {...other}>
+    <Box
+      sx={{ gap: 2, display: "flex", alignItems: "center", ...sx }}
+      {...other}
+    >
       {largeItem}
-      {smallItem('ant-design:android-filled', item.android)}
-      {smallItem('mingcute:windows-fill', item.windows)}
-      {smallItem('mingcute:apple-fill', item.apple)}
+      {smallItem("ant-design:android-filled", item.android)}
+      {smallItem("mingcute:windows-fill", item.windows)}
+      {smallItem("mingcute:apple-fill", item.apple)}
     </Box>
   );
 }

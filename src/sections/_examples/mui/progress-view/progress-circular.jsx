@@ -1,11 +1,19 @@
-import Stack from '@mui/material/Stack';
-import CircularProgress from '@mui/material/CircularProgress';
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['inherit', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = [
+  "inherit",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
 // ----------------------------------------------------------------------
 

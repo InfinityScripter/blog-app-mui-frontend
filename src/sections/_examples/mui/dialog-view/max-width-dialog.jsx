@@ -1,20 +1,20 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
-import Dialog from '@mui/material/Dialog';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import Typography from '@mui/material/Typography';
-import FormControl from '@mui/material/FormControl';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Switch from "@mui/material/Switch";
+import Dialog from "@mui/material/Dialog";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
 // ----------------------------------------------------------------------
 
@@ -23,7 +23,7 @@ export function MaxWidthDialog() {
 
   const [fullWidth, setFullWidth] = useState(true);
 
-  const [maxWidth, setMaxWidth] = useState('sm');
+  const [maxWidth, setMaxWidth] = useState("sm");
 
   const handleMaxWidthChange = useCallback((event) => {
     // @ts-expect-error autofill of arbitrary value is not handled.
@@ -49,7 +49,7 @@ export function MaxWidthDialog() {
         <DialogTitle>Optional sizes</DialogTitle>
 
         <DialogContent>
-          <Typography sx={{ color: 'text.secondary' }}>
+          <Typography sx={{ color: "text.secondary" }}>
             You can set my maximum width and whether to adapt or not.
           </Typography>
 
@@ -57,10 +57,10 @@ export function MaxWidthDialog() {
             component="form"
             noValidate
             sx={{
-              margin: 'auto',
-              display: 'flex',
-              width: 'fit-content',
-              flexDirection: 'column',
+              margin: "auto",
+              display: "flex",
+              width: "fit-content",
+              flexDirection: "column",
             }}
           >
             <FormControl sx={{ my: 3, minWidth: 160 }}>
@@ -70,7 +70,7 @@ export function MaxWidthDialog() {
                 value={maxWidth}
                 onChange={handleMaxWidthChange}
                 label="maxWidth"
-                inputProps={{ id: 'max-width-label' }}
+                inputProps={{ id: "max-width-label" }}
               >
                 <MenuItem value={false}>false</MenuItem>
                 <MenuItem value="xs">xs</MenuItem>
@@ -82,7 +82,9 @@ export function MaxWidthDialog() {
             </FormControl>
 
             <FormControlLabel
-              control={<Switch checked={fullWidth} onChange={handleFullWidthChange} />}
+              control={
+                <Switch checked={fullWidth} onChange={handleFullWidthChange} />
+              }
               label="Full width"
               sx={{ mt: 1 }}
             />

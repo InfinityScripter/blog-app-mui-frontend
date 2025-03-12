@@ -1,3 +1,3 @@
-export * from './mega-menu-vertical';
+export * from "./mega-menu-vertical";
 
-export { NavItem as MegaMenuVerticalItem } from './nav-item';
+export { NavItem as MegaMenuVerticalItem } from "./nav-item";

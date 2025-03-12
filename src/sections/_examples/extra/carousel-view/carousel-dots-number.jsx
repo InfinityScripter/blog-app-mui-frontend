@@ -1,21 +1,21 @@
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
 
-import { maxLine, varAlpha, bgGradient } from 'src/theme/styles';
+import { maxLine, varAlpha, bgGradient } from "src/theme/styles";
 
-import { Image } from 'src/components/image';
-import { Iconify } from 'src/components/iconify';
+import { Image } from "src/components/image";
+import { Iconify } from "src/components/iconify";
 import {
   Carousel,
   useCarousel,
   CarouselDotButtons,
   CarouselArrowFloatButtons,
-} from 'src/components/carousel';
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
@@ -23,20 +23,23 @@ export function CarouselDotsNumber({ data }) {
   const carousel = useCarousel({
     loop: true,
     dragFree: true,
-    slideSpacing: '20px',
-    slidesToShow: { xs: 1, sm: 2, md: '36%' },
+    slideSpacing: "20px",
+    slidesToShow: { xs: 1, sm: 2, md: "36%" },
   });
 
   return (
     <>
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: "relative" }}>
         <Carousel carousel={carousel}>
           {data.map((item, index) => (
             <CarouselItem key={item.id} index={index} item={item} />
           ))}
         </Carousel>
 
-        <CarouselArrowFloatButtons {...carousel.arrows} options={carousel.options} />
+        <CarouselArrowFloatButtons
+          {...carousel.arrows}
+          options={carousel.options}
+        />
       </Box>
 
       <CarouselDotButtons
@@ -44,7 +47,7 @@ export function CarouselDotsNumber({ data }) {
         scrollSnaps={carousel.dots.scrollSnaps}
         selectedIndex={carousel.dots.selectedIndex}
         onClickDot={carousel.dots.onClickDot}
-        sx={{ mt: 5, mb: 2, width: 1, justifyContent: 'center' }}
+        sx={{ mt: 5, mb: 2, width: 1, justifyContent: "center" }}
       />
     </>
   );
@@ -54,22 +57,27 @@ function CarouselItem({ item, index }) {
   const theme = useTheme();
 
   return (
-    <Box sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}>
+    <Box sx={{ borderRadius: 2, overflow: "hidden", position: "relative" }}>
       <IndexLabel index={index + 1} />
 
-      <Image visibleByDefault alt={item.title} src={item.coverUrl} ratio="3/4" />
+      <Image
+        visibleByDefault
+        alt={item.title}
+        src={item.coverUrl}
+        ratio="3/4"
+      />
 
       <CardContent
         sx={{
           ...bgGradient({
-            color: `to top, ${theme.vars.palette.grey[900]} 25%, ${varAlpha(theme.vars.palette.grey['900Channel'], 0)} 100%`,
+            color: `to top, ${theme.vars.palette.grey[900]} 25%, ${varAlpha(theme.vars.palette.grey["900Channel"], 0)} 100%`,
           }),
           width: 1,
           bottom: 0,
           zIndex: 9,
-          textAlign: 'left',
-          position: 'absolute',
-          color: 'common.white',
+          textAlign: "left",
+          position: "absolute",
+          color: "common.white",
         }}
       >
         <Typography variant="h5" sx={{ ...maxLine({ line: 2 }), mb: 2 }}>
@@ -81,10 +89,10 @@ function CarouselItem({ item, index }) {
           variant="overline"
           sx={{
             opacity: 0.72,
-            alignItems: 'center',
-            display: 'inline-flex',
-            transition: theme.transitions.create(['opacity']),
-            '&:hover': { opacity: 1 },
+            alignItems: "center",
+            display: "inline-flex",
+            transition: theme.transitions.create(["opacity"]),
+            "&:hover": { opacity: 1 },
           }}
         >
           learn More

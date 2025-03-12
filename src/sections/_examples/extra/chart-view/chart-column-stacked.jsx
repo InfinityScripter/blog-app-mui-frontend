@@ -1,6 +1,6 @@
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -20,15 +20,22 @@ export function ChartColumnStacked({ chart }) {
     stroke: { width: 0 },
     legend: {
       show: true,
-      position: 'right',
+      position: "right",
       itemMargin: { vertical: 8 },
     },
     xaxis: {
-      type: 'datetime',
+      type: "datetime",
       categories: chart.categories,
     },
-    plotOptions: { bar: { columnWidth: '36%' } },
+    plotOptions: { bar: { columnWidth: "36%" } },
   });
 
-  return <Chart type="bar" series={chart.series} options={chartOptions} height={320} />;
+  return (
+    <Chart
+      type="bar"
+      series={chart.series}
+      options={chartOptions}
+      height={320}
+    />
+  );
 }

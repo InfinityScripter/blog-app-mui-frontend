@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { SvgColor, svgColorClasses } from '../../svg-color';
+import { SvgColor, svgColorClasses } from "../../svg-color";
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ export function FullScreenButton() {
   }, []);
 
   return (
-    <Tooltip title={fullscreen ? 'Exit' : 'Full Screen'}>
+    <Tooltip title={fullscreen ? "Exit" : "Full Screen"}>
       <IconButton
         onClick={onToggleFullScreen}
         sx={{
@@ -40,7 +40,7 @@ export function FullScreenButton() {
         }}
       >
         <SvgColor
-          src={`${CONFIG.site.basePath}/assets/icons/setting/${fullscreen ? 'ic-exit-full-screen' : 'ic-full-screen'}.svg`}
+          src={`${CONFIG.site.basePath}/assets/icons/setting/${fullscreen ? "ic-exit-full-screen" : "ic-full-screen"}.svg`}
           sx={{ width: 18, height: 18 }}
         />
       </IconButton>

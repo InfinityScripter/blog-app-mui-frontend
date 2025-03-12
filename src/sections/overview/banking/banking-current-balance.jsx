@@ -1,19 +1,23 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
+import Box from "@mui/material/Box";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from "src/utils/format-number";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { Iconify } from 'src/components/iconify';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
-import { Carousel, useCarousel, CarouselDotButtons } from 'src/components/carousel';
+import { Iconify } from "src/components/iconify";
+import { usePopover, CustomPopover } from "src/components/custom-popover";
+import {
+  Carousel,
+  useCarousel,
+  CarouselDotButtons,
+} from "src/components/carousel";
 
 // ----------------------------------------------------------------------
 
@@ -27,25 +31,25 @@ export function BankingCurrentBalance({ list, sx, ...other }) {
       sx={{
         mb: 2,
         borderRadius: 2,
-        position: 'relative',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+        position: "relative",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         backgroundImage: `url('${CONFIG.site.basePath}/assets/background/background-4.jpg')`,
-        '&::before, &::after': {
+        "&::before, &::after": {
           left: 0,
           right: 0,
-          mx: '28px',
+          mx: "28px",
           zIndex: -2,
           height: 40,
           bottom: -16,
           content: "''",
           opacity: 0.16,
           borderRadius: 1.5,
-          bgcolor: 'grey.500',
-          position: 'absolute',
+          bgcolor: "grey.500",
+          position: "absolute",
         },
-        '&::after': { mx: '16px', bottom: -8, opacity: 0.32 },
+        "&::after": { mx: "16px", bottom: -8, opacity: 0.32 },
         ...sx,
       }}
       {...other}
@@ -54,10 +58,15 @@ export function BankingCurrentBalance({ list, sx, ...other }) {
         scrollSnaps={carousel.dots.scrollSnaps}
         selectedIndex={carousel.dots.selectedIndex}
         onClickDot={carousel.dots.onClickDot}
-        sx={{ right: 16, bottom: 16, position: 'absolute', color: 'primary.main' }}
+        sx={{
+          right: 16,
+          bottom: 16,
+          position: "absolute",
+          color: "primary.main",
+        }}
       />
 
-      <Carousel carousel={carousel} sx={{ color: 'common.white' }}>
+      <Carousel carousel={carousel} sx={{ color: "common.white" }}>
         {list.map((item) => (
           <Item
             item={item}
@@ -78,12 +87,12 @@ function Item({ item, showCurrency, onToggleCurrency }) {
 
   const handleDelete = useCallback(() => {
     popover.onClose();
-    console.info('DELETE', item.id);
+    console.info("DELETE", item.id);
   }, [item.id, popover]);
 
   const handleEdit = useCallback(() => {
     popover.onClose();
-    console.info('EDIT', item.id);
+    console.info("EDIT", item.id);
   }, [item.id, popover]);
 
   return (
@@ -97,7 +106,7 @@ function Item({ item, showCurrency, onToggleCurrency }) {
             right: 8,
             zIndex: 9,
             opacity: 0.48,
-            position: 'absolute',
+            position: "absolute",
             ...(popover.open && { opacity: 1 }),
           }}
         >
@@ -105,15 +114,23 @@ function Item({ item, showCurrency, onToggleCurrency }) {
         </IconButton>
 
         <div>
-          <Box sx={{ mb: 1.5, typography: 'subtitle2', opacity: 0.48 }}>Current balance</Box>
+          <Box sx={{ mb: 1.5, typography: "subtitle2", opacity: 0.48 }}>
+            Current balance
+          </Box>
 
-          <Box sx={{ gap: 1, display: 'flex', alignItems: 'center' }}>
-            <Box component="span" sx={{ typography: 'h4' }}>
-              {showCurrency ? '********' : fCurrency(item.balance)}
+          <Box sx={{ gap: 1, display: "flex", alignItems: "center" }}>
+            <Box component="span" sx={{ typography: "h4" }}>
+              {showCurrency ? "********" : fCurrency(item.balance)}
             </Box>
 
-            <IconButton color="inherit" onClick={onToggleCurrency} sx={{ opacity: 0.48 }}>
-              <Iconify icon={showCurrency ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+            <IconButton
+              color="inherit"
+              onClick={onToggleCurrency}
+              sx={{ opacity: 0.48 }}
+            >
+              <Iconify
+                icon={showCurrency ? "solar:eye-bold" : "solar:eye-closed-bold"}
+              />
             </IconButton>
           </Box>
         </div>
@@ -122,41 +139,53 @@ function Item({ item, showCurrency, onToggleCurrency }) {
           sx={{
             my: 3,
             gap: 1,
-            display: 'flex',
-            alignItems: 'center',
-            typography: 'subtitle1',
-            justifyContent: 'flex-end',
+            display: "flex",
+            alignItems: "center",
+            typography: "subtitle1",
+            justifyContent: "flex-end",
           }}
         >
           <Box
             sx={{
               px: 0.75,
-              bgcolor: 'white',
+              bgcolor: "white",
               borderRadius: 0.5,
-              display: 'inline-flex',
+              display: "inline-flex",
             }}
           >
-            {item.cardType === 'mastercard' && <Iconify width={24} icon="logos:mastercard" />}
-            {item.cardType === 'visa' && <Iconify width={24} icon="logos:visa" />}
+            {item.cardType === "mastercard" && (
+              <Iconify width={24} icon="logos:mastercard" />
+            )}
+            {item.cardType === "visa" && (
+              <Iconify width={24} icon="logos:visa" />
+            )}
           </Box>
           {item.cardNumber}
         </Box>
 
-        <Box sx={{ gap: 5, display: 'flex', typography: 'subtitle1' }}>
+        <Box sx={{ gap: 5, display: "flex", typography: "subtitle1" }}>
           <div>
-            <Box sx={{ mb: 1, opacity: 0.48, typography: 'caption' }}>Card holder</Box>
+            <Box sx={{ mb: 1, opacity: 0.48, typography: "caption" }}>
+              Card holder
+            </Box>
             <Box component="span">{item.cardHolder}</Box>
           </div>
           <div>
-            <Box sx={{ mb: 1, opacity: 0.48, typography: 'caption' }}>Expiration date</Box>
+            <Box sx={{ mb: 1, opacity: 0.48, typography: "caption" }}>
+              Expiration date
+            </Box>
             <Box component="span">{item.cardValid}</Box>
           </div>
         </Box>
       </Box>
 
-      <CustomPopover open={popover.open} anchorEl={popover.anchorEl} onClose={popover.onClose}>
+      <CustomPopover
+        open={popover.open}
+        anchorEl={popover.anchorEl}
+        onClose={popover.onClose}
+      >
         <MenuList>
-          <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
+          <MenuItem onClick={handleDelete} sx={{ color: "error.main" }}>
             <Iconify icon="solar:trash-bin-trash-bold" />
             Delete
           </MenuItem>

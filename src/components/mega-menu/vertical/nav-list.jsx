@@ -1,22 +1,28 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from "react";
 
-import Paper from '@mui/material/Paper';
-import Popover from '@mui/material/Popover';
-import { useTheme } from '@mui/material/styles';
+import Paper from "@mui/material/Paper";
+import Popover from "@mui/material/Popover";
+import { useTheme } from "@mui/material/styles";
 
-import { isExternalLink } from 'src/routes/utils';
-import { usePathname, useActiveLink } from 'src/routes/hooks';
+import { isExternalLink } from "src/routes/utils";
+import { usePathname, useActiveLink } from "src/routes/hooks";
 
-import { paper, hideScrollY } from 'src/theme/styles';
+import { paper, hideScrollY } from "src/theme/styles";
 
-import { NavItem } from './nav-item';
-import { NavLi } from '../../nav-section';
-import { megaMenuClasses } from '../classes';
-import { NavContent } from '../components/nav-content';
+import { NavItem } from "./nav-item";
+import { NavLi } from "../../nav-section";
+import { megaMenuClasses } from "../classes";
+import { NavContent } from "../components/nav-content";
 
 // ----------------------------------------------------------------------
 
-export function NavList({ data, render, slotProps, cssVars, enabledRootRedirect }) {
+export function NavList({
+  data,
+  render,
+  slotProps,
+  cssVars,
+  enabledRootRedirect,
+}) {
   const theme = useTheme();
 
   const pathname = usePathname();
@@ -46,7 +52,9 @@ export function NavList({ data, render, slotProps, cssVars, enabledRootRedirect 
   }, [pathname]);
 
   const handleGetClientRect = useCallback(() => {
-    const element = document.getElementsByClassName(megaMenuClasses.vertical.root);
+    const element = document.getElementsByClassName(
+      megaMenuClasses.vertical.root,
+    );
 
     if (element) {
       const rect = element[0].getBoundingClientRect();
@@ -62,10 +70,10 @@ export function NavList({ data, render, slotProps, cssVars, enabledRootRedirect 
   useEffect(() => {
     handleGetClientRect();
 
-    window.addEventListener('scroll', handleGetClientRect);
+    window.addEventListener("scroll", handleGetClientRect);
 
     return () => {
-      window.removeEventListener('scroll', handleGetClientRect);
+      window.removeEventListener("scroll", handleGetClientRect);
     };
   }, [handleGetClientRect]);
 
@@ -118,25 +126,25 @@ export function NavList({ data, render, slotProps, cssVars, enabledRootRedirect 
             top: clientRect.top - 20,
             left: clientRect.x + clientRect.width,
           }}
-          anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-          transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          transformOrigin={{ vertical: "top", horizontal: "left" }}
           slotProps={{
             paper: {
               onMouseEnter: handleOpenMenu,
               onMouseLeave: handleCloseMenu,
               sx: {
                 /* Reset */
-                boxShadow: 'none',
-                overflow: 'unset',
-                backdropFilter: 'none',
-                background: 'transparent',
+                boxShadow: "none",
+                overflow: "unset",
+                backdropFilter: "none",
+                background: "transparent",
                 /**/
-                ...(openMenu && { pointerEvents: 'auto' }),
+                ...(openMenu && { pointerEvents: "auto" }),
                 ...slotProps?.paper,
               },
             },
           }}
-          sx={{ ...cssVars, pointerEvents: 'none' }}
+          sx={{ ...cssVars, pointerEvents: "none" }}
         >
           <Paper
             sx={{
@@ -157,7 +165,11 @@ export function NavList({ data, render, slotProps, cssVars, enabledRootRedirect 
               ...slotProps?.paper,
             }}
           >
-            <NavContent singleList={singleList} data={data} slotProps={slotProps} />
+            <NavContent
+              singleList={singleList}
+              data={data}
+              slotProps={slotProps}
+            />
           </Paper>
         </Popover>
       </NavLi>

@@ -1,13 +1,20 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import InputBase from '@mui/material/InputBase';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import InputBase from "@mui/material/InputBase";
+import { useTheme } from "@mui/material/styles";
 
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
-export function BankingInviteFriends({ price, title, imgUrl, description, sx, ...other }) {
+export function BankingInviteFriends({
+  price,
+  title,
+  imgUrl,
+  description,
+  sx,
+  ...other
+}) {
   const theme = useTheme();
 
   return (
@@ -18,8 +25,8 @@ export function BankingInviteFriends({ price, title, imgUrl, description, sx, ..
         }),
         p: 5,
         borderRadius: 2,
-        position: 'relative',
-        color: 'common.white',
+        position: "relative",
+        color: "common.white",
         ...sx,
       }}
       {...other}
@@ -34,29 +41,34 @@ export function BankingInviteFriends({ price, title, imgUrl, description, sx, ..
           zIndex: 9,
           width: 128,
           height: 128,
-          position: 'absolute',
+          position: "absolute",
           ...sx,
         }}
       />
 
-      <Box sx={{ whiteSpace: 'pre-line', typography: 'h6' }}>{title}</Box>
-      <Box sx={{ typography: 'h2' }}>{price}</Box>
+      <Box sx={{ whiteSpace: "pre-line", typography: "h6" }}>{title}</Box>
+      <Box sx={{ typography: "h2" }}>{price}</Box>
 
-      <Box sx={{ mt: 2, mb: 3, typography: 'body2' }}>{description}</Box>
+      <Box sx={{ mt: 2, mb: 3, typography: "body2" }}>{description}</Box>
 
       <InputBase
         fullWidth
         placeholder="Email"
         endAdornment={
-          <Button color="warning" variant="contained" size="small" sx={{ mr: 0.5 }}>
+          <Button
+            color="warning"
+            variant="contained"
+            size="small"
+            sx={{ mr: 0.5 }}
+          >
             Invite
           </Button>
         }
         inputProps={{
-          id: 'input-email',
+          id: "input-email",
           sx: {
-            color: 'common.white',
-            '&::placeholder': { opacity: 0.48, color: 'inherit' },
+            color: "common.white",
+            "&::placeholder": { opacity: 0.48, color: "inherit" },
           },
         }}
         sx={{

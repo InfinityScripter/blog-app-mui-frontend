@@ -1,6 +1,6 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from "react-hook-form";
 
-import { PhoneInput } from '../phone-input';
+import { PhoneInput } from "../phone-input";
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +16,9 @@ export function RHFPhoneInput({ name, helperText, ...other }) {
           {...field}
           fullWidth
           value={field.value}
-          onChange={(newValue) => setValue(name, newValue, { shouldValidate: true })}
+          onChange={(newValue) =>
+            setValue(name, newValue, { shouldValidate: true })
+          }
           error={!!error}
           helperText={error ? error?.message : helperText}
           {...other}

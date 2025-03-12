@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import useSWR, { mutate } from 'swr';
+import { useMemo } from "react";
+import useSWR, { mutate } from "swr";
 
-import axios, { fetcher, endpoints } from 'src/utils/axios';
+import axios, { fetcher, endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,11 @@ const swrOptions = {
 // ----------------------------------------------------------------------
 
 export function useGetEvents() {
-  const { data, isLoading, error, isValidating } = useSWR(CALENDAR_ENDPOINT, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR(
+    CALENDAR_ENDPOINT,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(() => {
     const events = data?.events.map((event) => ({
@@ -61,7 +65,7 @@ export async function createEvent(eventData) {
 
       return { ...currentData, events };
     },
-    false
+    false,
   );
 }
 
@@ -85,12 +89,12 @@ export async function updateEvent(eventData) {
       const currentEvents = currentData?.events;
 
       const events = currentEvents.map((event) =>
-        event.id === eventData.id ? { ...event, ...eventData } : event
+        event.id === eventData.id ? { ...event, ...eventData } : event,
       );
 
       return { ...currentData, events };
     },
-    false
+    false,
   );
 }
 
@@ -117,6 +121,6 @@ export async function deleteEvent(eventId) {
 
       return { ...currentData, events };
     },
-    false
+    false,
   );
 }

@@ -1,24 +1,26 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import Box from '@mui/material/Box';
-import Slide from '@mui/material/Slide';
-import Button from '@mui/material/Button';
-import AppBar from '@mui/material/AppBar';
-import Dialog from '@mui/material/Dialog';
-import Divider from '@mui/material/Divider';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
+import Box from "@mui/material/Box";
+import Slide from "@mui/material/Slide";
+import Button from "@mui/material/Button";
+import AppBar from "@mui/material/AppBar";
+import Dialog from "@mui/material/Dialog";
+import Divider from "@mui/material/Divider";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
-const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+const Transition = forwardRef((props, ref) => (
+  <Slide direction="up" ref={ref} {...props} />
+));
 
 // ----------------------------------------------------------------------
 
@@ -47,14 +49,19 @@ export function FullScreenDialog() {
               Sound
             </Typography>
 
-            <Button autoFocus color="inherit" variant="contained" onClick={dialog.onFalse}>
+            <Button
+              autoFocus
+              color="inherit"
+              variant="contained"
+              onClick={dialog.onFalse}
+            >
               Save
             </Button>
           </Toolbar>
         </AppBar>
 
         <Box component="ul">
-          <Box component="li" sx={{ display: 'flex' }}>
+          <Box component="li" sx={{ display: "flex" }}>
             <ListItemButton>
               <ListItemText primary="Phone ringtone" secondary="Titania" />
             </ListItemButton>
@@ -62,9 +69,12 @@ export function FullScreenDialog() {
 
           <Divider />
 
-          <Box component="li" sx={{ display: 'flex' }}>
+          <Box component="li" sx={{ display: "flex" }}>
             <ListItemButton>
-              <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+              <ListItemText
+                primary="Default notification ringtone"
+                secondary="Tethys"
+              />
             </ListItemButton>
           </Box>
         </Box>

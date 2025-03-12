@@ -1,22 +1,28 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Table from '@mui/material/Table';
-import Avatar from '@mui/material/Avatar';
-import TableRow from '@mui/material/TableRow';
-import TableCell from '@mui/material/TableCell';
-import TableBody from '@mui/material/TableBody';
-import CardHeader from '@mui/material/CardHeader';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Table from "@mui/material/Table";
+import Avatar from "@mui/material/Avatar";
+import TableRow from "@mui/material/TableRow";
+import TableCell from "@mui/material/TableCell";
+import TableBody from "@mui/material/TableBody";
+import CardHeader from "@mui/material/CardHeader";
 
-import { fCurrency } from 'src/utils/format-number';
+import { fCurrency } from "src/utils/format-number";
 
-import { Label } from 'src/components/label';
-import { FlagIcon } from 'src/components/iconify';
-import { Scrollbar } from 'src/components/scrollbar';
-import { TableHeadCustom } from 'src/components/table';
+import { Label } from "src/components/label";
+import { FlagIcon } from "src/components/iconify";
+import { Scrollbar } from "src/components/scrollbar";
+import { TableHeadCustom } from "src/components/table";
 
 // ----------------------------------------------------------------------
 
-export function EcommerceBestSalesman({ title, subheader, tableData, headLabel, ...other }) {
+export function EcommerceBestSalesman({
+  title,
+  subheader,
+  tableData,
+  headLabel,
+  ...other
+}) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
@@ -42,7 +48,7 @@ function RowItem({ row }) {
   return (
     <TableRow>
       <TableCell>
-        <Box sx={{ gap: 2, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
           <Avatar alt={row.name} src={row.avatarUrl} />
           {row.name}
         </Box>
@@ -60,11 +66,11 @@ function RowItem({ row }) {
         <Label
           variant="soft"
           color={
-            (row.rank === 'Top 1' && 'primary') ||
-            (row.rank === 'Top 2' && 'secondary') ||
-            (row.rank === 'Top 3' && 'info') ||
-            (row.rank === 'Top 4' && 'warning') ||
-            'error'
+            (row.rank === "Top 1" && "primary") ||
+            (row.rank === "Top 2" && "secondary") ||
+            (row.rank === "Top 3" && "info") ||
+            (row.rank === "Top 4" && "warning") ||
+            "error"
           }
         >
           {row.rank}

@@ -1,12 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import LoadingButton from '@mui/lab/LoadingButton';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import LoadingButton from "@mui/lab/LoadingButton";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
 // ----------------------------------------------------------------------
 
@@ -16,22 +16,26 @@ export function ConfirmDialog({
   action,
   open,
   onClose,
-  maxWidth = 'xs',
-  cancelText = 'Cancel',
-  confirmText = 'Confirm',
-  confirmColor = 'primary',
+  maxWidth = "xs",
+  cancelText = "Cancel",
+  confirmText = "Confirm",
+  confirmColor = "primary",
   loading = false,
   onConfirm,
   ...other
 }) {
   return (
-    <Dialog fullWidth maxWidth={maxWidth} open={open} onClose={onClose} {...other}>
+    <Dialog
+      fullWidth
+      maxWidth={maxWidth}
+      open={open}
+      onClose={onClose}
+      {...other}
+    >
       <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle>
 
       {content && (
-        <DialogContent sx={{ typography: 'body2' }}>
-          {content}
-        </DialogContent>
+        <DialogContent sx={{ typography: "body2" }}>{content}</DialogContent>
       )}
 
       <DialogActions>

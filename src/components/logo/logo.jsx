@@ -1,19 +1,30 @@
-'use client';
+"use client";
 
-import { useId, forwardRef } from 'react';
+import { useId, forwardRef } from "react";
 
-import Box from '@mui/material/Box';
-import NoSsr from '@mui/material/NoSsr';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import NoSsr from "@mui/material/NoSsr";
+import { useTheme } from "@mui/material/styles";
 
-import { RouterLink } from 'src/routes/components';
+import { RouterLink } from "src/routes/components";
 
-import { logoClasses } from './classes';
+import { logoClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
 export const Logo = forwardRef(
-  ({ width = 40, height = 40, disableLink = false, className, href = '/', sx, ...other }, ref) => {
+  (
+    {
+      width = 40,
+      height = 40,
+      disableLink = false,
+      className,
+      href = "/",
+      sx,
+      ...other
+    },
+    ref,
+  ) => {
     const theme = useTheme();
 
     const gradientId = useId();
@@ -46,11 +57,13 @@ export const Logo = forwardRef(
           <Box
             width={width}
             height={height}
-            className={logoClasses.root.concat(className ? ` ${className}` : '')}
+            className={logoClasses.root.concat(
+              className ? ` ${className}` : "",
+            )}
             sx={{
               flexShrink: 0,
-              display: 'inline-flex',
-              verticalAlign: 'middle',
+              display: "inline-flex",
+              verticalAlign: "middle",
               ...sx,
             }}
           />
@@ -62,13 +75,13 @@ export const Logo = forwardRef(
           href={href}
           width={width}
           height={height}
-          className={logoClasses.root.concat(className ? ` ${className}` : '')}
+          className={logoClasses.root.concat(className ? ` ${className}` : "")}
           aria-label="logo"
           sx={{
             flexShrink: 0,
-            display: 'inline-flex',
-            verticalAlign: 'middle',
-            ...(disableLink && { pointerEvents: 'none' }),
+            display: "inline-flex",
+            verticalAlign: "middle",
+            ...(disableLink && { pointerEvents: "none" }),
             ...sx,
           }}
           {...other}
@@ -77,5 +90,5 @@ export const Logo = forwardRef(
         </Box>
       </NoSsr>
     );
-  }
+  },
 );

@@ -1,28 +1,36 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['standard', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = [
+  "standard",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
-const SIZES = ['small', 'medium', 'large'];
+const SIZES = ["small", "medium", "large"];
 
 // ----------------------------------------------------------------------
 
 export function ToggleButtons() {
-  const [alignment, setAlignment] = useState('left');
+  const [alignment, setAlignment] = useState("left");
 
-  const [formats, setFormats] = useState(() => ['bold', 'italic']);
+  const [formats, setFormats] = useState(() => ["bold", "italic"]);
 
-  const [view, setView] = useState('list');
+  const [view, setView] = useState("list");
 
   const [selected, setSelected] = useState(true);
 
@@ -86,10 +94,14 @@ export function ToggleButtons() {
       rowGap={5}
       columnGap={2.5}
       display="grid"
-      gridTemplateColumns={{ xs: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}
+      gridTemplateColumns={{ xs: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
     >
       <ComponentBlock title="Exclusive selection">
-        <ToggleButtonGroup value={alignment} exclusive onChange={handleAlignment}>
+        <ToggleButtonGroup
+          value={alignment}
+          exclusive
+          onChange={handleAlignment}
+        >
           {alignContent}
         </ToggleButtonGroup>
       </ComponentBlock>
@@ -151,7 +163,7 @@ export function ToggleButtons() {
           </ToggleButtonGroup>
         ))}
 
-        <Box sx={{ display: 'block', width: 1, height: 16 }} />
+        <Box sx={{ display: "block", width: 1, height: 16 }} />
 
         {COLORS.map((color) => (
           <ToggleButton
@@ -169,7 +181,12 @@ export function ToggleButtons() {
       </ComponentBlock>
 
       <ComponentBlock title="Vertical & Standalone buttons">
-        <ToggleButtonGroup orientation="vertical" value={view} exclusive onChange={handleChange}>
+        <ToggleButtonGroup
+          orientation="vertical"
+          value={view}
+          exclusive
+          onChange={handleChange}
+        >
           {viewContent}
         </ToggleButtonGroup>
 

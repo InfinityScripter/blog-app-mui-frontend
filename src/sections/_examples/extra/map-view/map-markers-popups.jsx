@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
-import { Image } from 'src/components/image';
-import { FlagIcon } from 'src/components/iconify';
-import { Map, MapPopup, MapMarker, MapControl } from 'src/components/map';
+import { Image } from "src/components/image";
+import { FlagIcon } from "src/components/iconify";
+import { Map, MapPopup, MapMarker, MapControl } from "src/components/map";
 
 // ----------------------------------------------------------------------
 

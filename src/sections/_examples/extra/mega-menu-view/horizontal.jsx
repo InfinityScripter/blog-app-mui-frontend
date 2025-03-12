@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 
-import { Label } from 'src/components/label';
-import { Iconify } from 'src/components/iconify';
-import { MegaMenuHorizontal } from 'src/components/mega-menu';
+import { Label } from "src/components/label";
+import { Iconify } from "src/components/iconify";
+import { MegaMenuHorizontal } from "src/components/mega-menu";
 
-import { navItems2 } from './data';
+import { navItems2 } from "./data";
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +17,10 @@ export function DemoMegaMenuHorizontal() {
   return (
     <AppBar
       position="sticky"
-      sx={{ bgcolor: 'background.paper', boxShadow: (theme) => theme.customShadows.z8 }}
+      sx={{
+        bgcolor: "background.paper",
+        boxShadow: (theme) => theme.customShadows.z8,
+      }}
     >
       <Toolbar component={Container}>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
@@ -31,14 +34,14 @@ export function DemoMegaMenuHorizontal() {
             navInfo: NAV_INFO,
           }}
           cssVars={{
-            '--nav-item-gap': '8px',
+            "--nav-item-gap": "8px",
           }}
           slotProps={{
             rootItem: {
               sx: {},
               icon: {},
               title: {
-                typography: 'subtitle1',
+                typography: "subtitle1",
                 fontFamily: (theme) => theme.typography.fontSecondaryFamily,
               },
               info: {},
@@ -60,14 +63,14 @@ export function DemoMegaMenuHorizontal() {
 // ----------------------------------------------------------------------
 
 const NAV_ICONS = {
-  'icon.item1': <Iconify icon="solar:home-2-outline" />,
-  'icon.item2': <Iconify icon="solar:atom-outline" />,
-  'icon.item3': <Iconify icon="solar:chart-square-outline" />,
-  'icon.item4': <Iconify icon="solar:confetti-minimalistic-outline" />,
-  'icon.item5': <Iconify icon="solar:gallery-circle-outline" />,
+  "icon.item1": <Iconify icon="solar:home-2-outline" />,
+  "icon.item2": <Iconify icon="solar:atom-outline" />,
+  "icon.item3": <Iconify icon="solar:chart-square-outline" />,
+  "icon.item4": <Iconify icon="solar:confetti-minimalistic-outline" />,
+  "icon.item5": <Iconify icon="solar:gallery-circle-outline" />,
 };
 
 const NAV_INFO = (val) => ({
-  'info.item3': <Label color="info">{val}</Label>,
-  'info.item4': <>{val}</>,
+  "info.item3": <Label color="info">{val}</Label>,
+  "info.item4": <>{val}</>,
 });

@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -15,8 +15,8 @@ export function AppWelcome({ title, description, action, img, sx, ...other }) {
       sx={{
         ...bgGradient({
           color: `to right, ${varAlpha(
-            theme.vars.palette.grey['900Channel'],
-            0.88
+            theme.vars.palette.grey["900Channel"],
+            0.88,
           )} 0%, ${theme.vars.palette.grey[900]} 75%`,
           imgUrl: `${CONFIG.site.basePath}/assets/background/background-5.webp`,
         }),
@@ -25,14 +25,14 @@ export function AppWelcome({ title, description, action, img, sx, ...other }) {
         pr: 3,
         gap: 5,
         borderRadius: 2,
-        display: 'flex',
+        display: "flex",
         height: { md: 1 },
-        position: 'relative',
+        position: "relative",
         pl: { xs: 3, md: 5 },
-        alignItems: 'center',
-        color: 'common.white',
-        textAlign: { xs: 'center', md: 'left' },
-        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: "center",
+        color: "common.white",
+        textAlign: { xs: "center", md: "left" },
+        flexDirection: { xs: "column", md: "row" },
         border: `solid 1px ${theme.vars.palette.grey[800]}`,
         ...sx,
       }}
@@ -40,17 +40,20 @@ export function AppWelcome({ title, description, action, img, sx, ...other }) {
     >
       <Box
         sx={{
-          display: 'flex',
-          flex: '1 1 auto',
-          flexDirection: 'column',
-          alignItems: { xs: 'center', md: 'flex-start' },
+          display: "flex",
+          flex: "1 1 auto",
+          flexDirection: "column",
+          alignItems: { xs: "center", md: "flex-start" },
         }}
       >
-        <Typography variant="h4" sx={{ whiteSpace: 'pre-line', mb: 1 }}>
+        <Typography variant="h4" sx={{ whiteSpace: "pre-line", mb: 1 }}>
           {title}
         </Typography>
 
-        <Typography variant="body2" sx={{ opacity: 0.64, maxWidth: 360, ...(action && { mb: 3 }) }}>
+        <Typography
+          variant="body2"
+          sx={{ opacity: 0.64, maxWidth: 360, ...(action && { mb: 3 }) }}
+        >
           {description}
         </Typography>
 

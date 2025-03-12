@@ -1,40 +1,52 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
-import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
 const labels = {
-  0.5: 'Useless',
-  1: 'Useless+',
-  1.5: 'Poor',
-  2: 'Poor+',
-  2.5: 'Ok',
-  3: 'Ok+',
-  3.5: 'Good',
-  4: 'Good+',
-  4.5: 'Excellent',
-  5: 'Excellent+',
+  0.5: "Useless",
+  1: "Useless+",
+  1.5: "Poor",
+  2: "Poor+",
+  2.5: "Ok",
+  3: "Ok+",
+  3.5: "Good",
+  4: "Good+",
+  4.5: "Excellent",
+  5: "Excellent+",
 };
 
 const customIcons = {
-  1: { icon: <Iconify icon="ic:round-sentiment-very-dissatisfied" />, label: 'Very Dissatisfied' },
-  2: { icon: <Iconify icon="ic:round-sentiment-dissatisfied" />, label: 'Dissatisfied' },
-  3: { icon: <Iconify icon="ic:round-sentiment-neutral" />, label: 'Neutral' },
-  4: { icon: <Iconify icon="ic:round-sentiment-satisfied" />, label: 'Satisfied' },
-  5: { icon: <Iconify icon="ic:round-sentiment-very-satisfied" />, label: 'Very Satisfied' },
+  1: {
+    icon: <Iconify icon="ic:round-sentiment-very-dissatisfied" />,
+    label: "Very Dissatisfied",
+  },
+  2: {
+    icon: <Iconify icon="ic:round-sentiment-dissatisfied" />,
+    label: "Dissatisfied",
+  },
+  3: { icon: <Iconify icon="ic:round-sentiment-neutral" />, label: "Neutral" },
+  4: {
+    icon: <Iconify icon="ic:round-sentiment-satisfied" />,
+    label: "Satisfied",
+  },
+  5: {
+    icon: <Iconify icon="ic:round-sentiment-very-satisfied" />,
+    label: "Very Satisfied",
+  },
 };
 
 // ----------------------------------------------------------------------
@@ -46,7 +58,7 @@ export function RatingView() {
 
   const DEMO = [
     {
-      name: 'Controlled',
+      name: "Controlled",
       component: (
         <ComponentBlock>
           <Rating
@@ -60,7 +72,7 @@ export function RatingView() {
       ),
     },
     {
-      name: 'Read only',
+      name: "Read only",
       component: (
         <ComponentBlock>
           <Rating name="read-only" value={value} readOnly />
@@ -68,7 +80,7 @@ export function RatingView() {
       ),
     },
     {
-      name: 'Disabled',
+      name: "Disabled",
       component: (
         <ComponentBlock>
           <Rating name="disabled" value={value} disabled />
@@ -76,7 +88,7 @@ export function RatingView() {
       ),
     },
     {
-      name: 'Pristine',
+      name: "Pristine",
       component: (
         <ComponentBlock>
           <Rating name="pristine" value={null} />
@@ -84,7 +96,7 @@ export function RatingView() {
       ),
     },
     {
-      name: 'Custom empty icon',
+      name: "Custom empty icon",
       component: (
         <ComponentBlock>
           <Rating name="customized-empty" defaultValue={2} precision={0.5} />
@@ -92,23 +104,25 @@ export function RatingView() {
       ),
     },
     {
-      name: 'Custom icon and color',
+      name: "Custom icon and color",
       component: (
         <ComponentBlock>
           <Rating
             name="customized-color"
             defaultValue={2}
-            getLabelText={(ratingValue) => `${ratingValue} Heart${ratingValue !== 1 ? 's' : ''}`}
+            getLabelText={(ratingValue) =>
+              `${ratingValue} Heart${ratingValue !== 1 ? "s" : ""}`
+            }
             precision={0.5}
             icon={<Iconify icon="solar:heart-bold" />}
             emptyIcon={<Iconify icon="solar:heart-bold" />}
-            sx={{ color: 'info.main', '&:hover': { color: 'info.dark' } }}
+            sx={{ color: "info.main", "&:hover": { color: "info.dark" } }}
           />
         </ComponentBlock>
       ),
     },
     {
-      name: '10 stars',
+      name: "10 stars",
       component: (
         <ComponentBlock>
           <Rating name="customized-10" defaultValue={2} max={10} />
@@ -116,7 +130,7 @@ export function RatingView() {
       ),
     },
     {
-      name: 'Custom icon set',
+      name: "Custom icon set",
       component: (
         <ComponentBlock>
           <Rating
@@ -129,7 +143,7 @@ export function RatingView() {
       ),
     },
     {
-      name: 'Hover feedback',
+      name: "Hover feedback",
       component: (
         <ComponentBlock>
           <Rating
@@ -143,21 +157,28 @@ export function RatingView() {
               setHover(newHover);
             }}
           />
-          {value !== null && <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>}
+          {value !== null && (
+            <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+          )}
         </ComponentBlock>
       ),
     },
     {
-      name: 'Half ratings',
+      name: "Half ratings",
       component: (
         <ComponentBlock>
           <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-          <Rating name="half-rating-read" defaultValue={2.5} precision={0.5} readOnly />
+          <Rating
+            name="half-rating-read"
+            defaultValue={2.5}
+            precision={0.5}
+            readOnly
+          />
         </ComponentBlock>
       ),
     },
     {
-      name: 'Sizes',
+      name: "Sizes",
       component: (
         <ComponentBlock>
           <Rating name="size-small" defaultValue={2} size="small" />
@@ -173,8 +194,11 @@ export function RatingView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Rating"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Rating' }]}
-          moreLink={['https://mui.com/components/rating']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Rating" },
+          ]}
+          moreLink={["https://mui.com/components/rating"]}
         />
       </ComponentHero>
 

@@ -1,12 +1,12 @@
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from "react-hook-form";
 
-import Box from '@mui/material/Box';
-import Switch from '@mui/material/Switch';
-import FormGroup from '@mui/material/FormGroup';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Switch from "@mui/material/Switch";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 // ----------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ export function RHFSwitch({ name, helperText, label, slotProps, ...other }) {
                 checked={field.value}
                 {...slotProps?.switch}
                 inputProps={{
-                  ...(!label && { 'aria-label': ariaLabel }),
+                  ...(!label && { "aria-label": ariaLabel }),
                   ...slotProps?.switch?.inputProps,
                 }}
               />
@@ -54,7 +54,14 @@ export function RHFSwitch({ name, helperText, label, slotProps, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RHFMultiSwitch({ name, label, options, helperText, slotProps, ...other }) {
+export function RHFMultiSwitch({
+  name,
+  label,
+  options,
+  helperText,
+  slotProps,
+  ...other
+}) {
   const { control } = useFormContext();
 
   const getSelected = (selectedItems, item) =>
@@ -75,7 +82,7 @@ export function RHFMultiSwitch({ name, label, options, helperText, slotProps, ..
             <FormLabel
               component="legend"
               {...slotProps?.formLabel}
-              sx={{ mb: 1, typography: 'body2', ...slotProps?.formLabel?.sx }}
+              sx={{ mb: 1, typography: "body2", ...slotProps?.formLabel?.sx }}
             >
               {label}
             </FormLabel>
@@ -88,11 +95,15 @@ export function RHFMultiSwitch({ name, label, options, helperText, slotProps, ..
                 control={
                   <Switch
                     checked={field.value.includes(option.value)}
-                    onChange={() => field.onChange(getSelected(field.value, option.value))}
+                    onChange={() =>
+                      field.onChange(getSelected(field.value, option.value))
+                    }
                     name={accessibility(option.label)}
                     {...slotProps?.switch}
                     inputProps={{
-                      ...(!option.label && { 'aria-label': ariaLabel(option.label) }),
+                      ...(!option.label && {
+                        "aria-label": ariaLabel(option.label),
+                      }),
                       ...slotProps?.switch?.inputProps,
                     }}
                   />
@@ -103,7 +114,11 @@ export function RHFMultiSwitch({ name, label, options, helperText, slotProps, ..
           </FormGroup>
 
           {(!!error || helperText) && (
-            <FormHelperText error={!!error} sx={{ mx: 0 }} {...slotProps?.formHelperText}>
+            <FormHelperText
+              error={!!error}
+              sx={{ mx: 0 }}
+              {...slotProps?.formHelperText}
+            >
               {error ? error?.message : helperText}
             </FormHelperText>
           )}

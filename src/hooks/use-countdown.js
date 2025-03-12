@@ -1,13 +1,13 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
 export function useCountdownDate(date) {
   const [countdown, setCountdown] = useState({
-    days: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
+    days: "00",
+    hours: "00",
+    minutes: "00",
+    seconds: "00",
   });
 
   useEffect(() => {
@@ -27,11 +27,17 @@ export function useCountdownDate(date) {
     const getDays = Math.floor(distanceToNow / (1000 * 60 * 60 * 24));
 
     const getHours =
-      `0${Math.floor((distanceToNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}`.slice(-2);
+      `0${Math.floor((distanceToNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))}`.slice(
+        -2,
+      );
 
-    const getMinutes = `0${Math.floor((distanceToNow % (1000 * 60 * 60)) / (1000 * 60))}`.slice(-2);
+    const getMinutes =
+      `0${Math.floor((distanceToNow % (1000 * 60 * 60)) / (1000 * 60))}`.slice(
+        -2,
+      );
 
-    const getSeconds = `0${Math.floor((distanceToNow % (1000 * 60)) / 1000)}`.slice(-2);
+    const getSeconds =
+      `0${Math.floor((distanceToNow % (1000 * 60)) / 1000)}`.slice(-2);
 
     setCountdown({
       days: getDays < 10 ? `0${getDays}` : `${getDays}`,

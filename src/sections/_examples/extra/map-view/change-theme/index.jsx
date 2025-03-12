@@ -1,13 +1,13 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import { Map, MapControl } from 'src/components/map';
+import { Map, MapControl } from "src/components/map";
 
-import { ControlPanel } from './control-panel';
+import { ControlPanel } from "./control-panel";
 
 // ----------------------------------------------------------------------
 
 export function MapChangeTheme({ themes, ...other }) {
-  const [selectTheme, setSelectTheme] = useState('outdoors');
+  const [selectTheme, setSelectTheme] = useState("outdoors");
 
   const handleChangeTheme = useCallback((value) => setSelectTheme(value), []);
 
@@ -27,7 +27,11 @@ export function MapChangeTheme({ themes, ...other }) {
         <MapControl />
       </Map>
 
-      <ControlPanel themes={themes} selectTheme={selectTheme} onChangeTheme={handleChangeTheme} />
+      <ControlPanel
+        themes={themes}
+        selectTheme={selectTheme}
+        onChangeTheme={handleChangeTheme}
+      />
     </>
   );
 }

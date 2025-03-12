@@ -1,22 +1,22 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import Popover from '@mui/material/Popover';
-import Divider from '@mui/material/Divider';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import TextField from '@mui/material/TextField';
-import ButtonBase from '@mui/material/ButtonBase';
-import ListItemText from '@mui/material/ListItemText';
-import InputAdornment from '@mui/material/InputAdornment';
+import Box from "@mui/material/Box";
+import Popover from "@mui/material/Popover";
+import Divider from "@mui/material/Divider";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import ButtonBase from "@mui/material/ButtonBase";
+import ListItemText from "@mui/material/ListItemText";
+import InputAdornment from "@mui/material/InputAdornment";
 
-import { countries } from 'src/assets/data/countries';
+import { countries } from "src/assets/data/countries";
 
-import { Iconify, FlagIcon } from 'src/components/iconify';
-import { SearchNotFound } from 'src/components/search-not-found';
+import { Iconify, FlagIcon } from "src/components/iconify";
+import { SearchNotFound } from "src/components/search-not-found";
 
-import { usePopover } from '../custom-popover';
-import { getCountry, applyFilter } from './utils';
+import { usePopover } from "../custom-popover";
+import { getCountry, applyFilter } from "./utils";
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ export function CountryListPopover({ countryCode, onClickCountry }) {
 
   const selectedCountry = getCountry(countryCode);
 
-  const [searchCountry, setSearchCountry] = useState('');
+  const [searchCountry, setSearchCountry] = useState("");
 
   const handleSearchCountry = useCallback((event) => {
     setSearchCountry(event.target.value);
@@ -40,11 +40,14 @@ export function CountryListPopover({ countryCode, onClickCountry }) {
 
   const renderButton = (
     <ButtonBase disableRipple onClick={popover.onOpen}>
-      <FlagIcon code={selectedCountry?.code} sx={{ width: 22, height: 22, borderRadius: '50%' }} />
+      <FlagIcon
+        code={selectedCountry?.code}
+        sx={{ width: 22, height: 22, borderRadius: "50%" }}
+      />
 
       <Iconify
         icon="eva:chevron-down-fill"
-        sx={{ ml: 0.5, flexShrink: 0, color: 'text.disabled' }}
+        sx={{ ml: 0.5, flexShrink: 0, color: "text.disabled" }}
       />
 
       <Divider orientation="vertical" flexItem sx={{ mr: 1 }} />
@@ -65,20 +68,20 @@ export function CountryListPopover({ countryCode, onClickCountry }) {
             autoFocus={countryCode === country.code}
             onClick={() => {
               popover.onClose();
-              setSearchCountry('');
+              setSearchCountry("");
               onClickCountry(country.code);
             }}
           >
             <FlagIcon
               code={country.code}
-              sx={{ mr: 1, width: 22, height: 22, borderRadius: '50%' }}
+              sx={{ mr: 1, width: 22, height: 22, borderRadius: "50%" }}
             />
 
             <ListItemText
               primary={country.label}
               secondary={`${country.code} (+${country.phone})`}
-              primaryTypographyProps={{ noWrap: true, typography: 'body2' }}
-              secondaryTypographyProps={{ typography: 'caption' }}
+              primaryTypographyProps={{ noWrap: true, typography: "body2" }}
+              secondaryTypographyProps={{ typography: "caption" }}
             />
           </MenuItem>
         );
@@ -96,18 +99,18 @@ export function CountryListPopover({ countryCode, onClickCountry }) {
         anchorEl={popover.anchorEl}
         onClose={() => {
           popover.onClose();
-          setSearchCountry('');
+          setSearchCountry("");
         }}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        transformOrigin={{ vertical: "top", horizontal: "left" }}
         slotProps={{
           paper: {
             sx: {
               width: 1,
               height: 320,
               maxWidth: 320,
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
             },
           },
         }}
@@ -122,15 +125,22 @@ export function CountryListPopover({ countryCode, onClickCountry }) {
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
-                  <Iconify icon="eva:search-fill" sx={{ color: 'text.disabled' }} />
+                  <Iconify
+                    icon="eva:search-fill"
+                    sx={{ color: "text.disabled" }}
+                  />
                 </InputAdornment>
               ),
             }}
           />
         </Box>
 
-        <Box sx={{ flex: '1 1 auto', overflowX: 'hidden' }}>
-          {notFound ? <SearchNotFound query={searchCountry} sx={{ px: 2, pt: 5 }} /> : renderList}
+        <Box sx={{ flex: "1 1 auto", overflowX: "hidden" }}>
+          {notFound ? (
+            <SearchNotFound query={searchCountry} sx={{ px: 2, pt: 5 }} />
+          ) : (
+            renderList
+          )}
         </Box>
       </Popover>
     </>

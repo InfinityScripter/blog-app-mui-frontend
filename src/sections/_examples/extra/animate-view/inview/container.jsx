@@ -1,17 +1,17 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
-import { _mock } from 'src/_mock';
+import { _mock } from "src/_mock";
 
-import { AnimateText, MotionContainer } from 'src/components/animate';
+import { AnimateText, MotionContainer } from "src/components/animate";
 
-import { getVariant } from '../get-variant';
+import { getVariant } from "../get-variant";
 
 // ----------------------------------------------------------------------
 
-const TEXT = 'Minimals';
+const TEXT = "Minimals";
 
 const IMG = [
   _mock.image.cover(2),
@@ -22,7 +22,13 @@ const IMG = [
 
 // ----------------------------------------------------------------------
 
-export function ContainerView({ isText, isMulti, selectVariant, sx, ...other }) {
+export function ContainerView({
+  isText,
+  isMulti,
+  selectVariant,
+  sx,
+  ...other
+}) {
   const items = isMulti ? IMG : IMG.slice(0, 1);
 
   const renderText = (
@@ -31,7 +37,7 @@ export function ContainerView({ isText, isMulti, selectVariant, sx, ...other }) 
       variant="h1"
       text={TEXT}
       variants={getVariant(selectVariant, 400)}
-      sx={{ overflow: 'hidden' }}
+      sx={{ overflow: "hidden" }}
     />
   );
 
@@ -40,9 +46,9 @@ export function ContainerView({ isText, isMulti, selectVariant, sx, ...other }) 
       sx={{
         gap: 3,
         width: 1,
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
       }}
     >
       {items.map((item, index) => (
@@ -54,7 +60,7 @@ export function ContainerView({ isText, isMulti, selectVariant, sx, ...other }) 
           sx={{
             width: 480,
             borderRadius: 1,
-            objectFit: 'cover',
+            objectFit: "cover",
             height: isMulti ? 80 : 320,
             boxShadow: (theme) => theme.customShadows.z8,
           }}
@@ -67,11 +73,11 @@ export function ContainerView({ isText, isMulti, selectVariant, sx, ...other }) 
     <Stack
       sx={{
         borderRadius: 2,
-        flex: '1 1 auto',
-        overflow: 'hidden',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bgcolor: 'background.neutral',
+        flex: "1 1 auto",
+        overflow: "hidden",
+        alignItems: "center",
+        justifyContent: "center",
+        bgcolor: "background.neutral",
         ...sx,
       }}
       {...other}

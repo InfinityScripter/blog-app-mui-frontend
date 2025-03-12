@@ -1,20 +1,30 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import { useTheme } from "@mui/material/styles";
 
-import { fNumber, fPercent } from 'src/utils/format-number';
+import { fNumber, fPercent } from "src/utils/format-number";
 
-import { varAlpha, stylesMode } from 'src/theme/styles';
+import { varAlpha, stylesMode } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { Chart, useChart } from 'src/components/chart';
+import { Iconify } from "src/components/iconify";
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function EcommerceWidgetSummary({ title, percent, total, chart, sx, ...other }) {
+export function EcommerceWidgetSummary({
+  title,
+  percent,
+  total,
+  chart,
+  sx,
+  ...other
+}) {
   const theme = useTheme();
 
-  const chartColors = chart.colors ?? [theme.palette.primary.light, theme.palette.primary.main];
+  const chartColors = chart.colors ?? [
+    theme.palette.primary.light,
+    theme.palette.primary.main,
+  ];
 
   const chartOptions = useChart({
     chart: { sparkline: { enabled: true } },
@@ -29,7 +39,7 @@ export function EcommerceWidgetSummary({ title, percent, total, chart, sx, ...ot
       },
     },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
         colorStops: [
           { offset: 0, color: chartColors[0], opacity: 1 },
@@ -38,44 +48,50 @@ export function EcommerceWidgetSummary({ title, percent, total, chart, sx, ...ot
       },
     },
     tooltip: {
-      y: { formatter: (value) => fNumber(value), title: { formatter: () => '' } },
+      y: {
+        formatter: (value) => fNumber(value),
+        title: { formatter: () => "" },
+      },
     },
     ...chart.options,
   });
 
   const renderTrending = (
-    <Box sx={{ gap: 0.5, display: 'flex', alignItems: 'center' }}>
+    <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
       <Box
         component="span"
         sx={{
           width: 24,
           height: 24,
-          display: 'flex',
-          borderRadius: '50%',
-          position: 'relative',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "flex",
+          borderRadius: "50%",
+          position: "relative",
+          alignItems: "center",
+          justifyContent: "center",
           bgcolor: varAlpha(theme.vars.palette.success.mainChannel, 0.16),
-          color: 'success.dark',
-          [stylesMode.dark]: { color: 'success.light' },
+          color: "success.dark",
+          [stylesMode.dark]: { color: "success.light" },
           ...(percent < 0 && {
             bgcolor: varAlpha(theme.vars.palette.error.mainChannel, 0.16),
-            color: 'error.dark',
-            [stylesMode.dark]: { color: 'error.light' },
+            color: "error.dark",
+            [stylesMode.dark]: { color: "error.light" },
           }),
         }}
       >
         <Iconify
           width={16}
-          icon={percent < 0 ? 'eva:trending-down-fill' : 'eva:trending-up-fill'}
+          icon={percent < 0 ? "eva:trending-down-fill" : "eva:trending-up-fill"}
         />
       </Box>
 
-      <Box component="span" sx={{ typography: 'subtitle2' }}>
-        {percent > 0 && '+'}
+      <Box component="span" sx={{ typography: "subtitle2" }}>
+        {percent > 0 && "+"}
         {fPercent(percent)}
       </Box>
-      <Box component="span" sx={{ color: 'text.secondary', typography: 'body2' }}>
+      <Box
+        component="span"
+        sx={{ color: "text.secondary", typography: "body2" }}
+      >
         last week
       </Box>
     </Box>
@@ -85,15 +101,15 @@ export function EcommerceWidgetSummary({ title, percent, total, chart, sx, ...ot
     <Card
       sx={{
         p: 3,
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         ...sx,
       }}
       {...other}
     >
       <Box sx={{ flexGrow: 1 }}>
-        <Box sx={{ typography: 'subtitle2' }}>{title}</Box>
-        <Box sx={{ my: 1.5, typography: 'h3' }}>{fNumber(total)}</Box>
+        <Box sx={{ typography: "subtitle2" }}>{title}</Box>
+        <Box sx={{ my: 1.5, typography: "h3" }}>{fNumber(total)}</Box>
         {renderTrending}
       </Box>
 

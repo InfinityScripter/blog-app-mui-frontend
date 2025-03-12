@@ -1,8 +1,8 @@
-import { useMemo } from 'react';
-import useSWR, { mutate } from 'swr';
+import { useMemo } from "react";
+import useSWR, { mutate } from "swr";
 
-import { keyBy } from 'src/utils/helper';
-import axios, { fetcher, endpoints } from 'src/utils/axios';
+import { keyBy } from "src/utils/helper";
+import axios, { fetcher, endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
 
@@ -19,9 +19,13 @@ const swrOptions = {
 // ----------------------------------------------------------------------
 
 export function useGetContacts() {
-  const url = [CHART_ENDPOINT, { params: { endpoint: 'contacts' } }];
+  const url = [CHART_ENDPOINT, { params: { endpoint: "contacts" } }];
 
-  const { data, isLoading, error, isValidating } = useSWR(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR(
+    url,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -31,7 +35,7 @@ export function useGetContacts() {
       contactsValidating: isValidating,
       contactsEmpty: !isLoading && !data?.contacts.length,
     }),
-    [data?.contacts, error, isLoading, isValidating]
+    [data?.contacts, error, isLoading, isValidating],
   );
 
   return memoizedValue;
@@ -40,12 +44,18 @@ export function useGetContacts() {
 // ----------------------------------------------------------------------
 
 export function useGetConversations() {
-  const url = [CHART_ENDPOINT, { params: { endpoint: 'conversations' } }];
+  const url = [CHART_ENDPOINT, { params: { endpoint: "conversations" } }];
 
-  const { data, isLoading, error, isValidating } = useSWR(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR(
+    url,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(() => {
-    const byId = data?.conversations.length ? keyBy(data.conversations, 'id') : {};
+    const byId = data?.conversations.length
+      ? keyBy(data.conversations, "id")
+      : {};
     const allIds = Object.keys(byId);
 
     return {
@@ -64,10 +74,14 @@ export function useGetConversations() {
 
 export function useGetConversation(conversationId) {
   const url = conversationId
-    ? [CHART_ENDPOINT, { params: { conversationId, endpoint: 'conversation' } }]
-    : '';
+    ? [CHART_ENDPOINT, { params: { conversationId, endpoint: "conversation" } }]
+    : "";
 
-  const { data, isLoading, error, isValidating } = useSWR(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR(
+    url,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -76,7 +90,7 @@ export function useGetConversation(conversationId) {
       conversationError: error,
       conversationValidating: isValidating,
     }),
-    [data?.conversation, error, isLoading, isValidating]
+    [data?.conversation, error, isLoading, isValidating],
   );
 
   return memoizedValue;
@@ -85,11 +99,14 @@ export function useGetConversation(conversationId) {
 // ----------------------------------------------------------------------
 
 export async function sendMessage(conversationId, messageData) {
-  const conversationsUrl = [CHART_ENDPOINT, { params: { endpoint: 'conversations' } }];
+  const conversationsUrl = [
+    CHART_ENDPOINT,
+    { params: { endpoint: "conversations" } },
+  ];
 
   const conversationUrl = [
     CHART_ENDPOINT,
-    { params: { conversationId, endpoint: 'conversation' } },
+    { params: { conversationId, endpoint: "conversation" } },
   ];
 
   /**
@@ -115,7 +132,7 @@ export async function sendMessage(conversationId, messageData) {
 
       return { ...currentData, conversation };
     },
-    false
+    false,
   );
 
   mutate(
@@ -125,20 +142,23 @@ export async function sendMessage(conversationId, messageData) {
 
       const conversations = currentConversations.map((conversation) =>
         conversation.id === conversationId
-          ? { ...conversation, messages: [...conversation.messages, messageData] }
-          : conversation
+          ? {
+              ...conversation,
+              messages: [...conversation.messages, messageData],
+            }
+          : conversation,
       );
 
       return { ...currentData, conversations };
     },
-    false
+    false,
   );
 }
 
 // ----------------------------------------------------------------------
 
 export async function createConversation(conversationData) {
-  const url = [CHART_ENDPOINT, { params: { endpoint: 'conversations' } }];
+  const url = [CHART_ENDPOINT, { params: { endpoint: "conversations" } }];
 
   /**
    * Work on server
@@ -158,7 +178,7 @@ export async function createConversation(conversationData) {
 
       return { ...currentData, conversations };
     },
-    false
+    false,
   );
 
   return res.data;
@@ -171,23 +191,27 @@ export async function clickConversation(conversationId) {
    * Work on server
    */
   if (enableServer) {
-    await axios.get(CHART_ENDPOINT, { params: { conversationId, endpoint: 'mark-as-seen' } });
+    await axios.get(CHART_ENDPOINT, {
+      params: { conversationId, endpoint: "mark-as-seen" },
+    });
   }
 
   /**
    * Work in local
    */
   mutate(
-    [CHART_ENDPOINT, { params: { endpoint: 'conversations' } }],
+    [CHART_ENDPOINT, { params: { endpoint: "conversations" } }],
     (currentData) => {
       const currentConversations = currentData.conversations;
 
       const conversations = currentConversations.map((conversation) =>
-        conversation.id === conversationId ? { ...conversation, unreadCount: 0 } : conversation
+        conversation.id === conversationId
+          ? { ...conversation, unreadCount: 0 }
+          : conversation,
       );
 
       return { ...currentData, conversations };
     },
-    false
+    false,
   );
 }

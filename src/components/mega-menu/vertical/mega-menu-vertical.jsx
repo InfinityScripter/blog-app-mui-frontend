@@ -1,10 +1,10 @@
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { NavList } from './nav-list';
-import { NavUl } from '../../nav-section';
-import { megaMenuClasses } from '../classes';
-import { megaMenuCssVars } from '../css-vars';
+import { NavList } from "./nav-list";
+import { NavUl } from "../../nav-section";
+import { megaMenuClasses } from "../classes";
+import { megaMenuCssVars } from "../css-vars";
 
 // ----------------------------------------------------------------------
 
@@ -28,10 +28,10 @@ export function MegaMenuVertical({
     <Stack
       component="nav"
       className={megaMenuClasses.vertical.root}
-      sx={{ ...cssVars, flex: '1 1 auto', ...sx }}
+      sx={{ ...cssVars, flex: "1 1 auto", ...sx }}
       {...other}
     >
-      <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
+      <NavUl sx={{ gap: "var(--nav-item-gap)" }}>
         {data.map((list) => (
           <NavList
             key={list.title}

@@ -1,15 +1,15 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import { useTheme } from "@mui/material/styles";
 
-import { fNumber, fPercent, fShortenNumber } from 'src/utils/format-number';
+import { fNumber, fPercent, fShortenNumber } from "src/utils/format-number";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha, bgGradient } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
-import { Chart, useChart } from 'src/components/chart';
+import { Iconify } from "src/components/iconify";
+import { SvgColor } from "src/components/svg-color";
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ export function AnalyticsWidgetSummary({
   total,
   chart,
   percent,
-  color = 'primary',
+  color = "primary",
   sx,
   ...other
 }) {
@@ -40,7 +40,10 @@ export function AnalyticsWidgetSummary({
       },
     },
     tooltip: {
-      y: { formatter: (value) => fNumber(value), title: { formatter: () => '' } },
+      y: {
+        formatter: (value) => fNumber(value),
+        title: { formatter: () => "" },
+      },
     },
     ...chart.options,
   });
@@ -51,14 +54,17 @@ export function AnalyticsWidgetSummary({
         top: 16,
         gap: 0.5,
         right: 16,
-        display: 'flex',
-        position: 'absolute',
-        alignItems: 'center',
+        display: "flex",
+        position: "absolute",
+        alignItems: "center",
       }}
     >
-      <Iconify width={20} icon={percent < 0 ? 'eva:trending-down-fill' : 'eva:trending-up-fill'} />
-      <Box component="span" sx={{ typography: 'subtitle2' }}>
-        {percent > 0 && '+'}
+      <Iconify
+        width={20}
+        icon={percent < 0 ? "eva:trending-down-fill" : "eva:trending-up-fill"}
+      />
+      <Box component="span" sx={{ typography: "subtitle2" }}>
+        {percent > 0 && "+"}
         {fPercent(percent)}
       </Box>
     </Box>
@@ -71,10 +77,10 @@ export function AnalyticsWidgetSummary({
           color: `135deg, ${varAlpha(theme.vars.palette[color].lighterChannel, 0.48)}, ${varAlpha(theme.vars.palette[color].lightChannel, 0.48)}`,
         }),
         p: 3,
-        boxShadow: 'none',
-        position: 'relative',
+        boxShadow: "none",
+        position: "relative",
         color: `${color}.darker`,
-        backgroundColor: 'common.white',
+        backgroundColor: "common.white",
         ...sx,
       }}
       {...other}
@@ -85,15 +91,15 @@ export function AnalyticsWidgetSummary({
 
       <Box
         sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'flex-end',
-          justifyContent: 'flex-end',
+          display: "flex",
+          flexWrap: "wrap",
+          alignItems: "flex-end",
+          justifyContent: "flex-end",
         }}
       >
         <Box sx={{ flexGrow: 1, minWidth: 112 }}>
-          <Box sx={{ mb: 1, typography: 'subtitle2' }}>{title}</Box>
-          <Box sx={{ typography: 'h4' }}>{fShortenNumber(total)}</Box>
+          <Box sx={{ mb: 1, typography: "subtitle2" }}>{title}</Box>
+          <Box sx={{ typography: "h4" }}>{fShortenNumber(total)}</Box>
         </Box>
 
         <Chart
@@ -114,7 +120,7 @@ export function AnalyticsWidgetSummary({
           zIndex: -1,
           height: 240,
           opacity: 0.24,
-          position: 'absolute',
+          position: "absolute",
           color: `${color}.main`,
         }}
       />

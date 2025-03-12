@@ -1,7 +1,7 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ function PlanFreeIcon({ sx, ...other }) {
       height="100%"
       viewBox="0 0 80 80"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 48, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 48, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       <g transform="translate(9.167 20)">

@@ -1,27 +1,27 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Stack from '@mui/material/Stack';
-import Fab, { fabClasses } from '@mui/material/Fab';
+import Stack from "@mui/material/Stack";
+import Fab, { fabClasses } from "@mui/material/Fab";
 
-import { Iconify } from 'src/components/iconify';
-import { varHover } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { varHover } from "src/components/animate";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 const COLORS = [
-  'default',
-  'inherit',
-  'primary',
-  'secondary',
-  'info',
-  'success',
-  'warning',
-  'error',
+  "default",
+  "inherit",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
 ];
 
-const SIZES = ['small', 'medium', 'large'];
+const SIZES = ["small", "medium", "large"];
 
 // ----------------------------------------------------------------------
 
@@ -31,8 +31,8 @@ export function FloatingActionButton() {
       rowGap={5}
       columnGap={2.5}
       display="grid"
-      gridTemplateColumns={{ xs: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}
-      sx={{ [`& .${fabClasses.root}`]: { textTransform: 'capitalize' } }}
+      gridTemplateColumns={{ xs: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
+      sx={{ [`& .${fabClasses.root}`]: { textTransform: "capitalize" } }}
     >
       <ComponentBlock title="Default">
         {COLORS.map((color) => (
@@ -154,8 +154,8 @@ export function FloatingActionButton() {
             whileTap="tap"
             whileHover="hover"
             variants={
-              (size === 'small' && varHover(1.1, 0.95)) ||
-              (size === 'large' && varHover(1.08, 0.99)) ||
+              (size === "small" && varHover(1.1, 0.95)) ||
+              (size === "large" && varHover(1.08, 0.99)) ||
               varHover()
             }
             variant="extended"

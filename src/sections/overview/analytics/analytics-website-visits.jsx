@@ -1,8 +1,8 @@
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { Chart, useChart } from 'src/components/chart';
+import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ export function AnalyticsWebsiteVisits({ title, subheader, chart, ...other }) {
     colors: chartColors,
     stroke: {
       width: 2,
-      colors: ['transparent'],
+      colors: ["transparent"],
     },
     xaxis: {
       categories: chart.categories,

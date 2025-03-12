@@ -1,29 +1,37 @@
-import { useState } from 'react';
-import { m } from 'framer-motion';
+import { useState } from "react";
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Accordion, { accordionClasses } from '@mui/material/Accordion';
-import AccordionDetails, { accordionDetailsClasses } from '@mui/material/AccordionDetails';
-import AccordionSummary, { accordionSummaryClasses } from '@mui/material/AccordionSummary';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Accordion, { accordionClasses } from "@mui/material/Accordion";
+import AccordionDetails, {
+  accordionDetailsClasses,
+} from "@mui/material/AccordionDetails";
+import AccordionSummary, {
+  accordionSummaryClasses,
+} from "@mui/material/AccordionSummary";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
-import { varFade, MotionViewport } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { varFade, MotionViewport } from "src/components/animate";
 
-import { SectionTitle } from './components/section-title';
-import { FloatLine, FloatPlusIcon, FloatTriangleDownIcon } from './components/svg-elements';
+import { SectionTitle } from "./components/section-title";
+import {
+  FloatLine,
+  FloatPlusIcon,
+  FloatTriangleDownIcon,
+} from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
 const FAQs = [
   {
-    question: 'How can I get the update?',
+    question: "How can I get the update?",
     answer: (
       <Typography>
         You will get 12 months of free
@@ -40,17 +48,18 @@ const FAQs = [
     ),
   },
   {
-    question: 'Which license is right for you?',
+    question: "Which license is right for you?",
     answer: (
-      <Box component="ul" sx={{ pl: 3, listStyleType: 'disc' }}>
+      <Box component="ul" sx={{ pl: 3, listStyleType: "disc" }}>
         <li> All licenses do not apply to open source.</li>
         <li> One licenses / one end product (3 licenses / 3 products...).</li>
         <li>
-          <strong>Standard / Plus</strong> license used in free products (Internal management...).
+          <strong>Standard / Plus</strong> license used in free products
+          (Internal management...).
         </li>
         <li>
-          <strong>Extended</strong> license used in charge products, collect fees from users
-          (SAAS...).
+          <strong>Extended</strong> license used in charge products, collect
+          fees from users (SAAS...).
         </li>
         <li>
           Learn more about the
@@ -67,16 +76,16 @@ const FAQs = [
     ),
   },
   {
-    question: 'How long is my license valid for?',
+    question: "How long is my license valid for?",
     answer: (
-      <Box component="ul" sx={{ pl: 3, listStyleType: 'disc' }}>
+      <Box component="ul" sx={{ pl: 3, listStyleType: "disc" }}>
         <li> The license is lifetime.</li>
         <li> You get 12 months of free updates.</li>
       </Box>
     ),
   },
   {
-    question: 'Which platforms will the template support?',
+    question: "Which platforms will the template support?",
     answer: (
       <Typography>
         {`The components in MUI are designed to work in the latest, stable releases of all major browsers, including Chrome, Firefox, Safari, and Edge. We don't support Internet Explorer 11. `}
@@ -93,17 +102,18 @@ const FAQs = [
     ),
   },
   {
-    question: 'For what kind of projects is the Standard license intended?',
+    question: "For what kind of projects is the Standard license intended?",
     answer: (
       <Typography>
-        The Standard license is designed for internal applications in which staff will access the
-        application. An example could be the back-office dashboard of a public-facing e-commerce
-        website in which staff would sign in and manage inventory, customers, etc.
+        The Standard license is designed for internal applications in which
+        staff will access the application. An example could be the back-office
+        dashboard of a public-facing e-commerce website in which staff would
+        sign in and manage inventory, customers, etc.
       </Typography>
     ),
   },
   {
-    question: 'Do you have a free demo to review the code before purchasing?',
+    question: "Do you have a free demo to review the code before purchasing?",
     answer: (
       <Typography>
         Yes, you can check out our
@@ -115,8 +125,9 @@ const FAQs = [
         >
           open source
         </Link>
-        dashboard template which should give you an overview of the code quality and folder
-        structure. Keep in mind that some aspects may differ from this Paid version.
+        dashboard template which should give you an overview of the code quality
+        and folder structure. Keep in mind that some aspects may differ from
+        this Paid version.
       </Typography>
     ),
   },
@@ -136,7 +147,7 @@ export function HomeFAQs({ sx, ...other }) {
       caption="FAQs"
       title="We’ve got the"
       txtGradient="answers"
-      sx={{ textAlign: 'center' }}
+      sx={{ textAlign: "center" }}
     />
   );
 
@@ -145,7 +156,7 @@ export function HomeFAQs({ sx, ...other }) {
       spacing={1}
       sx={{
         mt: 8,
-        mx: 'auto',
+        mx: "auto",
         maxWidth: 720,
         mb: { xs: 5, md: 8 },
       }}
@@ -160,24 +171,26 @@ export function HomeFAQs({ sx, ...other }) {
           sx={{
             borderRadius: 2,
             transition: (theme) =>
-              theme.transitions.create(['background-color'], {
+              theme.transitions.create(["background-color"], {
                 duration: theme.transitions.duration.short,
               }),
-            '&::before': { display: 'none' },
-            '&:hover': {
-              bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
+            "&::before": { display: "none" },
+            "&:hover": {
+              bgcolor: (theme) =>
+                varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
             },
-            '&:first-of-type, &:last-of-type': { borderRadius: 2 },
+            "&:first-of-type, &:last-of-type": { borderRadius: 2 },
             [`&.${accordionClasses.expanded}`]: {
               m: 0,
               borderRadius: 2,
-              boxShadow: 'none',
-              bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+              boxShadow: "none",
+              bgcolor: (theme) =>
+                varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
             },
             [`& .${accordionSummaryClasses.root}`]: {
               py: 3,
               px: 2.5,
-              minHeight: 'auto',
+              minHeight: "auto",
               [`& .${accordionSummaryClasses.content}`]: {
                 m: 0,
                 [`&.${accordionSummaryClasses.expanded}`]: { m: 0 },
@@ -190,7 +203,11 @@ export function HomeFAQs({ sx, ...other }) {
             expandIcon={
               <Iconify
                 width={20}
-                icon={expanded === item.question ? 'mingcute:minimize-line' : 'mingcute:add-line'}
+                icon={
+                  expanded === item.question
+                    ? "mingcute:minimize-line"
+                    : "mingcute:add-line"
+                }
               />
             }
             aria-controls={`panel${index}bh-content`}
@@ -210,9 +227,9 @@ export function HomeFAQs({ sx, ...other }) {
       sx={{
         px: 3,
         py: 8,
-        textAlign: 'center',
+        textAlign: "center",
         background: (theme) =>
-          `linear-gradient(270deg, ${varAlpha(theme.vars.palette.grey['500Channel'], 0.08)}, ${varAlpha(theme.vars.palette.grey['500Channel'], 0)})`,
+          `linear-gradient(270deg, ${varAlpha(theme.vars.palette.grey["500Channel"], 0.08)}, ${varAlpha(theme.vars.palette.grey["500Channel"], 0)})`,
       }}
     >
       <m.div variants={varFade().in}>
@@ -220,7 +237,7 @@ export function HomeFAQs({ sx, ...other }) {
       </m.div>
 
       <m.div variants={varFade().in}>
-        <Typography sx={{ mt: 2, mb: 3, color: 'text.secondary' }}>
+        <Typography sx={{ mt: 2, mb: 3, color: "text.secondary" }}>
           Please describe your case to receive the most accurate advice
         </Typography>
       </m.div>
@@ -240,7 +257,7 @@ export function HomeFAQs({ sx, ...other }) {
 
   return (
     <Stack component="section" sx={{ ...sx }} {...other}>
-      <MotionViewport sx={{ py: 10, position: 'relative' }}>
+      <MotionViewport sx={{ py: 10, position: "relative" }}>
         <TopLines />
 
         <Container>
@@ -248,7 +265,7 @@ export function HomeFAQs({ sx, ...other }) {
           {renderContent}
         </Container>
 
-        <Stack sx={{ position: 'relative' }}>
+        <Stack sx={{ position: "relative" }}>
           <BottomLines />
           {renderContact}
         </Stack>
@@ -268,14 +285,14 @@ function TopLines() {
         sx={{
           top: 64,
           left: 80,
-          position: 'absolute',
-          transform: 'translateX(-15px)',
+          position: "absolute",
+          transform: "translateX(-15px)",
         }}
       >
-        <FloatTriangleDownIcon sx={{ position: 'static', opacity: 0.12 }} />
+        <FloatTriangleDownIcon sx={{ position: "static", opacity: 0.12 }} />
         <FloatTriangleDownIcon
           sx={{
-            position: 'static',
+            position: "static",
             opacity: 0.24,
             width: 30,
             height: 15,

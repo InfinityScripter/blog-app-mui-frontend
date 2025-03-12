@@ -1,35 +1,35 @@
-import { forwardRef } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { forwardRef } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { imageClasses } from './classes';
+import { imageClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
 const ImageWrapper = styled(Box)({
-  overflow: 'hidden',
-  position: 'relative',
-  verticalAlign: 'bottom',
-  display: 'inline-block',
+  overflow: "hidden",
+  position: "relative",
+  verticalAlign: "bottom",
+  display: "inline-block",
   [`& .${imageClasses.wrapper}`]: {
-    width: '100%',
-    height: '100%',
-    verticalAlign: 'bottom',
-    backgroundSize: 'cover !important',
+    width: "100%",
+    height: "100%",
+    verticalAlign: "bottom",
+    backgroundSize: "cover !important",
   },
 });
 
-const Overlay = styled('span')({
+const Overlay = styled("span")({
   top: 0,
   left: 0,
   zIndex: 1,
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
+  width: "100%",
+  height: "100%",
+  position: "absolute",
 });
 
 // ----------------------------------------------------------------------
@@ -49,7 +49,7 @@ export const Image = forwardRef(
       placeholder,
       wrapperProps,
       scrollPosition,
-      effect = 'blur',
+      effect = "blur",
       visibleByDefault,
       wrapperClassName,
       useIntersectionObserver,
@@ -58,7 +58,7 @@ export const Image = forwardRef(
       sx,
       ...other
     },
-    ref
+    ref,
   ) => {
     const content = (
       <Box
@@ -84,8 +84,8 @@ export const Image = forwardRef(
         sx={{
           width: 1,
           height: 1,
-          objectFit: 'cover',
-          verticalAlign: 'bottom',
+          objectFit: "cover",
+          verticalAlign: "bottom",
           aspectRatio: ratio,
         }}
       />
@@ -99,10 +99,12 @@ export const Image = forwardRef(
         sx={{ ...(!!ratio && { width: 1 }), ...sx }}
         {...other}
       >
-        {slotProps?.overlay && <Overlay className={imageClasses.overlay} sx={slotProps?.overlay} />}
+        {slotProps?.overlay && (
+          <Overlay className={imageClasses.overlay} sx={slotProps?.overlay} />
+        )}
 
         {content}
       </ImageWrapper>
     );
-  }
+  },
 );

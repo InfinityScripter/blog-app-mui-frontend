@@ -1,28 +1,36 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Pagination from '@mui/material/Pagination';
-import TablePagination from '@mui/material/TablePagination';
+import Pagination from "@mui/material/Pagination";
+import TablePagination from "@mui/material/TablePagination";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { PaginationItems } from './pagination-items';
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
-
-// ----------------------------------------------------------------------
-
-const COLORS = ['standard', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
-
-const SIZES = ['small', 'medium', 'large'];
+import { PaginationItems } from "./pagination-items";
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const blockProps = { gap: 3, flexDirection: 'column' };
+const COLORS = [
+  "standard",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
+
+const SIZES = ["small", "medium", "large"];
+
+// ----------------------------------------------------------------------
+
+const blockProps = { gap: 3, flexDirection: "column" };
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +50,7 @@ export function PaginationView() {
 
   const DEMO = [
     {
-      name: 'Circular',
+      name: "Circular",
       component: (
         <ComponentBlock sx={blockProps}>
           <Pagination shape="circular" count={10} variant="text" />
@@ -55,7 +63,7 @@ export function PaginationView() {
       ),
     },
     {
-      name: 'Rounded',
+      name: "Rounded",
       component: (
         <ComponentBlock sx={blockProps}>
           <Pagination shape="rounded" count={10} variant="text" />
@@ -68,7 +76,7 @@ export function PaginationView() {
       ),
     },
     {
-      name: 'Colors',
+      name: "Colors",
       component: (
         <ComponentBlock sx={blockProps}>
           {COLORS.map((color) => (
@@ -76,7 +84,12 @@ export function PaginationView() {
           ))}
 
           {COLORS.map((color) => (
-            <Pagination key={color} color={color} count={10} variant="outlined" />
+            <Pagination
+              key={color}
+              color={color}
+              count={10}
+              variant="outlined"
+            />
           ))}
 
           {COLORS.map((color) => (
@@ -86,7 +99,7 @@ export function PaginationView() {
       ),
     },
     {
-      name: 'Sizes',
+      name: "Sizes",
       component: (
         <ComponentBlock sx={blockProps}>
           {SIZES.map((size) => (
@@ -96,7 +109,7 @@ export function PaginationView() {
       ),
     },
     {
-      name: 'Buttons',
+      name: "Buttons",
       component: (
         <ComponentBlock sx={blockProps}>
           <Pagination count={10} showFirstButton showLastButton />
@@ -105,18 +118,23 @@ export function PaginationView() {
       ),
     },
     {
-      name: 'Ranges',
+      name: "Ranges",
       component: (
         <ComponentBlock sx={blockProps}>
           <Pagination count={11} defaultPage={6} siblingCount={0} />
           <Pagination count={11} defaultPage={6} />
-          <Pagination count={11} defaultPage={6} siblingCount={0} boundaryCount={2} />
+          <Pagination
+            count={11}
+            defaultPage={6}
+            siblingCount={0}
+            boundaryCount={2}
+          />
           <Pagination count={11} defaultPage={6} boundaryCount={2} />
         </ComponentBlock>
       ),
     },
     {
-      name: 'Table',
+      name: "Table",
       component: (
         <ComponentBlock sx={blockProps}>
           <TablePagination
@@ -131,7 +149,7 @@ export function PaginationView() {
       ),
     },
     {
-      name: 'Items',
+      name: "Items",
       component: (
         <ComponentBlock sx={blockProps}>
           <PaginationItems />
@@ -145,8 +163,11 @@ export function PaginationView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Pagination"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Pagination' }]}
-          moreLink={['https://mui.com/components/pagination']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Pagination" },
+          ]}
+          moreLink={["https://mui.com/components/pagination"]}
         />
       </ComponentHero>
 

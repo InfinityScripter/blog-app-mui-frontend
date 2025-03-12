@@ -1,18 +1,18 @@
-import SvgIcon from '@mui/material/SvgIcon';
+import SvgIcon from "@mui/material/SvgIcon";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
 export const _account = [
   {
-    label: 'Home',
-    href: '/',
+    label: "Home",
+    href: "/",
     icon: <Iconify icon="solar:home-angle-bold-duotone" />,
   },
   {
-    label: 'Profile',
-    href: '#',
+    label: "Profile",
+    href: "#",
     icon: (
       <SvgIcon>
         <path
@@ -28,14 +28,14 @@ export const _account = [
     ),
   },
   {
-    label: 'Projects',
-    href: '#',
+    label: "Projects",
+    href: "#",
     icon: <Iconify icon="solar:notes-bold-duotone" />,
-    info: '3',
+    info: "3",
   },
   {
-    label: 'Subscription',
-    href: '#',
+    label: "Subscription",
+    href: "#",
     icon: (
       <SvgIcon>
         <path
@@ -57,13 +57,13 @@ export const _account = [
     ),
   },
   {
-    label: 'Security',
-    href: '#',
+    label: "Security",
+    href: "#",
     icon: <Iconify icon="solar:shield-keyhole-bold-duotone" />,
   },
   {
-    label: 'Account settings',
-    href: '#',
+    label: "Account settings",
+    href: "#",
     icon: <Iconify icon="solar:settings-bold-duotone" />,
   },
 ];

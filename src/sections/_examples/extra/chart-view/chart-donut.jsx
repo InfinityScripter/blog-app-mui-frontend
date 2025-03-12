@@ -1,6 +1,6 @@
-import { useTheme, alpha as hexAlpha } from '@mui/material/styles';
+import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
-import { Chart, useChart, ChartLegends } from 'src/components/chart';
+import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ export function ChartDonut({ chart }) {
     colors: chartColors,
     labels: chart.categories,
     stroke: { width: 0 },
-    plotOptions: { pie: { donut: { size: '72%' } } },
+    plotOptions: { pie: { donut: { size: "72%" } } },
   });
 
   return (
@@ -29,7 +29,7 @@ export function ChartDonut({ chart }) {
         colors={chartOptions?.colors}
         sx={{
           p: 3,
-          justifyContent: 'center',
+          justifyContent: "center",
         }}
       />
 
@@ -41,7 +41,7 @@ export function ChartDonut({ chart }) {
         height={240}
         sx={{
           my: 3,
-          mx: 'auto',
+          mx: "auto",
         }}
       />
     </>

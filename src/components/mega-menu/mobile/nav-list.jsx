@@ -1,20 +1,20 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
-import Stack from '@mui/material/Stack';
-import Drawer from '@mui/material/Drawer';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import Stack from "@mui/material/Stack";
+import Drawer from "@mui/material/Drawer";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 
-import { isExternalLink } from 'src/routes/utils';
-import { usePathname, useActiveLink } from 'src/routes/hooks';
+import { isExternalLink } from "src/routes/utils";
+import { usePathname, useActiveLink } from "src/routes/hooks";
 
-import { Scrollbar } from 'src/components/scrollbar';
+import { Scrollbar } from "src/components/scrollbar";
 
-import { NavItem } from './nav-item';
-import { Iconify } from '../../iconify';
-import { NavUl, NavLi } from '../../nav-section';
-import { NavSubList } from '../components/nav-sub-list';
+import { NavItem } from "./nav-item";
+import { Iconify } from "../../iconify";
+import { NavUl, NavLi } from "../../nav-section";
+import { NavSubList } from "../components/nav-sub-list";
 
 // ----------------------------------------------------------------------
 
@@ -74,19 +74,28 @@ export function NavList({ data, render, cssVars, slotProps }) {
           slotProps={{ backdrop: { invisible: true } }}
           PaperProps={{
             sx: {
-              display: 'flex',
-              flexDirection: 'column',
-              width: 'calc(var(--nav-width) - 8px)',
+              display: "flex",
+              flexDirection: "column",
+              width: "calc(var(--nav-width) - 8px)",
             },
           }}
           sx={{ ...cssVars }}
         >
-          <Stack direction="row" alignItems="center" spacing={1} sx={{ px: 1, py: 1.5 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
+            sx={{ px: 1, py: 1.5 }}
+          >
             <IconButton onClick={handleCloseMenu}>
               <Iconify icon="eva:arrow-ios-back-fill" width={16} />
             </IconButton>
 
-            <Typography noWrap variant="subtitle1" sx={{ textTransform: 'capitalize' }}>
+            <Typography
+              noWrap
+              variant="subtitle1"
+              sx={{ textTransform: "capitalize" }}
+            >
               {data.title}
             </Typography>
           </Stack>

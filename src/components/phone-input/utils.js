@@ -1,6 +1,6 @@
-import { parsePhoneNumber } from 'react-phone-number-input';
+import { parsePhoneNumber } from "react-phone-number-input";
 
-import { countries } from 'src/assets/data/countries';
+import { countries } from "src/assets/data/countries";
 
 // ----------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ export function getCountryCode(inputValue, countryCode) {
     }
   }
 
-  return countryCode ?? 'US';
+  return countryCode ?? "US";
 }
 
 // ----------------------------------------------------------------------
@@ -29,7 +29,7 @@ export function applyFilter({ inputData, query }) {
       (country) =>
         country.label.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
         country.code.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
-        country.phone.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        country.phone.toLowerCase().indexOf(query.toLowerCase()) !== -1,
     );
   }
 

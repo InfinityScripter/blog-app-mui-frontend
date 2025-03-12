@@ -1,13 +1,13 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Unstable_Grid2";
+import Typography from "@mui/material/Typography";
+import { alpha, useTheme } from "@mui/material/styles";
 
-import { varFade, MotionViewport } from 'src/components/animate';
+import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
@@ -30,8 +30,8 @@ export default function HomeAbout() {
                 p: 2,
                 borderRadius: 2,
                 boxShadow: theme.customShadows.z24,
-                position: 'relative',
-                overflow: 'hidden',
+                position: "relative",
+                overflow: "hidden",
               }}
             >
               <Box
@@ -39,28 +39,28 @@ export default function HomeAbout() {
                 src="/assets/images/about/developer.webp"
                 alt="Developer"
                 sx={{
-                  width: '100%',
-                  height: 'auto',
+                  width: "100%",
+                  height: "auto",
                   borderRadius: 1,
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
+                  transition: "transform 0.3s ease",
+                  "&:hover": {
+                    transform: "scale(1.05)",
                   },
                 }}
               />
               <Box
                 sx={{
-                  position: 'absolute',
+                  position: "absolute",
                   bottom: 0,
                   left: 0,
                   right: 0,
                   p: 2,
                   bgcolor: alpha(theme.palette.background.default, 0.8),
-                  backdropFilter: 'blur(8px)',
+                  backdropFilter: "blur(8px)",
                 }}
               >
                 <Typography variant="h5">Михаил Талалаев</Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                <Typography variant="body2" sx={{ color: "text.secondary" }}>
                   Web developer
                 </Typography>
               </Box>
@@ -77,39 +77,41 @@ export default function HomeAbout() {
 
             <Typography
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
                 mb: 3,
-                typography: 'body1',
+                typography: "body1",
               }}
             >
-              Опытный Frontend разработчик с более чем 13-летним опытом работы в IT и нефтегазовой отрасли.
-              Специализируюсь на создании современных веб-интерфейсов с использованием React, Angular, TypeScript
-              и других современных технологий.
+              Опытный Frontend разработчик с более чем 13-летним опытом работы в
+              IT и нефтегазовой отрасли. Специализируюсь на создании современных
+              веб-интерфейсов с использованием React, Angular, TypeScript и
+              других современных технологий.
             </Typography>
 
             <Typography
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
                 mb: 3,
-                typography: 'body1',
+                typography: "body1",
               }}
             >
-              Имею опыт работы в таких компаниях как Яндекс, СТОМПЛАН, ShurikMarket и QCup, где успешно
-              разрабатывал и оптимизировал веб-приложения, внедрял новые функциональности и улучшал
+              Имею опыт работы в таких компаниях как Яндекс, СТОМПЛАН,
+              ShurikMarket и QCup, где успешно разрабатывал и оптимизировал
+              веб-приложения, внедрял новые функциональности и улучшал
               пользовательский опыт.
             </Typography>
 
             <Typography
               sx={{
-                color: 'text.secondary',
+                color: "text.secondary",
                 mb: 4,
-                typography: 'body1',
+                typography: "body1",
               }}
             >
-              Готов решать сложные задачи, выходящие за рамки текущей специализации, и развиваться в направлении,
-              где смогу принести максимальную пользу вашему бизнесу.
+              Готов решать сложные задачи, выходящие за рамки текущей
+              специализации, и развиваться в направлении, где смогу принести
+              максимальную пользу вашему бизнесу.
             </Typography>
-
           </m.div>
         </Grid>
       </Grid>

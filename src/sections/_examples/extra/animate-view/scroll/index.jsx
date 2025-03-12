@@ -1,30 +1,30 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
 
-import { Toolbar } from './toolbar';
-import { ContainerView } from './container';
-import { ControlPanel } from '../control-panel';
+import { Toolbar } from "./toolbar";
+import { ContainerView } from "./container";
+import { ControlPanel } from "../control-panel";
 
 // ----------------------------------------------------------------------
 
 export function AnimateScroll() {
   const [count, setCount] = useState(0);
 
-  const [selectVariant, setSelectVariant] = useState('slideInUp');
+  const [selectVariant, setSelectVariant] = useState("slideInUp");
 
   const handleChangeVariant = useCallback(
     (event) => {
       setCount(count + 1);
       setSelectVariant(event.target.value);
     },
-    [count]
+    [count],
   );
 
   return (
-    <Card sx={{ height: 640, display: 'flex' }}>
-      <Stack spacing={2.5} sx={{ p: 2.5, display: 'flex', flex: '1 1 auto' }}>
+    <Card sx={{ height: 640, display: "flex" }}>
+      <Stack spacing={2.5} sx={{ p: 2.5, display: "flex", flex: "1 1 auto" }}>
         <Toolbar onRefresh={() => setCount(count + 1)} />
         <ContainerView key={count} selectVariant={selectVariant} />
       </Stack>
@@ -41,14 +41,29 @@ export function AnimateScroll() {
 // ----------------------------------------------------------------------
 
 const VARIANT_KEYS = [
-  { type: 'slide', values: ['slideInUp', 'slideInDown', 'slideInLeft', 'slideInRight'] },
-  { type: 'fade', values: ['fadeIn', 'fadeInUp', 'fadeInDown', 'fadeInLeft', 'fadeInRight'] },
-  { type: 'zoom', values: ['zoomIn', 'zoomInUp', 'zoomInDown', 'zoomInLeft', 'zoomInRight'] },
   {
-    type: 'bounce',
-    values: ['bounceIn', 'bounceInUp', 'bounceInDown', 'bounceInLeft', 'bounceInRight'],
+    type: "slide",
+    values: ["slideInUp", "slideInDown", "slideInLeft", "slideInRight"],
   },
-  { type: 'flip', values: ['flipInX', 'flipInY'] },
-  { type: 'scale', values: ['scaleInX', 'scaleInY'] },
-  { type: 'rotate', values: ['rotateIn'] },
+  {
+    type: "fade",
+    values: ["fadeIn", "fadeInUp", "fadeInDown", "fadeInLeft", "fadeInRight"],
+  },
+  {
+    type: "zoom",
+    values: ["zoomIn", "zoomInUp", "zoomInDown", "zoomInLeft", "zoomInRight"],
+  },
+  {
+    type: "bounce",
+    values: [
+      "bounceIn",
+      "bounceInUp",
+      "bounceInDown",
+      "bounceInLeft",
+      "bounceInRight",
+    ],
+  },
+  { type: "flip", values: ["flipInX", "flipInY"] },
+  { type: "scale", values: ["scaleInX", "scaleInY"] },
+  { type: "rotate", values: ["rotateIn"] },
 ];

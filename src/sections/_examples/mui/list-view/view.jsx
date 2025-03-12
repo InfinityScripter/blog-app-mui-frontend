@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Box from '@mui/material/Box';
-import List from '@mui/material/List';
-import Avatar from '@mui/material/Avatar';
-import Switch from '@mui/material/Switch';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import Collapse from '@mui/material/Collapse';
-import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import Avatar from "@mui/material/Avatar";
+import Switch from "@mui/material/Switch";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import Collapse from "@mui/material/Collapse";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ export function ListView() {
 
   const [checked, setChecked] = useState([0]);
 
-  const [toggle, setToggle] = useState(['wifi']);
+  const [toggle, setToggle] = useState(["wifi"]);
 
   const [selectedIndex, setSelectedIndex] = useState(1);
 
@@ -72,10 +72,10 @@ export function ListView() {
 
   const DEMO = [
     {
-      name: 'Simple',
+      name: "Simple",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
-          <Box sx={{ bgcolor: 'background.paper' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
+          <Box sx={{ bgcolor: "background.paper" }}>
             <nav aria-label="main mailbox folders">
               <List>
                 <ListItem disablePadding>
@@ -117,11 +117,11 @@ export function ListView() {
       ),
     },
     {
-      name: 'Nested',
+      name: "Nested",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
           <List
-            sx={{ bgcolor: 'background.paper' }}
+            sx={{ bgcolor: "background.paper" }}
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
@@ -147,7 +147,13 @@ export function ListView() {
                 <Iconify icon="solar:inbox-in-bold" width={24} />
               </ListItemIcon>
               <ListItemText primary="Inbox" />
-              <Iconify icon={open ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'} />
+              <Iconify
+                icon={
+                  open
+                    ? "eva:arrow-ios-upward-fill"
+                    : "eva:arrow-ios-downward-fill"
+                }
+              />
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
@@ -164,10 +170,10 @@ export function ListView() {
       ),
     },
     {
-      name: 'Folder',
+      name: "Folder",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
-          <List sx={{ bgcolor: 'background.paper' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
+          <List sx={{ bgcolor: "background.paper" }}>
             <ListItem>
               <ListItemAvatar>
                 <Avatar>
@@ -197,10 +203,10 @@ export function ListView() {
       ),
     },
     {
-      name: 'Selected',
+      name: "Selected",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
-          <Box sx={{ bgcolor: 'background.paper' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
+          <Box sx={{ bgcolor: "background.paper" }}>
             <List component="nav" aria-label="main mailbox folders">
               <ListItemButton
                 selected={selectedIndex === 0}
@@ -241,10 +247,10 @@ export function ListView() {
       ),
     },
     {
-      name: 'Controls',
+      name: "Controls",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
-          <List sx={{ bgcolor: 'background.paper' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
+          <List sx={{ bgcolor: "background.paper" }}>
             {[0, 1, 2, 3].map((value) => {
               const labelId = `checkbox-list-label-${value}`;
               return (
@@ -257,18 +263,26 @@ export function ListView() {
                   }
                   disablePadding
                 >
-                  <ListItemButton key={value} role={undefined} dense onClick={handleCheck(value)}>
+                  <ListItemButton
+                    key={value}
+                    role={undefined}
+                    dense
+                    onClick={handleCheck(value)}
+                  >
                     <ListItemIcon>
                       <Checkbox
                         edge="start"
                         checked={checked.indexOf(value) !== -1}
                         tabIndex={-1}
                         disableRipple
-                        inputProps={{ id: labelId, 'aria-labelledby': labelId }}
+                        inputProps={{ id: labelId, "aria-labelledby": labelId }}
                       />
                     </ListItemIcon>
 
-                    <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                    <ListItemText
+                      id={labelId}
+                      primary={`Line item ${value + 1}`}
+                    />
                   </ListItemButton>
                 </ListItem>
               );
@@ -278,12 +292,12 @@ export function ListView() {
       ),
     },
     {
-      name: 'Switch',
+      name: "Switch",
       component: (
-        <ComponentBlock sx={{ flexDirection: 'column', alignItems: 'unset' }}>
+        <ComponentBlock sx={{ flexDirection: "column", alignItems: "unset" }}>
           <List
             subheader={<ListSubheader>Settings</ListSubheader>}
-            sx={{ bgcolor: 'background.paper' }}
+            sx={{ bgcolor: "background.paper" }}
           >
             <ListItem>
               <ListItemButton>
@@ -294,11 +308,11 @@ export function ListView() {
                 <ListItemSecondaryAction>
                   <Switch
                     edge="end"
-                    onChange={handleToggle('wifi')}
-                    checked={toggle.indexOf('wifi') !== -1}
+                    onChange={handleToggle("wifi")}
+                    checked={toggle.indexOf("wifi") !== -1}
                     inputProps={{
-                      id: 'switch-list-label-wifi',
-                      'aria-labelledby': 'switch-list-label-wifi',
+                      id: "switch-list-label-wifi",
+                      "aria-labelledby": "switch-list-label-wifi",
                     }}
                   />
                 </ListItemSecondaryAction>
@@ -310,15 +324,18 @@ export function ListView() {
                 <ListItemIcon>
                   <Iconify icon="ic:baseline-bluetooth" width={24} />
                 </ListItemIcon>
-                <ListItemText id="switch-list-label-bluetooth" primary="Bluetooth" />
+                <ListItemText
+                  id="switch-list-label-bluetooth"
+                  primary="Bluetooth"
+                />
                 <ListItemSecondaryAction>
                   <Switch
                     edge="end"
-                    onChange={handleToggle('bluetooth')}
-                    checked={toggle.indexOf('bluetooth') !== -1}
+                    onChange={handleToggle("bluetooth")}
+                    checked={toggle.indexOf("bluetooth") !== -1}
                     inputProps={{
-                      id: 'switch-list-label-bluetooth',
-                      'aria-labelledby': 'switch-list-label-bluetooth',
+                      id: "switch-list-label-bluetooth",
+                      "aria-labelledby": "switch-list-label-bluetooth",
                     }}
                   />
                 </ListItemSecondaryAction>
@@ -335,8 +352,11 @@ export function ListView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="List"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Lists' }]}
-          moreLink={['https://mui.com/components/lists']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Lists" },
+          ]}
+          moreLink={["https://mui.com/components/lists"]}
         />
       </ComponentHero>
 

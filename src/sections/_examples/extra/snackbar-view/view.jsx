@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import Button from '@mui/material/Button';
+import Button from "@mui/material/Button";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { toast } from 'src/components/snackbar';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { toast } from "src/components/snackbar";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock, ComponentContainer } from '../../component-block';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock, ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
@@ -18,9 +18,9 @@ export function SnackbarView() {
 
     try {
       toast.promise(promise, {
-        loading: 'Loading...',
+        loading: "Loading...",
         success: () => `Loading success!`,
-        error: 'Error',
+        error: "Error",
         closeButton: false,
       });
 
@@ -35,8 +35,11 @@ export function SnackbarView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Snackbar"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Snackbar' }]}
-          moreLink={['https://sonner.emilkowal.ski/']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Snackbar" },
+          ]}
+          moreLink={["https://sonner.emilkowal.ski/"]}
         />
       </ComponentHero>
 
@@ -44,35 +47,47 @@ export function SnackbarView() {
         sx={{
           rowGap: 5,
           columnGap: 3,
-          display: 'grid',
+          display: "grid",
           gridTemplateColumns: {
-            xs: 'repeat(1, 1fr)',
-            md: 'repeat(2, 1fr)',
+            xs: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
           },
         }}
       >
         <ComponentBlock title="Simple">
-          <Button variant="contained" color="inherit" onClick={() => toast('This is an default')}>
+          <Button
+            variant="contained"
+            color="inherit"
+            onClick={() => toast("This is an default")}
+          >
             Default
           </Button>
-          <Button variant="contained" color="info" onClick={() => toast.info('This is an info')}>
+          <Button
+            variant="contained"
+            color="info"
+            onClick={() => toast.info("This is an info")}
+          >
             Info
           </Button>
           <Button
             variant="contained"
             color="success"
-            onClick={() => toast.success('This is an success')}
+            onClick={() => toast.success("This is an success")}
           >
             Success
           </Button>
           <Button
             variant="contained"
             color="warning"
-            onClick={() => toast.warning('This is an warning')}
+            onClick={() => toast.warning("This is an warning")}
           >
             Warning
           </Button>
-          <Button variant="contained" color="error" onClick={() => toast.error('This is an error')}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => toast.error("This is an error")}
+          >
             Error
           </Button>
         </ComponentBlock>
@@ -82,20 +97,24 @@ export function SnackbarView() {
             variant="contained"
             color="inherit"
             onClick={() => {
-              toast('Title', {
-                id: 'defaultId',
-                description: 'description',
+              toast("Title", {
+                id: "defaultId",
+                description: "description",
                 closeButton: false,
                 action: (
                   <div>
-                    <Button color="primary" size="small" onClick={() => console.info('Action!')}>
+                    <Button
+                      color="primary"
+                      size="small"
+                      onClick={() => console.info("Action!")}
+                    >
                       Action
                     </Button>
                     <Button
                       size="small"
                       onClick={() => {
-                        console.info('Action!');
-                        toast.dismiss('defaultId');
+                        console.info("Action!");
+                        toast.dismiss("defaultId");
                       }}
                     >
                       Dismiss
@@ -111,20 +130,24 @@ export function SnackbarView() {
             variant="contained"
             color="info"
             onClick={() => {
-              toast.info('Title', {
-                id: 'infoId',
-                description: 'description',
+              toast.info("Title", {
+                id: "infoId",
+                description: "description",
                 closeButton: false,
                 action: (
                   <div>
-                    <Button color="info" size="small" onClick={() => console.info('Action!')}>
+                    <Button
+                      color="info"
+                      size="small"
+                      onClick={() => console.info("Action!")}
+                    >
                       Action
                     </Button>
                     <Button
                       size="small"
                       onClick={() => {
-                        console.info('Action!');
-                        toast.dismiss('infoId');
+                        console.info("Action!");
+                        toast.dismiss("infoId");
                       }}
                     >
                       Dismiss
@@ -140,20 +163,24 @@ export function SnackbarView() {
             variant="contained"
             color="success"
             onClick={() => {
-              toast.success('Title', {
-                id: 'successId',
-                description: 'description',
+              toast.success("Title", {
+                id: "successId",
+                description: "description",
                 closeButton: false,
                 action: (
                   <div>
-                    <Button color="success" size="small" onClick={() => console.info('Action!')}>
+                    <Button
+                      color="success"
+                      size="small"
+                      onClick={() => console.info("Action!")}
+                    >
                       Action
                     </Button>
                     <Button
                       size="small"
                       onClick={() => {
-                        console.info('Action!');
-                        toast.dismiss('successId');
+                        console.info("Action!");
+                        toast.dismiss("successId");
                       }}
                     >
                       Dismiss
@@ -169,20 +196,24 @@ export function SnackbarView() {
             variant="contained"
             color="warning"
             onClick={() => {
-              toast.warning('Title', {
-                id: 'warningId',
-                description: 'description',
+              toast.warning("Title", {
+                id: "warningId",
+                description: "description",
                 closeButton: false,
                 action: (
                   <div>
-                    <Button color="warning" size="small" onClick={() => console.info('Action!')}>
+                    <Button
+                      color="warning"
+                      size="small"
+                      onClick={() => console.info("Action!")}
+                    >
                       Action
                     </Button>
                     <Button
                       size="small"
                       onClick={() => {
-                        console.info('Action!');
-                        toast.dismiss('warningId');
+                        console.info("Action!");
+                        toast.dismiss("warningId");
                       }}
                     >
                       Dismiss
@@ -199,20 +230,24 @@ export function SnackbarView() {
             variant="contained"
             color="error"
             onClick={() => {
-              toast.error('Error title', {
-                id: 'errorId',
-                description: 'description',
+              toast.error("Error title", {
+                id: "errorId",
+                description: "description",
                 closeButton: false,
                 action: (
                   <div>
-                    <Button color="error" size="small" onClick={() => console.info('Action!')}>
+                    <Button
+                      color="error"
+                      size="small"
+                      onClick={() => console.info("Action!")}
+                    >
                       Action
                     </Button>
                     <Button
                       size="small"
                       onClick={() => {
-                        console.info('Action!');
-                        toast.dismiss('errorId');
+                        console.info("Action!");
+                        toast.dismiss("errorId");
                       }}
                     >
                       Dismiss
@@ -228,12 +263,12 @@ export function SnackbarView() {
 
         <ComponentBlock title="anchorOrigin">
           {[
-            'top-left',
-            'top-center',
-            'top-right',
-            'bottom-left',
-            'bottom-center',
-            'bottom-right',
+            "top-left",
+            "top-center",
+            "top-right",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right",
           ].map((position) => (
             <Button
               key={position}

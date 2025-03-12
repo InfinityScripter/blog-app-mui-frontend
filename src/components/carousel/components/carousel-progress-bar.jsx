@@ -1,30 +1,30 @@
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { carouselClasses } from '../classes';
+import { carouselClasses } from "../classes";
 
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled(Box)(({ theme }) => ({
   height: 6,
   maxWidth: 120,
-  width: '100%',
+  width: "100%",
   borderRadius: 6,
-  overflow: 'hidden',
-  position: 'relative',
+  overflow: "hidden",
+  position: "relative",
   color: theme.vars.palette.text.primary,
-  backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.2),
+  backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.2),
 }));
 
 const StyledProgress = styled(Box)(() => ({
   top: 0,
   bottom: 0,
-  width: '100%',
-  left: '-100%',
-  position: 'absolute',
-  backgroundColor: 'currentColor',
+  width: "100%",
+  left: "-100%",
+  position: "absolute",
+  backgroundColor: "currentColor",
 }));
 
 // ----------------------------------------------------------------------

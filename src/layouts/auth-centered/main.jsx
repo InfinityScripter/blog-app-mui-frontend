@@ -1,7 +1,7 @@
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
-import { layoutClasses } from 'src/layouts/classes';
+import { layoutClasses } from "src/layouts/classes";
 
 // ----------------------------------------------------------------------
 
@@ -15,11 +15,11 @@ export function Main({ sx, children, layoutQuery, ...other }) {
         px: 3,
         width: 1,
         borderRadius: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        bgcolor: 'background.default',
+        display: "flex",
+        flexDirection: "column",
+        bgcolor: "background.default",
         boxShadow: theme.customShadows.card,
-        maxWidth: 'var(--layout-auth-content-width)',
+        maxWidth: "var(--layout-auth-content-width)",
       }}
     >
       {children}
@@ -34,14 +34,14 @@ export function Main({ sx, children, layoutQuery, ...other }) {
         px: 2,
         py: 5,
         zIndex: 9,
-        display: 'flex',
-        flex: '1 1 auto',
-        alignItems: 'center',
-        flexDirection: 'column',
-        justifyContent: 'center',
+        display: "flex",
+        flex: "1 1 auto",
+        alignItems: "center",
+        flexDirection: "column",
+        justifyContent: "center",
         [theme.breakpoints.up(layoutQuery)]: {
           px: 0,
-          py: 'calc(var(--layout-header-desktop-height) + 24px)',
+          py: "calc(var(--layout-header-desktop-height) + 24px)",
         },
         ...sx,
       }}

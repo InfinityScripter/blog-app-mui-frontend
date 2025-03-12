@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import Divider from '@mui/material/Divider';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
-import DialogActions from '@mui/material/DialogActions';
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import Divider from "@mui/material/Divider";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
+import DialogActions from "@mui/material/DialogActions";
 
-import { formatImageUrl } from 'src/utils/format-image-url';
+import { formatImageUrl } from "src/utils/format-image-url";
 
-import { Markdown } from 'src/components/markdown';
-import { Scrollbar } from 'src/components/scrollbar';
-import { EmptyContent } from 'src/components/empty-content';
+import { Markdown } from "src/components/markdown";
+import { Scrollbar } from "src/components/scrollbar";
+import { EmptyContent } from "src/components/empty-content";
 
-import { PostDetailsHero } from './post-details-hero';
+import { PostDetailsHero } from "./post-details-hero";
 
 // ----------------------------------------------------------------------
 
@@ -30,11 +30,11 @@ export function PostDetailsPreview({
   description,
   isSubmitting,
 }) {
-  const [previewUrl, setPreviewUrl] = useState('');
+  const [previewUrl, setPreviewUrl] = useState("");
 
   useEffect(() => {
     if (coverUrl) {
-      if (typeof coverUrl === 'string') {
+      if (typeof coverUrl === "string") {
         setPreviewUrl(formatImageUrl(coverUrl));
       } else {
         setPreviewUrl(URL.createObjectURL(coverUrl));
@@ -72,9 +72,11 @@ export function PostDetailsPreview({
 
       {hasContent ? (
         <Scrollbar>
-          {(hasHero || previewUrl) && <PostDetailsHero title={title} coverUrl={previewUrl} />}
+          {(hasHero || previewUrl) && (
+            <PostDetailsHero title={title} coverUrl={previewUrl} />
+          )}
           <Container sx={{ mt: 5, mb: 10 }}>
-            <Stack sx={{ mx: 'auto', maxWidth: 720 }}>
+            <Stack sx={{ mx: "auto", maxWidth: 720 }}>
               <Typography variant="h6">{description}</Typography>
               <Markdown>{content}</Markdown>
             </Stack>

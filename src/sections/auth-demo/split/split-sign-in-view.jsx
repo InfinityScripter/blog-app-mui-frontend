@@ -1,36 +1,36 @@
-'use client';
+"use client";
 
-import { z as zod } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z as zod } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import LoadingButton from "@mui/lab/LoadingButton";
+import InputAdornment from "@mui/material/InputAdornment";
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
+import { paths } from "src/routes/paths";
+import { RouterLink } from "src/routes/components";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { Form, Field } from 'src/components/hook-form';
-import { Iconify, SocialIcon } from 'src/components/iconify';
+import { Form, Field } from "src/components/hook-form";
+import { Iconify, SocialIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
 export const SignInSchema = zod.object({
   email: zod
     .string()
-    .min(1, { message: 'Email is required!' })
-    .email({ message: 'Email must be a valid email address!' }),
+    .min(1, { message: "Email is required!" })
+    .email({ message: "Email must be a valid email address!" }),
   password: zod
     .string()
-    .min(1, { message: 'Password is required!' })
-    .min(6, { message: 'Password must be at least 6 characters!' }),
+    .min(1, { message: "Password is required!" })
+    .min(6, { message: "Password must be at least 6 characters!" }),
 });
 
 // ----------------------------------------------------------------------
@@ -38,7 +38,7 @@ export const SignInSchema = zod.object({
 export function SplitSignInView() {
   const password = useBoolean();
 
-  const defaultValues = { email: '', password: '' };
+  const defaultValues = { email: "", password: "" };
 
   const methods = useForm({
     resolver: zodResolver(SignInSchema),
@@ -53,7 +53,7 @@ export function SplitSignInView() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      console.info('DATA', data);
+      console.info("DATA", data);
     } catch (error) {
       console.error(error);
     }
@@ -64,11 +64,15 @@ export function SplitSignInView() {
       <Typography variant="h5">Sign in to your account</Typography>
 
       <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {`Don't have an account?`}
         </Typography>
 
-        <Link component={RouterLink} href={paths.authDemo.split.signUp} variant="subtitle2">
+        <Link
+          component={RouterLink}
+          href={paths.authDemo.split.signUp}
+          variant="subtitle2"
+        >
           Get started
         </Link>
       </Stack>
@@ -77,7 +81,11 @@ export function SplitSignInView() {
 
   const renderForm = (
     <Stack spacing={3}>
-      <Field.Text name="email" label="Email address" InputLabelProps={{ shrink: true }} />
+      <Field.Text
+        name="email"
+        label="Email address"
+        InputLabelProps={{ shrink: true }}
+      />
 
       <Stack spacing={1.5}>
         <Link
@@ -85,7 +93,7 @@ export function SplitSignInView() {
           href={paths.authDemo.split.resetPassword}
           variant="body2"
           color="inherit"
-          sx={{ alignSelf: 'flex-end' }}
+          sx={{ alignSelf: "flex-end" }}
         >
           Forgot password?
         </Link>
@@ -94,13 +102,19 @@ export function SplitSignInView() {
           name="password"
           label="Password"
           placeholder="6+ characters"
-          type={password.value ? 'text' : 'password'}
+          type={password.value ? "text" : "password"}
           InputLabelProps={{ shrink: true }}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
                 <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
+                  <Iconify
+                    icon={
+                      password.value
+                        ? "solar:eye-bold"
+                        : "solar:eye-closed-bold"
+                    }
+                  />
                 </IconButton>
               </InputAdornment>
             ),
@@ -127,9 +141,9 @@ export function SplitSignInView() {
       <Divider
         sx={{
           my: 3,
-          typography: 'overline',
-          color: 'text.disabled',
-          '&::before, :after': { borderTopStyle: 'dashed' },
+          typography: "overline",
+          color: "text.disabled",
+          "&::before, :after": { borderTopStyle: "dashed" },
         }}
       >
         OR

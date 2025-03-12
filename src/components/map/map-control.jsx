@@ -1,12 +1,25 @@
-import { ScaleControl, GeolocateControl, NavigationControl, FullscreenControl } from 'react-map-gl';
+import {
+  ScaleControl,
+  GeolocateControl,
+  NavigationControl,
+  FullscreenControl,
+} from "react-map-gl";
 
 // ----------------------------------------------------------------------
 
-export function MapControl({ hideScale, hideGeolocate, hideFullscreen, hideNavigation }) {
+export function MapControl({
+  hideScale,
+  hideGeolocate,
+  hideFullscreen,
+  hideNavigation,
+}) {
   return (
     <>
       {!hideGeolocate && (
-        <GeolocateControl position="top-left" positionOptions={{ enableHighAccuracy: true }} />
+        <GeolocateControl
+          position="top-left"
+          positionOptions={{ enableHighAccuracy: true }}
+        />
       )}
 
       {!hideFullscreen && <FullscreenControl position="top-left" />}

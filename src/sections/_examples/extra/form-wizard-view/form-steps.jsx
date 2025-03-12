@@ -1,12 +1,12 @@
-import Box from '@mui/material/Box';
-import Step from '@mui/material/Step';
-import Button from '@mui/material/Button';
-import MuiStepper from '@mui/material/Stepper';
-import StepLabel from '@mui/material/StepLabel';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Step from "@mui/material/Step";
+import Button from "@mui/material/Button";
+import MuiStepper from "@mui/material/Stepper";
+import StepLabel from "@mui/material/StepLabel";
+import Typography from "@mui/material/Typography";
 
-import { Iconify } from 'src/components/iconify';
-import { Field } from 'src/components/hook-form';
+import { Iconify } from "src/components/iconify";
+import { Field } from "src/components/hook-form";
 
 // ----------------------------------------------------------------------
 
@@ -24,18 +24,24 @@ export function Stepper({ steps, activeStep }) {
                 sx={{
                   width: 24,
                   height: 24,
-                  borderRadius: '50%',
-                  color: 'text.disabled',
-                  typography: 'subtitle2',
-                  bgcolor: 'action.disabledBackground',
-                  ...(active && { bgcolor: 'primary.main', color: 'primary.contrastText' }),
-                  ...(completed && { bgcolor: 'primary.main', color: 'primary.contrastText' }),
+                  borderRadius: "50%",
+                  color: "text.disabled",
+                  typography: "subtitle2",
+                  bgcolor: "action.disabledBackground",
+                  ...(active && {
+                    bgcolor: "primary.main",
+                    color: "primary.contrastText",
+                  }),
+                  ...(completed && {
+                    bgcolor: "primary.main",
+                    color: "primary.contrastText",
+                  }),
                 }}
               >
                 {completed ? (
                   <Iconify width={14} icon="mingcute:check-fill" />
                 ) : (
-                  <Box sx={{ typography: 'subtitle2' }}>{index + 1}</Box>
+                  <Box sx={{ typography: "subtitle2" }}>{index + 1}</Box>
                 )}
               </Box>
             )}
@@ -102,9 +108,11 @@ export function StepCompleted({ onReset }) {
       alignItems="center"
       flexDirection="column"
       justifyContent="center"
-      sx={{ borderRadius: 'inherit', bgcolor: 'background.neutral' }}
+      sx={{ borderRadius: "inherit", bgcolor: "background.neutral" }}
     >
-      <Typography variant="subtitle1">All steps completed - you&apos;re finished</Typography>
+      <Typography variant="subtitle1">
+        All steps completed - you&apos;re finished
+      </Typography>
 
       <Button
         variant="outlined"

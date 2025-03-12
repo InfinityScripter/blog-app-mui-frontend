@@ -1,36 +1,39 @@
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
+import { paths } from "src/routes/paths";
+import { RouterLink } from "src/routes/components";
 
-import { fDate } from 'src/utils/format-time';
-import { fShortenNumber } from 'src/utils/format-number';
-import { formatImageUrl } from 'src/utils/format-image-url';
+import { fDate } from "src/utils/format-time";
+import { fShortenNumber } from "src/utils/format-number";
+import { formatImageUrl } from "src/utils/format-image-url";
 
-import { maxLine, varAlpha } from 'src/theme/styles';
-import { AvatarShape } from 'src/assets/illustrations';
+import { maxLine, varAlpha } from "src/theme/styles";
+import { AvatarShape } from "src/assets/illustrations";
 
-import { Image } from 'src/components/image';
-import { Iconify } from 'src/components/iconify';
+import { Image } from "src/components/image";
+import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
 export function PostItem({ post }) {
   const theme = useTheme();
-  console.log({post}, 'данные от сервера которые нужно показывать в карточке');
+  console.log(
+    { post },
+    "данные от сервера которые нужно показывать в карточке",
+  );
 
   const linkTo = paths.post.details(post._id);
 
   return (
     <Card>
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: "relative" }}>
         <AvatarShape
           sx={{
             left: 0,
@@ -38,7 +41,7 @@ export function PostItem({ post }) {
             width: 88,
             height: 36,
             bottom: -16,
-            position: 'absolute',
+            position: "absolute",
           }}
         />
 
@@ -49,15 +52,23 @@ export function PostItem({ post }) {
             left: 24,
             zIndex: 9,
             bottom: -24,
-            position: 'absolute',
+            position: "absolute",
           }}
         />
 
-        <Image alt={post.title} src={formatImageUrl(post.coverUrl)} ratio="4/3" />
+        <Image
+          alt={post.title}
+          src={formatImageUrl(post.coverUrl)}
+          ratio="4/3"
+        />
       </Box>
 
       <CardContent sx={{ pt: 6 }}>
-        <Typography variant="caption" component="div" sx={{ mb: 1, color: 'text.disabled' }}>
+        <Typography
+          variant="caption"
+          component="div"
+          sx={{ mb: 1, color: "text.disabled" }}
+        >
           {fDate(post.createdAt)}
         </Typography>
 
@@ -66,7 +77,9 @@ export function PostItem({ post }) {
           href={linkTo}
           color="inherit"
           variant="subtitle2"
-          sx={{ ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }) }}
+          sx={{
+            ...maxLine({ line: 2, persistent: theme.typography.subtitle2 }),
+          }}
         >
           {post.title}
         </Link>
@@ -99,7 +112,7 @@ export function PostItemLatest({ post, index }) {
           top: 24,
           left: 24,
           zIndex: 9,
-          position: 'absolute',
+          position: "absolute",
         }}
       />
 
@@ -108,7 +121,11 @@ export function PostItemLatest({ post, index }) {
         src={formatImageUrl(post.coverUrl)}
         ratio="4/3"
         sx={{ height: 360 }}
-        slotProps={{ overlay: { bgcolor: varAlpha(theme.vars.palette.grey['900Channel'], 0.48) } }}
+        slotProps={{
+          overlay: {
+            bgcolor: varAlpha(theme.vars.palette.grey["900Channel"], 0.48),
+          },
+        }}
       />
 
       <CardContent
@@ -116,11 +133,15 @@ export function PostItemLatest({ post, index }) {
           width: 1,
           zIndex: 9,
           bottom: 0,
-          position: 'absolute',
-          color: 'common.white',
+          position: "absolute",
+          color: "common.white",
         }}
       >
-        <Typography variant="caption" component="div" sx={{ mb: 1, opacity: 0.64 }}>
+        <Typography
+          variant="caption"
+          component="div"
+          sx={{ mb: 1, opacity: 0.64 }}
+        >
           {fDate(post.createdAt)}
         </Typography>
 
@@ -128,11 +149,13 @@ export function PostItemLatest({ post, index }) {
           component={RouterLink}
           href={linkTo}
           color="inherit"
-          variant={postSmall ? 'subtitle2' : 'h5'}
+          variant={postSmall ? "subtitle2" : "h5"}
           sx={{
             ...maxLine({
               line: 2,
-              persistent: postSmall ? theme.typography.subtitle2 : theme.typography.h5,
+              persistent: postSmall
+                ? theme.typography.subtitle2
+                : theme.typography.h5,
             }),
           }}
         >
@@ -143,7 +166,7 @@ export function PostItemLatest({ post, index }) {
           totalViews={post.totalViews}
           totalShares={post.totalShares}
           totalComments={post.totalComments}
-          sx={{ opacity: 0.64, color: 'common.white' }}
+          sx={{ opacity: 0.64, color: "common.white" }}
         />
       </CardContent>
     </Card>
@@ -160,8 +183,8 @@ export function InfoBlock({ totalComments, totalViews, totalShares, sx }) {
       justifyContent="flex-end"
       sx={{
         mt: 3,
-        typography: 'caption',
-        color: 'text.disabled',
+        typography: "caption",
+        color: "text.disabled",
         ...sx,
       }}
     >

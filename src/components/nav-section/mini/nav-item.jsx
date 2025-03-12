@@ -1,16 +1,16 @@
-import { forwardRef } from 'react';
+import { forwardRef } from "react";
 
-import Box from '@mui/material/Box';
-import Tooltip from '@mui/material/Tooltip';
-import { styled } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
+import Box from "@mui/material/Box";
+import Tooltip from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
+import ButtonBase from "@mui/material/ButtonBase";
 
-import { stylesMode } from 'src/theme/styles';
+import { stylesMode } from "src/theme/styles";
 
-import { useNavItem } from '../hooks';
-import { Iconify } from '../../iconify';
-import { navSectionClasses } from '../classes';
-import { stateClasses, sharedStyles } from '../styles';
+import { useNavItem } from "../hooks";
+import { Iconify } from "../../iconify";
+import { navSectionClasses } from "../classes";
+import { stateClasses, sharedStyles } from "../styles";
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ export const NavItem = forwardRef(
       enabledRootRedirect,
       ...other
     },
-    ref
+    ref,
   ) => {
     const navItem = useNavItem({
       path,
@@ -81,7 +81,10 @@ export const NavItem = forwardRef(
 
         {caption && (
           <Tooltip title={caption} arrow placement="right">
-            <Iconify icon="eva:info-outline" className={navSectionClasses.item.caption} />
+            <Iconify
+              icon="eva:info-outline"
+              className={navSectionClasses.item.caption}
+            />
           </Tooltip>
         )}
 
@@ -92,18 +95,24 @@ export const NavItem = forwardRef(
         )}
 
         {hasChild && (
-          <Iconify icon="eva:arrow-ios-forward-fill" className={navSectionClasses.item.arrow} />
+          <Iconify
+            icon="eva:arrow-ios-forward-fill"
+            className={navSectionClasses.item.arrow}
+          />
         )}
       </StyledNavItem>
     );
-  }
+  },
 );
 
 // ----------------------------------------------------------------------
 
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
-    prop !== 'active' && prop !== 'open' && prop !== 'disabled' && prop !== 'depth',
+    prop !== "active" &&
+    prop !== "open" &&
+    prop !== "disabled" &&
+    prop !== "depth",
 })(({ active, open, disabled, depth, theme }) => {
   const rootItem = depth === 1;
 
@@ -111,11 +120,11 @@ const StyledNavItem = styled(ButtonBase, {
 
   const baseStyles = {
     item: {
-      width: '100%',
-      borderRadius: 'var(--nav-item-radius)',
-      color: 'var(--nav-item-color)',
-      '&:hover': {
-        backgroundColor: 'var(--nav-item-hover-bg)',
+      width: "100%",
+      borderRadius: "var(--nav-item-radius)",
+      color: "var(--nav-item-color)",
+      "&:hover": {
+        backgroundColor: "var(--nav-item-hover-bg)",
       },
     },
 
@@ -124,13 +133,13 @@ const StyledNavItem = styled(ButtonBase, {
     caption: {
       width: 16,
       height: 16,
-      color: 'var(--nav-item-caption-color)',
+      color: "var(--nav-item-caption-color)",
     },
 
     icon: {
       ...sharedStyles.icon,
-      width: 'var(--nav-icon-size)',
-      height: 'var(--nav-icon-size)',
+      width: "var(--nav-icon-size)",
+      height: "var(--nav-icon-size)",
     },
 
     arrow: { ...sharedStyles.arrow },
@@ -143,48 +152,50 @@ const StyledNavItem = styled(ButtonBase, {
      */
     ...(rootItem && {
       ...baseStyles.item,
-      textAlign: 'center',
-      flexDirection: 'column',
-      minHeight: 'var(--nav-item-root-height)',
-      padding: 'var(--nav-item-root-padding)',
+      textAlign: "center",
+      flexDirection: "column",
+      minHeight: "var(--nav-item-root-height)",
+      padding: "var(--nav-item-root-padding)",
       [`& .${navSectionClasses.item.icon}`]: {
         ...baseStyles.icon,
-        margin: 'var(--nav-icon-root-margin)',
+        margin: "var(--nav-icon-root-margin)",
       },
       [`& .${navSectionClasses.item.title}`]: {
         ...baseStyles.title,
         ...sharedStyles.noWrap,
-        lineHeight: '16px',
+        lineHeight: "16px",
         fontSize: theme.typography.pxToRem(10),
-        fontWeight: active ? theme.typography.fontWeightBold : theme.typography.fontWeightSemiBold,
+        fontWeight: active
+          ? theme.typography.fontWeightBold
+          : theme.typography.fontWeightSemiBold,
       },
       [`& .${navSectionClasses.item.caption}`]: {
         ...baseStyles.caption,
         top: 11,
         left: 6,
-        position: 'absolute',
+        position: "absolute",
       },
       [`& .${navSectionClasses.item.arrow}`]: {
         ...baseStyles.arrow,
         top: 11,
         right: 6,
-        position: 'absolute',
+        position: "absolute",
       },
       [`& .${navSectionClasses.item.info}`]: { ...baseStyles.info },
       // State
       ...(active && {
-        color: 'var(--nav-item-root-active-color)',
-        backgroundColor: 'var(--nav-item-root-active-bg)',
-        '&:hover': {
-          backgroundColor: 'var(--nav-item-root-active-hover-bg)',
+        color: "var(--nav-item-root-active-color)",
+        backgroundColor: "var(--nav-item-root-active-bg)",
+        "&:hover": {
+          backgroundColor: "var(--nav-item-root-active-hover-bg)",
         },
         [stylesMode.dark]: {
-          color: 'var(--nav-item-root-active-color-on-dark)',
+          color: "var(--nav-item-root-active-color-on-dark)",
         },
       }),
       ...(open && {
-        color: 'var(--nav-item-root-open-color)',
-        backgroundColor: 'var(--nav-item-root-open-bg)',
+        color: "var(--nav-item-root-open-color)",
+        backgroundColor: "var(--nav-item-root-open-bg)",
       }),
     }),
 
@@ -194,11 +205,11 @@ const StyledNavItem = styled(ButtonBase, {
     ...(subItem && {
       ...baseStyles.item,
       color: theme.vars.palette.text.secondary,
-      minHeight: 'var(--nav-item-sub-height)',
-      padding: 'var(--nav-item-sub-padding)',
+      minHeight: "var(--nav-item-sub-height)",
+      padding: "var(--nav-item-sub-padding)",
       [`& .${navSectionClasses.item.icon}`]: {
         ...baseStyles.icon,
-        margin: 'var(--nav-icon-sub-margin)',
+        margin: "var(--nav-icon-sub-margin)",
       },
       [`& .${navSectionClasses.item.title}`]: {
         ...baseStyles.title,
@@ -206,7 +217,7 @@ const StyledNavItem = styled(ButtonBase, {
         fontWeight: active
           ? theme.typography.fontWeightSemiBold
           : theme.typography.fontWeightMedium,
-        flex: '1 1 auto',
+        flex: "1 1 auto",
       },
       [`& .${navSectionClasses.item.caption}`]: { ...baseStyles.caption },
       [`& .${navSectionClasses.item.arrow}`]: {
@@ -216,12 +227,12 @@ const StyledNavItem = styled(ButtonBase, {
       [`& .${navSectionClasses.item.info}`]: { ...baseStyles.info },
       // State
       ...(active && {
-        color: 'var(--nav-item-sub-active-color)',
-        backgroundColor: 'var(--nav-item-sub-active-bg)',
+        color: "var(--nav-item-sub-active-color)",
+        backgroundColor: "var(--nav-item-sub-active-bg)",
       }),
       ...(open && {
-        color: 'var(--nav-item-sub-open-color)',
-        backgroundColor: 'var(--nav-item-sub-open-bg)',
+        color: "var(--nav-item-sub-open-color)",
+        backgroundColor: "var(--nav-item-sub-open-bg)",
       }),
     }),
 

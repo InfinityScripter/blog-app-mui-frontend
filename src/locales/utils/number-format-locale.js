@@ -1,7 +1,7 @@
-import i18next from 'i18next';
+import i18next from "i18next";
 
-import { allLangs } from '../all-langs';
-import { fallbackLng } from '../config-locales';
+import { allLangs } from "../all-langs";
+import { fallbackLng } from "../config-locales";
 
 // ----------------------------------------------------------------------
 
@@ -10,5 +10,8 @@ export function formatNumberLocale() {
 
   const currentLang = allLangs.find((lang) => lang.value === lng);
 
-  return { code: currentLang?.numberFormat.code, currency: currentLang?.numberFormat.currency };
+  return {
+    code: currentLang?.numberFormat.code,
+    currency: currentLang?.numberFormat.currency,
+  };
 }

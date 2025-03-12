@@ -1,19 +1,19 @@
-import { useState, useEffect, useCallback, cloneElement } from 'react';
+import { useState, useEffect, useCallback, cloneElement } from "react";
 
-import Stack from '@mui/material/Stack';
-import Drawer from '@mui/material/Drawer';
-import SvgIcon from '@mui/material/SvgIcon';
-import { useTheme } from '@mui/material/styles';
-import IconButton from '@mui/material/IconButton';
+import Stack from "@mui/material/Stack";
+import Drawer from "@mui/material/Drawer";
+import SvgIcon from "@mui/material/SvgIcon";
+import { useTheme } from "@mui/material/styles";
+import IconButton from "@mui/material/IconButton";
 
-import { usePathname } from 'src/routes/hooks';
+import { usePathname } from "src/routes/hooks";
 
-import { Scrollbar } from 'src/components/scrollbar';
+import { Scrollbar } from "src/components/scrollbar";
 
-import { NavList } from './nav-list';
-import { NavUl } from '../../nav-section';
-import { megaMenuClasses } from '../classes';
-import { megaMenuCssVars } from '../css-vars';
+import { NavList } from "./nav-list";
+import { NavUl } from "../../nav-section";
+import { megaMenuClasses } from "../classes";
+import { megaMenuCssVars } from "../css-vars";
 
 // ----------------------------------------------------------------------
 
@@ -83,9 +83,9 @@ export function MegaMenuMobile({
         onClose={handleCloseDrawer}
         PaperProps={{
           sx: {
-            display: 'flex',
-            flexDirection: 'column',
-            width: 'var(--nav-width)',
+            display: "flex",
+            flexDirection: "column",
+            width: "var(--nav-width)",
           },
         }}
         sx={{ ...cssVars }}
@@ -93,8 +93,13 @@ export function MegaMenuMobile({
         {slots?.topArea}
 
         <Scrollbar fillContent>
-          <Stack component="nav" className={megaMenuClasses.mobile.root} sx={sx} {...other}>
-            <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
+          <Stack
+            component="nav"
+            className={megaMenuClasses.mobile.root}
+            sx={sx}
+            {...other}
+          >
+            <NavUl sx={{ gap: "var(--nav-item-gap)" }}>
               {data.map((list) => (
                 <NavList
                   key={list.title}

@@ -1,5 +1,5 @@
-import dayjs from 'dayjs';
-import { z as zod } from 'zod';
+import dayjs from "dayjs";
+import { z as zod } from "zod";
 
 // ----------------------------------------------------------------------
 
@@ -12,10 +12,10 @@ export const schemaHelper = {
     zod
       .string()
       .min(1, {
-        message: props?.message?.required_error ?? 'Phone number is required!',
+        message: props?.message?.required_error ?? "Phone number is required!",
       })
       .refine((data) => props?.isValidPhoneNumber?.(data), {
-        message: props?.message?.invalid_type_error ?? 'Invalid phone number!',
+        message: props?.message?.invalid_type_error ?? "Invalid phone number!",
       }),
   /**
    * date
@@ -33,7 +33,7 @@ export const schemaHelper = {
         if (!dateString) {
           ctx.addIssue({
             code: zod.ZodIssueCode.custom,
-            message: props?.message?.required_error ?? 'Date is required!',
+            message: props?.message?.required_error ?? "Date is required!",
           });
           return null;
         }
@@ -41,7 +41,7 @@ export const schemaHelper = {
         if (!stringToDate.safeParse(date).success) {
           ctx.addIssue({
             code: zod.ZodIssueCode.invalid_date,
-            message: props?.message?.invalid_type_error ?? 'Invalid Date!!',
+            message: props?.message?.invalid_type_error ?? "Invalid Date!!",
           });
         }
 
@@ -54,7 +54,7 @@ export const schemaHelper = {
    */
   editor: (props) =>
     zod.string().min(8, {
-      message: props?.message?.required_error ?? 'Editor is required!',
+      message: props?.message?.required_error ?? "Editor is required!",
     }),
   /**
    * object
@@ -64,10 +64,10 @@ export const schemaHelper = {
     zod
       .custom()
       .refine((data) => data !== null, {
-        message: props?.message?.required_error ?? 'Field is required!',
+        message: props?.message?.required_error ?? "Field is required!",
       })
-      .refine((data) => data !== '', {
-        message: props?.message?.required_error ?? 'Field is required!',
+      .refine((data) => data !== "", {
+        message: props?.message?.required_error ?? "Field is required!",
       }),
   /**
    * boolean
@@ -75,7 +75,7 @@ export const schemaHelper = {
    */
   boolean: (props) =>
     zod.coerce.boolean().refine((bool) => bool === true, {
-      message: props?.message?.required_error ?? 'Switch is required!',
+      message: props?.message?.required_error ?? "Switch is required!",
     }),
   /**
    * file
@@ -83,12 +83,13 @@ export const schemaHelper = {
    */
   file: (props) =>
     zod.custom().transform((data, ctx) => {
-      const hasFile = data instanceof File || (typeof data === 'string' && !!data.length);
+      const hasFile =
+        data instanceof File || (typeof data === "string" && !!data.length);
 
       if (!hasFile) {
         ctx.addIssue({
           code: zod.ZodIssueCode.custom,
-          message: props?.message?.required_error ?? 'File is required!',
+          message: props?.message?.required_error ?? "File is required!",
         });
         return null;
       }
@@ -106,7 +107,7 @@ export const schemaHelper = {
       if (!data.length) {
         ctx.addIssue({
           code: zod.ZodIssueCode.custom,
-          message: props?.message?.required_error ?? 'Files is required!',
+          message: props?.message?.required_error ?? "Files is required!",
         });
       } else if (data.length < minFiles) {
         ctx.addIssue({

@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import Link from '@mui/material/Link';
-import Tooltip from '@mui/material/Tooltip';
+import Link from "@mui/material/Link";
+import Tooltip from "@mui/material/Tooltip";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CONFIG } from 'src/config-global';
-import { countries } from 'src/assets/data';
+import { CONFIG } from "src/config-global";
+import { countries } from "src/assets/data";
 
-import { SvgColor } from 'src/components/svg-color';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
-import { Iconify, FlagIcon, SocialIcon } from 'src/components/iconify';
+import { SvgColor } from "src/components/svg-color";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import { Iconify, FlagIcon, SocialIcon } from "src/components/iconify";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock, ComponentContainer } from '../../component-block';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock, ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
@@ -23,10 +23,13 @@ export function IconsView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Icons"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Icons' }]}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Icons" },
+          ]}
           moreLink={[
-            'https://mui.com/components/material-icons',
-            'https://iconify.design/icon-sets',
+            "https://mui.com/components/material-icons",
+            "https://iconify.design/icon-sets",
           ]}
         />
       </ComponentHero>
@@ -46,14 +49,46 @@ export function IconsView() {
           <Tooltip title="Iconify">
             <Iconify icon="eva:color-palette-fill" width={32} />
           </Tooltip>
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'action.active' }} />
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'action.disabled' }} />
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'primary.main' }} />
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'secondary.main' }} />
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'info.main' }} />
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'success.main' }} />
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'warning.main' }} />
-          <Iconify icon="eva:color-palette-fill" width={32} sx={{ color: 'error.main' }} />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "action.active" }}
+          />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "action.disabled" }}
+          />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "primary.main" }}
+          />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "secondary.main" }}
+          />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "info.main" }}
+          />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "success.main" }}
+          />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "warning.main" }}
+          />
+          <Iconify
+            icon="eva:color-palette-fill"
+            width={32}
+            sx={{ color: "error.main" }}
+          />
         </ComponentBlock>
 
         <ComponentBlock title="Local icon">
@@ -65,35 +100,35 @@ export function IconsView() {
           </Tooltip>
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'action.active', width: 32, height: 32 }}
+            sx={{ color: "action.active", width: 32, height: 32 }}
           />
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'action.disabled', width: 32, height: 32 }}
+            sx={{ color: "action.disabled", width: 32, height: 32 }}
           />
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'primary.main', width: 32, height: 32 }}
+            sx={{ color: "primary.main", width: 32, height: 32 }}
           />
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'secondary.main', width: 32, height: 32 }}
+            sx={{ color: "secondary.main", width: 32, height: 32 }}
           />
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'info.main', width: 32, height: 32 }}
+            sx={{ color: "info.main", width: 32, height: 32 }}
           />
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'success.main', width: 32, height: 32 }}
+            sx={{ color: "success.main", width: 32, height: 32 }}
           />
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'warning.main', width: 32, height: 32 }}
+            sx={{ color: "warning.main", width: 32, height: 32 }}
           />
           <SvgColor
             src={`${CONFIG.site.basePath}/assets/icons/navbar/ic-dashboard.svg`}
-            sx={{ color: 'error.main', width: 32, height: 32 }}
+            sx={{ color: "error.main", width: 32, height: 32 }}
           />
         </ComponentBlock>
 
@@ -112,10 +147,13 @@ export function IconsView() {
         <ComponentBlock title="Flag icon">
           {countries.map((country) =>
             country.label ? (
-              <Tooltip key={country.code} title={`${country.label} - ${country.code}`}>
+              <Tooltip
+                key={country.code}
+                title={`${country.label} - ${country.code}`}
+              >
                 <FlagIcon code={country.code} />
               </Tooltip>
-            ) : null
+            ) : null,
           )}
         </ComponentBlock>
       </ComponentContainer>

@@ -1,10 +1,10 @@
-import { Toaster } from 'sonner';
+import { Toaster } from "sonner";
 
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { toasterClasses } from './classes';
+import { toasterClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
@@ -33,43 +33,43 @@ export const StyledToaster = styled(Toaster)(({ theme }) => {
   const loadingStyles = {
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
-    display: 'none',
-    transform: 'none',
-    overflow: 'hidden',
-    alignItems: 'center',
-    position: 'relative',
-    borderRadius: 'inherit',
-    justifyContent: 'center',
+    width: "100%",
+    height: "100%",
+    display: "none",
+    transform: "none",
+    overflow: "hidden",
+    alignItems: "center",
+    position: "relative",
+    borderRadius: "inherit",
+    justifyContent: "center",
     background: theme.vars.palette.background.neutral,
     [`& .${toasterClasses.loadingIcon}`]: {
       zIndex: 9,
       width: 24,
       height: 24,
-      borderRadius: '50%',
-      animation: 'rotate 3s infinite linear',
+      borderRadius: "50%",
+      animation: "rotate 3s infinite linear",
       background: `conic-gradient(${varAlpha(theme.vars.palette.text.primaryChannel, 0)}, ${varAlpha(theme.vars.palette.text.disabledChannel, 0.64)})`,
     },
-    [toasterClasses.loaderVisible]: { display: 'flex' },
+    [toasterClasses.loaderVisible]: { display: "flex" },
   };
 
   return {
     width: 300,
     [`& .${toasterClasses.toast}`]: {
       gap: 12,
-      width: '100%',
+      width: "100%",
       minHeight: 52,
-      display: 'flex',
+      display: "flex",
       borderRadius: 12,
-      alignItems: 'center',
+      alignItems: "center",
     },
     /*
      * Content
      */
     [`& .${toasterClasses.content}`]: {
       gap: 0,
-      flex: '1 1 auto',
+      flex: "1 1 auto",
     },
     [`& .${toasterClasses.title}`]: {
       fontSize: theme.typography.subtitle2.fontSize,
@@ -86,15 +86,18 @@ export const StyledToaster = styled(Toaster)(({ theme }) => {
     [`& .${toasterClasses.closeButton}`]: {
       top: 0,
       right: 0,
-      left: 'auto',
-      color: 'currentColor',
-      backgroundColor: 'transparent',
-      transform: 'translate(-6px, 6px)',
-      borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
-      transition: theme.transitions.create(['background-color', 'border-color']),
-      '&:hover': {
-        borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.24),
-        backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+      left: "auto",
+      color: "currentColor",
+      backgroundColor: "transparent",
+      transform: "translate(-6px, 6px)",
+      borderColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
+      transition: theme.transitions.create([
+        "background-color",
+        "border-color",
+      ]),
+      "&:hover": {
+        borderColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.24),
+        backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
       },
     },
     /*
@@ -104,10 +107,10 @@ export const StyledToaster = styled(Toaster)(({ theme }) => {
       margin: 0,
       width: 48,
       height: 48,
-      alignItems: 'center',
-      borderRadius: 'inherit',
-      justifyContent: 'center',
-      alignSelf: 'flex-start',
+      alignItems: "center",
+      borderRadius: "inherit",
+      justifyContent: "center",
+      alignSelf: "flex-start",
       [`& .${toasterClasses.iconSvg}`]: {
         width: 24,
         height: 24,
@@ -118,7 +121,7 @@ export const StyledToaster = styled(Toaster)(({ theme }) => {
     /*
      * Default
      */
-    '@keyframes rotate': { to: { transform: 'rotate(1turn)' } },
+    "@keyframes rotate": { to: { transform: "rotate(1turn)" } },
 
     [`& .${toasterClasses.default}`]: {
       ...baseStyles.toastDefault,

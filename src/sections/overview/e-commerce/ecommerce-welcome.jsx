@@ -1,13 +1,20 @@
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha, bgGradient } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
-export function EcommerceWelcome({ title, description, action, img, sx, ...other }) {
+export function EcommerceWelcome({
+  title,
+  description,
+  action,
+  img,
+  sx,
+  ...other
+}) {
   const theme = useTheme();
 
   return (
@@ -16,7 +23,7 @@ export function EcommerceWelcome({ title, description, action, img, sx, ...other
         ...bgGradient({
           color: `to right, ${theme.vars.palette.grey[900]} 25%, ${varAlpha(
             theme.vars.palette.primary.darkerChannel,
-            0.88
+            0.88,
           )}`,
           imgUrl: `${CONFIG.site.basePath}/assets/background/background-6.webp`,
         }),
@@ -25,14 +32,14 @@ export function EcommerceWelcome({ title, description, action, img, sx, ...other
         pr: 3,
         gap: 5,
         borderRadius: 2,
-        display: 'flex',
+        display: "flex",
         height: { md: 1 },
-        position: 'relative',
+        position: "relative",
         pl: { xs: 3, md: 5 },
-        alignItems: 'center',
-        color: 'common.white',
-        textAlign: { xs: 'center', md: 'left' },
-        flexDirection: { xs: 'column', md: 'row' },
+        alignItems: "center",
+        color: "common.white",
+        textAlign: { xs: "center", md: "left" },
+        flexDirection: { xs: "column", md: "row" },
         border: `solid 1px ${theme.vars.palette.grey[800]}`,
         ...sx,
       }}
@@ -40,17 +47,20 @@ export function EcommerceWelcome({ title, description, action, img, sx, ...other
     >
       <Box
         sx={{
-          display: 'flex',
-          flex: '1 1 auto',
-          flexDirection: 'column',
-          alignItems: { xs: 'center', md: 'flex-start' },
+          display: "flex",
+          flex: "1 1 auto",
+          flexDirection: "column",
+          alignItems: { xs: "center", md: "flex-start" },
         }}
       >
-        <Typography variant="h4" sx={{ whiteSpace: 'pre-line', mb: 1 }}>
+        <Typography variant="h4" sx={{ whiteSpace: "pre-line", mb: 1 }}>
           {title}
         </Typography>
 
-        <Typography variant="body2" sx={{ opacity: 0.64, maxWidth: 360, ...(action && { mb: 3 }) }}>
+        <Typography
+          variant="body2"
+          sx={{ opacity: 0.64, maxWidth: 360, ...(action && { mb: 3 }) }}
+        >
           {description}
         </Typography>
 

@@ -1,20 +1,20 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
-import LoadingButton from '@mui/lab/LoadingButton';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-import { useRouter } from 'src/routes/hooks';
-import { RouterLink } from 'src/routes/components';
+import { useRouter } from "src/routes/hooks";
+import { RouterLink } from "src/routes/components";
 
-import { usePostDelete } from 'src/hooks/use-post-delete';
+import { usePostDelete } from "src/hooks/use-post-delete";
 
-import { Iconify } from 'src/components/iconify';
-import { ConfirmDialog } from 'src/components/confirm-dialog';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { Iconify } from "src/components/iconify";
+import { ConfirmDialog } from "src/components/confirm-dialog";
+import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
@@ -31,8 +31,13 @@ export function PostDetailsToolbar({
 }) {
   const popover = usePopover();
   const router = useRouter();
-  const { openConfirm, loading, handleOpenConfirm, handleCloseConfirm, handleDelete } =
-    usePostDelete();
+  const {
+    openConfirm,
+    loading,
+    handleOpenConfirm,
+    handleCloseConfirm,
+    handleDelete,
+  } = usePostDelete();
 
   const handleClickDelete = () => {
     handleOpenConfirm({ _id: postId });
@@ -40,7 +45,12 @@ export function PostDetailsToolbar({
 
   return (
     <>
-      <Stack spacing={1.5} direction="row" sx={{ mb: { xs: 3, md: 5 }, ...sx }} {...other}>
+      <Stack
+        spacing={1.5}
+        direction="row"
+        sx={{ mb: { xs: 3, md: 5 }, ...sx }}
+        {...other}
+      >
         <Button
           component={RouterLink}
           href={backLink}
@@ -51,7 +61,7 @@ export function PostDetailsToolbar({
 
         <Box sx={{ flexGrow: 1 }} />
 
-        {publish === 'published' && (
+        {publish === "published" && (
           <Tooltip title="Go Live">
             <IconButton component={RouterLink} href={liveLink}>
               <Iconify icon="eva:external-link-fill" />
@@ -78,7 +88,7 @@ export function PostDetailsToolbar({
           loadingIndicator="Loading…"
           endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
           onClick={popover.onOpen}
-          sx={{ textTransform: 'capitalize' }}
+          sx={{ textTransform: "capitalize" }}
         >
           {publish}
         </LoadingButton>
@@ -88,7 +98,7 @@ export function PostDetailsToolbar({
         open={popover.open}
         anchorEl={popover.anchorEl}
         onClose={popover.onClose}
-        slotProps={{ arrow: { placement: 'top-right' } }}
+        slotProps={{ arrow: { placement: "top-right" } }}
       >
         <MenuList>
           {publishOptions.map((option) => (
@@ -100,8 +110,12 @@ export function PostDetailsToolbar({
                 onChangePublish(option.value);
               }}
             >
-              {option.value === 'published' && <Iconify icon="eva:cloud-upload-fill" />}
-              {option.value === 'draft' && <Iconify icon="solar:file-text-bold" />}
+              {option.value === "published" && (
+                <Iconify icon="eva:cloud-upload-fill" />
+              )}
+              {option.value === "draft" && (
+                <Iconify icon="solar:file-text-bold" />
+              )}
               {option.label}
             </MenuItem>
           ))}

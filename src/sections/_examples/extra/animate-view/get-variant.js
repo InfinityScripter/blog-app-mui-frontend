@@ -9,11 +9,11 @@ import {
   varRotate,
   varBgColor,
   varBgKenburns,
-} from 'src/components/animate';
+} from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
-export function getVariant(variant = 'slideInUp', distance = 160) {
+export function getVariant(variant = "slideInUp", distance = 160) {
   return {
     // Slide
     slideInUp: varSlide({ distance }).inUp,
@@ -80,8 +80,12 @@ export function getVariant(variant = 'slideInUp', distance = 160) {
     panLeft: varBgPan().left,
     panRight: varBgPan().right,
     color2x: varBgColor(),
-    color3x: varBgColor({ colors: ['#19dcea', '#b22cff', '#ea2222'] }),
-    color4x: varBgColor({ colors: ['#19dcea', '#b22cff', '#ea2222', '#f5be10'] }),
-    color5x: varBgColor({ colors: ['#19dcea', '#b22cff', '#ea2222', '#f5be10', '#3bd80d'] }),
+    color3x: varBgColor({ colors: ["#19dcea", "#b22cff", "#ea2222"] }),
+    color4x: varBgColor({
+      colors: ["#19dcea", "#b22cff", "#ea2222", "#f5be10"],
+    }),
+    color5x: varBgColor({
+      colors: ["#19dcea", "#b22cff", "#ea2222", "#f5be10", "#3bd80d"],
+    }),
   }[variant];
 }

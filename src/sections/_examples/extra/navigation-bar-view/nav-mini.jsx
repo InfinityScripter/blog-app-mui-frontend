@@ -1,8 +1,8 @@
-import Paper from '@mui/material/Paper';
+import Paper from "@mui/material/Paper";
 
-import { NavSectionMini } from 'src/components/nav-section';
+import { NavSectionMini } from "src/components/nav-section";
 
-import { NAV_ITEMS } from './data';
+import { NAV_ITEMS } from "./data";
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ export function NavMini() {
       variant="outlined"
       sx={{
         p: 0.5,
-        mx: 'auto',
+        mx: "auto",
         maxWidth: 96,
         borderRadius: 1,
       }}
@@ -20,7 +20,7 @@ export function NavMini() {
       <NavSectionMini
         data={NAV_ITEMS}
         cssVars={{
-          '--nav-item-gap': '8px',
+          "--nav-item-gap": "8px",
         }}
         slotProps={{
           paper: {},

@@ -1,13 +1,13 @@
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import ListItemText from '@mui/material/ListItemText';
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import ListItemText from "@mui/material/ListItemText";
 
-import { fData } from 'src/utils/format-number';
+import { fData } from "src/utils/format-number";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from '../../iconify';
-import { fileData, FileThumbnail } from '../../file-thumbnail';
+import { Iconify } from "../../iconify";
+import { fileData, FileThumbnail } from "../../file-thumbnail";
 
 // ----------------------------------------------------------------------
 
@@ -25,8 +25,8 @@ export function MultiFilePreview({
       component="li"
       sx={{
         ...(thumbnail && {
-          width: 'auto',
-          display: 'inline-flex',
+          width: "auto",
+          display: "inline-flex",
         }),
       }}
     >
@@ -38,7 +38,7 @@ export function MultiFilePreview({
     <Box
       component="li"
       sx={{
-        ...(thumbnail && { width: 'auto', display: 'inline-flex' }),
+        ...(thumbnail && { width: "auto", display: "inline-flex" }),
       }}
     >
       {lastNode}
@@ -50,11 +50,11 @@ export function MultiFilePreview({
       component="ul"
       sx={{
         gap: 1,
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         ...(thumbnail && {
-          flexWrap: 'wrap',
-          flexDirection: 'row',
+          flexWrap: "wrap",
+          flexDirection: "row",
         }),
         ...sx,
       }}
@@ -66,7 +66,7 @@ export function MultiFilePreview({
 
         if (thumbnail) {
           return (
-            <Box component="li" key={name} sx={{ display: 'inline-flex' }}>
+            <Box component="li" key={name} sx={{ display: "inline-flex" }}>
               <FileThumbnail
                 tooltip
                 imageView
@@ -76,7 +76,7 @@ export function MultiFilePreview({
                   width: 80,
                   height: 80,
                   border: (theme) =>
-                    `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
+                    `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,
                 }}
                 slotProps={{ icon: { width: 36, height: 36 } }}
                 {...slotProps?.thumbnail}
@@ -94,11 +94,11 @@ export function MultiFilePreview({
               pr: 1,
               pl: 1.5,
               gap: 1.5,
-              display: 'flex',
+              display: "flex",
               borderRadius: 1,
-              alignItems: 'center',
+              alignItems: "center",
               border: (theme) =>
-                `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.16)}`,
+                `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,
             }}
           >
             <FileThumbnail file={file} {...slotProps?.thumbnail} />
@@ -106,7 +106,10 @@ export function MultiFilePreview({
             <ListItemText
               primary={name}
               secondary={fData(size)}
-              secondaryTypographyProps={{ component: 'span', typography: 'caption' }}
+              secondaryTypographyProps={{
+                component: "span",
+                typography: "caption",
+              }}
             />
 
             {onRemove && (

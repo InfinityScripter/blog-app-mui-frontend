@@ -1,6 +1,6 @@
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { JwtSignUpView } from 'src/sections/auth/jwt';
+import { JwtSignUpView } from "src/sections/auth/jwt";
 
 // ----------------------------------------------------------------------
 

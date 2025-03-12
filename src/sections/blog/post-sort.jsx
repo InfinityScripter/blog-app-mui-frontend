@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import MenuList from '@mui/material/MenuList';
-import MenuItem from '@mui/material/MenuItem';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import MenuList from "@mui/material/MenuList";
+import MenuItem from "@mui/material/MenuItem";
 
-import { Iconify } from 'src/components/iconify';
-import { usePopover, CustomPopover } from 'src/components/custom-popover';
+import { Iconify } from "src/components/iconify";
+import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
@@ -19,18 +19,26 @@ export function PostSort({ sort, sortOptions, onSort }) {
         onClick={popover.onOpen}
         endIcon={
           <Iconify
-            icon={popover.open ? 'eva:arrow-ios-upward-fill' : 'eva:arrow-ios-downward-fill'}
+            icon={
+              popover.open
+                ? "eva:arrow-ios-upward-fill"
+                : "eva:arrow-ios-downward-fill"
+            }
           />
         }
-        sx={{ fontWeight: 'fontWeightSemiBold', textTransform: 'capitalize' }}
+        sx={{ fontWeight: "fontWeightSemiBold", textTransform: "capitalize" }}
       >
         Sort by:
-        <Box component="span" sx={{ ml: 0.5, fontWeight: 'fontWeightBold' }}>
+        <Box component="span" sx={{ ml: 0.5, fontWeight: "fontWeightBold" }}>
           {sort}
         </Box>
       </Button>
 
-      <CustomPopover open={popover.open} anchorEl={popover.anchorEl} onClose={popover.onClose}>
+      <CustomPopover
+        open={popover.open}
+        anchorEl={popover.anchorEl}
+        onClose={popover.onClose}
+      >
         <MenuList>
           {sortOptions.map((option) => (
             <MenuItem

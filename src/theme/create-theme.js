@@ -1,9 +1,18 @@
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
+import { experimental_extendTheme as extendTheme } from "@mui/material/styles";
 
-import { setFont } from './styles/utils';
-import { overridesTheme } from './overrides-theme';
-import { shadows, typography, components, colorSchemes, customShadows } from './core';
-import { updateCoreWithSettings, updateComponentsWithSettings } from './with-settings/update-theme';
+import { setFont } from "./styles/utils";
+import { overridesTheme } from "./overrides-theme";
+import {
+  shadows,
+  typography,
+  components,
+  colorSchemes,
+  customShadows,
+} from "./core";
+import {
+  updateCoreWithSettings,
+  updateComponentsWithSettings,
+} from "./with-settings/update-theme";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +28,7 @@ export function createTheme(settings) {
       ...typography,
       fontFamily: setFont(settings.fontFamily),
     },
-    cssVarPrefix: '',
+    cssVarPrefix: "",
     shouldSkipGeneratingVar,
   };
 
@@ -31,7 +40,11 @@ export function createTheme(settings) {
   /**
    * 2.Create theme + add locale + update component with settings.
    */
-  const theme = extendTheme(updateTheme, updateComponentsWithSettings(settings), overridesTheme);
+  const theme = extendTheme(
+    updateTheme,
+    updateComponentsWithSettings(settings),
+    overridesTheme,
+  );
 
   return theme;
 }
@@ -40,23 +53,23 @@ export function createTheme(settings) {
 
 function shouldSkipGeneratingVar(keys, value) {
   const skipGlobalKeys = [
-    'mixins',
-    'overlays',
-    'direction',
-    'breakpoints',
-    'cssVarPrefix',
-    'unstable_sxConfig',
-    'typography',
+    "mixins",
+    "overlays",
+    "direction",
+    "breakpoints",
+    "cssVarPrefix",
+    "unstable_sxConfig",
+    "typography",
     // 'transitions',
   ];
 
   const skipPaletteKeys = {
-    global: ['tonalOffset', 'dividerChannel', 'contrastThreshold'],
-    grey: ['A100', 'A200', 'A400', 'A700'],
-    text: ['icon'],
+    global: ["tonalOffset", "dividerChannel", "contrastThreshold"],
+    grey: ["A100", "A200", "A400", "A700"],
+    text: ["icon"],
   };
 
-  const isPaletteKey = keys[0] === 'palette';
+  const isPaletteKey = keys[0] === "palette";
 
   if (isPaletteKey) {
     const paletteType = keys[1];

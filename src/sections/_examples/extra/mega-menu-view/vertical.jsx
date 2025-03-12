@@ -1,14 +1,14 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Paper from '@mui/material/Paper';
-import Divider from '@mui/material/Divider';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { MegaMenuVertical } from 'src/components/mega-menu';
+import { MegaMenuVertical } from "src/components/mega-menu";
 
-import { navItems1 } from './data';
+import { navItems1 } from "./data";
 
 // ----------------------------------------------------------------------
 
@@ -20,9 +20,9 @@ export function DemoMegaMenuVertical() {
         sx={{
           width: 260,
           flexShrink: 0,
-          display: 'flex',
+          display: "flex",
           borderRadius: 2,
-          flexDirection: 'column',
+          flexDirection: "column",
         }}
       >
         <Typography variant="h6" sx={{ p: 2 }}>
@@ -34,13 +34,15 @@ export function DemoMegaMenuVertical() {
         <MegaMenuVertical
           data={navItems1}
           cssVars={{
-            '--nav-item-gap': '8px',
+            "--nav-item-gap": "8px",
           }}
           slotProps={{
             rootItem: {
-              sx: { typography: 'subtitle1' },
+              sx: { typography: "subtitle1" },
               icon: {},
-              title: { fontFamily: (theme) => theme.typography.fontSecondaryFamily },
+              title: {
+                fontFamily: (theme) => theme.typography.fontSecondaryFamily,
+              },
               info: {},
               arrow: {},
             },
@@ -58,8 +60,9 @@ export function DemoMegaMenuVertical() {
         sx={{
           height: 1,
           borderRadius: 2,
-          flex: '1 1 auto',
-          bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.04),
+          flex: "1 1 auto",
+          bgcolor: (theme) =>
+            varAlpha(theme.vars.palette.grey["500Channel"], 0.04),
           border: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
         }}
       />

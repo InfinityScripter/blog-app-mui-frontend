@@ -1,34 +1,34 @@
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
-import Rating from '@mui/material/Rating';
-import Avatar from '@mui/material/Avatar';
-import CardHeader from '@mui/material/CardHeader';
-import Typography from '@mui/material/Typography';
-import { svgIconClasses } from '@mui/material/SvgIcon';
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Rating from "@mui/material/Rating";
+import Avatar from "@mui/material/Avatar";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import { svgIconClasses } from "@mui/material/SvgIcon";
 
-import { useTabs } from 'src/hooks/use-tabs';
+import { useTabs } from "src/hooks/use-tabs";
 
-import { fData, fCurrency, fShortenNumber } from 'src/utils/format-number';
+import { fData, fCurrency, fShortenNumber } from "src/utils/format-number";
 
-import { Label } from 'src/components/label';
-import { Iconify } from 'src/components/iconify';
-import { Scrollbar } from 'src/components/scrollbar';
-import { CustomTabs } from 'src/components/custom-tabs';
+import { Label } from "src/components/label";
+import { Iconify } from "src/components/iconify";
+import { Scrollbar } from "src/components/scrollbar";
+import { CustomTabs } from "src/components/custom-tabs";
 
 // ----------------------------------------------------------------------
 
 const TABS = [
-  { value: '7days', label: 'Top 7 days' },
-  { value: '30days', label: 'Top 30 days' },
-  { value: 'all', label: 'All times' },
+  { value: "7days", label: "Top 7 days" },
+  { value: "30days", label: "Top 30 days" },
+  { value: "all", label: "All times" },
 ];
 
 // ----------------------------------------------------------------------
 
 export function AppTopRelated({ title, subheader, list, ...other }) {
-  const tabs = useTabs('7days');
+  const tabs = useTabs("7days");
 
   const renderTabs = (
     <CustomTabs
@@ -50,7 +50,15 @@ export function AppTopRelated({ title, subheader, list, ...other }) {
       {renderTabs}
 
       <Scrollbar sx={{ minHeight: 384 }}>
-        <Box sx={{ p: 3, gap: 3, minWidth: 360, display: 'flex', flexDirection: 'column' }}>
+        <Box
+          sx={{
+            p: 3,
+            gap: 3,
+            minWidth: 360,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           {list.map((item) => (
             <Item key={item.id} item={item} />
           ))}
@@ -62,7 +70,10 @@ export function AppTopRelated({ title, subheader, list, ...other }) {
 
 function Item({ item, sx, ...other }) {
   return (
-    <Box sx={{ gap: 2, display: 'flex', alignItems: 'center', ...sx }} {...other}>
+    <Box
+      sx={{ gap: 2, display: "flex", alignItems: "center", ...sx }}
+      {...other}
+    >
       <Avatar
         variant="rounded"
         src={item.shortcut}
@@ -70,18 +81,21 @@ function Item({ item, sx, ...other }) {
           p: 1,
           width: 48,
           height: 48,
-          bgcolor: 'background.neutral',
+          bgcolor: "background.neutral",
         }}
       />
 
       <div>
-        <Box sx={{ mb: 1, gap: 1, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ mb: 1, gap: 1, display: "flex", alignItems: "center" }}>
           <Typography variant="subtitle2" noWrap>
             {item.name}
           </Typography>
 
-          <Label color={item.price === 0 ? 'default' : 'success'} sx={{ height: 20 }}>
-            {item.price === 0 ? 'Free' : fCurrency(item.price)}
+          <Label
+            color={item.price === 0 ? "default" : "success"}
+            sx={{ height: 20 }}
+          >
+            {item.price === 0 ? "Free" : fCurrency(item.price)}
           </Label>
         </Box>
 
@@ -90,21 +104,36 @@ function Item({ item, sx, ...other }) {
           direction="row"
           alignItems="center"
           divider={
-            <Box sx={{ width: 4, height: 4, borderRadius: '50%', bgcolor: 'text.disabled' }} />
+            <Box
+              sx={{
+                width: 4,
+                height: 4,
+                borderRadius: "50%",
+                bgcolor: "text.disabled",
+              }}
+            />
           }
-          sx={{ typography: 'caption' }}
+          sx={{ typography: "caption" }}
         >
-          <Box sx={{ gap: 0.5, display: 'flex', alignItems: 'center' }}>
-            <Iconify width={16} icon="solar:download-bold" sx={{ color: 'text.disabled' }} />
+          <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
+            <Iconify
+              width={16}
+              icon="solar:download-bold"
+              sx={{ color: "text.disabled" }}
+            />
             {fShortenNumber(item.downloaded)}
           </Box>
 
-          <Box sx={{ gap: 0.5, display: 'flex', alignItems: 'center' }}>
-            <Iconify width={16} icon="heroicons:server-solid" sx={{ color: 'text.disabled' }} />
+          <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
+            <Iconify
+              width={16}
+              icon="heroicons:server-solid"
+              sx={{ color: "text.disabled" }}
+            />
             {fData(item.size)}
           </Box>
 
-          <Box sx={{ gap: 0.5, display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
             <Rating
               readOnly
               size="small"

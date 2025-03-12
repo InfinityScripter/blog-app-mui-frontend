@@ -1,46 +1,46 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Menu from '@mui/material/Menu';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemButton from '@mui/material/ListItemButton';
+import Menu from "@mui/material/Menu";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import IconButton from "@mui/material/IconButton";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemButton from "@mui/material/ListItemButton";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock, ComponentContainer } from '../../component-block';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock, ComponentContainer } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 const OPTIONS = [
-  'Show some love to Material-UI',
-  'Show all notification content',
-  'Hide sensitive notification content',
-  'Hide all notification content',
+  "Show some love to Material-UI",
+  "Show all notification content",
+  "Hide sensitive notification content",
+  "Hide all notification content",
 ];
 
 const OPTIONS_MAXHEIGHT = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
+  "None",
+  "Atria",
+  "Callisto",
+  "Dione",
+  "Ganymede",
+  "Hangouts Call",
+  "Luna",
+  "Oberon",
+  "Phobos",
+  "Pyxis",
+  "Sedna",
+  "Titania",
+  "Triton",
+  "Umbriel",
 ];
 
 // ----------------------------------------------------------------------
@@ -84,8 +84,11 @@ export function MenuView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Menu"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Menu' }]}
-          moreLink={['https://mui.com/components/menus']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Menu" },
+          ]}
+          moreLink={["https://mui.com/components/menus"]}
         />
       </ComponentHero>
 
@@ -93,17 +96,30 @@ export function MenuView() {
         sx={{
           rowGap: 5,
           columnGap: 3,
-          display: 'grid',
-          gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' },
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(3, 1fr)",
+          },
         }}
       >
         <ComponentBlock title="Simple">
           <Button variant="outlined" onClick={handleOpen}>
             Open Menu
           </Button>
-          <Menu id="simple-menu" anchorEl={isOpen} onClose={handleClose} open={!!isOpen}>
-            {['Profile', 'My account', 'Logout'].map((option) => (
-              <MenuItem key={option} selected={option === 'Profile'} onClick={handleClose}>
+          <Menu
+            id="simple-menu"
+            anchorEl={isOpen}
+            onClose={handleClose}
+            open={!!isOpen}
+          >
+            {["Profile", "My account", "Logout"].map((option) => (
+              <MenuItem
+                key={option}
+                selected={option === "Profile"}
+                onClick={handleClose}
+              >
                 {option}
               </MenuItem>
             ))}
@@ -118,11 +134,19 @@ export function MenuView() {
               aria-label="when device is locked"
               onClick={handleClickListItem}
             >
-              <ListItemText primary="When device is locked" secondary={OPTIONS[selectedIndex]} />
+              <ListItemText
+                primary="When device is locked"
+                secondary={OPTIONS[selectedIndex]}
+              />
             </ListItemButton>
           </nav>
 
-          <Menu id="lock-menu" anchorEl={isOpenList} onClose={handleClose} open={!!isOpenList}>
+          <Menu
+            id="lock-menu"
+            anchorEl={isOpenList}
+            onClose={handleClose}
+            open={!!isOpenList}
+          >
             {OPTIONS.map((option, index) => (
               <MenuItem
                 key={option}
@@ -151,10 +175,16 @@ export function MenuView() {
             anchorEl={isOpenMaxHeight}
             onClose={handleMaxHeightClose}
             open={!!isOpenMaxHeight}
-            slotProps={{ paper: { sx: { width: '20ch', maxHeight: 48 * 4.5 } } }}
+            slotProps={{
+              paper: { sx: { width: "20ch", maxHeight: 48 * 4.5 } },
+            }}
           >
             {OPTIONS_MAXHEIGHT.map((option) => (
-              <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleMaxHeightClose}>
+              <MenuItem
+                key={option}
+                selected={option === "Pyxis"}
+                onClick={handleMaxHeightClose}
+              >
                 {option}
               </MenuItem>
             ))}

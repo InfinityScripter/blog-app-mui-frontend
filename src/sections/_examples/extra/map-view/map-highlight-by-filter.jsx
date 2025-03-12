@@ -1,10 +1,10 @@
-import { Layer, Source } from 'react-map-gl';
-import { useMemo, useState, useCallback } from 'react';
+import { Layer, Source } from "react-map-gl";
+import { useMemo, useState, useCallback } from "react";
 
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 
-import { Map, MapPopup, MapControl } from 'src/components/map';
+import { Map, MapPopup, MapControl } from "src/components/map";
 
 // ----------------------------------------------------------------------
 
@@ -12,25 +12,25 @@ export function MapHighlightByFilter({ ...other }) {
   const theme = useTheme();
 
   const countiesLayer = {
-    id: 'counties',
-    type: 'fill',
-    'source-layer': 'original',
+    id: "counties",
+    type: "fill",
+    "source-layer": "original",
     paint: {
-      'fill-outline-color': theme.palette.grey[900],
-      'fill-color': theme.palette.grey[900],
-      'fill-opacity': 0.12,
+      "fill-outline-color": theme.palette.grey[900],
+      "fill-color": theme.palette.grey[900],
+      "fill-opacity": 0.12,
     },
   };
 
   const highlightLayer = {
-    id: 'counties-highlighted',
-    type: 'fill',
-    source: 'counties',
-    'source-layer': 'original',
+    id: "counties-highlighted",
+    type: "fill",
+    source: "counties",
+    "source-layer": "original",
     paint: {
-      'fill-outline-color': theme.palette.error.main,
-      'fill-color': theme.palette.error.main,
-      'fill-opacity': 0.48,
+      "fill-outline-color": theme.palette.error.main,
+      "fill-color": theme.palette.error.main,
+      "fill-opacity": 0.48,
     },
   };
 
@@ -46,16 +46,19 @@ export function MapHighlightByFilter({ ...other }) {
     });
   }, []);
 
-  const selectedCounty = (hoverInfo && hoverInfo.countyName) || '';
+  const selectedCounty = (hoverInfo && hoverInfo.countyName) || "";
 
-  const filter = useMemo(() => ['in', 'COUNTY', selectedCounty], [selectedCounty]);
+  const filter = useMemo(
+    () => ["in", "COUNTY", selectedCounty],
+    [selectedCounty],
+  );
 
   return (
     <Map
       initialViewState={{ latitude: 38.88, longitude: -98, zoom: 3 }}
       minZoom={2}
       onMouseMove={onHover}
-      interactiveLayerIds={['counties']}
+      interactiveLayerIds={["counties"]}
       {...other}
     >
       <MapControl />
@@ -66,8 +69,12 @@ export function MapHighlightByFilter({ ...other }) {
       </Source>
 
       {selectedCounty && hoverInfo && (
-        <MapPopup longitude={hoverInfo.longitude} latitude={hoverInfo.latitude} closeButton={false}>
-          <Typography variant="body2" sx={{ color: 'common.white' }}>
+        <MapPopup
+          longitude={hoverInfo.longitude}
+          latitude={hoverInfo.latitude}
+          closeButton={false}
+        >
+          <Typography variant="body2" sx={{ color: "common.white" }}>
             {selectedCounty}
           </Typography>
         </MapPopup>

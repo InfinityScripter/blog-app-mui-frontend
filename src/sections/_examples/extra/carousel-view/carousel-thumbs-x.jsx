@@ -1,37 +1,37 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { Image } from 'src/components/image';
+import { Image } from "src/components/image";
 import {
   Carousel,
   useCarousel,
   CarouselThumb,
   CarouselThumbs,
   CarouselArrowNumberButtons,
-} from 'src/components/carousel';
+} from "src/components/carousel";
 
-import { IndexLabel } from './elements';
+import { IndexLabel } from "./elements";
 
 // ----------------------------------------------------------------------
 
 export function CarouselThumbsX({ data }) {
   const carousel = useCarousel({
     thumbs: {
-      slidesToShow: 'auto',
+      slidesToShow: "auto",
     },
   });
 
   return (
     <div>
-      <Box sx={{ mb: 2.5, position: 'relative' }}>
+      <Box sx={{ mb: 2.5, position: "relative" }}>
         <Carousel carousel={carousel} sx={{ borderRadius: 2 }}>
           {data.map((item, index) => (
-            <Box key={item.id} sx={{ position: 'relative' }}>
+            <Box key={item.id} sx={{ position: "relative" }}>
               <IndexLabel index={index + 1} />
               <Image
                 visibleByDefault
                 alt={item.title}
                 src={item.coverUrl}
-                ratio={{ xs: '4/3', sm: '16/10' }}
+                ratio={{ xs: "4/3", sm: "16/10" }}
               />
             </Box>
           ))}
@@ -42,7 +42,7 @@ export function CarouselThumbsX({ data }) {
           options={carousel.options}
           totalSlides={carousel.dots.dotCount}
           selectedIndex={carousel.dots.selectedIndex + 1}
-          sx={{ right: 16, bottom: 16, position: 'absolute' }}
+          sx={{ right: 16, bottom: 16, position: "absolute" }}
         />
       </Box>
 

@@ -1,28 +1,36 @@
-import Stack from '@mui/material/Stack';
-import LoadingButton from '@mui/lab/LoadingButton';
-import Button, { buttonClasses } from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
+import LoadingButton from "@mui/lab/LoadingButton";
+import Button, { buttonClasses } from "@mui/material/Button";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
-import { ComponentBlock } from '../../component-block';
-
-// ----------------------------------------------------------------------
-
-const COLORS = ['inherit', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
-
-const SIZES = ['small', 'medium', 'large'];
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
-export function ButtonVariants({ variant = 'text' }) {
+const COLORS = [
+  "inherit",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
+
+const SIZES = ["small", "medium", "large"];
+
+// ----------------------------------------------------------------------
+
+export function ButtonVariants({ variant = "text" }) {
   return (
     <Stack
       sx={{
         rowGap: 5,
         columnGap: 3,
-        display: 'grid',
-        gridTemplateColumns: { xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
-        [`& .${buttonClasses.root}`]: { textTransform: 'capitalize' },
+        display: "grid",
+        gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
+        [`& .${buttonClasses.root}`]: { textTransform: "capitalize" },
       }}
     >
       <ComponentBlock title="Base" sx={{ gap: 1 }}>
@@ -44,7 +52,7 @@ export function ButtonVariants({ variant = 'text' }) {
       <ComponentBlock title="Colors" sx={{ gap: 1 }}>
         {COLORS.map((color) => (
           <Button key={color} variant={variant} color={color}>
-            {color === 'inherit' ? 'default' : color}
+            {color === "inherit" ? "default" : color}
           </Button>
         ))}
       </ComponentBlock>
@@ -58,7 +66,11 @@ export function ButtonVariants({ variant = 'text' }) {
           Icon Left
         </Button>
 
-        <Button variant={variant} color="error" endIcon={<Iconify icon="ic:round-access-alarm" />}>
+        <Button
+          variant={variant}
+          color="error"
+          endIcon={<Iconify icon="ic:round-access-alarm" />}
+        >
           Icon Right
         </Button>
 

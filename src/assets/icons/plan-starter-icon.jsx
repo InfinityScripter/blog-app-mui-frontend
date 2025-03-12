@@ -1,7 +1,7 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -21,13 +21,16 @@ function PlanStarterIcon({ sx, ...other }) {
       height="100%"
       viewBox="0 0 80 80"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 48, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 48, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       <g transform="translate(0 -5)">
         <g transform="translate(0 9.15)">
           <g transform="translate(9.167 19.963)">
-            <path fill={PRIMARY_DARK} d="M53.333 17.467H61.666V24.953H53.333z" />
+            <path
+              fill={PRIMARY_DARK}
+              d="M53.333 17.467H61.666V24.953H53.333z"
+            />
 
             <path
               fill={PRIMARY_DARKER}

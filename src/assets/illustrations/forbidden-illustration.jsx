@@ -1,11 +1,11 @@
-import { memo } from 'react';
+import { memo } from "react";
 
-import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 
-import { CONFIG } from 'src/config-global';
+import { CONFIG } from "src/config-global";
 
-import { BackgroundShape } from './background-shape';
+import { BackgroundShape } from "./background-shape";
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +27,7 @@ function ForbiddenIllustration({ hideBackground, sx, ...other }) {
       height="100%"
       viewBox="0 0 480 360"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 320, maxWidth: 1, flexShrink: 0, height: 'auto', ...sx }}
+      sx={{ width: 320, maxWidth: 1, flexShrink: 0, height: "auto", ...sx }}
       {...other}
     >
       {!hideBackground && <BackgroundShape />}
@@ -51,7 +51,10 @@ function ForbiddenIllustration({ hideBackground, sx, ...other }) {
         opacity="0.12"
       />
 
-      <path fill="#FFD666" d="M111.045 121c30.8-.5 30.8-46.3 0-46.8-30.8.5-30.8 46.3 0 46.8z" />
+      <path
+        fill="#FFD666"
+        d="M111.045 121c30.8-.5 30.8-46.3 0-46.8-30.8.5-30.8 46.3 0 46.8z"
+      />
 
       <path
         fill="#FBCDBE"

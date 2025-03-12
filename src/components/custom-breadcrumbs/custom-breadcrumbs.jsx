@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
 
-import { BreadcrumbsLink } from './breadcrumb-link';
+import { BreadcrumbsLink } from "./breadcrumb-link";
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +27,11 @@ export function CustomBreadcrumbs({
   );
 
   const renderLinks = (
-    <Breadcrumbs separator={<Separator />} sx={slotProps?.breadcrumbs} {...other}>
+    <Breadcrumbs
+      separator={<Separator />}
+      sx={slotProps?.breadcrumbs}
+      {...other}
+    >
       {links.map((link, index) => (
         <BreadcrumbsLink
           key={link.name ?? index}
@@ -39,13 +43,21 @@ export function CustomBreadcrumbs({
     </Breadcrumbs>
   );
 
-  const renderAction = <Box sx={{ flexShrink: 0, ...slotProps?.action }}> {action} </Box>;
+  const renderAction = (
+    <Box sx={{ flexShrink: 0, ...slotProps?.action }}> {action} </Box>
+  );
 
   const renderMoreLink = (
     <Box component="ul">
       {moreLink?.map((href) => (
-        <Box key={href} component="li" sx={{ display: 'flex' }}>
-          <Link href={href} variant="body2" target="_blank" rel="noopener" sx={slotProps?.moreLink}>
+        <Box key={href} component="li" sx={{ display: "flex" }}>
+          <Link
+            href={href}
+            variant="body2"
+            target="_blank"
+            rel="noopener"
+            sx={slotProps?.moreLink}
+          >
             {href}
           </Link>
         </Box>
@@ -79,8 +91,8 @@ function Separator() {
       sx={{
         width: 4,
         height: 4,
-        borderRadius: '50%',
-        bgcolor: 'text.disabled',
+        borderRadius: "50%",
+        bgcolor: "text.disabled",
       }}
     />
   );

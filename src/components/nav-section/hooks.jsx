@@ -1,6 +1,6 @@
-import { cloneElement } from 'react';
+import { cloneElement } from "react";
 
-import { RouterLink } from 'src/routes/components';
+import { RouterLink } from "src/routes/components";
 
 // ----------------------------------------------------------------------
 
@@ -21,17 +21,18 @@ export function useNavItem({
   const subDeepItem = Number(depth) > 2;
 
   const linkProps = externalLink
-    ? { href: path, target: '_blank', rel: 'noopener' }
+    ? { href: path, target: "_blank", rel: "noopener" }
     : { component: RouterLink, href: path };
 
-  const baseProps = hasChild && !enabledRootRedirect ? { component: 'div' } : linkProps;
+  const baseProps =
+    hasChild && !enabledRootRedirect ? { component: "div" } : linkProps;
 
   /**
    * Render @icon
    */
   let renderIcon = null;
 
-  if (icon && render?.navIcon && typeof icon === 'string') {
+  if (icon && render?.navIcon && typeof icon === "string") {
     renderIcon = render?.navIcon[icon];
   } else {
     renderIcon = icon;

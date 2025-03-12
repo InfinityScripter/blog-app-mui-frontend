@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,10 @@ export function useTabs(defaultValue) {
     setValue(newValue);
   }, []);
 
-  const memoizedValue = useMemo(() => ({ value, setValue, onChange }), [onChange, value]);
+  const memoizedValue = useMemo(
+    () => ({ value, setValue, onChange }),
+    [onChange, value],
+  );
 
   return memoizedValue;
 }

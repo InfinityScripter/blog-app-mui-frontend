@@ -1,30 +1,38 @@
-'use client';
+"use client";
 
-import Switch from '@mui/material/Switch';
-import FormGroup from '@mui/material/FormGroup';
-import FormControl from '@mui/material/FormControl';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from "@mui/material/Switch";
+import FormGroup from "@mui/material/FormGroup";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
-import { paths } from 'src/routes/paths';
+import { paths } from "src/routes/paths";
 
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { ComponentHero } from '../../component-hero';
-import { ComponentBlock } from '../../component-block';
-import { ScrollToViewTemplate } from '../../component-template';
+import { ComponentHero } from "../../component-hero";
+import { ComponentBlock } from "../../component-block";
+import { ScrollToViewTemplate } from "../../component-template";
 
 // ----------------------------------------------------------------------
 
-const COLORS = ['default', 'primary', 'secondary', 'info', 'success', 'warning', 'error'];
+const COLORS = [
+  "default",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
-const PLACEMENTS = ['top', 'start', 'bottom', 'end'];
+const PLACEMENTS = ["top", "start", "bottom", "end"];
 
 // ----------------------------------------------------------------------
 
 export function SwitchView() {
   const DEMO = [
     {
-      name: 'Basic',
+      name: "Basic",
       component: (
         <ComponentBlock>
           <Switch name="basic-1" defaultChecked />
@@ -36,18 +44,24 @@ export function SwitchView() {
       ),
     },
     {
-      name: 'Sizes',
+      name: "Sizes",
       component: (
         <ComponentBlock>
           <FormGroup row>
-            <FormControlLabel control={<Switch name="small" size="small" />} label="Small" />
-            <FormControlLabel control={<Switch name="normal" />} label="Normal" />
+            <FormControlLabel
+              control={<Switch name="small" size="small" />}
+              label="Small"
+            />
+            <FormControlLabel
+              control={<Switch name="normal" />}
+              label="Normal"
+            />
           </FormGroup>
         </ComponentBlock>
       ),
     },
     {
-      name: 'Placement',
+      name: "Placement",
       component: (
         <ComponentBlock>
           <FormGroup row>
@@ -58,7 +72,7 @@ export function SwitchView() {
                 label={placement}
                 labelPlacement={placement}
                 control={<Switch name={placement} />}
-                sx={{ textTransform: 'capitalize' }}
+                sx={{ textTransform: "capitalize" }}
               />
             ))}
           </FormGroup>
@@ -66,7 +80,7 @@ export function SwitchView() {
       ),
     },
     {
-      name: 'Colors',
+      name: "Colors",
       component: (
         <ComponentBlock>
           <FormControl component="fieldset">
@@ -76,7 +90,7 @@ export function SwitchView() {
                   key={color}
                   control={<Switch defaultChecked name={color} color={color} />}
                   label={color}
-                  sx={{ textTransform: 'capitalize' }}
+                  sx={{ textTransform: "capitalize" }}
                 />
               ))}
 
@@ -97,8 +111,11 @@ export function SwitchView() {
       <ComponentHero>
         <CustomBreadcrumbs
           heading="Switch"
-          links={[{ name: 'Components', href: paths.components }, { name: 'Switch' }]}
-          moreLink={['https://mui.com/components/switches']}
+          links={[
+            { name: "Components", href: paths.components },
+            { name: "Switch" },
+          ]}
+          moreLink={["https://mui.com/components/switches"]}
         />
       </ComponentHero>
 

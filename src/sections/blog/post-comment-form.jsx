@@ -1,26 +1,31 @@
-import { z as zod } from 'zod';
-import { useForm } from 'react-hook-form';
-import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { z as zod } from "zod";
+import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import Stack from '@mui/material/Stack';
-import Alert from '@mui/material/Alert';
-import LoadingButton from '@mui/lab/LoadingButton';
+import Stack from "@mui/material/Stack";
+import Alert from "@mui/material/Alert";
+import LoadingButton from "@mui/lab/LoadingButton";
 
-import { addComment, getCurrentUser } from 'src/actions/blog-ssr';
+import { addComment, getCurrentUser } from "src/actions/blog-ssr";
 
-import { Form, Field } from 'src/components/hook-form';
+import { Form, Field } from "src/components/hook-form";
 
 // ----------------------------------------------------------------------
 
 export const CommentSchema = zod.object({
-  comment: zod.string().min(1, { message: 'Comment is required!' }),
+  comment: zod.string().min(1, { message: "Comment is required!" }),
 });
 
 // ----------------------------------------------------------------------
 
-export function PostCommentForm({ postId: propPostId, onCommentAdded, onCommentUpdated, parentCommentId }) {
+export function PostCommentForm({
+  postId: propPostId,
+  onCommentAdded,
+  onCommentUpdated,
+  parentCommentId,
+}) {
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState(null);
   const params = useParams();
@@ -28,7 +33,7 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded, onCommentU
   // Get post ID from props or URL params
   const postId = propPostId || params?.id;
 
-  const defaultValues = { comment: '' };
+  const defaultValues = { comment: "" };
 
   const methods = useForm({
     resolver: zodResolver(CommentSchema),
@@ -48,8 +53,8 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded, onCommentU
         setCurrentUser(user);
         // eslint-disable-next-line no-shadow
       } catch (error) {
-        console.error('Failed to fetch user:', error);
-        setError('Please login to comment');
+        console.error("Failed to fetch user:", error);
+        setError("Please login to comment");
       }
     };
     fetchUser();
@@ -60,12 +65,12 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded, onCommentU
       setError(null);
 
       if (!currentUser) {
-        setError('Please login to comment');
+        setError("Please login to comment");
         return;
       }
 
       if (!postId) {
-        setError('Unable to add comment at this time');
+        setError("Unable to add comment at this time");
         return;
       }
 
@@ -80,14 +85,14 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded, onCommentU
       if (onCommentAdded) {
         onCommentAdded(result);
       }
-      
+
       if (onCommentUpdated) {
         onCommentUpdated();
       }
       // eslint-disable-next-line no-shadow
     } catch (error) {
-      console.error('Failed to add comment:', error);
-      setError(error.message || 'Failed to add comment');
+      console.error("Failed to add comment:", error);
+      setError(error.message || "Failed to add comment");
     }
   });
 
@@ -128,7 +133,7 @@ export function PostCommentForm({ postId: propPostId, onCommentAdded, onCommentU
             loading={isSubmitting}
             disabled={!currentUser}
           >
-            {parentCommentId ? 'Post reply' : 'Post comment'}
+            {parentCommentId ? "Post reply" : "Post comment"}
           </LoadingButton>
         </Stack>
       </Stack>

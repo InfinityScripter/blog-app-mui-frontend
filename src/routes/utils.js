@@ -1,8 +1,10 @@
 // ----------------------------------------------------------------------
 
 export const hasParams = (url) => {
-  const queryString = url.split('?')[1];
-  return queryString ? new URLSearchParams(queryString).toString().length > 0 : false;
+  const queryString = url.split("?")[1];
+  return queryString
+    ? new URLSearchParams(queryString).toString().length > 0
+    : false;
 };
 
 // ----------------------------------------------------------------------
@@ -17,7 +19,7 @@ export function removeLastSlash(pathname) {
    * @input  = '/dashboard/calendar'
    * @output = '/dashboard/calendar'
    */
-  if (pathname !== '/' && pathname.endsWith('/')) {
+  if (pathname !== "/" && pathname.endsWith("/")) {
     return pathname.slice(0, -1);
   }
 
@@ -39,5 +41,5 @@ export function removeParams(url) {
 // ----------------------------------------------------------------------
 
 export function isExternalLink(url) {
-  return url.startsWith('http');
+  return url.startsWith("http");
 }

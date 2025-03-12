@@ -1,20 +1,20 @@
-import { useId } from 'react';
-import { m } from 'framer-motion';
+import { useId } from "react";
+import { m } from "framer-motion";
 
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import { varFade } from 'src/components/animate';
+import { varFade } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
 const baseStyles = {
   zIndex: 2,
-  display: 'none',
-  color: 'grey.500',
-  position: 'absolute',
-  '& line': { strokeDasharray: 3, stroke: 'currentColor' },
-  '& path': { fill: 'currentColor', stroke: 'currentColor' },
-  '@media (min-width: 1440px)': { display: 'block' },
+  display: "none",
+  color: "grey.500",
+  position: "absolute",
+  "& line": { strokeDasharray: 3, stroke: "currentColor" },
+  "& path": { fill: "currentColor", stroke: "currentColor" },
+  "@media (min-width: 1440px)": { display: "block" },
 };
 
 const transition = { duration: 0.64, ease: [0.43, 0.13, 0.23, 0.96] };
@@ -28,10 +28,10 @@ export function FloatLine({ sx, vertical, ...other }) {
       sx={{
         ...baseStyles,
         zIndex: 1,
-        width: '100%',
-        height: '1px',
+        width: "100%",
+        height: "1px",
         opacity: 0.24,
-        ...(vertical && { width: '1px', height: '100%' }),
+        ...(vertical && { width: "1px", height: "100%" }),
         ...sx,
       }}
       {...other}
@@ -43,8 +43,8 @@ export function FloatLine({ sx, vertical, ...other }) {
           y1="0"
           y2="100%"
           variants={{
-            initial: { y2: '0%' },
-            animate: { y2: '100%', transition },
+            initial: { y2: "0%" },
+            animate: { y2: "100%", transition },
           }}
         />
       ) : (
@@ -54,8 +54,8 @@ export function FloatLine({ sx, vertical, ...other }) {
           y1="0.5"
           y2="0.5"
           variants={{
-            initial: { x2: '0%' },
-            animate: { x2: '100%', transition },
+            initial: { x2: "0%" },
+            animate: { x2: "100%", transition },
           }}
         />
       )}
@@ -174,8 +174,8 @@ export function FloatDotIcon({ sx, ...other }) {
         ...baseStyles,
         width: 12,
         height: 12,
-        borderRadius: '50%',
-        bgcolor: 'currentColor',
+        borderRadius: "50%",
+        bgcolor: "currentColor",
         ...sx,
       }}
       {...other}
@@ -204,11 +204,11 @@ export function CircleSvg({ sx, variants }) {
         left: 0,
         right: 0,
         bottom: 0,
-        m: 'auto',
+        m: "auto",
         width: 560,
         height: 560,
-        color: 'grey.500',
-        position: 'absolute',
+        color: "grey.500",
+        position: "absolute",
         ...sx,
       }}
     >
@@ -233,7 +233,7 @@ export function CircleSvg({ sx, variants }) {
       <g clipPath={`url(#${clipPathId})`}>
         <mask
           id={maskId}
-          style={{ maskType: 'alpha' }}
+          style={{ maskType: "alpha" }}
           width="560"
           height="560"
           x="0"
@@ -243,7 +243,12 @@ export function CircleSvg({ sx, variants }) {
           <path fill={`url(#${gradientId})`} d="M0 0H560V560H0z" />
         </mask>
 
-        <g stroke="currentColor" strokeDasharray={3} mask={`url(#${maskId})`} opacity={0.4}>
+        <g
+          stroke="currentColor"
+          strokeDasharray={3}
+          mask={`url(#${maskId})`}
+          opacity={0.4}
+        >
           <circle cx="280" cy="280" r="90" />
           <circle cx="280" cy="280" r="180" />
           <path d="M0 0l560 560M560 0L0 560" />

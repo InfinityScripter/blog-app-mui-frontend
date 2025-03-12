@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from "react";
 import {
   arraySwap,
   arrayMove,
@@ -8,7 +8,7 @@ import {
   rectSwappingStrategy,
   sortableKeyboardCoordinates,
   defaultAnimateLayoutChanges,
-} from '@dnd-kit/sortable';
+} from "@dnd-kit/sortable";
 import {
   useSensor,
   DndContext,
@@ -20,25 +20,31 @@ import {
   KeyboardSensor,
   MeasuringStrategy,
   defaultDropAnimationSideEffects,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Portal from '@mui/material/Portal';
-import Button from '@mui/material/Button';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Portal from "@mui/material/Portal";
+import Button from "@mui/material/Button";
 
-import { itemClasses } from './classes';
-import ItemBase from './sortable-item-base';
+import { itemClasses } from "./classes";
+import ItemBase from "./sortable-item-base";
 
 // ----------------------------------------------------------------------
 
 const dropAnimationConfig = {
-  sideEffects: defaultDropAnimationSideEffects({ styles: { active: { opacity: '0.5' } } }),
+  sideEffects: defaultDropAnimationSideEffects({
+    styles: { active: { opacity: "0.5" } },
+  }),
 };
 
 // ----------------------------------------------------------------------
 
-export function SortableContainer({ itemCount = 12, swap = false, layout = 'grid' }) {
+export function SortableContainer({
+  itemCount = 12,
+  swap = false,
+  layout = "grid",
+}) {
   const createItems = [...Array(itemCount)].map((_, index) => index + 1);
 
   const [items, setItems] = useState(createItems);
@@ -46,7 +52,9 @@ export function SortableContainer({ itemCount = 12, swap = false, layout = 'grid
   const sensors = useSensors(
     useSensor(MouseSensor),
     useSensor(TouchSensor),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
   );
 
   const isFirstAnnouncement = useRef(true);
@@ -118,15 +126,21 @@ export function SortableContainer({ itemCount = 12, swap = false, layout = 'grid
               py: 3,
               gap: 2,
               width: 1,
-              ...(layout === 'grid' && {
-                display: 'grid',
-                gridTemplateColumns: { xs: 'repeat(2, 1fr)', sm: 'repeat(4, 1fr)' },
+              ...(layout === "grid" && {
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "repeat(2, 1fr)",
+                  sm: "repeat(4, 1fr)",
+                },
               }),
-              ...(layout === 'vertical' && { display: 'flex', flexDirection: 'column' }),
-              ...(layout === 'horizontal' && {
-                display: 'flex',
-                overflowX: 'auto',
-                flexDirection: 'row',
+              ...(layout === "vertical" && {
+                display: "flex",
+                flexDirection: "column",
+              }),
+              ...(layout === "horizontal" && {
+                display: "flex",
+                overflowX: "auto",
+                flexDirection: "row",
                 [`& .${itemClasses.itemWrap}`]: { maxWidth: 180 },
               }),
             }}
@@ -146,7 +160,10 @@ export function SortableContainer({ itemCount = 12, swap = false, layout = 'grid
         <Portal>
           <DragOverlay dropAnimation={dropAnimationConfig}>
             {activeId ? (
-              <ItemBase item={items[activeIndex]} stateProps={{ dragOverlay: true }} />
+              <ItemBase
+                item={items[activeIndex]}
+                stateProps={{ dragOverlay: true }}
+              />
             ) : null}
           </DragOverlay>
         </Portal>
@@ -157,7 +174,8 @@ export function SortableContainer({ itemCount = 12, swap = false, layout = 'grid
 
 // ----------------------------------------------------------------------
 
-const animateLayoutChanges = (args) => defaultAnimateLayoutChanges({ ...args, wasDragging: true });
+const animateLayoutChanges = (args) =>
+  defaultAnimateLayoutChanges({ ...args, wasDragging: true });
 
 // ----------------------------------------------------------------------
 

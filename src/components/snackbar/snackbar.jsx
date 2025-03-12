@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Portal from '@mui/material/Portal';
+import Portal from "@mui/material/Portal";
 
-import { Iconify } from '../iconify';
-import { StyledToaster } from './styles';
-import { toasterClasses } from './classes';
+import { Iconify } from "../iconify";
+import { StyledToaster } from "./styles";
+import { toasterClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
@@ -42,10 +42,30 @@ export function Snackbar() {
         }}
         icons={{
           loading: <span className={toasterClasses.loadingIcon} />,
-          info: <Iconify className={toasterClasses.iconSvg} icon="solar:info-circle-bold" />,
-          success: <Iconify className={toasterClasses.iconSvg} icon="solar:check-circle-bold" />,
-          warning: <Iconify className={toasterClasses.iconSvg} icon="solar:danger-triangle-bold" />,
-          error: <Iconify className={toasterClasses.iconSvg} icon="solar:danger-bold" />,
+          info: (
+            <Iconify
+              className={toasterClasses.iconSvg}
+              icon="solar:info-circle-bold"
+            />
+          ),
+          success: (
+            <Iconify
+              className={toasterClasses.iconSvg}
+              icon="solar:check-circle-bold"
+            />
+          ),
+          warning: (
+            <Iconify
+              className={toasterClasses.iconSvg}
+              icon="solar:danger-triangle-bold"
+            />
+          ),
+          error: (
+            <Iconify
+              className={toasterClasses.iconSvg}
+              icon="solar:danger-bold"
+            />
+          ),
         }}
       />
     </Portal>

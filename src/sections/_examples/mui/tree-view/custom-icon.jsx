@@ -1,6 +1,6 @@
-import SvgIcon from '@mui/material/SvgIcon';
-import { TreeItem } from '@mui/x-tree-view/TreeItem';
-import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import SvgIcon from "@mui/material/SvgIcon";
+import { TreeItem } from "@mui/x-tree-view/TreeItem";
+import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 
 // ----------------------------------------------------------------------
 
@@ -28,13 +28,13 @@ export function CustomIcons() {
   return (
     <SimpleTreeView
       aria-label="customized"
-      defaultExpandedItems={['1']}
+      defaultExpandedItems={["1"]}
       slots={{
         expandIcon: TreeViewExpandIcon,
         collapseIcon: TreeViewCollapseIcon,
         endIcon: TreeViewEndIcon,
       }}
-      sx={{ overflowX: 'hidden', minHeight: 240, width: 1 }}
+      sx={{ overflowX: "hidden", minHeight: 240, width: 1 }}
     >
       <TreeItem itemId="1" label="Main">
         <TreeItem itemId="2" label="Hello" />

@@ -1,38 +1,38 @@
-'use client';
+"use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
+import { paths } from "src/routes/paths";
+import { RouterLink } from "src/routes/components";
 
-import { useDebounce } from 'src/hooks/use-debounce';
-import { useSetState } from 'src/hooks/use-set-state';
+import { useDebounce } from "src/hooks/use-debounce";
+import { useSetState } from "src/hooks/use-set-state";
 
-import { orderBy } from 'src/utils/helper';
+import { orderBy } from "src/utils/helper";
 
-import { POST_SORT_OPTIONS } from 'src/_mock';
-import { DashboardContent } from 'src/layouts/dashboard';
-import { useGetPosts, useSearchPosts } from 'src/actions/blog';
+import { POST_SORT_OPTIONS } from "src/_mock";
+import { DashboardContent } from "src/layouts/dashboard";
+import { useGetPosts, useSearchPosts } from "src/actions/blog";
 
-import { Label } from 'src/components/label';
-import { Iconify } from 'src/components/iconify';
-import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
+import { Label } from "src/components/label";
+import { Iconify } from "src/components/iconify";
+import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
-import { PostSort } from '../post-sort';
-import { PostSearch } from '../post-search';
-import { PostListHorizontal } from '../post-list-horizontal';
+import { PostSort } from "../post-sort";
+import { PostSearch } from "../post-search";
+import { PostListHorizontal } from "../post-list-horizontal";
 
 // ----------------------------------------------------------------------
 
 export function PostListView() {
-  const [sortBy, setSortBy] = useState('latest');
+  const [sortBy, setSortBy] = useState("latest");
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
 
   const debouncedQuery = useDebounce(searchQuery);
 
@@ -40,9 +40,13 @@ export function PostListView() {
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery, true);
 
-  const filters = useSetState({ publish: 'all' });
+  const filters = useSetState({ publish: "all" });
 
-  const dataFiltered = applyFilter({ inputData: posts, filters: filters.state, sortBy });
+  const dataFiltered = applyFilter({
+    inputData: posts,
+    filters: filters.state,
+    sortBy,
+  });
 
   const handleSortBy = useCallback((newValue) => {
     setSortBy(newValue);
@@ -56,7 +60,7 @@ export function PostListView() {
     (event, newValue) => {
       filters.setState({ publish: newValue });
     },
-    [filters]
+    [filters],
   );
 
   return (
@@ -64,9 +68,9 @@ export function PostListView() {
       <CustomBreadcrumbs
         heading="List"
         links={[
-          { name: 'Dashboard', href: paths.dashboard.root },
-          { name: 'Blog', href: paths.dashboard.post.root },
-          { name: 'List' },
+          { name: "Dashboard", href: paths.dashboard.root },
+          { name: "Blog", href: paths.dashboard.post.root },
+          { name: "List" },
         ]}
         action={
           <Button
@@ -84,8 +88,8 @@ export function PostListView() {
       <Stack
         spacing={3}
         justifyContent="space-between"
-        alignItems={{ xs: 'flex-end', sm: 'center' }}
-        direction={{ xs: 'column', sm: 'row' }}
+        alignItems={{ xs: "flex-end", sm: "center" }}
+        direction={{ xs: "column", sm: "row" }}
         sx={{ mb: { xs: 3, md: 5 } }}
       >
         <PostSearch
@@ -97,7 +101,11 @@ export function PostListView() {
           dashboard
         />
 
-        <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
+        <PostSort
+          sort={sortBy}
+          onSort={handleSortBy}
+          sortOptions={POST_SORT_OPTIONS}
+        />
       </Stack>
 
       <Tabs
@@ -105,7 +113,7 @@ export function PostListView() {
         onChange={handleFilterPublish}
         sx={{ mb: { xs: 3, md: 5 } }}
       >
-        {['all', 'published', 'draft'].map((tab) => (
+        {["all", "published", "draft"].map((tab) => (
           <Tab
             key={tab}
             iconPosition="end"
@@ -113,17 +121,23 @@ export function PostListView() {
             label={tab}
             icon={
               <Label
-                variant={((tab === 'all' || tab === filters.state.publish) && 'filled') || 'soft'}
-                color={(tab === 'published' && 'info') || 'default'}
+                variant={
+                  ((tab === "all" || tab === filters.state.publish) &&
+                    "filled") ||
+                  "soft"
+                }
+                color={(tab === "published" && "info") || "default"}
               >
-                {tab === 'all' && posts.length}
+                {tab === "all" && posts.length}
 
-                {tab === 'published' && posts.filter((post) => post.publish === 'published').length}
+                {tab === "published" &&
+                  posts.filter((post) => post.publish === "published").length}
 
-                {tab === 'draft' && posts.filter((post) => post.publish === 'draft').length}
+                {tab === "draft" &&
+                  posts.filter((post) => post.publish === "draft").length}
               </Label>
             }
-            sx={{ textTransform: 'capitalize' }}
+            sx={{ textTransform: "capitalize" }}
           />
         ))}
       </Tabs>
@@ -136,19 +150,19 @@ export function PostListView() {
 const applyFilter = ({ inputData, filters, sortBy }) => {
   const { publish } = filters;
 
-  if (sortBy === 'latest') {
-    inputData = orderBy(inputData, ['createdAt'], ['desc']);
+  if (sortBy === "latest") {
+    inputData = orderBy(inputData, ["createdAt"], ["desc"]);
   }
 
-  if (sortBy === 'oldest') {
-    inputData = orderBy(inputData, ['createdAt'], ['asc']);
+  if (sortBy === "oldest") {
+    inputData = orderBy(inputData, ["createdAt"], ["asc"]);
   }
 
-  if (sortBy === 'popular') {
-    inputData = orderBy(inputData, ['totalViews'], ['desc']);
+  if (sortBy === "popular") {
+    inputData = orderBy(inputData, ["totalViews"], ["desc"]);
   }
 
-  if (publish !== 'all') {
+  if (publish !== "all") {
     inputData = inputData.filter((post) => post.publish === publish);
   }
 

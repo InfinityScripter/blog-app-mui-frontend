@@ -1,47 +1,51 @@
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Avatar from '@mui/material/Avatar';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import ListItemButton from '@mui/material/ListItemButton';
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Avatar from "@mui/material/Avatar";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import ListItemButton from "@mui/material/ListItemButton";
 
-import { useBoolean } from 'src/hooks/use-boolean';
+import { useBoolean } from "src/hooks/use-boolean";
 
-import { CONFIG } from 'src/config-global';
-import { maxLine } from 'src/theme/styles';
+import { CONFIG } from "src/config-global";
+import { maxLine } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
 const CATEGORIES = [
   {
-    label: 'Managing your account',
+    label: "Managing your account",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-account.svg`,
-    href: '#',
+    href: "#",
   },
-  { label: 'Payment', icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-payment.svg`, href: '#' },
   {
-    label: 'Delivery',
+    label: "Payment",
+    icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-payment.svg`,
+    href: "#",
+  },
+  {
+    label: "Delivery",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-delivery.svg`,
-    href: '#',
+    href: "#",
   },
   {
-    label: 'Problem with the product',
+    label: "Problem with the product",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-package.svg`,
-    href: '#',
+    href: "#",
   },
   {
-    label: 'Return & refund',
+    label: "Return & refund",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-refund.svg`,
-    href: '#',
+    href: "#",
   },
   {
-    label: 'Guarantees and assurances',
+    label: "Guarantees and assurances",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-assurances.svg`,
-    href: '#',
+    href: "#",
   },
 ];
 
@@ -58,18 +62,26 @@ export function FaqsCategory() {
           top: 0,
           left: 0,
           width: 1,
-          position: 'absolute',
-          display: { xs: 'block', md: 'none' },
+          position: "absolute",
+          display: { xs: "block", md: "none" },
           borderBottom: (theme) => `solid 1px ${theme.vars.palette.divider}`,
         }}
       >
-        <Button startIcon={<Iconify icon="solar:list-bold" />} onClick={nav.onTrue}>
+        <Button
+          startIcon={<Iconify icon="solar:list-bold" />}
+          onClick={nav.onTrue}
+        >
           Categories
         </Button>
       </Box>
 
       <Drawer open={nav.value} onClose={nav.onFalse}>
-        <Box gap={1} display="grid" gridTemplateColumns="repeat(2, 1fr)" sx={{ p: 1 }}>
+        <Box
+          gap={1}
+          display="grid"
+          gridTemplateColumns="repeat(2, 1fr)"
+          sx={{ p: 1 }}
+        >
           {CATEGORIES.map((category) => (
             <CardMobile key={category.label} category={category} />
           ))}
@@ -81,8 +93,8 @@ export function FaqsCategory() {
   const renderDesktop = (
     <Box
       gap={3}
-      display={{ xs: 'none', md: 'grid' }}
-      gridTemplateColumns={{ md: 'repeat(3, 1fr)', lg: 'repeat(6, 1fr)' }}
+      display={{ xs: "none", md: "grid" }}
+      gridTemplateColumns={{ md: "repeat(3, 1fr)", lg: "repeat(6, 1fr)" }}
     >
       {CATEGORIES.map((category) => (
         <CardDesktop key={category.label} category={category} />
@@ -107,10 +119,13 @@ function CardDesktop({ category }) {
       sx={{
         p: 3,
         borderRadius: 2,
-        bgcolor: 'unset',
-        cursor: 'pointer',
-        textAlign: 'center',
-        '&:hover': { bgcolor: 'background.paper', boxShadow: theme.customShadows.z20 },
+        bgcolor: "unset",
+        cursor: "pointer",
+        textAlign: "center",
+        "&:hover": {
+          bgcolor: "background.paper",
+          boxShadow: theme.customShadows.z20,
+        },
       }}
     >
       <Avatar
@@ -120,7 +135,7 @@ function CardDesktop({ category }) {
           mb: 2,
           width: 80,
           height: 80,
-          mx: 'auto',
+          mx: "auto",
         }}
       />
 
@@ -144,15 +159,19 @@ function CardMobile({ category }) {
         py: 2,
         maxWidth: 140,
         borderRadius: 1,
-        textAlign: 'center',
-        alignItems: 'center',
-        typography: 'subtitle2',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        bgcolor: 'background.neutral',
+        textAlign: "center",
+        alignItems: "center",
+        typography: "subtitle2",
+        flexDirection: "column",
+        justifyContent: "center",
+        bgcolor: "background.neutral",
       }}
     >
-      <Avatar alt={category.icon} src={category.icon} sx={{ width: 48, height: 48, mb: 1 }} />
+      <Avatar
+        alt={category.icon}
+        src={category.icon}
+        sx={{ width: 48, height: 48, mb: 1 }}
+      />
 
       {category.label}
     </ListItemButton>

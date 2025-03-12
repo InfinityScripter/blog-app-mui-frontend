@@ -1,3 +1,3 @@
-export * from './lightbox';
+export * from "./lightbox";
 
-export * from './use-light-box';
+export * from "./use-light-box";

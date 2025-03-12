@@ -1,27 +1,27 @@
-import { m } from 'framer-motion';
+import { m } from "framer-motion";
 
-import Stack from '@mui/material/Stack';
-import IconButton from '@mui/material/IconButton';
+import Stack from "@mui/material/Stack";
+import IconButton from "@mui/material/IconButton";
 
-import { Iconify } from 'src/components/iconify';
-import { varHover } from 'src/components/animate';
+import { Iconify } from "src/components/iconify";
+import { varHover } from "src/components/animate";
 
-import { ComponentBlock } from '../../component-block';
+import { ComponentBlock } from "../../component-block";
 
 // ----------------------------------------------------------------------
 
 const COLORS = [
-  'inherit',
-  'default',
-  'primary',
-  'secondary',
-  'info',
-  'success',
-  'warning',
-  'error',
+  "inherit",
+  "default",
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
 ];
 
-const SIZES = ['small', 'medium', 'large'];
+const SIZES = ["small", "medium", "large"];
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ export function IconButtons() {
       rowGap={5}
       columnGap={2.5}
       display="grid"
-      gridTemplateColumns={{ xs: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}
+      gridTemplateColumns={{ xs: "repeat(1, 1fr)", lg: "repeat(2, 1fr)" }}
     >
       <ComponentBlock title="Base">
         <IconButton color="inherit">
@@ -79,8 +79,8 @@ export function IconButtons() {
             whileTap="tap"
             whileHover="hover"
             variants={
-              (size === 'small' && varHover(1.1, 0.95)) ||
-              (size === 'large' && varHover(1.08, 0.99)) ||
+              (size === "small" && varHover(1.1, 0.95)) ||
+              (size === "large" && varHover(1.08, 0.99)) ||
               varHover()
             }
             size={size}

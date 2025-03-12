@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
 
-import { varAlpha } from 'src/theme/styles';
+import { varAlpha } from "src/theme/styles";
 
-import { Iconify } from 'src/components/iconify';
+import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +46,12 @@ export function WalktourTooltip({
   );
 
   const renderBackBtn = index > 0 && (
-    <Button {...backProps} disableRipple variant="outlined" {...slotProps?.backBtn}>
+    <Button
+      {...backProps}
+      disableRipple
+      variant="outlined"
+      {...slotProps?.backBtn}
+    >
       {backProps.title}
     </Button>
   );
@@ -55,7 +62,7 @@ export function WalktourTooltip({
       disableRipple
       role="button"
       variant="contained"
-      color={isLastStep ? 'primary' : 'inherit'}
+      color={isLastStep ? "primary" : "inherit"}
       {...slotProps?.nextBtn}
     >
       {primaryProps.title}
@@ -69,8 +76,9 @@ export function WalktourTooltip({
         p: 0.5,
         top: 10,
         right: 10,
-        position: 'absolute',
-        border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
+        position: "absolute",
+        border: (theme) =>
+          `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.12)}`,
         ...slotProps?.closeBtn?.sx,
       }}
       {...slotProps?.closeBtn}
@@ -86,7 +94,8 @@ export function WalktourTooltip({
       sx={{
         height: 2,
         borderRadius: 0,
-        bgcolor: (theme) => varAlpha(theme.vars.palette.grey['500Channel'], 0.2),
+        bgcolor: (theme) =>
+          varAlpha(theme.vars.palette.grey["500Channel"], 0.2),
         [`& .${linearProgressClasses.bar}`]: {
           background: (theme) =>
             `linear-gradient(135deg, ${theme.vars.palette.primary.light} 0%, ${theme.vars.palette.primary.main} 100%)`,
@@ -102,12 +111,12 @@ export function WalktourTooltip({
       sx={{
         width: 360,
         borderRadius: 2,
-        bgcolor: 'background.paper',
+        bgcolor: "background.paper",
         boxShadow: (theme) => theme.customShadows.dialog,
         ...slotProps?.root,
       }}
     >
-      <Box sx={{ px: 3, pt: 3, position: 'relative' }}>
+      <Box sx={{ px: 3, pt: 3, position: "relative" }}>
         {title && (
           <Typography variant="h6" sx={slotProps?.title}>
             {title}
@@ -117,7 +126,9 @@ export function WalktourTooltip({
         {!hideCloseButton && renderCloseBtn}
       </Box>
 
-      {content && <Box sx={{ px: 3, pt: 2, pb: 4, ...slotProps?.content }}>{content}</Box>}
+      {content && (
+        <Box sx={{ px: 3, pt: 2, pb: 4, ...slotProps?.content }}>{content}</Box>
+      )}
 
       {showProgress && renderProgress}
 
@@ -126,8 +137,8 @@ export function WalktourTooltip({
           sx={{
             p: 2.5,
             gap: 1.5,
-            display: 'flex',
-            justifyContent: 'flex-end',
+            display: "flex",
+            justifyContent: "flex-end",
             borderTop: (theme) => `solid 1px ${theme.vars.palette.divider}`,
           }}
         >

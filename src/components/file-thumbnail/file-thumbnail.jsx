@@ -1,10 +1,10 @@
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Tooltip from '@mui/material/Tooltip';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
 
-import { fileThumbnailClasses } from './classes';
-import { fileData, fileThumb, fileFormat } from './utils';
-import { RemoveButton, DownloadButton } from './action-buttons';
+import { fileThumbnailClasses } from "./classes";
+import { fileData, fileThumb, fileFormat } from "./utils";
+import { RemoveButton, DownloadButton } from "./action-buttons";
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,8 @@ export function FileThumbnail({
   onDownload,
   ...other
 }) {
-  const previewUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
+  const previewUrl =
+    typeof file === "string" ? file : URL.createObjectURL(file);
 
   const { name, path } = fileData(file);
 
@@ -32,8 +33,8 @@ export function FileThumbnail({
       sx={{
         width: 1,
         height: 1,
-        objectFit: 'cover',
-        borderRadius: 'inherit',
+        objectFit: "cover",
+        borderRadius: "inherit",
         ...slotProps?.img,
       }}
     />
@@ -57,15 +58,15 @@ export function FileThumbnail({
         height: 36,
         flexShrink: 0,
         borderRadius: 1.25,
-        alignItems: 'center',
-        position: 'relative',
-        display: 'inline-flex',
-        justifyContent: 'center',
+        alignItems: "center",
+        position: "relative",
+        display: "inline-flex",
+        justifyContent: "center",
         ...sx,
       }}
       {...other}
     >
-      {format === 'image' && imageView ? renderImg : renderIcon}
+      {format === "image" && imageView ? renderImg : renderIcon}
 
       {onRemove && (
         <RemoveButton
@@ -90,7 +91,11 @@ export function FileThumbnail({
       <Tooltip
         arrow
         title={name}
-        slotProps={{ popper: { modifiers: [{ name: 'offset', options: { offset: [0, -12] } }] } }}
+        slotProps={{
+          popper: {
+            modifiers: [{ name: "offset", options: { offset: [0, -12] } }],
+          },
+        }}
       >
         {renderContent}
       </Tooltip>

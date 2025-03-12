@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import axios, { endpoints } from 'src/utils/axios';
+import axios, { endpoints } from "src/utils/axios";
 
-import { setSession } from './utils';
-import { STORAGE_KEY } from './constant';
+import { setSession } from "./utils";
+import { STORAGE_KEY } from "./constant";
 
 /** **************************************
  * Sign in
@@ -17,12 +17,12 @@ export const signInWithPassword = async ({ email, password }) => {
     const { accessToken } = res.data;
 
     if (!accessToken) {
-      throw new Error('Access token not found in response');
+      throw new Error("Access token not found in response");
     }
 
     setSession(accessToken);
   } catch (error) {
-    console.error('Error during sign in:', error);
+    console.error("Error during sign in:", error);
     throw error;
   }
 };
@@ -44,12 +44,12 @@ export const signUp = async ({ email, password, firstName, lastName }) => {
     const { accessToken } = res.data;
 
     if (!accessToken) {
-      throw new Error('Access token not found in response');
+      throw new Error("Access token not found in response");
     }
 
     sessionStorage.setItem(STORAGE_KEY, accessToken);
   } catch (error) {
-    console.error('Error during sign up:', error);
+    console.error("Error during sign up:", error);
     throw error;
   }
 };
@@ -61,7 +61,7 @@ export const signOut = async () => {
   try {
     await setSession(null);
   } catch (error) {
-    console.error('Error during sign out:', error);
+    console.error("Error during sign out:", error);
     throw error;
   }
 };

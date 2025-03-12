@@ -1,27 +1,27 @@
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
 
-import { carouselClasses } from '../classes';
+import { carouselClasses } from "../classes";
 
 const StyledRoot = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'axis' && prop !== 'slideSpacing',
+  shouldForwardProp: (prop) => prop !== "axis" && prop !== "slideSpacing",
 })(({ axis, slideSpacing }) => ({
-  display: 'block',
-  position: 'relative',
-  ...(axis === 'x' && {
+  display: "block",
+  position: "relative",
+  ...(axis === "x" && {
     minWidth: 0,
     paddingLeft: slideSpacing,
   }),
-  ...(axis === 'y' && {
+  ...(axis === "y" && {
     minHeight: 0,
     paddingTop: slideSpacing,
   }),
 }));
 
 const StyledContent = styled(Box)(() => ({
-  overflow: 'hidden',
-  position: 'relative',
-  borderRadius: 'inherit',
+  overflow: "hidden",
+  position: "relative",
+  borderRadius: "inherit",
 }));
 
 // ----------------------------------------------------------------------
@@ -32,7 +32,7 @@ export function CarouselSlide({ sx, options, children, ...other }) {
   return (
     <StyledRoot
       component="li"
-      axis={options?.axis ?? 'x'}
+      axis={options?.axis ?? "x"}
       slideSpacing={options?.slideSpacing}
       className={carouselClasses.slide}
       sx={{
@@ -53,7 +53,7 @@ export function CarouselSlide({ sx, options, children, ...other }) {
 }
 
 function getSize(slidesToShow) {
-  if (slidesToShow && typeof slidesToShow === 'object') {
+  if (slidesToShow && typeof slidesToShow === "object") {
     return Object.keys(slidesToShow).reduce((acc, key) => {
       const sizeByKey = slidesToShow[key];
       acc[key] = getValue(sizeByKey);
@@ -65,8 +65,9 @@ function getSize(slidesToShow) {
 }
 
 function getValue(value = 1) {
-  if (typeof value === 'string') {
-    const isSupported = value === 'auto' || value.endsWith('%') || value.endsWith('px');
+  if (typeof value === "string") {
+    const isSupported =
+      value === "auto" || value.endsWith("%") || value.endsWith("px");
     if (!isSupported) {
       throw new Error(`Only accepts values: auto, px, %, or number.`);
     }
@@ -74,10 +75,12 @@ function getValue(value = 1) {
     return `0 0 ${value}`;
   }
 
-  if (typeof value === 'number') {
+  if (typeof value === "number") {
     return `0 0 ${100 / value}%`;
   }
 
   // Default case should not be reached due to the type signature, but we include it for safety
-  throw new Error(`Invalid value type. Only accepts values: auto, px, %, or number.`);
+  throw new Error(
+    `Invalid value type. Only accepts values: auto, px, %, or number.`,
+  );
 }

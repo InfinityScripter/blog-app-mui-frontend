@@ -1,32 +1,44 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 
-import { fPercent, fShortenNumber } from 'src/utils/format-number';
-
-// ----------------------------------------------------------------------
-
-import { Iconify } from 'src/components/iconify';
+import { fPercent, fShortenNumber } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 
-export function BookingWidgetSummary({ title, percent, total, icon, sx, ...other }) {
+import { Iconify } from "src/components/iconify";
+
+// ----------------------------------------------------------------------
+
+export function BookingWidgetSummary({
+  title,
+  percent,
+  total,
+  icon,
+  sx,
+  ...other
+}) {
   const renderTrending = (
-    <Box gap={0.5} display="flex" alignItems="center" sx={{ typography: 'subtitle2' }}>
+    <Box
+      gap={0.5}
+      display="flex"
+      alignItems="center"
+      sx={{ typography: "subtitle2" }}
+    >
       <Iconify
         width={24}
         icon={
           percent < 0
-            ? 'solar:double-alt-arrow-down-bold-duotone'
-            : 'solar:double-alt-arrow-up-bold-duotone'
+            ? "solar:double-alt-arrow-down-bold-duotone"
+            : "solar:double-alt-arrow-up-bold-duotone"
         }
         sx={{
           flexShrink: 0,
-          color: 'success.main',
-          ...(percent < 0 && { color: 'error.main' }),
+          color: "success.main",
+          ...(percent < 0 && { color: "error.main" }),
         }}
       />
       <span>
-        {percent > 0 && '+'}
+        {percent > 0 && "+"}
         {fPercent(percent)}
       </span>
     </Box>
@@ -37,15 +49,17 @@ export function BookingWidgetSummary({ title, percent, total, icon, sx, ...other
       sx={{
         p: 2,
         pl: 3,
-        display: 'flex',
-        alignItems: 'center',
+        display: "flex",
+        alignItems: "center",
         ...sx,
       }}
       {...other}
     >
       <Box sx={{ flexGrow: 1 }}>
-        <Box sx={{ color: 'text.secondary', typography: 'subtitle2' }}>{title}</Box>
-        <Box sx={{ my: 1.5, typography: 'h3' }}>{fShortenNumber(total)}</Box>
+        <Box sx={{ color: "text.secondary", typography: "subtitle2" }}>
+          {title}
+        </Box>
+        <Box sx={{ my: 1.5, typography: "h3" }}>{fShortenNumber(total)}</Box>
         {renderTrending}
       </Box>
 
@@ -54,8 +68,8 @@ export function BookingWidgetSummary({ title, percent, total, icon, sx, ...other
           width: 120,
           height: 120,
           lineHeight: 0,
-          borderRadius: '50%',
-          bgcolor: 'background.neutral',
+          borderRadius: "50%",
+          bgcolor: "background.neutral",
         }}
       >
         {icon}
