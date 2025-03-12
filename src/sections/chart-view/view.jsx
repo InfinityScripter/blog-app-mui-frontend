@@ -16,14 +16,14 @@ import { ChartHeatmap } from './chart-heatmap';
 import { ChartBoxPlot } from './chart-box-plot';
 import { ChartRadarBar } from './chart-radar-bar';
 import { ChartRadialBar } from './chart-radial-bar';
-import { ComponentHero } from '../../component-hero';
 import { ChartStrokedGauge } from './chart-stroked-gauge';
 import { ChartColumnSingle } from './chart-column-single';
+import {ComponentHero} from "../_examples/component-hero";
 import { ChartColumnStacked } from './chart-column-stacked';
 import { ChartColumnNegative } from './chart-column-negative';
 import { ChartColumnMultiple } from './chart-column-multiple';
-import { ScrollToViewTemplate } from '../../component-template';
 import { ChartSemiCircleGauge } from './chart-semi-circle-gauge';
+import {ScrollToViewTemplate} from "../_examples/component-template";
 
 // ----------------------------------------------------------------------
 

@@ -11,7 +11,6 @@ import AvatarGroup from '@mui/material/AvatarGroup';
 
 import { paths } from 'src/routes/paths';
 
-
 import { useGetPost } from 'src/actions/blog';
 
 import { Markdown } from 'src/components/markdown';

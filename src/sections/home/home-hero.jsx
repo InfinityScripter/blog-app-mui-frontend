@@ -21,8 +21,7 @@ import { textGradient } from "src/theme/styles";
 
 import { Iconify } from "src/components/iconify";
 import { varFade, MotionContainer } from "src/components/animate";
-import RouterLink from "next/link";
-import {paths} from "../../routes/paths";
+
 import { HeroBackground } from "./components/hero-background";
 
 // Функции-хелперы остаются без изменений

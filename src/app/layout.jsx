@@ -2,6 +2,8 @@ import 'src/global.css';
 
 // ----------------------------------------------------------------------
 
+import { Analytics } from '@vercel/analytics/next';
+
 import { CONFIG } from 'src/config-global';
 import { primary } from 'src/theme/core/palette';
 import { ThemeProvider } from 'src/theme/theme-provider';
@@ -26,7 +28,7 @@ export default async function RootLayout({ children }) {
   const settings = CONFIG.isStaticExport ? defaultSettings : await detectSettings();
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <body suppressHydrationWarning>
         {getInitColorSchemeScript}
 
@@ -40,6 +42,7 @@ export default async function RootLayout({ children }) {
                 <ProgressBar />
                 <SettingsDrawer />
                 {children}
+                <Analytics />
               </MotionLazy>
             </ThemeProvider>
           </SettingsProvider>

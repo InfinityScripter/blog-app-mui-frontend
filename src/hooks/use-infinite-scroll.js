@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useRef } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -37,9 +37,9 @@ export function useInfiniteScroll(initialItems = [], itemsPerPage = 8) {
   const handleScroll = useCallback(() => {
     if (loading || !hasMore) return;
     
-    const scrollHeight = document.documentElement.scrollHeight;
+    const {scrollHeight} = document.documentElement;
     const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const clientHeight = document.documentElement.clientHeight;
+    const {clientHeight} = document.documentElement;
     
     // Load more when user scrolls to bottom (with a 200px threshold)
     if (scrollTop + clientHeight >= scrollHeight - 200) {
