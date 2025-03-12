@@ -4,13 +4,13 @@ import IconButton from '@mui/material/IconButton';
 import { varAlpha } from 'src/theme/styles';
 
 import { Iconify } from '../../iconify';
+import {formatImageUrl} from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
 export function SingleFilePreview({ file }) {
   const fileName = typeof file === 'string' ? file : file.name;
-
-  const previewUrl = typeof file === 'string' ? file : URL.createObjectURL(file);
+  const previewUrl = typeof file === 'string' ? formatImageUrl(file) : URL.createObjectURL(file);
 
   return (
     <Box
