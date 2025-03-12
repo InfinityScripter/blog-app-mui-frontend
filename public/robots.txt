@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /login
+Disallow: /signup
+Disallow: /reset-password
+Disallow: /*?*
+
+# Allow Google bot to access everything
+User-agent: Googlebot
+Allow: /
+
+# Allow Bing bot
+User-agent: Bingbot
+Allow: /
+
+# Block common bots that might overload your server
+User-agent: PetalBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml
+
+# Crawl delay for all bots
+Crawl-delay: 10
