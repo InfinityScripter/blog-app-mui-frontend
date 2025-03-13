@@ -1,0 +1,8 @@
+{
+  "ban-dependencies": {
+    "lodash": "Use ES6 methods or individual lodash methods for better tree-shaking",
+    "moment": "Use date-fns or dayjs instead",
+    "jquery": "Use native DOM methods",
+    "underscore": "Use ES6 methods or lodash if needed"
+  }
+}

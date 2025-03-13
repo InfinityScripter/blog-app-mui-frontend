@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:depend/recommended"
+  ],
+  "plugins": ["depend"],
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "overrides": [
+    {
+      "files": ["package.json"],
+      "parser": "jsonc-eslint-parser",
+      "plugins": ["depend"],
+      "rules": {
+        "depend/ban-dependencies": "warn"
+      }
+    }
+  ]
+}
