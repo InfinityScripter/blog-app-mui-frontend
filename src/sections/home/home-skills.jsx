@@ -88,7 +88,7 @@ const SKILLS = [
   },
 ];
 
-export  function HomeSkills() {
+export function HomeSkills() {
   const theme = useTheme();
 
   return (
