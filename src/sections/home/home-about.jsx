@@ -11,7 +11,7 @@ import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
-export default function HomeAbout() {
+export function HomeAbout() {
   const theme = useTheme();
 
   return (
@@ -38,6 +38,7 @@ export default function HomeAbout() {
                 component="img"
                 src="/assets/images/about/developer.webp"
                 alt="Developer"
+                loading="lazy"
                 sx={{
                   width: "100%",
                   height: "auto",

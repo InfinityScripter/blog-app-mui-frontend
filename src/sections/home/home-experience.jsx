@@ -103,7 +103,7 @@ const EXPERIENCE = [
   },
 ];
 
-export default function HomeExperience() {
+export function HomeExperience() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
