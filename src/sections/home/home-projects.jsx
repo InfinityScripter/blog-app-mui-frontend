@@ -24,7 +24,7 @@ const PROJECTS = [
     icon: "mdi:blog",
     iconColor: "primary.main",
     link: "https://github.com/InfinityScripter/blog-app-mui-frontend",
-    demoLink: "https://sh0ny.online/post",
+    demoLink: "https://sh0ny.ru/post",
     tech: ["React", "Material UI", "Node.js"],
     features: [
       "Аутентификация пользователей",
