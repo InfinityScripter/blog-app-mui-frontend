@@ -30,7 +30,7 @@ User-agent: AhrefsBot
 Disallow: /
 
 # Sitemap
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://sh0ny.ru/sitemap.xml
 
 # Crawl delay for all bots
 Crawl-delay: 10
