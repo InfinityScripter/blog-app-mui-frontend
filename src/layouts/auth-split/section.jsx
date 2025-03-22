@@ -16,9 +16,9 @@ export function Section({
   method,
   layoutQuery,
   methods,
-  title = "Manage the job",
+  title = "Управляйте задачами",
   imgUrl = `${CONFIG.site.basePath}/assets/illustrations/illustration-dashboard.webp`,
-  subtitle = "More effectively with optimized workflows.",
+  subtitle = "Работайте эффективнее с оптимизированными процессами.",
   ...other
 }) {
   const theme = useTheme();

@@ -5,7 +5,7 @@ import { CenteredResetPasswordView } from "../../../sections/auth-demo/centered"
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: `Reset password | Layout split - ${CONFIG.site.name}`,
+  title: `Сброс пароля | Разделенный макет - ${CONFIG.site.name}`,
 };
 
 export default function Page() {

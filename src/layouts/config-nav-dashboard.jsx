@@ -46,41 +46,41 @@ export const navData = [
    * Overview
    */
   {
-    subheader: "Overview 6.0.0",
+    subheader: "Обзор",
     items: [
-      { title: "One", path: paths.dashboard.root, icon: ICONS.dashboard },
-      { title: "Two", path: paths.dashboard.two, icon: ICONS.ecommerce },
-      { title: "Three", path: paths.dashboard.three, icon: ICONS.analytics },
+      { title: "Главная", path: paths.dashboard.root, icon: ICONS.dashboard },
+      { title: "Аналитика", path: paths.dashboard.two, icon: ICONS.ecommerce },
+      { title: "Отчеты", path: paths.dashboard.three, icon: ICONS.analytics },
     ],
   },
   /**
    * Management
    */
   {
-    subheader: "Management",
+    subheader: "Управление",
     items: [
       {
-        title: "Group",
+        title: "Пользователи",
         path: paths.dashboard.group.root,
         icon: ICONS.user,
         children: [
-          { title: "Four", path: paths.dashboard.group.root },
-          { title: "Five", path: paths.dashboard.group.five },
-          { title: "Six", path: paths.dashboard.group.six },
+          { title: "Все пользователи", path: paths.dashboard.group.root },
+          { title: "Активные", path: paths.dashboard.group.five },
+          { title: "Заблокированные", path: paths.dashboard.group.six },
         ],
       },
     ],
   },
   {
-    subheader: "Blog",
+    subheader: "Блог",
     items: [
       {
-        title: "Blog",
+        title: "Статьи",
         path: paths.dashboard.post.root,
         icon: ICONS.blog,
         children: [
-          { title: "List", path: paths.dashboard.post.root },
-          { title: "Create", path: paths.dashboard.post.new },
+          { title: "Список", path: paths.dashboard.post.root },
+          { title: "Создать", path: paths.dashboard.post.new },
         ],
       },
     ],

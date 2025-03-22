@@ -152,7 +152,7 @@ export default function PostCommentItem({
               value={editedMessage}
               onChange={(e) => setEditedMessage(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Press Enter to save or Shift+Enter for new line"
+              placeholder="Нажмите Enter для сохранения или Shift+Enter для новой строки"
               sx={{ mb: 1 }}
             />
             <Stack direction="row" spacing={2} justifyContent="flex-end">
@@ -162,7 +162,7 @@ export default function PostCommentItem({
                 onClick={handleCancelEdit}
                 startIcon={<Iconify icon="eva:close-fill" />}
               >
-                Cancel
+                Отмена
               </Button>
               <Button
                 size="small"
@@ -170,7 +170,7 @@ export default function PostCommentItem({
                 startIcon={<Iconify icon="eva:checkmark-fill" />}
                 color="success"
               >
-                Save
+                Сохранить
               </Button>
             </Stack>
           </Stack>
@@ -198,7 +198,7 @@ export default function PostCommentItem({
               sx={{ color: "text.disabled" }}
               startIcon={<Iconify icon="solar:reply-bold" width={24} />}
             >
-              Reply
+              Ответить
             </Button>
           )}
         </Stack>
@@ -219,12 +219,12 @@ export default function PostCommentItem({
       >
         <MenuItem onClick={handleStartEdit}>
           <Iconify icon="solar:pen-bold" sx={{ mr: 1 }} />
-          Edit
+          Редактировать
         </MenuItem>
 
         <MenuItem onClick={handleDelete} sx={{ color: "error.main" }}>
           <Iconify icon="solar:trash-bin-trash-bold" sx={{ mr: 1 }} />
-          Delete
+          Удалить
         </MenuItem>
       </CustomPopover>
     </Box>

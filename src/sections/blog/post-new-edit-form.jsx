@@ -32,19 +32,19 @@ import { createPost, updatePost } from "../../actions/blog-ssr";
 // ----------------------------------------------------------------------
 
 export const NewPostSchema = zod.object({
-  title: zod.string().min(1, { message: "Title is required!" }),
-  description: zod.string().min(1, { message: "Description is required!" }),
+  title: zod.string().min(1, { message: "Заголовок обязателен!" }),
+  description: zod.string().min(1, { message: "Описание обязательно!" }),
   content: schemaHelper
     .editor()
-    .min(100, { message: "Content must be at least 100 characters" }),
+    .min(100, { message: "Содержание должно быть не менее 100 символов" }),
   coverUrl: schemaHelper.file({
-    message: { required_error: "Cover is required!" },
+    message: { required_error: "Обложка обязательна!" },
   }),
-  tags: zod.string().array().min(2, { message: "Must have at least 2 items!" }),
+  tags: zod.string().array().min(2, { message: "Должно быть не менее 2 тегов!" }),
   metaKeywords: zod
     .string()
     .array()
-    .nonempty({ message: "Meta keywords is required!" }),
+    .nonempty({ message: "Мета-ключевые слова обязательны!" }),
   publish: zod.boolean(),
   // Not required
   metaTitle: zod.string(),
@@ -125,12 +125,12 @@ export function PostNewEditForm({ currentPost }) {
 
       reset();
       preview.onFalse();
-      toast.success(currentPost ? "Update success!" : "Create success!");
+      toast.success(currentPost ? "Успешно обновлено!" : "Успешно создано!");
       router.push(paths.dashboard.post.root);
       console.info("Response:", response);
     } catch (error) {
       console.error(error);
-      toast.error(error.message || "Operation failed");
+      toast.error(error.message || "Операция не удалась");
     }
   });
 
@@ -141,25 +141,25 @@ export function PostNewEditForm({ currentPost }) {
   const renderDetails = (
     <Card>
       <CardHeader
-        title="Details"
-        subheader="Title, short description, image..."
+        title="Детали"
+        subheader="Заголовок, краткое описание, изображение..."
         sx={{ mb: 3 }}
       />
 
       <Divider />
 
       <Stack spacing={3} sx={{ p: 3 }}>
-        <Field.Text name="title" label="Post title" />
+        <Field.Text name="title" label="Заголовок поста" />
 
-        <Field.Text name="description" label="Description" multiline rows={3} />
+        <Field.Text name="description" label="Описание" multiline rows={3} />
 
         <Stack spacing={1.5}>
-          <Typography variant="subtitle2">Content</Typography>
+          <Typography variant="subtitle2">Содержание</Typography>
           <Field.Editor name="content" sx={{ maxHeight: 480 }} />
         </Stack>
 
         <Stack spacing={1.5}>
-          <Typography variant="subtitle2">Cover</Typography>
+          <Typography variant="subtitle2">Обложка</Typography>
           <Field.Upload
             name="coverUrl"
             maxSize={3145728}
@@ -173,8 +173,8 @@ export function PostNewEditForm({ currentPost }) {
   const renderProperties = (
     <Card>
       <CardHeader
-        title="Properties"
-        subheader="Additional functions and attributes..."
+        title="Свойства"
+        subheader="Дополнительные функции и атрибуты..."
         sx={{ mb: 3 }}
       />
 
@@ -183,8 +183,8 @@ export function PostNewEditForm({ currentPost }) {
       <Stack spacing={3} sx={{ p: 3 }}>
         <Field.Autocomplete
           name="tags"
-          label="Tags"
-          placeholder="+ Tags"
+          label="Теги"
+          placeholder="+ Теги"
           multiple
           freeSolo
           disableCloseOnSelect
@@ -209,11 +209,11 @@ export function PostNewEditForm({ currentPost }) {
           }
         />
 
-        <Field.Text name="metaTitle" label="Meta title" />
+        <Field.Text name="metaTitle" label="Мета-заголовок" />
 
         <Field.Text
           name="metaDescription"
-          label="Meta description"
+          label="Мета-описание"
           fullWidth
           multiline
           rows={3}
@@ -221,8 +221,8 @@ export function PostNewEditForm({ currentPost }) {
 
         <Field.Autocomplete
           name="metaKeywords"
-          label="Meta keywords"
-          placeholder="+ Keywords"
+          label="Мета-ключевые слова"
+          placeholder="+ Ключевые слова"
           multiple
           freeSolo
           disableCloseOnSelect
@@ -251,7 +251,7 @@ export function PostNewEditForm({ currentPost }) {
           control={
             <Switch defaultChecked inputProps={{ id: "comments-switch" }} />
           }
-          label="Enable comments"
+          label="Включить комментарии"
         />
       </Stack>
     </Card>
@@ -275,7 +275,7 @@ export function PostNewEditForm({ currentPost }) {
                 onChange={(e) => onChange(e.target.checked)}
               />
             }
-            label="Publish"
+            label="Опубликовать"
             sx={{ pl: 3, flexGrow: 1 }}
           />
         )}
@@ -288,7 +288,7 @@ export function PostNewEditForm({ currentPost }) {
           size="large"
           onClick={preview.onTrue}
         >
-          Preview
+          Предпросмотр
         </Button>
 
         <LoadingButton
@@ -298,7 +298,7 @@ export function PostNewEditForm({ currentPost }) {
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!currentPost ? "Create post" : "Save changes"}
+          {!currentPost ? "Создать пост" : "Сохранить изменения"}
         </LoadingButton>
       </div>
     </Box>

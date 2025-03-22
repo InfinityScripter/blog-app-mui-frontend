@@ -28,7 +28,7 @@ export function PostSort({ sort, sortOptions, onSort }) {
         }
         sx={{ fontWeight: "fontWeightSemiBold", textTransform: "capitalize" }}
       >
-        Sort by:
+        Сортировка:
         <Box component="span" sx={{ ml: 0.5, fontWeight: "fontWeightBold" }}>
           {sort}
         </Box>

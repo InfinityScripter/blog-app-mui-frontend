@@ -56,26 +56,26 @@ export function PostDetailsToolbar({
           href={backLink}
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
         >
-          Back
+          Назад
         </Button>
 
         <Box sx={{ flexGrow: 1 }} />
 
         {publish === "published" && (
-          <Tooltip title="Go Live">
+          <Tooltip title="Просмотреть">
             <IconButton component={RouterLink} href={liveLink}>
               <Iconify icon="eva:external-link-fill" />
             </IconButton>
           </Tooltip>
         )}
 
-        <Tooltip title="Edit">
+        <Tooltip title="Редактировать">
           <IconButton component={RouterLink} href={editLink}>
             <Iconify icon="solar:pen-bold" />
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="Delete">
+        <Tooltip title="Удалить">
           <IconButton onClick={handleClickDelete}>
             <Iconify icon="solar:trash-bin-trash-bold" />
           </IconButton>
@@ -85,7 +85,7 @@ export function PostDetailsToolbar({
           color="inherit"
           variant="contained"
           loading={!publish}
-          loadingIndicator="Loading…"
+          loadingIndicator="Загрузка…"
           endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
           onClick={popover.onOpen}
           sx={{ textTransform: "capitalize" }}
@@ -125,11 +125,11 @@ export function PostDetailsToolbar({
       <ConfirmDialog
         open={openConfirm}
         onClose={handleCloseConfirm}
-        title="Delete Post"
-        content="Are you sure you want to delete this post?"
+        title="Удалить пост"
+        content="Вы уверены, что хотите удалить этот пост?"
         onConfirm={handleDelete}
         loading={loading}
-        confirmText="Delete"
+        confirmText="Удалить"
         confirmColor="error"
       />
     </>

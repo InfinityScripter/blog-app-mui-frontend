@@ -26,8 +26,8 @@ import axios, { endpoints } from "../../../utils/axios";
 export const ResetPasswordSchema = zod.object({
   email: zod
     .string()
-    .min(1, { message: "Email is required!" })
-    .email({ message: "Email must be a valid email address!" }),
+    .min(1, { message: "Email обязателен!" })
+    .email({ message: "Email должен быть действительным адресом электронной почты!" }),
 });
 
 // ----------------------------------------------------------------------
@@ -59,12 +59,12 @@ export function CenteredResetPasswordView() {
 
       setSuccess(
         response.data.message ||
-          "Reset password instructions have been sent to your email",
+          "Инструкции по сбросу пароля были отправлены на ваш email",
       );
       // eslint-disable-next-line no-shadow
     } catch (error) {
-      console.error("Reset password error:", error);
-      setError(error.message || "Failed to send reset password email");
+      console.error("Ошибка сброса пароля:", error);
+      setError(error.message || "Не удалось отправить email для сброса пароля");
     }
   });
 
@@ -76,10 +76,10 @@ export function CenteredResetPasswordView() {
         spacing={1}
         sx={{ mt: 3, mb: 5, textAlign: "center", whiteSpace: "pre-line" }}
       >
-        <Typography variant="h5">Forgot your password?</Typography>
+        <Typography variant="h5">Забыли пароль?</Typography>
 
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {`Please enter the email address associated with your account and we'll email you a link to reset your password.`}
+          {`Пожалуйста, введите email-адрес, связанный с вашей учетной записью, и мы отправим вам ссылку для сброса пароля.`}
         </Typography>
       </Stack>
     </>
@@ -89,7 +89,7 @@ export function CenteredResetPasswordView() {
     <Stack spacing={3}>
       <Field.Text
         name="email"
-        label="Email address"
+        label="Email адрес"
         placeholder="example@gmail.com"
         autoFocus
         InputLabelProps={{ shrink: true }}
@@ -103,9 +103,9 @@ export function CenteredResetPasswordView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Send request..."
+        loadingIndicator="Отправка запроса..."
       >
-        Send request
+        Отправить запрос
       </LoadingButton>
 
       <Link
@@ -116,7 +116,7 @@ export function CenteredResetPasswordView() {
         sx={{ mx: "auto", alignItems: "center", display: "inline-flex" }}
       >
         <Iconify icon="eva:arrow-ios-back-fill" width={16} sx={{ mr: 0.5 }} />
-        Return to sign in
+        Вернуться к входу
       </Link>
     </Stack>
   );

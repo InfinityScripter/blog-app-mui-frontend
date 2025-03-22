@@ -47,7 +47,7 @@ export function FaqsHero() {
           <AnimateText
             component="h1"
             variant="h1"
-            text={["Where", "can we help you?"]}
+            text={["Чем", "мы можем помочь?"]}
             variants={varFade({ distance: 24 }).inRight}
             sx={{
               color: "common.white",
@@ -62,7 +62,7 @@ export function FaqsHero() {
           <m.div variants={varFade().in}>
             <TextField
               fullWidth
-              placeholder="Search support..."
+              placeholder="Поиск поддержки..."
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">

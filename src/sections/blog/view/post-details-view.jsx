@@ -115,7 +115,7 @@ export function PostDetailsView({ initialPost }) {
         </Stack>
 
         <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-          <Typography variant="h4">Comments</Typography>
+          <Typography variant="h4">Комментарии</Typography>
 
           <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
             ({currentPost?.comments.length})

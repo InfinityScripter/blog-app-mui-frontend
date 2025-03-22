@@ -1,10 +1,10 @@
 export const POST_PUBLISH_OPTIONS = [
-  { value: "published", label: "Published" },
-  { value: "draft", label: "Draft" },
+  { value: "published", label: "Опубликовано" },
+  { value: "draft", label: "Черновик" },
 ];
 
 export const POST_SORT_OPTIONS = [
-  { value: "latest", label: "Latest" },
-  { value: "popular", label: "Popular" },
-  { value: "oldest", label: "Oldest" },
+  { value: "latest", label: "Новые" },
+  { value: "popular", label: "Популярные" },
+  { value: "oldest", label: "Старые" },
 ];

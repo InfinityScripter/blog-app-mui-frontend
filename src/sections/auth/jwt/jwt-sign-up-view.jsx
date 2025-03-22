@@ -28,16 +28,16 @@ import { useAuthContext } from "src/auth/hooks";
 // ----------------------------------------------------------------------
 
 export const SignUpSchema = zod.object({
-  firstName: zod.string().min(1, { message: "First name is required!" }),
-  lastName: zod.string().min(1, { message: "Last name is required!" }),
+  firstName: zod.string().min(1, { message: "Имя обязательно!" }),
+  lastName: zod.string().min(1, { message: "Фамилия обязательна!" }),
   email: zod
     .string()
-    .min(1, { message: "Email is required!" })
-    .email({ message: "Email must be a valid email address!" }),
+    .min(1, { message: "Email обязателен!" })
+    .email({ message: "Email должен быть действительным адресом электронной почты!" }),
   password: zod
     .string()
-    .min(1, { message: "Password is required!" })
-    .min(6, { message: "Password must be at least 6 characters!" }),
+    .min(1, { message: "Пароль обязателен!" })
+    .min(6, { message: "Пароль должен содержать не менее 6 символов!" }),
 });
 
 // ----------------------------------------------------------------------
@@ -87,11 +87,11 @@ export function JwtSignUpView() {
 
   const renderHead = (
     <Stack spacing={1.5} sx={{ mb: 5 }}>
-      <Typography variant="h5">Get started absolutely free</Typography>
+      <Typography variant="h5">Начните абсолютно бесплатно</Typography>
 
       <Stack direction="row" spacing={0.5}>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Already have an account?
+          Уже есть аккаунт?
         </Typography>
 
         <Link
@@ -99,7 +99,7 @@ export function JwtSignUpView() {
           href={paths.auth.jwt.signIn}
           variant="subtitle2"
         >
-          Sign in
+          Войти
         </Link>
       </Stack>
     </Stack>
@@ -110,26 +110,26 @@ export function JwtSignUpView() {
       <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
         <Field.Text
           name="firstName"
-          label="First name"
+          label="Имя"
           InputLabelProps={{ shrink: true }}
         />
         <Field.Text
           name="lastName"
-          label="Last name"
+          label="Фамилия"
           InputLabelProps={{ shrink: true }}
         />
       </Stack>
 
       <Field.Text
         name="email"
-        label="Email address"
+        label="Email адрес"
         InputLabelProps={{ shrink: true }}
       />
 
       <Field.Text
         name="password"
-        label="Password"
-        placeholder="6+ characters"
+        label="Пароль"
+        placeholder="Не менее 6 символов"
         type={password.value ? "text" : "password"}
         InputLabelProps={{ shrink: true }}
         InputProps={{
@@ -154,9 +154,9 @@ export function JwtSignUpView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Create account..."
+        loadingIndicator="Создание аккаунта..."
       >
-        Create account
+        Создать аккаунт
       </LoadingButton>
     </Stack>
   );
@@ -171,13 +171,13 @@ export function JwtSignUpView() {
         color: "text.secondary",
       }}
     >
-      {"By signing up, I agree to "}
+      {"Регистрируясь, я соглашаюсь с "}
       <Link underline="always" color="text.primary">
-        Terms of service
+        Условиями использования
       </Link>
-      {" and "}
+      {" и "}
       <Link underline="always" color="text.primary">
-        Privacy policy
+        Политикой конфиденциальности
       </Link>
       .
     </Typography>

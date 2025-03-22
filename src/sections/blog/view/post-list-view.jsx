@@ -66,11 +66,11 @@ export function PostListView() {
   return (
     <DashboardContent>
       <CustomBreadcrumbs
-        heading="List"
+        heading="Список"
         links={[
-          { name: "Dashboard", href: paths.dashboard.root },
-          { name: "Blog", href: paths.dashboard.post.root },
-          { name: "List" },
+          { name: "Главная", href: paths.dashboard.root },
+          { name: "Блог", href: paths.dashboard.post.root },
+          { name: "Список" },
         ]}
         action={
           <Button
@@ -79,7 +79,7 @@ export function PostListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            New post
+            Новый пост
           </Button>
         }
         sx={{ mb: { xs: 3, md: 5 } }}

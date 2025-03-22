@@ -88,7 +88,7 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }) {
 
           <SpeedDial
             direction={smUp ? "left" : "up"}
-            ariaLabel="Share post"
+            ariaLabel="Поделиться постом"
             icon={<Iconify icon="solar:share-bold" />}
             FabProps={{ size: "medium" }}
             sx={{

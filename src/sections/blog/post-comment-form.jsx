@@ -15,7 +15,7 @@ import { Form, Field } from "src/components/hook-form";
 // ----------------------------------------------------------------------
 
 export const CommentSchema = zod.object({
-  comment: zod.string().min(1, { message: "Comment is required!" }),
+  comment: zod.string().min(1, { message: "Необходимо ввести комментарий!" }),
 });
 
 // ----------------------------------------------------------------------
@@ -54,7 +54,7 @@ export function PostCommentForm({
         // eslint-disable-next-line no-shadow
       } catch (error) {
         console.error("Failed to fetch user:", error);
-        setError("Please login to comment");
+        setError("Пожалуйста, войдите чтобы оставить комментарий");
       }
     };
     fetchUser();
@@ -65,12 +65,12 @@ export function PostCommentForm({
       setError(null);
 
       if (!currentUser) {
-        setError("Please login to comment");
+        setError("Пожалуйста, войдите чтобы оставить комментарий");
         return;
       }
 
       if (!postId) {
-        setError("Unable to add comment at this time");
+        setError("Невозможно добавить комментарий в данный момент");
         return;
       }
 
@@ -107,7 +107,7 @@ export function PostCommentForm({
 
         <Field.Text
           name="comment"
-          placeholder="Write some of your comments..."
+          placeholder="Оставьте комментарий..."
           multiline
           rows={4}
         />
@@ -133,7 +133,7 @@ export function PostCommentForm({
             loading={isSubmitting}
             disabled={!currentUser}
           >
-            {parentCommentId ? "Post reply" : "Post comment"}
+            {parentCommentId ? "Отправить ответ" : "Отправить комментарий"}
           </LoadingButton>
         </Stack>
       </Stack>

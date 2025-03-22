@@ -30,12 +30,12 @@ import { signInWithPassword } from "src/auth/context/jwt";
 export const SignInSchema = zod.object({
   email: zod
     .string()
-    .min(1, { message: "Email is required!" })
-    .email({ message: "Email must be a valid email address!" }),
+    .min(1, { message: "Email обязателен!" })
+    .email({ message: "Email должен быть действительным адресом электронной почты!" }),
   password: zod
     .string()
-    .min(1, { message: "Password is required!" })
-    .min(6, { message: "Password must be at least 6 characters!" }),
+    .min(1, { message: "Пароль обязателен!" })
+    .min(6, { message: "Пароль должен содержать не менее 6 символов!" }),
 });
 
 // ----------------------------------------------------------------------
@@ -81,11 +81,11 @@ export function JwtSignInView() {
 
   const renderHead = (
     <Stack spacing={1.5} sx={{ mb: 5 }}>
-      <Typography variant="h5">Sign in to your account</Typography>
+      <Typography variant="h5">Вход в аккаунт</Typography>
 
       <Stack direction="row" spacing={0.5}>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {`Don't have an account?`}
+          {`Нет аккаунта?`}
         </Typography>
 
         <Link
@@ -93,7 +93,7 @@ export function JwtSignInView() {
           href={paths.auth.jwt.signUp}
           variant="subtitle2"
         >
-          Get started
+          Зарегистрироваться
         </Link>
       </Stack>
     </Stack>
@@ -103,7 +103,7 @@ export function JwtSignInView() {
     <Stack spacing={3}>
       <Field.Text
         name="email"
-        label="Email address"
+        label="Email адрес"
         InputLabelProps={{ shrink: true }}
       />
 
@@ -115,13 +115,13 @@ export function JwtSignInView() {
           color="inherit"
           sx={{ alignSelf: "flex-end" }}
         >
-          Forgot password?
+          Забыли пароль?
         </Link>
 
         <Field.Text
           name="password"
-          label="Password"
-          placeholder="6+ characters"
+          label="Пароль"
+          placeholder="Не менее 6 символов"
           type={password.value ? "text" : "password"}
           InputLabelProps={{ shrink: true }}
           InputProps={{
@@ -149,9 +149,9 @@ export function JwtSignInView() {
         type="submit"
         variant="contained"
         loading={isSubmitting}
-        loadingIndicator="Sign in..."
+        loadingIndicator="Вход..."
       >
-        Sign in
+        Войти
       </LoadingButton>
     </Stack>
   );
@@ -161,8 +161,8 @@ export function JwtSignInView() {
       {renderHead}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Use <strong>{defaultValues.email}</strong>
-        {" with password "}
+        Используйте <strong>{defaultValues.email}</strong>
+        {" с паролем "}
         <strong>{defaultValues.password}</strong>
       </Alert>
 
