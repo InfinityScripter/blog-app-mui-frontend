@@ -1,5 +1,6 @@
 import { buttonClasses } from "@mui/material/Button";
-import { loadingButtonClasses } from "@mui/lab/LoadingButton";
+// Removed loadingButtonClasses: in MUI v7, LoadingButton is deprecated and Button provides
+// loading class names directly (e.g., MuiButton-loadingIndicatorStart/End, MuiButton-loadingWrapper)
 
 import { varAlpha, stylesMode } from "../../styles";
 
@@ -55,14 +56,13 @@ const softVariant = {
             0.24,
           ),
         },
-        [`&.${buttonClasses.disabled}`]: {
-          backgroundColor: theme.vars.palette.action.disabledBackground,
-        },
-        [`& .${loadingButtonClasses.loadingIndicatorStart}`]: { left: 14 },
-        [`& .${loadingButtonClasses.loadingIndicatorEnd}`]: { right: 14 },
+        "& .MuiButton-loadingIndicatorStart": { left: 14 },
+        "& .MuiButton-loadingIndicatorEnd": { right: 14 },
+        "& .MuiButton-loadingWrapper": { left: 14, right: 14 },
         [`&.${buttonClasses.sizeSmall}`]: {
-          [`& .${loadingButtonClasses.loadingIndicatorStart}`]: { left: 10 },
-          [`& .${loadingButtonClasses.loadingIndicatorEnd}`]: { right: 10 },
+          "& .MuiButton-loadingIndicatorStart": { left: 10 },
+          "& .MuiButton-loadingIndicatorEnd": { right: 10 },
+          "& .MuiButton-loadingWrapper": { left: 10, right: 10 },
         },
       }),
     },

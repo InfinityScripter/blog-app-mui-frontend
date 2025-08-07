@@ -1,6 +1,6 @@
 "use client";
 
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import { CONFIG } from "src/config-global";

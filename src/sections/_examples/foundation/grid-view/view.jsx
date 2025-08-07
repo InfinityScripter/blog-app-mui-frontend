@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import Radio from "@mui/material/Radio";
 import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import RadioGroup from "@mui/material/RadioGroup";

@@ -1,4 +1,4 @@
-import { mutate } from "swr";
+// Note: Do not import SWR in SSR helpers to avoid RSC import issues
 
 import axios, { endpoints } from "src/utils/axios";
 
@@ -35,7 +35,6 @@ export async function createPost(postData) {
 
 export async function updatePost(postData) {
   const res = await axios.put(`/api/post/${postData.id}/edit`, postData);
-  await mutate(endpoints.post.list);
   return res.data;
 }
 
@@ -44,7 +43,6 @@ export async function updatePostPublish(postId, publishStatus) {
     const res = await axios.put(`/api/post/${postId}/publish`, {
       publish: publishStatus,
     });
-    await mutate(endpoints.post.list);
     return res.data;
   } catch (error) {
     console.error("Ошибка обновления статуса публикации:", error);
@@ -56,7 +54,6 @@ export async function deletePost(postId) {
   try {
     // Если вы хотите использовать динамический URL с [id]:
     const res = await axios.delete(`/api/post/${postId}/delete`);
-    await mutate(endpoints.post.list);
     return res.data;
   } catch (error) {
     console.error("Ошибка удаления поста:", error);
@@ -78,7 +75,6 @@ export async function addComment(postId, commentData) {
       `${endpoints.post.comments.add(postId)}?postId=${postId}`,
       commentData,
     );
-    await mutate(`${endpoints.post.details}?id=${postId}`);
     return res.data;
   } catch (error) {
     console.error("Ошибка добавления комментария:", error);
@@ -92,7 +88,6 @@ export async function updateComment(postId, commentId, commentData) {
     commentId,
     ...commentData,
   });
-  await mutate(`${endpoints.post.details}?id=${postId}`);
   return res.data;
 }
 
@@ -105,7 +100,6 @@ export async function deleteComment(postId, commentId, options = {}) {
     const res = await axios.delete(`${url}?postId=${postId}`, {
       data: { commentId, ...options },
     });
-    await mutate(`${endpoints.post.details}?id=${postId}`);
     return res.data;
   } catch (error) {
     console.error("Ошибка удаления комментария:", error);

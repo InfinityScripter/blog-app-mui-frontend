@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Unstable_Grid2";
+import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
