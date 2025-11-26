@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 export type PublishStatus = 'draft' | 'published';
 
 export interface ReplyComment {
@@ -69,4 +71,55 @@ export interface FileMeta {
   size: number;
   uploadDate: string | Date;
   userId: string;
+}
+
+// Navigation types
+export interface NavItem {
+  title: string;
+  path: string;
+  icon?: ReactNode;
+  children?: NavItem[];
+  info?: ReactNode;
+  disabled?: boolean;
+  roles?: string[];
+  caption?: string;
+}
+
+export interface NavSection {
+  subheader: string;
+  items: NavItem[];
+}
+
+// Theme types
+export type ColorScheme = 'light' | 'dark';
+export type ThemeDirection = 'ltr' | 'rtl';
+export type FontFamily = string;
+export type NavLayout = 'vertical' | 'horizontal' | 'mini';
+export type NavColor = 'integrate' | 'apparent';
+export type Contrast = 'default' | 'bold';
+export type PrimaryColor = 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red';
+
+export interface SettingsState {
+  colorScheme: ColorScheme;
+  direction: ThemeDirection;
+  contrast: Contrast;
+  navLayout: NavLayout;
+  primaryColor: PrimaryColor;
+  navColor: NavColor;
+  compactLayout: boolean;
+  fontFamily: FontFamily;
+}
+
+// Form types
+export interface FormFieldError {
+  message?: string;
+  type?: string;
+}
+
+export interface FormState<T = Record<string, unknown>> {
+  values: T;
+  errors: Record<string, FormFieldError>;
+  touched: Record<string, boolean>;
+  isSubmitting: boolean;
+  isValid: boolean;
 } 

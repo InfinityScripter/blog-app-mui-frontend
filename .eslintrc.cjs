@@ -1,8 +1,9 @@
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
-  plugins: ['perfectionist', 'unused-imports', 'prettier'],
+  plugins: ['perfectionist', 'unused-imports', 'prettier', '@typescript-eslint'],
   extends: ['airbnb', 'airbnb/hooks', 'prettier'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -17,7 +18,7 @@ module.exports = {
     'import/resolver': {
       alias: {
         map: [['src', './src']],
-        extensions: ['.js', '.jsx', '.json'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },
     },
   },
@@ -38,6 +39,8 @@ module.exports = {
     'no-restricted-exports': 0,
     'no-promise-executor-return': 0,
     'import/prefer-default-export': 0,
+    'import/extensions': 0,
+    'import/no-unresolved': 0,
     'prefer-destructuring': [1, { object: true, array: false }],
     // react
     'react/prop-types': 0,
@@ -68,38 +71,17 @@ module.exports = {
       {
         order: 'asc',
         type: 'line-length',
-        'newlines-between': 'always',
+        newlinesBetween: 'always',
         groups: [
           'style',
           'type',
           ['builtin', 'external'],
-          'custom-mui',
-          'custom-routes',
-          'custom-hooks',
-          'custom-utils',
           'internal',
-          'custom-components',
-          'custom-sections',
-          'custom-auth',
-          'custom-types',
           ['parent', 'sibling', 'index'],
           ['parent-type', 'sibling-type', 'index-type'],
           'object',
           'unknown',
         ],
-        'custom-groups': {
-          value: {
-            ['custom-mui']: '@mui/**',
-            ['custom-auth']: 'src/auth/**',
-            ['custom-hooks']: 'src/hooks/**',
-            ['custom-utils']: 'src/utils/**',
-            ['custom-types']: 'src/types/**',
-            ['custom-routes']: 'src/routes/**',
-            ['custom-sections']: 'src/sections/**',
-            ['custom-components']: 'src/components/**',
-          },
-        },
-        'internal-pattern': ['src/**'],
       },
     ],
   },

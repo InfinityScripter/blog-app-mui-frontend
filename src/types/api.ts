@@ -6,6 +6,7 @@ export interface ListPostsResponse {
 
 export interface PostResponse {
   post: Post;
+  latestPosts?: Post[];
 }
 
 export interface LatestPostsResponse {
