@@ -1,3 +1,8 @@
+import type { ReactNode } from "react";
+import type { StackProps } from "@mui/material/Stack";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { ButtonBaseProps } from "@mui/material/ButtonBase";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import SvgIcon from "@mui/material/SvgIcon";
@@ -7,23 +12,41 @@ import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 
 import { carouselClasses } from "../classes";
 
+import type { CarouselOptions, CarouselSlotProps } from "../carousel";
+
 // ----------------------------------------------------------------------
+
+interface ArrowButtonSlotProps {
+  svgIcon?: ReactNode;
+  svgSize?: number;
+  sx?: SxProps<Theme>;
+}
+
+interface CarouselArrowButtonsProps extends Omit<StackProps, "slotProps"> {
+  options?: CarouselOptions;
+  slotProps?: Pick<CarouselSlotProps, "prevBtn" | "nextBtn">;
+  onClickPrev?: () => void;
+  onClickNext?: () => void;
+  disablePrev?: boolean;
+  disableNext?: boolean;
+  sx?: SxProps<Theme>;
+}
+
+interface CarouselArrowNumberButtonsProps extends CarouselArrowButtonsProps {
+  totalSlides?: number;
+  selectedIndex?: number;
+}
 
 export function CarouselArrowBasicButtons({
   options,
   slotProps,
-  totalSlides,
-  selectedIndex,
-
-  //
   onClickPrev,
-
   onClickNext,
   disablePrev,
   disableNext,
   sx,
   ...other
-}) {
+}: CarouselArrowButtonsProps) {
   return (
     <Stack
       direction="row"
@@ -77,8 +100,13 @@ export function CarouselArrowNumberButtons({
   disableNext,
   sx,
   ...other
-}) {
+}: CarouselArrowNumberButtonsProps) {
   const theme = useTheme();
+  const greyVars = theme.vars?.palette.grey as
+    | Record<string, string>
+    | undefined;
+  const grey900Channel =
+    greyVars?.["900Channel"] ?? theme.palette.grey[900] ?? "34 40 49";
 
   return (
     <Stack
@@ -92,7 +120,7 @@ export function CarouselArrowNumberButtons({
         zIndex: 9,
         borderRadius: 1.25,
         color: "common.white",
-        bgcolor: varAlpha(theme.vars.palette.grey["900Channel"], 0.48),
+        bgcolor: varAlpha(grey900Channel, 0.48),
         ...sx,
       }}
       {...other}
@@ -102,7 +130,11 @@ export function CarouselArrowNumberButtons({
         options={options}
         disabled={disablePrev}
         onClick={onClickPrev}
-        sx={{ p: 0.75, borderRadius: "inherit", ...slotProps?.prevBtn?.sx }}
+        sx={
+          (slotProps?.prevBtn?.sx
+            ? [{ p: 0.75, borderRadius: "inherit" }, slotProps.prevBtn.sx]
+            : { p: 0.75, borderRadius: "inherit" }) as SxProps<Theme>
+        }
         svgIcon={slotProps?.prevBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize ?? 16}
       />
@@ -120,7 +152,11 @@ export function CarouselArrowNumberButtons({
         options={options}
         disabled={disableNext}
         onClick={onClickNext}
-        sx={{ p: 0.75, borderRadius: "inherit", ...slotProps?.nextBtn?.sx }}
+        sx={
+          (slotProps?.nextBtn?.sx
+            ? [{ p: 0.75, borderRadius: "inherit" }, slotProps.nextBtn.sx]
+            : { p: 0.75, borderRadius: "inherit" }) as SxProps<Theme>
+        }
         svgIcon={slotProps?.nextBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize ?? 16}
       />
@@ -137,7 +173,7 @@ export function CarouselArrowFloatButtons({
   onClickNext,
   disablePrev,
   disableNext,
-}) {
+}: CarouselArrowButtonsProps) {
   const baseStyles = {
     zIndex: 9,
     top: "50%",
@@ -159,7 +195,11 @@ export function CarouselArrowFloatButtons({
         onClick={onClickPrev}
         svgIcon={slotProps?.prevBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize}
-        sx={{ left: -16, ...baseStyles, ...slotProps?.prevBtn?.sx }}
+        sx={
+          (slotProps?.prevBtn?.sx
+            ? [{ left: -16, ...baseStyles }, slotProps.prevBtn.sx]
+            : { left: -16, ...baseStyles }) as SxProps<Theme>
+        }
       />
 
       <ArrowButton
@@ -169,7 +209,11 @@ export function CarouselArrowFloatButtons({
         onClick={onClickNext}
         svgIcon={slotProps?.nextBtn?.svgIcon}
         svgSize={slotProps?.nextBtn?.svgSize}
-        sx={{ right: -16, ...baseStyles, ...slotProps?.nextBtn?.sx }}
+        sx={
+          (slotProps?.nextBtn?.sx
+            ? [{ right: -16, ...baseStyles }, slotProps.nextBtn.sx]
+            : { right: -16, ...baseStyles }) as SxProps<Theme>
+        }
       />
     </>
   );
@@ -184,7 +228,12 @@ export function ArrowButton({
   options,
   variant,
   ...other
-}) {
+}: ArrowButtonSlotProps &
+  Omit<ButtonBaseProps, "sx"> & {
+    options?: CarouselOptions;
+    variant: "prev" | "next";
+    sx?: SxProps<Theme>;
+  }) {
   const arrowPrev = variant === "prev";
   const arrowNext = variant === "next";
 

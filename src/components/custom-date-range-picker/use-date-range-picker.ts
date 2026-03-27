@@ -1,9 +1,13 @@
+import type { Dayjs } from "dayjs";
+
 import { useState, useCallback } from "react";
 import { fIsAfter, fDateRangeShortLabel } from "src/utils/format-time";
 
 // ----------------------------------------------------------------------
 
-export function useDateRangePicker(start, end) {
+type DateValue = Dayjs | null;
+
+export function useDateRangePicker(start: DateValue, end: DateValue) {
   const [open, setOpen] = useState(false);
 
   const [endDate, setEndDate] = useState(end);
@@ -20,12 +24,12 @@ export function useDateRangePicker(start, end) {
     setOpen(false);
   }, []);
 
-  const onChangeStartDate = useCallback((newValue) => {
+  const onChangeStartDate = useCallback((newValue: DateValue) => {
     setStartDate(newValue);
   }, []);
 
   const onChangeEndDate = useCallback(
-    (newValue) => {
+    (newValue: DateValue) => {
       if (error) {
         setEndDate(null);
       }

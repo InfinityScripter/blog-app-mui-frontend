@@ -7,7 +7,7 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function withLoadingProps<P extends Record<string, unknown>>(
+export function withLoadingProps<P extends object>(
   loader: (useLoadingProps: () => P) => ComponentType<P>,
 ): ComponentType<P> {
   const LoadingPropsContext = createContext<P>({} as P);

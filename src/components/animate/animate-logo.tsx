@@ -15,6 +15,9 @@ interface AnimateLogo1Props extends Omit<BoxProps, "sx"> {
 }
 
 export function AnimateLogo1({ logo, sx, ...other }: AnimateLogo1Props) {
+  const primaryDarkChannel =
+    "var(--palette-primary-darkChannel, var(--palette-primary-dark, 25 118 210))";
+
   return (
     <Box
       sx={{
@@ -56,7 +59,7 @@ export function AnimateLogo1({ logo, sx, ...other }: AnimateLogo1Props) {
           width: "calc(100% - 20px)",
           height: "calc(100% - 20px)",
           border: (theme) =>
-            `solid 3px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+            `solid 3px ${varAlpha(theme.vars?.palette.primary.darkChannel ?? primaryDarkChannel, 0.24)}`,
         }}
       />
 
@@ -74,7 +77,7 @@ export function AnimateLogo1({ logo, sx, ...other }: AnimateLogo1Props) {
           height: 1,
           position: "absolute",
           border: (theme) =>
-            `solid 8px ${varAlpha(theme.vars.palette.primary.darkChannel, 0.24)}`,
+            `solid 8px ${varAlpha(theme.vars?.palette.primary.darkChannel ?? primaryDarkChannel, 0.24)}`,
         }}
       />
     </Box>
@@ -89,6 +92,10 @@ interface AnimateLogo2Props extends Omit<BoxProps, "sx"> {
 }
 
 export function AnimateLogo2({ logo, sx, ...other }: AnimateLogo2Props) {
+  const primaryMainChannel =
+    "var(--palette-primary-mainChannel, var(--palette-primary-main, 32 101 209))";
+  const primaryMain = "var(--palette-primary-main, #2065d1)";
+
   return (
     <Box
       alignItems="center"
@@ -122,7 +129,7 @@ export function AnimateLogo2({ logo, sx, ...other }: AnimateLogo2Props) {
               duration: theme.transitions.duration.shorter,
             }),
           background: (theme) =>
-            `linear-gradient(135deg, ${varAlpha(theme.vars.palette.primary.mainChannel, 0)} 50%, ${theme.vars.palette.primary.main} 100%)`,
+            `linear-gradient(135deg, ${varAlpha(theme.vars?.palette.primary.mainChannel ?? primaryMainChannel, 0)} 50%, ${theme.vars?.palette.primary.main ?? primaryMain} 100%)`,
         }}
       />
     </Box>

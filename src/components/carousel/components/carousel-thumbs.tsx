@@ -1,3 +1,8 @@
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { ButtonBaseProps } from "@mui/material/ButtonBase";
+
 import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
@@ -8,9 +13,22 @@ import { carouselClasses } from "../classes";
 import { CarouselSlide } from "./carousel-slide";
 import { StyledRoot, StyledContainer } from "../carousel";
 
+import type {
+  CarouselAxis,
+  CarouselOptions,
+  CarouselSlotProps,
+} from "../carousel";
+
 // ----------------------------------------------------------------------
 
-export const CarouselThumbs = forwardRef(
+interface CarouselThumbsProps extends Omit<BoxProps, "slotProps"> {
+  children?: ReactNode;
+  slotProps?: Pick<CarouselSlotProps, "slide" | "container" | "disableMask">;
+  options?: CarouselOptions;
+  sx?: SxProps<Theme>;
+}
+
+export const CarouselThumbs = forwardRef<HTMLDivElement, CarouselThumbsProps>(
   ({ children, slotProps, options, sx, ...other }, ref) => {
     const axis = options?.axis ?? "x";
 
@@ -50,7 +68,7 @@ export const CarouselThumbs = forwardRef(
         {...other}
       >
         <StyledContainer
-          component="ul"
+          as="ul"
           axis={axis}
           slideSpacing={slideSpacing}
           className={carouselClasses.thumbContainer}
@@ -67,7 +85,20 @@ export const CarouselThumbs = forwardRef(
 
 // ----------------------------------------------------------------------
 
-export function CarouselThumb({ sx, src, index, selected, ...other }) {
+interface CarouselThumbProps extends Omit<ButtonBaseProps, "children"> {
+  sx?: SxProps<Theme>;
+  src: string;
+  index: number;
+  selected?: boolean;
+}
+
+export function CarouselThumb({
+  sx,
+  src,
+  index,
+  selected,
+  ...other
+}: CarouselThumbProps) {
   return (
     <ButtonBase
       className={carouselClasses.thumb}
@@ -85,7 +116,8 @@ export function CarouselThumb({ sx, src, index, selected, ...other }) {
           }),
         ...(selected && {
           opacity: 1,
-          boxShadow: (theme) => `0 0 0 2px ${theme.vars.palette.primary.main}`,
+          boxShadow: (theme) =>
+            `0 0 0 2px ${theme.vars?.palette.primary.main ?? theme.palette.primary.main}`,
         }),
         ...sx,
       }}
@@ -109,8 +141,11 @@ export function CarouselThumb({ sx, src, index, selected, ...other }) {
 
 // ----------------------------------------------------------------------
 
-function useMaskStyle(axis) {
+function useMaskStyle(axis: CarouselAxis) {
   const theme = useTheme();
+  const backgroundVars = theme.vars?.palette.background as
+    | Record<string, string>
+    | undefined;
 
   const baseStyles = {
     zIndex: 9,
@@ -118,7 +153,11 @@ function useMaskStyle(axis) {
     position: "absolute",
   };
 
-  const bgcolor = `${theme.vars.palette.background.paper} 20%, ${varAlpha(theme.vars.palette.background.paperChannel, 0)} 100%)`;
+  const backgroundPaper =
+    theme.vars?.palette.background.paper ?? theme.palette.background.paper;
+  const backgroundPaperChannel =
+    backgroundVars?.paperChannel ?? theme.palette.background.paper;
+  const bgcolor = `${backgroundPaper} 20%, ${varAlpha(backgroundPaperChannel, 0)} 100%)`;
 
   if (axis === "y") {
     return {

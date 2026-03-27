@@ -1,18 +1,26 @@
+import type { Transition } from "framer-motion";
+
 // ----------------------------------------------------------------------
 
-export const varBgColor = (props) => {
-  const colors = props?.colors || ["#19dcea", "#b22cff"];
-  const duration = props?.duration || 5;
-  const ease = props?.ease || "linear";
+interface BackgroundProps {
+  colors?: string[];
+  duration?: number;
+  ease?: Transition["ease"];
+}
+
+export const varBgColor = (props?: BackgroundProps) => {
+  const colors = props?.colors ?? ["#19dcea", "#b22cff"];
+  const duration = props?.duration ?? 5;
+  const ease = props?.ease ?? "linear";
 
   return { animate: { background: colors, transition: { duration, ease } } };
 };
 
 // ----------------------------------------------------------------------
 
-export const varBgKenburns = (props) => {
-  const duration = props?.duration || 5;
-  const ease = props?.ease || "easeOut";
+export const varBgKenburns = (props?: BackgroundProps) => {
+  const duration = props?.duration ?? 5;
+  const ease = props?.ease ?? "easeOut";
 
   return {
     top: {
@@ -54,12 +62,13 @@ export const varBgKenburns = (props) => {
 
 // ----------------------------------------------------------------------
 
-export const varBgPan = (props) => {
-  const colors = props?.colors || ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"];
-  const duration = props?.duration || 5;
-  const ease = props?.ease || "linear";
+export const varBgPan = (props?: BackgroundProps) => {
+  const colors = props?.colors ?? ["#ee7752", "#e73c7e", "#23a6d5", "#23d5ab"];
+  const duration = props?.duration ?? 5;
+  const ease = props?.ease ?? "linear";
 
-  const gradient = (deg) => `linear-gradient(${deg}deg, ${colors})`;
+  const gradient = (deg: number) =>
+    `linear-gradient(${deg}deg, ${colors.join(", ")})`;
 
   return {
     top: {

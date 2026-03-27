@@ -1,22 +1,48 @@
+import type { ApexOptions } from "apexcharts";
+
 import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-export function useChart(options) {
+export function useChart(
+  options?: ApexOptions & { responsive?: ApexOptions["responsive"] },
+) {
   const theme = useTheme();
+  const successPalette = theme.palette
+    .success as typeof theme.palette.success & {
+    darker?: string;
+  };
+  const infoPalette = theme.palette.info as typeof theme.palette.info & {
+    darker?: string;
+  };
+  const greyVars = theme.vars?.palette.grey as
+    | Record<string, string>
+    | undefined;
+  const textVars = theme.vars?.palette.text;
+  const backgroundVars = theme.vars?.palette.background as
+    | Record<string, string>
+    | undefined;
+  const divider = theme.vars?.palette.divider ?? theme.palette.divider;
+  const textPrimary = textVars?.primary ?? theme.palette.text.primary;
+  const textSecondary = textVars?.secondary ?? theme.palette.text.secondary;
+  const textDisabled = textVars?.disabled ?? theme.palette.text.disabled;
+  const backgroundPaper =
+    backgroundVars?.paper ?? theme.palette.background.paper;
+  const grey500Channel =
+    greyVars?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171";
 
   const LABEL_TOTAL = {
     show: true,
     label: "Total",
-    color: theme.vars.palette.text.secondary,
+    color: textSecondary,
     fontSize: theme.typography.subtitle2.fontSize,
     fontWeight: theme.typography.subtitle2.fontWeight,
   };
 
   const LABEL_VALUE = {
     offsetY: 8,
-    color: theme.vars.palette.text.primary,
+    color: textPrimary,
     fontSize: theme.typography.h4.fontSize,
     fontWeight: theme.typography.h4.fontWeight,
   };
@@ -61,7 +87,7 @@ export function useChart(options) {
       },
       parentHeightOffset: 0,
       fontFamily: theme.typography.fontFamily,
-      foreColor: theme.vars.palette.text.disabled,
+      foreColor: textDisabled,
       ...options?.chart,
       animations: {
         enabled: true,
@@ -82,9 +108,9 @@ export function useChart(options) {
       theme.palette.error.main,
       theme.palette.success.main,
       theme.palette.warning.dark,
-      theme.palette.success.darker,
+      successPalette.darker ?? theme.palette.success.dark,
       theme.palette.info.dark,
-      theme.palette.info.darker,
+      infoPalette.darker ?? theme.palette.info.dark,
     ],
 
     /** **************************************
@@ -149,7 +175,7 @@ export function useChart(options) {
      *************************************** */
     grid: {
       strokeDashArray: 3,
-      borderColor: theme.vars.palette.divider,
+      borderColor: divider,
       ...options?.grid,
       padding: {
         top: 0,
@@ -187,7 +213,7 @@ export function useChart(options) {
      *************************************** */
     markers: {
       size: 0,
-      strokeColors: theme.vars.palette.background.paper,
+      strokeColors: backgroundPaper,
       ...options?.markers,
     },
 
@@ -214,7 +240,7 @@ export function useChart(options) {
       horizontalAlign: "right",
       markers: { radius: 12 },
       labels: {
-        colors: theme.vars.palette.text.primary,
+        colors: textPrimary,
       },
       ...options?.legend,
       itemMargin: {
@@ -268,7 +294,7 @@ export function useChart(options) {
         track: {
           margin: -8,
           strokeWidth: "50%",
-          background: varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
+          background: varAlpha(grey500Channel, 0.16),
           ...options?.plotOptions?.radialBar?.track,
         },
         dataLabels: {
@@ -291,8 +317,8 @@ export function useChart(options) {
           fill: {
             colors: ["transparent"],
           },
-          strokeColors: theme.vars.palette.divider,
-          connectorColors: theme.vars.palette.divider,
+          strokeColors: divider,
+          connectorColors: divider,
           ...options?.plotOptions?.radar?.polygons,
         },
       },
@@ -300,10 +326,10 @@ export function useChart(options) {
       // plotOptions: polarArea
       polarArea: {
         rings: {
-          strokeColor: theme.vars.palette.divider,
+          strokeColor: divider,
         },
         spokes: {
-          connectorColors: theme.vars.palette.divider,
+          connectorColors: divider,
         },
         ...options?.plotOptions?.polarArea,
       },
@@ -318,11 +344,14 @@ export function useChart(options) {
     /** **************************************
      * Responsive
      *************************************** */
-    responsive: RESPONSIVE.reduce((acc, cur) => {
-      if (!acc.some((item) => item.breakpoint === cur.breakpoint)) {
-        acc.push(cur);
-      }
-      return acc;
-    }, []),
+    responsive: RESPONSIVE.reduce<NonNullable<ApexOptions["responsive"]>>(
+      (acc, cur) => {
+        if (!acc.some((item) => item.breakpoint === cur.breakpoint)) {
+          acc.push(cur);
+        }
+        return acc;
+      },
+      [],
+    ),
   };
 }

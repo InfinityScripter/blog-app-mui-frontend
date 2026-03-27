@@ -1,3 +1,6 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { TypographyProps } from "@mui/material/Typography";
+
 import { useRef, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import {
@@ -10,6 +13,17 @@ import {
 
 // ----------------------------------------------------------------------
 
+interface AnimateCountUpProps extends Omit<TypographyProps, "children"> {
+  to: number;
+  from?: number;
+  unit?: string;
+  toFixed?: number;
+  duration?: number;
+  once?: boolean;
+  amount?: number;
+  sx?: SxProps<Theme>;
+}
+
 export function AnimateCountUp({
   to,
   sx,
@@ -21,8 +35,8 @@ export function AnimateCountUp({
   amount = 0.5,
   component = "p",
   ...other
-}) {
-  const ref = useRef(null);
+}: AnimateCountUpProps) {
+  const ref = useRef<HTMLSpanElement | null>(null);
 
   const inView = useInView(ref, { once, amount });
 

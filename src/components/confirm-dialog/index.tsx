@@ -1,5 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import PropTypes from "prop-types";
+import type { ReactNode } from "react";
+import type { DialogProps } from "@mui/material/Dialog";
+
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -8,6 +9,24 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 
 // ----------------------------------------------------------------------
+
+interface ConfirmDialogProps extends Omit<DialogProps, "title" | "content"> {
+  title?: ReactNode;
+  content?: ReactNode;
+  action?: ReactNode;
+  cancelText?: string;
+  confirmText?: string;
+  confirmColor?:
+    | "inherit"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "error"
+    | "info"
+    | "warning";
+  loading?: boolean;
+  onConfirm?: () => void;
+}
 
 export function ConfirmDialog({
   title,
@@ -22,7 +41,11 @@ export function ConfirmDialog({
   loading = false,
   onConfirm,
   ...other
-}) {
+}: ConfirmDialogProps) {
+  const handleCancel = () => {
+    onClose?.({}, "escapeKeyDown");
+  };
+
   return (
     <Dialog
       fullWidth
@@ -40,7 +63,7 @@ export function ConfirmDialog({
       <DialogActions>
         {action || (
           <>
-            <Button variant="outlined" color="inherit" onClick={onClose}>
+            <Button variant="outlined" color="inherit" onClick={handleCancel}>
               {cancelText}
             </Button>
 
@@ -60,17 +83,3 @@ export function ConfirmDialog({
     </Dialog>
   );
 }
-
-ConfirmDialog.propTypes = {
-  action: PropTypes.node,
-  cancelText: PropTypes.string,
-  confirmColor: PropTypes.string,
-  confirmText: PropTypes.string,
-  content: PropTypes.node,
-  loading: PropTypes.bool,
-  maxWidth: PropTypes.string,
-  onClose: PropTypes.func,
-  onConfirm: PropTypes.func,
-  open: PropTypes.bool,
-  title: PropTypes.string,
-};

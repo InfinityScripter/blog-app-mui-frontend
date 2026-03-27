@@ -1,9 +1,17 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 
 // ----------------------------------------------------------------------
 
-export function ChartLoading({ sx, type, ...other }) {
+interface ChartLoadingProps extends BoxProps {
+  sx?: SxProps<Theme>;
+  type?: string;
+}
+
+export function ChartLoading({ sx, type, ...other }: ChartLoadingProps) {
   const circularTypes = ["donut", "radialBar", "pie", "polarArea"];
 
   return (
@@ -30,9 +38,10 @@ export function ChartLoading({ sx, type, ...other }) {
           width: 1,
           height: 1,
           borderRadius: "inherit",
-          ...(circularTypes.includes(type) && {
-            borderRadius: "50%",
-          }),
+          ...(type &&
+            circularTypes.includes(type) && {
+              borderRadius: "50%",
+            }),
         }}
       />
     </Box>

@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import type { StackProps } from "@mui/material/Stack";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -27,6 +30,14 @@ export const StyledDot = styled(Box)(() => ({
 
 // ----------------------------------------------------------------------
 
+interface ChartLegendsProps extends StackProps {
+  labels?: string[];
+  colors?: string[];
+  values?: Array<string | number>;
+  sublabels?: Array<string | number>;
+  icons?: ReactNode[];
+}
+
 export function ChartLegends({
   labels = [],
   colors = [],
@@ -34,7 +45,7 @@ export function ChartLegends({
   sublabels,
   icons,
   ...other
-}) {
+}: ChartLegendsProps) {
   return (
     <Stack direction="row" flexWrap="wrap" spacing={2} {...other}>
       {labels?.map((series, index) => (
@@ -51,7 +62,7 @@ export function ChartLegends({
                 {icons?.[index]}
               </Box>
             ) : (
-              <StyledDot component="span" sx={{ color: colors[index] }} />
+              <StyledDot as="span" sx={{ color: colors[index] }} />
             )}
 
             <Box component="span" sx={{ flexShrink: 0 }}>

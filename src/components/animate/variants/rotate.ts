@@ -1,8 +1,10 @@
 import { varTranExit, varTranEnter } from "./transition";
 
+import type { TransitionProps } from "./transition";
+
 // ----------------------------------------------------------------------
 
-export const varRotate = (props) => {
+export const varRotate = (props?: TransitionProps) => {
   const durationIn = props?.durationIn;
   const durationOut = props?.durationOut;
   const easeIn = props?.easeIn;

@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import NoSsr from "@mui/material/NoSsr";
@@ -5,33 +8,47 @@ import { CONFIG } from "src/config-global";
 
 // ----------------------------------------------------------------------
 
-export const FlagIcon = forwardRef(({ code, sx, ...other }, ref) => {
-  const baseStyles = {
-    width: 26,
-    height: 20,
-    flexShrink: 0,
-    overflow: "hidden",
-    borderRadius: "5px",
-    display: "inline-flex",
-    bgcolor: "background.neutral",
-  };
+interface FlagIconProps extends Omit<BoxProps, "children" | "component"> {
+  code?: string;
+  sx?: SxProps<Theme>;
+}
 
-  const renderFallback = <Box component="span" sx={{ ...baseStyles, ...sx }} />;
+export const FlagIcon = forwardRef<HTMLSpanElement, FlagIconProps>(
+  ({ code, sx, ...other }, ref) => {
+    const baseStyles = {
+      width: 26,
+      height: 20,
+      flexShrink: 0,
+      overflow: "hidden",
+      borderRadius: "5px",
+      display: "inline-flex",
+      bgcolor: "background.neutral",
+    };
 
-  if (!code) {
-    return null;
-  }
+    const renderFallback = (
+      <Box component="span" sx={{ ...baseStyles, ...sx }} />
+    );
 
-  return (
-    <NoSsr fallback={renderFallback}>
-      <Box ref={ref} component="span" sx={{ ...baseStyles, ...sx }} {...other}>
+    if (!code) {
+      return null;
+    }
+
+    return (
+      <NoSsr fallback={renderFallback}>
         <Box
-          component="img"
-          alt={code}
-          src={`${CONFIG.site.basePath}/assets/icons/flagpack/${code?.toLowerCase()}.webp`}
-          sx={{ width: 1, height: 1, objectFit: "cover" }}
-        />
-      </Box>
-    </NoSsr>
-  );
-});
+          ref={ref}
+          component="span"
+          sx={{ ...baseStyles, ...sx }}
+          {...other}
+        >
+          <Box
+            component="img"
+            alt={code}
+            src={`${CONFIG.site.basePath}/assets/icons/flagpack/${code?.toLowerCase()}.webp`}
+            sx={{ width: 1, height: 1, objectFit: "cover" }}
+          />
+        </Box>
+      </NoSsr>
+    );
+  },
+);

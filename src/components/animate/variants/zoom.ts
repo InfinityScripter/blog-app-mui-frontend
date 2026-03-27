@@ -1,9 +1,15 @@
 import { varTranExit, varTranEnter } from "./transition";
 
+import type { TransitionProps } from "./transition";
+
 // ----------------------------------------------------------------------
 
-export const varZoom = (props) => {
-  const distance = props?.distance || 720;
+interface ZoomProps extends TransitionProps {
+  distance?: number;
+}
+
+export const varZoom = (props?: ZoomProps) => {
+  const distance = props?.distance ?? 720;
   const durationIn = props?.durationIn;
   const durationOut = props?.durationOut;
   const easeIn = props?.easeIn;

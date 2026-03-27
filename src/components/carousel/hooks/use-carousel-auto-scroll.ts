@@ -1,12 +1,14 @@
+import type { EmblaCarouselType } from "embla-carousel";
+
 import { useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
-export function useCarouselAutoScroll(mainApi) {
+export function useCarouselAutoScroll(mainApi?: EmblaCarouselType) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const onClickAutoplay = useCallback(
-    (callback) => {
+    (callback: () => void) => {
       const autoScroll = mainApi?.plugins()?.autoScroll;
       if (!autoScroll) return;
 

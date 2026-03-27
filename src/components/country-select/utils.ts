@@ -2,7 +2,9 @@ import { countries } from "src/assets/data";
 
 // ----------------------------------------------------------------------
 
-export function getCountry(inputValue) {
+export type Country = (typeof countries)[number];
+
+export function getCountry(inputValue: string) {
   const option = countries.filter(
     (country) => country.label === inputValue || country.code === inputValue,
   )[0];
@@ -12,8 +14,8 @@ export function getCountry(inputValue) {
 
 // ----------------------------------------------------------------------
 
-export function displayValueByCountryCode(inputValue) {
+export function displayValueByCountryCode(inputValue: string) {
   const option = countries.filter((country) => country.code === inputValue)[0];
 
-  return option.label;
+  return option?.label ?? inputValue;
 }

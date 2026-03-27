@@ -1,72 +1,81 @@
+import type { EmblaEventType, EmblaCarouselType } from "embla-carousel";
+
 import { useRef, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
-export function useParallax(mainApi, parallax) {
+export function useParallax(
+  mainApi?: EmblaCarouselType,
+  parallax?: number | boolean,
+) {
   const tweenFactor = useRef(0);
 
-  const tweenNodes = useRef([]);
+  const tweenNodes = useRef<Array<Element | null>>([]);
 
   const TWEEN_FACTOR_BASE = typeof parallax === "number" ? parallax : 0.24;
 
-  const setTweenNodes = useCallback((_mainApi) => {
+  const setTweenNodes = useCallback((_mainApi: EmblaCarouselType) => {
     tweenNodes.current = _mainApi
       .slideNodes()
       .map((slideNode) => slideNode.querySelector(".slide__parallax__layer"));
   }, []);
 
   const setTweenFactor = useCallback(
-    (_mainApi) => {
+    (_mainApi: EmblaCarouselType) => {
       tweenFactor.current =
         TWEEN_FACTOR_BASE * _mainApi.scrollSnapList().length;
     },
     [TWEEN_FACTOR_BASE],
   );
 
-  const tweenParallax = useCallback((_mainApi, eventName) => {
-    const engine = _mainApi.internalEngine();
+  const tweenParallax = useCallback(
+    (_mainApi: EmblaCarouselType, eventName?: EmblaEventType) => {
+      const engine = _mainApi.internalEngine();
 
-    const scrollProgress = _mainApi.scrollProgress();
+      const scrollProgress = _mainApi.scrollProgress();
 
-    const slidesInView = _mainApi.slidesInView();
+      const slidesInView = _mainApi.slidesInView();
 
-    const isScrollEvent = eventName === "scroll";
+      const isScrollEvent = eventName === "scroll";
 
-    _mainApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
-      let diffToTarget = scrollSnap - scrollProgress;
+      _mainApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+        let diffToTarget = scrollSnap - scrollProgress;
 
-      const slidesInSnap = engine.slideRegistry[snapIndex];
+        const slidesInSnap = engine.slideRegistry[snapIndex];
 
-      slidesInSnap.forEach((slideIndex) => {
-        if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
+        slidesInSnap.forEach((slideIndex) => {
+          if (isScrollEvent && !slidesInView.includes(slideIndex)) return;
 
-        if (engine.options.loop) {
-          engine.slideLooper.loopPoints.forEach((loopItem) => {
-            const target = loopItem.target();
+          if (engine.options.loop) {
+            engine.slideLooper.loopPoints.forEach((loopItem) => {
+              const target = loopItem.target();
 
-            if (slideIndex === loopItem.index && target !== 0) {
-              const sign = Math.sign(target);
+              if (slideIndex === loopItem.index && target !== 0) {
+                const sign = Math.sign(target);
 
-              if (sign === -1) {
-                diffToTarget = scrollSnap - (1 + scrollProgress);
+                if (sign === -1) {
+                  diffToTarget = scrollSnap - (1 + scrollProgress);
+                }
+                if (sign === 1) {
+                  diffToTarget = scrollSnap + (1 - scrollProgress);
+                }
               }
-              if (sign === 1) {
-                diffToTarget = scrollSnap + (1 - scrollProgress);
-              }
-            }
-          });
-        }
+            });
+          }
 
-        const translateValue = diffToTarget * (-1 * tweenFactor.current) * 100;
+          const translateValue =
+            diffToTarget * (-1 * tweenFactor.current) * 100;
 
-        const tweenNode = tweenNodes.current[slideIndex];
+          const tweenNode = tweenNodes.current[slideIndex];
 
-        if (tweenNode) {
-          tweenNode.style.transform = `translateX(${translateValue}%)`;
-        }
+          if (tweenNode instanceof HTMLElement) {
+            tweenNode.style.transform = `translateX(${translateValue}%)`;
+          }
+        });
       });
-    });
-  }, []);
+    },
+    [],
+  );
 
   useEffect(() => {
     if (!mainApi || !parallax) return;

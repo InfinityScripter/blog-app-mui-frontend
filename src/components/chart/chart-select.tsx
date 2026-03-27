@@ -1,3 +1,6 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { ButtonBaseProps } from "@mui/material/ButtonBase";
+
 import { varAlpha } from "src/theme/styles";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
@@ -8,8 +11,25 @@ import { usePopover, CustomPopover } from "../custom-popover";
 
 // ----------------------------------------------------------------------
 
-export function ChartSelect({ options, value, onChange, slotProps, ...other }) {
+interface ChartSelectProps extends Omit<ButtonBaseProps, "value" | "onChange"> {
+  options: string[];
+  value: string;
+  onChange: (option: string) => void;
+  slotProps?: {
+    button?: SxProps<Theme>;
+    popover?: SxProps<Theme>;
+  };
+}
+
+export function ChartSelect({
+  options,
+  value,
+  onChange,
+  slotProps,
+  ...other
+}: ChartSelectProps) {
   const popover = usePopover();
+  const buttonSx = slotProps?.button;
 
   return (
     <>
@@ -23,8 +43,8 @@ export function ChartSelect({ options, value, onChange, slotProps, ...other }) {
           borderRadius: 1,
           typography: "subtitle2",
           border: (theme) =>
-            `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.24)}`,
-          ...slotProps?.button,
+            `solid 1px ${varAlpha((theme.vars?.palette.grey as Record<string, string> | undefined)?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171", 0.24)}`,
+          ...(buttonSx as object),
         }}
         {...other}
       >

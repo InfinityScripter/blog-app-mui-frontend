@@ -1,27 +1,29 @@
+import type { EmblaCarouselType } from "embla-carousel";
+
 import { useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
-export function useCarouselDots(mainApi) {
+export function useCarouselDots(mainApi?: EmblaCarouselType) {
   const [dotCount, setDotCount] = useState(0);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const [scrollSnaps, setScrollSnaps] = useState([]);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
   const onClickDot = useCallback(
-    (index) => {
+    (index: number) => {
       if (!mainApi) return;
       mainApi.scrollTo(index);
     },
     [mainApi],
   );
 
-  const onInit = useCallback((_mainApi) => {
+  const onInit = useCallback((_mainApi: EmblaCarouselType) => {
     setScrollSnaps(_mainApi.scrollSnapList());
   }, []);
 
-  const onSelect = useCallback((_mainApi) => {
+  const onSelect = useCallback((_mainApi: EmblaCarouselType) => {
     setSelectedIndex(_mainApi.selectedScrollSnap());
     setDotCount(_mainApi.scrollSnapList().length);
   }, []);

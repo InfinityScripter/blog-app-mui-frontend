@@ -1,9 +1,15 @@
 import { varTranExit, varTranEnter } from "./transition";
 
+import type { TransitionProps } from "./transition";
+
 // ----------------------------------------------------------------------
 
-export const varSlide = (props) => {
-  const distance = props?.distance || 160;
+interface SlideProps extends TransitionProps {
+  distance?: number;
+}
+
+export const varSlide = (props?: SlideProps) => {
+  const distance = props?.distance ?? 160;
   const durationIn = props?.durationIn;
   const durationOut = props?.durationOut;
   const easeIn = props?.easeIn;

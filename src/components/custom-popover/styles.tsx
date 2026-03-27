@@ -1,13 +1,24 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { CONFIG } from "src/config-global";
 import { styled } from "@mui/material/styles";
 import { varAlpha, stylesMode } from "src/theme/styles";
 
+import type { ArrowPlacement } from "./utils";
+
 // ----------------------------------------------------------------------
+
+interface StyledArrowProps {
+  placement: ArrowPlacement;
+  offset?: number;
+  size?: number;
+  sx?: SxProps<Theme>;
+}
 
 export const StyledArrow = styled("span", {
   shouldForwardProp: (prop) =>
     prop !== "size" && prop !== "placement" && prop !== "offset",
-})(({ placement, offset = 0, size = 0, theme }) => {
+})<StyledArrowProps>(({ placement, offset = 0, size = 0, theme }) => {
   const POSITION = -(size / 2) + 0.5;
 
   const alignmentStyles = {
@@ -19,7 +30,7 @@ export const StyledArrow = styled("span", {
     vCenter: { top: 0, bottom: 0, margin: "auto" },
   };
 
-  const backgroundStyles = (color) => ({
+  const backgroundStyles = (color: "cyan" | "red") => ({
     backgroundRepeat: "no-repeat",
     backgroundSize: `${size * 3}px ${size * 3}px`,
     backgroundImage: `url(${CONFIG.site.basePath}/assets/${color}-blur.png)`,

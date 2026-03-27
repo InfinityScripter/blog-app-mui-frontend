@@ -1,9 +1,34 @@
+import type { PopoverOrigin } from "@mui/material/Popover";
+import type { Theme, SystemStyleObject } from "@mui/material/styles";
+
 // ----------------------------------------------------------------------
 
 const POPOVER_DISTANCE = 0.75;
 
-export function calculateAnchorOrigin(arrow) {
-  let props;
+export type ArrowPlacement =
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right"
+  | "left-top"
+  | "left-center"
+  | "left-bottom"
+  | "right-top"
+  | "right-center"
+  | "right-bottom";
+
+interface AnchorOriginResult {
+  paperStyles?: SystemStyleObject<Theme>;
+  anchorOrigin: PopoverOrigin;
+  transformOrigin: PopoverOrigin;
+}
+
+export function calculateAnchorOrigin(
+  arrow: ArrowPlacement,
+): AnchorOriginResult {
+  let props: AnchorOriginResult;
 
   switch (arrow) {
     /**

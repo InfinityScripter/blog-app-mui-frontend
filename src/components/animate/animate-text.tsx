@@ -1,3 +1,7 @@
+import type { Variants } from "framer-motion";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { TypographyProps } from "@mui/material/Typography";
+
 import Box from "@mui/material/Box";
 import { useRef, useEffect } from "react";
 import Typography from "@mui/material/Typography";
@@ -18,6 +22,15 @@ export const animateTextClasses = {
   dataIndex: '[data-columns="3"]',
 };
 
+interface AnimateTextProps extends Omit<TypographyProps, "children"> {
+  text: string | string[];
+  variants?: Variants;
+  once?: boolean;
+  amount?: number;
+  repeatDelay?: number;
+  sx?: SxProps<Theme>;
+}
+
 export function AnimateText({
   sx,
   text,
@@ -27,8 +40,8 @@ export function AnimateText({
   component = "p",
   repeatDelay = 500, // 1000 = 1s
   ...other
-}) {
-  const ref = useRef(null);
+}: AnimateTextProps) {
+  const ref = useRef<HTMLSpanElement | null>(null);
 
   const controls = useAnimation();
 
@@ -37,7 +50,7 @@ export function AnimateText({
   const isInView = useInView(ref, { once, amount });
 
   useEffect(() => {
-    let timeout;
+    let timeout: ReturnType<typeof setTimeout> | undefined;
 
     const show = () => {
       if (repeatDelay) {
@@ -93,7 +106,7 @@ export function AnimateText({
         initial="initial"
         animate={controls}
         exit="exit"
-        variants={varContainer()}
+        variants={varContainer({})}
         aria-hidden
         className={animateTextClasses.lines}
       >
@@ -118,16 +131,15 @@ export function AnimateText({
                   sx={{ display: "inline-block" }}
                 >
                   {word.split("").map((char, charIndex) => (
-                    <Box
-                      component={m.span}
+                    <m.span
                       key={`${char}-${charIndex}`}
-                      variants={variants ?? varFade().in}
+                      variants={(variants ?? varFade({}).in) as Variants}
                       data-index={charIndex}
                       className={animateTextClasses.char}
-                      sx={{ display: "inline-block" }}
+                      style={{ display: "inline-block" }}
                     >
                       {char}
-                    </Box>
+                    </m.span>
                   ))}
 
                   {lastWordInline !== word && (

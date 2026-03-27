@@ -1,5 +1,7 @@
 "use client";
 
+import type { CSSProperties } from "react";
+import type { Transition } from "framer-motion";
 import type { Theme, SxProps } from "@mui/material/styles";
 
 import { m } from "framer-motion";
@@ -18,10 +20,10 @@ interface AnimateBorderProps {
     length?: number;
     width?: string;
     color?: string | string[];
-    ease?: string;
+    ease?: Transition["ease"];
     duration?: number;
     distance?: number;
-    repeatType?: string;
+    repeatType?: Transition["repeatType"];
     disableDoubleline?: boolean;
     outline?: string;
   };
@@ -35,10 +37,7 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
 
   const [aspectRatio, setAspectRatio] = useState(1);
 
-  const [animateStyle, setAnimateStyle] = useState<Record<
-    string,
-    string
-  > | null>(null);
+  const [animateStyle, setAnimateStyle] = useState<CSSProperties | null>(null);
 
   const values = {
     disable: animate?.disable,
@@ -95,11 +94,11 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
     ];
   };
 
-  const transition = {
+  const transition: Transition = {
     ease: values.ease,
     delay: values.delay,
     duration: values.duration,
-    repeatType: values.repeatType as "loop" | "reverse" | "mirror",
+    repeatType: values.repeatType,
     repeat: values.loop ? Infinity : 1,
     times:
       aspectRatio > 1
@@ -121,9 +120,8 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
         ...sx,
       }}
     >
-      <Box
+      <m.span
         ref={animateRef}
-        component={m.span}
         transition={transition}
         animate={
           !values.disable
@@ -136,22 +134,19 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
               }
             : undefined
         }
-        sx={{
-          ...borderGradient({ padding: values.width }),
-        }}
+        style={borderGradient({ padding: values.width }) as CSSProperties}
       />
 
       {!values.disable && !values.disableDoubleline && (
-        <Box
-          component={m.span}
+        <m.span
           transition={transition}
           animate={{
             background: background(
               typeof values.color === "string" ? values.color : values.color[1],
             ),
           }}
-          sx={{
-            ...borderGradient(),
+          style={{
+            ...(borderGradient() as CSSProperties),
             transform: "scale(-1)",
             ...(animateStyle && {
               paddingTop: animateStyle?.paddingBottom,

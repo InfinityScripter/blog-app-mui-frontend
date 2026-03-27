@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import type { DialogProps } from "@mui/material/Dialog";
+
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -6,6 +9,12 @@ import DialogContent from "@mui/material/DialogContent";
 
 // ----------------------------------------------------------------------
 
+interface ConfirmDialogProps extends Omit<DialogProps, "title" | "content"> {
+  title?: ReactNode;
+  content?: ReactNode;
+  action?: ReactNode;
+}
+
 export function ConfirmDialog({
   title,
   content,
@@ -13,7 +22,11 @@ export function ConfirmDialog({
   open,
   onClose,
   ...other
-}) {
+}: ConfirmDialogProps) {
+  const handleClose = () => {
+    onClose?.({}, "escapeKeyDown");
+  };
+
   return (
     <Dialog fullWidth maxWidth="xs" open={open} onClose={onClose} {...other}>
       <DialogTitle sx={{ pb: 2 }}>{title}</DialogTitle>
@@ -25,7 +38,7 @@ export function ConfirmDialog({
       <DialogActions>
         {action}
 
-        <Button variant="outlined" color="inherit" onClick={onClose}>
+        <Button variant="outlined" color="inherit" onClick={handleClose}>
           Cancel
         </Button>
       </DialogActions>

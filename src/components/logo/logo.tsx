@@ -1,5 +1,7 @@
 "use client";
 
+import type { BoxProps } from "@mui/material/Box";
+
 import Box from "@mui/material/Box";
 import NoSsr from "@mui/material/NoSsr";
 import { useId, forwardRef } from "react";
@@ -10,7 +12,14 @@ import { logoClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
-export const Logo = forwardRef(
+interface LogoProps extends Omit<BoxProps, "component"> {
+  width?: number | string;
+  height?: number | string;
+  disableLink?: boolean;
+  href?: string;
+}
+
+export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
   (
     {
       width = 40,

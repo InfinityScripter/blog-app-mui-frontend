@@ -1,11 +1,39 @@
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 
 import { carouselClasses } from "../classes";
 
+type CarouselAxis = "x" | "y";
+
+interface StyledRootProps {
+  axis: CarouselAxis;
+  slideSpacing?: string;
+}
+
+interface SlidesToShowByBreakpoint {
+  [key: string]: number | string;
+}
+
+interface CarouselSlideOptions {
+  axis?: CarouselAxis;
+  slideSpacing?: string;
+  parallax?: boolean;
+  slidesToShow?: number | string | SlidesToShowByBreakpoint;
+}
+
+interface CarouselSlideProps extends Omit<BoxProps, "children"> {
+  children?: ReactNode;
+  options?: CarouselSlideOptions;
+  sx?: SxProps<Theme>;
+}
+
 const StyledRoot = styled(Box, {
   shouldForwardProp: (prop) => prop !== "axis" && prop !== "slideSpacing",
-})(({ axis, slideSpacing }) => ({
+})<StyledRootProps>(({ axis, slideSpacing }) => ({
   display: "block",
   position: "relative",
   ...(axis === "x" && {
@@ -26,12 +54,17 @@ const StyledContent = styled(Box)(() => ({
 
 // ----------------------------------------------------------------------
 
-export function CarouselSlide({ sx, options, children, ...other }) {
+export function CarouselSlide({
+  sx,
+  options,
+  children,
+  ...other
+}: CarouselSlideProps) {
   const slideSize = getSize(options?.slidesToShow);
 
   return (
     <StyledRoot
-      component="li"
+      as="li"
       axis={options?.axis ?? "x"}
       slideSpacing={options?.slideSpacing}
       className={carouselClasses.slide}
@@ -52,19 +85,22 @@ export function CarouselSlide({ sx, options, children, ...other }) {
   );
 }
 
-function getSize(slidesToShow) {
+function getSize(slidesToShow?: CarouselSlideOptions["slidesToShow"]) {
   if (slidesToShow && typeof slidesToShow === "object") {
-    return Object.keys(slidesToShow).reduce((acc, key) => {
-      const sizeByKey = slidesToShow[key];
-      acc[key] = getValue(sizeByKey);
-      return acc;
-    }, {});
+    return Object.keys(slidesToShow).reduce<Record<string, string>>(
+      (acc, key) => {
+        const sizeByKey = slidesToShow[key];
+        acc[key] = getValue(sizeByKey);
+        return acc;
+      },
+      {},
+    );
   }
 
   return getValue(slidesToShow);
 }
 
-function getValue(value = 1) {
+function getValue(value: number | string = 1) {
   if (typeof value === "string") {
     const isSupported =
       value === "auto" || value.endsWith("%") || value.endsWith("px");

@@ -1,3 +1,7 @@
+import type { Dayjs } from "dayjs";
+import type { ReactNode } from "react";
+import type { DialogProps } from "@mui/material/Dialog";
+
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -12,6 +16,19 @@ import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 
 // ----------------------------------------------------------------------
 
+type DateValue = Dayjs | null;
+
+interface CustomDateRangePickerProps
+  extends Pick<DialogProps, "open" | "onClose"> {
+  error?: boolean;
+  endDate: DateValue;
+  startDate: DateValue;
+  onChangeEndDate: (value: DateValue) => void;
+  onChangeStartDate: (value: DateValue) => void;
+  variant?: "input" | "calendar";
+  title?: ReactNode;
+}
+
 export function CustomDateRangePicker({
   open,
   error,
@@ -22,10 +39,14 @@ export function CustomDateRangePicker({
   variant = "input",
   onChangeStartDate,
   title = "Select date range",
-}) {
+}: CustomDateRangePickerProps) {
   const mdUp = useResponsive("up", "md");
 
   const isCalendarView = variant === "calendar";
+
+  const handleClose = () => {
+    onClose?.({}, "escapeKeyDown");
+  };
 
   return (
     <Dialog
@@ -95,11 +116,11 @@ export function CustomDateRangePicker({
       </DialogContent>
 
       <DialogActions>
-        <Button variant="outlined" color="inherit" onClick={onClose}>
+        <Button variant="outlined" color="inherit" onClick={handleClose}>
           Cancel
         </Button>
 
-        <Button disabled={error} variant="contained" onClick={onClose}>
+        <Button disabled={error} variant="contained" onClick={handleClose}>
           Apply
         </Button>
       </DialogActions>

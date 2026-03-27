@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import NoSsr from "@mui/material/NoSsr";
 import { useTheme } from "@mui/material/styles";
@@ -6,7 +9,21 @@ import { varAlpha, stylesMode } from "src/theme/styles";
 
 import { carouselClasses } from "../classes";
 
+import type { CarouselSlotProps } from "../carousel";
+
 // ----------------------------------------------------------------------
+
+interface CarouselDotButtonsProps extends Omit<BoxProps, "slotProps"> {
+  sx?: SxProps<Theme>;
+  gap?: number;
+  slotProps?: Pick<CarouselSlotProps, "dot">;
+  onClickDot: (index: number) => void;
+  scrollSnaps: number[];
+  selectedIndex: number;
+  fallbackCount?: number;
+  variant?: "circular" | "rounded" | "number";
+  fallback?: boolean;
+}
 
 export function CarouselDotButtons({
   sx,
@@ -19,8 +36,13 @@ export function CarouselDotButtons({
   variant = "circular",
   fallback = false,
   ...other
-}) {
+}: CarouselDotButtonsProps) {
   const theme = useTheme();
+  const greyVars = theme.vars?.palette.grey as
+    | Record<string, string>
+    | undefined;
+  const grey500Channel =
+    greyVars?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171";
 
   const GAPS = {
     number: gap ?? 6,
@@ -47,7 +69,7 @@ export function CarouselDotButtons({
   );
 
   const dotStyles = {
-    circular: (selected) => ({
+    circular: (selected: boolean) => ({
       width: SIZES.circular,
       height: SIZES.circular,
       "&::before": {
@@ -64,7 +86,7 @@ export function CarouselDotButtons({
         ...(selected && { opacity: 1 }),
       },
     }),
-    rounded: (selected) => ({
+    rounded: (selected: boolean) => ({
       width: SIZES.circular,
       height: SIZES.circular,
       "&::before": {
@@ -85,13 +107,13 @@ export function CarouselDotButtons({
         }),
       },
     }),
-    number: (selected) => ({
+    number: (selected: boolean) => ({
       width: SIZES.number,
       height: SIZES.number,
       borderRadius: "50%",
       typography: "caption",
       color: "text.disabled",
-      border: `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,
+      border: `solid 1px ${varAlpha(grey500Channel, 0.16)}`,
       ...(selected && {
         color: "common.white",
         bgcolor: "text.primary",

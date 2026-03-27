@@ -1,15 +1,10 @@
 import { varTranExit, varTranEnter } from "./transition";
 
+import type { TransitionProps } from "./transition";
+
 // ----------------------------------------------------------------------
 
-interface VarBounceProps {
-  durationIn?: number;
-  durationOut?: number;
-  easeIn?: number[];
-  easeOut?: number[];
-}
-
-export const varBounce = (props?: VarBounceProps) => {
+export const varBounce = (props?: TransitionProps) => {
   const durationIn = props?.durationIn;
   const durationOut = props?.durationOut;
   const easeIn = props?.easeIn;

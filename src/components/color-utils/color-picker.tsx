@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { varAlpha } from "src/theme/styles";
@@ -9,7 +12,18 @@ import { Iconify } from "../iconify";
 
 // ----------------------------------------------------------------------
 
-export const ColorPicker = forwardRef(
+interface ColorPickerProps extends Omit<BoxProps, "children"> {
+  colors: string[];
+  selected: string | string[];
+  onSelectColor: (value: string | string[]) => void;
+  limit?: number | "auto";
+  sx?: SxProps<Theme>;
+  slotProps?: {
+    button?: SxProps<Theme>;
+  };
+}
+
+export const ColorPicker = forwardRef<HTMLUListElement, ColorPickerProps>(
   (
     {
       colors,
@@ -25,14 +39,14 @@ export const ColorPicker = forwardRef(
     const singleSelect = typeof selected === "string";
 
     const handleSelect = useCallback(
-      (color) => {
+      (color: string) => {
         if (singleSelect) {
           if (color !== selected) {
             onSelectColor(color);
           }
         } else {
           const newSelected = selected.includes(color)
-            ? selected.filter((value) => value !== color)
+            ? selected.filter((value: string) => value !== color)
             : [...selected, color];
 
           onSelectColor(newSelected);
@@ -83,7 +97,16 @@ export const ColorPicker = forwardRef(
                     bgcolor: color,
                     borderRadius: "50%",
                     border: (theme) =>
-                      `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,
+                      `solid 1px ${varAlpha(
+                        (
+                          theme.vars?.palette.grey as
+                            | Record<string, string>
+                            | undefined
+                        )?.["500Channel"] ??
+                          theme.palette.grey[500] ??
+                          "145 158 171",
+                        0.16,
+                      )}`,
                     ...(hasSelected && {
                       transform: "scale(1.3)",
                       boxShadow: `4px 4px 8px 0 ${hexAlpha(color, 0.48)}`,

@@ -1,3 +1,5 @@
+import type { EmblaPluginType, EmblaOptionsType } from "embla-carousel";
+
 import { useMemo } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -11,7 +13,13 @@ import { useCarouselAutoScroll } from "./use-carousel-auto-scroll";
 
 // ----------------------------------------------------------------------
 
-export const useCarousel = (options, plugins) => {
+export const useCarousel = (
+  options?: EmblaOptionsType & {
+    thumbs?: EmblaOptionsType;
+    parallax?: number | boolean;
+  },
+  plugins?: EmblaPluginType[],
+) => {
   const [mainRef, mainApi] = useEmblaCarousel(options, plugins);
 
   const { disablePrev, disableNext, onClickPrev, onClickNext } =

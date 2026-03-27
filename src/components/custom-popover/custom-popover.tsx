@@ -1,11 +1,32 @@
+import type { ReactNode } from "react";
+import type { PopoverProps } from "@mui/material/Popover";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Popover from "@mui/material/Popover";
 import { listClasses } from "@mui/material/List";
 import { menuItemClasses } from "@mui/material/MenuItem";
 
 import { StyledArrow } from "./styles";
-import { calculateAnchorOrigin } from "./utils";
+import { type ArrowPlacement, calculateAnchorOrigin } from "./utils";
 
 // ----------------------------------------------------------------------
+
+interface CustomPopoverProps extends Omit<PopoverProps, "open" | "children"> {
+  open: boolean;
+  children?: ReactNode;
+  slotProps?: {
+    paper?: {
+      sx?: SxProps<Theme>;
+    };
+    arrow?: {
+      hide?: boolean;
+      placement?: ArrowPlacement;
+      size?: number;
+      offset?: number;
+      sx?: SxProps<Theme>;
+    };
+  };
+}
 
 export function CustomPopover({
   open,
@@ -14,7 +35,7 @@ export function CustomPopover({
   anchorEl,
   slotProps,
   ...other
-}) {
+}: CustomPopoverProps) {
   const arrowPlacement = slotProps?.arrow?.placement ?? "top-right";
 
   const arrowSize = slotProps?.arrow?.size ?? 14;

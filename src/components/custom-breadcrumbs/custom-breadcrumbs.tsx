@@ -1,12 +1,32 @@
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { BreadcrumbsProps } from "@mui/material/Breadcrumbs";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 
-import { BreadcrumbsLink } from "./breadcrumb-link";
+import { BreadcrumbsLink, type BreadcrumbLinkItem } from "./breadcrumb-link";
 
 // ----------------------------------------------------------------------
+
+interface CustomBreadcrumbsProps
+  extends Omit<BreadcrumbsProps, "children" | "slotProps"> {
+  links: BreadcrumbLinkItem[];
+  action?: ReactNode;
+  heading?: ReactNode;
+  moreLink?: string[];
+  activeLast?: boolean;
+  slotProps?: {
+    heading?: SxProps<Theme>;
+    breadcrumbs?: SxProps<Theme>;
+    action?: SxProps<Theme>;
+    moreLink?: SxProps<Theme>;
+  };
+  sx?: SxProps<Theme>;
+}
 
 export function CustomBreadcrumbs({
   links,
@@ -17,7 +37,7 @@ export function CustomBreadcrumbs({
   slotProps,
   sx,
   ...other
-}) {
+}: CustomBreadcrumbsProps) {
   const lastLink = links[links.length - 1].name;
 
   const renderHeading = (
@@ -33,8 +53,14 @@ export function CustomBreadcrumbs({
       {...other}
     >
       {links.map((link, index) => (
+        // React keys must be string/number, not an arbitrary ReactNode.
         <BreadcrumbsLink
-          key={link.name ?? index}
+          key={
+            link.href ??
+            (typeof link.name === "string" || typeof link.name === "number"
+              ? link.name
+              : index)
+          }
           link={link}
           activeLast={activeLast}
           disabled={link.name === lastLink}
