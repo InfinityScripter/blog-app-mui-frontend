@@ -63,7 +63,7 @@
     "lowlight": "^3.3.0",
     "mapbox-gl": "^3.14.0",
     "mui-one-time-password-input": "^5.0.0",
-    "next": "15.4.6",
+    "next": "^15.4.8",
     "nprogress": "^0.2.0",
     "prop-types": "^15.8.1",
     "react": "^19.1.1",
