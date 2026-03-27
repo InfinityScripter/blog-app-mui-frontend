@@ -1,15 +1,13 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import LinearProgress from "@mui/material/LinearProgress";
-
-import { Iconify } from "src/components/iconify";
 import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------

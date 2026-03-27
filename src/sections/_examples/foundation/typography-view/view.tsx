@@ -3,15 +3,11 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
+import { remToPx } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-
-import { paths } from "src/routes/paths";
-
 import { useResponsive } from "src/hooks/use-responsive";
-
-import { remToPx } from "src/theme/styles";
-
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

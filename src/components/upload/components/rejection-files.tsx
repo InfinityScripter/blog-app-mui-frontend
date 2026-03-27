@@ -1,10 +1,8 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-
-import { fData } from "src/utils/format-number";
-
 import { varAlpha } from "src/theme/styles";
+import { fData } from "src/utils/format-number";
+import Typography from "@mui/material/Typography";
 
 import { fileData } from "../../file-thumbnail";
 

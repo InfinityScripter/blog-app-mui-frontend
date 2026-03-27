@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
+import type { Breakpoint } from "@mui/material/styles";
 
+import { useMemo } from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import type { Breakpoint } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -13,7 +13,7 @@ type ResponsiveQuery = "up" | "down" | "between" | "only";
 export function useResponsive(
   query: ResponsiveQuery,
   start: Breakpoint | number,
-  end?: Breakpoint | number
+  end?: Breakpoint | number,
 ): boolean {
   const theme = useTheme();
 

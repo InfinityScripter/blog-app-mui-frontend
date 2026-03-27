@@ -2,23 +2,19 @@
 
 import { z as zod } from "zod";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter, useSearchParams } from "next/navigation";
-
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
-import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
-
 import { paths } from "src/routes/paths";
-import { RouterLink } from "src/routes/components";
-
-import { EmailInboxIcon } from "src/assets/icons";
-
+import { useForm } from "react-hook-form";
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
+import { EmailInboxIcon } from "src/assets/icons";
+import LoadingButton from "@mui/lab/LoadingButton";
+import { RouterLink } from "src/routes/components";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { RHFCode } from "src/components/hook-form/rhf-code";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Form } from "src/components/hook-form/form-provider";
 import { RHFTextField } from "src/components/hook-form/rhf-text-field";
 

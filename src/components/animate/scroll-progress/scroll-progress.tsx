@@ -1,6 +1,5 @@
-import { m, useSpring } from "framer-motion";
-
 import Box from "@mui/material/Box";
+import { m, useSpring } from "framer-motion";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +18,7 @@ export function ScrollProgress({
     restDelta: 0.001,
   });
 
-  const progressSize = variant === "circular" ? size ?? 64 : size ?? 3;
+  const progressSize = variant === "circular" ? (size ?? 64) : (size ?? 3);
 
   const renderCircular = (
     <Box

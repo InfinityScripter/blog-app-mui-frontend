@@ -1,17 +1,16 @@
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-
 import { CONFIG } from "src/config-global";
 import { varAlpha } from "src/theme/styles";
-
-import type { ReactNode } from "react";
-import type { SxProps, Theme } from "@mui/material/styles";
-import type { BoxProps } from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
 
-interface EmptyContentProps extends Omit<BoxProps, 'sx'> {
+interface EmptyContentProps extends Omit<BoxProps, "sx"> {
   sx?: SxProps<Theme>;
   imgUrl?: string;
   action?: ReactNode;

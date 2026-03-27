@@ -1,5 +1,4 @@
 import { DashboardContent } from "src/layouts/dashboard";
-
 import { PostDetailsSkeleton } from "src/sections/blog/post-skeleton";
 
 // ----------------------------------------------------------------------

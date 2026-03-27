@@ -2,14 +2,11 @@
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
+import { toast } from "src/components/snackbar";
 import Typography from "@mui/material/Typography";
 import { useTheme, hexToRgb } from "@mui/material/styles";
-
-import { paths } from "src/routes/paths";
-
 import { useCopyToClipboard } from "src/hooks/use-copy-to-clipboard";
-
-import { toast } from "src/components/snackbar";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

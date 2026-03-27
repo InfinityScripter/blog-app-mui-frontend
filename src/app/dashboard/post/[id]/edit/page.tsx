@@ -1,10 +1,8 @@
-import axios, { endpoints } from "src/utils/axios";
+import type { PostResponse } from "src/types/api";
 
 import { CONFIG } from "src/config-global";
-
+import axios, { endpoints } from "src/utils/axios";
 import { PostEditView } from "src/sections/blog/view";
-
-import type { PostResponse } from "src/types/api";
 
 // ----------------------------------------------------------------------
 
@@ -48,7 +46,9 @@ export { dynamic };
  */
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
   if (CONFIG.isStaticExport) {
-    const res = await axios.get<{ posts: Array<{ id: string }> }>(endpoints.post.list);
+    const res = await axios.get<{ posts: Array<{ id: string }> }>(
+      endpoints.post.list,
+    );
 
     return res.data.posts.map((post) => ({ id: post.id }));
   }

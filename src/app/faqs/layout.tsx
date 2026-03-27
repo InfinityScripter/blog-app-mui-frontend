@@ -1,8 +1,7 @@
-import { MainLayout } from "../../layouts/main";
+import type { ReactNode } from "react";
 
 // ----------------------------------------------------------------------
-
-import type { ReactNode } from "react";
+import { MainLayout } from "../../layouts/main";
 
 interface LayoutProps {
   children: ReactNode;

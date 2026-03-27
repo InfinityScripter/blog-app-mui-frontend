@@ -1,13 +1,10 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { Image } from "src/components/image";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-
 import { varAlpha, bgGradient } from "src/theme/styles";
-
-import { Image } from "src/components/image";
 import { varFade, MotionContainer } from "src/components/animate";
 import {
   Carousel,

@@ -2,7 +2,6 @@
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-
 import { DashboardContent } from "src/layouts/dashboard";
 import {
   _bookings,

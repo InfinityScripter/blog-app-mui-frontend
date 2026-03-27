@@ -2,15 +2,13 @@
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { varAlpha } from "src/theme/styles";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-
-import { varAlpha } from "src/theme/styles";
-
-import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 

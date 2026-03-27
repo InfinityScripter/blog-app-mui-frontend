@@ -1,17 +1,13 @@
 "use client";
 
 import { useState } from "react";
-
+import { _mock } from "src/_mock";
+import { paths } from "src/routes/paths";
 import Accordion from "@mui/material/Accordion";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-
-import { paths } from "src/routes/paths";
-
-import { _mock } from "src/_mock";
-
-import { Iconify } from "src/components/iconify";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

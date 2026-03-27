@@ -2,20 +2,17 @@
 
 import Paper from "@mui/material/Paper";
 import Timeline from "@mui/lab/Timeline";
+import { paths } from "src/routes/paths";
+import { varAlpha } from "src/theme/styles";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineItem from "@mui/lab/TimelineItem";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-
-import { paths } from "src/routes/paths";
-
-import { varAlpha } from "src/theme/styles";
-
-import { Iconify } from "src/components/iconify";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 import { ComponentHero } from "../../component-hero";
 import { ComponentBlock } from "../../component-block";

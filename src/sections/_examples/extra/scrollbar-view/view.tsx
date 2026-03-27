@@ -4,10 +4,8 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-
 import { paths } from "src/routes/paths";
-
+import Typography from "@mui/material/Typography";
 import { Scrollbar } from "src/components/scrollbar";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 

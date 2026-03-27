@@ -1,17 +1,14 @@
 "use client";
 
 import { useState } from "react";
-
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import Switch from "@mui/material/Switch";
-import Typography from "@mui/material/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
 import { paths } from "src/routes/paths";
-
+import Switch from "@mui/material/Switch";
 import { Editor } from "src/components/editor";
+import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

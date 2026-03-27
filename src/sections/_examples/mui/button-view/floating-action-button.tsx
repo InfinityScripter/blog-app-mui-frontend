@@ -1,10 +1,8 @@
 import { m } from "framer-motion";
-
 import Stack from "@mui/material/Stack";
-import Fab, { fabClasses } from "@mui/material/Fab";
-
 import { Iconify } from "src/components/iconify";
 import { varHover } from "src/components/animate";
+import Fab, { fabClasses } from "@mui/material/Fab";
 
 import { ComponentBlock } from "../../component-block";
 

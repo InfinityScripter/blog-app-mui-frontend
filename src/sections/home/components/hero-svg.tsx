@@ -1,11 +1,8 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
-
 import { stylesMode } from "src/theme/styles";
-
+import { useTheme } from "@mui/material/styles";
 import { varFade } from "src/components/animate";
 
 // ----------------------------------------------------------------------

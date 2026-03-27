@@ -1,19 +1,16 @@
 "use client";
 
 import Chip from "@mui/material/Chip";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import AvatarGroup from "@mui/material/AvatarGroup";
-
-import { paths } from "src/routes/paths";
-
 import { useGetPost } from "src/actions/blog";
-
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
+import AvatarGroup from "@mui/material/AvatarGroup";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { PostItem } from "../post-item";

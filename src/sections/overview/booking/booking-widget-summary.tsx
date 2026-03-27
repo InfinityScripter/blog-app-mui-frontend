@@ -1,11 +1,8 @@
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-
-import { fPercent, fShortenNumber } from "src/utils/format-number";
-
-// ----------------------------------------------------------------------
-
 import { Iconify } from "src/components/iconify";
+// ----------------------------------------------------------------------
+import { fPercent, fShortenNumber } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 

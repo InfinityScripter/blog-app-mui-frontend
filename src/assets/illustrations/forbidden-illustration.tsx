@@ -1,15 +1,12 @@
-import { memo } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
 
+import { memo } from "react";
 import Box from "@mui/material/Box";
+import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
 
-import { CONFIG } from "src/config-global";
-
-import { BackgroundShape } from "./background-shape";
-
 // ----------------------------------------------------------------------
-
-import type { SxProps, Theme } from "@mui/material/styles";
+import { BackgroundShape } from "./background-shape";
 
 interface ForbiddenIllustrationProps {
   hideBackground?: boolean;
@@ -17,16 +14,26 @@ interface ForbiddenIllustrationProps {
   [key: string]: unknown;
 }
 
-function ForbiddenIllustration({ hideBackground, sx, ...other }: ForbiddenIllustrationProps = {}) {
+function ForbiddenIllustration({
+  hideBackground,
+  sx,
+  ...other
+}: ForbiddenIllustrationProps = {}) {
   const theme = useTheme();
 
-  const PRIMARY_LIGHT = theme.vars?.palette?.primary?.light ?? theme.palette.primary.light;
+  const PRIMARY_LIGHT =
+    theme.vars?.palette?.primary?.light ?? theme.palette.primary.light;
 
-  const PRIMARY_MAIN = theme.vars?.palette?.primary?.main ?? theme.palette.primary.main;
+  const PRIMARY_MAIN =
+    theme.vars?.palette?.primary?.main ?? theme.palette.primary.main;
 
-  const PRIMARY_DARK = theme.vars?.palette?.primary?.dark ?? theme.palette.primary.dark;
+  const PRIMARY_DARK =
+    theme.vars?.palette?.primary?.dark ?? theme.palette.primary.dark;
 
-  const PRIMARY_DARKER = (theme.vars?.palette?.primary as { darker?: string })?.darker ?? (theme.palette.primary as { darker?: string })?.darker ?? PRIMARY_DARK;
+  const PRIMARY_DARKER =
+    (theme.vars?.palette?.primary as { darker?: string })?.darker ??
+    (theme.palette.primary as { darker?: string })?.darker ??
+    PRIMARY_DARK;
 
   return (
     <Box

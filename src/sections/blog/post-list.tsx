@@ -1,11 +1,9 @@
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-
-import { useInfiniteScroll } from "src/hooks/use-infinite-scroll";
-
 import { Iconify } from "src/components/iconify";
+import { useInfiniteScroll } from "src/hooks/use-infinite-scroll";
 
 import { PostItemSkeleton } from "./post-skeleton";
 import { PostItem, PostItemLatest } from "./post-item";

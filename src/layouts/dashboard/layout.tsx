@@ -1,17 +1,17 @@
 "use client";
 
-import { useMemo } from "react";
+import type { ReactNode } from "react";
+import type { SettingsState } from "src/types/domain";
+import type { Theme, SxProps, Theme as MuiTheme } from "@mui/material/styles";
 
+import { useMemo } from "react";
 import Alert from "@mui/material/Alert";
 import { useTheme } from "@mui/material/styles";
-import { iconButtonClasses } from "@mui/material/IconButton";
-
 import { useBoolean } from "src/hooks/use-boolean";
-
 import { _contacts, _notifications } from "src/_mock";
 import { varAlpha, stylesMode } from "src/theme/styles";
-
 import { bulletColor } from "src/components/nav-section";
+import { iconButtonClasses } from "@mui/material/IconButton";
 import { useSettingsContext } from "src/components/settings";
 
 import { Main } from "./main";
@@ -20,17 +20,11 @@ import { layoutClasses } from "../classes";
 import { NavVertical } from "./nav-vertical";
 import { NavHorizontal } from "./nav-horizontal";
 import { _account } from "../config-nav-account";
+// ----------------------------------------------------------------------
 import { HeaderBase } from "../core/header-base";
 import { _workspaces } from "../config-nav-workspace";
 import { LayoutSection } from "../core/layout-section";
 import { navData as dashboardNavData } from "../config-nav-dashboard";
-
-// ----------------------------------------------------------------------
-
-import type { ReactNode } from "react";
-import type { SxProps, Theme } from "@mui/material/styles";
-import type { Theme as MuiTheme } from "@mui/material/styles";
-import type { SettingsState } from "src/types/domain";
 
 interface DashboardLayoutProps {
   sx?: SxProps<Theme>;

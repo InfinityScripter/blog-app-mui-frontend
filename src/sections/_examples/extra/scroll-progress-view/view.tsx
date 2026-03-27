@@ -3,12 +3,9 @@
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import CardContent from "@mui/material/CardContent";
-
 import { paths } from "src/routes/paths";
-
 import { varAlpha } from "src/theme/styles";
-
+import CardContent from "@mui/material/CardContent";
 import { Scrollbar } from "src/components/scrollbar";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 import {

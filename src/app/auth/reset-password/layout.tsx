@@ -1,8 +1,7 @@
-import { AuthSplitLayout } from "src/layouts/auth-split";
+import type { ReactNode } from "react";
 
 // ----------------------------------------------------------------------
-
-import type { ReactNode } from "react";
+import { AuthSplitLayout } from "src/layouts/auth-split";
 
 interface LayoutProps {
   children: ReactNode;

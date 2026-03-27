@@ -1,17 +1,14 @@
 "use client";
 
+import { _mock } from "src/_mock";
 import Badge from "@mui/material/Badge";
+import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import { useTheme } from "@mui/material/styles";
-import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
-
-import { paths } from "src/routes/paths";
-
-import { _mock } from "src/_mock";
-
 import { Iconify } from "src/components/iconify";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
 import { ComponentHero } from "../../component-hero";
 import { ComponentBlock } from "../../component-block";

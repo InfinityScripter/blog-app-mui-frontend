@@ -1,17 +1,14 @@
 "use client";
 
+import { _mock } from "src/_mock";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Container from "@mui/material/Container";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
-
-import { paths } from "src/routes/paths";
-
-import { _mock } from "src/_mock";
-
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { DataGridBasic } from "./data-grid-basic";

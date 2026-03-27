@@ -1,12 +1,10 @@
 import Box from "@mui/material/Box";
+import { varAlpha } from "src/theme/styles";
+import { Image } from "src/components/image";
 import { useTheme } from "@mui/material/styles";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-
-import { varAlpha } from "src/theme/styles";
-
-import { Image } from "src/components/image";
-import { Iconify } from "src/components/iconify";
 import {
   Carousel,
   useCarousel,

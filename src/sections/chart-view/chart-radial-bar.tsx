@@ -1,9 +1,6 @@
-import { useTheme } from "@mui/material/styles";
-
-import { fNumber } from "src/utils/format-number";
-
 import { varAlpha } from "src/theme/styles";
-
+import { useTheme } from "@mui/material/styles";
+import { fNumber } from "src/utils/format-number";
 import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------

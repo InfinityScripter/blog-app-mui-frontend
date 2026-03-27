@@ -1,11 +1,9 @@
 import { useState } from "react";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { Iconify } from "src/components/iconify";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-
-import { Iconify } from "src/components/iconify";
 
 import { ComponentBlock } from "../../component-block";
 

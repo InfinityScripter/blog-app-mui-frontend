@@ -1,15 +1,12 @@
-import Autoplay from "embla-carousel-autoplay";
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
+import { varAlpha } from "src/theme/styles";
+import { Image } from "src/components/image";
+import Autoplay from "embla-carousel-autoplay";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-
-import { varAlpha } from "src/theme/styles";
-
-import { Image } from "src/components/image";
 import {
   Carousel,
   useCarousel,

@@ -1,7 +1,6 @@
 import { useRef } from "react";
-import { Layer, Source } from "react-map-gl";
-
 import { Map } from "src/components/map";
+import { Layer, Source } from "react-map-gl";
 
 import {
   clusterLayer,

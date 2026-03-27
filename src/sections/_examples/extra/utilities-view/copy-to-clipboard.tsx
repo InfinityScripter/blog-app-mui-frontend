@@ -1,18 +1,15 @@
 "use client";
 
-import { useState, useCallback } from "react";
-
 import Tooltip from "@mui/material/Tooltip";
+import { useState, useCallback } from "react";
 import TextField from "@mui/material/TextField";
+import { toast } from "src/components/snackbar";
+import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputAdornment from "@mui/material/InputAdornment";
-
 import { useDoubleClick } from "src/hooks/use-double-click";
 import { useCopyToClipboard } from "src/hooks/use-copy-to-clipboard";
-
-import { toast } from "src/components/snackbar";
-import { Iconify } from "src/components/iconify";
 
 import { ComponentBlock, ComponentContainer } from "../../component-block";
 

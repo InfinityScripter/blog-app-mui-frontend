@@ -1,23 +1,19 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
-
-import { paths } from "src/routes/paths";
-
 import { useGetPost } from "src/actions/blog";
+import Container from "@mui/material/Container";
 import { POST_PUBLISH_OPTIONS } from "src/_mock";
+import Typography from "@mui/material/Typography";
+import { Markdown } from "src/components/markdown";
+import { useState, useEffect, useCallback } from "react";
 import { DashboardContent } from "src/layouts/dashboard";
 import { updatePostPublish } from "src/actions/blog-ssr";
-
-import { Markdown } from "src/components/markdown";
+import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
 import { PostDetailsHero } from "../post-details-hero";
 import { PostCommentList } from "../post-comment-list";

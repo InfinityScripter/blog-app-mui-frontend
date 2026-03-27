@@ -1,5 +1,4 @@
 import { CONFIG } from "src/config-global";
-
 import { PostCreateView } from "src/sections/blog/view";
 
 // ----------------------------------------------------------------------

@@ -1,13 +1,11 @@
 "use client";
 
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-
 import Box from "@mui/material/Box";
-
 import { borderGradient } from "src/theme/styles";
-
-import type { SxProps, Theme } from "@mui/material/styles";
+import { useRef, useState, useEffect } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -37,7 +35,10 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
 
   const [aspectRatio, setAspectRatio] = useState(1);
 
-  const [animateStyle, setAnimateStyle] = useState<Record<string, string> | null>(null);
+  const [animateStyle, setAnimateStyle] = useState<Record<
+    string,
+    string
+  > | null>(null);
 
   const values = {
     disable: animate?.disable,

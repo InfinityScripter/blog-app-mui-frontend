@@ -1,24 +1,20 @@
-import { useState, useCallback } from "react";
-
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
+import { isEqual } from "src/utils/helper";
+import { CONFIG } from "src/config-global";
 import Divider from "@mui/material/Divider";
+import { useState, useCallback } from "react";
 import TextField from "@mui/material/TextField";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import { SvgColor } from "src/components/svg-color";
 import ToggleButton from "@mui/material/ToggleButton";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-
-import { isEqual } from "src/utils/helper";
-
-import { CONFIG } from "src/config-global";
-
-import { Iconify } from "src/components/iconify";
-import { SvgColor } from "src/components/svg-color";
 import {
   NavSectionVertical,
   NavSectionVerticalItem,

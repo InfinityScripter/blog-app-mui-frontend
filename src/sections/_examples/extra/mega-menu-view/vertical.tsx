@@ -2,10 +2,8 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-
 import { varAlpha } from "src/theme/styles";
-
+import Typography from "@mui/material/Typography";
 import { MegaMenuVertical } from "src/components/mega-menu";
 
 import { navItems1 } from "./data";

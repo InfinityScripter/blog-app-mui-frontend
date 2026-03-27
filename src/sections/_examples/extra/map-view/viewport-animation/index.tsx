@@ -1,6 +1,5 @@
-import { useRef, useState, useCallback } from "react";
-
 import { Map, MapControl } from "src/components/map";
+import { useRef, useState, useCallback } from "react";
 
 import { ControlPanel } from "./control-panel";
 

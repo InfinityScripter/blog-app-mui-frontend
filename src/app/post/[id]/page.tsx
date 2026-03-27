@@ -1,9 +1,7 @@
-import { paramCase } from "src/utils/change-case";
-import axios, { endpoints } from "src/utils/axios";
-
 import { CONFIG } from "src/config-global";
 import { getPost } from "src/actions/blog-ssr";
-
+import { paramCase } from "src/utils/change-case";
+import axios, { endpoints } from "src/utils/axios";
 import { PostDetailsHomeView } from "src/sections/blog/view";
 
 // ----------------------------------------------------------------------
@@ -36,8 +34,12 @@ export { dynamic };
  */
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
   if (CONFIG.isStaticExport) {
-    const res = await axios.get<{ posts: Array<{ title: string; _id?: string; id?: string }> }>(endpoints.post.list);
-    return res.data.posts.map((post) => ({ id: post._id ?? post.id ?? paramCase(post.title) }));
+    const res = await axios.get<{
+      posts: Array<{ title: string; _id?: string; id?: string }>;
+    }>(endpoints.post.list);
+    return res.data.posts.map((post) => ({
+      id: post._id ?? post.id ?? paramCase(post.title),
+    }));
   }
   return [];
 }

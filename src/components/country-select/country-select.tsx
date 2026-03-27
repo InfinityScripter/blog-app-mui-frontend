@@ -1,11 +1,9 @@
 import Chip from "@mui/material/Chip";
+import { countries } from "src/assets/data";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import InputAdornment from "@mui/material/InputAdornment";
 import { filledInputClasses } from "@mui/material/FilledInput";
-
-import { countries } from "src/assets/data";
-
 import { FlagIcon, iconifyClasses } from "src/components/iconify";
 
 import { getCountry, displayValueByCountryCode } from "./utils";

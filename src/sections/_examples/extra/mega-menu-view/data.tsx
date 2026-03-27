@@ -1,5 +1,4 @@
 import { _mock } from "src/_mock";
-
 import { Label } from "src/components/label";
 import { Iconify } from "src/components/iconify";
 

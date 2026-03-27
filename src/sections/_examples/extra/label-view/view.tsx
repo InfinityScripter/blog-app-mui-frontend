@@ -1,9 +1,7 @@
 "use client";
 
-import Tooltip from "@mui/material/Tooltip";
-
 import { paths } from "src/routes/paths";
-
+import Tooltip from "@mui/material/Tooltip";
 import { Label } from "src/components/label";
 import { Iconify } from "src/components/iconify";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";

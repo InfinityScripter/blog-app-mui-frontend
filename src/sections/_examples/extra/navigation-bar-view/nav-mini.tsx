@@ -1,5 +1,4 @@
 import Paper from "@mui/material/Paper";
-
 import { NavSectionMini } from "src/components/nav-section";
 
 import { NAV_ITEMS } from "./data";

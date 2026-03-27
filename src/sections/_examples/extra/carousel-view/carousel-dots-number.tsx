@@ -1,13 +1,11 @@
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import { Image } from "src/components/image";
 import { useTheme } from "@mui/material/styles";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-
 import { maxLine, varAlpha, bgGradient } from "src/theme/styles";
-
-import { Image } from "src/components/image";
-import { Iconify } from "src/components/iconify";
 import {
   Carousel,
   useCarousel,

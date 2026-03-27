@@ -1,10 +1,8 @@
-import { AuthSplitLayout } from "src/layouts/auth-split";
+import type { ReactNode } from "react";
 
 import { GuestGuard } from "src/auth/guard";
-
 // ----------------------------------------------------------------------
-
-import type { ReactNode } from "react";
+import { AuthSplitLayout } from "src/layouts/auth-split";
 
 interface LayoutProps {
   children: ReactNode;

@@ -1,19 +1,14 @@
 "use client";
 
-import { useState, useCallback } from "react";
-
 import Stack from "@mui/material/Stack";
-import Switch from "@mui/material/Switch";
-import Typography from "@mui/material/Typography";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
 import { paths } from "src/routes/paths";
-
-import { useBoolean } from "src/hooks/use-boolean";
-
+import Switch from "@mui/material/Switch";
+import { useState, useCallback } from "react";
 import { fData } from "src/utils/format-number";
-
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
+import { useBoolean } from "src/hooks/use-boolean";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 import { Upload, UploadBox, UploadAvatar } from "src/components/upload";
 

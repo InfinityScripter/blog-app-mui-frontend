@@ -1,10 +1,8 @@
-import axios, { endpoints } from "src/utils/axios";
+import type { PostResponse } from "src/types/api";
 
 import { CONFIG } from "src/config-global";
-
+import axios, { endpoints } from "src/utils/axios";
 import { PostDetailsView } from "src/sections/blog/view";
-
-import type { PostResponse } from "src/types/api";
 
 export const metadata = {
   title: `Post details | Dashboard - ${CONFIG.site.name}`,
@@ -31,7 +29,9 @@ export { dynamic };
 
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
   if (CONFIG.isStaticExport) {
-    const res = await axios.get<{ posts: Array<{ _id: string }> }>(endpoints.post.list);
+    const res = await axios.get<{ posts: Array<{ _id: string }> }>(
+      endpoints.post.list,
+    );
     return res.data.posts.map((post) => ({ id: post._id }));
   }
   return [];

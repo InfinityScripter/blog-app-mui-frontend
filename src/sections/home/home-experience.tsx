@@ -1,5 +1,4 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
@@ -15,9 +14,8 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-
 import { varFade, MotionViewport } from "src/components/animate";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 // ----------------------------------------------------------------------
 

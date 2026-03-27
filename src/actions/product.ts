@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import { useMemo } from "react";
-
 import { fetcher, endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
@@ -91,10 +90,11 @@ interface SearchProductsResponse {
 export function useSearchProducts(query: string | null) {
   const url = query ? [endpoints.product.search, { params: { query } }] : null;
 
-  const { data, isLoading, error, isValidating } = useSWR<SearchProductsResponse>(url, fetcher, {
-    ...swrOptions,
-    keepPreviousData: true,
-  });
+  const { data, isLoading, error, isValidating } =
+    useSWR<SearchProductsResponse>(url, fetcher, {
+      ...swrOptions,
+      keepPreviousData: true,
+    });
 
   const memoizedValue = useMemo(
     () => ({

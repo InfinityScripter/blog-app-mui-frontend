@@ -1,9 +1,9 @@
-import { useEffect, type ReactNode } from "react";
+import type { ThemeDirection } from "src/types/domain";
+
 import createCache from "@emotion/cache";
 import rtlPlugin from "stylis-plugin-rtl";
 import { CacheProvider } from "@emotion/react";
-
-import type { ThemeDirection } from "src/types/domain";
+import { useEffect, type ReactNode } from "react";
 
 // ----------------------------------------------------------------------
 

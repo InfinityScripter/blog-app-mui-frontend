@@ -1,12 +1,9 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-
+import Stack from "@mui/material/Stack";
 import { CONFIG } from "src/config-global";
-
+import Container from "@mui/material/Container";
 import { varScale, MotionViewport } from "src/components/animate";
 
 import { SectionTitle } from "./components/section-title";

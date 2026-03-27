@@ -2,23 +2,19 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import CardContent from "@mui/material/CardContent";
-
 import { paths } from "src/routes/paths";
-import { RouterLink } from "src/routes/components";
-
+import Avatar from "@mui/material/Avatar";
+import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
-import { fShortenNumber } from "src/utils/format-number";
-import { formatImageUrl } from "src/utils/format-image-url";
-
+import { useTheme } from "@mui/material/styles";
+import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
+import { RouterLink } from "src/routes/components";
+import CardContent from "@mui/material/CardContent";
 import { maxLine, varAlpha } from "src/theme/styles";
 import { AvatarShape } from "src/assets/illustrations";
-
-import { Image } from "src/components/image";
-import { Iconify } from "src/components/iconify";
+import { fShortenNumber } from "src/utils/format-number";
+import { formatImageUrl } from "src/utils/format-image-url";
 
 // ----------------------------------------------------------------------
 

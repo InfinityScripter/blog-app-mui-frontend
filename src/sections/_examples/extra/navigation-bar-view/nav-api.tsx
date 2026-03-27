@@ -1,14 +1,10 @@
 import useSWR from "swr";
 import { useMemo } from "react";
-
 import Paper from "@mui/material/Paper";
-import Skeleton from "@mui/material/Skeleton";
-
 import { fetcher } from "src/utils/axios";
-
 import { CONFIG } from "src/config-global";
-
 import { Label } from "src/components/label";
+import Skeleton from "@mui/material/Skeleton";
 import { SvgColor } from "src/components/svg-color";
 import { NavSectionVertical } from "src/components/nav-section";
 

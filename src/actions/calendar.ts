@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import useSWR, { mutate } from "swr";
-
 import axios, { fetcher, endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
@@ -32,17 +31,15 @@ interface CalendarEventsResponse {
 }
 
 export function useGetEvents() {
-  const { data, isLoading, error, isValidating } = useSWR<CalendarEventsResponse>(
-    CALENDAR_ENDPOINT,
-    fetcher,
-    swrOptions,
-  );
+  const { data, isLoading, error, isValidating } =
+    useSWR<CalendarEventsResponse>(CALENDAR_ENDPOINT, fetcher, swrOptions);
 
   const memoizedValue = useMemo(() => {
-    const events = data?.events?.map((event) => ({
-      ...event,
-      textColor: event.color,
-    })) ?? [];
+    const events =
+      data?.events?.map((event) => ({
+        ...event,
+        textColor: event.color,
+      })) ?? [];
 
     return {
       events,

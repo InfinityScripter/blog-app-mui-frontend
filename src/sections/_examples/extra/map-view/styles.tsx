@@ -1,5 +1,4 @@
 import { styled } from "@mui/material/styles";
-
 import { bgBlur, varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------

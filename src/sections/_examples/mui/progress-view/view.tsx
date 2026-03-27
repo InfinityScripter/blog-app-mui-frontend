@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-
 import { paths } from "src/routes/paths";
-
+import { useRef, useState, useEffect } from "react";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ProgressLinear } from "./progress-linear";

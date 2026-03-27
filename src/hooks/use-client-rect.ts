@@ -4,8 +4,8 @@ import {
   useState,
   useEffect,
   useCallback,
-  useLayoutEffect,
   type RefObject,
+  useLayoutEffect,
 } from "react";
 
 import { useEventListener } from "./use-event-listener";
@@ -31,7 +31,9 @@ interface UseClientRectReturn {
   scrollHeight: number;
 }
 
-export function useClientRect(inputRef?: RefObject<HTMLElement>): UseClientRectReturn {
+export function useClientRect(
+  inputRef?: RefObject<HTMLElement>,
+): UseClientRectReturn {
   const initialRef = useRef<HTMLElement>(null);
 
   const elementRef = inputRef || initialRef;

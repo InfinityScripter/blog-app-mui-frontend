@@ -1,24 +1,20 @@
 import "src/global.css";
 
 // ----------------------------------------------------------------------
-
-import { Analytics } from "@vercel/analytics/next";
-
 import { CONFIG } from "src/config-global";
 import { primary } from "src/theme/core/palette";
+import { Analytics } from "@vercel/analytics/next";
+import { AuthProvider } from "src/auth/context/jwt";
 import { ThemeProvider } from "src/theme/theme-provider";
-import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
-
 import { ProgressBar } from "src/components/progress-bar";
 import { MotionLazy } from "src/components/animate/motion-lazy";
 import { detectSettings } from "src/components/settings/server";
+import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
 import {
   SettingsDrawer,
   defaultSettings,
   SettingsProvider,
 } from "src/components/settings";
-
-import { AuthProvider } from "src/auth/context/jwt";
 
 // ----------------------------------------------------------------------
 

@@ -1,7 +1,6 @@
-import { Children, isValidElement } from "react";
-
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
+import { Children, isValidElement } from "react";
 
 import { carouselClasses } from "./classes";
 import { CarouselSlide } from "./components/carousel-slide";

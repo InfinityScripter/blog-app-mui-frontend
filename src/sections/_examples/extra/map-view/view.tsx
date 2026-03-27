@@ -1,15 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-
+import { paths } from "src/routes/paths";
 import Skeleton from "@mui/material/Skeleton";
 import { styled } from "@mui/material/styles";
-
-import { paths } from "src/routes/paths";
-
 import { cities as CITIES } from "src/_mock/_map/cities";
 import { countries as COUNTRIES } from "src/_mock/_map/countries";
-
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

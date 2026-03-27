@@ -1,13 +1,11 @@
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import { varAlpha } from "src/theme/styles";
 import CardHeader from "@mui/material/CardHeader";
+import { fShortenNumber } from "src/utils/format-number";
 import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
-
-import { fShortenNumber } from "src/utils/format-number";
-
-import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 

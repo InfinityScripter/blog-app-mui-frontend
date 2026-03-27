@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, type ReactNode } from "react";
-
 import type { User } from "src/types/domain";
+
+import { createContext } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -14,6 +14,8 @@ export interface AuthContextValue {
   unauthenticated: boolean;
 }
 
-export const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+export const AuthContext = createContext<AuthContextValue | undefined>(
+  undefined,
+);
 
 export const AuthConsumer = AuthContext.Consumer;

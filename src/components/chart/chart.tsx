@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-
 import Box from "@mui/material/Box";
 
 import { ChartLoading } from "./chart-loading";

@@ -1,14 +1,11 @@
 "use client";
 
+import { _mock } from "src/_mock";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-
 import { paths } from "src/routes/paths";
-
-import { _mock } from "src/_mock";
-
 import { Image } from "src/components/image";
+import Typography from "@mui/material/Typography";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Layer, Source } from "react-map-gl";
-
 import { useTheme } from "@mui/material/styles";
-
 import { Map, MapControl } from "src/components/map";
 
 // ----------------------------------------------------------------------

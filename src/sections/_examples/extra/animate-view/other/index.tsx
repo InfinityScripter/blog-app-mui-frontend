@@ -1,13 +1,10 @@
 import { useState } from "react";
-
-import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
-
 import { _mock } from "src/_mock";
+import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
-
+import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
+import IconButton from "@mui/material/IconButton";
 import {
   AnimateLogo1,
   AnimateLogo2,

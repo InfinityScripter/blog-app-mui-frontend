@@ -5,12 +5,10 @@ import Collapse from "@mui/material/Collapse";
 import TableHead from "@mui/material/TableHead";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
+import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
 import { useBoolean } from "src/hooks/use-boolean";
-
-import { Iconify } from "src/components/iconify";
 import { Scrollbar } from "src/components/scrollbar";
 
 import { createData } from "./utils";

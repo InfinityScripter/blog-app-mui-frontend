@@ -1,10 +1,11 @@
 "use client";
 
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Alert from "@mui/material/Alert";
-import { useTheme } from "@mui/material/styles";
-
 import { usePathname } from "src/routes/hooks";
-
+import { useTheme } from "@mui/material/styles";
 import { useBoolean } from "src/hooks/use-boolean";
 
 import { Main } from "./main";
@@ -12,13 +13,9 @@ import { NavMobile } from "./nav/mobile";
 import { NavDesktop } from "./nav/desktop";
 import { Footer, HomeFooter } from "./footer";
 import { HeaderBase } from "../core/header-base";
+// ----------------------------------------------------------------------
 import { LayoutSection } from "../core/layout-section";
 import { navData as mainNavData } from "../config-nav-main";
-
-// ----------------------------------------------------------------------
-
-import type { ReactNode } from "react";
-import type { SxProps, Theme } from "@mui/material/styles";
 
 interface MainLayoutProps {
   sx?: SxProps<Theme>;

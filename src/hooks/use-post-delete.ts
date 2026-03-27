@@ -1,11 +1,9 @@
-import { useState, useCallback } from "react";
+import type { Post } from "src/types/domain";
 
 import { paths } from "src/routes/paths";
 import { useRouter } from "src/routes/hooks";
-
+import { useState, useCallback } from "react";
 import { deletePost } from "src/actions/blog-ssr";
-
-import type { Post } from "src/types/domain";
 
 interface PostWithId extends Post {
   _id: string;

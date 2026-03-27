@@ -2,11 +2,10 @@
 
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-
 import { Label } from "src/components/label";
+import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
 import { MegaMenuHorizontal } from "src/components/mega-menu";
 
 import { navItems2 } from "./data";

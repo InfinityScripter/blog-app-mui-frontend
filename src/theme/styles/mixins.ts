@@ -1,9 +1,8 @@
+import { CONFIG } from "src/config-global";
 import { dividerClasses } from "@mui/material/Divider";
 import { checkboxClasses } from "@mui/material/Checkbox";
 import { menuItemClasses } from "@mui/material/MenuItem";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
-
-import { CONFIG } from "src/config-global";
 
 import { remToPx, varAlpha, mediaQueries } from "./utils";
 
@@ -52,7 +51,9 @@ interface BorderGradientProps {
   padding?: string;
 }
 
-export function borderGradient(props?: BorderGradientProps): Record<string, string | number> {
+export function borderGradient(
+  props?: BorderGradientProps,
+): Record<string, string | number> {
   return {
     inset: 0,
     width: "100%",
@@ -83,7 +84,10 @@ interface BgGradientProps {
   imgUrl?: string;
 }
 
-export function bgGradient({ color, imgUrl }: BgGradientProps): Record<string, string> {
+export function bgGradient({
+  color,
+  imgUrl,
+}: BgGradientProps): Record<string, string> {
   if (imgUrl) {
     return {
       background: `linear-gradient(${color}), url(${imgUrl})`,
@@ -105,7 +109,14 @@ interface BgBlurProps {
   imgUrl?: string;
 }
 
-export function bgBlur({ color, blur = 6, imgUrl }: BgBlurProps): Record<string, string | number | Record<string, string | number>> {
+export function bgBlur({
+  color,
+  blur = 6,
+  imgUrl,
+}: BgBlurProps): Record<
+  string,
+  string | number | Record<string, string | number>
+> {
   if (imgUrl) {
     return {
       position: "relative",
@@ -140,7 +151,10 @@ function getFontSize(fontSize: string | number | undefined): number {
   return typeof fontSize === "string" ? remToPx(fontSize) : fontSize;
 }
 
-function getLineHeight(lineHeight: string | number | undefined, fontSize: number): number {
+function getLineHeight(
+  lineHeight: string | number | undefined,
+  fontSize: number,
+): number {
   if (typeof lineHeight === "string") {
     return fontSize ? remToPx(lineHeight) / fontSize : 1;
   }
@@ -156,7 +170,10 @@ interface MaxLineProps {
   };
 }
 
-export function maxLine({ line, persistent }: MaxLineProps): Record<string, string | number | Record<string, number>> {
+export function maxLine({
+  line,
+  persistent,
+}: MaxLineProps): Record<string, string | number | Record<string, number>> {
   const baseStyles = {
     overflow: "hidden",
     display: "-webkit-box",
@@ -205,7 +222,14 @@ interface PaperProps {
   dropdown?: boolean;
 }
 
-export function paper({ theme, color, dropdown }: PaperProps): Record<string, string | number | Record<string, string | number>> {
+export function paper({
+  theme,
+  color,
+  dropdown,
+}: PaperProps): Record<
+  string,
+  string | number | Record<string, string | number>
+> {
   return {
     ...bgBlur({
       color: color ?? varAlpha(theme.vars.palette.background.paperChannel, 0.9),
@@ -230,7 +254,9 @@ export function paper({ theme, color, dropdown }: PaperProps): Record<string, st
  * Usage:
  * ...menuItem(theme)
  */
-export function menuItem(theme: Theme): Record<string, string | number | Record<string, string | number>> {
+export function menuItem(
+  theme: Theme,
+): Record<string, string | number | Record<string, string | number>> {
   return {
     ...theme.typography.body2,
     padding: theme.spacing(0.75, 1),

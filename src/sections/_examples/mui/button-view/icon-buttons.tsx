@@ -1,9 +1,7 @@
 import { m } from "framer-motion";
-
 import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
-
 import { Iconify } from "src/components/iconify";
+import IconButton from "@mui/material/IconButton";
 import { varHover } from "src/components/animate";
 
 import { ComponentBlock } from "../../component-block";

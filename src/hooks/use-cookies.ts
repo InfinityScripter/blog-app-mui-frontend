@@ -1,6 +1,5 @@
-import { useMemo, useState, useEffect, useCallback } from "react";
-
 import { isEqual } from "src/utils/helper";
+import { useMemo, useState, useEffect, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +19,7 @@ export function useCookies<T>(
   key: string,
   initialState: T,
   defaultValues: T,
-  options?: UseCookiesOptions
+  options?: UseCookiesOptions,
 ): UseCookiesReturn<T> {
   const [state, set] = useState<T>(initialState);
 
@@ -33,7 +32,7 @@ export function useCookies<T>(
 
     if (restoredValue) {
       if (multiValue) {
-        set((prevValue) => ({ ...prevValue, ...restoredValue } as T));
+        set((prevValue) => ({ ...prevValue, ...restoredValue }) as T);
       } else {
         set(restoredValue);
       }
@@ -45,11 +44,7 @@ export function useCookies<T>(
       if (multiValue) {
         set((prevValue) => {
           const newValue = { ...prevValue, ...updateState } as T;
-          setStorage(
-            key,
-            newValue,
-            options?.daysUntilExpiration,
-          );
+          setStorage(key, newValue, options?.daysUntilExpiration);
           return newValue;
         });
       } else {

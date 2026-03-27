@@ -1,5 +1,4 @@
 import Box from "@mui/material/Box";
-
 import { Image } from "src/components/image";
 import {
   Carousel,

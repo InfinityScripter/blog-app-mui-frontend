@@ -1,17 +1,15 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
-
 import { varAlpha } from "src/theme/styles";
 
 import { Logo } from "../logo";
 
-import type { SxProps, Theme } from "@mui/material/styles";
-import type { BoxProps } from "@mui/material/Box";
-
 // ----------------------------------------------------------------------
 
-interface AnimateLogo1Props extends Omit<BoxProps, 'sx'> {
+interface AnimateLogo1Props extends Omit<BoxProps, "sx"> {
   logo?: React.ReactNode;
   sx?: SxProps<Theme>;
 }
@@ -85,7 +83,7 @@ export function AnimateLogo1({ logo, sx, ...other }: AnimateLogo1Props) {
 
 // ----------------------------------------------------------------------
 
-interface AnimateLogo2Props extends Omit<BoxProps, 'sx'> {
+interface AnimateLogo2Props extends Omit<BoxProps, "sx"> {
   logo?: React.ReactNode;
   sx?: SxProps<Theme>;
 }

@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
-
 import { CONFIG } from "src/config-global";
+import { useTheme } from "@mui/material/styles";
 import { varAlpha, bgGradient, textGradient } from "src/theme/styles";
 
 import { ComponentBlock, ComponentContainer } from "../../component-block";

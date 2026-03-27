@@ -1,3 +1,6 @@
+import type { Theme } from "@mui/material/styles";
+import type { SettingsState } from "src/types/domain";
+
 import COLORS from "../core/colors.json";
 import PRIMARY_COLOR from "./primary-color.json";
 import { components as coreComponents } from "../core/components";
@@ -11,9 +14,6 @@ import {
   customShadows as coreCustomShadows,
 } from "../core/custom-shadows";
 
-import type { SettingsState } from "src/types/domain";
-import type { Theme } from "@mui/material/styles";
-
 // ----------------------------------------------------------------------
 
 /**
@@ -21,7 +21,10 @@ import type { Theme } from "@mui/material/styles";
  * [2] settings @contrast
  */
 
-export function updateCoreWithSettings(theme: Theme, settings: SettingsState): Theme {
+export function updateCoreWithSettings(
+  theme: Theme,
+  settings: SettingsState,
+): Theme {
   const { colorSchemes, customShadows } = theme;
 
   return {
@@ -66,14 +69,22 @@ export function updateCoreWithSettings(theme: Theme, settings: SettingsState): T
 
 // ----------------------------------------------------------------------
 
-export function updateComponentsWithSettings(settings: SettingsState): { components: Record<string, unknown> } {
+export function updateComponentsWithSettings(settings: SettingsState): {
+  components: Record<string, unknown>;
+} {
   const components: Record<string, unknown> = {};
 
   /** [2] */
   if (settings.contrast === "bold") {
     const MuiCard = {
       styleOverrides: {
-        root: ({ theme, ownerState }: { theme: Theme; ownerState: unknown }) => {
+        root: ({
+          theme,
+          ownerState,
+        }: {
+          theme: Theme;
+          ownerState: unknown;
+        }) => {
           let rootStyles: Record<string, unknown> = {};
           if (
             typeof coreComponents?.MuiCard?.styleOverrides?.root === "function"
@@ -110,9 +121,12 @@ const PRIMARY_COLORS: Record<string, Record<string, string>> = {
   red: PRIMARY_COLOR.red,
 };
 
-function getPalettePrimary(primaryColorName: SettingsState['primaryColor']): Record<string, string> {
+function getPalettePrimary(
+  primaryColorName: SettingsState["primaryColor"],
+): Record<string, string> {
   /** [1] */
-  const selectedPrimaryColor = PRIMARY_COLORS[primaryColorName] || PRIMARY_COLORS.default;
+  const selectedPrimaryColor =
+    PRIMARY_COLORS[primaryColorName] || PRIMARY_COLORS.default;
   const updatedPrimaryPalette = createPaletteChannel(selectedPrimaryColor);
 
   return primaryColorName === "default"
@@ -120,7 +134,7 @@ function getPalettePrimary(primaryColorName: SettingsState['primaryColor']): Rec
     : updatedPrimaryPalette;
 }
 
-function getBackgroundDefault(contrast: SettingsState['contrast']): string {
+function getBackgroundDefault(contrast: SettingsState["contrast"]): string {
   /** [2] */
   return contrast === "default" ? "#FFFFFF" : coreGreyPalette[200];
 }

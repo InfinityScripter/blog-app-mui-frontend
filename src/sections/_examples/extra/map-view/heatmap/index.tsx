@@ -1,7 +1,6 @@
+import { Map } from "src/components/map";
 import { Layer, Source } from "react-map-gl";
 import { useMemo, useState, useEffect } from "react";
-
-import { Map } from "src/components/map";
 
 import { heatmapLayer } from "./map-style";
 import { ControlPanel } from "./control-panel";

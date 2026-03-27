@@ -1,15 +1,12 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import { CONFIG } from "src/config-global";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-
-import { CONFIG } from "src/config-global";
-import { varAlpha, stylesMode } from "src/theme/styles";
-
 import { SvgColor } from "src/components/svg-color";
+import { varAlpha, stylesMode } from "src/theme/styles";
 import { varFade, MotionViewport } from "src/components/animate";
 
 import { SectionTitle } from "./components/section-title";

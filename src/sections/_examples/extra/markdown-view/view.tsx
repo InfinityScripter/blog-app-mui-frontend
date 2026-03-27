@@ -1,9 +1,7 @@
 "use client";
 
-import { paths } from "src/routes/paths";
-
 import { _mock } from "src/_mock";
-
+import { paths } from "src/routes/paths";
 import { Markdown } from "src/components/markdown";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 

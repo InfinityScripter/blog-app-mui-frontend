@@ -1,16 +1,13 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
+import { CONFIG } from "src/config-global";
 import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import { useTheme } from "@mui/material/styles";
+import { Iconify } from "src/components/iconify";
+import { varAlpha, bgGradient } from "src/theme/styles";
 import InputAdornment from "@mui/material/InputAdornment";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
-
-import { CONFIG } from "src/config-global";
-import { varAlpha, bgGradient } from "src/theme/styles";
-
-import { Iconify } from "src/components/iconify";
 import {
   varFade,
   AnimateText,

@@ -1,7 +1,7 @@
+import type { ColorScheme } from "src/types/domain";
+
 import { varAlpha } from "../styles";
 import { grey, common } from "./palette";
-
-import type { ColorScheme } from "src/types/domain";
 
 // ----------------------------------------------------------------------
 

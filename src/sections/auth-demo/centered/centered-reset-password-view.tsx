@@ -2,21 +2,17 @@
 
 import { z as zod } from "zod";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
+import { paths } from "src/routes/paths";
+import { useForm } from "react-hook-form";
+import { PasswordIcon } from "src/assets/icons";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-
-import { paths } from "src/routes/paths";
 import { RouterLink } from "src/routes/components";
-
-import { PasswordIcon } from "src/assets/icons";
-
-import { Iconify } from "src/components/iconify";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
 
 import axios, { endpoints } from "../../../utils/axios";
@@ -27,7 +23,9 @@ export const ResetPasswordSchema = zod.object({
   email: zod
     .string()
     .min(1, { message: "Email обязателен!" })
-    .email({ message: "Email должен быть действительным адресом электронной почты!" }),
+    .email({
+      message: "Email должен быть действительным адресом электронной почты!",
+    }),
 });
 
 // ----------------------------------------------------------------------
@@ -79,7 +77,8 @@ export function CenteredResetPasswordView() {
         <Typography variant="h5">Забыли пароль?</Typography>
 
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Пожалуйста, введите email-адрес, связанный с вашей учетной записью, и мы отправим вам ссылку для сброса пароля.
+          Пожалуйста, введите email-адрес, связанный с вашей учетной записью, и
+          мы отправим вам ссылку для сброса пароля.
         </Typography>
       </Stack>
     </>

@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-
 import { varAlpha } from "src/theme/styles";
+import IconButton from "@mui/material/IconButton";
 
 import { Iconify } from "../../iconify";
 import { formatImageUrl } from "../../../utils/format-image-url";

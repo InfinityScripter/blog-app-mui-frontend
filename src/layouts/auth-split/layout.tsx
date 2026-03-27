@@ -1,18 +1,16 @@
 "use client";
 
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Alert from "@mui/material/Alert";
-
-import { useBoolean } from "src/hooks/use-boolean";
-
 import { CONFIG } from "src/config-global";
+import { useBoolean } from "src/hooks/use-boolean";
 
 import { Section } from "./section";
 import { Main, Content } from "./main";
 import { HeaderBase } from "../core/header-base";
 import { LayoutSection } from "../core/layout-section";
-
-import type { ReactNode } from "react";
-import type { SxProps, Theme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -26,7 +24,11 @@ interface AuthSplitLayoutProps {
   children: ReactNode;
 }
 
-export function AuthSplitLayout({ sx, section, children }: AuthSplitLayoutProps) {
+export function AuthSplitLayout({
+  sx,
+  section,
+  children,
+}: AuthSplitLayoutProps) {
   const mobileNavOpen = useBoolean();
 
   const layoutQuery = "md";

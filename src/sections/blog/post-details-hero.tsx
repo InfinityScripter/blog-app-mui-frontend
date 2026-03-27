@@ -1,21 +1,17 @@
 import Box from "@mui/material/Box";
+import { _socials } from "src/_mock";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import { fDate } from "src/utils/format-time";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-
-import { useResponsive } from "src/hooks/use-responsive";
-
-import { fDate } from "src/utils/format-time";
-import { formatImageUrl } from "src/utils/format-image-url";
-
-import { _socials } from "src/_mock";
 import { varAlpha, bgGradient } from "src/theme/styles";
-
+import { useResponsive } from "src/hooks/use-responsive";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+import { formatImageUrl } from "src/utils/format-image-url";
 import { Iconify, SocialIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------

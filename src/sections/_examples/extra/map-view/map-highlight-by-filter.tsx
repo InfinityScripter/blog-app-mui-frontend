@@ -1,9 +1,7 @@
 import { Layer, Source } from "react-map-gl";
-import { useMemo, useState, useCallback } from "react";
-
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-
+import { useMemo, useState, useCallback } from "react";
 import { Map, MapPopup, MapControl } from "src/components/map";
 
 // ----------------------------------------------------------------------

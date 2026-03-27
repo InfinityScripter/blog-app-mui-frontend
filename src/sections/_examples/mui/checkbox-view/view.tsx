@@ -1,15 +1,12 @@
 "use client";
 
 import { useState } from "react";
-
+import { paths } from "src/routes/paths";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
+import { Iconify } from "src/components/iconify";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
-import { paths } from "src/routes/paths";
-
-import { Iconify } from "src/components/iconify";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

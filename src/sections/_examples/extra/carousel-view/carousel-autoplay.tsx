@@ -1,8 +1,6 @@
-import Autoplay from "embla-carousel-autoplay";
-
 import Box from "@mui/material/Box";
-
 import { Image } from "src/components/image";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   useCarousel,

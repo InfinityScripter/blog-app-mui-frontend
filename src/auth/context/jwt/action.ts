@@ -1,11 +1,11 @@
 "use client";
 
+import type { AccessTokenResponse } from "src/types/auth";
+
 import axios, { endpoints } from "src/utils/axios";
 
 import { setSession } from "./utils";
 import { STORAGE_KEY } from "./constant";
-
-import type { AccessTokenResponse } from "src/types/auth";
 
 // ----------------------------------------------------------------------
 
@@ -17,11 +17,17 @@ interface SignInParams {
 /** **************************************
  * Sign in
  *************************************** */
-export const signInWithPassword = async ({ email, password }: SignInParams): Promise<void> => {
+export const signInWithPassword = async ({
+  email,
+  password,
+}: SignInParams): Promise<void> => {
   try {
     const params = { email, password };
 
-    const res = await axios.post<AccessTokenResponse>(endpoints.auth.signIn, params);
+    const res = await axios.post<AccessTokenResponse>(
+      endpoints.auth.signIn,
+      params,
+    );
 
     const { accessToken } = res.data;
 
@@ -48,7 +54,12 @@ interface SignUpParams {
 /** **************************************
  * Sign up
  *************************************** */
-export const signUp = async ({ email, password, firstName, lastName }: SignUpParams): Promise<void> => {
+export const signUp = async ({
+  email,
+  password,
+  firstName,
+  lastName,
+}: SignUpParams): Promise<void> => {
   const params = {
     email,
     password,
@@ -57,7 +68,10 @@ export const signUp = async ({ email, password, firstName, lastName }: SignUpPar
   };
 
   try {
-    const res = await axios.post<AccessTokenResponse>(endpoints.auth.signUp, params);
+    const res = await axios.post<AccessTokenResponse>(
+      endpoints.auth.signUp,
+      params,
+    );
 
     const { accessToken } = res.data;
 

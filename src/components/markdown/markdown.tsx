@@ -1,13 +1,11 @@
 import "./code-highlight-block.css";
 
 import { useMemo } from "react";
-import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import rehypeHighlight from "rehype-highlight";
-
 import Link from "@mui/material/Link";
-
+import ReactMarkdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
 import { isExternalLink } from "src/routes/utils";
 import { RouterLink } from "src/routes/components";
 
@@ -27,11 +25,7 @@ export function Markdown({ children, sx, ...other }) {
   }, [children]);
 
   return (
-    <StyledRoot
-      className={markdownClasses.root}
-      sx={sx}
-      {...other}
-    >
+    <StyledRoot className={markdownClasses.root} sx={sx} {...other}>
       <ReactMarkdown
         components={components}
         rehypePlugins={rehypePlugins}

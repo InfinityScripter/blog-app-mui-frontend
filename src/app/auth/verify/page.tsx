@@ -1,5 +1,4 @@
 import { CONFIG } from "src/config-global";
-
 import { SplitVerifyView } from "src/sections/auth-demo/split";
 
 // ----------------------------------------------------------------------

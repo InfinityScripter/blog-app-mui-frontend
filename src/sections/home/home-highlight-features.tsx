@@ -1,4 +1,16 @@
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import { CONFIG } from "src/config-global";
+import SvgIcon from "@mui/material/SvgIcon";
+import Container from "@mui/material/Container";
+import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
 import { useRef, useState, forwardRef } from "react";
+import { styled, useTheme } from "@mui/material/styles";
+import { varAlpha, stylesMode } from "src/theme/styles";
+import { useClientRect } from "src/hooks/use-client-rect";
+import { varFade, MotionViewport } from "src/components/animate";
+import PRIMARY_COLOR from "src/theme/with-settings/primary-color.json";
 import {
   m,
   useSpring,
@@ -6,22 +18,6 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion";
-
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import SvgIcon from "@mui/material/SvgIcon";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import { styled, useTheme } from "@mui/material/styles";
-
-import { useClientRect } from "src/hooks/use-client-rect";
-
-import { CONFIG } from "src/config-global";
-import { varAlpha, stylesMode } from "src/theme/styles";
-import PRIMARY_COLOR from "src/theme/with-settings/primary-color.json";
-
-import { Iconify } from "src/components/iconify";
-import { varFade, MotionViewport } from "src/components/animate";
 
 import { SectionTitle } from "./components/section-title";
 import { FloatLine, FloatPlusIcon } from "./components/svg-elements";

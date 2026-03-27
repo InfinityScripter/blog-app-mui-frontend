@@ -1,8 +1,13 @@
-import useSWR from 'swr';
-import { useMemo } from 'react';
+import type {
+  PostResponse,
+  ListPostsResponse,
+  LatestPostsResponse,
+  SearchPostsResponse,
+} from "src/types/api";
 
-import { fetcher, endpoints } from 'src/utils/axios';
-import type { LatestPostsResponse, ListPostsResponse, PostResponse, SearchPostsResponse } from 'src/types/api';
+import useSWR from "swr";
+import { useMemo } from "react";
+import { fetcher, endpoints } from "src/utils/axios";
 
 const swrOptions = {
   revalidateIfStale: true,
@@ -13,7 +18,11 @@ const swrOptions = {
 export function useGetPosts() {
   const url = endpoints.post.list;
 
-  const { data, isLoading, error, isValidating } = useSWR<ListPostsResponse>(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR<ListPostsResponse>(
+    url,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -30,10 +39,14 @@ export function useGetPosts() {
 }
 
 export function useGetPost(postId?: string, title?: string) {
-  const url = title ? [endpoints.post.details, { params: { title } }] : '';
+  const url = title ? [endpoints.post.details, { params: { title } }] : "";
   const key = postId ? `${endpoints.post.details}?id=${postId}` : null;
 
-  const { data, isLoading, error, isValidating, mutate } = useSWR<PostResponse>(key, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating, mutate } = useSWR<PostResponse>(
+    key,
+    fetcher,
+    swrOptions,
+  );
 
   return useMemo(
     () => ({
@@ -48,9 +61,13 @@ export function useGetPost(postId?: string, title?: string) {
 }
 
 export function useGetLatestPosts(title?: string) {
-  const url = title ? [endpoints.post.latest, { params: { title } }] : '';
+  const url = title ? [endpoints.post.latest, { params: { title } }] : "";
 
-  const { data, isLoading, error, isValidating } = useSWR<LatestPostsResponse>(url, fetcher, swrOptions);
+  const { data, isLoading, error, isValidating } = useSWR<LatestPostsResponse>(
+    url,
+    fetcher,
+    swrOptions,
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -67,12 +84,18 @@ export function useGetLatestPosts(title?: string) {
 }
 
 export function useSearchPosts(query?: string, dashboard: boolean = false) {
-  const url = query ? [endpoints.post.search, { params: { query, dashboard } }] : '';
+  const url = query
+    ? [endpoints.post.search, { params: { query, dashboard } }]
+    : "";
 
-  const { data, isLoading, error, isValidating } = useSWR<SearchPostsResponse>(url, fetcher, {
-    ...swrOptions,
-    keepPreviousData: true,
-  });
+  const { data, isLoading, error, isValidating } = useSWR<SearchPostsResponse>(
+    url,
+    fetcher,
+    {
+      ...swrOptions,
+      keepPreviousData: true,
+    },
+  );
 
   const memoizedValue = useMemo(
     () => ({
@@ -86,4 +109,4 @@ export function useSearchPosts(query?: string, dashboard: boolean = false) {
   );
 
   return memoizedValue;
-} 
+}

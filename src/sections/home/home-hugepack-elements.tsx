@@ -1,4 +1,16 @@
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
+import Button from "@mui/material/Button";
+import { CONFIG } from "src/config-global";
+import Container from "@mui/material/Container";
+import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
 import { useRef, useState, forwardRef } from "react";
+import { styled, useTheme } from "@mui/material/styles";
+import { useClientRect } from "src/hooks/use-client-rect";
+import { varFade, MotionViewport } from "src/components/animate";
 import {
   m,
   useSpring,
@@ -6,23 +18,6 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion";
-
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import { styled, useTheme } from "@mui/material/styles";
-
-import { paths } from "src/routes/paths";
-
-import { useClientRect } from "src/hooks/use-client-rect";
-
-import { CONFIG } from "src/config-global";
-
-import { Iconify } from "src/components/iconify";
-import { varFade, MotionViewport } from "src/components/animate";
 
 import { SectionTitle, SectionCaption } from "./components/section-title";
 import { FloatLine, FloatTriangleLeftIcon } from "./components/svg-elements";

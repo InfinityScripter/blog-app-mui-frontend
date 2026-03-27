@@ -1,19 +1,18 @@
 "use client";
 
-import { forwardRef } from "react";
-import { Icon } from "@iconify/react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
 
+import { forwardRef } from "react";
 import Box from "@mui/material/Box";
+import { Icon } from "@iconify/react";
 import NoSsr from "@mui/material/NoSsr";
 
 import { iconifyClasses } from "./classes";
 
-import type { BoxProps } from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
-
 // ----------------------------------------------------------------------
 
-interface IconifyProps extends Omit<BoxProps, 'sx' | 'component'> {
+interface IconifyProps extends Omit<BoxProps, "sx" | "component"> {
   className?: string;
   width?: number | string;
   sx?: SxProps<Theme>;

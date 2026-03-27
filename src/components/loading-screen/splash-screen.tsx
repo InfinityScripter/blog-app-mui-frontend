@@ -1,21 +1,24 @@
 "use client";
 
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Portal from "@mui/material/Portal";
-
 import { AnimateLogo1 } from "src/components/animate";
-
-import type { BoxProps } from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-interface SplashScreenProps extends Omit<BoxProps, 'sx'> {
+interface SplashScreenProps extends Omit<BoxProps, "sx"> {
   portal?: boolean;
   sx?: SxProps<Theme>;
 }
 
-export function SplashScreen({ portal = true, sx, ...other }: SplashScreenProps = {}) {
+export function SplashScreen({
+  portal = true,
+  sx,
+  ...other
+}: SplashScreenProps = {}) {
   const content = (
     <Box sx={{ overflow: "hidden" }}>
       <Box

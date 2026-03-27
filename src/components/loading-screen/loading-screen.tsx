@@ -1,15 +1,15 @@
 "use client";
 
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Portal from "@mui/material/Portal";
 import LinearProgress from "@mui/material/LinearProgress";
 
-import type { BoxProps } from "@mui/material/Box";
-import type { SxProps, Theme } from "@mui/material/styles";
-
 // ----------------------------------------------------------------------
 
-interface LoadingScreenProps extends Omit<BoxProps, 'sx'> {
+interface LoadingScreenProps extends Omit<BoxProps, "sx"> {
   portal?: boolean;
   sx?: SxProps<Theme>;
 }

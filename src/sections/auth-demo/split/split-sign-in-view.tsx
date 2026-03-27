@@ -1,23 +1,19 @@
 "use client";
 
 import { z as zod } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
+import { useForm } from "react-hook-form";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-import InputAdornment from "@mui/material/InputAdornment";
-
-import { paths } from "src/routes/paths";
 import { RouterLink } from "src/routes/components";
-
 import { useBoolean } from "src/hooks/use-boolean";
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
+import InputAdornment from "@mui/material/InputAdornment";
 import { Iconify, SocialIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------

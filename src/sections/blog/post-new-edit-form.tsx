@@ -1,28 +1,23 @@
 import { z as zod } from "zod";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo, useEffect, useCallback } from "react";
-
+import { _tags } from "src/_mock";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import Divider from "@mui/material/Divider";
+import { useRouter } from "src/routes/hooks";
+import { toast } from "src/components/snackbar";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
-import { paths } from "src/routes/paths";
-import { useRouter } from "src/routes/hooks";
-
 import { useBoolean } from "src/hooks/use-boolean";
-
-import { _tags } from "src/_mock";
-
-import { toast } from "src/components/snackbar";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMemo, useEffect, useCallback } from "react";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { Form, Field, schemaHelper } from "src/components/hook-form";
 
 import axios from "../../utils/axios";
@@ -40,7 +35,10 @@ export const NewPostSchema = zod.object({
   coverUrl: schemaHelper.file({
     message: { required_error: "Обложка обязательна!" },
   }),
-  tags: zod.string().array().min(2, { message: "Должно быть не менее 2 тегов!" }),
+  tags: zod
+    .string()
+    .array()
+    .min(2, { message: "Должно быть не менее 2 тегов!" }),
   metaKeywords: zod
     .string()
     .array()

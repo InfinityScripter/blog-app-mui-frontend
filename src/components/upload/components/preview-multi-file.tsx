@@ -1,10 +1,8 @@
 import Box from "@mui/material/Box";
+import { varAlpha } from "src/theme/styles";
+import { fData } from "src/utils/format-number";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
-
-import { fData } from "src/utils/format-number";
-
-import { varAlpha } from "src/theme/styles";
 
 import { Iconify } from "../../iconify";
 import { fileData, FileThumbnail } from "../../file-thumbnail";

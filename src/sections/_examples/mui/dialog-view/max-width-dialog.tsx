@@ -1,20 +1,18 @@
-import { useState, useCallback } from "react";
-
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import Dialog from "@mui/material/Dialog";
 import Select from "@mui/material/Select";
+import { useState, useCallback } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
+import { useBoolean } from "src/hooks/use-boolean";
 import FormControl from "@mui/material/FormControl";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
-import { useBoolean } from "src/hooks/use-boolean";
 
 // ----------------------------------------------------------------------
 

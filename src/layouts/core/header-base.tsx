@@ -1,12 +1,10 @@
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import Button from "@mui/material/Button";
-import { styled, useTheme } from "@mui/material/styles";
-
 import { paths } from "src/routes/paths";
-import { RouterLink } from "src/routes/components";
-
+import Button from "@mui/material/Button";
 import { Logo } from "src/components/logo";
+import { RouterLink } from "src/routes/components";
+import { styled, useTheme } from "@mui/material/styles";
 
 import { HeaderSection } from "./header-section";
 import { Searchbar } from "../components/searchbar";

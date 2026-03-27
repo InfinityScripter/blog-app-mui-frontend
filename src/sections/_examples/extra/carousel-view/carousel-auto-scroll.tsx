@@ -1,8 +1,6 @@
-import AutoScroll from "embla-carousel-auto-scroll";
-
 import Box from "@mui/material/Box";
-
 import { Image } from "src/components/image";
+import AutoScroll from "embla-carousel-auto-scroll";
 import {
   Carousel,
   useCarousel,

@@ -1,16 +1,14 @@
 "use client";
 
-import { useMemo, useEffect, useCallback, type ReactNode } from "react";
-
-import { useSetState } from "src/hooks/use-set-state";
+import type { User } from "src/types/domain";
 
 import axios, { endpoints } from "src/utils/axios";
+import { useSetState } from "src/hooks/use-set-state";
+import { useMemo, useEffect, useCallback, type ReactNode } from "react";
 
 import { STORAGE_KEY } from "./constant";
-import { AuthContext, type AuthContextValue } from "../auth-context";
 import { setSession, isValidToken } from "./utils";
-
-import type { User } from "src/types/domain";
+import { AuthContext, type AuthContextValue } from "../auth-context";
 
 // ----------------------------------------------------------------------
 

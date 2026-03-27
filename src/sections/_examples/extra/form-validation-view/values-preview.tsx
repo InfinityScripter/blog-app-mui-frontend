@@ -1,15 +1,12 @@
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
-
 import Stack from "@mui/material/Stack";
 import Portal from "@mui/material/Portal";
 import Collapse from "@mui/material/Collapse";
 import { useTheme } from "@mui/material/styles";
-import ButtonBase from "@mui/material/ButtonBase";
-
-import { bgBlur, varAlpha } from "src/theme/styles";
-
+import { useFormContext } from "react-hook-form";
 import { Iconify } from "src/components/iconify";
+import ButtonBase from "@mui/material/ButtonBase";
+import { bgBlur, varAlpha } from "src/theme/styles";
 import { fileData } from "src/components/file-thumbnail";
 
 // ----------------------------------------------------------------------

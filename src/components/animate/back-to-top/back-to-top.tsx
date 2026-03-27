@@ -1,15 +1,13 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { useState } from "react";
-import { useScroll, useMotionValueEvent } from "framer-motion";
-
-import Fab, { type FabProps } from "@mui/material/Fab";
-
 import { Iconify } from "src/components/iconify";
-
-import type { SxProps, Theme } from "@mui/material/styles";
+import Fab, { type FabProps } from "@mui/material/Fab";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 
 // ----------------------------------------------------------------------
 
-interface BackToTopProps extends Omit<FabProps, 'sx'> {
+interface BackToTopProps extends Omit<FabProps, "sx"> {
   value?: number;
   sx?: SxProps<Theme>;
 }

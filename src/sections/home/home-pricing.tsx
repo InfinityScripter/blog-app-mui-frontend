@@ -1,23 +1,18 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
+import { CONFIG } from "src/config-global";
 import Divider from "@mui/material/Divider";
+import { varAlpha } from "src/theme/styles";
+import { useTabs } from "src/hooks/use-tabs";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-
-import { paths } from "src/routes/paths";
-
-import { useTabs } from "src/hooks/use-tabs";
-
-import { CONFIG } from "src/config-global";
-import { varAlpha } from "src/theme/styles";
-
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
 import { varFade, varScale, MotionViewport } from "src/components/animate";
 
 import { SectionTitle } from "./components/section-title";

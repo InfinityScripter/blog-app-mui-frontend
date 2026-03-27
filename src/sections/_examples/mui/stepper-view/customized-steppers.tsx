@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import Box from "@mui/material/Box";
 import Step from "@mui/material/Step";
 import Paper from "@mui/material/Paper";
@@ -7,14 +6,12 @@ import Button from "@mui/material/Button";
 import Stepper from "@mui/material/Stepper";
 import { styled } from "@mui/material/styles";
 import StepLabel from "@mui/material/StepLabel";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
+import { varAlpha, bgGradient, stylesMode } from "src/theme/styles";
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
-
-import { varAlpha, bgGradient, stylesMode } from "src/theme/styles";
-
-import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 

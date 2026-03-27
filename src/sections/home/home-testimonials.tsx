@@ -1,19 +1,15 @@
 import { m } from "framer-motion";
-
+import { _mock } from "src/_mock";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import Rating from "@mui/material/Rating";
 import Divider from "@mui/material/Divider";
+import { fToNow } from "src/utils/format-time";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-
-import { fToNow } from "src/utils/format-time";
-
-import { _mock } from "src/_mock";
 import { maxLine, varAlpha, textGradient } from "src/theme/styles";
-
 import {
   varFade,
   MotionViewport,

@@ -1,6 +1,5 @@
-import { paramCase } from "src/utils/change-case";
-
 import { CONFIG } from "src/config-global";
+import { paramCase } from "src/utils/change-case";
 
 // ----------------------------------------------------------------------
 

@@ -1,6 +1,5 @@
-import { useMemo, useState, useEffect, useCallback } from "react";
-
 import { isEqual } from "src/utils/helper";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import { localStorageGetItem } from "src/utils/storage-available";
 
 // ----------------------------------------------------------------------
@@ -13,7 +12,10 @@ interface UseLocalStorageReturn<T> {
   canReset: boolean;
 }
 
-export function useLocalStorage<T>(key: string, initialState: T): UseLocalStorageReturn<T> {
+export function useLocalStorage<T>(
+  key: string,
+  initialState: T,
+): UseLocalStorageReturn<T> {
   const [state, set] = useState<T>(initialState);
 
   const multiValue = initialState && typeof initialState === "object";
@@ -25,7 +27,7 @@ export function useLocalStorage<T>(key: string, initialState: T): UseLocalStorag
 
     if (restoredValue) {
       if (multiValue) {
-        set((prevValue) => ({ ...prevValue, ...restoredValue } as T));
+        set((prevValue) => ({ ...prevValue, ...restoredValue }) as T);
       } else {
         set(restoredValue);
       }

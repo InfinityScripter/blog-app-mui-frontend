@@ -1,4 +1,4 @@
-import { useRef, useEffect, useLayoutEffect, type RefObject } from "react";
+import { useRef, useEffect, type RefObject, useLayoutEffect } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -11,19 +11,19 @@ export function useEventListener<K extends keyof WindowEventMap>(
   eventName: K,
   handler: (event: WindowEventMap[K]) => void,
   element?: RefObject<HTMLElement>,
-  options?: boolean | AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions,
 ): void;
 export function useEventListener<K extends keyof HTMLElementEventMap>(
   eventName: K,
   handler: (event: HTMLElementEventMap[K]) => void,
   element: RefObject<HTMLElement>,
-  options?: boolean | AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions,
 ): void;
 export function useEventListener(
   eventName: string,
   handler: (event: Event) => void,
   element?: RefObject<HTMLElement>,
-  options?: boolean | AddEventListenerOptions
+  options?: boolean | AddEventListenerOptions,
 ): void {
   // Create a ref that stores handler
   const savedHandler = useRef(handler);

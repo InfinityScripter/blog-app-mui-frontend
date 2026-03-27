@@ -1,19 +1,16 @@
 "use client";
 
 import { m } from "framer-motion";
-
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import Fade from "@mui/material/Fade";
+import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-
-import { paths } from "src/routes/paths";
-
 import { Iconify } from "src/components/iconify";
+import IconButton from "@mui/material/IconButton";
 import { varHover } from "src/components/animate";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

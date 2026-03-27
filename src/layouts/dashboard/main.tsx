@@ -1,15 +1,13 @@
 "use client";
 
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
-import Container, { type ContainerProps } from "@mui/material/Container";
-
 import { layoutClasses } from "src/layouts/classes";
-
 import { useSettingsContext } from "src/components/settings";
-
-import type { ReactNode } from "react";
-import type { SxProps, Theme } from "@mui/material/styles";
+import Container, { type ContainerProps } from "@mui/material/Container";
 
 // ----------------------------------------------------------------------
 
@@ -42,11 +40,11 @@ export function Main({ children, isNavHorizontal, sx, ...other }: MainProps) {
 
 // ----------------------------------------------------------------------
 
-interface DashboardContentProps extends Omit<ContainerProps, 'maxWidth'> {
+interface DashboardContentProps extends Omit<ContainerProps, "maxWidth"> {
   sx?: SxProps<Theme>;
   children: ReactNode;
   disablePadding?: boolean;
-  maxWidth?: ContainerProps['maxWidth'];
+  maxWidth?: ContainerProps["maxWidth"];
 }
 
 export function DashboardContent({

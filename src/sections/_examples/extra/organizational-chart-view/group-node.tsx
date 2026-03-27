@@ -2,17 +2,15 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import { Label } from "src/components/label";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-
-import { varAlpha, stylesMode } from "src/theme/styles";
-
-import { Label } from "src/components/label";
 import { toast } from "src/components/snackbar";
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import { varAlpha, stylesMode } from "src/theme/styles";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------

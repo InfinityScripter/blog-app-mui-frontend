@@ -1,12 +1,10 @@
 "use client";
 
+import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-
-import { paths } from "src/routes/paths";
-import { RouterLink } from "src/routes/components";
-
 import { Iconify } from "src/components/iconify";
+import { RouterLink } from "src/routes/components";
 import { EmptyContent } from "src/components/empty-content";
 
 // ----------------------------------------------------------------------

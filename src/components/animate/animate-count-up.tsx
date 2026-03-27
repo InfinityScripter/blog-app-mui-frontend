@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import Typography from "@mui/material/Typography";
 import {
   m,
   animate,
@@ -6,8 +7,6 @@ import {
   useTransform,
   useMotionValue,
 } from "framer-motion";
-
-import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
 

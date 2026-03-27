@@ -1,16 +1,13 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
-import Typography from "@mui/material/Typography";
-import { alpha as hexAlpha } from "@mui/material/styles";
-
 import { CONFIG } from "src/config-global";
-import { varAlpha, bgGradient } from "src/theme/styles";
-
 import { useAuthContext } from "src/auth/hooks";
+import Typography from "@mui/material/Typography";
+import { varAlpha, bgGradient } from "src/theme/styles";
+import { alpha as hexAlpha } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 

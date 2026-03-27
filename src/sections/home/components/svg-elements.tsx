@@ -1,8 +1,6 @@
 import { useId } from "react";
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
-
 import { varFade } from "src/components/animate";
 
 // ----------------------------------------------------------------------

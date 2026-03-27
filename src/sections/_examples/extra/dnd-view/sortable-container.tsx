@@ -1,3 +1,7 @@
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Portal from "@mui/material/Portal";
+import Button from "@mui/material/Button";
 import { useRef, useState, useEffect } from "react";
 import {
   arraySwap,
@@ -21,11 +25,6 @@ import {
   MeasuringStrategy,
   defaultDropAnimationSideEffects,
 } from "@dnd-kit/core";
-
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Portal from "@mui/material/Portal";
-import Button from "@mui/material/Button";
 
 import { itemClasses } from "./classes";
 import ItemBase from "./sortable-item-base";

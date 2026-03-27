@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import useSWR, { mutate } from "swr";
-
 import { keyBy } from "src/utils/helper";
 import axios, { fetcher, endpoints } from "src/utils/axios";
 
@@ -87,11 +86,8 @@ interface ConversationsResponse {
 export function useGetConversations() {
   const url = [CHART_ENDPOINT, { params: { endpoint: "conversations" } }];
 
-  const { data, isLoading, error, isValidating } = useSWR<ConversationsResponse>(
-    url,
-    fetcher,
-    swrOptions,
-  );
+  const { data, isLoading, error, isValidating } =
+    useSWR<ConversationsResponse>(url, fetcher, swrOptions);
 
   const memoizedValue = useMemo(() => {
     const byId = data?.conversations?.length
@@ -143,7 +139,10 @@ export function useGetConversation(conversationId: string | null) {
 
 // ----------------------------------------------------------------------
 
-export async function sendMessage(conversationId: string, messageData: Message): Promise<void> {
+export async function sendMessage(
+  conversationId: string,
+  messageData: Message,
+): Promise<void> {
   const conversationsUrl = [
     CHART_ENDPOINT,
     { params: { endpoint: "conversations" } },
@@ -203,14 +202,19 @@ export async function sendMessage(conversationId: string, messageData: Message):
 
 // ----------------------------------------------------------------------
 
-export async function createConversation(conversationData: Conversation): Promise<Conversation> {
+export async function createConversation(
+  conversationData: Conversation,
+): Promise<Conversation> {
   const url = [CHART_ENDPOINT, { params: { endpoint: "conversations" } }];
 
   /**
    * Work on server
    */
   const data = { conversationData };
-  const res = await axios.post<{ conversation: Conversation }>(CHART_ENDPOINT, data);
+  const res = await axios.post<{ conversation: Conversation }>(
+    CHART_ENDPOINT,
+    data,
+  );
 
   /**
    * Work in local

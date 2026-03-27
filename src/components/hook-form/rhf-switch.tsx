@@ -1,11 +1,10 @@
-import { Controller, useFormContext } from "react-hook-form";
-
 import Box from "@mui/material/Box";
 import Switch from "@mui/material/Switch";
 import FormGroup from "@mui/material/FormGroup";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
+import { Controller, useFormContext } from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 // ----------------------------------------------------------------------

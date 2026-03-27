@@ -1,5 +1,4 @@
 import { CONFIG } from "src/config-global";
-
 import { FaqsView } from "src/sections/faqs/view";
 
 // ----------------------------------------------------------------------

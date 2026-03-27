@@ -1,27 +1,24 @@
 "use client";
 
-import { useState, useCallback } from "react";
-
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
+import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Switch from "@mui/material/Switch";
 import Divider from "@mui/material/Divider";
+import { useState, useCallback } from "react";
 import ListItem from "@mui/material/ListItem";
 import Collapse from "@mui/material/Collapse";
 import Checkbox from "@mui/material/Checkbox";
+import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
-
-import { paths } from "src/routes/paths";
-
-import { Iconify } from "src/components/iconify";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 
 import { ComponentHero } from "../../component-hero";
 import { ComponentBlock } from "../../component-block";

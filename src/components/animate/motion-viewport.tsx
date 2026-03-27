@@ -1,8 +1,6 @@
 import { m } from "framer-motion";
 import { forwardRef } from "react";
-
 import Box from "@mui/material/Box";
-
 import { useResponsive } from "src/hooks/use-responsive";
 
 import { varContainer } from "./variants";

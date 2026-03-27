@@ -1,13 +1,10 @@
-import { memo, useEffect, forwardRef } from "react";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import IconButton from "@mui/material/IconButton";
-
-import { varAlpha, stylesMode } from "src/theme/styles";
-
 import { Iconify } from "src/components/iconify";
+import IconButton from "@mui/material/IconButton";
+import { memo, useEffect, forwardRef } from "react";
+import { varAlpha, stylesMode } from "src/theme/styles";
 
 import { itemClasses } from "./classes";
 

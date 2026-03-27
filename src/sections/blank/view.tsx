@@ -1,9 +1,8 @@
 "use client";
 
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-
 import { varAlpha } from "src/theme/styles";
+import Typography from "@mui/material/Typography";
 import { DashboardContent } from "src/layouts/dashboard";
 
 // ----------------------------------------------------------------------

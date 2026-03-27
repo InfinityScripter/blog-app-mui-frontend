@@ -1,7 +1,5 @@
 import { forwardRef } from "react";
-
 import Box from "@mui/material/Box";
-
 import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------

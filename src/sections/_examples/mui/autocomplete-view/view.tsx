@@ -1,16 +1,13 @@
 "use client";
 
 import { useState } from "react";
-
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
-
-import { paths } from "src/routes/paths";
-
 import { CountrySelect } from "src/components/country-select";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 

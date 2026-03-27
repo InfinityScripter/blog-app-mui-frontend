@@ -1,7 +1,6 @@
 import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
-
 import { varAlpha } from "src/theme/styles";
+import { styled } from "@mui/material/styles";
 
 import { editorClasses } from "./classes";
 

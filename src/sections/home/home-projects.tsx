@@ -1,5 +1,4 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
@@ -7,11 +6,9 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-
-import { RouterLink } from "src/routes/components";
-
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
+import { RouterLink } from "src/routes/components";
 import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------

@@ -1,9 +1,14 @@
-import { useContext, createContext, type ComponentType, type ReactNode } from "react";
+import {
+  useContext,
+  createContext,
+  type ReactNode,
+  type ComponentType,
+} from "react";
 
 // ----------------------------------------------------------------------
 
 export function withLoadingProps<P extends Record<string, unknown>>(
-  loader: (useLoadingProps: () => P) => ComponentType<P>
+  loader: (useLoadingProps: () => P) => ComponentType<P>,
 ): ComponentType<P> {
   const LoadingPropsContext = createContext<P>({} as P);
 

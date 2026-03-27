@@ -1,15 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
-
 import Stack from "@mui/material/Stack";
 import Drawer from "@mui/material/Drawer";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
 import { isExternalLink } from "src/routes/utils";
-import { usePathname, useActiveLink } from "src/routes/hooks";
-
 import { Scrollbar } from "src/components/scrollbar";
+import { useState, useEffect, useCallback } from "react";
+import { usePathname, useActiveLink } from "src/routes/hooks";
 
 import { NavItem } from "./nav-item";
 import { Iconify } from "../../iconify";

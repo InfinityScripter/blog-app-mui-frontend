@@ -1,16 +1,12 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import { useTheme } from "@mui/material/styles";
-
 import { paths } from "src/routes/paths";
-
+import Button from "@mui/material/Button";
 import { CONFIG } from "src/config-global";
-import { varAlpha, textGradient } from "src/theme/styles";
-
+import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
+import { varAlpha, textGradient } from "src/theme/styles";
 import { varFade, AnimateBorder, MotionViewport } from "src/components/animate";
 
 import { SectionTitle } from "./components/section-title";

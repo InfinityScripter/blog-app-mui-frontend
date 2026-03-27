@@ -1,15 +1,14 @@
-import { m } from "framer-motion";
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
 
+import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Avatar, { type AvatarProps } from "@mui/material/Avatar";
 
-import type { ReactNode } from "react";
-import type { SxProps, Theme } from "@mui/material/styles";
-import type { BoxProps } from "@mui/material/Box";
-
 // ----------------------------------------------------------------------
 
-interface AnimateAvatarProps extends Omit<BoxProps, 'sx'> {
+interface AnimateAvatarProps extends Omit<BoxProps, "sx"> {
   sx?: SxProps<Theme>;
   slotProps?: {
     avatar?: Partial<AvatarProps>;

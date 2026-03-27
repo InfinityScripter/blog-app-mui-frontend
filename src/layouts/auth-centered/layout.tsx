@@ -1,18 +1,16 @@
 "use client";
 
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Alert from "@mui/material/Alert";
-
-import { useBoolean } from "src/hooks/use-boolean";
-
 import { CONFIG } from "src/config-global";
 import { stylesMode } from "src/theme/styles";
+import { useBoolean } from "src/hooks/use-boolean";
 
 import { Main } from "./main";
 import { HeaderBase } from "../core/header-base";
 import { LayoutSection } from "../core/layout-section";
-
-import type { ReactNode } from "react";
-import type { SxProps, Theme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 

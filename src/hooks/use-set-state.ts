@@ -1,6 +1,5 @@
-import { useMemo, useState, useCallback } from "react";
-
 import { isEqual } from "src/utils/helper";
+import { useMemo, useState, useCallback } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +11,9 @@ interface UseSetStateReturn<T> {
   canReset: boolean;
 }
 
-export function useSetState<T extends Record<string, unknown>>(initialState: T): UseSetStateReturn<T> {
+export function useSetState<T extends Record<string, unknown>>(
+  initialState: T,
+): UseSetStateReturn<T> {
   const [state, set] = useState<T>(initialState);
 
   const canReset = !isEqual(state, initialState);

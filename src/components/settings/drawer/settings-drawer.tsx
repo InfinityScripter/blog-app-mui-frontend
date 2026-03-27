@@ -1,17 +1,18 @@
 "use client";
 
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
+import COLORS from "src/theme/core/colors.json";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Drawer, { drawerClasses } from "@mui/material/Drawer";
-import { useTheme, useColorScheme } from "@mui/material/styles";
-
-import COLORS from "src/theme/core/colors.json";
 import { paper, varAlpha } from "src/theme/styles";
 import { defaultFont } from "src/theme/core/typography";
+import Drawer, { drawerClasses } from "@mui/material/Drawer";
+import { useTheme, useColorScheme } from "@mui/material/styles";
 import PRIMARY_COLOR from "src/theme/with-settings/primary-color.json";
 
 import { Iconify } from "../../iconify";
@@ -23,8 +24,6 @@ import { useSettingsContext } from "../context";
 import { PresetsOptions } from "./presets-options";
 import { defaultSettings } from "../config-settings";
 import { FullScreenButton } from "./fullscreen-button";
-
-import type { SxProps, Theme } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 

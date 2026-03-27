@@ -1,9 +1,8 @@
-import { CONFIG } from "src/config-global";
-import { DashboardLayout } from "src/layouts/dashboard";
-
-import { AuthGuard } from "src/auth/guard";
-
 import type { ReactNode } from "react";
+
+import { CONFIG } from "src/config-global";
+import { AuthGuard } from "src/auth/guard";
+import { DashboardLayout } from "src/layouts/dashboard";
 
 // ----------------------------------------------------------------------
 

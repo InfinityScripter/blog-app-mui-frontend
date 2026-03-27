@@ -1,11 +1,8 @@
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
-
-import { fNumber } from "src/utils/format-number";
-
 import { CONFIG } from "src/config-global";
-
+import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
+import { fNumber } from "src/utils/format-number";
 import { SvgColor } from "src/components/svg-color";
 import { Chart, useChart } from "src/components/chart";
 

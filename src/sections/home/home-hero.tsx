@@ -1,4 +1,15 @@
+import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
 import { useRef, useState } from "react";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import { useTheme } from "@mui/material/styles";
+import { textGradient } from "src/theme/styles";
+import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
+import { useResponsive } from "src/hooks/use-responsive";
+import { varFade, MotionContainer } from "src/components/animate";
 import {
   m,
   useScroll,
@@ -6,21 +17,6 @@ import {
   useTransform,
   useMotionValueEvent,
 } from "framer-motion";
-
-import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
-
-import { useResponsive } from "src/hooks/use-responsive";
-
-import { textGradient } from "src/theme/styles";
-
-import { Iconify } from "src/components/iconify";
-import { varFade, MotionContainer } from "src/components/animate";
 
 import { HeroBackground } from "./components/hero-background";
 

@@ -1,17 +1,12 @@
 import { useCallback } from "react";
-
 import Box from "@mui/material/Box";
+import { CONFIG } from "src/config-global";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
-import IconButton from "@mui/material/IconButton";
-
-import { useBoolean } from "src/hooks/use-boolean";
-
-import { fCurrency } from "src/utils/format-number";
-
-import { CONFIG } from "src/config-global";
-
 import { Iconify } from "src/components/iconify";
+import IconButton from "@mui/material/IconButton";
+import { useBoolean } from "src/hooks/use-boolean";
+import { fCurrency } from "src/utils/format-number";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 import {
   Carousel,

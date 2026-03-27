@@ -1,12 +1,9 @@
 import { useEffect } from "react";
-
 import Box from "@mui/material/Box";
-import Drawer, { drawerClasses } from "@mui/material/Drawer";
-
-import { usePathname } from "src/routes/hooks";
-
 import { Logo } from "src/components/logo";
+import { usePathname } from "src/routes/hooks";
 import { Scrollbar } from "src/components/scrollbar";
+import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import { NavSectionVertical } from "src/components/nav-section";
 
 import { NavUpgrade } from "../components/nav-upgrade";

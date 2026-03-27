@@ -1,13 +1,10 @@
 "use client";
 
-import Button from "@mui/material/Button";
-
 import { paths } from "src/routes/paths";
-import { RouterLink } from "src/routes/components";
-
-import { DashboardContent } from "src/layouts/dashboard";
-
+import Button from "@mui/material/Button";
 import { Iconify } from "src/components/iconify";
+import { RouterLink } from "src/routes/components";
+import { DashboardContent } from "src/layouts/dashboard";
 import { EmptyContent } from "src/components/empty-content";
 
 // ----------------------------------------------------------------------

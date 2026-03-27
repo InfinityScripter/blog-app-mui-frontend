@@ -1,32 +1,21 @@
 "use client";
 
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
+import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
+import { useRouter } from "src/routes/hooks";
 import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-
-import { paths } from "src/routes/paths";
-import { useRouter } from "src/routes/hooks";
-
-import { MotivationIllustration } from "src/assets/illustrations";
-import {
-  _mock,
-  _ecommerceNewProducts,
-  _ecommerceBestSalesman,
-  _ecommerceSalesOverview,
-  _ecommerceLatestProducts,
-} from "src/_mock";
-
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
 import { Walktour, useWalktour } from "src/components/walktour";
+import { MotivationIllustration } from "src/assets/illustrations";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
-
 import { EcommerceWelcome } from "src/sections/overview/e-commerce/ecommerce-welcome";
 import { EcommerceNewProducts } from "src/sections/overview/e-commerce/ecommerce-new-products";
 import { EcommerceYearlySales } from "src/sections/overview/e-commerce/ecommerce-yearly-sales";
@@ -36,6 +25,13 @@ import { EcommerceSalesOverview } from "src/sections/overview/e-commerce/ecommer
 import { EcommerceWidgetSummary } from "src/sections/overview/e-commerce/ecommerce-widget-summary";
 import { EcommerceLatestProducts } from "src/sections/overview/e-commerce/ecommerce-latest-products";
 import { EcommerceCurrentBalance } from "src/sections/overview/e-commerce/ecommerce-current-balance";
+import {
+  _mock,
+  _ecommerceNewProducts,
+  _ecommerceBestSalesman,
+  _ecommerceSalesOverview,
+  _ecommerceLatestProducts,
+} from "src/_mock";
 
 import { ComponentHero } from "../../component-hero";
 

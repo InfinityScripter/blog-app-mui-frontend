@@ -1,9 +1,7 @@
+import { _mock } from "src/_mock";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
-
-import { _mock } from "src/_mock";
-
 import { Iconify } from "src/components/iconify";
 
 import { ComponentBlock } from "../../component-block";

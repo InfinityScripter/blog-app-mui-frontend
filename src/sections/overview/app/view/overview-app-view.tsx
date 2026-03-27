@@ -1,20 +1,17 @@
 "use client";
 
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-
+import { useMockedUser } from "src/auth/hooks";
+import { useTheme } from "@mui/material/styles";
 import { DashboardContent } from "src/layouts/dashboard";
+import { svgColorClasses } from "src/components/svg-color";
 import {
   _ecommerceNewProducts,
   _ecommerceBestSalesman,
   _ecommerceSalesOverview,
   _ecommerceLatestProducts,
 } from "src/_mock";
-
-import { svgColorClasses } from "src/components/svg-color";
-
-import { useMockedUser } from "src/auth/hooks";
 
 import { AppWidget } from "../app-widget";
 import { AppAreaInstalled } from "../app-area-installed";

@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import useSWR, { mutate } from "swr";
-
 import axios, { fetcher, endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
@@ -65,7 +64,13 @@ export function useGetBoard() {
       boardValidating: isValidating,
       boardEmpty: !isLoading && !columns.length,
     };
-  }, [data?.board?.columns, data?.board?.tasks, error, isLoading, isValidating]);
+  }, [
+    data?.board?.columns,
+    data?.board?.tasks,
+    error,
+    isLoading,
+    isValidating,
+  ]);
 
   return memoizedValue;
 }
@@ -98,7 +103,10 @@ export async function createColumn(columnData: Column): Promise<void> {
       // add new task in board.tasks
       const tasks = { ...board.tasks, [columnData.id]: [] };
 
-      return { ...currentData, board: { ...board, columns, tasks } } as BoardResponse;
+      return {
+        ...currentData,
+        board: { ...board, columns, tasks },
+      } as BoardResponse;
     },
     false,
   );
@@ -106,7 +114,10 @@ export async function createColumn(columnData: Column): Promise<void> {
 
 // ----------------------------------------------------------------------
 
-export async function updateColumn(columnId: string, columnName: string): Promise<void> {
+export async function updateColumn(
+  columnId: string,
+  columnName: string,
+): Promise<void> {
   /**
    * Work on server
    */
@@ -154,7 +165,10 @@ export async function moveColumn(updateColumns: Column[]): Promise<void> {
       const board = currentData?.board;
       if (!board) return currentData;
 
-      return { ...currentData, board: { ...board, columns: updateColumns } } as BoardResponse;
+      return {
+        ...currentData,
+        board: { ...board, columns: updateColumns },
+      } as BoardResponse;
     },
     false,
   );
@@ -234,7 +248,10 @@ export async function deleteColumn(columnId: string): Promise<void> {
           return obj;
         }, {});
 
-      return { ...currentData, board: { ...board, columns, tasks } } as BoardResponse;
+      return {
+        ...currentData,
+        board: { ...board, columns, tasks },
+      } as BoardResponse;
     },
     false,
   );
@@ -242,7 +259,10 @@ export async function deleteColumn(columnId: string): Promise<void> {
 
 // ----------------------------------------------------------------------
 
-export async function createTask(columnId: string, taskData: Task): Promise<void> {
+export async function createTask(
+  columnId: string,
+  taskData: Task,
+): Promise<void> {
   /**
    * Work on server
    */
@@ -276,7 +296,10 @@ export async function createTask(columnId: string, taskData: Task): Promise<void
 
 // ----------------------------------------------------------------------
 
-export async function updateTask(columnId: string, taskData: Task): Promise<void> {
+export async function updateTask(
+  columnId: string,
+  taskData: Task,
+): Promise<void> {
   /**
    * Work on server
    */
@@ -320,7 +343,9 @@ export async function updateTask(columnId: string, taskData: Task): Promise<void
 
 // ----------------------------------------------------------------------
 
-export async function moveTask(updateTasks: Record<string, Task[]>): Promise<void> {
+export async function moveTask(
+  updateTasks: Record<string, Task[]>,
+): Promise<void> {
   /**
    * Work in local
    */
@@ -351,7 +376,10 @@ export async function moveTask(updateTasks: Record<string, Task[]>): Promise<voi
 
 // ----------------------------------------------------------------------
 
-export async function deleteTask(columnId: string, taskId: string): Promise<void> {
+export async function deleteTask(
+  columnId: string,
+  taskId: string,
+): Promise<void> {
   /**
    * Work on server
    */
@@ -374,7 +402,9 @@ export async function deleteTask(columnId: string, taskId: string): Promise<void
       // delete task in column
       const tasks = {
         ...board.tasks,
-        [columnId]: (board.tasks[columnId] ?? []).filter((task) => task.id !== taskId),
+        [columnId]: (board.tasks[columnId] ?? []).filter(
+          (task) => task.id !== taskId,
+        ),
       };
 
       return { ...currentData, board: { ...board, tasks } } as BoardResponse;

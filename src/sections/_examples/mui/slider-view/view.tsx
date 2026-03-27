@@ -1,16 +1,12 @@
 "use client";
 
 import { useState } from "react";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Slider, { sliderClasses } from "@mui/material/Slider";
-
 import { paths } from "src/routes/paths";
-
 import { varAlpha } from "src/theme/styles";
-
 import { Iconify } from "src/components/iconify";
+import Slider, { sliderClasses } from "@mui/material/Slider";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { ComponentHero } from "../../component-hero";

@@ -1,17 +1,15 @@
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
+import { Logo } from "src/components/logo";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-
-import { paths } from "src/routes/paths";
 import { RouterLink } from "src/routes/components";
-
-import { Logo } from "src/components/logo";
 import { SocialIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------

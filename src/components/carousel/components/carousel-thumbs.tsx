@@ -1,10 +1,8 @@
-import { Children, forwardRef, isValidElement } from "react";
-
 import Box from "@mui/material/Box";
+import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
-
-import { varAlpha } from "src/theme/styles";
+import { Children, forwardRef, isValidElement } from "react";
 
 import { carouselClasses } from "../classes";
 import { CarouselSlide } from "./carousel-slide";

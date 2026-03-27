@@ -1,15 +1,13 @@
 import { useState } from "react";
-
 import Box from "@mui/material/Box";
 import Step from "@mui/material/Step";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Stepper from "@mui/material/Stepper";
+import { varAlpha } from "src/theme/styles";
 import StepLabel from "@mui/material/StepLabel";
 import Typography from "@mui/material/Typography";
 import StepContent from "@mui/material/StepContent";
-
-import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 

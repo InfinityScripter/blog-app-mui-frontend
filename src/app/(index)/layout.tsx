@@ -1,8 +1,7 @@
-import { MainLayout } from "src/layouts/main";
-
-import { AuthProvider } from "src/auth/context/jwt";
-
 import type { ReactNode } from "react";
+
+import { MainLayout } from "src/layouts/main";
+import { AuthProvider } from "src/auth/context/jwt";
 
 // ----------------------------------------------------------------------
 

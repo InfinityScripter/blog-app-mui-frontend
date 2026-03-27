@@ -1,9 +1,7 @@
 "use client";
 
-import Button from "@mui/material/Button";
-
 import { paths } from "src/routes/paths";
-
+import Button from "@mui/material/Button";
 import { toast } from "src/components/snackbar";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 

@@ -1,8 +1,7 @@
 import Box from "@mui/material/Box";
+import { CONFIG } from "src/config-global";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
-
-import { CONFIG } from "src/config-global";
 import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------

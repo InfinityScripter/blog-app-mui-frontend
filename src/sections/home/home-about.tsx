@@ -1,12 +1,10 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-
 import { varFade, MotionViewport } from "src/components/animate";
 
 // ----------------------------------------------------------------------

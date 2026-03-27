@@ -1,20 +1,16 @@
 "use client";
 
 import { useState } from "react";
-
+import { _mock } from "src/_mock";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Switch from "@mui/material/Switch";
+import { Image } from "src/components/image";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
-import { paths } from "src/routes/paths";
-
-import { _mock } from "src/_mock";
-
-import { Image } from "src/components/image";
 import { Lightbox, useLightBox } from "src/components/lightbox";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 

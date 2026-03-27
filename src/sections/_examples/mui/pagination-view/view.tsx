@@ -1,12 +1,9 @@
 "use client";
 
+import { paths } from "src/routes/paths";
 import { useState, useCallback } from "react";
-
 import Pagination from "@mui/material/Pagination";
 import TablePagination from "@mui/material/TablePagination";
-
-import { paths } from "src/routes/paths";
-
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { PaginationItems } from "./pagination-items";

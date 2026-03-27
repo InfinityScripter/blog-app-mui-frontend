@@ -1,7 +1,5 @@
 import { useTheme } from "@mui/material/styles";
-
 import { fData } from "src/utils/format-number";
-
 import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------

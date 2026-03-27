@@ -1,18 +1,14 @@
 import { m } from "framer-motion";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
+import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
-
-import { paths } from "src/routes/paths";
-
-import { CONFIG } from "src/config-global";
-import { varAlpha, textGradient } from "src/theme/styles";
-
 import { Iconify } from "src/components/iconify";
 import { SvgColor } from "src/components/svg-color";
+import { varAlpha, textGradient } from "src/theme/styles";
 import { varFade, MotionViewport } from "src/components/animate";
 
 import { FloatLine, FloatPlusIcon } from "./components/svg-elements";

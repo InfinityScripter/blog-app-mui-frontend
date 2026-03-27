@@ -1,15 +1,11 @@
 "use client";
 
 import { Fragment } from "react";
-
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Paper from "@mui/material/Paper";
-
 import { paths } from "src/routes/paths";
-
 import { useTabs } from "src/hooks/use-tabs";
-
 import { Iconify } from "src/components/iconify";
 import { CustomTabs } from "src/components/custom-tabs";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";

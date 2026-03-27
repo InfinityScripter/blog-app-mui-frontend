@@ -1,17 +1,14 @@
 import { z as zod } from "zod";
+import Stack from "@mui/material/Stack";
+import Alert from "@mui/material/Alert";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
 import LoadingButton from "@mui/lab/LoadingButton";
-
-import { addComment, getCurrentUser } from "src/actions/blog-ssr";
 import { STORAGE_KEY } from "src/auth/context/jwt";
-
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
+import { addComment, getCurrentUser } from "src/actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
@@ -60,7 +57,10 @@ export function PostCommentForm({
         setCurrentUser(response.user);
         // eslint-disable-next-line no-shadow
       } catch (error) {
-        if (error instanceof Error && error.message === "Authorization token missing") {
+        if (
+          error instanceof Error &&
+          error.message === "Authorization token missing"
+        ) {
           return;
         }
 

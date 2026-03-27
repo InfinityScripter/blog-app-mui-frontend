@@ -1,9 +1,8 @@
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Switch from "@mui/material/Switch";
-import Typography from "@mui/material/Typography";
-
 import { fDate } from "src/utils/format-time";
+import Typography from "@mui/material/Typography";
 
 import { StyledControlPanel } from "../styles";
 

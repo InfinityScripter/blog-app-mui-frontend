@@ -1,10 +1,8 @@
 import { forwardRef } from "react";
-
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-
 import { usePathname } from "src/routes/hooks";
+import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { removeLastSlash } from "src/routes/utils";
 
