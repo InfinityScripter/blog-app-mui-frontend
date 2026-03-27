@@ -18,7 +18,7 @@ export function createShadowColor(colorChannel: string): string {
   return `0 8px 16px 0 ${varAlpha(colorChannel, 0.24)}`;
 }
 
-interface CustomShadows {
+export interface CustomShadows {
   z1: string;
   z4: string;
   z8: string;

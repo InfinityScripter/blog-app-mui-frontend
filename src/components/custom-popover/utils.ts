@@ -1,5 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
 import type { PopoverOrigin } from "@mui/material/Popover";
-import type { Theme, SystemStyleObject } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ export type ArrowPlacement =
   | "right-bottom";
 
 interface AnchorOriginResult {
-  paperStyles?: SystemStyleObject<Theme>;
+  paperStyles?: SxProps<Theme>;
   anchorOrigin: PopoverOrigin;
   transformOrigin: PopoverOrigin;
 }

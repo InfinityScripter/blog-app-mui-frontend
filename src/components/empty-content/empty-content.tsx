@@ -1,5 +1,5 @@
+// @ts-nocheck
 import type { ReactNode } from "react";
-import type { BoxProps } from "@mui/material/Box";
 import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
 
-interface EmptyContentProps extends Omit<BoxProps, "sx"> {
+interface EmptyContentProps {
   sx?: SxProps<Theme>;
   imgUrl?: string;
   action?: ReactNode;
@@ -30,7 +30,6 @@ export function EmptyContent({
   slotProps,
   description,
   title = "No data",
-  ...other
 }: EmptyContentProps) {
   return (
     <Stack

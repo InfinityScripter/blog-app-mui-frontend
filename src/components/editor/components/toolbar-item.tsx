@@ -1,9 +1,35 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+import type {
+  ReactNode,
+  ElementType,
+  MouseEvent as ReactMouseEvent,
+} from "react";
+
 import SvgIcon from "@mui/material/SvgIcon";
 import ButtonBase from "@mui/material/ButtonBase";
 
 // ----------------------------------------------------------------------
 
-export function ToolbarItem({ sx, icon, label, active, disabled, ...other }) {
+interface ToolbarItemProps {
+  sx?: SxProps<Theme>;
+  icon?: ReactNode;
+  label?: ReactNode;
+  active?: boolean;
+  disabled?: boolean;
+  component?: ElementType;
+  className?: string;
+  onClick?: (event: ReactMouseEvent) => void;
+}
+
+export function ToolbarItem({
+  sx,
+  icon,
+  label,
+  active,
+  disabled,
+  component,
+  ...other
+}: ToolbarItemProps) {
   return (
     <ButtonBase
       sx={{

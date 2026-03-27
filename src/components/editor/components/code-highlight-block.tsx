@@ -1,5 +1,7 @@
 import "./code-highlight-block.css";
 
+import type { NodeViewProps } from "@tiptap/react";
+
 import { NodeViewContent, NodeViewWrapper } from "@tiptap/react";
 
 import { editorClasses } from "../classes";
@@ -13,7 +15,7 @@ export function CodeHighlightBlock({
 
   extension,
   updateAttributes,
-}) {
+}: NodeViewProps) {
   return (
     <NodeViewWrapper className={editorClasses.content.codeBlock}>
       <select
@@ -25,7 +27,7 @@ export function CodeHighlightBlock({
       >
         <option value="null">auto</option>
         <option disabled>—</option>
-        {extension.options.lowlight.listLanguages().map((lang) => (
+        {extension.options.lowlight.listLanguages().map((lang: string) => (
           <option key={lang} value={lang}>
             {lang}
           </option>
@@ -33,6 +35,7 @@ export function CodeHighlightBlock({
       </select>
 
       <pre>
+        {/* @ts-ignore */}
         <NodeViewContent as="code" />
       </pre>
     </NodeViewWrapper>

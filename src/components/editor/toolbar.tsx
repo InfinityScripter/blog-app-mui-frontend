@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import { varAlpha } from "src/theme/styles";

@@ -1,3 +1,6 @@
+import type { MouseEvent } from "react";
+import type { Editor } from "@tiptap/react";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
@@ -10,12 +13,16 @@ import { ToolbarItem } from "./toolbar-item";
 
 // ----------------------------------------------------------------------
 
-export function LinkBlock({ editor }) {
+interface LinkBlockProps {
+  editor: Editor;
+}
+
+export function LinkBlock({ editor }: LinkBlockProps) {
   const [url, setUrl] = useState("");
 
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
-  const handleOpenPopover = (event) => {
+  const handleOpenPopover = (event: MouseEvent) => {
     const previousUrl = editor?.getAttributes("link").href;
 
     setAnchorEl(event.currentTarget);

@@ -1,3 +1,6 @@
+import type { MouseEvent } from "react";
+import type { Editor } from "@tiptap/react";
+
 import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import { varAlpha } from "src/theme/styles";
@@ -18,10 +21,14 @@ const HEADING_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export function HeadingBlock({ editor }) {
-  const [anchorEl, setAnchorEl] = useState(null);
+interface HeadingBlockProps {
+  editor: Editor;
+}
 
-  const handleClick = (event) => {
+export function HeadingBlock({ editor }: HeadingBlockProps) {
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+
+  const handleClick = (event: MouseEvent) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -50,7 +57,7 @@ export function HeadingBlock({ editor }) {
           typography: "body2",
           justifyContent: "space-between",
           border: (theme) =>
-            `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.2)}`,
+            `solid 1px ${varAlpha((theme.vars?.palette.grey as Record<string, string> | undefined)?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171", 0.2)}`,
         }}
       >
         {(editor.isActive("heading", { level: 1 }) && "Heading 1") ||
@@ -109,7 +116,7 @@ export function HeadingBlock({ editor }) {
         />
 
         {HEADING_OPTIONS.map((heading, index) => {
-          const level = index + 1;
+          const level = (index + 1) as 1 | 2 | 3 | 4 | 5 | 6;
 
           return (
             <ToolbarItem
