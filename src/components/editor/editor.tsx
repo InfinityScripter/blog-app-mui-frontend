@@ -1,3 +1,5 @@
+"use client";
+
 import { common, createLowlight } from "lowlight";
 import LinkExtension from "@tiptap/extension-link";
 import ImageExtension from "@tiptap/extension-image";
@@ -46,6 +48,7 @@ export const Editor = forwardRef(
     const lowlight = createLowlight(common);
 
     const editor = useEditor({
+      immediatelyRender: false,
       content,
       editable,
       extensions: [

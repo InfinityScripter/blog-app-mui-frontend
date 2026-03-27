@@ -9,6 +9,7 @@ import Alert from "@mui/material/Alert";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 import { addComment, getCurrentUser } from "src/actions/blog-ssr";
+import { STORAGE_KEY } from "src/auth/context/jwt";
 
 import { Form, Field } from "src/components/hook-form";
 
@@ -48,15 +49,25 @@ export function PostCommentForm({
 
   useEffect(() => {
     const fetchUser = async () => {
+      const accessToken = sessionStorage.getItem(STORAGE_KEY);
+
+      if (!accessToken) {
+        return;
+      }
+
       try {
-        const user = await getCurrentUser();
-        setCurrentUser(user);
+        const response = await getCurrentUser();
+        setCurrentUser(response.user);
         // eslint-disable-next-line no-shadow
       } catch (error) {
+        if (error instanceof Error && error.message === "Authorization token missing") {
+          return;
+        }
+
         console.error("Failed to fetch user:", error);
-        setError("Пожалуйста, войдите чтобы оставить комментарий");
       }
     };
+
     fetchUser();
   }, []);
 

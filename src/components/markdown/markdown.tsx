@@ -1,6 +1,7 @@
 import "./code-highlight-block.css";
 
 import { useMemo } from "react";
+import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
@@ -27,17 +28,21 @@ export function Markdown({ children, sx, ...other }) {
 
   return (
     <StyledRoot
-      children={content}
-      components={components}
-      rehypePlugins={rehypePlugins}
-      /* base64-encoded images
-       * https://github.com/remarkjs/react-markdown/issues/774
-       * urlTransform={(value: string) => value}
-       */
       className={markdownClasses.root}
       sx={sx}
       {...other}
-    />
+    >
+      <ReactMarkdown
+        components={components}
+        rehypePlugins={rehypePlugins}
+        /* base64-encoded images
+         * https://github.com/remarkjs/react-markdown/issues/774
+         * urlTransform={(value: string) => value}
+         */
+      >
+        {content}
+      </ReactMarkdown>
+    </StyledRoot>
   );
 }
 

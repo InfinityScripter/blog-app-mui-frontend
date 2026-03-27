@@ -1,8 +1,6 @@
 import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 
-import { useResponsive } from "src/hooks/use-responsive";
-
 // ----------------------------------------------------------------------
 
 export function PostItemSkeleton({
@@ -11,8 +9,6 @@ export function PostItemSkeleton({
   variant = "vertical",
   ...other
 }) {
-  const smUp = useResponsive("up", "sm");
-
   if (variant === "horizontal") {
     return [...Array(amount)].map((_, index) => (
       <Stack
@@ -41,11 +37,17 @@ export function PostItemSkeleton({
           <Skeleton sx={{ width: `calc(100% - 80px)`, height: 10 }} />
         </Stack>
 
-        {smUp && (
-          <Stack sx={{ p: 1 }}>
+        <Stack
+          sx={{
+            p: 1,
+            display: {
+              xs: "none",
+              sm: "flex",
+            },
+          }}
+        >
             <Skeleton sx={{ width: 170, height: 240, flexShrink: 0 }} />
-          </Stack>
-        )}
+        </Stack>
       </Stack>
     ));
   }

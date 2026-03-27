@@ -3,6 +3,16 @@ import { CONFIG } from "src/config-global";
 export function formatImageUrl(url: string | null | undefined): string {
   if (!url) return "";
 
+  const assetBaseUrl = CONFIG.site.assetURL || CONFIG.site.serverUrl;
+
+  if (url.startsWith("http://localhost:4444/")) {
+    return url.replace("http://localhost:4444", assetBaseUrl);
+  }
+
+  if (url.startsWith("https://localhost:4444/")) {
+    return url.replace("https://localhost:4444", assetBaseUrl);
+  }
+
   // Если URL уже абсолютный (начинается с http:// или https://)
   if (url.startsWith("http://") || url.startsWith("https://")) {
     return url;
@@ -11,6 +21,10 @@ export function formatImageUrl(url: string | null | undefined): string {
   // Если URL начинается с /uploads/
   if (url.startsWith("/uploads/")) {
     return `${CONFIG.site.serverUrl}${url}`;
+  }
+
+  if (url.startsWith("/assets/")) {
+    return `${assetBaseUrl}${url}`;
   }
 
   // Для других относительных URL
