@@ -79,7 +79,7 @@ export function CenteredResetPasswordView() {
         <Typography variant="h5">Забыли пароль?</Typography>
 
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {`Пожалуйста, введите email-адрес, связанный с вашей учетной записью, и мы отправим вам ссылку для сброса пароля.`}
+          Пожалуйста, введите email-адрес, связанный с вашей учетной записью, и мы отправим вам ссылку для сброса пароля.
         </Typography>
       </Stack>
     </>
