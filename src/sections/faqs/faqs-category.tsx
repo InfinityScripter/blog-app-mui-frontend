@@ -15,32 +15,32 @@ import ListItemButton from "@mui/material/ListItemButton";
 
 const CATEGORIES = [
   {
-    label: "Managing your account",
+    label: "Управление аккаунтом",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-account.svg`,
     href: "#",
   },
   {
-    label: "Payment",
+    label: "Оплата",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-payment.svg`,
     href: "#",
   },
   {
-    label: "Delivery",
+    label: "Доставка",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-delivery.svg`,
     href: "#",
   },
   {
-    label: "Problem with the product",
+    label: "Проблема с продуктом",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-package.svg`,
     href: "#",
   },
   {
-    label: "Return & refund",
+    label: "Возврат и компенсация",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-refund.svg`,
     href: "#",
   },
   {
-    label: "Guarantees and assurances",
+    label: "Гарантии и условия",
     icon: `${CONFIG.site.basePath}/assets/icons/faqs/ic-assurances.svg`,
     href: "#",
   },
@@ -68,7 +68,7 @@ export function FaqsCategory() {
           startIcon={<Iconify icon="solar:list-bold" />}
           onClick={nav.onTrue}
         >
-          Categories
+          Категории
         </Button>
       </Box>
 

@@ -134,7 +134,7 @@ export function HeaderBase({
                   color="inherit"
                   sx={{ typography: "subtitle2" }}
                 >
-                  Need help?
+                  Нужна помощь?
                 </Link>
               )}
 

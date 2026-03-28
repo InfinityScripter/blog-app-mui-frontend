@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
@@ -8,23 +9,47 @@ import Typography from "@mui/material/Typography";
 export function FaqsForm() {
   return (
     <div>
-      <Typography variant="h4">{`Haven't found the right help?`}</Typography>
+      <Typography variant="h4">Не нашли нужный ответ?</Typography>
 
-      <Box gap={3} display="flex" flexDirection="column" sx={{ my: 5 }}>
-        <TextField fullWidth label="Name" />
-        <TextField fullWidth label="Email" />
-        <TextField fullWidth label="Subject" />
-        <TextField
-          fullWidth
-          label="Enter your message here."
-          multiline
-          rows={4}
-        />
-      </Box>
+      <Typography sx={{ mt: 2, mb: 4, color: "text.secondary" }}>
+        Напишите напрямую в соцсети — так быстрее обсудим задачу и контекст.
+      </Typography>
 
-      <Button size="large" variant="contained">
-        Submit
-      </Button>
+      <Stack spacing={2}>
+        <Button
+          size="large"
+          variant="contained"
+          color="primary"
+          href="https://t.me/sh0ny/"
+          target="_blank"
+          rel="noopener"
+          startIcon={<Iconify icon="ri:telegram-fill" />}
+        >
+          Написать в Telegram
+        </Button>
+
+        <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" gap={1.5}>
+          <Button
+            variant="outlined"
+            href="https://github.com/InfinityScripter"
+            target="_blank"
+            rel="noopener"
+            startIcon={<Iconify icon="akar-icons:github-fill" />}
+          >
+            GitHub
+          </Button>
+
+          <Button
+            variant="outlined"
+            href="https://vk.com/sh0ny"
+            target="_blank"
+            rel="noopener"
+            startIcon={<Iconify icon="ri:vk-fill" />}
+          >
+            VK
+          </Button>
+        </Box>
+      </Stack>
     </div>
   );
 }

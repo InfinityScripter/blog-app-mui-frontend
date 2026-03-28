@@ -33,6 +33,7 @@ export function createTheme(settings: SettingsState): Theme {
       ...typography,
       fontFamily: setFont(settings.fontFamily),
     },
+    colorSchemeSelector: "class",
     cssVarPrefix: "",
     shouldSkipGeneratingVar,
   };

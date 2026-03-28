@@ -1,8 +1,10 @@
+import type { ExperienceItem } from "src/sections/home/home-experience/types";
+
+import dayjs from "dayjs";
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import Paper from "@mui/material/Paper";
 import Timeline from "@mui/lab/Timeline";
 import Avatar from "@mui/material/Avatar";
 import TimelineDot from "@mui/lab/TimelineDot";
@@ -15,95 +17,48 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import { varFade, MotionViewport } from "src/components/animate";
+import { EXPERIENCE } from "src/sections/home/home-experience/const";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 // ----------------------------------------------------------------------
 
-const EXPERIENCE = [
-  {
-    position: "IT Systems Implementation Specialist",
-    company: "Газпром",
-    location: "Санкт-Петербург",
-    period: "Март 2016 — Сентябрь 2022",
-    description: [
-      "Внедрение и настройка корпоративных IT-систем",
-      "Интеграция систем документооборота",
-      "Обучение персонала работе с новыми IT-решениями",
-      "Оптимизация бизнес-процессов с использованием IT-инструментов",
-    ],
-    technologies:
-      "SAP, 1C, Microsoft SharePoint, SQL, Business Intelligence tools",
-    logo: "/assets/icons/experience/gazprom.svg",
-    link: "https://pererabotka.gazprom.ru",
-  },
-  {
-    position: "Frontend Developer (React, TS)",
-    company: "QCup",
-    location: "Санкт-Петербург",
-    period: "Ноябрь 2022 — Май 2023",
-    description: [
-      "Проработка архитектуры приложения с нуля",
-      "Разработка клиент-серверных взаимодействий",
-      "Реализация приложения в рамках трёхуровневой архитектуры UI-BLL-DAL",
-      "Обработка ошибок и внедрение прелоадеров для улучшения UX",
-    ],
-    technologies:
-      "JavaScript, TypeScript, React, MUI UI, Git, HTML, CSS, Figma, REST API",
-    logo: "/assets/icons/experience/qcup.svg",
-    link: "https://github.com/InfinityScripter",
-  },
-  {
-    position: "Frontend Developer (JS)",
-    company: "Яндекс",
-    location: "Санкт-Петербург",
-    period: "Май 2023 — Октябрь 2023",
-    description: [
-      "Оптимизация UI-документации для Userver, ведущего C++ фреймворка",
-      "Улучшение документации и кодовой базы",
-      "Перевод на новый UI-кит",
-    ],
-    technologies: "JavaScript, Git, HTML, CSS, Figma, jQuery",
-    logo: "/assets/icons/experience/yandex.png",
-    link: "https://userver.tech",
-  },
-  {
-    position: "Frontend Developer (React, JS)",
-    company: "ShurikMarket",
-    location: "Санкт-Петербург",
-    period: "Октябрь 2023 — Май 2024",
-    description: [
-      "Ускорение первичной загрузки страницы сайта",
-      "Разработка новых сервисов (новости, сертификаты, обратная связь, избранные товары)",
-      "Разработка и внедрение функционала регистрации и авторизации пользователей",
-      "Вёрстка нового лендинга по макетам Pixel Perfect",
-      "Внедрение внутреннего UI kit",
-    ],
-    technologies:
-      "JavaScript, TypeScript, React JS, Next.js, Material UI, Git, HTML, CSS, Figma, Webpack, PHP, Twig, Symfony",
-    logo: "/assets/icons/experience/shurikmarket.ico",
-    link: "https://shurik.market",
-  },
-  {
-    position: "Frontend Developer (Angular, TS)",
-    company: "СТОМПЛАН",
-    location: "Москва",
-    period: "Май 2024 — настоящее время",
-    description: [
-      "Разработка мастера презентаций с возможностью выгрузки в PDF",
-      "Подготовка проекта к переходу на Angular",
-      "Внедрение новых интерактивных блоков",
-      "Успешный старт и запуск продукта в MVP",
-    ],
-    technologies:
-      "JavaScript, TypeScript, Angular, Git, HTML, CSS, Figma, Webpack, REST API",
-    logo: "/assets/icons/experience/stomplan.ico",
-    link: "https://stomplan.ru",
-  },
-];
+const DATE_FORMAT = "MMMM YYYY";
+const CURRENT_PERIOD_LABEL = "настоящее время";
+
+const formatPeriodDate = (value: string) =>
+  dayjs(value).locale("ru").format(DATE_FORMAT);
+
+const getPeriodLabel = (item: ExperienceItem) => {
+  const startLabel = formatPeriodDate(item.startDate);
+
+  if (!item.endDate) {
+    return `${startLabel} — ${CURRENT_PERIOD_LABEL}`;
+  }
+
+  return `${startLabel} — ${formatPeriodDate(item.endDate)}`;
+};
+
+const getSortedExperience = () =>
+  [...EXPERIENCE].sort(
+    (a, b) => dayjs(b.startDate).valueOf() - dayjs(a.startDate).valueOf(),
+  );
 
 export function HomeExperience() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isDarkMode = theme.palette.mode === "dark";
+  const cardBorderColor = isDarkMode
+    ? alpha(theme.palette.common.white, 0.34)
+    : alpha(theme.palette.common.black, 0.22);
+  const cardTitleColor = isDarkMode
+    ? "rgba(255, 255, 255, 0.96)"
+    : "text.primary";
+  const cardBodyColor = isDarkMode
+    ? "rgba(255, 255, 255, 0.84)"
+    : "text.primary";
+  const cardMetaColor = isDarkMode
+    ? "rgba(255, 255, 255, 0.72)"
+    : "text.secondary";
 
   return (
     <Container
@@ -143,11 +98,7 @@ export function HomeExperience() {
           px: { xs: 0, sm: 2 },
         }}
       >
-        {EXPERIENCE.sort(
-          (a, b) =>
-            new Date(b.period.split(" — ")[0]) -
-            new Date(a.period.split(" — ")[0]),
-        ).map((item, index) => (
+        {getSortedExperience().map((item, index) => (
           <TimelineItem key={index}>
             <TimelineOppositeContent
               sx={{
@@ -158,9 +109,16 @@ export function HomeExperience() {
             >
               <m.div variants={varFade().inLeft}>
                 <Typography variant="subtitle1" color="text.primary">
-                  {item.period}
+                  {getPeriodLabel(item)}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  sx={{
+                    color: isDarkMode
+                      ? "rgba(255, 255, 255, 0.76)"
+                      : "text.secondary",
+                  }}
+                >
                   {item.location}
                 </Typography>
               </m.div>
@@ -199,26 +157,42 @@ export function HomeExperience() {
                   target="_blank"
                   rel="noopener"
                   underline="none"
+                  color="inherit"
                   sx={{
                     "&:hover": {
-                      "& .MuiPaper-root": {
-                        boxShadow: theme.customShadows.z24,
-                        transition: theme.transitions.create("box-shadow", {
-                          duration: theme.transitions.duration.shorter,
-                        }),
+                      "& .experience-card": {
+                        borderColor: isDarkMode
+                          ? alpha(theme.palette.common.white, 0.62)
+                          : alpha(theme.palette.primary.main, 0.6),
+                        backgroundColor: isDarkMode
+                          ? alpha(theme.palette.common.white, 0.03)
+                          : alpha(theme.palette.common.black, 0.02),
+                        transition: theme.transitions.create(
+                          ["border-color", "background-color"],
+                          {
+                            duration: theme.transitions.duration.shorter,
+                          },
+                        ),
                       },
                     },
                   }}
                 >
-                  <Paper
+                  <Box
+                    className="experience-card"
                     sx={{
                       p: { xs: 2, sm: 3 },
-                      bgcolor: alpha(theme.palette.background.neutral, 0.8),
+                      color: cardBodyColor,
+                      bgcolor: "transparent",
                       borderRadius: 2,
-                      boxShadow: theme.customShadows.z1,
+                      border: `1px solid ${cardBorderColor}`,
                     }}
                   >
-                    <Typography variant="h6" component="div" gutterBottom>
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      gutterBottom
+                      sx={{ color: cardTitleColor }}
+                    >
                       {item.position}
                     </Typography>
                     <Typography
@@ -233,10 +207,9 @@ export function HomeExperience() {
                     {isMobile && (
                       <Typography
                         variant="body2"
-                        color="text.secondary"
-                        sx={{ mb: 1 }}
+                        sx={{ mb: 1, color: cardMetaColor }}
                       >
-                        {item.period} • {item.location}
+                        {getPeriodLabel(item)} • {item.location}
                       </Typography>
                     )}
 
@@ -246,8 +219,7 @@ export function HomeExperience() {
                           key={i}
                           component="li"
                           variant="body2"
-                          color="text.secondary"
-                          sx={{ mb: 0.5 }}
+                          sx={{ mb: 0.5, color: cardBodyColor }}
                         >
                           {desc}
                         </Typography>
@@ -255,15 +227,15 @@ export function HomeExperience() {
                     </Box>
                     <Typography
                       variant="caption"
-                      color="text.secondary"
                       sx={{
                         display: "block",
                         fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                        color: cardMetaColor,
                       }}
                     >
                       <strong>Технологии:</strong> {item.technologies}
                     </Typography>
-                  </Paper>
+                  </Box>
                 </Link>
               </m.div>
             </TimelineContent>

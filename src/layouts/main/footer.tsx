@@ -16,18 +16,18 @@ import { SocialIcon } from "src/components/iconify";
 
 const LINKS = [
   {
-    headline: "Product",
-    children: [{ name: "FAQs", href: paths.faqs }],
+    headline: "Разделы",
+    children: [{ name: "Вопросы и ответы", href: paths.faqs }],
   },
   {
-    headline: "Legal",
+    headline: "Документы",
     children: [
-      { name: "Terms and condition", href: "#" },
-      { name: "Privacy policy", href: "#" },
+      { name: "Условия использования", href: "#" },
+      { name: "Политика конфиденциальности", href: "#" },
     ],
   },
   {
-    headline: "Contact",
+    headline: "Контакты",
     children: [
       {
         name: "talalaev.misha@gmail.com",
@@ -101,8 +101,8 @@ export function Footer({ layoutQuery, sx }) {
                 [theme.breakpoints.up(layoutQuery)]: { mx: "unset" },
               }}
             >
-              Hello from my portfolio project, please contact me if you have any
-              questions
+              Блог и портфолио по frontend-разработке. Для связи удобнее всего
+              использовать соцсети ниже.
             </Typography>
 
             <Stack
@@ -196,7 +196,7 @@ export function HomeFooter({ sx }) {
         <Logo />
         <Box sx={{ mt: 1, typography: "caption" }}>
           © All rights reserved.
-          <br /> made by
+          <br /> сделано
           <Link href="https://t.me/sh0ny/"> Mikhail Talalaev </Link>
         </Box>
       </Container>

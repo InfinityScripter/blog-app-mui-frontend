@@ -1,11 +1,12 @@
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { varFade, MotionViewport } from "src/components/animate";
+
+import { ABOUT_TITLE, ABOUT_PROFILE, ABOUT_PARAGRAPHS } from "./const";
 
 // ----------------------------------------------------------------------
 
@@ -19,23 +20,30 @@ export function HomeAbout() {
         py: { xs: 5, md: 10 },
       }}
     >
-      <Grid container spacing={3} alignItems="center">
+      <Box
+        sx={{
+          gap: 3,
+          display: "grid",
+          alignItems: "center",
+          gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
+        }}
+      >
         {/* Left side - Image */}
-        <Grid xs={12} md={6}>
+        <Box>
           <m.div variants={varFade().inUp}>
             <Card
               sx={{
                 p: 2,
                 borderRadius: 2,
-                boxShadow: theme.customShadows.z24,
+                boxShadow: theme.shadows[24],
                 position: "relative",
                 overflow: "hidden",
               }}
             >
               <Box
                 component="img"
-                src="/assets/images/about/developer.webp"
-                alt="Developer"
+                src={ABOUT_PROFILE.imageSrc}
+                alt={ABOUT_PROFILE.imageAlt}
                 loading="lazy"
                 sx={{
                   width: "100%",
@@ -58,20 +66,20 @@ export function HomeAbout() {
                   backdropFilter: "blur(8px)",
                 }}
               >
-                <Typography variant="h5">Михаил Талалаев</Typography>
+                <Typography variant="h5">{ABOUT_PROFILE.name}</Typography>
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  Web developer
+                  {ABOUT_PROFILE.role}
                 </Typography>
               </Box>
             </Card>
           </m.div>
-        </Grid>
+        </Box>
 
         {/* Right side - Content */}
-        <Grid xs={12} md={6}>
+        <Box>
           <m.div variants={varFade().inUp}>
             <Typography variant="h2" sx={{ mb: 3 }}>
-              Обо мне
+              {ABOUT_TITLE}
             </Typography>
 
             <Typography
@@ -81,10 +89,7 @@ export function HomeAbout() {
                 typography: "body1",
               }}
             >
-              Опытный Frontend разработчик с более чем 13-летним опытом работы в
-              IT и нефтегазовой отрасли. Специализируюсь на создании современных
-              веб-интерфейсов с использованием React, Angular, TypeScript и
-              других современных технологий.
+              {ABOUT_PARAGRAPHS[0]}
             </Typography>
 
             <Typography
@@ -94,10 +99,7 @@ export function HomeAbout() {
                 typography: "body1",
               }}
             >
-              Имею опыт работы в таких компаниях как Яндекс, СТОМПЛАН,
-              ShurikMarket и QCup, где успешно разрабатывал и оптимизировал
-              веб-приложения, внедрял новые функциональности и улучшал
-              пользовательский опыт.
+              {ABOUT_PARAGRAPHS[1]}
             </Typography>
 
             <Typography
@@ -107,13 +109,11 @@ export function HomeAbout() {
                 typography: "body1",
               }}
             >
-              Готов решать сложные задачи, выходящие за рамки текущей
-              специализации, и развиваться в направлении, где смогу принести
-              максимальную пользу вашему бизнесу.
+              {ABOUT_PARAGRAPHS[2]}
             </Typography>
           </m.div>
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </Container>
   );
 }

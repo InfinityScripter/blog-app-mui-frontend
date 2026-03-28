@@ -1,15 +1,7 @@
-// ----------------------------------------------------------------------
-
-import { _id, _postTitles } from "src/_mock/assets";
-
 const ROOTS = {
   AUTH: "/auth",
   DASHBOARD: "/dashboard",
 } as const;
-
-const MOCK_ID = _id[1];
-
-const MOCK_TITLE = _postTitles[2];
 
 // ----------------------------------------------------------------------
 
