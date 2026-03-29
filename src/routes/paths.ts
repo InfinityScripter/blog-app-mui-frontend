@@ -35,6 +35,7 @@ interface Paths {
     resetPassword: string;
     updatePassword: string;
     verify: string;
+    success: string;
   };
   dashboard: {
     root: string;
@@ -86,6 +87,7 @@ export const paths: Paths = {
     resetPassword: `${ROOTS.AUTH}/reset-password`,
     updatePassword: `${ROOTS.AUTH}/update-password`,
     verify: `${ROOTS.AUTH}/verify`,
+    success: `${ROOTS.AUTH}/success`,
   },
   // DASHBOARD
   dashboard: {

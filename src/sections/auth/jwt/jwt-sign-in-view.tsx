@@ -6,8 +6,9 @@ import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
-import { useRouter } from "src/routes/hooks";
+import Divider from "@mui/material/Divider";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
@@ -18,17 +19,19 @@ import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
 import InputAdornment from "@mui/material/InputAdornment";
-import { signInWithPassword } from "src/auth/context/jwt";
+import { useRouter, useSearchParams } from "src/routes/hooks";
+import {
+  signInWithGoogle,
+  signInWithYandex,
+  signInWithPassword,
+} from "src/auth/context/jwt";
 
 // ----------------------------------------------------------------------
 
 export const SignInSchema = zod.object({
-  email: zod
-    .string()
-    .min(1, { message: "Email обязателен!" })
-    .email({
-      message: "Email должен быть действительным адресом электронной почты!",
-    }),
+  email: zod.string().min(1, { message: "Email обязателен!" }).email({
+    message: "Email должен быть действительным адресом электронной почты!",
+  }),
   password: zod
     .string()
     .min(1, { message: "Пароль обязателен!" })
@@ -39,10 +42,12 @@ export const SignInSchema = zod.object({
 
 export function JwtSignInView() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const { checkUserSession } = useAuthContext();
 
   const [errorMsg, setErrorMsg] = useState("");
+  const oauthError = searchParams.get("oauthError");
 
   const password = useBoolean();
 
@@ -153,6 +158,43 @@ export function JwtSignInView() {
     </Stack>
   );
 
+  const renderSocialSignIn = (
+    <>
+      <Divider
+        sx={{
+          my: 3,
+          typography: "overline",
+          color: "text.disabled",
+          "&::before, :after": { borderTopStyle: "dashed" },
+        }}
+      >
+        ИЛИ
+      </Divider>
+
+      <Stack spacing={1.5}>
+        <Button
+          fullWidth
+          size="large"
+          variant="outlined"
+          startIcon={<Iconify icon="flat-color-icons:google" />}
+          onClick={signInWithGoogle}
+        >
+          Войти через Google
+        </Button>
+
+        <Button
+          fullWidth
+          size="large"
+          variant="outlined"
+          startIcon={<Iconify icon="simple-icons:yandex" />}
+          onClick={signInWithYandex}
+        >
+          Войти через Yandex ID
+        </Button>
+      </Stack>
+    </>
+  );
+
   return (
     <>
       {renderHead}
@@ -169,9 +211,17 @@ export function JwtSignInView() {
         </Alert>
       )}
 
+      {!!oauthError && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          Не удалось выполнить OAuth-вход. Попробуйте ещё раз.
+        </Alert>
+      )}
+
       <Form methods={methods} onSubmit={onSubmit}>
         {renderForm}
       </Form>
+
+      {renderSocialSignIn}
     </>
   );
 }

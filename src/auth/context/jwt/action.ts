@@ -2,10 +2,10 @@
 
 import type { AccessTokenResponse } from "src/types/auth";
 
+import { CONFIG } from "src/config-global";
 import axios, { endpoints } from "src/utils/axios";
 
 import { setSession } from "./utils";
-import { STORAGE_KEY } from "./constant";
 
 // ----------------------------------------------------------------------
 
@@ -51,6 +51,10 @@ interface SignUpParams {
   lastName: string;
 }
 
+interface SignUpResponse {
+  message: string;
+}
+
 /** **************************************
  * Sign up
  *************************************** */
@@ -59,7 +63,7 @@ export const signUp = async ({
   password,
   firstName,
   lastName,
-}: SignUpParams): Promise<void> => {
+}: SignUpParams): Promise<SignUpResponse> => {
   const params = {
     email,
     password,
@@ -68,18 +72,8 @@ export const signUp = async ({
   };
 
   try {
-    const res = await axios.post<AccessTokenResponse>(
-      endpoints.auth.signUp,
-      params,
-    );
-
-    const { accessToken } = res.data;
-
-    if (!accessToken) {
-      throw new Error("Access token not found in response");
-    }
-
-    sessionStorage.setItem(STORAGE_KEY, accessToken);
+    const res = await axios.post<SignUpResponse>(endpoints.auth.signUp, params);
+    return res.data;
   } catch (error) {
     console.error("Error during sign up:", error);
     throw error;
@@ -98,4 +92,22 @@ export const signOut = async (): Promise<void> => {
     console.error("Error during sign out:", error);
     throw error;
   }
+};
+
+// ----------------------------------------------------------------------
+
+export const signInWithGoogle = () => {
+  if (!CONFIG.site.serverUrl) {
+    throw new Error("NEXT_PUBLIC_SERVER_URL is not configured");
+  }
+
+  window.location.href = `${CONFIG.site.serverUrl}${endpoints.auth.google}`;
+};
+
+export const signInWithYandex = () => {
+  if (!CONFIG.site.serverUrl) {
+    throw new Error("NEXT_PUBLIC_SERVER_URL is not configured");
+  }
+
+  window.location.href = `${CONFIG.site.serverUrl}${endpoints.auth.yandex}`;
 };
