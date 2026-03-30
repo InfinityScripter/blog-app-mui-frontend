@@ -4,6 +4,7 @@ import "src/global.css";
 import { CONFIG } from "src/config-global";
 import { primary } from "src/theme/core/palette";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AuthProvider } from "src/auth/context/jwt";
 import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
@@ -51,6 +52,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
                 <SettingsDrawer />
                 {children}
                 <Analytics />
+                <SpeedInsights />
               </MotionLazy>
             </ThemeProvider>
           </SettingsProvider>
