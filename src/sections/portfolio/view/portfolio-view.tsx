@@ -9,43 +9,22 @@ import Container from "@mui/material/Container";
 import { textGradient } from "src/theme/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { alpha, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import { varFade, MotionContainer } from "src/components/animate";
 import { HomeExperience } from "src/sections/home/home-experience";
 
-const PORTFOLIO_METRICS = [
-  {
-    icon: "solar:code-bold-duotone",
-    label: "Продуктовый фокус",
-    value: "UI + DX",
-  },
-  {
-    icon: "solar:cpu-bolt-bold-duotone",
-    label: "Основной стек",
-    value: "React / Next.js",
-  },
-  {
-    icon: "solar:clock-circle-bold-duotone",
-    label: "Опыт в IT",
-    value: "13+ лет",
-  },
-];
+import { PORTFOLIO_METRICS } from "src/sections/portfolio/view/const";
+import {
+  portfolioHeroSectionSx,
+  portfolioMetricCardSx,
+} from "src/sections/portfolio/view/utils";
 
 export function PortfolioView() {
   const theme = useTheme();
-  const isDarkMode = theme.palette.mode === "dark";
 
   return (
     <>
-      <Box
-        sx={{
-          py: { xs: 10, md: 14 },
-          background:
-            theme.palette.mode === "dark"
-              ? `linear-gradient(135deg, ${alpha("#2065D1", 0.16)} 0%, ${alpha("#00A76F", 0.08)} 100%)`
-              : `linear-gradient(135deg, ${alpha("#2065D1", 0.08)} 0%, ${alpha("#00A76F", 0.04)} 100%)`,
-        }}
-      >
+      <Box sx={portfolioHeroSectionSx(theme)}>
         <Container component={MotionContainer}>
           <Stack spacing={4} sx={{ textAlign: "center" }}>
             <m.div variants={varFade().inDown}>
@@ -137,34 +116,17 @@ export function PortfolioView() {
             >
               {PORTFOLIO_METRICS.map((metric) => (
                 <m.div key={metric.label} variants={varFade().inUp}>
-                  <Box
-                    sx={{
-                      p: 2.5,
-                      borderRadius: 2,
-                      bgcolor: isDarkMode
-                        ? alpha(theme.palette.grey[900], 0.84)
-                        : alpha(theme.palette.background.paper, 0.82),
-                      border: `1px solid ${alpha(theme.palette.divider, isDarkMode ? 0.45 : 0.22)}`,
-                      boxShadow: isDarkMode
-                        ? `0 8px 24px ${alpha(theme.palette.common.black, 0.34)}`
-                        : `0 8px 24px ${alpha(theme.palette.grey[500], 0.14)}`,
-                    }}
-                  >
+                  <Box sx={portfolioMetricCardSx(theme)}>
                     <Stack spacing={1} alignItems="center">
                       <Iconify
                         icon={metric.icon}
                         width={26}
-                        sx={{
-                          color: isDarkMode ? "warning.light" : "primary.main",
-                        }}
+                        sx={{ color: "primary.main" }}
                       />
-                      <Typography variant="h6">{metric.value}</Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          color: isDarkMode ? "grey.200" : "text.secondary",
-                        }}
-                      >
+                      <Typography variant="h6" color="text.primary">
+                        {metric.value}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
                         {metric.label}
                       </Typography>
                     </Stack>

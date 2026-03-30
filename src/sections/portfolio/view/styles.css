@@ -1,0 +1,20 @@
+/** Portfolio hero — брендовый градиент (hex + opacity). Карточки метрик: тема через sx в utils. */
+
+:root {
+  --portfolio-gradient-from: #2065d1;
+  --portfolio-gradient-to: #00a76f;
+
+  --portfolio-hero-bg: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--portfolio-gradient-from) 8%, transparent) 0%,
+    color-mix(in srgb, var(--portfolio-gradient-to) 4%, transparent) 100%
+  );
+}
+
+html.dark {
+  --portfolio-hero-bg: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--portfolio-gradient-from) 16%, transparent) 0%,
+    color-mix(in srgb, var(--portfolio-gradient-to) 8%, transparent) 100%
+  );
+}

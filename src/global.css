@@ -3,6 +3,9 @@
 /** **************************************
 * Plugins
 *************************************** */
+/* portfolio section tokens */
+@import './sections/portfolio/view/styles.css';
+
 /* scrollbar */
 @import './components/scrollbar/styles.css';
 
