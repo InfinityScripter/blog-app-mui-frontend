@@ -19,9 +19,11 @@ export function RHFTextField<TFieldValues extends FieldValues = FieldValues>({
   name,
   helperText,
   type,
+  id,
   ...other
 }: RHFTextFieldProps<TFieldValues>) {
   const { control } = useFormContext();
+  const stableId = id ?? `rhf-${String(name).replace(/\./g, "-")}`;
 
   return (
     <Controller
@@ -30,6 +32,7 @@ export function RHFTextField<TFieldValues extends FieldValues = FieldValues>({
       render={({ field, fieldState: { error } }) => (
         <TextField
           {...field}
+          id={stableId}
           fullWidth
           type={type}
           value={type === "number" && field.value === 0 ? "" : field.value}
