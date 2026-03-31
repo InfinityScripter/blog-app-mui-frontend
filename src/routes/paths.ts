@@ -56,6 +56,9 @@ interface Paths {
       users: string;
       posts: string;
     };
+    chat: string;
+    kanban: string;
+    calendar: string;
   };
 }
 
@@ -113,5 +116,8 @@ export const paths: Paths = {
       users: `${ROOTS.DASHBOARD}/admin/users`,
       posts: `${ROOTS.DASHBOARD}/admin/posts`,
     },
+    chat: `${ROOTS.DASHBOARD}/chat`,
+    kanban: `${ROOTS.DASHBOARD}/kanban`,
+    calendar: `${ROOTS.DASHBOARD}/calendar`,
   },
 };

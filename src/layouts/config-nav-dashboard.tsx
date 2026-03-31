@@ -84,6 +84,14 @@ export function getNavData(role?: string) {
         },
       ],
     },
+    {
+      subheader: "Приложения",
+      items: [
+        { title: "Чат", path: paths.dashboard.chat, icon: ICONS.chat },
+        { title: "Kanban", path: paths.dashboard.kanban, icon: ICONS.kanban },
+        { title: "Календарь", path: paths.dashboard.calendar, icon: ICONS.calendar },
+      ],
+    },
   ];
 
   if (role === 'admin') {

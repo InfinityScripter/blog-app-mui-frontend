@@ -38,9 +38,6 @@ export const fetcher = async <T = unknown>(args: FetcherArgs): Promise<T> => {
 };
 
 export const endpoints = {
-  chat: "/api/chat",
-  kanban: "/api/kanban",
-  calendar: "/api/calendar",
   auth: {
     me: "/api/auth/me",
     signIn: "/api/auth/sign-in",
@@ -82,5 +79,22 @@ export const endpoints = {
     users: '/api/admin/users',
     userById: (id: string) => `/api/admin/users/${id}`,
     postById: (id: string) => `/api/admin/posts/${id}`,
+  },
+  chat: {
+    channels: '/api/chat/channels',
+    messages: (channelId: string) => `/api/chat/${channelId}/messages`,
+    stream: (channelId: string, token: string) =>
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chat/${channelId}/stream?token=${token}`,
+  },
+  kanban: {
+    boards: '/api/kanban/boards',
+    board: (id: string) => `/api/kanban/boards/${id}`,
+    columns: (boardId: string) => `/api/kanban/boards/${boardId}/columns`,
+    tasks: (columnId: string) => `/api/kanban/columns/${columnId}/tasks`,
+    task: (taskId: string) => `/api/kanban/tasks/${taskId}`,
+  },
+  calendar: {
+    events: '/api/calendar/events',
+    event: (id: string) => `/api/calendar/events/${id}`,
   },
 } as const;
