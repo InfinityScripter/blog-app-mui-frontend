@@ -1,8 +1,8 @@
 'use client';
+
 import useSWR from 'swr';
 import { useMemo } from 'react';
-import { fetcher, endpoints } from 'src/utils/axios';
-import axiosInstance from 'src/utils/axios';
+import axiosInstance, { fetcher, endpoints } from 'src/utils/axios';
 
 const swrOptions = {
   revalidateIfStale: true,

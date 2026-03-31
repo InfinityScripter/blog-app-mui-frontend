@@ -1,11 +1,12 @@
 'use client';
+
 import useSWR from 'swr';
-import { Box, Card, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Typography, Chip, IconButton, Tooltip } from '@mui/material';
-import { Iconify } from 'src/components/iconify';
-import axiosInstance, { endpoints, fetcher } from 'src/utils/axios';
-import { useRouter } from 'next/navigation';
 import { paths } from 'src/routes/paths';
+import { useRouter } from 'next/navigation';
+import { Iconify } from 'src/components/iconify';
+import axiosInstance, { fetcher, endpoints } from 'src/utils/axios';
+import { Box, Card, Chip, Table, Tooltip, TableRow,
+  TableBody, TableCell, TableHead, Typography, IconButton, TableContainer } from '@mui/material';
 
 export function AdminPostsView() {
   const { data, mutate } = useSWR(endpoints.post.list, fetcher);

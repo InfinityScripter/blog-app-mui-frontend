@@ -1,29 +1,28 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useAuthContext } from 'src/auth/hooks';
+import { Iconify } from 'src/components/iconify';
+import { useRef, useState, useEffect } from 'react';
+import {
+  sendMessage,
+  useChatStream,
+  useGetChannels,
+  useGetMessages,
+} from 'src/actions/chat-real';
 import {
   Box,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Typography,
-  TextField,
-  IconButton,
   Paper,
-  Divider,
-  Avatar,
   Stack,
+  Avatar,
+  Divider,
+  ListItem,
+  TextField,
+  Typography,
+  IconButton,
+  ListItemText,
+  ListItemButton,
 } from '@mui/material';
-
-import { Iconify } from 'src/components/iconify';
-import { useAuthContext } from 'src/auth/hooks';
-import {
-  useGetChannels,
-  useGetMessages,
-  useChatStream,
-  sendMessage,
-} from 'src/actions/chat-real';
 
 // ----------------------------------------------------------------------
 

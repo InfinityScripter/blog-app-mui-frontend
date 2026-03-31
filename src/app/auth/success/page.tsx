@@ -7,10 +7,10 @@ import { CONFIG } from "src/config-global";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Container from "@mui/material/Container";
+import { useAuthContext } from "src/auth/hooks";
 import Typography from "@mui/material/Typography";
 import { setSession } from "src/auth/context/jwt";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useAuthContext } from "src/auth/hooks";
 
 export default function Page() {
   const router = useRouter();

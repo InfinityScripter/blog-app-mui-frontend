@@ -8,6 +8,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 
 import { createTheme } from "./create-theme";
+import { useFontLoader } from "./use-font-loader";
 import { RTL } from "./with-settings/right-to-left";
 import { schemeConfig } from "./color-scheme-script";
 

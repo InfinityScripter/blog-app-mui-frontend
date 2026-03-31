@@ -1,4 +1,5 @@
 import type { Theme } from "@mui/material/styles";
+
 import { alpha } from "@mui/material/styles";
 
 /** Герой: отступы + фон из CSS-токенов (фиксированный брендовый градиент). */

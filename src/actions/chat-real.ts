@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
 import useSWR from 'swr';
-
-import axiosInstance, { endpoints, fetcher } from 'src/utils/axios';
+import { useRef, useMemo, useEffect } from 'react';
+import axiosInstance, { fetcher, endpoints } from 'src/utils/axios';
 
 // ----------------------------------------------------------------------
 

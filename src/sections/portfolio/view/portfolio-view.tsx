@@ -7,16 +7,15 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { textGradient } from "src/theme/styles";
+import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
 import { varFade, MotionContainer } from "src/components/animate";
 import { HomeExperience } from "src/sections/home/home-experience";
-
 import { PORTFOLIO_METRICS } from "src/sections/portfolio/view/const";
 import {
-  portfolioHeroSectionSx,
   portfolioMetricCardSx,
+  portfolioHeroSectionSx,
 } from "src/sections/portfolio/view/utils";
 
 export function PortfolioView() {

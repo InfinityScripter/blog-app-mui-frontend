@@ -7,6 +7,7 @@ import type { Theme, SxProps, Theme as MuiTheme } from "@mui/material/styles";
 import { useMemo } from "react";
 import Alert from "@mui/material/Alert";
 import { useTheme } from "@mui/material/styles";
+import { useAuthContext } from "src/auth/hooks";
 import { useBoolean } from "src/hooks/use-boolean";
 import { _contacts, _notifications } from "src/_mock";
 import { varAlpha, stylesMode } from "src/theme/styles";
@@ -22,10 +23,9 @@ import { NavHorizontal } from "./nav-horizontal";
 import { _account } from "../config-nav-account";
 // ----------------------------------------------------------------------
 import { HeaderBase } from "../core/header-base";
+import { getNavData } from "../config-nav-dashboard";
 import { _workspaces } from "../config-nav-workspace";
 import { LayoutSection } from "../core/layout-section";
-import { getNavData } from "../config-nav-dashboard";
-import { useAuthContext } from "src/auth/hooks";
 
 interface DashboardLayoutProps {
   sx?: SxProps<Theme>;

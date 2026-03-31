@@ -1,11 +1,12 @@
 'use client';
-import {
-  Box, Card, Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Typography, Chip, IconButton, Tooltip,
-} from '@mui/material';
-import { Iconify } from 'src/components/iconify';
-import { useGetAdminUsers, deleteUser } from 'src/actions/admin';
+
 import { useAuthContext } from 'src/auth/hooks';
+import { Iconify } from 'src/components/iconify';
+import { deleteUser, useGetAdminUsers } from 'src/actions/admin';
+import {
+  Box, Card, Chip, Table, Tooltip, TableRow,
+  TableBody, TableCell, TableHead, Typography, IconButton, TableContainer,
+} from '@mui/material';
 
 export function AdminUsersView() {
   const { users, usersLoading, usersMutate } = useGetAdminUsers();

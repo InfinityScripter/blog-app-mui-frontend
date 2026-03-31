@@ -1,26 +1,25 @@
 'use client';
 
 import { useState } from 'react';
+import { useAuthContext } from 'src/auth/hooks';
+import { createEvent, deleteEvent, useGetEvents } from 'src/actions/calendar-real';
 import {
   Box,
   Grid,
-  Typography,
-  Button,
-  Stack,
   Chip,
+  Stack,
+  Button,
   Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
   Select,
   MenuItem,
-  FormControl,
+  TextField,
+  Typography,
   InputLabel,
+  DialogTitle,
+  FormControl,
+  DialogContent,
+  DialogActions,
 } from '@mui/material';
-
-import { useAuthContext } from 'src/auth/hooks';
-import { useGetEvents, createEvent, deleteEvent } from 'src/actions/calendar-real';
 
 // ----------------------------------------------------------------------
 
