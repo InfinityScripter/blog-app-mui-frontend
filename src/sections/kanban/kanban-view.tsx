@@ -1,33 +1,56 @@
 'use client';
 
 import { useState } from 'react';
-import { Iconify } from 'src/components/iconify';
+
 import {
   Box,
-  Paper,
-  Stack,
-  Select,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   MenuItem,
+  Paper,
+  Select,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
+
+import { useAuthContext } from 'src/auth/hooks';
+import { Iconify } from 'src/components/iconify';
 import {
+  createBoard,
+  createColumn,
   createTask,
   updateTask,
   useGetBoard,
   useGetBoards,
-  createColumn,
 } from 'src/actions/kanban-real';
 
 // ----------------------------------------------------------------------
 
 export function KanbanView() {
-  const { boards } = useGetBoards();
+  const { user } = useAuthContext();
+  const { boards, boardsMutate } = useGetBoards();
   const [boardId, setBoardId] = useState<string | null>(null);
   const { board, boardMutate } = useGetBoard(boardId);
   const [newColName, setNewColName] = useState('');
   const [dragging, setDragging] = useState<{ taskId: string; fromColumnId: string } | null>(null);
+
+  const [createBoardOpen, setCreateBoardOpen] = useState(false);
+  const [newBoardName, setNewBoardName] = useState('');
+  const [newBoardDesc, setNewBoardDesc] = useState('');
+
+  const handleCreateBoard = async () => {
+    if (!newBoardName.trim()) return;
+    const res = await createBoard(newBoardName.trim(), newBoardDesc.trim() || undefined);
+    setCreateBoardOpen(false);
+    setNewBoardName('');
+    setNewBoardDesc('');
+    boardsMutate();
+    setBoardId((res.data as any).board.id);
+  };
 
   const handleAddColumn = async () => {
     if (!boardId || !newColName.trim()) return;
@@ -69,7 +92,44 @@ export function KanbanView() {
             </MenuItem>
           ))}
         </Select>
+        {user?.role === 'admin' && (
+          <Button
+            variant="contained"
+            size="small"
+            startIcon={<Iconify icon="mingcute:add-line" />}
+            onClick={() => setCreateBoardOpen(true)}
+          >
+            Новая доска
+          </Button>
+        )}
       </Stack>
+
+      <Dialog open={createBoardOpen} onClose={() => setCreateBoardOpen(false)} maxWidth="xs" fullWidth>
+        <DialogTitle>Создать доску</DialogTitle>
+        <DialogContent>
+          <Stack spacing={2} sx={{ mt: 1 }}>
+            <TextField
+              label="Название"
+              value={newBoardName}
+              onChange={(e) => setNewBoardName(e.target.value)}
+              autoFocus
+            />
+            <TextField
+              label="Описание (необязательно)"
+              value={newBoardDesc}
+              onChange={(e) => setNewBoardDesc(e.target.value)}
+              multiline
+              rows={2}
+            />
+          </Stack>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setCreateBoardOpen(false)}>Отмена</Button>
+          <Button variant="contained" onClick={handleCreateBoard} disabled={!newBoardName.trim()}>
+            Создать
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {board && (
         <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto', pb: 2 }}>

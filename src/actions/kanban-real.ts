@@ -48,6 +48,9 @@ export function useGetBoard(boardId: string | null) {
   );
 }
 
+export const createBoard = (name: string, description?: string, memberIds?: string[]) =>
+  axiosInstance.post(endpoints.kanban.boards, { name, description, memberIds: memberIds ?? [] });
+
 export const createColumn = (boardId: string, name: string) =>
   axiosInstance.post(endpoints.kanban.columns(boardId), { name });
 
