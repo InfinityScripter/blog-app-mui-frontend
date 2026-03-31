@@ -23,6 +23,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const theme = createTheme(settings);
 
+  useFontLoader(settings.fontFamily);
+
   return (
     <AppRouterCacheProvider options={{ key: "css" }}>
       <CssVarsProvider
