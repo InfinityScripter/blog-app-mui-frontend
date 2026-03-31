@@ -13,11 +13,17 @@ export const mediaQueries = {
   upXl: "@media (min-width:1536px)",
 } as const;
 
+const FONT_VARIABLES: Record<string, string> = {
+  "Public Sans": "var(--font-public-sans)",
+};
+
 /**
  * Set font family
  */
 export function setFont(fontName: string): string {
-  return `"${fontName}",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`;
+  const cssVar = FONT_VARIABLES[fontName];
+  const primary = cssVar ?? `"${fontName}"`;
+  return `${primary},-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`;
 }
 
 /**

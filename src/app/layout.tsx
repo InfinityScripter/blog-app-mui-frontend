@@ -1,7 +1,14 @@
 import "src/global.css";
 
 // ----------------------------------------------------------------------
+import { Public_Sans } from "next/font/google";
 import { CONFIG } from "src/config-global";
+
+const publicSans = Public_Sans({
+  subsets: ["latin"],
+  variable: "--font-public-sans",
+  display: "swap",
+});
 import { primary } from "src/theme/core/palette";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -37,7 +44,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     : await detectSettings();
 
   return (
-    <html lang="ru" suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning className={publicSans.variable}>
       <body suppressHydrationWarning>
         {getInitColorSchemeScript}
 
