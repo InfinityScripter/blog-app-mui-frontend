@@ -4,10 +4,10 @@ import "src/global.css";
 import type { ReactNode } from "react";
 
 import { CONFIG } from "src/config-global";
-import { Public_Sans } from "next/font/google";
 import { primary } from "src/theme/core/palette";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "src/auth/context/jwt";
+import { Barlow, Public_Sans } from "next/font/google";
 import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -28,6 +28,13 @@ const publicSans = Public_Sans({
   display: "swap",
 });
 
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-barlow",
+  display: "swap",
+});
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,
@@ -44,7 +51,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     : await detectSettings();
 
   return (
-    <html lang="ru" suppressHydrationWarning className={publicSans.variable}>
+    <html lang="ru" suppressHydrationWarning className={`${publicSans.variable} ${barlow.variable}`}>
       <body suppressHydrationWarning>
         {getInitColorSchemeScript}
 
