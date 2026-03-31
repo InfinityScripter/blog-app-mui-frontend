@@ -182,7 +182,7 @@ export function SettingsDrawer({
       onClickOption={(newValue) =>
         settings.onUpdateField("fontFamily", newValue)
       }
-      options={[defaultFont, "Inter", "DM Sans", "Nunito Sans"]}
+      options={[defaultFont, "Inter", "Roboto", "Lato"]}
     />
   );
 
