@@ -24,7 +24,8 @@ import { _account } from "../config-nav-account";
 import { HeaderBase } from "../core/header-base";
 import { _workspaces } from "../config-nav-workspace";
 import { LayoutSection } from "../core/layout-section";
-import { navData as dashboardNavData } from "../config-nav-dashboard";
+import { getNavData } from "../config-nav-dashboard";
+import { useAuthContext } from "src/auth/hooks";
 
 interface DashboardLayoutProps {
   sx?: SxProps<Theme>;
@@ -45,7 +46,9 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
 
   const layoutQuery = "lg";
 
-  const navData = data?.nav ?? dashboardNavData;
+  const { user } = useAuthContext();
+
+  const navData = data?.nav ?? getNavData(user?.role);
 
   const isNavMini = settings.navLayout === "mini";
 

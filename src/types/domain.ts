@@ -61,6 +61,7 @@ export interface User {
   email: string;
   avatarURL?: string;
   isEmailVerified?: boolean;
+  role?: 'user' | 'admin';
 }
 
 export interface FileMeta {

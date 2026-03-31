@@ -10,10 +10,12 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { setSession } from "src/auth/context/jwt";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useAuthContext } from "src/auth/hooks";
 
 export default function Page() {
   const router = useRouter();
   const [error, setError] = useState("");
+  const { checkUserSession } = useAuthContext();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -27,6 +29,7 @@ export default function Page() {
     const bootstrapSession = async () => {
       try {
         await setSession(token);
+        await checkUserSession();
         router.replace(CONFIG.auth.redirectPath || paths.dashboard.root);
       } catch (e) {
         setError("Не удалось завершить авторизацию");
@@ -34,7 +37,7 @@ export default function Page() {
     };
 
     bootstrapSession();
-  }, [router]);
+  }, [router, checkUserSession]);
 
   return (
     <Container sx={{ py: 10 }}>

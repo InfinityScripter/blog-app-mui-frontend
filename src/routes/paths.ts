@@ -52,6 +52,10 @@ interface Paths {
       details: (id: string) => string;
       edit: (id: string) => string;
     };
+    admin: {
+      users: string;
+      posts: string;
+    };
   };
 }
 
@@ -104,6 +108,10 @@ export const paths: Paths = {
       new: `${ROOTS.DASHBOARD}/post/new`,
       details: (id: string) => `${ROOTS.DASHBOARD}/post/${id}`,
       edit: (id: string) => `${ROOTS.DASHBOARD}/post/${id}/edit`,
+    },
+    admin: {
+      users: `${ROOTS.DASHBOARD}/admin/users`,
+      posts: `${ROOTS.DASHBOARD}/admin/posts`,
     },
   },
 };

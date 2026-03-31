@@ -78,4 +78,9 @@ export const endpoints = {
     details: "/api/product/details",
     search: "/api/product/search",
   },
+  admin: {
+    users: '/api/admin/users',
+    userById: (id: string) => `/api/admin/users/${id}`,
+    postById: (id: string) => `/api/admin/posts/${id}`,
+  },
 } as const;

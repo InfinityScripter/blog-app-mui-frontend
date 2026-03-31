@@ -39,48 +39,73 @@ const ICONS = {
 
 // ----------------------------------------------------------------------
 
-export const navData = [
-  /**
-   * Overview
-   */
-  {
-    subheader: "Обзор",
-    items: [
-      { title: "Главная", path: paths.dashboard.root, icon: ICONS.dashboard },
-      { title: "Аналитика", path: paths.dashboard.two, icon: ICONS.ecommerce },
-      { title: "Отчеты", path: paths.dashboard.three, icon: ICONS.analytics },
-    ],
-  },
-  /**
-   * Management
-   */
-  {
-    subheader: "Управление",
-    items: [
-      {
-        title: "Пользователи",
-        path: paths.dashboard.group.root,
-        icon: ICONS.user,
-        children: [
-          { title: "Все пользователи", path: paths.dashboard.group.root },
-          { title: "Активные", path: paths.dashboard.group.five },
-          { title: "Заблокированные", path: paths.dashboard.group.six },
-        ],
-      },
-    ],
-  },
-  {
-    subheader: "Блог",
-    items: [
-      {
-        title: "Статьи",
-        path: paths.dashboard.post.root,
-        icon: ICONS.blog,
-        children: [
-          { title: "Список", path: paths.dashboard.post.root },
-          { title: "Создать", path: paths.dashboard.post.new },
-        ],
-      },
-    ],
-  },
-];
+export function getNavData(role?: string) {
+  const baseNav = [
+    /**
+     * Overview
+     */
+    {
+      subheader: "Обзор",
+      items: [
+        { title: "Главная", path: paths.dashboard.root, icon: ICONS.dashboard },
+        { title: "Аналитика", path: paths.dashboard.two, icon: ICONS.ecommerce },
+        { title: "Отчеты", path: paths.dashboard.three, icon: ICONS.analytics },
+      ],
+    },
+    /**
+     * Management
+     */
+    {
+      subheader: "Управление",
+      items: [
+        {
+          title: "Пользователи",
+          path: paths.dashboard.group.root,
+          icon: ICONS.user,
+          children: [
+            { title: "Все пользователи", path: paths.dashboard.group.root },
+            { title: "Активные", path: paths.dashboard.group.five },
+            { title: "Заблокированные", path: paths.dashboard.group.six },
+          ],
+        },
+      ],
+    },
+    {
+      subheader: "Блог",
+      items: [
+        {
+          title: "Статьи",
+          path: paths.dashboard.post.root,
+          icon: ICONS.blog,
+          children: [
+            { title: "Список", path: paths.dashboard.post.root },
+            { title: "Создать", path: paths.dashboard.post.new },
+          ],
+        },
+      ],
+    },
+  ];
+
+  if (role === 'admin') {
+    baseNav.push({
+      subheader: "Администрирование",
+      items: [
+        {
+          title: "Пользователи",
+          path: paths.dashboard.admin.users,
+          icon: ICONS.user,
+        },
+        {
+          title: "Все посты",
+          path: paths.dashboard.admin.posts,
+          icon: ICONS.blog,
+        },
+      ],
+    });
+  }
+
+  return baseNav;
+}
+
+// Backward compat
+export const navData = getNavData();
