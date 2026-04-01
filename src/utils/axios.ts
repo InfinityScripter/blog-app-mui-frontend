@@ -90,6 +90,7 @@ export const endpoints = {
     boards: '/api/kanban/boards',
     board: (id: string) => `/api/kanban/boards/${id}`,
     columns: (boardId: string) => `/api/kanban/boards/${boardId}/columns`,
+    column: (columnId: string) => `/api/kanban/columns/${columnId}`,
     tasks: (columnId: string) => `/api/kanban/columns/${columnId}/tasks`,
     task: (taskId: string) => `/api/kanban/tasks/${taskId}`,
   },

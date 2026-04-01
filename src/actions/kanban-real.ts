@@ -62,3 +62,9 @@ export const updateTask = (taskId: string, data: Record<string, unknown>) =>
 
 export const deleteTask = (taskId: string) =>
   axiosInstance.delete(endpoints.kanban.task(taskId));
+
+export const deleteColumn = (columnId: string) =>
+  axiosInstance.delete(endpoints.kanban.column(columnId));
+
+export const deleteBoard = (boardId: string) =>
+  axiosInstance.delete(endpoints.kanban.board(boardId));
