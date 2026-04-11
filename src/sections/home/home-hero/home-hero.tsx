@@ -1,9 +1,9 @@
 import type { BoxProps } from "@mui/material/Box";
 
+import { useRef } from "react";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import { useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
@@ -13,13 +13,7 @@ import { marketingHeroCtaRowSx } from "src/theme/styles";
 import { useResponsive } from "src/hooks/use-responsive";
 import { varFade, MotionContainer } from "src/components/animate";
 import { MarketingGradientHighlight } from "src/components/marketing";
-import {
-  m,
-  useScroll,
-  useSpring,
-  useTransform,
-  useMotionValueEvent,
-} from "framer-motion";
+import { m, useScroll, useSpring, useTransform } from "framer-motion";
 
 import { HeroBackground } from "../components/hero-background";
 import {
@@ -46,32 +40,18 @@ function MInview({ children, component = m.div }) {
   );
 }
 
-function useTransformY(value, distance) {
-  const physics = {
-    mass: 0.1,
-    damping: 20,
-    stiffness: 300,
-    restDelta: 0.001,
-  };
-
-  return useSpring(useTransform(value, [0, 1], [0, distance]), physics);
-}
+const PARALLAX_PHYSICS = {
+  mass: 0.1,
+  damping: 20,
+  stiffness: 300,
+  restDelta: 0.001,
+};
 
 function useScrollPercent() {
-  const elementRef = useRef(null);
+  const elementRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  const [percent, setPercent] = useState(0);
 
-  useMotionValueEvent(scrollY, "change", (scrollHeight) => {
-    let heroHeight = 0;
-    if (elementRef.current) {
-      heroHeight = elementRef.current.offsetHeight;
-    }
-    const scrollPercent = Math.floor((scrollHeight / heroHeight) * 100);
-    setPercent(scrollPercent >= 100 ? 100 : Math.floor(scrollPercent));
-  });
-
-  return { elementRef, percent, scrollY };
+  return { elementRef, scrollY };
 }
 
 type HomeHeroProps = BoxProps;
@@ -80,16 +60,27 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
   const theme = useTheme();
   const scroll = useScrollPercent();
   const mdUp = useResponsive("up", MD_KEY);
-  const distance = mdUp ? scroll.percent : 0;
 
-  const y1 = useTransformY(scroll.scrollY, distance * -7);
-  const y2 = useTransformY(scroll.scrollY, distance * -6);
-  const y4 = useTransformY(scroll.scrollY, distance * -4);
+  const getPercent = (sv: number) => {
+    const hh = scroll.elementRef.current?.offsetHeight ?? 1;
+    return Math.min(Math.floor((sv / hh) * 100), 100);
+  };
 
-  const opacity = useTransform(
-    scroll.scrollY,
-    [0, 1],
-    [1, mdUp ? Number((1 - scroll.percent / 100).toFixed(1)) : 1],
+  const y1 = useSpring(
+    useTransform(scroll.scrollY, (sv) => (mdUp ? sv * getPercent(sv) * -7 : 0)),
+    PARALLAX_PHYSICS,
+  );
+  const y2 = useSpring(
+    useTransform(scroll.scrollY, (sv) => (mdUp ? sv * getPercent(sv) * -6 : 0)),
+    PARALLAX_PHYSICS,
+  );
+  const y4 = useSpring(
+    useTransform(scroll.scrollY, (sv) => (mdUp ? sv * getPercent(sv) * -4 : 0)),
+    PARALLAX_PHYSICS,
+  );
+
+  const opacity = useTransform(scroll.scrollY, (sv) =>
+    mdUp ? Number((1 - getPercent(sv) / 100).toFixed(1)) : 1,
   );
 
   // Заголовок главной страницы с фокусом на блоге

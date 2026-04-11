@@ -12,39 +12,22 @@ export function ProgressBar() {
   useEffect(() => {
     NProgress.configure({ showSpinner: false });
 
-    const handleAnchorClick = (event) => {
-      const targetUrl = event.currentTarget.href;
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as HTMLElement).closest?.("a[href]");
+      if (!anchor) return;
 
-      const currentUrl = window.location.href;
+      const href = anchor.getAttribute("href");
+      const target = anchor.getAttribute("target");
+      const rel = anchor.getAttribute("rel");
 
-      if (targetUrl !== currentUrl) {
-        NProgress.start();
+      if (href?.startsWith("/") && target !== "_blank" && rel !== "noopener") {
+        if ((anchor as HTMLAnchorElement).href !== window.location.href) {
+          NProgress.start();
+        }
       }
     };
 
-    const handleMutation = () => {
-      const anchorElements = document.querySelectorAll("a[href]");
-
-      const filteredAnchors = Array.from(anchorElements).filter((element) => {
-        const rel = element.getAttribute("rel");
-
-        const href = element.getAttribute("href");
-
-        const target = element.getAttribute("target");
-
-        return (
-          href?.startsWith("/") && target !== "_blank" && rel !== "noopener"
-        );
-      });
-
-      filteredAnchors.forEach((anchor) =>
-        anchor.addEventListener("click", handleAnchorClick),
-      );
-    };
-
-    const mutationObserver = new MutationObserver(handleMutation);
-
-    mutationObserver.observe(document, { childList: true, subtree: true });
+    document.addEventListener("click", handleClick, { capture: true });
 
     window.history.pushState = new Proxy(window.history.pushState, {
       apply: (target, thisArg, argArray) => {
@@ -52,7 +35,11 @@ export function ProgressBar() {
         return target.apply(thisArg, argArray);
       },
     });
-  });
+
+    return () => {
+      document.removeEventListener("click", handleClick, { capture: true });
+    };
+  }, []);
 
   return (
     <Suspense fallback={null}>
