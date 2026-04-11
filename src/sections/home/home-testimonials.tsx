@@ -9,7 +9,7 @@ import { fToNow } from "src/utils/format-time";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { maxLine, varAlpha, textGradient } from "src/theme/styles";
+import { maxLine, varAlpha, marketingMutedStatLabelSx } from "src/theme/styles";
 import {
   varFade,
   MotionViewport,
@@ -206,16 +206,7 @@ export function HomeTestimonials({ sx, ...other }) {
             </m.div>
 
             <m.div variants={varFade({ distance: 24 }).inUp}>
-              <Box
-                component="span"
-                sx={{
-                  ...textGradient(
-                    `90deg, ${theme.vars.palette.text.primary}, ${varAlpha(theme.vars.palette.text.primaryChannel, 0.2)}`,
-                  ),
-                  opacity: 0.4,
-                  typography: "h6",
-                }}
-              >
+              <Box component="span" sx={marketingMutedStatLabelSx(theme)}>
                 {item.label}
               </Box>
             </m.div>

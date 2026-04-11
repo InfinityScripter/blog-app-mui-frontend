@@ -1,7 +1,12 @@
 import Box from "@mui/material/Box";
 import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
-import { varAlpha, bgGradient, textGradient } from "src/theme/styles";
+import {
+  varAlpha,
+  bgGradient,
+  textGradient,
+  marketingHeadlineGradientCss,
+} from "src/theme/styles";
 
 import { ComponentBlock, ComponentContainer } from "../../component-block";
 
@@ -24,9 +29,7 @@ export function Gradient() {
           component="h1"
           sx={{
             typography: "h1",
-            ...textGradient(
-              `to right, ${theme.vars.palette.warning.light}, ${theme.vars.palette.primary.main}`,
-            ),
+            ...textGradient(marketingHeadlineGradientCss(theme)),
           }}
         >
           Minimals UI

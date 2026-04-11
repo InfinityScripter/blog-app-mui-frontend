@@ -6,8 +6,12 @@ import Button from "@mui/material/Button";
 import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
-import { varAlpha, textGradient } from "src/theme/styles";
 import { varFade, AnimateBorder, MotionViewport } from "src/components/animate";
+import {
+  varAlpha,
+  marketingWhiteFadeSx,
+  marketingWarningPrimaryBlendSx,
+} from "src/theme/styles";
 
 import { SectionTitle } from "./components/section-title";
 
@@ -111,18 +115,10 @@ export function HomeForDesigner({ sx, ...other }) {
             }}
             slotProps={{
               caption: {
-                sx: {
-                  ...textGradient(
-                    `to right, ${theme.vars.palette.common.white}, ${varAlpha(theme.vars.palette.common.whiteChannel, 0.2)}`,
-                  ),
-                },
+                sx: marketingWhiteFadeSx(theme, 0.2),
               },
               title: {
-                sx: {
-                  ...textGradient(
-                    `135deg, ${theme.vars.palette.warning.main}, ${theme.vars.palette.primary.main}`,
-                  ),
-                },
+                sx: marketingWarningPrimaryBlendSx(theme),
               },
               description: { sx: { maxWidth: 320, color: "common.white" } },
             }}

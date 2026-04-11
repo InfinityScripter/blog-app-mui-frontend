@@ -8,7 +8,7 @@ import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import { SvgColor } from "src/components/svg-color";
-import { varAlpha, textGradient } from "src/theme/styles";
+import { marketingWhiteFadeSx } from "src/theme/styles";
 import { varFade, MotionViewport } from "src/components/animate";
 
 import { FloatLine, FloatPlusIcon } from "./components/svg-elements";
@@ -41,12 +41,7 @@ export function HomeAdvertisement({ sx, ...other }) {
         <Box
           component="span"
           sx={{
-            ...textGradient(
-              `to right, ${theme.vars.palette.common.white}, ${varAlpha(
-                theme.vars.palette.common.whiteChannel,
-                0.4,
-              )}`,
-            ),
+            ...marketingWhiteFadeSx(theme, 0.4),
             ml: 1,
           }}
         >

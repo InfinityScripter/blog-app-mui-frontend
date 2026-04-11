@@ -4,7 +4,7 @@ import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import { varFade } from "src/components/animate";
 import Typography from "@mui/material/Typography";
-import { varAlpha, textGradient } from "src/theme/styles";
+import { marketingTextPrimaryFadeSx } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -40,9 +40,7 @@ export function SectionTitle({
           sx={{
             opacity: 0.4,
             display: "inline-block",
-            ...textGradient(
-              `to right, ${theme.vars.palette.text.primary}, ${varAlpha(theme.vars.palette.text.primaryChannel, 0.2)}`,
-            ),
+            ...marketingTextPrimaryFadeSx(theme),
           }}
         >
           {txtGradient}

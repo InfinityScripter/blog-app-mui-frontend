@@ -10,7 +10,7 @@ import { FAQ_ITEMS } from "./const";
 
 export function FaqsList() {
   return (
-    <div>
+    <>
       {FAQ_ITEMS.map((accordion) => (
         <Accordion key={accordion.id}>
           <AccordionSummary
@@ -24,6 +24,6 @@ export function FaqsList() {
           </AccordionDetails>
         </Accordion>
       ))}
-    </div>
+    </>
   );
 }

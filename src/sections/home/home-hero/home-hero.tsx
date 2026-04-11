@@ -7,11 +7,12 @@ import { useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
-import { textGradient } from "src/theme/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
+import { marketingHeroCtaRowSx } from "src/theme/styles";
 import { useResponsive } from "src/hooks/use-responsive";
 import { varFade, MotionContainer } from "src/components/animate";
+import { MarketingGradientHighlight } from "src/components/marketing";
 import {
   m,
   useScroll,
@@ -112,25 +113,9 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
         <Box component="span" sx={{ width: 1, opacity: 0.24, mr: 1 }}>
           {HERO_LABEL}
         </Box>
-        <Box
-          component={m.span}
-          animate={{ backgroundPosition: "200% center" }}
-          transition={{
-            duration: 20,
-            ease: "linear",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          sx={{
-            ...textGradient(
-              `300deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 25%, ${theme.vars.palette.primary.main} 50%, ${theme.vars.palette.warning.main} 75%, ${theme.vars.palette.primary.main} 100%`,
-            ),
-            backgroundSize: "400%",
-            ml: { xs: 0.75, md: 1, xl: 1.5 },
-          }}
-        >
+        <MarketingGradientHighlight>
           {HERO_HIGHLIGHT}
-        </Box>
+        </MarketingGradientHighlight>
       </Box>
       <Box
         component="h2"
@@ -159,12 +144,7 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
 
   // Кнопки для перехода к портфолио и статьям
   const renderButtons = (
-    <Box
-      display="flex"
-      flexWrap="wrap"
-      justifyContent="center"
-      gap={{ xs: 1.5, sm: 2 }}
-    >
+    <Box sx={marketingHeroCtaRowSx}>
       <MInview>
         <Button
           component={Link}
