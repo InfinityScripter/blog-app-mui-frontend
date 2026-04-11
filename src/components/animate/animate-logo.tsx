@@ -115,7 +115,7 @@ export function AnimateLogo2({ logo, sx, ...other }: AnimateLogo2Props) {
 
       <Box
         component={m.div}
-        animate={{ rotate: 360 }}
+        animate={{ transform: "rotate(360deg)" }}
         transition={{ duration: 10, ease: "linear", repeat: Infinity }}
         sx={{
           width: 1,

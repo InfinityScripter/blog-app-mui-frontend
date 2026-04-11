@@ -6,6 +6,11 @@ import { stylesMode } from "../../styles";
 
 const MuiTooltip = {
   /** **************************************
+   * DEFAULT PROPS
+   *************************************** */
+  defaultProps: { enterNextDelay: 0 },
+
+  /** **************************************
    * STYLE
    *************************************** */
   styleOverrides: {

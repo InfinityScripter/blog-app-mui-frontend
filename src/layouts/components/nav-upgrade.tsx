@@ -82,7 +82,13 @@ export function UpgradeBlock({ sx, ...other }) {
 
       <Box
         component={m.img}
-        animate={{ y: [12, -12, 12] }}
+        animate={{
+          transform: [
+            "translateY(12px)",
+            "translateY(-12px)",
+            "translateY(12px)",
+          ],
+        }}
         transition={{
           duration: 8,
           ease: "linear",

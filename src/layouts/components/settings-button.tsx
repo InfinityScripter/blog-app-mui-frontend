@@ -21,7 +21,7 @@ export function SettingsButton({ sx, ...other }) {
       <Badge color="error" variant="dot" invisible={!settings.canReset}>
         <SvgIcon
           component={m.svg}
-          animate={{ rotate: 360 }}
+          animate={{ transform: "rotate(360deg)" }}
           transition={{ duration: 8, ease: "linear", repeat: Infinity }}
         >
           {/* https://icon-sets.iconify.design/solar/settings-bold-duotone/ */}

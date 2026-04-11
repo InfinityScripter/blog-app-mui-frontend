@@ -67,7 +67,10 @@ export function FloatPlusIcon({ sx, ...other }) {
   return (
     <Box
       component={m.svg}
-      variants={{ initial: { scale: 0 }, animate: { scale: 1, transition } }}
+      variants={{
+        initial: { scale: 0.95, opacity: 0 },
+        animate: { scale: 1, opacity: 1, transition },
+      }}
       width="16"
       height="16"
       viewBox="0 0 16 16"
@@ -167,7 +170,10 @@ export function FloatDotIcon({ sx, ...other }) {
   return (
     <Box
       component={m.span}
-      variants={{ initial: { scale: 0 }, animate: { scale: 1, transition } }}
+      variants={{
+        initial: { scale: 0.95, opacity: 0 },
+        animate: { scale: 1, opacity: 1, transition },
+      }}
       sx={{
         ...baseStyles,
         width: 12,

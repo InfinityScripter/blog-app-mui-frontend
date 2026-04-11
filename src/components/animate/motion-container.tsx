@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
 import type { BoxProps } from "@mui/material/Box";
 
-import { m } from "framer-motion";
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
+import { m, useReducedMotion } from "framer-motion";
 
 import { varContainer } from "./variants";
 
@@ -15,6 +15,16 @@ interface MotionContainerProps extends Omit<BoxProps, "component"> {
 
 export const MotionContainer = forwardRef<HTMLDivElement, MotionContainerProps>(
   ({ animate, action = false, children, ...other }, ref) => {
+    const prefersReducedMotion = useReducedMotion();
+
+    if (prefersReducedMotion) {
+      return (
+        <Box ref={ref} {...other}>
+          {children}
+        </Box>
+      );
+    }
+
     const commonProps = {
       ref,
       component: m.div,

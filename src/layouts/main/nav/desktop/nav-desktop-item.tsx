@@ -56,9 +56,12 @@ const StyledNavItem = styled(ButtonBase, {
     item: {
       ...theme.typography.body2,
       fontWeight: theme.typography.fontWeightMedium,
-      transition: theme.transitions.create(["all"], {
-        duration: theme.transitions.duration.shorter,
-      }),
+      transition: theme.transitions.create(
+        ["color", "opacity", "background-color"],
+        {
+          duration: theme.transitions.duration.shorter,
+        },
+      ),
     },
     dot: {
       width: 6,

@@ -13,40 +13,40 @@ export const varScale = (props?: TransitionProps) => {
   return {
     // IN
     in: {
-      initial: { scale: 0, opacity: 0 },
+      initial: { scale: 0.95, opacity: 0 },
       animate: {
         scale: 1,
         opacity: 1,
         transition: varTranEnter({ durationIn, easeIn }),
       },
       exit: {
-        scale: 0,
+        scale: 0.95,
         opacity: 0,
         transition: varTranExit({ durationOut, easeOut }),
       },
     },
     inX: {
-      initial: { scaleX: 0, opacity: 0 },
+      initial: { scaleX: 0.95, opacity: 0 },
       animate: {
         scaleX: 1,
         opacity: 1,
         transition: varTranEnter({ durationIn, easeIn }),
       },
       exit: {
-        scaleX: 0,
+        scaleX: 0.95,
         opacity: 0,
         transition: varTranExit({ durationOut, easeOut }),
       },
     },
     inY: {
-      initial: { scaleY: 0, opacity: 0 },
+      initial: { scaleY: 0.95, opacity: 0 },
       animate: {
         scaleY: 1,
         opacity: 1,
         transition: varTranEnter({ durationIn, easeIn }),
       },
       exit: {
-        scaleY: 0,
+        scaleY: 0.95,
         opacity: 0,
         transition: varTranExit({ durationOut, easeOut }),
       },
@@ -56,7 +56,7 @@ export const varScale = (props?: TransitionProps) => {
     out: {
       initial: { scale: 1, opacity: 1 },
       animate: {
-        scale: 0,
+        scale: 0.95,
         opacity: 0,
         transition: varTranEnter({ durationIn, easeIn }),
       },
@@ -64,7 +64,7 @@ export const varScale = (props?: TransitionProps) => {
     outX: {
       initial: { scaleX: 1, opacity: 1 },
       animate: {
-        scaleX: 0,
+        scaleX: 0.95,
         opacity: 0,
         transition: varTranEnter({ durationIn, easeIn }),
       },
@@ -72,7 +72,7 @@ export const varScale = (props?: TransitionProps) => {
     outY: {
       initial: { scaleY: 1, opacity: 1 },
       animate: {
-        scaleY: 0,
+        scaleY: 0.95,
         opacity: 0,
         transition: varTranEnter({ durationIn, easeIn }),
       },

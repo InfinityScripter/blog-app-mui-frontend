@@ -166,9 +166,12 @@ const StyledNavItem = styled(ButtonBase, {
       ...baseStyles.item,
       padding: "var(--nav-item-root-padding)",
       borderRadius: "var(--nav-item-radius)",
-      transition: theme.transitions.create(["all"], {
-        duration: theme.transitions.duration.shorter,
-      }),
+      transition: theme.transitions.create(
+        ["color", "opacity", "background-color"],
+        {
+          duration: theme.transitions.duration.shorter,
+        },
+      ),
       "&:hover": { opacity: 0.64 },
       [`& .${navSectionClasses.item.icon}`]: { ...baseStyles.icon },
       [`& .${navSectionClasses.item.texts}`]: { ...baseStyles.texts },

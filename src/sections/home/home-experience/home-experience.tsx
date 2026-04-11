@@ -159,20 +159,22 @@ export function HomeExperience() {
                   underline="none"
                   color="inherit"
                   sx={{
-                    "&:hover": {
-                      "& .experience-card": {
-                        borderColor: isDarkMode
-                          ? alpha(theme.palette.common.white, 0.62)
-                          : alpha(theme.palette.primary.main, 0.6),
-                        backgroundColor: isDarkMode
-                          ? alpha(theme.palette.common.white, 0.03)
-                          : alpha(theme.palette.common.black, 0.02),
-                        transition: theme.transitions.create(
-                          ["border-color", "background-color"],
-                          {
-                            duration: theme.transitions.duration.shorter,
-                          },
-                        ),
+                    "@media (hover: hover) and (pointer: fine)": {
+                      "&:hover": {
+                        "& .experience-card": {
+                          borderColor: isDarkMode
+                            ? alpha(theme.palette.common.white, 0.62)
+                            : alpha(theme.palette.primary.main, 0.6),
+                          backgroundColor: isDarkMode
+                            ? alpha(theme.palette.common.white, 0.03)
+                            : alpha(theme.palette.common.black, 0.02),
+                          transition: theme.transitions.create(
+                            ["border-color", "background-color"],
+                            {
+                              duration: theme.transitions.duration.shorter,
+                            },
+                          ),
+                        },
                       },
                     },
                   }}

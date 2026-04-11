@@ -93,9 +93,12 @@ export const StyledLabel = styled(Box)(({
     fontSize: theme.typography.pxToRem(12),
     fontWeight: theme.typography.fontWeightBold,
     borderRadius: theme.shape.borderRadius * 0.75,
-    transition: theme.transitions.create("all", {
-      duration: theme.transitions.duration.shorter,
-    }),
+    transition: theme.transitions.create(
+      ["background-color", "color", "box-shadow"],
+      {
+        duration: theme.transitions.duration.shorter,
+      },
+    ),
     ...defaultColor,
     ...styleColors,
   };

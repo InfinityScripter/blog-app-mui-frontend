@@ -49,9 +49,11 @@ export function HomeAbout() {
                   width: "100%",
                   height: "auto",
                   borderRadius: 1,
-                  transition: "transform 0.3s ease",
-                  "&:hover": {
-                    transform: "scale(1.05)",
+                  transition: "transform 200ms cubic-bezier(0.23, 1, 0.32, 1)",
+                  "@media (hover: hover) and (pointer: fine)": {
+                    "&:hover": {
+                      transform: "scale(1.05)",
+                    },
                   },
                 }}
               />

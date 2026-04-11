@@ -237,7 +237,7 @@ export function Texts({ sx, ...other }) {
           x="0"
           y="12px"
           dominantBaseline="hanging"
-          animate={{ x: ["0%", "-50%"] }}
+          animate={{ transform: ["translateX(0%)", "translateX(-50%)"] }}
           transition={{ duration: 64, ease: "linear", repeat: Infinity }}
         >
           MIKHAIL TALALAEV MIKHAIL TALALAEV
@@ -304,7 +304,7 @@ export function Dots() {
     <>
       <Dot
         color="error"
-        animate={{ x: 24 }}
+        animate={{ transform: "translateX(24px)" }}
         sx={{
           width: 14,
           height: 14,
@@ -314,25 +314,25 @@ export function Dots() {
 
       <Dot
         color="warning"
-        animate={{ y: 24 }}
+        animate={{ transform: "translateY(24px)" }}
         sx={{ transform: "translate(calc(50% - 356px), calc(50% + 37px))" }}
       />
 
       <Dot
         color="info"
-        animate={{ x: 24 }}
+        animate={{ transform: "translateX(24px)" }}
         sx={{ transform: "translate(calc(50% + 332px), calc(50% + 135px))" }}
       />
 
       <Dot
         color="secondary"
-        animate={{ x: 24 }}
+        animate={{ transform: "translateX(24px)" }}
         sx={{ transform: "translate(calc(50% + 430px), calc(50% - 160px))" }}
       />
 
       <Dot
         color="success"
-        animate={{ y: 24 }}
+        animate={{ transform: "translateY(24px)" }}
         sx={{ transform: "translate(calc(50% + 136px), calc(50% + 332px))" }}
       />
     </>

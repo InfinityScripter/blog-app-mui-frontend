@@ -227,12 +227,14 @@ const StyledNavItem = styled(ButtonBase, {
         content: '""',
         borderRadius: 3,
         position: "absolute",
-        transform: "scale(0)",
-        transition: theme.transitions.create(["transform"], {
+        transform: "scale(0.95)",
+        opacity: 0,
+        transition: theme.transitions.create(["transform", "opacity"], {
           duration: theme.transitions.duration.short,
         }),
         ...(active && {
           transform: "scale(1)",
+          opacity: 1,
           backgroundColor: "currentColor",
         }),
       },

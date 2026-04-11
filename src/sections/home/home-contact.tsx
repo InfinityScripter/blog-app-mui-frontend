@@ -100,10 +100,13 @@ export default function HomeContact() {
                 <Card
                   sx={{
                     boxShadow: theme.customShadows.z8,
-                    transition: "transform 0.3s ease",
-                    "&:hover": {
-                      transform: "translateY(-8px)",
-                      boxShadow: theme.customShadows.z24,
+                    transition:
+                      "transform 200ms cubic-bezier(0.23, 1, 0.32, 1)",
+                    "@media (hover: hover) and (pointer: fine)": {
+                      "&:hover": {
+                        transform: "translateY(-8px)",
+                        boxShadow: theme.customShadows.z24,
+                      },
                     },
                   }}
                 >
@@ -145,10 +148,12 @@ export default function HomeContact() {
               <Card
                 sx={{
                   boxShadow: theme.customShadows.z8,
-                  transition: "transform 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-8px)",
-                    boxShadow: theme.customShadows.z24,
+                  transition: "transform 200ms cubic-bezier(0.23, 1, 0.32, 1)",
+                  "@media (hover: hover) and (pointer: fine)": {
+                    "&:hover": {
+                      transform: "translateY(-8px)",
+                      boxShadow: theme.customShadows.z24,
+                    },
                   },
                 }}
               >

@@ -34,12 +34,14 @@ export function BackToTop({ value = 90, sx, ...other }: BackToTopProps) {
         width: 48,
         height: 48,
         position: "fixed",
-        transform: "scale(0)",
+        transform: "scale(0.95)",
+        opacity: 0,
         right: { xs: 24, md: 32 },
         bottom: { xs: 24, md: 32 },
         zIndex: (theme) => theme.zIndex.speedDial,
-        transition: (theme) => theme.transitions.create(["transform"]),
-        ...(show && { transform: "scale(1)" }),
+        transition: (theme) =>
+          theme.transitions.create(["transform", "opacity"]),
+        ...(show && { transform: "scale(1)", opacity: 1 }),
         ...sx,
       }}
       {...other}

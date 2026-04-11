@@ -100,7 +100,13 @@ export function HomeAdvertisement({ sx, ...other }) {
     <m.div variants={varFade().inUp}>
       <Box
         component={m.img}
-        animate={{ y: [-20, 0, -20] }}
+        animate={{
+          transform: [
+            "translateY(-20px)",
+            "translateY(0px)",
+            "translateY(-20px)",
+          ],
+        }}
         transition={{ duration: 4, repeat: Infinity }}
         alt="rocket"
         src={`${CONFIG.site.basePath}/assets/illustrations/illustration-rocket-large.webp`}

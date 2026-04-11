@@ -1,25 +1,23 @@
-
-
 /** **************************************
 * Plugins
 *************************************** */
 /* portfolio section tokens */
-@import './sections/portfolio/view/styles.css';
+@import "./sections/portfolio/view/styles.css";
 
 /* scrollbar */
-@import './components/scrollbar/styles.css';
+@import "./components/scrollbar/styles.css";
 
 /* image */
-@import './components/image/styles.css';
+@import "./components/image/styles.css";
 
 /* map */
-@import './components/map/styles.css';
+@import "./components/map/styles.css";
 
 /* lightbox */
-@import './components/lightbox/styles.css';
+@import "./components/lightbox/styles.css";
 
 /* chart */
-@import './components/chart/styles.css';
+@import "./components/chart/styles.css";
 
 /** **************************************
 * Baseline
@@ -45,15 +43,29 @@ ul {
   padding: 0;
   list-style-type: none;
 }
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
   appearance: none;
 }
-input[type='number']::-webkit-outer-spin-button {
+input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
   -webkit-appearance: none;
 }
-input[type='number']::-webkit-inner-spin-button {
+input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
   -webkit-appearance: none;
+}
+
+/** **************************************
+* Reduced motion
+*************************************** */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

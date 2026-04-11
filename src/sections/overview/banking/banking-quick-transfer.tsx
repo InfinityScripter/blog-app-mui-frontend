@@ -118,7 +118,11 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
                 mx: "auto",
                 opacity: 0.48,
                 cursor: "pointer",
-                transition: theme.transitions.create("all"),
+                transition: theme.transitions.create([
+                  "opacity",
+                  "transform",
+                  "box-shadow",
+                ]),
                 ...(index === carousel.dots.selectedIndex && {
                   opacity: 1,
                   transform: "scale(1.25)",

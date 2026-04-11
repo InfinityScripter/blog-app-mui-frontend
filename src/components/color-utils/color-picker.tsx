@@ -112,7 +112,7 @@ export const ColorPicker = forwardRef<HTMLUListElement, ColorPickerProps>(
                       boxShadow: `4px 4px 8px 0 ${hexAlpha(color, 0.48)}`,
                       outline: `solid 2px ${hexAlpha(color, 0.08)}`,
                       transition: (theme) =>
-                        theme.transitions.create("all", {
+                        theme.transitions.create(["transform", "box-shadow"], {
                           duration: theme.transitions.duration.shortest,
                         }),
                     }),
@@ -124,7 +124,7 @@ export const ColorPicker = forwardRef<HTMLUListElement, ColorPickerProps>(
                     sx={{
                       color: (theme) => theme.palette.getContrastText(color),
                       transition: (theme) =>
-                        theme.transitions.create("all", {
+                        theme.transitions.create(["color", "transform"], {
                           duration: theme.transitions.duration.shortest,
                         }),
                     }}

@@ -266,7 +266,7 @@ export function ArrowButton({
         borderRadius: "50%",
         boxSizing: "content-box",
         transition: (theme) =>
-          theme.transitions.create(["all"], {
+          theme.transitions.create(["opacity", "background-color"], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.short,
           }),
