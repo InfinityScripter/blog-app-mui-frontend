@@ -123,6 +123,8 @@ export function NavItemDashboard({ path, sx, ...other }) {
     <Link
       component={RouterLink}
       href={path}
+      // Dashboard CTA in the public mega-menu — don't prefetch the heavy route.
+      prefetch={false}
       sx={{ width: 1, height: 1 }}
       {...other}
     >

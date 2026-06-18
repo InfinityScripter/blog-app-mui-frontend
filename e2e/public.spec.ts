@@ -40,7 +40,11 @@ test.describe("public pages", () => {
     // Navigate directly (fresh load) to the detail route.
     await page.goto(href!);
     await expect(page).toHaveTitle(/Post details/i);
-    await expect(page.getByText("Comments", { exact: false })).toBeVisible();
+    // .first() — after hydration the comments section can match more than one
+    // node; we only need to confirm the post detail rendered.
+    await expect(
+      page.getByText("Comments", { exact: false }).first(),
+    ).toBeVisible();
   });
 
   test("unknown route shows 404 view", async ({ page }) => {
