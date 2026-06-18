@@ -2,7 +2,10 @@ import { CONFIG } from "src/config-global";
 import { getPost } from "src/actions/blog-ssr";
 import { paramCase } from "src/utils/change-case";
 import axios, { endpoints } from "src/utils/axios";
-import { PostDetailsHomeView } from "src/sections/blog/view";
+// Import directly from the view file (not the barrel) — the barrel re-exports
+// the dashboard post editor, which would drag tiptap/dropzone/etc into this
+// public bundle.
+import { PostDetailsHomeView } from "src/sections/blog/view/post-details-home-view";
 
 // ----------------------------------------------------------------------
 

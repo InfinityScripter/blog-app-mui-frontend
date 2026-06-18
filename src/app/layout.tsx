@@ -14,11 +14,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MotionLazy } from "src/components/animate/motion-lazy";
 import { detectSettings } from "src/components/settings/server";
 import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
-import {
-  SettingsDrawer,
-  defaultSettings,
-  SettingsProvider,
-} from "src/components/settings";
+import { defaultSettings, SettingsProvider } from "src/components/settings";
+// Lazy client wrapper: defers the settings drawer (and its simplebar-react
+// dependency) out of every route's initial JS. Can't use dynamic({ssr:false})
+// directly here — this is a Server Component.
+import { SettingsDrawer } from "src/components/settings/drawer/settings-drawer-lazy";
 
 // ----------------------------------------------------------------------
 
