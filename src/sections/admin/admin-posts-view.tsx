@@ -1,27 +1,57 @@
-'use client';
+"use client";
 
-import useSWR from 'swr';
-import { paths } from 'src/routes/paths';
-import { useRouter } from 'next/navigation';
-import { Iconify } from 'src/components/iconify';
-import axiosInstance, { fetcher, endpoints } from 'src/utils/axios';
-import { Box, Card, Chip, Table, Tooltip, TableRow,
-  TableBody, TableCell, TableHead, Typography, IconButton, TableContainer } from '@mui/material';
+import useSWR from "swr";
+import { paths } from "src/routes/paths";
+import { useRouter } from "next/navigation";
+import { useAuthContext } from "src/auth/hooks";
+import { Iconify } from "src/components/iconify";
+import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
+import {
+  Box,
+  Card,
+  Chip,
+  Table,
+  Tooltip,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableHead,
+  Typography,
+  IconButton,
+  TableContainer,
+} from "@mui/material";
 
 export function AdminPostsView() {
-  const { data, mutate } = useSWR(endpoints.post.list, fetcher);
+  const { user } = useAuthContext();
+  const accessToken = user?.accessToken;
+
+  // Передаём токен в ключ SWR явно: иначе на свежем логине запрос уходит
+  // до того, как setSession проставит Authorization в axios.defaults — и
+  // бэкенд отдаёт посты по userId-фильтру (для админа это 0 строк) вместо
+  // admin-ветки «все посты». Ключ null до появления токена → нет гонки.
+  const { data, mutate } = useSWR(
+    accessToken
+      ? [
+          endpoints.post.list,
+          { headers: { Authorization: `Bearer ${accessToken}` } },
+        ]
+      : null,
+    fetcher,
+  );
   const posts = (data as any)?.posts ?? [];
   const router = useRouter();
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm('Удалить пост?')) return;
+    if (!window.confirm("Удалить пост?")) return;
     await axiosInstance.delete(endpoints.admin.postById(id));
     mutate();
   };
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 3 }}>Все посты</Typography>
+      <Typography variant="h4" sx={{ mb: 3 }}>
+        Все посты
+      </Typography>
       <Card>
         <TableContainer>
           <Table>
@@ -42,19 +72,28 @@ export function AdminPostsView() {
                   <TableCell>
                     <Chip
                       label={p.publish}
-                      color={p.publish === 'published' ? 'success' : 'default'}
+                      color={p.publish === "published" ? "success" : "default"}
                       size="small"
                     />
                   </TableCell>
-                  <TableCell>{new Date(p.createdAt).toLocaleDateString('ru-RU')}</TableCell>
+                  <TableCell>
+                    {new Date(p.createdAt).toLocaleDateString("ru-RU")}
+                  </TableCell>
                   <TableCell>
                     <Tooltip title="Редактировать">
-                      <IconButton onClick={() => router.push(paths.dashboard.post.edit(p.id))}>
+                      <IconButton
+                        onClick={() =>
+                          router.push(paths.dashboard.post.edit(p.id))
+                        }
+                      >
                         <Iconify icon="solar:pen-bold" />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Удалить">
-                      <IconButton color="error" onClick={() => handleDelete(p.id)}>
+                      <IconButton
+                        color="error"
+                        onClick={() => handleDelete(p.id)}
+                      >
                         <Iconify icon="solar:trash-bin-trash-bold" />
                       </IconButton>
                     </Tooltip>
