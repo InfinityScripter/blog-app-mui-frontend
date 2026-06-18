@@ -9,6 +9,10 @@ import { PostListHomeView } from "src/sections/blog/view/post-list-home-view";
 
 export const metadata = { title: `Post list - ${CONFIG.site.name}` };
 
+// ISR: serve a cached blog list, refreshed at most hourly (getPosts uses a
+// native fetch with the same revalidate window).
+export const revalidate = 3600;
+
 export default async function Page() {
   const { posts } = await getPosts();
 

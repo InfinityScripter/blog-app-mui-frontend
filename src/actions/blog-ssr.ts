@@ -12,19 +12,33 @@ import axios, { endpoints } from "src/utils/axios";
 
 // ----------------------------------------------------------------------
 
-export async function getPosts(): Promise<ListPostsResponse> {
-  const res = await axios.get<ListPostsResponse>(endpoints.post.list);
+// ISR window for the public blog SSR reads. Native fetch (not axios) is used
+// here so Next can cache/revalidate these requests — axios bypasses the Next
+// fetch cache, which would keep the pages dynamic.
+const REVALIDATE_SECONDS = 3600;
 
-  return res.data;
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
+
+export async function getPosts(): Promise<ListPostsResponse> {
+  const res = await fetch(`${SERVER_URL}${endpoints.post.list}`, {
+    next: { revalidate: REVALIDATE_SECONDS },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch posts: ${res.status}`);
+  }
+  return res.json() as Promise<ListPostsResponse>;
 }
 
 // ----------------------------------------------------------------------
 
 export async function getPost(id: string): Promise<PostResponse> {
-  const res = await axios.get<PostResponse>(
-    `${endpoints.post.details}?id=${id}`,
-  );
-  return res.data;
+  const res = await fetch(`${SERVER_URL}${endpoints.post.details}?id=${id}`, {
+    next: { revalidate: REVALIDATE_SECONDS },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch post ${id}: ${res.status}`);
+  }
+  return res.json() as Promise<PostResponse>;
 }
 
 // ----------------------------------------------------------------------
