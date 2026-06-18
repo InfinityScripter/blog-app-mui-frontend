@@ -12,13 +12,12 @@ import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MotionLazy } from "src/components/animate/motion-lazy";
-import { detectSettings } from "src/components/settings/server";
 import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
-import {
-  SettingsDrawer,
-  defaultSettings,
-  SettingsProvider,
-} from "src/components/settings";
+import { defaultSettings, SettingsProvider } from "src/components/settings";
+// Lazy client wrapper: defers the settings drawer (and its simplebar-react
+// dependency) out of every route's initial JS. Can't use dynamic({ssr:false})
+// directly here — this is a Server Component.
+import { SettingsDrawer } from "src/components/settings/drawer/settings-drawer-lazy";
 
 // ----------------------------------------------------------------------
 
@@ -45,10 +44,14 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-export default async function RootLayout({ children }: RootLayoutProps) {
-  const settings = CONFIG.isStaticExport
-    ? defaultSettings
-    : await detectSettings();
+export default function RootLayout({ children }: RootLayoutProps) {
+  // Render with default settings on the server and let the client hydrate the
+  // persisted settings from the cookie (SettingsProvider's useCookies mount
+  // effect) and the persisted color mode from localStorage (the inline
+  // getInitColorSchemeScript below, before first paint). Reading the cookie
+  // here via detectSettings() would call cookies() and force EVERY route to
+  // render dynamically — defeating ISR/static generation site-wide.
+  const settings = defaultSettings;
 
   return (
     <html

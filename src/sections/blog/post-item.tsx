@@ -116,6 +116,10 @@ export function PostItemLatest({ post, index }) {
         alt={post.title}
         src={formatImageUrl(post.coverUrl)}
         ratio="4/3"
+        // The first featured cover is the LCP element on the blog list — load
+        // it eagerly instead of lazily so it doesn't gate Largest Contentful
+        // Paint on mobile.
+        visibleByDefault={index === 0}
         sx={{ height: 360 }}
         slotProps={{
           overlay: {

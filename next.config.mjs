@@ -1,4 +1,10 @@
+import bundleAnalyzer from "@next/bundle-analyzer";
+
 const isStaticExport = "false";
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig = {
   trailingSlash: true,
@@ -45,4 +51,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

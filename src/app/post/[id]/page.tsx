@@ -1,12 +1,18 @@
 import { CONFIG } from "src/config-global";
-import { getPost } from "src/actions/blog-ssr";
 import { paramCase } from "src/utils/change-case";
-import axios, { endpoints } from "src/utils/axios";
-import { PostDetailsHomeView } from "src/sections/blog/view";
+import { getPost, getPosts } from "src/actions/blog-ssr";
+// Import directly from the view file (not the barrel) — the barrel re-exports
+// the dashboard post editor, which would drag tiptap/dropzone/etc into this
+// public bundle.
+import { PostDetailsHomeView } from "src/sections/blog/view/post-details-home-view";
 
 // ----------------------------------------------------------------------
 
 export const metadata = { title: `Post details - ${CONFIG.site.name}` };
+
+// ISR: prerender post pages and refresh them at most once per hour. Replaces
+// the previous force-dynamic export, which made every request a cold render.
+export const revalidate = 3600;
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -21,25 +27,25 @@ export default async function Page({ params }: PageProps) {
 // ----------------------------------------------------------------------
 
 /**
- * [1] Default
- * Remove [1] and [2] if not using [2]
- */
-const dynamic = CONFIG.isStaticExport ? "auto" : "force-dynamic";
-
-export { dynamic };
-
-/**
- * [2] Static exports
- * https://nextjs.org/docs/app/building-your-application/deploying/static-exports
+ * Prerender the published posts at build time; unknown ids still render on
+ * demand (dynamicParams defaults to true) and are then cached by ISR. The
+ * fetch is wrapped so an unreachable backend at build time yields no params
+ * instead of failing the build.
  */
 export async function generateStaticParams(): Promise<Array<{ id: string }>> {
-  if (CONFIG.isStaticExport) {
-    const res = await axios.get<{
-      posts: Array<{ title: string; _id?: string; id?: string }>;
-    }>(endpoints.post.list);
-    return res.data.posts.map((post) => ({
-      id: post._id ?? post.id ?? paramCase(post.title),
-    }));
+  try {
+    const { posts } = await getPosts();
+    return posts.map((post) => {
+      // The backend serialises the primary key as `_id`; `id`/`title` are
+      // fallbacks for older shapes.
+      const { _id, id, title } = post as {
+        _id?: string;
+        id?: string;
+        title: string;
+      };
+      return { id: _id ?? id ?? paramCase(title) };
+    });
+  } catch {
+    return [];
   }
-  return [];
 }

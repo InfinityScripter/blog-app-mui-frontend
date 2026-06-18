@@ -7,8 +7,13 @@ import { useParams } from "next/navigation";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { STORAGE_KEY } from "src/auth/context/jwt";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, Field } from "src/components/hook-form";
+// Import the two pieces this form needs directly — NOT from the hook-form
+// barrel. The barrel's `Field` namespace statically pulls RHFEditor (tiptap),
+// RHFUpload (dropzone) and RHFPhoneInput (libphonenumber), which would bloat
+// the public /post/[id] bundle by ~900 KB.
+import { Form } from "src/components/hook-form/form-provider";
 import { addComment, getCurrentUser } from "src/actions/blog-ssr";
+import { RHFTextField } from "src/components/hook-form/rhf-text-field";
 
 // ----------------------------------------------------------------------
 
@@ -116,7 +121,7 @@ export function PostCommentForm({
           </Alert>
         )}
 
-        <Field.Text
+        <RHFTextField
           name="comment"
           placeholder="Оставьте комментарий..."
           multiline

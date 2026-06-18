@@ -9,6 +9,8 @@ export function SignInButton({ sx, ...other }) {
     <Button
       component={RouterLink}
       href={CONFIG.auth.redirectPath}
+      // Don't prefetch the heavy dashboard route from every public page header.
+      prefetch={false}
       variant="outlined"
       sx={sx}
       {...other}

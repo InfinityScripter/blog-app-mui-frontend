@@ -86,10 +86,10 @@ test.describe("post CRUD (dashboard UI)", () => {
     expect(postId).toBeTruthy();
     await page.goto(`/post/${postId}`);
     await expect(page).toHaveTitle(/Post details/i);
-    await expect(page.getByRole("heading", { name: title })).toBeVisible({
-      timeout: 15_000,
-    });
-    await expect(page.getByText(CONTENT.slice(0, 40))).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: title }).first(),
+    ).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText(CONTENT.slice(0, 40)).first()).toBeVisible();
   });
 
   test("edit the post through the form", async ({ authedPage }) => {
@@ -114,9 +114,9 @@ test.describe("post CRUD (dashboard UI)", () => {
 
     // Public page reflects the new title.
     await page.goto(`/post/${postId}`);
-    await expect(page.getByRole("heading", { name: editedTitle })).toBeVisible({
-      timeout: 15_000,
-    });
+    await expect(
+      page.getByRole("heading", { name: editedTitle }).first(),
+    ).toBeVisible({ timeout: 15_000 });
   });
 
   test("delete the post from the admin table", async ({ authedPage }) => {

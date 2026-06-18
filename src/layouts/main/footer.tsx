@@ -158,6 +158,8 @@ export function Footer({ layoutQuery, sx }) {
                       key={link.name}
                       component={RouterLink}
                       href={link.href}
+                      // Low-traffic footer links — skip background prefetch.
+                      prefetch={false}
                       color="inherit"
                       variant="body2"
                     >
