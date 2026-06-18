@@ -9,3 +9,6 @@ public/*
 yarn.lock
 package-lock.json
 jsconfig.json
+
+# Vendored Minimals component gallery — dev-only reference, kept as-is
+examples/*

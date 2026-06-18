@@ -6,7 +6,17 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
+// Dev-only pages use a `.dev.tsx` (etc.) extension. Register those extensions
+// as routable only in development, so dev-only routes (e.g. the component
+// gallery under /dev) and their imports are entirely absent from prod builds.
+const basePageExtensions = ["tsx", "ts", "jsx", "js"];
+const pageExtensions =
+  process.env.NODE_ENV === "development"
+    ? [...basePageExtensions.map((ext) => `dev.${ext}`), ...basePageExtensions]
+    : basePageExtensions;
+
 const nextConfig = {
+  pageExtensions,
   trailingSlash: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   env: {

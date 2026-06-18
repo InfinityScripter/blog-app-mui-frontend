@@ -38,3 +38,10 @@ public/*
 # Playwright e2e (its `use` fixture trips React rules-of-hooks)
 e2e/*
 playwright.config.ts
+
+# Vendored Minimals component gallery — kept as a dev-only reference
+# ("component factory"), not part of the production app. Not linted or
+# type-checked in the main flow. Reachable only via the dev-only
+# /examples route (404s in production).
+examples/*
+
