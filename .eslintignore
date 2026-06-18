@@ -34,3 +34,7 @@ public/*
 
 # misc
 **/jsconfig.json
+
+# Playwright e2e (its `use` fixture trips React rules-of-hooks)
+e2e/*
+playwright.config.ts
