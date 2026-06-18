@@ -31,7 +31,7 @@ export default function Page() {
         await setSession(token);
         await checkUserSession();
         router.replace(CONFIG.auth.redirectPath || paths.dashboard.root);
-      } catch (e) {
+      } catch {
         setError("Не удалось завершить авторизацию");
       }
     };

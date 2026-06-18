@@ -38,8 +38,7 @@ export function useGetPosts() {
   return memoizedValue;
 }
 
-export function useGetPost(postId?: string, title?: string) {
-  const url = title ? [endpoints.post.details, { params: { title } }] : "";
+export function useGetPost(postId?: string) {
   const key = postId ? `${endpoints.post.details}?id=${postId}` : null;
 
   const { data, isLoading, error, isValidating, mutate } = useSWR<PostResponse>(

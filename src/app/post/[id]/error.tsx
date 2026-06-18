@@ -14,7 +14,7 @@ interface ErrorProps {
   reset: () => void;
 }
 
-export default function Error({ error, reset }: ErrorProps) {
+export default function Error({ error: _error, reset: _reset }: ErrorProps) {
   return (
     <Container sx={{ my: 5 }}>
       <EmptyContent

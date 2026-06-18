@@ -51,7 +51,9 @@ module.exports = {
     "import/no-unresolved": 0,
     "import/named": 0,
     "import/no-self-import": 0,
-    "import/no-cycle": 0,
+    // Circular deps are currently at zero (verified with madge). Lock that in
+    // as an error so they can never be reintroduced.
+    "import/no-cycle": [2, { maxDepth: 1, ignoreExternal: true }],
     "import/no-relative-packages": 0,
     "import/no-extraneous-dependencies": 0,
     "import/order": 0,
@@ -75,10 +77,18 @@ module.exports = {
     // jsx-a11y
     "jsx-a11y/anchor-is-valid": 0,
     "jsx-a11y/control-has-associated-label": 0,
-    // unused imports
-    "unused-imports/no-unused-imports": 1,
+    // Stale effect deps are a real correctness footgun and the code is already
+    // clean (0 violations) — lock it at error.
+    "react-hooks/exhaustive-deps": 2,
+    // Dead imports are noise and a refactor hazard — never allow them.
+    // Autofixable, so this is cheap to keep at error.
+    "unused-imports/no-unused-imports": 2,
+    // Unused vars are surfaced as warnings: ~100 legacy hits in vendored
+    // template code make `error` too disruptive repo-wide. Author folders are
+    // raised to error per-path in eslint `overrides` (see below). `_`-prefixed
+    // names are intentional placeholders and ignored.
     "unused-imports/no-unused-vars": [
-      0,
+      1,
       {
         vars: "all",
         varsIgnorePattern: "^_",
@@ -115,4 +125,30 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      // Author-owned code is held to a stricter bar than the vendored template:
+      // unused vars become errors here so our own code stays clean. Vendored
+      // sections keep the repo-wide `warn` until they are cleaned per-folder.
+      files: [
+        "src/actions/**/*.{ts,tsx}",
+        "src/auth/**/*.{ts,tsx}",
+        "src/sections/blog/**/*.{ts,tsx,jsx}",
+        "src/sections/admin/**/*.{ts,tsx}",
+        "src/sections/portfolio/**/*.{ts,tsx}",
+        "src/app/**/*.{ts,tsx}",
+      ],
+      rules: {
+        "unused-imports/no-unused-vars": [
+          2,
+          {
+            vars: "all",
+            varsIgnorePattern: "^_",
+            args: "after-used",
+            argsIgnorePattern: "^_",
+          },
+        ],
+      },
+    },
+  ],
 };

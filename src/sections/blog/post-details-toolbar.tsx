@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import { useRouter } from "src/routes/hooks";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
@@ -27,7 +26,6 @@ export function PostDetailsToolbar({
   ...other
 }) {
   const popover = usePopover();
-  const router = useRouter();
   const {
     openConfirm,
     loading,
