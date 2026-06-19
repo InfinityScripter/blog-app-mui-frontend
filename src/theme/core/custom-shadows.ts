@@ -1,6 +1,6 @@
 import type { ColorScheme } from "src/types/domain";
 
-import { varAlpha } from "../styles";
+import { varAlpha } from "../styles/utils";
 import {
   grey,
   info,

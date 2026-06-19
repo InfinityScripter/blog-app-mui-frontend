@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { varAlpha, bgGradient } from "src/theme/styles";
 import { alpha as hexAlpha } from "@mui/material/styles";
 
-import type { LayoutUserView } from "./account-drawer";
+import type { LayoutUserView } from "./types";
 
 // ----------------------------------------------------------------------
 

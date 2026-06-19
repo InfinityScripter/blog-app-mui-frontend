@@ -27,6 +27,8 @@ import { UpgradeBlock } from "./nav-upgrade";
 import { AccountButton } from "./account-button";
 import { SignOutButton } from "./sign-out-button";
 
+import type { LayoutUserView } from "./types";
+
 // ----------------------------------------------------------------------
 
 export interface AccountDrawerItem {
@@ -43,11 +45,6 @@ export interface AccountDrawerItem {
  * The hook's `user` (`User & { accessToken?; role? } | null`) is assignable to
  * it because every field here is optional. See the SHARED-TYPE GAP report.
  */
-export interface LayoutUserView {
-  photoURL?: string;
-  displayName?: string;
-  email?: string;
-}
 
 export interface AccountDrawerProps {
   data?: AccountDrawerItem[];
