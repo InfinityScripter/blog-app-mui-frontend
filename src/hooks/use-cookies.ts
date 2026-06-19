@@ -15,7 +15,7 @@ interface UseCookiesReturn<T> {
   canReset: boolean;
 }
 
-export function useCookies<T extends Record<string, unknown>>(
+export function useCookies<T extends object>(
   key: string,
   initialState: T,
   defaultValues: T,

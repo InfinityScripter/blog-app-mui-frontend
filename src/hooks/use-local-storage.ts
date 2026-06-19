@@ -12,7 +12,7 @@ interface UseLocalStorageReturn<T> {
   canReset: boolean;
 }
 
-export function useLocalStorage<T extends Record<string, unknown>>(
+export function useLocalStorage<T extends object>(
   key: string,
   initialState: T,
 ): UseLocalStorageReturn<T> {

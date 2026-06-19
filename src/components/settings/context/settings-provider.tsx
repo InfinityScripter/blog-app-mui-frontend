@@ -1,24 +1,36 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import { useCookies } from "src/hooks/use-cookies";
 import { useLocalStorage } from "src/hooks/use-local-storage";
 import { useMemo, useState, useCallback, createContext } from "react";
 
+import { type SettingsContextValue } from "../types";
+import { type SettingsState } from "../config-settings";
 import { STORAGE_KEY, defaultSettings } from "../config-settings";
 
 // ----------------------------------------------------------------------
 
-export const SettingsContext = createContext(undefined);
+export const SettingsContext = createContext<SettingsContextValue | undefined>(
+  undefined,
+);
 
 export const SettingsConsumer = SettingsContext.Consumer;
 
 // ----------------------------------------------------------------------
 
+interface SettingsProviderProps {
+  children: ReactNode;
+  settings: SettingsState;
+  caches?: "localStorage" | "cookie";
+}
+
 export function SettingsProvider({
   children,
   settings,
   caches = "localStorage",
-}) {
+}: SettingsProviderProps) {
   const cookies = useCookies(STORAGE_KEY, settings, defaultSettings);
 
   const localStorage = useLocalStorage(STORAGE_KEY, settings);
