@@ -1,3 +1,4 @@
+import type { SystemStyleObject } from "@mui/system";
 import type { Theme, SxProps } from "@mui/material/styles";
 
 import { alpha } from "@mui/material/styles";
@@ -35,7 +36,9 @@ export const marketingHeadlineHighlightSx = (theme: Theme): SxProps<Theme> => ({
 });
 
 /** Soft primary tint band for compact marketing sections (e.g. portfolio hero). */
-export const marketingHeroTintBandSx = (theme: Theme): SxProps<Theme> => ({
+export const marketingHeroTintBandSx = (
+  theme: Theme,
+): SystemStyleObject<Theme> => ({
   py: { xs: 10, md: 14 },
   bgcolor: alpha(
     theme.palette.primary.main,
