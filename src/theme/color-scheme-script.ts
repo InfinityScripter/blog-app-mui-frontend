@@ -11,7 +11,7 @@ type SchemeConfig = NonNullable<
 
 export const schemeConfig: SchemeConfig = {
   modeStorageKey: "theme-mode",
-  defaultMode: defaultSettings.colorScheme as SchemeConfig["defaultMode"],
+  defaultMode: defaultSettings.colorScheme,
 };
 
 export const getInitColorSchemeScript = _getInitColorSchemeScript(schemeConfig);

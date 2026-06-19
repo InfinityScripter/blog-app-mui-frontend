@@ -1,19 +1,19 @@
-import type { Post } from "src/types/domain";
-
 import { paths } from "src/routes/paths";
 import { useRouter } from "src/routes/hooks";
 import { useState, useCallback } from "react";
 import { deletePost } from "src/actions/blog-ssr";
 
-interface PostWithId extends Post {
+// Only the post id is needed to confirm + perform a delete, so callers may pass
+// any object carrying an `_id` (a full Post or just `{ _id }`).
+interface PostToDelete {
   _id: string;
 }
 
 interface UsePostDeleteReturn {
   openConfirm: boolean;
-  postToDelete: PostWithId | null;
+  postToDelete: PostToDelete | null;
   loading: boolean;
-  handleOpenConfirm: (post: PostWithId) => void;
+  handleOpenConfirm: (post: PostToDelete) => void;
   handleCloseConfirm: () => void;
   handleDelete: () => Promise<void>;
 }
@@ -21,10 +21,10 @@ interface UsePostDeleteReturn {
 export function usePostDelete(): UsePostDeleteReturn {
   const router = useRouter();
   const [openConfirm, setOpenConfirm] = useState(false);
-  const [postToDelete, setPostToDelete] = useState<PostWithId | null>(null);
+  const [postToDelete, setPostToDelete] = useState<PostToDelete | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleOpenConfirm = useCallback((post: PostWithId) => {
+  const handleOpenConfirm = useCallback((post: PostToDelete) => {
     setPostToDelete(post);
     setOpenConfirm(true);
   }, []);

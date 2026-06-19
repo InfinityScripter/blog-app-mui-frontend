@@ -54,9 +54,7 @@ export function PostDetailsToolbar({
   } = usePostDelete();
 
   const handleClickDelete = () => {
-    handleOpenConfirm({ _id: postId } as Parameters<
-      typeof handleOpenConfirm
-    >[0]);
+    handleOpenConfirm({ _id: postId });
   };
 
   return (
