@@ -4,11 +4,7 @@ name: frontend-ci
 # pushes to main. Blocks merge on lint errors, circular dependencies, or a
 # broken production build.
 #
-# Intentionally NOT gated here (yet):
-#  - `tsc --noEmit`: the vendored Minimals template still has ~2.7k type errors
-#    (next.config sets typescript.ignoreBuildErrors). Strict typing is being
-#    rolled out per author-folder; once author code is clean a scoped type-check
-#    can be added.
+# Intentionally NOT gated here:
 #  - e2e: requires a running backend + seeded Postgres; too heavy for this gate.
 #  - knip: reports false positives for some live features, so it runs as a
 #    non-blocking report rather than a hard gate.
@@ -41,6 +37,9 @@ jobs:
 
       - name: Lint
         run: yarn lint
+
+      - name: Type check
+        run: npx tsc --noEmit
 
       - name: Circular dependency check
         run: npx madge --circular --extensions ts,tsx src

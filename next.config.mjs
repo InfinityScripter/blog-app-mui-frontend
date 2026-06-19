@@ -23,7 +23,9 @@ const nextConfig = {
     BUILD_STATIC_EXPORT: isStaticExport,
   },
   typescript: {
-    ignoreBuildErrors: true,
+    // The whole repo type-checks clean (npx tsc --noEmit = 0). Let the build
+    // enforce types instead of ignoring them.
+    ignoreBuildErrors: false,
   },
   modularizeImports: {
     "@mui/icons-material": {
