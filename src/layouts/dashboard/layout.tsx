@@ -1,7 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import type { SettingsState } from "src/types/domain";
+import type { SettingsContextValue } from "src/components/settings/types";
+import type { NavSectionDataProps } from "src/components/nav-section/types";
 import type { Theme, SxProps, Theme as MuiTheme } from "@mui/material/styles";
 
 import { useMemo } from "react";
@@ -31,7 +32,7 @@ interface DashboardLayoutProps {
   sx?: SxProps<Theme>;
   children: ReactNode;
   data?: {
-    nav?: unknown;
+    nav?: NavSectionDataProps[];
   };
 }
 
@@ -213,7 +214,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
 
 // ----------------------------------------------------------------------
 
-function useNavColorVars(theme: MuiTheme, settings: SettingsState) {
+function useNavColorVars(theme: MuiTheme, settings: SettingsContextValue) {
   const {
     vars: { palette },
   } = theme;

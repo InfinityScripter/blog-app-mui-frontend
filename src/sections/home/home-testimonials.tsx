@@ -21,7 +21,6 @@ import {
   Carousel,
   useCarousel,
   CarouselDotButtons,
-  carouselBreakpoints,
   CarouselArrowBasicButtons,
 } from "src/components/carousel";
 
@@ -54,14 +53,14 @@ export function HomeTestimonials({ sx, ...other }: StackProps) {
     </>
   );
 
+  // NOTE: `slideSpacing` is not an Embla per-breakpoint option and is only
+  // read once at the top level by `Carousel` (`options.slideSpacing`), so a
+  // per-breakpoint `breakpoints: { ...: { slideSpacing } }` map is inert at
+  // runtime. The `useCarousel` options type also does not allow custom keys
+  // inside `breakpoints` (shared-type gap). Set spacing at the top level.
   const carousel = useCarousel({
     align: "start",
     slidesToShow: { xs: 1, sm: 2, md: 3, lg: 4 },
-    breakpoints: {
-      [carouselBreakpoints.sm]: { slideSpacing: "24px" },
-      [carouselBreakpoints.md]: { slideSpacing: "40px" },
-      [carouselBreakpoints.lg]: { slideSpacing: "64px" },
-    },
   });
 
   const renderDescription = (

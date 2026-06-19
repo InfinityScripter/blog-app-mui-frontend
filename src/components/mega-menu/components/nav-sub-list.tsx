@@ -8,9 +8,11 @@ import { removeLastSlash } from "src/routes/utils";
 
 import { NavLi, NavUl } from "../../nav-section";
 
+import type { NavSubListProps, NavSubItemProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function NavSubList({ data, slotProps, ...other }) {
+export function NavSubList({ data, slotProps, ...other }: NavSubListProps) {
   const pathname = usePathname();
 
   return (
@@ -47,7 +49,7 @@ export function NavSubList({ data, slotProps, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export const NavSubItem = forwardRef(
+export const NavSubItem = forwardRef<HTMLAnchorElement, NavSubItemProps>(
   ({ title, path, active, slotProps }, ref) => (
     <NavLi key={title}>
       <Link

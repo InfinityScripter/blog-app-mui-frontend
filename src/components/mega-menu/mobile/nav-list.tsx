@@ -13,9 +13,16 @@ import { Iconify } from "../../iconify";
 import { NavUl, NavLi } from "../../nav-section";
 import { NavSubList } from "../components/nav-sub-list";
 
+import type { MegaMenuNavListProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function NavList({ data, render, cssVars, slotProps }) {
+export function NavList({
+  data,
+  render,
+  cssVars,
+  slotProps,
+}: MegaMenuNavListProps) {
   const pathname = usePathname();
 
   const active = useActiveLink(data.path, !!data.children);

@@ -15,12 +15,12 @@ const FORMAT_AUDIO = ["wav", "aif", "mp3", "aac"];
 const FORMAT_IMG = ["jpg", "jpeg", "gif", "bmp", "png", "svg", "webp"];
 const FORMAT_VIDEO = ["m4v", "avi", "mpg", "mp4", "webm"];
 
-const iconUrl = (icon) =>
+const iconUrl = (icon: string) =>
   `${CONFIG.site.basePath}/assets/icons/files/${icon}.svg`;
 
 // ----------------------------------------------------------------------
 
-export function fileFormat(fileUrl) {
+export function fileFormat(fileUrl: string) {
   let format;
 
   const fileByUrl = fileTypeByUrl(fileUrl);
@@ -68,7 +68,7 @@ export function fileFormat(fileUrl) {
 
 // ----------------------------------------------------------------------
 
-export function fileThumb(fileUrl) {
+export function fileThumb(fileUrl: string) {
   let thumb;
 
   switch (fileFormat(fileUrl)) {
@@ -116,19 +116,37 @@ export function fileThumb(fileUrl) {
 
 // ----------------------------------------------------------------------
 
-export function fileTypeByUrl(fileUrl) {
+export function fileTypeByUrl(fileUrl: string) {
   return (fileUrl && fileUrl.split(".").pop()) || "";
 }
 
 // ----------------------------------------------------------------------
 
-export function fileNameByUrl(fileUrl) {
+export function fileNameByUrl(fileUrl: string) {
   return fileUrl.split("/").pop();
 }
 
 // ----------------------------------------------------------------------
 
-export function fileData(file) {
+// Dropzone augments File with `path`/`preview`; some browsers expose the
+// legacy non-standard `lastModifiedDate`. Model them here so reads are typed.
+interface FileWithMeta extends File {
+  path?: string;
+  preview?: string;
+  lastModifiedDate?: Date;
+}
+
+interface FileData {
+  name: string | undefined;
+  size: number | undefined;
+  path: string | undefined;
+  type: string | undefined;
+  preview: string | undefined;
+  lastModified: number | undefined;
+  lastModifiedDate: Date | undefined;
+}
+
+export function fileData(file: FileWithMeta | string): FileData {
   // From url
   if (typeof file === "string") {
     return {

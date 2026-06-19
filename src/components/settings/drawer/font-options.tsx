@@ -6,9 +6,15 @@ import { setFont, varAlpha, stylesMode } from "src/theme/styles";
 import { Block } from "./styles";
 import { SvgColor } from "../../svg-color";
 
+import type { FontOptionsProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function FontOptions({ value, options, onClickOption }) {
+export function FontOptions({
+  value,
+  options,
+  onClickOption,
+}: FontOptionsProps) {
   return (
     <Block title="Font">
       <Box

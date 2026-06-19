@@ -1,3 +1,6 @@
+import type { SyntheticEvent } from "react";
+import type { StackProps } from "@mui/material/Stack";
+
 import { useState } from "react";
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
@@ -86,12 +89,13 @@ const FAQs = [
 
 // ----------------------------------------------------------------------
 
-export function HomeFAQs({ sx, ...other }) {
-  const [expanded, setExpanded] = useState(FAQs[0].question);
+export function HomeFAQs({ sx, ...other }: StackProps) {
+  const [expanded, setExpanded] = useState<string | false>(FAQs[0].question);
 
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
+  const handleChange =
+    (panel: string) => (_event: SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   const renderDescription = (
     <SectionTitle

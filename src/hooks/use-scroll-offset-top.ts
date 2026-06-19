@@ -6,7 +6,7 @@ import { useRef, useMemo, useState, useCallback } from "react";
 // ----------------------------------------------------------------------
 
 interface UseScrollOffSetTopReturn {
-  elementRef: React.RefObject<HTMLElement>;
+  elementRef: React.RefObject<HTMLElement | null>;
   offsetTop: boolean;
 }
 

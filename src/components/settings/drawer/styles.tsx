@@ -3,9 +3,11 @@ import Tooltip from "@mui/material/Tooltip";
 import { Iconify } from "src/components/iconify";
 import { varAlpha, stylesMode } from "src/theme/styles";
 
+import type { BlockProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function Block({ title, tooltip, children, sx }) {
+export function Block({ title, tooltip, children, sx }: BlockProps) {
   return (
     <Box
       sx={{

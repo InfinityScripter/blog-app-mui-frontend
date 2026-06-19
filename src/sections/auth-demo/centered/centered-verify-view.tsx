@@ -3,7 +3,6 @@
 import { z as zod } from "zod";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import { paths } from "src/routes/paths";
 import { useForm } from "react-hook-form";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -12,6 +11,8 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
+
+import { authDemoPaths } from "../paths";
 
 export const VerifySchema = zod.object({
   code: zod
@@ -96,7 +97,7 @@ export function CenteredVerifyView() {
 
       <Link
         component={RouterLink}
-        href={paths.authDemo.centered.signIn}
+        href={authDemoPaths.centered.signIn}
         color="inherit"
         variant="subtitle2"
         sx={{ mx: "auto", alignItems: "center", display: "inline-flex" }}

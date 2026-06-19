@@ -3,6 +3,13 @@ import { cloneElement } from "react";
 import { useTheme } from "@mui/material/styles";
 import { flattenArray } from "src/utils/helper";
 
+import type {
+  TreeListProps,
+  TreeSubListProps,
+  OrgChartNodeProps,
+  OrganizationalChartProps,
+} from "./types";
+
 // ----------------------------------------------------------------------
 
 const Tree = dynamic(
@@ -21,10 +28,14 @@ const TreeNode = dynamic(
 
 // ----------------------------------------------------------------------
 
-export function OrganizationalChart({ data, nodeItem, ...other }) {
+export function OrganizationalChart({
+  data,
+  nodeItem,
+  ...other
+}: OrganizationalChartProps) {
   const theme = useTheme();
 
-  const cloneNode = (props) => cloneElement(nodeItem(props));
+  const cloneNode = (props: OrgChartNodeProps) => cloneElement(nodeItem(props));
 
   const label = cloneNode({
     ...data,
@@ -39,7 +50,7 @@ export function OrganizationalChart({ data, nodeItem, ...other }) {
       label={label}
       {...other}
     >
-      {data.children.map((list, index) => (
+      {data.children?.map((list, index) => (
         <TreeList key={index} depth={1} data={list} nodeItem={nodeItem} />
       ))}
     </Tree>
@@ -48,10 +59,10 @@ export function OrganizationalChart({ data, nodeItem, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function TreeList({ data, depth, nodeItem }) {
+export function TreeList({ data, depth, nodeItem }: TreeListProps) {
   const childs = data.children;
 
-  const cloneNode = (props) => cloneElement(nodeItem(props));
+  const cloneNode = (props: OrgChartNodeProps) => cloneElement(nodeItem(props));
 
   const totalChildren = childs ? flattenArray(childs)?.length : 0;
 
@@ -72,7 +83,7 @@ export function TreeList({ data, depth, nodeItem }) {
 
 // ----------------------------------------------------------------------
 
-function TreeSubList({ data, depth, nodeItem }) {
+function TreeSubList({ data, depth, nodeItem }: TreeSubListProps) {
   return (
     <>
       {data.map((list, index) => (

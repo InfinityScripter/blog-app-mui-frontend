@@ -3,9 +3,11 @@ import { RouterLink } from "src/routes/components";
 
 import { Iconify } from "../../iconify";
 
+import type { MenuMoreLinkProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function MenuMoreLink({ title, path, sx, ...other }) {
+export function MenuMoreLink({ title, path, sx, ...other }: MenuMoreLinkProps) {
   return (
     <Link
       component={RouterLink}

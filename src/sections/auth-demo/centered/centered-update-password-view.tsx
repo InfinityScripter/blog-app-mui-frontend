@@ -2,6 +2,7 @@
 
 import { z as zod } from "zod";
 import { useState } from "react";
+import { isAxiosError } from "axios";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
@@ -93,10 +94,10 @@ export function CenteredUpdatePasswordView() {
       // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error("Error updating password:", error);
-      setError(
-        error.response?.data?.message ||
-          "Failed to update password. Please try again.",
-      );
+      const message = isAxiosError<{ message?: string }>(error)
+        ? error.response?.data?.message
+        : undefined;
+      setError(message || "Failed to update password. Please try again.");
     }
   });
 

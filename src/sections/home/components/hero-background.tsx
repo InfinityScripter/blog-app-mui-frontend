@@ -1,3 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -11,7 +13,11 @@ import { Dots, Lines, Texts, Circles, PlusIcon } from "./hero-svg";
 
 // ----------------------------------------------------------------------
 
-export function HeroBackground({ sx }) {
+interface HeroBackgroundProps {
+  sx?: SxProps<Theme>;
+}
+
+export function HeroBackground({ sx }: HeroBackgroundProps) {
   const theme = useTheme();
 
   const upMd = useResponsive("up", "md");

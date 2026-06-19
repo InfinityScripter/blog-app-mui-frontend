@@ -7,9 +7,17 @@ import FormHelperText from "@mui/material/FormHelperText";
 import { Controller, useFormContext } from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+import type { FieldOption, RHFSwitchProps, RHFMultiSwitchProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFSwitch({ name, helperText, label, slotProps, ...other }) {
+export function RHFSwitch({
+  name,
+  helperText,
+  label,
+  slotProps,
+  ...other
+}: RHFSwitchProps) {
   const { control } = useFormContext();
 
   const ariaLabel = `Switch ${name}`;
@@ -60,16 +68,19 @@ export function RHFMultiSwitch({
   helperText,
   slotProps,
   ...other
-}) {
+}: RHFMultiSwitchProps) {
   const { control } = useFormContext();
 
-  const getSelected = (selectedItems, item) =>
+  const getSelected = (
+    selectedItems: FieldOption["value"][],
+    item: FieldOption["value"],
+  ) =>
     selectedItems.includes(item)
       ? selectedItems.filter((value) => value !== item)
       : [...selectedItems, item];
 
-  const accessibility = (val) => val;
-  const ariaLabel = (val) => `Switch ${val}`;
+  const accessibility = (val: FieldOption["label"]) => val;
+  const ariaLabel = (val: FieldOption["label"]) => `Switch ${val}`;
 
   return (
     <Controller
@@ -88,7 +99,7 @@ export function RHFMultiSwitch({
           )}
 
           <FormGroup {...other}>
-            {options.map((option) => (
+            {options.map((option: FieldOption) => (
               <FormControlLabel
                 key={option.value}
                 control={

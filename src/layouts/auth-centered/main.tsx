@@ -1,10 +1,19 @@
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Breakpoint } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { layoutClasses } from "src/layouts/classes";
 
 // ----------------------------------------------------------------------
 
-export function Main({ sx, children, layoutQuery, ...other }) {
+export interface MainProps extends Omit<BoxProps, "children"> {
+  children: ReactNode;
+  layoutQuery: Breakpoint;
+}
+
+export function Main({ sx, children, layoutQuery, ...other }: MainProps) {
   const theme = useTheme();
 
   const renderContent = (

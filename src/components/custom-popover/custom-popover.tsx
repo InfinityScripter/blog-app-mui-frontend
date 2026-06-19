@@ -12,10 +12,16 @@ import { type ArrowPlacement, calculateAnchorOrigin } from "./utils";
 
 // ----------------------------------------------------------------------
 
+function isStyleObject(
+  sx: SxProps<Theme>,
+): sx is Exclude<SystemStyleObject<Theme>, null> {
+  return typeof sx === "object" && !Array.isArray(sx);
+}
+
 function toStyleObject(
   sx: SxProps<Theme> | undefined,
 ): SystemStyleObject<Theme> {
-  if (sx && typeof sx === "object" && !Array.isArray(sx)) {
+  if (sx && isStyleObject(sx)) {
     return sx;
   }
   return {};

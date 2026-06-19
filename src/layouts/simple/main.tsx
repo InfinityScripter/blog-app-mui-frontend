@@ -1,10 +1,19 @@
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 
 import { layoutClasses } from "../classes";
 
 // ----------------------------------------------------------------------
 
-export function Main({ children, sx, ...other }) {
+export interface MainProps {
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function Main({ children, sx, ...other }: MainProps) {
   return (
     <Box
       component="main"
@@ -24,7 +33,17 @@ export function Main({ children, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function CompactContent({ children, sx, ...other }) {
+export interface CompactContentProps {
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function CompactContent({
+  children,
+  sx,
+  ...other
+}: CompactContentProps) {
   return (
     <Box
       className={layoutClasses.content}

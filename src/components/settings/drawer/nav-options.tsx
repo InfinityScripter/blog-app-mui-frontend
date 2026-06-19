@@ -8,6 +8,12 @@ import { varAlpha, stylesMode } from "src/theme/styles";
 import { Block } from "./styles";
 import { SvgColor, svgColorClasses } from "../../svg-color";
 
+import type {
+  NavOptionsProps,
+  ColorOptionProps,
+  LayoutOptionProps,
+} from "./types";
+
 // ----------------------------------------------------------------------
 
 export function NavOptions({
@@ -16,7 +22,7 @@ export function NavOptions({
   onClickOption,
   hideNavColor,
   hideNavLayout,
-}) {
+}: NavOptionsProps) {
   const theme = useTheme();
 
   const cssVars = {
@@ -91,7 +97,12 @@ export function NavOptions({
 
 // ----------------------------------------------------------------------
 
-export function LayoutOption({ option, selected, sx, ...other }) {
+export function LayoutOption({
+  option,
+  selected,
+  sx,
+  ...other
+}: LayoutOptionProps) {
   const renderNav = () => {
     const baseStyles = {
       flexShrink: 0,
@@ -218,7 +229,12 @@ export function LayoutOption({ option, selected, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function ColorOption({ option, selected, sx, ...other }) {
+export function ColorOption({
+  option,
+  selected,
+  sx,
+  ...other
+}: ColorOptionProps) {
   return (
     <ButtonBase
       disableRipple

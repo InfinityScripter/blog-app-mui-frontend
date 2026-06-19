@@ -11,9 +11,12 @@ import {
   navSectionClasses,
 } from "../../nav-section";
 
+import type { MegaMenuNavItemProps } from "../types";
+import type { NavItemStateProps } from "../../nav-section/types";
+
 // ----------------------------------------------------------------------
 
-export const NavItem = forwardRef(
+export const NavItem = forwardRef<HTMLButtonElement, MegaMenuNavItemProps>(
   (
     {
       path,
@@ -95,7 +98,7 @@ export const NavItem = forwardRef(
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
     prop !== "active" && prop !== "open" && prop !== "disabled",
-})(({ active, open, disabled, theme }) => ({
+})<NavItemStateProps>(({ active, open, disabled, theme }) => ({
   padding: "var(--nav-item-padding)",
   minHeight: "var(--nav-item-height)",
   borderRadius: "var(--nav-item-radius)",

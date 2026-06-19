@@ -1,5 +1,7 @@
 "use client";
 
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import { useState, useCallback } from "react";
 import MenuList from "@mui/material/MenuList";
@@ -11,7 +13,23 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
-export function LanguagePopover({ data = [], sx, ...other }) {
+export interface LanguageOption {
+  value: string;
+  label: string;
+  countryCode: string;
+}
+
+export interface LanguagePopoverProps {
+  data?: LanguageOption[];
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function LanguagePopover({
+  data = [],
+  sx,
+  ...other
+}: LanguagePopoverProps) {
   const popover = usePopover();
 
   const [locale, setLocale] = useState(data[0].value);
@@ -19,7 +37,7 @@ export function LanguagePopover({ data = [], sx, ...other }) {
   const currentLang = data.find((lang) => lang.value === locale);
 
   const handleChangeLang = useCallback(
-    (newLang) => {
+    (newLang: string) => {
       setLocale(newLang);
       popover.onClose();
     },

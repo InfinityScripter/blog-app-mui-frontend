@@ -7,9 +7,11 @@ import { MenuCarousel } from "./menu-carousel";
 import { MenuMoreLink } from "./menu-more-link";
 import { NavUl, navSectionClasses } from "../../nav-section";
 
+import type { NavContentProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function NavContent({ data, slotProps, singleList }) {
+export function NavContent({ data, slotProps, singleList }: NavContentProps) {
   if (!data.children) {
     return null;
   }

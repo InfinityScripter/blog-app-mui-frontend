@@ -4,7 +4,7 @@ import { SvgColor } from "src/components/svg-color";
 
 // ----------------------------------------------------------------------
 
-const icon = (name) => (
+const icon = (name: string) => (
   <SvgColor src={`${CONFIG.site.basePath}/assets/icons/navbar/${name}.svg`} />
 );
 
@@ -48,7 +48,11 @@ export function getNavData(role?: string) {
       subheader: "Обзор",
       items: [
         { title: "Главная", path: paths.dashboard.root, icon: ICONS.dashboard },
-        { title: "Аналитика", path: paths.dashboard.two, icon: ICONS.ecommerce },
+        {
+          title: "Аналитика",
+          path: paths.dashboard.two,
+          icon: ICONS.ecommerce,
+        },
         { title: "Отчеты", path: paths.dashboard.three, icon: ICONS.analytics },
       ],
     },
@@ -89,12 +93,16 @@ export function getNavData(role?: string) {
       items: [
         { title: "Чат", path: paths.dashboard.chat, icon: ICONS.chat },
         { title: "Kanban", path: paths.dashboard.kanban, icon: ICONS.kanban },
-        { title: "Календарь", path: paths.dashboard.calendar, icon: ICONS.calendar },
+        {
+          title: "Календарь",
+          path: paths.dashboard.calendar,
+          icon: ICONS.calendar,
+        },
       ],
     },
   ];
 
-  if (role === 'admin') {
+  if (role === "admin") {
     baseNav.push({
       subheader: "Администрирование",
       items: [

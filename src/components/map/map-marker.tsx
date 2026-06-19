@@ -1,5 +1,7 @@
+import type { MarkerProps } from "react-map-gl/mapbox";
+
 import Box from "@mui/material/Box";
-import { Marker } from "react-map-gl";
+import { Marker } from "react-map-gl/mapbox";
 
 // ----------------------------------------------------------------------
 
@@ -11,7 +13,7 @@ const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,
 
 // ----------------------------------------------------------------------
 
-export function MapMarker({ ...other }) {
+export function MapMarker({ ...other }: MarkerProps) {
   return (
     <Marker {...other}>
       <Box

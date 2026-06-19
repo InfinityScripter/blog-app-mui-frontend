@@ -4,9 +4,11 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import { varAlpha, stylesMode } from "src/theme/styles";
 
+import type { LabelOwnerState } from "./types";
+
 // ----------------------------------------------------------------------
 
-export const StyledLabel = styled(Box)(({
+export const StyledLabel = styled(Box)<{ ownerState: LabelOwnerState }>(({
   theme,
   ownerState: { color, variant },
 }) => {
@@ -80,6 +82,11 @@ export const StyledLabel = styled(Box)(({
     }),
   };
 
+  const borderRadius =
+    typeof theme.shape.borderRadius === "number"
+      ? theme.shape.borderRadius
+      : parseFloat(theme.shape.borderRadius);
+
   return {
     height: 24,
     minWidth: 24,
@@ -92,7 +99,7 @@ export const StyledLabel = styled(Box)(({
     padding: theme.spacing(0, 0.75),
     fontSize: theme.typography.pxToRem(12),
     fontWeight: theme.typography.fontWeightBold,
-    borderRadius: theme.shape.borderRadius * 0.75,
+    borderRadius: borderRadius * 0.75,
     transition: theme.transitions.create(
       ["background-color", "color", "box-shadow"],
       {

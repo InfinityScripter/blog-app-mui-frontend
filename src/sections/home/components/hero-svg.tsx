@@ -4,8 +4,8 @@ import type { MarketingTheme } from "src/sections/home/components/types";
 import type {
   Variants,
   Transition,
-  AnimationControls,
   TargetAndTransition,
+  LegacyAnimationControls,
 } from "framer-motion";
 
 import { m } from "framer-motion";
@@ -247,8 +247,7 @@ export function Texts({ sx, ...other }: TextsProps) {
             textTransform: "uppercase",
             stroke: "var(--hero-text-stroke-color)",
             strokeWidth: "var(--hero-text-stroke-width)",
-            fontFamily: (theme: MarketingTheme) =>
-              theme.typography.fontSecondaryFamily,
+            fontFamily: (theme: Theme) => theme.typography.fontSecondaryFamily,
           },
         }}
       >
@@ -268,7 +267,7 @@ export function Texts({ sx, ...other }: TextsProps) {
 
 interface DotProps {
   color?: ColorType;
-  animate?: AnimationControls | TargetAndTransition;
+  animate?: LegacyAnimationControls | TargetAndTransition;
   transition?: Transition;
   sx?: SxProps<Theme>;
 }

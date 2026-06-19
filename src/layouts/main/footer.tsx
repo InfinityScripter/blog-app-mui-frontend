@@ -1,3 +1,5 @@
+import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -62,7 +64,12 @@ const socials = [
 
 // ----------------------------------------------------------------------
 
-export function Footer({ layoutQuery, sx }) {
+export interface FooterProps {
+  layoutQuery: Breakpoint;
+  sx?: SxProps<Theme>;
+}
+
+export function Footer({ layoutQuery, sx }: FooterProps) {
   const theme = useTheme();
 
   return (
@@ -182,7 +189,11 @@ export function Footer({ layoutQuery, sx }) {
 
 // ----------------------------------------------------------------------
 
-export function HomeFooter({ sx }) {
+export interface HomeFooterProps {
+  sx?: SxProps<Theme>;
+}
+
+export function HomeFooter({ sx }: HomeFooterProps) {
   return (
     <Box
       component="footer"

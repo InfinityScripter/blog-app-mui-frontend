@@ -1,5 +1,7 @@
 "use client";
 
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
@@ -15,7 +17,40 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
-export function ContactsPopover({ data = [], sx, ...other }) {
+/**
+ * The contact presence status (`online` / `offline` / `busy` / ...) is used
+ * directly as the MUI `Badge` `variant` to render a colored dot — that's how
+ * the Minimals template wires presence to the badge. The source data comes
+ * from the untyped `src/_mock` (`.js`), where `status` is inferred as `string`,
+ * so the Badge `variant` union is augmented to accept any string presence key.
+ * This keeps `variant={contact.status}` type-safe without a cast and without
+ * changing runtime behaviour.
+ */
+declare module "@mui/material/Badge" {
+  interface BadgePropsVariantOverrides {
+    [presenceStatus: string]: true;
+  }
+}
+
+export interface ContactItem {
+  id: string;
+  status: string;
+  name: string;
+  avatarUrl: string;
+  lastActivity?: string | Date;
+}
+
+export interface ContactsPopoverProps {
+  data?: ContactItem[];
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function ContactsPopover({
+  data = [],
+  sx,
+  ...other
+}: ContactsPopoverProps) {
   const popover = usePopover();
 
   return (

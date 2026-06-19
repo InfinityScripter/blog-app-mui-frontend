@@ -13,9 +13,15 @@ import {
   CarouselArrowBasicButtons,
 } from "../../carousel";
 
+import type { MenuCarouselProps, MegaMenuCarouselSlide } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function MenuCarousel({ slides, displayCount = 8, sx }) {
+export function MenuCarousel({
+  slides,
+  displayCount = 8,
+  sx,
+}: MenuCarouselProps) {
   const carousel = useCarousel({
     slidesToShow: displayCount,
     slidesToScroll: displayCount,
@@ -50,7 +56,7 @@ export function MenuCarousel({ slides, displayCount = 8, sx }) {
   );
 }
 
-function CarouselItem({ item }) {
+function CarouselItem({ item }: { item: MegaMenuCarouselSlide }) {
   const theme = useTheme();
 
   return (

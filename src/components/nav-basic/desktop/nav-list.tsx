@@ -10,6 +10,8 @@ import { useActiveLink } from "src/routes/hooks/use-active-link";
 import { NavItem } from "./nav-item";
 import { NavLi, NavUl, navSectionClasses } from "../../nav-section";
 
+import type { NavListProps, NavSubListProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function NavList({
@@ -19,7 +21,7 @@ export function NavList({
   cssVars,
   slotProps,
   enabledRootRedirect,
-}) {
+}: NavListProps) {
   const theme = useTheme();
 
   const pathname = usePathname();
@@ -143,7 +145,7 @@ function NavSubList({
   cssVars,
   slotProps,
   enabledRootRedirect,
-}) {
+}: NavSubListProps) {
   return (
     <NavUl sx={{ gap: 0.5 }}>
       {data.map((list) => (

@@ -1,5 +1,9 @@
 "use client";
 
+import type { ChangeEvent } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { NavSectionDataProps } from "src/components/nav-section/types";
+
 import Box from "@mui/material/Box";
 import SvgIcon from "@mui/material/SvgIcon";
 import { varAlpha } from "src/theme/styles";
@@ -25,7 +29,17 @@ import { groupItems, applyFilter, getAllItems } from "./utils";
 
 // ----------------------------------------------------------------------
 
-export function Searchbar({ data: navItems = [], sx, ...other }) {
+export interface SearchbarProps {
+  data?: NavSectionDataProps[];
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function Searchbar({
+  data: navItems = [],
+  sx,
+  ...other
+}: SearchbarProps) {
   const theme = useTheme();
 
   const router = useRouter();
@@ -39,7 +53,7 @@ export function Searchbar({ data: navItems = [], sx, ...other }) {
     setSearchQuery("");
   }, [search]);
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "k" && event.metaKey) {
       search.onToggle();
       setSearchQuery("");
@@ -49,7 +63,7 @@ export function Searchbar({ data: navItems = [], sx, ...other }) {
   useEventListener("keydown", handleKeyDown);
 
   const handleClick = useCallback(
-    (path) => {
+    (path: string) => {
       if (isExternalLink(path)) {
         window.open(path);
       } else {
@@ -60,7 +74,7 @@ export function Searchbar({ data: navItems = [], sx, ...other }) {
     [handleClose, router],
   );
 
-  const handleSearch = useCallback((event) => {
+  const handleSearch = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   }, []);
 

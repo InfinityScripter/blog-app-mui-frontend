@@ -1,8 +1,10 @@
+import type { Theme } from "@mui/material/styles";
+
 import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
-function verticalVars(theme) {
+function verticalVars(theme: Theme) {
   const {
     spacing,
     vars: { palette },
@@ -30,7 +32,7 @@ function verticalVars(theme) {
 
 // ----------------------------------------------------------------------
 
-function horizontalVars(theme) {
+function horizontalVars(theme: Theme) {
   const {
     shape,
     spacing,
@@ -56,7 +58,7 @@ function horizontalVars(theme) {
 
 // ----------------------------------------------------------------------
 
-function mobileVars(theme) {
+function mobileVars(theme: Theme) {
   const {
     spacing,
     vars: { palette },

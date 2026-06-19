@@ -1,3 +1,6 @@
+import type { ButtonBaseProps } from "@mui/material/ButtonBase";
+import type { IconButtonProps } from "@mui/material/IconButton";
+
 import { useTheme } from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
 import IconButton from "@mui/material/IconButton";
@@ -7,7 +10,7 @@ import { Iconify } from "../iconify";
 
 // ----------------------------------------------------------------------
 
-export function DownloadButton({ sx, ...other }) {
+export function DownloadButton({ sx, ...other }: ButtonBaseProps) {
   const theme = useTheme();
 
   return (
@@ -41,7 +44,7 @@ export function DownloadButton({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RemoveButton({ sx, ...other }) {
+export function RemoveButton({ sx, ...other }: IconButtonProps) {
   return (
     <IconButton
       size="small"

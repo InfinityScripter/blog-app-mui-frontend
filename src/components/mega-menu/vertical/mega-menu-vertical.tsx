@@ -6,6 +6,8 @@ import { NavUl } from "../../nav-section";
 import { megaMenuClasses } from "../classes";
 import { megaMenuCssVars } from "../css-vars";
 
+import type { MegaMenuProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function MegaMenuVertical({
@@ -16,7 +18,7 @@ export function MegaMenuVertical({
   enabledRootRedirect,
   cssVars: overridesVars,
   ...other
-}) {
+}: MegaMenuProps) {
   const theme = useTheme();
 
   const cssVars = {

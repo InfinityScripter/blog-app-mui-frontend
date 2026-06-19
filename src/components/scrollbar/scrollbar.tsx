@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { SystemStyleObject } from "@mui/system";
 import type { Theme, SxProps } from "@mui/material/styles";
 import type { Props as SimpleBarProps } from "simplebar-react";
 
@@ -11,9 +12,9 @@ import { scrollbarClasses } from "./classes";
 // ----------------------------------------------------------------------
 
 export interface ScrollbarSlotProps {
-  wrapper?: SxProps<Theme>;
-  contentWrapper?: SxProps<Theme>;
-  content?: SxProps<Theme>;
+  wrapper?: SystemStyleObject<Theme>;
+  contentWrapper?: SystemStyleObject<Theme>;
+  content?: SystemStyleObject<Theme>;
 }
 
 export interface ScrollbarProps extends Omit<SimpleBarProps, "children"> {

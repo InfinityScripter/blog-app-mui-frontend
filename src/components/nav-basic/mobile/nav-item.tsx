@@ -13,9 +13,11 @@ import {
   navSectionClasses,
 } from "../../nav-section";
 
+import type { NavItemProps, NavItemStateProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export const NavItem = forwardRef(
+export const NavItem = forwardRef<HTMLButtonElement, NavItemProps>(
   (
     {
       path,
@@ -123,7 +125,7 @@ const StyledNavItem = styled(ButtonBase, {
     prop !== "open" &&
     prop !== "disabled" &&
     prop !== "depth",
-})(({ active, open, disabled, depth, theme }) => {
+})<NavItemStateProps>(({ active, open, disabled, depth, theme }) => {
   const rootItem = depth === 1;
 
   const subItem = !rootItem;

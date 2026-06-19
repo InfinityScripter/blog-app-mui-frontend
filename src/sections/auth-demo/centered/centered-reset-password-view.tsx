@@ -20,12 +20,9 @@ import axios, { endpoints } from "../../../utils/axios";
 // ----------------------------------------------------------------------
 
 export const ResetPasswordSchema = zod.object({
-  email: zod
-    .string()
-    .min(1, { message: "Email обязателен!" })
-    .email({
-      message: "Email должен быть действительным адресом электронной почты!",
-    }),
+  email: zod.string().min(1, { message: "Email обязателен!" }).email({
+    message: "Email должен быть действительным адресом электронной почты!",
+  }),
 });
 
 // ----------------------------------------------------------------------
@@ -62,7 +59,11 @@ export function CenteredResetPasswordView() {
       // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error("Ошибка сброса пароля:", error);
-      setError(error.message || "Не удалось отправить email для сброса пароля");
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Не удалось отправить email для сброса пароля",
+      );
     }
   });
 

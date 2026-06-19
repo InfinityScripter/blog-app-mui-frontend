@@ -1,3 +1,5 @@
+import type { StackProps } from "@mui/material/Stack";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -17,7 +19,7 @@ import { SectionTitle } from "./components/section-title";
 
 // ----------------------------------------------------------------------
 
-export function HomeForDesigner({ sx, ...other }) {
+export function HomeForDesigner({ sx, ...other }: StackProps) {
   const theme = useTheme();
 
   const borderTop = (

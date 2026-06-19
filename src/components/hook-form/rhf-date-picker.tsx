@@ -4,9 +4,15 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Controller, useFormContext } from "react-hook-form";
 import { MobileDateTimePicker } from "@mui/x-date-pickers/MobileDateTimePicker";
 
+import type { RHFDatePickerProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFDatePicker({ name, slotProps, ...other }) {
+export function RHFDatePicker({
+  name,
+  slotProps,
+  ...other
+}: RHFDatePickerProps) {
   const { control } = useFormContext();
 
   return (
@@ -37,7 +43,11 @@ export function RHFDatePicker({ name, slotProps, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RHFMobileDateTimePicker({ name, slotProps, ...other }) {
+export function RHFMobileDateTimePicker({
+  name,
+  slotProps,
+  ...other
+}: RHFDatePickerProps) {
   const { control } = useFormContext();
 
   return (

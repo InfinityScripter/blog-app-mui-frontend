@@ -12,9 +12,15 @@ import {
 
 import { NavItem } from "./nav-mobile-item";
 
+import type { MainNavItem } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function NavList({ data }) {
+export interface NavListProps {
+  data: MainNavItem;
+}
+
+export function NavList({ data }: NavListProps) {
   const active = useActiveLink(data.path, !!data.children);
 
   const [openMenu, setOpenMenu] = useState(false);
@@ -61,7 +67,7 @@ export function NavList({ data }) {
                   backgroundRepeat: "no-repeat",
                   backgroundImage: `url(${CONFIG.site.basePath}/assets/illustrations/illustration-dashboard.webp)`,
                   border: (theme) =>
-                    `solid 1px ${varAlpha(theme.palette.grey["500Channel"], 0.12)}`,
+                    `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.12)}`,
                 },
               },
             }}

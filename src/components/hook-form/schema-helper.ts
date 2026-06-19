@@ -3,12 +3,31 @@ import { z as zod } from "zod";
 
 // ----------------------------------------------------------------------
 
+interface SchemaHelperMessage {
+  required_error?: string;
+  invalid_type_error?: string;
+}
+
+interface SchemaHelperProps {
+  message?: SchemaHelperMessage;
+}
+
+interface PhoneNumberProps extends SchemaHelperProps {
+  isValidPhoneNumber?: (text: string) => boolean;
+}
+
+interface FilesProps extends SchemaHelperProps {
+  minFiles?: number;
+}
+
+// ----------------------------------------------------------------------
+
 export const schemaHelper = {
   /**
    * Phone number
    * defaultValue === null
    */
-  phoneNumber: (props) =>
+  phoneNumber: (props?: PhoneNumberProps) =>
     zod
       .string()
       .min(1, {
@@ -21,7 +40,7 @@ export const schemaHelper = {
    * date
    * defaultValue === null
    */
-  date: (props) =>
+  date: (props?: SchemaHelperProps) =>
     zod.coerce
       .date()
       .nullable()
@@ -40,19 +59,19 @@ export const schemaHelper = {
 
         if (!stringToDate.safeParse(date).success) {
           ctx.addIssue({
-            code: zod.ZodIssueCode.invalid_date,
+            code: zod.ZodIssueCode.custom,
             message: props?.message?.invalid_type_error ?? "Invalid Date!!",
           });
         }
 
         return date;
       })
-      .pipe(zod.union([zod.number(), zod.string(), zod.date(), zod.null()])),
+      .pipe(zod.union([zod.string(), zod.null()])),
   /**
    * editor
    * defaultValue === '' | <p></p>
    */
-  editor: (props) =>
+  editor: (props?: SchemaHelperProps) =>
     zod.string().min(8, {
       message: props?.message?.required_error ?? "Editor is required!",
     }),
@@ -60,7 +79,7 @@ export const schemaHelper = {
    * object
    * defaultValue === null
    */
-  objectOrNull: (props) =>
+  objectOrNull: (props?: SchemaHelperProps) =>
     zod
       .custom()
       .refine((data) => data !== null, {
@@ -73,7 +92,7 @@ export const schemaHelper = {
    * boolean
    * defaultValue === false
    */
-  boolean: (props) =>
+  boolean: (props?: SchemaHelperProps) =>
     zod.coerce.boolean().refine((bool) => bool === true, {
       message: props?.message?.required_error ?? "Switch is required!",
     }),
@@ -81,7 +100,7 @@ export const schemaHelper = {
    * file
    * defaultValue === '' || null
    */
-  file: (props) =>
+  file: (props?: SchemaHelperProps) =>
     zod.custom().transform((data, ctx) => {
       const hasFile =
         data instanceof File || (typeof data === "string" && !!data.length);
@@ -100,7 +119,7 @@ export const schemaHelper = {
    * files
    * defaultValue === []
    */
-  files: (props) =>
+  files: (props?: FilesProps) =>
     zod.array(zod.custom()).transform((data, ctx) => {
       const minFiles = props?.minFiles ?? 2;
 

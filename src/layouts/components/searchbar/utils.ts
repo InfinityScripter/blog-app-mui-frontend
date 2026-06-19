@@ -1,18 +1,47 @@
+import type { NavItemBaseProps } from "src/components/nav-section/types";
+
 import { flattenArray } from "src/utils/helper";
 
 // ----------------------------------------------------------------------
 
-export function getAllItems({ data }) {
+export interface SearchResultItem {
+  group: string;
+  title: string;
+  path: string;
+}
+
+/**
+ * A nav item flattened with its parent subheader carried alongside. The index
+ * signature keeps it compatible with `flattenArray`'s `Flattenable` constraint.
+ */
+export interface SearchLoopItem extends NavItemBaseProps {
+  subheader?: string;
+  children?: SearchLoopItem[];
+  [key: string]: unknown;
+}
+
+export interface SearchNavSection {
+  subheader?: string;
+  items: NavItemBaseProps[];
+}
+
+export function getAllItems({
+  data,
+}: {
+  data: SearchNavSection[];
+}): SearchResultItem[] {
   const reduceItems = data
     .map((list) => handleLoop(list.items, list.subheader))
     .flat();
 
-  const items = flattenArray(reduceItems).map((option) => {
+  const items: SearchResultItem[] = flattenArray<SearchLoopItem>(
+    reduceItems,
+  ).map((option) => {
     const group = splitPath(reduceItems, option.path);
 
     return {
-      group: group && group.length > 1 ? group[0] : option.subheader,
-      title: option.title,
+      group: group && group.length > 1 ? group[0] : (option.subheader ?? ""),
+      title: option.title ?? "",
       path: option.path,
     };
   });
@@ -22,7 +51,13 @@ export function getAllItems({ data }) {
 
 // ----------------------------------------------------------------------
 
-export function applyFilter({ inputData, query }) {
+export function applyFilter({
+  inputData,
+  query,
+}: {
+  inputData: SearchResultItem[];
+  query: string;
+}): SearchResultItem[] {
   if (query) {
     inputData = inputData.filter(
       (item) =>
@@ -36,11 +71,22 @@ export function applyFilter({ inputData, query }) {
 
 // ----------------------------------------------------------------------
 
-export function splitPath(array, key) {
-  let stack = array.map((item) => ({ path: [item.title], currItem: item }));
+export function splitPath(
+  array: SearchLoopItem[],
+  key: string,
+): string[] | null {
+  let stack: { path: string[]; currItem: SearchLoopItem }[] = array.map(
+    (item) => ({ path: [item.title ?? ""], currItem: item }),
+  );
 
   while (stack.length) {
-    const { path, currItem } = stack.pop();
+    const popped = stack.pop();
+
+    if (!popped) {
+      break;
+    }
+
+    const { path, currItem } = popped;
 
     if (currItem.path === key) {
       return path;
@@ -49,7 +95,7 @@ export function splitPath(array, key) {
     if (currItem.children?.length) {
       stack = stack.concat(
         currItem.children.map((item) => ({
-          path: path.concat(item.title),
+          path: path.concat(item.title ?? ""),
           currItem: item,
         })),
       );
@@ -60,22 +106,34 @@ export function splitPath(array, key) {
 
 // ----------------------------------------------------------------------
 
-export function handleLoop(array, subheader) {
-  return array?.map((list) => ({
-    subheader,
-    ...list,
-    ...(list.children && { children: handleLoop(list.children, subheader) }),
-  }));
+export function handleLoop(
+  array: NavItemBaseProps[] | undefined,
+  subheader?: string,
+): SearchLoopItem[] {
+  return (
+    array?.map((list) => ({
+      subheader,
+      ...list,
+      ...(list.children && {
+        children: handleLoop(list.children, subheader),
+      }),
+    })) ?? []
+  );
 }
 
-export function groupItems(array) {
-  const group = array.reduce((groups, item) => {
-    groups[item.group] = groups[item.group] || [];
+export function groupItems(
+  array: SearchResultItem[],
+): Record<string, SearchResultItem[]> {
+  const group = array.reduce<Record<string, SearchResultItem[]>>(
+    (groups, item) => {
+      groups[item.group] = groups[item.group] || [];
 
-    groups[item.group].push(item);
+      groups[item.group].push(item);
 
-    return groups;
-  }, {});
+      return groups;
+    },
+    {},
+  );
 
   return group;
 }

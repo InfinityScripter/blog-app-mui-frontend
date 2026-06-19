@@ -12,6 +12,8 @@ import { NavUl } from "../../nav-section";
 import { megaMenuClasses } from "../classes";
 import { megaMenuCssVars } from "../css-vars";
 
+import type { MegaMenuMobileProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function MegaMenuMobile({
@@ -22,7 +24,7 @@ export function MegaMenuMobile({
   slotProps,
   cssVars: overridesVars,
   ...other
-}) {
+}: MegaMenuMobileProps) {
   const theme = useTheme();
 
   const pathname = usePathname();

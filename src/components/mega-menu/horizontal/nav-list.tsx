@@ -10,6 +10,8 @@ import { NavItem } from "./nav-item";
 import { NavLi } from "../../nav-section";
 import { NavContent } from "../components/nav-content";
 
+import type { MegaMenuNavListProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function NavList({
@@ -18,14 +20,14 @@ export function NavList({
   slotProps,
   enabledRootRedirect,
   cssVars,
-}) {
+}: MegaMenuNavListProps) {
   const theme = useTheme();
 
   const pathname = usePathname();
 
   const [openMenu, setOpenMenu] = useState(false);
 
-  const navItemRef = useRef(null);
+  const navItemRef = useRef<HTMLButtonElement>(null);
 
   const active = useActiveLink(data.path, !!data.children);
 

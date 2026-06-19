@@ -1,3 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import Stack from "@mui/material/Stack";
@@ -13,12 +15,18 @@ import { isExternalLink, removeLastSlash } from "src/routes/utils";
 
 import { NavItem, NavItemDashboard } from "./nav-desktop-item";
 
+import type { MainNavItem, MainNavSubItem } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function NavList({ data }) {
+export interface NavListProps {
+  data: MainNavItem;
+}
+
+export function NavList({ data }: NavListProps) {
   const theme = useTheme();
 
-  const navItemRef = useRef(null);
+  const navItemRef = useRef<HTMLButtonElement>(null);
 
   const pathname = usePathname();
 
@@ -141,7 +149,14 @@ export function NavList({ data }) {
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, subheader, sx, ...other }) {
+interface NavSubListProps {
+  data: MainNavSubItem[];
+  subheader: string;
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+function NavSubList({ data, subheader, sx, ...other }: NavSubListProps) {
   const pathname = usePathname();
 
   const isDashboard = subheader === "Dashboard";

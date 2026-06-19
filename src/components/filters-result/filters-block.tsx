@@ -1,8 +1,15 @@
 import Box from "@mui/material/Box";
 
+import type { FiltersBlockProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function FiltersBlock({ label, children, isShow, sx }) {
+export function FiltersBlock({
+  label,
+  children,
+  isShow,
+  sx,
+}: FiltersBlockProps) {
   if (!isShow) {
     return null;
   }

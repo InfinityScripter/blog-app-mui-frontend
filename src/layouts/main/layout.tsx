@@ -17,9 +17,13 @@ import { HeaderBase } from "../core/header-base";
 import { LayoutSection } from "../core/layout-section";
 import { navData as mainNavData } from "../config-nav-main";
 
+import type { MainNavItem } from "./nav/types";
+
 interface MainLayoutProps {
   sx?: SxProps<Theme>;
-  data?: unknown;
+  data?: {
+    nav?: MainNavItem[];
+  };
   children: ReactNode;
 }
 

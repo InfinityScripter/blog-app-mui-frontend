@@ -1,7 +1,10 @@
+import type { StackProps } from "@mui/material/Stack";
+import type { LegacyGrid } from "src/sections/home/components/types";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import MuiGrid from "@mui/material/Grid";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { CONFIG } from "src/config-global";
@@ -19,7 +22,9 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function HomeZoneUI({ sx, ...other }) {
+const Grid: LegacyGrid = MuiGrid;
+
+export function HomeZoneUI({ sx, ...other }: StackProps) {
   const renderLines = (
     <>
       <Stack

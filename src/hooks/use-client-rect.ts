@@ -18,7 +18,7 @@ interface ScrollInfo {
 }
 
 interface UseClientRectReturn {
-  elementRef: RefObject<HTMLElement>;
+  elementRef: RefObject<HTMLElement | null>;
   top: number;
   right: number;
   bottom: number;
@@ -32,7 +32,7 @@ interface UseClientRectReturn {
 }
 
 export function useClientRect(
-  inputRef?: RefObject<HTMLElement>,
+  inputRef?: RefObject<HTMLElement | null>,
 ): UseClientRectReturn {
   const initialRef = useRef<HTMLElement>(null);
 

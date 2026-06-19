@@ -1,5 +1,8 @@
 "use client";
 
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { _mock } from "src/_mock";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -26,7 +29,33 @@ import { SignOutButton } from "./sign-out-button";
 
 // ----------------------------------------------------------------------
 
-export function AccountDrawer({ data = [], sx, ...other }) {
+export interface AccountDrawerItem {
+  label: string;
+  href: string;
+  icon: ReactNode;
+  info?: ReactNode;
+}
+
+/**
+ * The fields the account UI reads off the authenticated user. The auth `User`
+ * type (`src/types/domain.ts`) predates these Minimals-era aliases
+ * (`photoURL`/`displayName`), so the layout describes its own optional view.
+ * The hook's `user` (`User & { accessToken?; role? } | null`) is assignable to
+ * it because every field here is optional. See the SHARED-TYPE GAP report.
+ */
+export interface LayoutUserView {
+  photoURL?: string;
+  displayName?: string;
+  email?: string;
+}
+
+export interface AccountDrawerProps {
+  data?: AccountDrawerItem[];
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
   const theme = useTheme();
 
   const router = useRouter();
@@ -34,6 +63,8 @@ export function AccountDrawer({ data = [], sx, ...other }) {
   const pathname = usePathname();
 
   const { user } = useAuthContext();
+
+  const userView: LayoutUserView | null = user;
 
   const [open, setOpen] = useState(false);
 
@@ -46,7 +77,7 @@ export function AccountDrawer({ data = [], sx, ...other }) {
   }, []);
 
   const handleClickItem = useCallback(
-    (path) => {
+    (path: string) => {
       handleCloseDrawer();
       router.push(path);
     },
@@ -57,7 +88,7 @@ export function AccountDrawer({ data = [], sx, ...other }) {
     <AnimateAvatar
       width={96}
       slotProps={{
-        avatar: { src: user?.photoURL, alt: user?.displayName },
+        avatar: { src: userView?.photoURL, alt: userView?.displayName },
         overlay: {
           border: 2,
           spacing: 3,
@@ -65,7 +96,7 @@ export function AccountDrawer({ data = [], sx, ...other }) {
         },
       }}
     >
-      {user?.displayName?.charAt(0).toUpperCase()}
+      {userView?.displayName?.charAt(0).toUpperCase()}
     </AnimateAvatar>
   );
 
@@ -74,8 +105,8 @@ export function AccountDrawer({ data = [], sx, ...other }) {
       <AccountButton
         open={open}
         onClick={handleOpenDrawer}
-        photoURL={user?.photoURL}
-        displayName={user?.displayName}
+        photoURL={userView?.photoURL}
+        displayName={userView?.displayName}
         sx={sx}
         {...other}
       />
@@ -99,7 +130,7 @@ export function AccountDrawer({ data = [], sx, ...other }) {
             {renderAvatar}
 
             <Typography variant="subtitle1" noWrap sx={{ mt: 2 }}>
-              {user?.displayName}
+              {userView?.displayName}
             </Typography>
 
             <Typography
@@ -107,7 +138,7 @@ export function AccountDrawer({ data = [], sx, ...other }) {
               sx={{ color: "text.secondary", mt: 0.5 }}
               noWrap
             >
-              {user?.email}
+              {userView?.email}
             </Typography>
           </Stack>
 

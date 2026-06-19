@@ -2,9 +2,16 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import { layoutClasses } from "src/layouts/classes";
 
+import type { AuthSplitMainProps, AuthSplitContentProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function Main({ sx, children, layoutQuery, ...other }) {
+export function Main({
+  sx,
+  children,
+  layoutQuery,
+  ...other
+}: AuthSplitMainProps) {
   const theme = useTheme();
 
   return (
@@ -29,7 +36,12 @@ export function Main({ sx, children, layoutQuery, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function Content({ sx, children, layoutQuery, ...other }) {
+export function Content({
+  sx,
+  children,
+  layoutQuery,
+  ...other
+}: AuthSplitContentProps) {
   const theme = useTheme();
 
   const renderContent = (

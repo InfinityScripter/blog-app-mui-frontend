@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { varAlpha, bgGradient } from "src/theme/styles";
 
+import type { AuthSplitSectionProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 export function Section({
@@ -18,7 +20,7 @@ export function Section({
   imgUrl = `${CONFIG.site.basePath}/assets/illustrations/illustration-dashboard.webp`,
   subtitle = "Работайте эффективнее с оптимизированными процессами.",
   ...other
-}) {
+}: AuthSplitSectionProps) {
   const theme = useTheme();
 
   return (

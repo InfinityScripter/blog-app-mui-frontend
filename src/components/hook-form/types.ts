@@ -98,7 +98,7 @@ export type RHFMultiSelectProps = Omit<FormControlProps, "children"> & {
   options: FieldOption[];
   slotProps?: {
     chip?: ChipProps;
-    select?: SelectProps;
+    select?: SelectProps<FieldOption["value"][]>;
     checkbox?: CheckboxProps;
     inputLabel?: InputLabelProps;
     formHelperText?: FormHelperTextProps;
@@ -128,7 +128,7 @@ export interface RHFSliderProps {
 
 export interface RHFEditorProps {
   name: string;
-  helperText?: ReactNode;
+  helperText?: string;
   [key: string]: unknown;
 }
 

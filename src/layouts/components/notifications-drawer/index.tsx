@@ -1,5 +1,8 @@
 "use client";
 
+import type { SyntheticEvent } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -21,6 +24,8 @@ import { CustomTabs } from "src/components/custom-tabs";
 
 import { NotificationItem } from "./notification-item";
 
+import type { NotificationItemData } from "./notification-item";
+
 // ----------------------------------------------------------------------
 
 const TABS = [
@@ -31,16 +36,30 @@ const TABS = [
 
 // ----------------------------------------------------------------------
 
-export function NotificationsDrawer({ data = [], sx, ...other }) {
+export interface NotificationsDrawerProps {
+  data?: NotificationItemData[];
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function NotificationsDrawer({
+  data = [],
+  sx,
+  ...other
+}: NotificationsDrawerProps) {
   const drawer = useBoolean();
 
   const [currentTab, setCurrentTab] = useState("all");
 
-  const handleChangeTab = useCallback((event, newValue) => {
-    setCurrentTab(newValue);
-  }, []);
+  const handleChangeTab = useCallback(
+    (event: SyntheticEvent, newValue: string) => {
+      setCurrentTab(newValue);
+    },
+    [],
+  );
 
-  const [notifications, setNotifications] = useState(data);
+  const [notifications, setNotifications] =
+    useState<NotificationItemData[]>(data);
 
   const totalUnRead = notifications.filter(
     (item) => item.isUnRead === true,

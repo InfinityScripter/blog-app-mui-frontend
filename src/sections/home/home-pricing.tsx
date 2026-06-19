@@ -1,3 +1,6 @@
+import type { StackProps } from "@mui/material/Stack";
+import type { MarketingTheme } from "src/sections/home/components/types";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -20,8 +23,16 @@ import { FloatLine, FloatXIcon } from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
-export function HomePricing({ sx, ...other }) {
-  const theme = useTheme();
+interface Plan {
+  license: string;
+  price: number;
+  commons: string[];
+  options: string[];
+  icons: string[];
+}
+
+export function HomePricing({ sx, ...other }: StackProps) {
+  const theme = useTheme<MarketingTheme>();
 
   const tabs = useTabs("Standard");
 
@@ -124,7 +135,11 @@ export function HomePricing({ sx, ...other }) {
   );
 }
 
-function PlanCard({ plan, sx, ...other }) {
+interface PlanCardProps extends StackProps {
+  plan: Plan;
+}
+
+function PlanCard({ plan, sx, ...other }: PlanCardProps) {
   const standardLicense = plan.license === "Standard";
 
   const plusLicense = plan.license === "Plus";
@@ -168,7 +183,7 @@ function PlanCard({ plan, sx, ...other }) {
             </Typography>
           </m.div>
 
-          <m.div variants={varScale({ distance: 24 }).inX}>
+          <m.div variants={varScale().inX}>
             <Box
               sx={{
                 width: 32,
@@ -283,7 +298,7 @@ function PlanCard({ plan, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-const PLANS = [...Array(3)].map((_, index) => ({
+const PLANS: Plan[] = [...Array(3)].map((_, index) => ({
   license: ["Standard", "Plus", "Extended"][index],
   price: [69, 129, 599][index],
   commons: [

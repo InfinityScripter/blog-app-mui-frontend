@@ -1,4 +1,5 @@
 import type { BoxProps } from "@mui/material/Box";
+import type { ReactNode, ElementType } from "react";
 
 import { useRef } from "react";
 import Box from "@mui/material/Box";
@@ -32,7 +33,12 @@ import {
 } from "./const";
 
 // Функции-хелперы остаются без изменений
-function MInview({ children, component = m.div }) {
+interface MInviewProps {
+  children?: ReactNode;
+  component?: ElementType;
+}
+
+function MInview({ children, component = m.div }: MInviewProps) {
   return (
     <Box component={component} variants={varFade({ distance: 24 }).inUp}>
       {children}

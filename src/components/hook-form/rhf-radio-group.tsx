@@ -6,6 +6,8 @@ import FormHelperText from "@mui/material/FormHelperText";
 import { Controller, useFormContext } from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+import type { FieldOption, RHFRadioGroupProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 export function RHFRadioGroup({
@@ -15,11 +17,11 @@ export function RHFRadioGroup({
   helperText,
   slotProps,
   ...other
-}) {
+}: RHFRadioGroupProps) {
   const { control } = useFormContext();
 
   const labelledby = `${name}-radio-buttons-group-label`;
-  const ariaLabel = (val) => `Radio ${val}`;
+  const ariaLabel = (val: FieldOption["label"]) => `Radio ${val}`;
 
   return (
     <Controller
@@ -32,14 +34,14 @@ export function RHFRadioGroup({
               id={labelledby}
               component="legend"
               {...slotProps?.formLabel}
-              sx={{ mb: 1, typography: "body2", ...slotProps?.formLabel.sx }}
+              sx={{ mb: 1, typography: "body2", ...slotProps?.formLabel?.sx }}
             >
               {label}
             </FormLabel>
           )}
 
           <RadioGroup {...field} aria-labelledby={labelledby} {...other}>
-            {options.map((option) => (
+            {options.map((option: FieldOption) => (
               <FormControlLabel
                 key={option.value}
                 value={option.value}

@@ -1,3 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Paper from "@mui/material/Paper";
 import Popover from "@mui/material/Popover";
 import { useTheme } from "@mui/material/styles";
@@ -11,6 +13,8 @@ import { NavLi } from "../../nav-section";
 import { megaMenuClasses } from "../classes";
 import { NavContent } from "../components/nav-content";
 
+import type { MegaMenuNavListProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function NavList({
@@ -19,14 +23,14 @@ export function NavList({
   slotProps,
   cssVars,
   enabledRootRedirect,
-}) {
+}: MegaMenuNavListProps) {
   const theme = useTheme();
 
   const pathname = usePathname();
 
   const [openMenu, setOpenMenu] = useState(false);
 
-  const navItemRef = useRef(null);
+  const navItemRef = useRef<HTMLButtonElement>(null);
 
   const active = useActiveLink(data.path, !!data.children);
 
@@ -108,6 +112,8 @@ export function NavList({
     />
   );
 
+  const hideScroll: SxProps<Theme> = hideScrollY;
+
   if (data.children) {
     return (
       <NavLi disabled={data.disabled}>
@@ -149,7 +155,7 @@ export function NavList({
               p: 2.5,
               borderRadius: 2,
               ...(singleList && {
-                ...hideScrollY,
+                ...hideScroll,
                 minWidth: 280,
                 height: clientRect.height,
               }),

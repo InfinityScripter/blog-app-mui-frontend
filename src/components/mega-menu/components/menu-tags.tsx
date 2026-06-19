@@ -3,9 +3,11 @@ import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 
+import type { MenuTagsProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function MenuTags({ tags, ...other }) {
+export function MenuTags({ tags, ...other }: MenuTagsProps) {
   return (
     <Box {...other}>
       <Typography

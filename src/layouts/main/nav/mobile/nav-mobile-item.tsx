@@ -6,9 +6,11 @@ import { Iconify } from "src/components/iconify";
 import ButtonBase from "@mui/material/ButtonBase";
 import { useNavItem } from "src/components/nav-section/hooks";
 
+import type { MainNavItemProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export const NavItem = forwardRef(
+export const NavItem = forwardRef<HTMLButtonElement, MainNavItemProps>(
   (
     { title, path, icon, open, active, hasChild, externalLink, ...other },
     ref,
@@ -52,9 +54,14 @@ export const NavItem = forwardRef(
 
 // ----------------------------------------------------------------------
 
+interface StyledNavItemProps {
+  active?: boolean;
+  open?: boolean;
+}
+
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) => prop !== "active" && prop !== "open",
-})(({ active, open, theme }) => ({
+})<StyledNavItemProps>(({ active, open, theme }) => ({
   ...theme.typography.body2,
   gap: 16,
   height: 48,

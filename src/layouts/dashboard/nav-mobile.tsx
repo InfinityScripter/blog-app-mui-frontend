@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { NavSectionDataProps } from "src/components/nav-section/types";
+
 import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Logo } from "src/components/logo";
@@ -10,7 +14,27 @@ import { NavUpgrade } from "../components/nav-upgrade";
 
 // ----------------------------------------------------------------------
 
-export function NavMobile({ data, open, onClose, slots, sx, ...other }) {
+export interface NavMobileProps {
+  data: NavSectionDataProps[];
+  open: boolean;
+  onClose: () => void;
+  slots?: {
+    topArea?: ReactNode;
+    bottomArea?: ReactNode;
+  };
+  sx?: SxProps<Theme>;
+  cssVars?: Record<string, string | number>;
+  [key: string]: unknown;
+}
+
+export function NavMobile({
+  data,
+  open,
+  onClose,
+  slots,
+  sx,
+  ...other
+}: NavMobileProps) {
   const pathname = usePathname();
 
   useEffect(() => {

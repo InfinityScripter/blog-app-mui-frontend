@@ -1,3 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -9,21 +11,33 @@ import Typography from "@mui/material/Typography";
 import { varAlpha, bgGradient } from "src/theme/styles";
 import { alpha as hexAlpha } from "@mui/material/styles";
 
+import type { LayoutUserView } from "./account-drawer";
+
 // ----------------------------------------------------------------------
 
-export function NavUpgrade({ sx, ...other }) {
+export interface NavUpgradeProps {
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function NavUpgrade({ sx, ...other }: NavUpgradeProps) {
   const { user } = useAuthContext();
+
+  // The auth `User` shape predates the Minimals UI fields (`photoURL`/
+  // `displayName`); read through the layout's own optional view. See
+  // `account-drawer.tsx` `LayoutUserView` and the SHARED-TYPE GAP note.
+  const userView: LayoutUserView | null = user;
 
   return (
     <Stack sx={{ px: 2, py: 5, textAlign: "center", ...sx }} {...other}>
       <Stack alignItems="center">
         <Box sx={{ position: "relative" }}>
           <Avatar
-            src={user?.photoURL}
-            alt={user?.displayName}
+            src={userView?.photoURL}
+            alt={userView?.displayName}
             sx={{ width: 48, height: 48 }}
           >
-            {user?.displayName?.charAt(0).toUpperCase()}
+            {userView?.displayName?.charAt(0).toUpperCase()}
           </Avatar>
         </Box>
 
@@ -33,7 +47,7 @@ export function NavUpgrade({ sx, ...other }) {
             noWrap
             sx={{ color: "var(--layout-nav-text-primary-color)" }}
           >
-            {user?.displayName}
+            {userView?.displayName}
           </Typography>
 
           <Typography
@@ -41,7 +55,7 @@ export function NavUpgrade({ sx, ...other }) {
             noWrap
             sx={{ color: "var(--layout-nav-text-disabled-color)" }}
           >
-            {user?.email}
+            {userView?.email}
           </Typography>
         </Stack>
       </Stack>
@@ -51,7 +65,12 @@ export function NavUpgrade({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function UpgradeBlock({ sx, ...other }) {
+export interface UpgradeBlockProps {
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function UpgradeBlock({ sx, ...other }: UpgradeBlockProps) {
   return (
     <Stack
       sx={{

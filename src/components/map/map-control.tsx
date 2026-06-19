@@ -3,16 +3,23 @@ import {
   GeolocateControl,
   NavigationControl,
   FullscreenControl,
-} from "react-map-gl";
+} from "react-map-gl/mapbox";
 
 // ----------------------------------------------------------------------
+
+type MapControlProps = {
+  hideScale?: boolean;
+  hideGeolocate?: boolean;
+  hideFullscreen?: boolean;
+  hideNavigation?: boolean;
+};
 
 export function MapControl({
   hideScale,
   hideGeolocate,
   hideFullscreen,
   hideNavigation,
-}) {
+}: MapControlProps) {
   return (
     <>
       {!hideGeolocate && (

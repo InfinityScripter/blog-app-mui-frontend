@@ -1,21 +1,28 @@
+import type { StoreHelpers, CallBackProps } from "react-joyride";
+
 import { STATUS } from "react-joyride";
 import { useRef, useState } from "react";
 
+import type { UseWalktourProps, UseWalktourReturn } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function useWalktour({ steps, defaultRun }) {
-  const helpers = useRef();
+export function useWalktour({
+  steps,
+  defaultRun,
+}: UseWalktourProps): UseWalktourReturn {
+  const helpers = useRef<StoreHelpers | null>(null);
 
   const [run, setRun] = useState(!!defaultRun);
 
-  const setHelpers = (storeHelpers) => {
+  const setHelpers = (storeHelpers: StoreHelpers) => {
     helpers.current = storeHelpers;
   };
 
-  const onCallback = (data) => {
+  const onCallback = (data: CallBackProps) => {
     const { status } = data;
 
-    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+    const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED];
 
     if (finishedStatuses.includes(status)) {
       setRun(false);

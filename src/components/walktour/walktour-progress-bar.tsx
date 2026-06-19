@@ -3,9 +3,15 @@ import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import ButtonBase from "@mui/material/ButtonBase";
 
+import type { WalktourProgressBarProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function WalktourProgressBar({ onGoStep, totalSteps, currentStep }) {
+export function WalktourProgressBar({
+  onGoStep,
+  totalSteps,
+  currentStep,
+}: WalktourProgressBarProps) {
   const theme = useTheme();
 
   const barStyles = {

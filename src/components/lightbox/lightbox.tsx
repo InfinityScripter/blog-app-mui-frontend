@@ -10,6 +10,12 @@ import ReactLightbox, { useLightboxState } from "yet-another-react-lightbox";
 import { Iconify } from "../iconify";
 import { lightboxClasses } from "./classes";
 
+import type {
+  LightboxProps,
+  DisplayTotalProps,
+  LightboxPluginOptions,
+} from "./types";
+
 // ----------------------------------------------------------------------
 
 export function Lightbox({
@@ -23,7 +29,7 @@ export function Lightbox({
   disableFullscreen,
   onGetCurrentIndex,
   ...other
-}) {
+}: LightboxProps) {
   const totalItems = slides ? slides.length : 0;
 
   return (
@@ -87,7 +93,7 @@ export function getPlugins({
   disableSlideshow,
   disableThumbnails,
   disableFullscreen,
-}) {
+}: LightboxPluginOptions) {
   let plugins = [Captions, Fullscreen, Slideshow, Thumbnails, Video, Zoom];
 
   if (disableThumbnails) {
@@ -114,7 +120,7 @@ export function getPlugins({
 
 // ----------------------------------------------------------------------
 
-export function DisplayTotal({ totalItems, disableTotal }) {
+export function DisplayTotal({ totalItems, disableTotal }: DisplayTotalProps) {
   const { currentIndex } = useLightboxState();
 
   if (disableTotal) {

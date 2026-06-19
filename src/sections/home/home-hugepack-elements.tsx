@@ -1,6 +1,14 @@
+import type { MotionProps } from "framer-motion";
+import type { BoxProps } from "@mui/material/Box";
+import type { StackProps } from "@mui/material/Stack";
+import type {
+  LegacyGrid,
+  MarketingTheme,
+} from "src/sections/home/components/types";
+
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import MuiGrid from "@mui/material/Grid";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { CONFIG } from "src/config-global";
@@ -24,7 +32,15 @@ import { FloatLine, FloatTriangleLeftIcon } from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
-export function HomeHugePackElements({ sx, ...other }) {
+const Grid: LegacyGrid = MuiGrid;
+
+type MotionBoxProps = Omit<BoxProps, "style"> &
+  Pick<MotionProps, "layout" | "transition"> & {
+    style?: MotionProps["style"];
+    "data-scrolling"?: boolean;
+  };
+
+export function HomeHugePackElements({ sx, ...other }: StackProps) {
   const renderLines = (
     <>
       <FloatTriangleLeftIcon sx={{ top: 80, left: 80, opacity: 0.4 }} />
@@ -102,7 +118,9 @@ export function HomeHugePackElements({ sx, ...other }) {
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled(
-  forwardRef((props, ref) => <Box ref={ref} component={m.div} {...props} />),
+  forwardRef<HTMLDivElement, MotionBoxProps>((props, ref) => (
+    <Box ref={ref} component={m.div} {...props} />
+  )),
 )(({ theme }) => ({
   zIndex: 9,
   position: "relative",
@@ -110,22 +128,22 @@ const StyledRoot = styled(
   [theme.breakpoints.up("md")]: { paddingTop: theme.spacing(15) },
 }));
 
-const StyledContainer = styled((props) => <Box component={m.div} {...props} />)(
-  ({ theme }) => ({
-    top: 0,
-    height: "100vh",
-    display: "flex",
-    position: "sticky",
-    overflow: "hidden",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    transition: theme.transitions.create(["background-color"]),
-    '&[data-scrolling="true"]': { justifyContent: "center" },
-  }),
-);
+const StyledContainer = styled((props: MotionBoxProps) => (
+  <Box component={m.div} {...props} />
+))(({ theme }) => ({
+  top: 0,
+  height: "100vh",
+  display: "flex",
+  position: "sticky",
+  overflow: "hidden",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  transition: theme.transitions.create(["background-color"]),
+  '&[data-scrolling="true"]': { justifyContent: "center" },
+}));
 
 const StyledContent = styled(
-  forwardRef((props, ref) => (
+  forwardRef<HTMLDivElement, MotionBoxProps>((props, ref) => (
     <Box
       ref={ref}
       component={m.div}
@@ -140,7 +158,9 @@ const StyledContent = styled(
   [theme.breakpoints.up("md")]: { gap: theme.spacing(5) },
 }));
 
-const StyledItem = styled((props) => <Box component={m.div} {...props} />)({
+const StyledItem = styled((props: MotionBoxProps) => (
+  <Box component={m.div} {...props} />
+))({
   backgroundSize: "auto 100%",
   backgroundRepeat: "repeat-x",
   backgroundPosition: "center center",
@@ -149,12 +169,12 @@ const StyledItem = styled((props) => <Box component={m.div} {...props} />)({
 // ----------------------------------------------------------------------
 
 function ScrollContent() {
-  const theme = useTheme();
+  const theme = useTheme<MarketingTheme>();
 
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const containerRect = useClientRect(containerRef);
 
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const scrollRect = useClientRect(scrollRef);
 
   const [startScroll, setStartScroll] = useState(false);

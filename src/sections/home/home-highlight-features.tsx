@@ -1,3 +1,8 @@
+import type { MotionProps } from "framer-motion";
+import type { BoxProps } from "@mui/material/Box";
+import type { StackProps } from "@mui/material/Stack";
+import type { MarketingTheme } from "src/sections/home/components/types";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { CONFIG } from "src/config-global";
@@ -24,8 +29,26 @@ import { FloatLine, FloatPlusIcon } from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
-export function HomeHighlightFeatures({ sx, ...other }) {
-  const containerRoot = useClientRect();
+type ClientRect = ReturnType<typeof useClientRect>;
+
+type MotionBoxProps = Omit<BoxProps, "style"> &
+  Pick<MotionProps, "layout" | "transition"> & {
+    style?: MotionProps["style"];
+    "data-scrolling"?: boolean;
+  };
+
+interface HighlightItem {
+  title: string;
+  subtitle: string;
+  icon: string;
+  imgUrl: string[];
+}
+
+// ----------------------------------------------------------------------
+
+export function HomeHighlightFeatures({ sx, ...other }: StackProps) {
+  const containerRootRef = useRef<HTMLDivElement>(null);
+  const containerRoot = useClientRect(containerRootRef);
 
   const renderLines = (
     <>
@@ -46,7 +69,7 @@ export function HomeHighlightFeatures({ sx, ...other }) {
 
         <Container>
           <Stack
-            ref={containerRoot.elementRef}
+            ref={containerRootRef}
             spacing={5}
             alignItems={{ xs: "center", md: "flex-start" }}
             sx={{ textAlign: { xs: "center", md: "left" } }}
@@ -85,7 +108,9 @@ export function HomeHighlightFeatures({ sx, ...other }) {
 // ----------------------------------------------------------------------
 
 const StyledRoot = styled(
-  forwardRef((props, ref) => <Box ref={ref} component={m.div} {...props} />),
+  forwardRef<HTMLDivElement, MotionBoxProps>((props, ref) => (
+    <Box ref={ref} component={m.div} {...props} />
+  )),
 )(({ theme }) => ({
   zIndex: 9,
   position: "relative",
@@ -93,22 +118,22 @@ const StyledRoot = styled(
   [theme.breakpoints.up("md")]: { paddingTop: theme.spacing(8) },
 }));
 
-const StyledContainer = styled((props) => <Box component={m.div} {...props} />)(
-  ({ theme }) => ({
-    top: 0,
-    height: "100vh",
-    display: "flex",
-    position: "sticky",
-    overflow: "hidden",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    transition: theme.transitions.create(["background-color"]),
-    '&[data-scrolling="true"]': { justifyContent: "center" },
-  }),
-);
+const StyledContainer = styled((props: MotionBoxProps) => (
+  <Box component={m.div} {...props} />
+))(({ theme }) => ({
+  top: 0,
+  height: "100vh",
+  display: "flex",
+  position: "sticky",
+  overflow: "hidden",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  transition: theme.transitions.create(["background-color"]),
+  '&[data-scrolling="true"]': { justifyContent: "center" },
+}));
 
 const StyledContent = styled(
-  forwardRef((props, ref) => (
+  forwardRef<HTMLDivElement, MotionBoxProps>((props, ref) => (
     <Box
       ref={ref}
       component={m.div}
@@ -129,8 +154,8 @@ const StyledContent = styled(
 
 // ----------------------------------------------------------------------
 
-function ScrollContent({ containerRoot }) {
-  const theme = useTheme();
+function ScrollContent({ containerRoot }: { containerRoot: ClientRect }) {
+  const theme = useTheme<MarketingTheme>();
 
   const containerRef = useRef(null);
   const containeRect = useClientRect(containerRef);
@@ -195,7 +220,11 @@ function ScrollContent({ containerRoot }) {
   );
 }
 
-function Item({ item, sx, ...other }) {
+interface ItemProps extends BoxProps {
+  item: HighlightItem;
+}
+
+function Item({ item, sx, ...other }: ItemProps) {
   return (
     <Box sx={{ flexShrink: 0, ...sx }} {...other}>
       <Stack direction="row" spacing={2} sx={{ mb: 6 }}>
@@ -247,7 +276,7 @@ function Item({ item, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-const ITEMS = [
+const ITEMS: HighlightItem[] = [
   {
     title: "Dark mode",
     subtitle: "A dark theme that feels easier on the eyes.",

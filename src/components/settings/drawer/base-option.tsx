@@ -8,9 +8,17 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 import { SvgColor } from "../../svg-color";
 
+import type { BaseOptionProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function BaseOption({ icon, label, tooltip, selected, ...other }) {
+export function BaseOption({
+  icon,
+  label,
+  tooltip,
+  selected,
+  ...other
+}: BaseOptionProps) {
   return (
     <ButtonBase
       disableRipple

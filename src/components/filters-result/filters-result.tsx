@@ -1,15 +1,24 @@
+import type { ChipProps } from "@mui/material/Chip";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Iconify } from "src/components/iconify";
 
+import type { FiltersResultProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export const chipProps = {
+export const chipProps: Pick<ChipProps, "size" | "variant"> = {
   size: "small",
   variant: "soft",
 };
 
-export function FiltersResult({ totalResults, onReset, sx, children }) {
+export function FiltersResult({
+  totalResults,
+  onReset,
+  sx,
+  children,
+}: FiltersResultProps) {
   return (
     <Box sx={sx}>
       <Box sx={{ mb: 1.5, typography: "body2" }}>

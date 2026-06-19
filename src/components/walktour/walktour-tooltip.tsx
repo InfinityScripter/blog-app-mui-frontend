@@ -10,6 +10,8 @@ import LinearProgress, {
   linearProgressClasses,
 } from "@mui/material/LinearProgress";
 
+import type { WalktourTooltipProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 export function WalktourTooltip({
@@ -23,7 +25,7 @@ export function WalktourTooltip({
   isLastStep,
   primaryProps,
   tooltipProps,
-}) {
+}: WalktourTooltipProps) {
   const {
     title,
     content,

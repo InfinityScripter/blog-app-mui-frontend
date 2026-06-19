@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
+import type { NavSectionDataProps } from "src/components/nav-section/types";
+
 import Box from "@mui/material/Box";
 import { Logo } from "src/components/logo";
 import { useTheme } from "@mui/material/styles";
@@ -10,6 +14,22 @@ import { NavToggleButton } from "../components/nav-toggle-button";
 
 // ----------------------------------------------------------------------
 
+export interface DashboardNavSlots {
+  topArea?: ReactNode;
+  bottomArea?: ReactNode;
+}
+
+export interface NavVerticalProps {
+  sx?: SxProps<Theme>;
+  data: NavSectionDataProps[];
+  slots?: DashboardNavSlots;
+  isNavMini?: boolean;
+  layoutQuery: Breakpoint;
+  onToggleNav?: () => void;
+  cssVars?: Record<string, string | number>;
+  [key: string]: unknown;
+}
+
 export function NavVertical({
   sx,
   data,
@@ -18,7 +38,7 @@ export function NavVertical({
   layoutQuery,
   onToggleNav,
   ...other
-}) {
+}: NavVerticalProps) {
   const theme = useTheme();
 
   const renderNavVertical = (

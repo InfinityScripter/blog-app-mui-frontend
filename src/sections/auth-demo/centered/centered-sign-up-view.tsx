@@ -3,7 +3,6 @@
 import { z as zod } from "zod";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import { paths } from "src/routes/paths";
 import { useForm } from "react-hook-form";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -16,6 +15,8 @@ import { AnimateLogo2 } from "src/components/animate";
 import { Form, Field } from "src/components/hook-form";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Iconify, SocialIcon } from "src/components/iconify";
+
+import { authDemoPaths } from "../paths";
 
 // ----------------------------------------------------------------------
 
@@ -76,7 +77,7 @@ export function CenteredSignUpView() {
 
         <Link
           component={RouterLink}
-          href={paths.authDemo.centered.signIn}
+          href={authDemoPaths.centered.signIn}
           variant="subtitle2"
         >
           Sign in

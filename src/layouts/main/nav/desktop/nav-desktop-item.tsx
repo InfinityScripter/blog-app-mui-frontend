@@ -1,3 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
@@ -10,9 +12,11 @@ import { RouterLink } from "src/routes/components";
 import CardActionArea from "@mui/material/CardActionArea";
 import { useNavItem } from "src/components/nav-section/hooks";
 
+import type { MainNavItemProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export const NavItem = forwardRef(
+export const NavItem = forwardRef<HTMLButtonElement, MainNavItemProps>(
   (
     { title, path, open, active, hasChild, externalLink, subItem, ...other },
     ref,
@@ -46,10 +50,16 @@ export const NavItem = forwardRef(
 
 // ----------------------------------------------------------------------
 
+interface StyledNavItemProps {
+  active?: boolean;
+  open?: boolean;
+  subItem?: boolean;
+}
+
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) =>
     prop !== "active" && prop !== "open" && prop !== "subItem",
-})(({ active, open, subItem, theme }) => {
+})<StyledNavItemProps>(({ active, open, subItem, theme }) => {
   const rootItem = !subItem;
 
   const baseStyles = {
@@ -118,7 +128,17 @@ const StyledNavItem = styled(ButtonBase, {
 
 // ----------------------------------------------------------------------
 
-export function NavItemDashboard({ path, sx, ...other }) {
+export interface NavItemDashboardProps {
+  path: string;
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function NavItemDashboard({
+  path,
+  sx,
+  ...other
+}: NavItemDashboardProps) {
   return (
     <Link
       component={RouterLink}

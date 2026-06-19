@@ -6,9 +6,15 @@ import { alpha as hexAlpha } from "@mui/material/styles";
 import { Block } from "./styles";
 import { SvgColor } from "../../svg-color";
 
+import type { PresetsOptionsProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function PresetsOptions({ value, options, onClickOption }) {
+export function PresetsOptions({
+  value,
+  options,
+  onClickOption,
+}: PresetsOptionsProps) {
   return (
     <Block title="Presets">
       <Box

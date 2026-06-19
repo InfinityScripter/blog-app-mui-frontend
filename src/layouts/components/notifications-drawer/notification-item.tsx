@@ -13,7 +13,21 @@ import { FileThumbnail } from "src/components/file-thumbnail";
 
 // ----------------------------------------------------------------------
 
-export function NotificationItem({ notification }) {
+export interface NotificationItemData {
+  id: string;
+  isUnRead: boolean;
+  type: string;
+  title: string;
+  category?: string;
+  createdAt: string | Date;
+  avatarUrl: string | null;
+}
+
+export interface NotificationItemProps {
+  notification: NotificationItemData;
+}
+
+export function NotificationItem({ notification }: NotificationItemProps) {
   const renderAvatar = (
     <ListItemAvatar>
       {notification.avatarUrl ? (
@@ -229,7 +243,7 @@ export function NotificationItem({ notification }) {
 
 // ----------------------------------------------------------------------
 
-function reader(data) {
+function reader(data: string) {
   return (
     <Box
       dangerouslySetInnerHTML={{ __html: data }}

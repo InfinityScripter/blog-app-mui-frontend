@@ -1,3 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import NoSsr from "@mui/material/NoSsr";
 import Avatar from "@mui/material/Avatar";
@@ -8,7 +10,21 @@ import { varHover, AnimateAvatar } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
-export function AccountButton({ open, photoURL, displayName, sx, ...other }) {
+export interface AccountButtonProps {
+  open?: boolean;
+  photoURL?: string;
+  displayName?: string;
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export function AccountButton({
+  open,
+  photoURL,
+  displayName,
+  sx,
+  ...other
+}: AccountButtonProps) {
   const theme = useTheme();
 
   const renderFallback = (

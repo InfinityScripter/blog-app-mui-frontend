@@ -4,6 +4,8 @@ import { useTheme } from "@mui/material/styles";
 
 import { WalktourTooltip } from "./walktour-tooltip";
 
+import type { WalktourProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 const Joyride = dynamic(
@@ -23,7 +25,7 @@ export function Walktour({
   showSkipButton = true,
   disableOverlayClose = true,
   ...other
-}) {
+}: WalktourProps) {
   const theme = useTheme();
 
   const arrowStyles = {
@@ -57,7 +59,7 @@ export function Walktour({
           backgroundColor: varAlpha(theme.vars.palette.grey["900Channel"], 0.8),
         },
         spotlight: {
-          borderRadius: theme.shape.borderRadius * 2,
+          borderRadius: Number(theme.shape.borderRadius) * 2,
         },
         beacon: {
           outline: 0,

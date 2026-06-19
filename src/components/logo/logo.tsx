@@ -12,7 +12,8 @@ import { logoClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
-interface LogoProps extends Omit<BoxProps, "component"> {
+interface LogoProps
+  extends Omit<BoxProps<typeof RouterLink>, "component" | "href"> {
   width?: number | string;
   height?: number | string;
   disableLink?: boolean;

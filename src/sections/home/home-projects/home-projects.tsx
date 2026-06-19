@@ -76,7 +76,6 @@ export function HomeProjects() {
                   <Iconify
                     icon={project.icon}
                     width={24}
-                    height={24}
                     sx={{
                       color: project.iconColor || "primary.main",
                     }}

@@ -95,7 +95,9 @@ export function SplitVerifyView() {
       // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error("Verification error:", error);
-      setError(error.message || "Failed to verify email");
+      setError(
+        error instanceof Error ? error.message : "Failed to verify email",
+      );
     }
   });
 
@@ -132,7 +134,9 @@ export function SplitVerifyView() {
       // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error("Resend code error:", error);
-      setError(error.message || "Failed to resend code");
+      setError(
+        error instanceof Error ? error.message : "Failed to resend code",
+      );
     }
   };
 

@@ -1,3 +1,5 @@
+import type { StackProps } from "@mui/material/Stack";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -15,7 +17,7 @@ import { FloatLine, FloatPlusIcon } from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
-export function HomeAdvertisement({ sx, ...other }) {
+export function HomeAdvertisement({ sx, ...other }: StackProps) {
   const theme = useTheme();
 
   const renderLines = (

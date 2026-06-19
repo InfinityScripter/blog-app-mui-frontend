@@ -6,6 +6,8 @@ import { NavUl } from "../../nav-section";
 import { navBasicClasses } from "../classes";
 import { navBasicCssVars } from "../css-vars";
 
+import type { NavBasicProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function NavBasicMobile({
@@ -16,7 +18,7 @@ export function NavBasicMobile({
   enabledRootRedirect,
   cssVars: overridesVars,
   ...other
-}) {
+}: NavBasicProps) {
   const theme = useTheme();
 
   const cssVars = {
