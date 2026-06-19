@@ -1,0 +1,92 @@
+---
+description: Code style and architecture conventions for blog-app-mui-frontend
+globs: ["src/**/*.ts", "src/**/*.tsx", "src/**/*.css"]
+alwaysApply: true
+priority: 1
+---
+
+# blog-app-mui-frontend Code Style
+
+Stack: **Next.js 15 (App Router) + React 19 + MUI v7**. SWR for data, React Hook
+Form + Zod for forms, Tiptap for the editor. This project is built on the
+Minimals.cc template — match the template's existing conventions, do not impose
+a different house style on it.
+
+## Naming & file structure
+
+Files and folders are **kebab-case** — never PascalCase:
+
+```
+src/components/custom-popover/
+  custom-popover.tsx     — the component
+  index.ts               — re-export: export * from './custom-popover'
+  types.ts               — types for this component (only if it has its own)
+  utils.ts               — pure helpers (formatting, sx mapping), no JSX
+  use-popover.ts         — co-located hook
+  classes.ts / styles.tsx — style tokens / styled() wrappers
+```
+
+- Components: kebab-case file, named export (e.g. `export function CustomPopover`).
+  PascalCase is for the symbol, never the filename.
+- Co-locate `const.ts` / `types.ts` / `utils.ts` next to a non-trivial component
+  instead of inlining large data/type blocks.
+- Do NOT rename existing files to PascalCase. The whole codebase is kebab-case;
+  keep it consistent.
+
+## Sections isolation
+
+`src/sections/` holds page-specific feature components. A section must NOT import
+another section (`sections/blog` importing from `sections/home` is a violation).
+If two sections need the same component, lift it into `src/components/`.
+
+## Styling
+
+- Use MUI `sx` + the theme palette (`theme.palette`, `alpha(...)`) for borders,
+  hover, text — so primary-color and light/dark switching work predictably.
+- Static brand tokens (e.g. a fixed gradient) may live in CSS next to the
+  section and be `@import`-ed from `src/global.css`. Don't hardcode palette
+  colors in CSS.
+
+## Forms
+
+All forms use React Hook Form + Zod via `src/components/hook-form/`. Use the
+`RHF*` field components (`RHFTextField`, etc.) — never raw MUI inputs in a form.
+
+## Routing & env
+
+- Routes live in `src/app/` (App Router). Navigate via `src/routes/hooks`
+  (re-exports of `next/navigation`) and path constants in `src/routes/paths.ts`.
+- Env vars are build-time, prefixed `NEXT_PUBLIC_`, read via `process.env`
+  (NOT `import.meta.env` / `VITE_`).
+- Dev-only routes/pages use the `.dev.tsx` extension (registered as routable
+  only in development in `next.config.mjs`); the component gallery under
+  `/examples` is reachable at `/dev/examples` in dev and absent from prod.
+
+## TypeScript
+
+- No `any`. Reuse shared types from `src/types/` (`Post`, `Comment`, `User`,
+  `FileMeta`, API response types). For opaque catch values use `unknown` + narrow
+  (`error instanceof Error ? error.message : ...`).
+- `import type { Foo } from "..."` for type-only imports.
+- The `src/` alias resolves via tsconfig `baseUrl`; `examples/` via a path alias.
+
+## Imports
+
+Grouped and sorted (enforced by `import/order` + `perfectionist`):
+external packages → internal `src/` aliases → local relative → CSS last.
+No circular dependencies — `import/no-cycle` is an error (verify: `npx madge
+--circular --extensions ts,tsx src`).
+
+## Linting
+
+- `yarn lint` must be 0 errors. Author folders (`actions`, `auth`,
+  `sections/{blog,admin,portfolio}`, `app`) are held to error-level
+  `unused-vars`; vendored template code stays at warn until cleaned per-folder.
+- Don't silence rules with `eslint-disable` / `@ts-ignore` to push code through.
+  Fix the cause.
+
+## Dead code
+
+Vendored template code that no live route uses is either removed or isolated
+(see `/examples`). Don't add new files to the dead-but-kept template areas;
+build features in `src/sections/` + `src/app/`.
