@@ -67,6 +67,22 @@ All forms use React Hook Form + Zod via `src/components/hook-form/`. Use the
 - No `any`. Reuse shared types from `src/types/` (`Post`, `Comment`, `User`,
   `FileMeta`, API response types). For opaque catch values use `unknown` + narrow
   (`error instanceof Error ? error.message : ...`).
+- **No type assertions (`as`).** Do not use `as T`, `as const`, or
+  `as unknown as T` to silence the compiler. They erase the very checks this
+  refactor exists to add. Fix the cause instead:
+  - Annotate the source so the type is correct from the start (function return
+    type, variable type, generic argument) rather than casting the result.
+  - For a value of genuinely unknown shape, use `unknown` + a runtime narrow
+    (type guard / `instanceof` / schema parse), not a blind cast.
+  - A third-party type that's wrong is the only narrow exception — and only via
+    a documented module augmentation in `src/types/*.d.ts` (as done for
+    `theme.vars`), never an inline `as` at the call site.
+- **String "param" values are an enum, not a bare `string`.** Any parameter,
+  prop, or field that accepts a fixed set of string literals must be typed as a
+  string-literal union or TS `enum` — e.g. `type Variant = "filled" | "outlined"`
+  — so the set is closed and exhaustively checked. Never type such a value as
+  `string` and never cast a `string` into the union with `as`. Reuse the
+  existing closed types where one fits (e.g. `ColorType` for palette keys).
 - `import type { Foo } from "..."` for type-only imports.
 - The `src/` alias resolves via tsconfig `baseUrl`; `examples/` via a path alias.
 
