@@ -189,7 +189,7 @@ ALTER TABLE posts ADD COLUMN views INT DEFAULT 0;
 - Комментарии от внешних пользователей — не трогать (уже есть в БД, остаётся)
 - Email-рассылка через сторонний сервис (Buttondown/ConvertKit) — P2
 - Монетизация — не в этом спринте
-- Удаление chat/kanban/calendar таблиц из БД — опционально после подтверждения
+- **Удаление chat/kanban/calendar таблиц из БД — НЕ делаем.** Таблицы оставляем, удаляем только код (frontend + API routes)
 
 ---
 

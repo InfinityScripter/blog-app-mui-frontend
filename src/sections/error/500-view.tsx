@@ -28,7 +28,10 @@ export function View500() {
         </m.div>
 
         <m.div variants={varBounce({ durationIn: 0.4 }).in}>
-          <ServerErrorIllustration sx={{ my: { xs: 5, sm: 10 } }} />
+          <ServerErrorIllustration
+            hideBackground={false}
+            sx={{ my: { xs: 5, sm: 10 } }}
+          />
         </m.div>
 
         <Button

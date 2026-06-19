@@ -29,7 +29,10 @@ export function NotFoundView() {
         </m.div>
 
         <m.div variants={varBounce({ durationIn: 0.4 }).in}>
-          <PageNotFoundIllustration sx={{ my: { xs: 5, sm: 10 } }} />
+          <PageNotFoundIllustration
+            hideBackground={false}
+            sx={{ my: { xs: 5, sm: 10 } }}
+          />
         </m.div>
 
         <Button

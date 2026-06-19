@@ -11,7 +11,9 @@ import { fallbackLng, changeLangMessages as messages } from "./config-locales";
 
 // ----------------------------------------------------------------------
 
-export function useTranslate(ns) {
+type LanguageValue = keyof typeof messages;
+
+export function useTranslate(ns?: string) {
   const router = useRouter();
 
   const { t, i18n } = useTranslation(ns);
@@ -23,7 +25,7 @@ export function useTranslate(ns) {
   );
 
   const onChangeLang = useCallback(
-    async (newLang) => {
+    async (newLang: LanguageValue) => {
       try {
         const langChangePromise = i18n.changeLanguage(newLang);
 

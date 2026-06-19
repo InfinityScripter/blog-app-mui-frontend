@@ -126,7 +126,7 @@ export function ComponentsView() {
 
 // ----------------------------------------------------------------------
 
-function Grid({ children }) {
+function Grid({ children }: { children: React.ReactNode }) {
   return (
     <Box
       rowGap={3}

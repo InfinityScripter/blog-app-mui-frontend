@@ -4,11 +4,12 @@ import type { CardProps } from "@mui/material/Card";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { CONFIG } from "src/config-global";
+import { varAlpha } from "src/theme/styles";
+import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import { SvgColor } from "src/components/svg-color";
 import { Chart, useChart } from "src/components/chart";
 import { fPercent, fCurrency } from "src/utils/format-number";
-import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
@@ -35,7 +36,7 @@ export function BookingTotalIncomes({
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [
-    hexAlpha(theme.palette.primary.lighter, 0.64),
+    varAlpha(theme.vars.palette.primary.lighterChannel, 0.64),
   ];
 
   const chartOptions = useChart({

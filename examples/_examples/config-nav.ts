@@ -3,7 +3,7 @@ import { paramCase } from "src/utils/change-case";
 
 // ----------------------------------------------------------------------
 
-const getHref = (category, name) =>
+const getHref = (category: string, name: string) =>
   `/components/${category}/${paramCase(name)}`;
 
 export const foundationNav = [

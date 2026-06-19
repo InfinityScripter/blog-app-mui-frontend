@@ -10,7 +10,14 @@ import { varHover, varTranHover } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
-export function ComponentCard({ item }) {
+interface ComponentCardItem {
+  name: string;
+  href: string;
+  icon: string;
+  category?: string;
+}
+
+export function ComponentCard({ item }: { item: ComponentCardItem }) {
   return (
     <Paper
       component={RouterLink}

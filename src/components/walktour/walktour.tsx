@@ -1,3 +1,5 @@
+import type { Props as JoyrideProps } from "react-joyride";
+
 import dynamic from "next/dynamic";
 import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
@@ -5,6 +7,10 @@ import { useTheme } from "@mui/material/styles";
 import { WalktourTooltip } from "./walktour-tooltip";
 
 import type { WalktourProps } from "./types";
+
+// `react-joyride` requires `steps`, while `WalktourProps` (Partial<Props>) makes
+// every prop optional — restore `steps` as required for the rendered component.
+type WalktourComponentProps = WalktourProps & Pick<JoyrideProps, "steps">;
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +31,7 @@ export function Walktour({
   showSkipButton = true,
   disableOverlayClose = true,
   ...other
-}: WalktourProps) {
+}: WalktourComponentProps) {
   const theme = useTheme();
 
   const arrowStyles = {

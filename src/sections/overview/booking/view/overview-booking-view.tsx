@@ -30,36 +30,36 @@ import { BookingCustomerReviews } from "../booking-customer-reviews";
 export function OverviewBookingView() {
   return (
     <DashboardContent maxWidth="xl">
-      <Grid container spacing={3} disableEqualOverflow>
-        <Grid xs={12} md={4}>
+      <Grid container spacing={3}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <BookingWidgetSummary
             title="Total booking"
             percent={2.6}
             total={714000}
-            icon={<BookingIllustration />}
+            icon={<BookingIllustration sx={{}} />}
           />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <BookingWidgetSummary
             title="Sold"
             percent={0.2}
             total={311000}
-            icon={<CheckInIllustration />}
+            icon={<CheckInIllustration sx={{}} />}
           />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <BookingWidgetSummary
             title="Canceled"
             percent={-0.1}
             total={124000}
-            icon={<CheckoutIllustration />}
+            icon={<CheckoutIllustration sx={{}} />}
           />
         </Grid>
 
-        <Grid container xs={12}>
-          <Grid xs={12} md={7} lg={8}>
+        <Grid container size={{ xs: 12 }}>
+          <Grid size={{ xs: 12, md: 7, lg: 8 }}>
             <Box
               sx={{
                 mb: 3,
@@ -188,7 +188,7 @@ export function OverviewBookingView() {
             />
           </Grid>
 
-          <Grid xs={12} md={5} lg={4}>
+          <Grid size={{ xs: 12, md: 5, lg: 4 }}>
             <Box sx={{ gap: 3, display: "flex", flexDirection: "column" }}>
               <BookingAvailable
                 title="Tours available"
@@ -209,7 +209,7 @@ export function OverviewBookingView() {
           </Grid>
         </Grid>
 
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <BookingNewest
             title="Newest booking"
             subheader={`${_bookingNew.length} bookings`}
@@ -217,7 +217,7 @@ export function OverviewBookingView() {
           />
         </Grid>
 
-        <Grid xs={12}>
+        <Grid size={{ xs: 12 }}>
           <BookingDetails
             title="Booking details"
             tableData={_bookings}

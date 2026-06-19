@@ -39,6 +39,14 @@ export function BookingCheckInWidgets({
     [theme.palette.warning.light, theme.palette.warning.main],
   ];
 
+  // ApexCharts types `fontSize` as `string`, while MUI typography exposes it as
+  // `string | number | undefined` — normalize to a CSS string here.
+  const subtitle2FontSize = theme.typography.subtitle2.fontSize;
+  const valueFontSize =
+    typeof subtitle2FontSize === "number"
+      ? `${subtitle2FontSize}px`
+      : (subtitle2FontSize ?? "");
+
   const chartOptions = useChart({
     chart: { sparkline: { enabled: true } },
     stroke: { width: 0 },
@@ -57,7 +65,7 @@ export function BookingCheckInWidgets({
           name: { show: false },
           value: {
             offsetY: 6,
-            fontSize: theme.typography.subtitle2.fontSize,
+            fontSize: valueFontSize,
             fontWeight: theme.typography.subtitle2.fontWeight,
           },
         },

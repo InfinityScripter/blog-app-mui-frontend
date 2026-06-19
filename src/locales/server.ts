@@ -22,7 +22,7 @@ import {
  */
 
 export async function detectLanguage() {
-  const cookies = getCookies();
+  const cookies = await getCookies();
 
   const language = cookies.get(cookieName)?.value ?? fallbackLng;
 
@@ -31,8 +31,18 @@ export async function detectLanguage() {
 
 // ----------------------------------------------------------------------
 
+interface GetServerTranslationsOptions {
+  keyPrefix?: string;
+}
+
 export const getServerTranslations = cache(
-  async (ns = defaultNS, options = {}) => {
+  async (
+    ns: string = defaultNS,
+    options: GetServerTranslationsOptions = {},
+  ): Promise<{
+    t: ReturnType<ReturnType<typeof createInstance>["getFixedT"]>;
+    i18n: ReturnType<typeof createInstance>;
+  }> => {
     const language = await detectLanguage();
 
     const i18nextInstance = await initServerI18next(language, ns);
@@ -50,12 +60,16 @@ export const getServerTranslations = cache(
 
 // ----------------------------------------------------------------------
 
-const initServerI18next = async (language, namespace) => {
+const initServerI18next = async (language: string, namespace: string) => {
   const i18nInstance = createInstance();
 
   await i18nInstance
     .use(initReactI18next)
-    .use(resourcesToBackend((lang, ns) => import(`./langs/${lang}/${ns}.json`)))
+    .use(
+      resourcesToBackend(
+        (lang: string, ns: string) => import(`./langs/${lang}/${ns}.json`),
+      ),
+    )
     .init(i18nOptions(language, namespace));
 
   return i18nInstance;

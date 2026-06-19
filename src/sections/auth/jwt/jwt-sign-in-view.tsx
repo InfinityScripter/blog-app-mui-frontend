@@ -2,6 +2,7 @@
 
 import { z as zod } from "zod";
 import { useState } from "react";
+import { isAxiosError } from "axios";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
@@ -75,7 +76,11 @@ export function JwtSignInView() {
     } catch (error) {
       // Извлекаем сообщение об ошибке из ответа сервера, если оно есть
       const errorMessage =
-        error.response?.data?.message || error.message || "Ошибка авторизации";
+        (isAxiosError(error)
+          ? error.response?.data?.message
+          : error instanceof Error
+            ? error.message
+            : undefined) || "Ошибка авторизации";
       setErrorMsg(errorMessage);
       console.error("Ошибка входа:", errorMessage);
     }

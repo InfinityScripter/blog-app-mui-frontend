@@ -48,6 +48,14 @@ const CATEGORIES = [
 
 // ----------------------------------------------------------------------
 
+type Category = (typeof CATEGORIES)[number];
+
+interface CardProps {
+  category: Category;
+}
+
+// ----------------------------------------------------------------------
+
 export function FaqsCategory() {
   const nav = useBoolean();
 
@@ -107,7 +115,7 @@ export function FaqsCategory() {
   );
 }
 
-function CardDesktop({ category }) {
+function CardDesktop({ category }: CardProps) {
   const theme = useTheme();
 
   return (
@@ -148,7 +156,7 @@ function CardDesktop({ category }) {
 
 // ----------------------------------------------------------------------
 
-function CardMobile({ category }) {
+function CardMobile({ category }: CardProps) {
   return (
     <ListItemButton
       key={category.label}

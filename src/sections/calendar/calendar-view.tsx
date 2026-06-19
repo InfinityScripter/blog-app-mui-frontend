@@ -73,7 +73,7 @@ export function CalendarView() {
   const lastDay = new Date(year, month + 1, 0);
   // Monday = index 0
   const startOffset = (firstDay.getDay() + 6) % 7;
-  const days: (number | null)[] = Array<null>(startOffset)
+  const days: (number | null)[] = Array<number | null>(startOffset)
     .fill(null)
     .concat(Array.from({ length: lastDay.getDate() }, (_, i) => i + 1));
   while (days.length % 7 !== 0) days.push(null);

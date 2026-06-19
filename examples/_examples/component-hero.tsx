@@ -1,3 +1,5 @@
+import type { BoxProps } from "@mui/material/Box";
+
 import Box from "@mui/material/Box";
 import { CONFIG } from "src/config-global";
 import Container from "@mui/material/Container";
@@ -6,7 +8,7 @@ import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
-export function ComponentHero({ children, sx, ...other }) {
+export function ComponentHero({ children, sx, ...other }: BoxProps) {
   const theme = useTheme();
 
   return (
