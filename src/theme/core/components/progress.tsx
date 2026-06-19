@@ -1,4 +1,8 @@
+import type { Theme } from "@mui/material/styles";
+import type { LinearProgressProps } from "@mui/material/LinearProgress";
+
 import { varAlpha } from "../../styles";
+import { type ColorType } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -6,13 +10,19 @@ const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
 
 // ----------------------------------------------------------------------
 
-function styleColors(ownerState, styles) {
-  const outputStyle = COLORS.reduce((acc, color) => {
-    if (ownerState.color === color) {
-      acc = styles(color);
-    }
-    return acc;
-  }, {});
+function styleColors(
+  ownerState: LinearProgressProps,
+  styles: (color: ColorType) => Record<string, unknown>,
+) {
+  const outputStyle = (COLORS as ColorType[]).reduce<Record<string, unknown>>(
+    (acc, color) => {
+      if (ownerState.color === color) {
+        acc = styles(color);
+      }
+      return acc;
+    },
+    {},
+  );
 
   return outputStyle;
 }
@@ -22,7 +32,13 @@ const MuiLinearProgress = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme, ownerState }) => {
+    root: ({
+      theme,
+      ownerState,
+    }: {
+      theme: Theme;
+      ownerState: LinearProgressProps;
+    }) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
           backgroundColor: varAlpha(

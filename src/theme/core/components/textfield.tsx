@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 import { inputBaseClasses } from "@mui/material/InputBase";
 import { filledInputClasses } from "@mui/material/FilledInput";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
@@ -11,12 +13,12 @@ const MuiInputBase = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       [`&.${inputBaseClasses.disabled}`]: {
         "& svg": { color: theme.vars.palette.text.disabled },
       },
     }),
-    input: ({ theme }) => ({
+    input: ({ theme }: { theme: Theme }) => ({
       fontSize: theme.typography.pxToRem(15),
       [theme.breakpoints.down("sm")]: {
         // This will prevent zoom in Safari min font size ~ 16px
@@ -37,7 +39,7 @@ const MuiInput = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    underline: ({ theme }) => ({
+    underline: ({ theme }: { theme: Theme }) => ({
       "&::before": {
         borderBottomColor: varAlpha(
           theme.vars.palette.grey["500Channel"],
@@ -56,7 +58,7 @@ const MuiOutlinedInput = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       [`&.${outlinedInputClasses.focused}`]: {
         [`& .${outlinedInputClasses.notchedOutline}`]: {
           borderColor: theme.vars.palette.text.primary,
@@ -73,7 +75,7 @@ const MuiOutlinedInput = {
         },
       },
     }),
-    notchedOutline: ({ theme }) => ({
+    notchedOutline: ({ theme }: { theme: Theme }) => ({
       borderColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.2),
       transition: theme.transitions.create(["border-color"], {
         duration: theme.transitions.duration.shortest,
@@ -94,7 +96,7 @@ const MuiFilledInput = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       borderRadius: theme.shape.borderRadius,
       backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
       "&:hover": {

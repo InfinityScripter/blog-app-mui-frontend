@@ -1,4 +1,8 @@
-import type { SettingsState } from "src/types/domain";
+import type {
+  ColorScheme,
+  SettingsState,
+  ThemeDirection,
+} from "src/types/domain";
 
 import {
   type Theme,
@@ -22,11 +26,22 @@ import {
 // ----------------------------------------------------------------------
 
 export function createTheme(settings: SettingsState): Theme {
+  /**
+   * NOTE: `themeMode` / `themeDirection` are legacy property names that are not
+   * part of `SettingsState` (the real fields are `colorScheme` / `direction`),
+   * so these reads resolve to `undefined` at runtime. This typing preserves the
+   * existing runtime behavior exactly — see follow-up task to correct the bug.
+   */
+  const legacySettings = settings as SettingsState & {
+    themeMode?: ColorScheme;
+    themeDirection?: ThemeDirection;
+  };
+
   const initialTheme = {
     colorSchemes,
-    shadows: shadows(settings.themeMode),
-    customShadows: customShadows(settings.themeMode),
-    direction: settings.themeDirection,
+    shadows: shadows(legacySettings.themeMode as ColorScheme),
+    customShadows: customShadows(legacySettings.themeMode as ColorScheme),
+    direction: legacySettings.themeDirection,
     shape: { borderRadius: 8 },
     components,
     typography: {

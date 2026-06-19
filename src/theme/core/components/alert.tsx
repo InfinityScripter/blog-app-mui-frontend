@@ -1,7 +1,12 @@
+import type { Theme } from "@mui/material/styles";
+import type { AlertProps } from "@mui/material/Alert";
+import type { SvgIconProps } from "@mui/material/SvgIcon";
+
 import SvgIcon from "@mui/material/SvgIcon";
 import { alertClasses } from "@mui/material/Alert";
 
 import { varAlpha, stylesMode } from "../../styles";
+import { type ColorType, type ThemeWithVars } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +14,7 @@ import { varAlpha, stylesMode } from "../../styles";
  * Icons
  */
 /* https://icon-sets.iconify.design/solar/info-circle-bold/ */
-const AlertInfoIcon = (props) => (
+const AlertInfoIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -21,7 +26,7 @@ const AlertInfoIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/solar/check-circle-bold/ */
-const AlertSuccessIcon = (props) => (
+const AlertSuccessIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -33,7 +38,7 @@ const AlertSuccessIcon = (props) => (
 );
 
 /* https:// icon-sets.iconify.design/solar/danger-triangle-bold/ */
-const AlertWarningIcon = (props) => (
+const AlertWarningIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -45,7 +50,7 @@ const AlertWarningIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/solar/danger-bold/ */
-const AlertErrorIcon = (props) => (
+const AlertErrorIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -60,13 +65,19 @@ const AlertErrorIcon = (props) => (
 
 const COLORS = ["info", "success", "warning", "error"];
 
-function styleColors(ownerState, styles) {
-  const outputStyle = COLORS.reduce((acc, color) => {
-    if (ownerState.severity === color) {
-      acc = styles(color);
-    }
-    return acc;
-  }, {});
+function styleColors(
+  ownerState: AlertProps,
+  styles: (color: ColorType) => Record<string, unknown>,
+) {
+  const outputStyle = (COLORS as ColorType[]).reduce<Record<string, unknown>>(
+    (acc, color) => {
+      if (ownerState.severity === color) {
+        acc = styles(color);
+      }
+      return acc;
+    },
+    {},
+  );
 
   return outputStyle;
 }
@@ -94,7 +105,13 @@ const MuiAlert = {
     /**
      * @variant standard
      */
-    standard: ({ ownerState, theme }) => {
+    standard: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: AlertProps;
+      theme: Theme;
+    }) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
           color: theme.vars.palette[color].darker,
@@ -115,7 +132,13 @@ const MuiAlert = {
     /**
      * @variant filled
      */
-    filled: ({ ownerState, theme }) => {
+    filled: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: AlertProps;
+      theme: Theme;
+    }) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
           color: theme.vars.palette[color].contrastText,
@@ -127,7 +150,13 @@ const MuiAlert = {
     /**
      * @variant outlined
      */
-    outlined: ({ ownerState, theme }) => {
+    outlined: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: AlertProps;
+      theme: Theme;
+    }) => {
       const styled = {
         colors: styleColors(ownerState, (color) => ({
           backgroundColor: varAlpha(
@@ -155,7 +184,7 @@ const MuiAlertTitle = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: ThemeWithVars }) => ({
       marginBottom: theme.spacing(0.5),
       fontWeight: theme.typography.fontWeightSemiBold,
     }),

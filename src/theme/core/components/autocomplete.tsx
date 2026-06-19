@@ -1,6 +1,10 @@
+import type { Theme } from "@mui/material/styles";
+import type { SvgIconProps } from "@mui/material/SvgIcon";
+
 import SvgIcon, { svgIconClasses } from "@mui/material/SvgIcon";
 import { autocompleteClasses } from "@mui/material/Autocomplete";
 
+import { type ThemeWithVars } from "./types";
 import { paper, varAlpha, menuItem } from "../../styles";
 
 // ----------------------------------------------------------------------
@@ -9,7 +13,7 @@ import { paper, varAlpha, menuItem } from "../../styles";
  * Icons
  * https://icon-sets.iconify.design/eva/arrow-ios-downward-fill/
  */
-const ArrowDownIcon = (props) => (
+const ArrowDownIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -30,7 +34,7 @@ const MuiAutocomplete = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       [`& span.${autocompleteClasses.tag}`]: {
         ...theme.typography.subtitle2,
         height: 24,
@@ -43,8 +47,10 @@ const MuiAutocomplete = {
         backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
       },
     }),
-    paper: ({ theme }) => ({ ...paper({ theme, dropdown: true }) }),
-    listbox: ({ theme }) => ({
+    paper: ({ theme }: { theme: ThemeWithVars }) => ({
+      ...paper({ theme, dropdown: true }),
+    }),
+    listbox: ({ theme }: { theme: ThemeWithVars }) => ({
       padding: 0,
       [`& .${autocompleteClasses.option}`]: { ...menuItem(theme) },
     }),

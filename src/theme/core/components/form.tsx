@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 import { inputLabelClasses } from "@mui/material/InputLabel";
 
 // ----------------------------------------------------------------------
@@ -7,7 +9,7 @@ const MuiFormLabel = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       ...theme.typography.body2,
       color: theme.vars.palette.text.disabled,
       [`&.${inputLabelClasses.shrink}`]: {
@@ -42,7 +44,9 @@ const MuiFormHelperText = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: ({ theme }) => ({ marginTop: theme.spacing(1) }) },
+  styleOverrides: {
+    root: ({ theme }: { theme: Theme }) => ({ marginTop: theme.spacing(1) }),
+  },
 };
 
 // ----------------------------------------------------------------------
@@ -51,7 +55,9 @@ const MuiFormControlLabel = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { label: ({ theme }) => ({ ...theme.typography.body2 }) },
+  styleOverrides: {
+    label: ({ theme }: { theme: Theme }) => ({ ...theme.typography.body2 }),
+  },
 };
 
 // ----------------------------------------------------------------------

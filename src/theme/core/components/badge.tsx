@@ -1,8 +1,25 @@
+import type { Theme } from "@mui/material/styles";
+import type { BadgeProps } from "@mui/material/Badge";
+
 import { badgeClasses } from "@mui/material/Badge";
 
 // ----------------------------------------------------------------------
 
-const baseStyles = (theme) => ({
+/**
+ * The app adds custom status variants to `Badge` via `variants`; the base MUI
+ * `BadgeProps["variant"]` only knows `standard | dot`.
+ */
+type BadgeOwnerState = Omit<BadgeProps, "variant"> & {
+  variant?:
+    | BadgeProps["variant"]
+    | "online"
+    | "alway"
+    | "busy"
+    | "offline"
+    | "invisible";
+};
+
+const baseStyles = (theme: Theme) => ({
   width: 10,
   zIndex: 9,
   padding: 0,
@@ -25,8 +42,9 @@ const MuiBadge = {
      * @variant online
      */
     {
-      props: ({ ownerState }) => ownerState.variant === "online",
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: BadgeOwnerState }) =>
+        ownerState.variant === "online",
+      style: ({ theme }: { theme: Theme }) => ({
         [`& .${badgeClasses.badge}`]: {
           ...baseStyles(theme),
           backgroundColor: theme.vars.palette.success.main,
@@ -37,8 +55,9 @@ const MuiBadge = {
      * @variant alway
      */
     {
-      props: ({ ownerState }) => ownerState.variant === "alway",
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: BadgeOwnerState }) =>
+        ownerState.variant === "alway",
+      style: ({ theme }: { theme: Theme }) => ({
         [`& .${badgeClasses.badge}`]: {
           ...baseStyles(theme),
           backgroundColor: theme.vars.palette.warning.main,
@@ -59,8 +78,9 @@ const MuiBadge = {
      * @variant busy
      */
     {
-      props: ({ ownerState }) => ownerState.variant === "busy",
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: BadgeOwnerState }) =>
+        ownerState.variant === "busy",
+      style: ({ theme }: { theme: Theme }) => ({
         [`& .${badgeClasses.badge}`]: {
           ...baseStyles(theme),
           backgroundColor: theme.vars.palette.error.main,
@@ -72,8 +92,9 @@ const MuiBadge = {
      * @variant offline
      */
     {
-      props: ({ ownerState }) => ownerState.variant === "offline",
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: BadgeOwnerState }) =>
+        ownerState.variant === "offline",
+      style: ({ theme }: { theme: Theme }) => ({
         [`& .${badgeClasses.badge}`]: {
           ...baseStyles(theme),
           backgroundColor: theme.vars.palette.text.disabled,
@@ -85,7 +106,8 @@ const MuiBadge = {
      * @variant invisible
      */
     {
-      props: ({ ownerState }) => ownerState.variant === "invisible",
+      props: ({ ownerState }: { ownerState: BadgeOwnerState }) =>
+        ownerState.variant === "invisible",
       style: { [`& .${badgeClasses.badge}`]: { display: "none" } },
     },
   ],

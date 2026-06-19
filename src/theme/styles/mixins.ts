@@ -161,11 +161,14 @@ function getLineHeight(
   return lineHeight ?? 1;
 }
 
+interface ResponsiveFontSize {
+  fontSize?: string | number;
+  lineHeight?: string | number;
+}
+
 interface MaxLineProps {
   line: number;
-  persistent?: {
-    fontSize?: string | number;
-    lineHeight?: string | number;
+  persistent?: ResponsiveFontSize & {
     [key: string]: unknown;
   };
 }
@@ -184,9 +187,18 @@ export function maxLine({
 
   if (persistent) {
     const fontSizeBase = getFontSize(persistent.fontSize);
-    const fontSizeSm = getFontSize(persistent[mediaQueries.upSm]?.fontSize);
-    const fontSizeMd = getFontSize(persistent[mediaQueries.upMd]?.fontSize);
-    const fontSizeLg = getFontSize(persistent[mediaQueries.upLg]?.fontSize);
+    const fontSizeSm = getFontSize(
+      (persistent[mediaQueries.upSm] as ResponsiveFontSize | undefined)
+        ?.fontSize,
+    );
+    const fontSizeMd = getFontSize(
+      (persistent[mediaQueries.upMd] as ResponsiveFontSize | undefined)
+        ?.fontSize,
+    );
+    const fontSizeLg = getFontSize(
+      (persistent[mediaQueries.upLg] as ResponsiveFontSize | undefined)
+        ?.fontSize,
+    );
 
     const lineHeight = getLineHeight(persistent.lineHeight, fontSizeBase);
 
@@ -214,10 +226,10 @@ export function maxLine({
  * Usage:
  * ...paper({ theme, color: varAlpha(theme.vars.palette.background.paperChannel, 0.9), dropdown: true }),
  */
-import type { Theme } from "@mui/material/styles";
+import type { ThemeWithVars } from "../core/components/types";
 
 interface PaperProps {
-  theme: Theme;
+  theme: ThemeWithVars;
   color?: string;
   dropdown?: boolean;
 }
@@ -245,7 +257,7 @@ export function paper({
     ...(dropdown && {
       padding: theme.spacing(0.5),
       boxShadow: theme.customShadows.dropdown,
-      borderRadius: `${theme.shape.borderRadius * 1.25}px`,
+      borderRadius: `${Number(theme.shape.borderRadius) * 1.25}px`,
     }),
   };
 }
@@ -254,13 +266,11 @@ export function paper({
  * Usage:
  * ...menuItem(theme)
  */
-export function menuItem(
-  theme: Theme,
-): Record<string, string | number | Record<string, string | number>> {
+export function menuItem(theme: ThemeWithVars): Record<string, unknown> {
   return {
     ...theme.typography.body2,
     padding: theme.spacing(0.75, 1),
-    borderRadius: theme.shape.borderRadius * 0.75,
+    borderRadius: Number(theme.shape.borderRadius) * 0.75,
     "&:not(:last-of-type)": { marginBottom: 4 },
     [`&.${menuItemClasses.selected}`]: {
       fontWeight: theme.typography.fontWeightSemiBold,

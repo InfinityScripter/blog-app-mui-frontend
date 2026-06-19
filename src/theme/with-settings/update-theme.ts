@@ -1,4 +1,3 @@
-import type { Theme } from "@mui/material/styles";
 import type { SettingsState } from "src/types/domain";
 
 import COLORS from "../core/colors.json";
@@ -14,7 +13,30 @@ import {
   customShadows as coreCustomShadows,
 } from "../core/custom-shadows";
 
+import type { CustomShadows } from "../core/custom-shadows";
+import type { ThemeWithVars } from "../core/components/types";
+
 // ----------------------------------------------------------------------
+
+/**
+ * The theme-options object assembled in `create-theme.ts` before it is handed
+ * to `extendTheme`. It carries the app's concrete `colorSchemes` plus the
+ * custom `customShadows` field, neither of which is shaped like the strict MUI
+ * `CssVarsThemeOptions`, so this helper types only the fields it reads/writes
+ * and passes the rest through. The assembled object is validated by
+ * `extendTheme` at the call site in `create-theme.ts`.
+ */
+type PaletteInput = Record<string, unknown>;
+
+type ColorSchemesInput = {
+  light?: { palette?: PaletteInput };
+  dark?: { palette?: PaletteInput };
+};
+
+type ThemeInput = Record<string, unknown> & {
+  colorSchemes?: ColorSchemesInput;
+  customShadows?: CustomShadows;
+};
 
 /**
  * [1] settings @primaryColor
@@ -22,9 +44,9 @@ import {
  */
 
 export function updateCoreWithSettings(
-  theme: Theme,
+  theme: ThemeInput,
   settings: SettingsState,
-): Theme {
+): ThemeInput {
   const { colorSchemes, customShadows } = theme;
 
   return {
@@ -38,7 +60,7 @@ export function updateCoreWithSettings(
           primary: getPalettePrimary(settings.primaryColor),
           /** [2] */
           background: {
-            ...colorSchemes?.light?.palette?.background,
+            ...(colorSchemes?.light?.palette?.background as PaletteInput),
             default: getBackgroundDefault(settings.contrast),
             defaultChannel: hexToRgbChannel(
               getBackgroundDefault(settings.contrast),
@@ -55,7 +77,7 @@ export function updateCoreWithSettings(
       },
     },
     customShadows: {
-      ...customShadows,
+      ...(customShadows ?? {}),
       /** [1] */
       primary:
         settings.primaryColor === "default"
@@ -64,7 +86,7 @@ export function updateCoreWithSettings(
               getPalettePrimary(settings.primaryColor).mainChannel,
             ),
     },
-  } as Theme;
+  } as ThemeInput;
 }
 
 // ----------------------------------------------------------------------
@@ -78,27 +100,20 @@ export function updateComponentsWithSettings(settings: SettingsState): {
   if (settings.contrast === "bold") {
     const MuiCard = {
       styleOverrides: {
-        root: ({
-          theme,
-          ownerState,
-        }: {
-          theme: Theme;
-          ownerState: unknown;
-        }) => {
+        root: ({ theme }: { theme: ThemeWithVars }) => {
           let rootStyles: Record<string, unknown> = {};
           if (
             typeof coreComponents?.MuiCard?.styleOverrides?.root === "function"
           ) {
             rootStyles =
               (coreComponents.MuiCard.styleOverrides.root({
-                ownerState,
                 theme,
               }) as Record<string, unknown>) ?? {};
           }
 
           return {
             ...rootStyles,
-            boxShadow: theme.customShadows?.z1,
+            boxShadow: theme.customShadows.z1,
           };
         },
       },

@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 // ----------------------------------------------------------------------
 
 const MuiTimelineDot = {
@@ -12,7 +14,9 @@ const MuiTimelineConnector = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({ backgroundColor: theme.vars.palette.divider }),
+    root: ({ theme }: { theme: Theme }) => ({
+      backgroundColor: theme.vars.palette.divider,
+    }),
   },
 };
 

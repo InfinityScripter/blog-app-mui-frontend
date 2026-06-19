@@ -1,3 +1,5 @@
+import type { SvgIconProps } from "@mui/material/SvgIcon";
+
 import SvgIcon from "@mui/material/SvgIcon";
 
 // ----------------------------------------------------------------------
@@ -6,7 +8,7 @@ import SvgIcon from "@mui/material/SvgIcon";
  * Icons
  * https://icon-sets.iconify.design/eva/arrow-ios-downward-fill/
  */
-const ArrowDownIcon = (props) => (
+const ArrowDownIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"

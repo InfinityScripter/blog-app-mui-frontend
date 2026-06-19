@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 // ----------------------------------------------------------------------
 
 const MuiBreadcrumbs = {
@@ -5,12 +7,12 @@ const MuiBreadcrumbs = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    ol: ({ theme }) => ({
+    ol: ({ theme }: { theme: Theme }) => ({
       rowGap: theme.spacing(0.5),
       columnGap: theme.spacing(2),
     }),
 
-    li: ({ theme }) => ({
+    li: ({ theme }: { theme: Theme }) => ({
       display: "inline-flex",
       "& > *": { ...theme.typography.body2 },
     }),

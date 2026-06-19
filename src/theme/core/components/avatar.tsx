@@ -1,10 +1,29 @@
+import type { Theme } from "@mui/material/styles";
+import type { AvatarProps } from "@mui/material/Avatar";
+import type { AvatarGroupProps } from "@mui/material/AvatarGroup";
+
 import { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
 import { varAlpha } from "../../styles";
+import { type ColorType, type ThemeWithVars } from "./types";
 
 const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
 
-const colorByName = (name) => {
+/**
+ * The base MUI `Avatar` has no `color` prop, but the app drives its custom
+ * color variants off `ownerState.color`. Type the ownerState as the real
+ * `AvatarProps` plus the extra fields the overrides read.
+ */
+type AvatarOwnerState = AvatarProps & { color?: ColorType | "default" };
+
+/**
+ * The app adds a custom `compact` variant to `AvatarGroup` via `variants`.
+ */
+type AvatarGroupOwnerState = Omit<AvatarGroupProps, "variant"> & {
+  variant?: AvatarGroupProps["variant"] | "compact";
+};
+
+const colorByName = (name: string): ColorType | "default" => {
   const charAt = name.charAt(0).toLowerCase();
 
   if (["a", "c", "f"].includes(charAt)) return "primary";
@@ -19,17 +38,19 @@ const colorByName = (name) => {
 // ----------------------------------------------------------------------
 
 const avatarColors = {
-  colors: COLORS.map((color) => ({
-    props: ({ ownerState }) => ownerState.color === color,
-    style: ({ theme }) => ({
+  colors: (COLORS as ColorType[]).map((color) => ({
+    props: ({ ownerState }: { ownerState: AvatarOwnerState }) =>
+      ownerState.color === color,
+    style: ({ theme }: { theme: Theme }) => ({
       color: theme.vars.palette[color].contrastText,
       backgroundColor: theme.vars.palette[color].main,
     }),
   })),
   defaultColor: [
     {
-      props: ({ ownerState }) => ownerState.color === "default",
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: AvatarOwnerState }) =>
+        ownerState.color === "default",
+      style: ({ theme }: { theme: Theme }) => ({
         color: theme.vars.palette.text.secondary,
         backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.24),
       }),
@@ -47,8 +68,16 @@ const MuiAvatar = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    rounded: ({ theme }) => ({ borderRadius: theme.shape.borderRadius * 1.5 }),
-    colorDefault: ({ ownerState, theme }) => {
+    rounded: ({ theme }: { theme: Theme }) => ({
+      borderRadius: Number(theme.shape.borderRadius) * 1.5,
+    }),
+    colorDefault: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: AvatarOwnerState;
+      theme: Theme;
+    }) => {
       const color = colorByName(`${ownerState.alt}`);
 
       return {
@@ -83,7 +112,7 @@ const MuiAvatarGroup = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ ownerState }) => ({
+    root: ({ ownerState }: { ownerState: AvatarGroupOwnerState }) => ({
       justifyContent: "flex-end",
       ...(ownerState.variant === "compact" && {
         width: 40,
@@ -99,7 +128,7 @@ const MuiAvatarGroup = {
         },
       }),
     }),
-    avatar: ({ theme }) => ({
+    avatar: ({ theme }: { theme: ThemeWithVars }) => ({
       fontSize: 16,
       fontWeight: theme.typography.fontWeightSemiBold,
       "&:first-of-type": {

@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import type { SettingsState } from "src/types/domain";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSettingsContext } from "src/components/settings";
@@ -19,7 +20,7 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const settings = useSettingsContext();
+  const settings = useSettingsContext() as SettingsState;
 
   const theme = createTheme(settings);
 

@@ -1,3 +1,7 @@
+import type { Theme } from "@mui/material/styles";
+
+import { type ThemeWithVars } from "./types";
+
 // ----------------------------------------------------------------------
 
 const MuiCard = {
@@ -5,10 +9,10 @@ const MuiCard = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: ThemeWithVars }) => ({
       position: "relative",
       boxShadow: theme.customShadows.card,
-      borderRadius: theme.shape.borderRadius * 2,
+      borderRadius: Number(theme.shape.borderRadius) * 2,
       zIndex: 0, // Fix Safari overflow: hidden with border radius
     }),
   },
@@ -29,7 +33,7 @@ const MuiCardHeader = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       padding: theme.spacing(3, 3, 0),
     }),
   },
@@ -41,7 +45,9 @@ const MuiCardContent = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: ({ theme }) => ({ padding: theme.spacing(3) }) },
+  styleOverrides: {
+    root: ({ theme }: { theme: Theme }) => ({ padding: theme.spacing(3) }),
+  },
 };
 
 // ----------------------------------------------------------------------

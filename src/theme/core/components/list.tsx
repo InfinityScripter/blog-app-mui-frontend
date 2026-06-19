@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 // ----------------------------------------------------------------------
 
 const MuiListItemIcon = {
@@ -5,7 +7,7 @@ const MuiListItemIcon = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       color: "inherit",
       minWidth: "auto",
       marginRight: theme.spacing(2),
@@ -20,7 +22,10 @@ const MuiListItemAvatar = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({ minWidth: "auto", marginRight: theme.spacing(2) }),
+    root: ({ theme }: { theme: Theme }) => ({
+      minWidth: "auto",
+      marginRight: theme.spacing(2),
+    }),
   },
 };
 

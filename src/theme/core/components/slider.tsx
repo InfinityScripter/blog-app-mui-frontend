@@ -1,8 +1,21 @@
+import type { Theme } from "@mui/material/styles";
+import type { SliderProps } from "@mui/material/Slider";
+
 import { sliderClasses } from "@mui/material/Slider";
 
+import { type ThemeWithVars } from "./types";
 import { varAlpha, stylesMode } from "../../styles";
 
 // ----------------------------------------------------------------------
+
+/**
+ * This override targets `color="inherit"`, which the app uses at runtime but
+ * the base MUI `SliderProps["color"]` union does not include. Widen only the
+ * `color` field for the predicate; no value or runtime behaviour changes.
+ */
+type SliderOwnerState = Omit<SliderProps, "color"> & {
+  color?: SliderProps["color"] | "inherit";
+};
 
 const SIZE = {
   rail: { small: 6, medium: 10 },
@@ -24,8 +37,9 @@ const MuiSlider = {
      * @color inherit
      */
     {
-      props: ({ ownerState }) => ownerState.color === "inherit",
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: SliderOwnerState }) =>
+        ownerState.color === "inherit",
+      style: ({ theme }: { theme: Theme }) => ({
         [`& .${sliderClasses.markActive}`]: {
           [stylesMode.dark]: {
             backgroundColor: varAlpha(
@@ -40,8 +54,9 @@ const MuiSlider = {
      * @state disabled
      */
     {
-      props: ({ ownerState }) => !!ownerState.disabled,
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: SliderProps }) =>
+        !!ownerState.disabled,
+      style: ({ theme }: { theme: Theme }) => ({
         [`&.${sliderClasses.disabled}`]: {
           color: varAlpha(
             theme.vars.palette.grey["500Channel"],
@@ -56,7 +71,7 @@ const MuiSlider = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: ThemeWithVars }) => ({
       [`& .${sliderClasses.thumb}`]: {
         borderWidth: 1,
         borderStyle: "solid",
@@ -75,26 +90,26 @@ const MuiSlider = {
         },
       },
     }),
-    rail: ({ theme }) => ({
+    rail: ({ theme }: { theme: Theme }) => ({
       opacity: 0.12,
       height: SIZE.rail.medium,
       backgroundColor: theme.vars.palette.grey[500],
     }),
     track: { height: SIZE.rail.medium },
-    mark: ({ theme }) => ({
+    mark: ({ theme }: { theme: Theme }) => ({
       width: 1,
       height: SIZE.mark.medium,
       backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.48),
       '&[data-index="0"]': { display: "none" },
     }),
-    markActive: ({ theme }) => ({
+    markActive: ({ theme }: { theme: Theme }) => ({
       backgroundColor: varAlpha(theme.vars.palette.common.whiteChannel, 0.64),
     }),
-    markLabel: ({ theme }) => ({
+    markLabel: ({ theme }: { theme: Theme }) => ({
       fontSize: theme.typography.pxToRem(13),
       color: theme.vars.palette.text.disabled,
     }),
-    valueLabel: ({ theme }) => ({
+    valueLabel: ({ theme }: { theme: Theme }) => ({
       borderRadius: 8,
       backgroundColor: theme.vars.palette.grey[800],
       [stylesMode.dark]: { backgroundColor: theme.vars.palette.grey[700] },

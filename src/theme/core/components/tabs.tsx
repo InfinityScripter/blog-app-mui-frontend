@@ -1,4 +1,9 @@
+import type { Theme } from "@mui/material/styles";
+import type { TabsProps } from "@mui/material/Tabs";
+
 import { tabClasses } from "@mui/material/Tab";
+
+import { type ThemeWithVars } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +21,13 @@ const MuiTabs = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    flexContainer: ({ ownerState, theme }) => ({
+    flexContainer: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: TabsProps;
+      theme: Theme;
+    }) => ({
       ...(ownerState.variant !== "fullWidth" && {
         gap: "24px",
         [theme.breakpoints.up("sm")]: {
@@ -40,7 +51,7 @@ const MuiTab = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: ThemeWithVars }) => ({
       opacity: 1,
       minWidth: 48,
       minHeight: 48,

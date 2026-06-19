@@ -1,3 +1,6 @@
+import type { Theme } from "@mui/material/styles";
+import type { SwitchProps } from "@mui/material/Switch";
+
 import { switchClasses } from "@mui/material/Switch";
 
 import { varAlpha, stylesMode } from "../../styles";
@@ -10,7 +13,13 @@ const MuiSwitch = {
    *************************************** */
   styleOverrides: {
     root: { alignItems: "center" },
-    switchBase: ({ ownerState, theme }) => ({
+    switchBase: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: SwitchProps;
+      theme: Theme;
+    }) => ({
       top: "unset",
       transform: "translateX(6px)",
       [`&.${switchClasses.checked}`]: {
@@ -34,12 +43,14 @@ const MuiSwitch = {
         [`&+.${switchClasses.track}`]: { opacity: 0.48 },
       },
     }),
-    track: ({ theme }) => ({
+    track: ({ theme }: { theme: Theme }) => ({
       opacity: 1,
       borderRadius: 10,
       backgroundColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.48),
     }),
-    thumb: ({ theme }) => ({ color: theme.vars.palette.common.white }),
+    thumb: ({ theme }: { theme: Theme }) => ({
+      color: theme.vars.palette.common.white,
+    }),
     sizeMedium: {
       [`& .${switchClasses.track}`]: { height: 20 },
       [`& .${switchClasses.thumb}`]: { width: 14, height: 14 },

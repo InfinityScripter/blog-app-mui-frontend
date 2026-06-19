@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 // ----------------------------------------------------------------------
 
 const MuiTreeItem = {
@@ -5,7 +7,7 @@ const MuiTreeItem = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    label: ({ theme }) => ({ ...theme.typography.body2 }),
+    label: ({ theme }: { theme: Theme }) => ({ ...theme.typography.body2 }),
     iconContainer: { width: "auto" },
   },
 };

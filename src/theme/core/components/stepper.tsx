@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 // ----------------------------------------------------------------------
 
 const MuiStepConnector = {
@@ -5,7 +7,9 @@ const MuiStepConnector = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    line: ({ theme }) => ({ borderColor: theme.vars.palette.divider }),
+    line: ({ theme }: { theme: Theme }) => ({
+      borderColor: theme.vars.palette.divider,
+    }),
   },
 };
 

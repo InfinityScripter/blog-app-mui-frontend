@@ -1,6 +1,10 @@
+import type { Theme } from "@mui/material/styles";
+import type { FabProps } from "@mui/material/Fab";
+
 import { fabClasses } from "@mui/material/Fab";
 
 import { varAlpha, stylesMode } from "../../styles";
+import { type ColorType, type ThemeWithVars } from "./types";
 
 const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
 
@@ -13,22 +17,22 @@ const SOFT_VARIANT = ["soft", "softExtended"];
 // ----------------------------------------------------------------------
 
 const filledVariant = {
-  colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+  colors: (COLORS as ColorType[]).map((color) => ({
+    props: ({ ownerState }: { ownerState: FabProps }) =>
       !ownerState.disabled &&
-      FILLED_VARIANT.includes(ownerState.variant) &&
+      FILLED_VARIANT.includes(ownerState.variant ?? "") &&
       ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: { theme: ThemeWithVars }) => ({
       boxShadow: theme.customShadows[color],
       "&:hover": { boxShadow: "none" },
     }),
   })),
   base: [
     {
-      props: ({ ownerState }) =>
-        FILLED_VARIANT.includes(ownerState.variant) &&
-        DEFAULT_COLORS.includes(ownerState.color),
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: FabProps }) =>
+        FILLED_VARIANT.includes(ownerState.variant ?? "") &&
+        DEFAULT_COLORS.includes(ownerState.color ?? ""),
+      style: ({ theme }: { theme: ThemeWithVars }) => ({
         boxShadow: theme.customShadows.z8,
         /**
          * @color default
@@ -57,12 +61,12 @@ const filledVariant = {
 };
 
 const outlinedVariant = {
-  colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+  colors: (COLORS as ColorType[]).map((color) => ({
+    props: ({ ownerState }: { ownerState: FabProps }) =>
       !ownerState.disabled &&
-      OUTLINED_VARIANT.includes(ownerState.variant) &&
+      OUTLINED_VARIANT.includes(ownerState.variant ?? "") &&
       ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: { theme: Theme }) => ({
       color: theme.vars.palette[color].main,
       border: `solid 1px ${varAlpha(theme.vars.palette[color].mainChannel, 0.48)}`,
       "&:hover": {
@@ -72,8 +76,9 @@ const outlinedVariant = {
   })),
   base: [
     {
-      props: ({ ownerState }) => OUTLINED_VARIANT.includes(ownerState.variant),
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: FabProps }) =>
+        OUTLINED_VARIANT.includes(ownerState.variant ?? ""),
+      style: ({ theme }: { theme: Theme }) => ({
         boxShadow: "none",
         backgroundColor: "transparent",
         color: theme.vars.palette.text.secondary,
@@ -96,12 +101,12 @@ const outlinedVariant = {
 };
 
 const softVariant = {
-  colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+  colors: (COLORS as ColorType[]).map((color) => ({
+    props: ({ ownerState }: { ownerState: FabProps }) =>
       !ownerState.disabled &&
-      SOFT_VARIANT.includes(ownerState.variant) &&
+      SOFT_VARIANT.includes(ownerState.variant ?? "") &&
       ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: { theme: Theme }) => ({
       boxShadow: "none",
       color: theme.vars.palette[color].dark,
       backgroundColor: varAlpha(theme.vars.palette[color].mainChannel, 0.16),
@@ -114,10 +119,10 @@ const softVariant = {
   })),
   base: [
     {
-      props: ({ ownerState }) =>
-        SOFT_VARIANT.includes(ownerState.variant) &&
-        DEFAULT_COLORS.includes(ownerState.color),
-      style: ({ theme }) => ({
+      props: ({ ownerState }: { ownerState: FabProps }) =>
+        SOFT_VARIANT.includes(ownerState.variant ?? "") &&
+        DEFAULT_COLORS.includes(ownerState.color ?? ""),
+      style: ({ theme }: { theme: Theme }) => ({
         /**
          * @color default
          */
@@ -151,8 +156,9 @@ const softVariant = {
 
 const sizes = [
   {
-    props: ({ ownerState }) => EXTENDED_VARIANT.includes(ownerState.variant),
-    style: ({ theme }) => ({
+    props: ({ ownerState }: { ownerState: FabProps }) =>
+      EXTENDED_VARIANT.includes(ownerState.variant ?? ""),
+    style: ({ theme }: { theme: Theme }) => ({
       height: 48,
       width: "auto",
       minHeight: 48,

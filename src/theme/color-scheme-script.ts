@@ -5,9 +5,13 @@ import { getInitColorSchemeScript as _getInitColorSchemeScript } from "@mui/mate
 
 // ----------------------------------------------------------------------
 
-export const schemeConfig = {
+type SchemeConfig = NonNullable<
+  Parameters<typeof _getInitColorSchemeScript>[0]
+>;
+
+export const schemeConfig: SchemeConfig = {
   modeStorageKey: "theme-mode",
-  defaultMode: defaultSettings.colorScheme,
+  defaultMode: defaultSettings.colorScheme as SchemeConfig["defaultMode"],
 };
 
 export const getInitColorSchemeScript = _getInitColorSchemeScript(schemeConfig);

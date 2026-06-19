@@ -1,4 +1,5 @@
 import { menuItem } from "../../styles";
+import { type ThemeWithVars } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -6,7 +7,9 @@ const MuiMenuItem = {
   /** **************************************
    * STYLE
    *************************************** */
-  styleOverrides: { root: ({ theme }) => ({ ...menuItem(theme) }) },
+  styleOverrides: {
+    root: ({ theme }: { theme: ThemeWithVars }) => ({ ...menuItem(theme) }),
+  },
 };
 
 // ----------------------------------------------------------------------

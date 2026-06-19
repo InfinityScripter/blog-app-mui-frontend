@@ -1,18 +1,29 @@
+import type { PaginationProps } from "@mui/material/Pagination";
+
 import { paginationItemClasses } from "@mui/material/PaginationItem";
 
 import { varAlpha, stylesMode } from "../../styles";
+import { type ColorType, type ThemeWithVars } from "./types";
 
 const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
+
+/**
+ * The base `PaginationProps["color"]` only allows `primary | secondary |
+ * standard`, but the app drives custom color variants across the full palette.
+ */
+type PaginationOwnerState = Omit<PaginationProps, "color"> & {
+  color?: PaginationProps["color"] | ColorType;
+};
 
 // ----------------------------------------------------------------------
 
 const softVariant = {
-  colors: COLORS.map((color) => ({
-    props: ({ ownerState }) =>
+  colors: (COLORS as ColorType[]).map((color) => ({
+    props: ({ ownerState }: { ownerState: PaginationOwnerState }) =>
       !ownerState.disabled &&
       ownerState.variant === "soft" &&
       ownerState.color === color,
-    style: ({ theme }) => ({
+    style: ({ theme }: { theme: ThemeWithVars }) => ({
       [`& .${paginationItemClasses.root}`]: {
         [`&.${paginationItemClasses.selected}`]: {
           fontWeight: theme.typography.fontWeightSemiBold,
@@ -34,9 +45,9 @@ const softVariant = {
   })),
   standardColor: [
     {
-      props: ({ ownerState }) =>
+      props: ({ ownerState }: { ownerState: PaginationOwnerState }) =>
         ownerState.variant === "soft" && ownerState.color === "standard",
-      style: ({ theme }) => ({
+      style: ({ theme }: { theme: ThemeWithVars }) => ({
         [`& .${paginationItemClasses.root}`]: {
           [`&.${paginationItemClasses.selected}`]: {
             fontWeight: theme.typography.fontWeightSemiBold,
@@ -77,7 +88,13 @@ const MuiPagination = {
     /**
      * @variant text
      */
-    text: ({ ownerState, theme }) => ({
+    text: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: PaginationOwnerState;
+      theme: ThemeWithVars;
+    }) => ({
       [`& .${paginationItemClasses.root}`]: {
         [`&.${paginationItemClasses.selected}`]: {
           fontWeight: theme.typography.fontWeightSemiBold,
@@ -96,7 +113,13 @@ const MuiPagination = {
     /**
      * @variant outlined
      */
-    outlined: ({ ownerState, theme }) => ({
+    outlined: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: PaginationOwnerState;
+      theme: ThemeWithVars;
+    }) => ({
       [`& .${paginationItemClasses.root}`]: {
         borderColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.24),
         [`&.${paginationItemClasses.selected}`]: {

@@ -1,8 +1,12 @@
+import type { Theme } from "@mui/material/styles";
+import type { SvgIconProps } from "@mui/material/SvgIcon";
+
 import SvgIcon from "@mui/material/SvgIcon";
 import { buttonClasses } from "@mui/material/Button";
 import { dialogActionsClasses } from "@mui/material/DialogActions";
 
 import { stylesMode } from "../../styles";
+import { type ThemeWithVars } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -10,7 +14,7 @@ import { stylesMode } from "../../styles";
  * Icons
  */
 /* https://icon-sets.iconify.design/eva/chevron-down-fill */
-export const PickerSwitchIcon = (props) => (
+export const PickerSwitchIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -20,7 +24,7 @@ export const PickerSwitchIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/eva/arrow-ios-back-fill */
-export const PickerLeftIcon = (props) => (
+export const PickerLeftIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -30,7 +34,7 @@ export const PickerLeftIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/eva/arrow-ios-forward-fill */
-export const PickerRightIcon = (props) => (
+export const PickerRightIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -40,7 +44,7 @@ export const PickerRightIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/solar/calendar-mark-bold-duotone */
-export const PickerCalendarIcon = (props) => (
+export const PickerCalendarIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -59,7 +63,7 @@ export const PickerCalendarIcon = (props) => (
 );
 
 /* https://icon-sets.iconify.design/solar/clock-circle-outline */
-export const PickerClockIcon = (props) => (
+export const PickerClockIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -166,7 +170,7 @@ const MuiPickersLayout = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    root: ({ theme }) => ({
+    root: ({ theme }: { theme: Theme }) => ({
       [`& .${dialogActionsClasses.root}`]: {
         [`& .${buttonClasses.root}`]: {
           [`&:last-of-type`]: {
@@ -185,9 +189,9 @@ const MuiPickersPopper = {
    * DEFAULT PROPS
    *************************************** */
   styleOverrides: {
-    paper: ({ theme }) => ({
+    paper: ({ theme }: { theme: ThemeWithVars }) => ({
       boxShadow: theme.customShadows.dropdown,
-      borderRadius: theme.shape.borderRadius * 1.5,
+      borderRadius: Number(theme.shape.borderRadius) * 1.5,
     }),
   },
 };

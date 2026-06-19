@@ -1,3 +1,6 @@
+import type { DrawerProps } from "@mui/material/Drawer";
+
+import { type ThemeWithVars } from "./types";
 import { paper, varAlpha, stylesMode } from "../../styles";
 
 // ----------------------------------------------------------------------
@@ -7,7 +10,13 @@ const MuiDrawer = {
    * STYLE
    *************************************** */
   styleOverrides: {
-    paperAnchorRight: ({ ownerState, theme }) => ({
+    paperAnchorRight: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: DrawerProps;
+      theme: ThemeWithVars;
+    }) => ({
       ...(ownerState.variant === "temporary" && {
         ...paper({ theme }),
         boxShadow: `-40px 40px 80px -8px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.24)}`,
@@ -16,7 +25,13 @@ const MuiDrawer = {
         },
       }),
     }),
-    paperAnchorLeft: ({ ownerState, theme }) => ({
+    paperAnchorLeft: ({
+      ownerState,
+      theme,
+    }: {
+      ownerState: DrawerProps;
+      theme: ThemeWithVars;
+    }) => ({
       ...(ownerState.variant === "temporary" && {
         ...paper({ theme }),
         boxShadow: `40px 40px 80px -8px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.24)}`,
