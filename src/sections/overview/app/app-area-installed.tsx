@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import { useState, useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
@@ -12,7 +15,26 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function AppAreaInstalled({ title, subheader, chart, ...other }) {
+interface AppAreaInstalledProps extends Omit<CardProps, "title"> {
+  title: string;
+  subheader?: string;
+  chart: {
+    colors?: string[];
+    categories?: string[];
+    series: {
+      name: string;
+      data: { name: string; data: number[] }[];
+    }[];
+    options?: ApexOptions;
+  };
+}
+
+export function AppAreaInstalled({
+  title,
+  subheader,
+  chart,
+  ...other
+}: AppAreaInstalledProps) {
   const theme = useTheme();
 
   const [selectedSeries, setSelectedSeries] = useState("2023");
@@ -28,12 +50,12 @@ export function AppAreaInstalled({ title, subheader, chart, ...other }) {
     colors: chartColors,
     stroke: { width: 0 },
     xaxis: { categories: chart.categories },
-    tooltip: { y: { formatter: (value) => fNumber(value) } },
+    tooltip: { y: { formatter: (value: number) => fNumber(value) } },
     plotOptions: { bar: { columnWidth: "40%" } },
     ...chart.options,
   });
 
-  const handleChangeSeries = useCallback((newValue) => {
+  const handleChangeSeries = useCallback((newValue: string) => {
     setSelectedSeries(newValue);
   }, []);
 

@@ -1,10 +1,31 @@
+import type { ApexOptions } from "apexcharts";
+
 import { useTheme } from "@mui/material/styles";
 import { fPercent } from "src/utils/format-number";
 import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function ProjectColumnNegative({ chart, rangeSettings }) {
+interface ColorRange {
+  from: number;
+  to: number;
+  color: string;
+}
+
+interface ProjectColumnNegativeProps {
+  chart: {
+    colors?: string[];
+    categories: (string | number)[];
+    series: { name: string; data: number[] }[];
+    options?: ApexOptions;
+  };
+  rangeSettings?: ColorRange[];
+}
+
+export function ProjectColumnNegative({
+  chart,
+  rangeSettings,
+}: ProjectColumnNegativeProps) {
   const theme = useTheme();
 
   // Default ranges for project data (typically within ±5%)

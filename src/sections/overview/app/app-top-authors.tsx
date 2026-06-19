@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
@@ -9,7 +12,25 @@ import { fShortenNumber } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 
-export function AppTopAuthors({ title, subheader, list, ...other }) {
+type AuthorItem = {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  totalFavorites: number;
+};
+
+interface AppTopAuthorsProps extends Omit<CardProps, "title"> {
+  title: string;
+  subheader?: string;
+  list: AuthorItem[];
+}
+
+export function AppTopAuthors({
+  title,
+  subheader,
+  list,
+  ...other
+}: AppTopAuthorsProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -30,7 +51,12 @@ export function AppTopAuthors({ title, subheader, list, ...other }) {
   );
 }
 
-function Item({ item, index, sx, ...other }) {
+interface AppTopAuthorsItemProps extends BoxProps {
+  item: AuthorItem;
+  index: number;
+}
+
+function Item({ item, index, sx, ...other }: AppTopAuthorsItemProps) {
   return (
     <Box
       sx={{

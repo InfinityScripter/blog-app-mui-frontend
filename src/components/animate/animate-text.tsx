@@ -49,6 +49,8 @@ export function AnimateText({
 
   const isInView = useInView(ref, { once, amount });
 
+  const charVariants: Variants = variants ?? varFade({}).in;
+
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | undefined;
 
@@ -133,7 +135,7 @@ export function AnimateText({
                   {word.split("").map((char, charIndex) => (
                     <m.span
                       key={`${char}-${charIndex}`}
-                      variants={(variants ?? varFade({}).in) as Variants}
+                      variants={charVariants}
                       data-index={charIndex}
                       className={animateTextClasses.char}
                       style={{ display: "inline-block" }}

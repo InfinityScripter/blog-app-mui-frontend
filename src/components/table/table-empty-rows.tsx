@@ -1,9 +1,11 @@
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 
+import type { TableEmptyRowsProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function TableEmptyRows({ emptyRows, height }) {
+export function TableEmptyRows({ emptyRows, height }: TableEmptyRowsProps) {
   if (!emptyRows) {
     return null;
   }

@@ -1,3 +1,6 @@
+import type { CardProps } from "@mui/material/Card";
+import type { TableHeadLabel } from "src/components/table/types";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
@@ -19,13 +22,28 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
+interface InvoiceRow {
+  id: string;
+  invoiceNumber: string;
+  category: string;
+  price: number;
+  status: string;
+}
+
+interface AppNewInvoiceProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  tableData: InvoiceRow[];
+  headLabel: TableHeadLabel[];
+}
+
 export function AppNewInvoice({
   title,
   subheader,
   tableData,
   headLabel,
   ...other
-}) {
+}: AppNewInvoiceProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
@@ -63,7 +81,11 @@ export function AppNewInvoice({
   );
 }
 
-function RowItem({ row }) {
+interface RowItemProps {
+  row: InvoiceRow;
+}
+
+function RowItem({ row }: RowItemProps) {
   const popover = usePopover();
 
   const handleDownload = () => {

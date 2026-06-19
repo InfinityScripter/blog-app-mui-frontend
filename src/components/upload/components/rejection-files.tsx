@@ -6,9 +6,11 @@ import Typography from "@mui/material/Typography";
 
 import { fileData } from "../../file-thumbnail";
 
+import type { RejectionFilesProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function RejectionFiles({ files }) {
+export function RejectionFiles({ files }: RejectionFilesProps) {
   if (!files.length) {
     return null;
   }

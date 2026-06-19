@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { Iconify } from "src/components/iconify";
@@ -6,6 +9,13 @@ import { fPercent, fShortenNumber } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 
+interface BookingWidgetSummaryProps extends Omit<CardProps, "title"> {
+  title: string;
+  percent: number;
+  total: number;
+  icon: ReactNode;
+}
+
 export function BookingWidgetSummary({
   title,
   percent,
@@ -13,7 +23,7 @@ export function BookingWidgetSummary({
   icon,
   sx,
   ...other
-}) {
+}: BookingWidgetSummaryProps) {
   const renderTrending = (
     <Box
       gap={0.5}

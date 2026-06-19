@@ -5,6 +5,8 @@ import TableHead from "@mui/material/TableHead";
 import TableCell from "@mui/material/TableCell";
 import TableSortLabel from "@mui/material/TableSortLabel";
 
+import type { TableHeadCustomProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 const visuallyHidden = {
@@ -30,7 +32,7 @@ export function TableHeadCustom({
   rowCount = 0,
   numSelected = 0,
   onSelectAllRows,
-}) {
+}: TableHeadCustomProps) {
   return (
     <TableHead sx={sx}>
       <TableRow>

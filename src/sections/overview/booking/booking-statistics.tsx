@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import { useState, useCallback } from "react";
 import CardHeader from "@mui/material/CardHeader";
@@ -12,7 +15,32 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function BookingStatistics({ title, subheader, chart, ...other }) {
+interface BookingStatisticsSeriesData {
+  name: string;
+  data: number[];
+}
+
+interface BookingStatisticsSeries {
+  name: string;
+  categories: string[];
+  data: BookingStatisticsSeriesData[];
+}
+
+interface BookingStatisticsProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  chart: {
+    series: BookingStatisticsSeries[];
+    options?: ApexOptions;
+  };
+}
+
+export function BookingStatistics({
+  title,
+  subheader,
+  chart,
+  ...other
+}: BookingStatisticsProps) {
   const theme = useTheme();
 
   const [selectedSeries, setSelectedSeries] = useState("Yearly");
@@ -32,7 +60,7 @@ export function BookingStatistics({ title, subheader, chart, ...other }) {
     ...chart.options,
   });
 
-  const handleChangeSeries = useCallback((newValue) => {
+  const handleChangeSeries = useCallback((newValue: string) => {
     setSelectedSeries(newValue);
   }, []);
 

@@ -2,6 +2,7 @@
 
 import type { Post } from "src/types/domain";
 import type { ReactNode, ComponentType } from "react";
+import type { ColorType } from "src/theme/core/components/types";
 
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -26,12 +27,16 @@ import { PostListHorizontal } from "../post-list-horizontal";
 
 // ----------------------------------------------------------------------
 
-// `Label` is a shared `forwardRef` component without exported prop types;
-// re-type it precisely at the call site (no runtime change).
+// `Label` is a shared `forwardRef` component whose props are untyped in its
+// source module; re-type it precisely at the call site (no runtime change),
+// constraining the variant/color params to their closed sets.
+type LabelVariant = "filled" | "outlined" | "soft" | "inverted";
+type LabelColor = "default" | ColorType;
+
 const Label = RawLabel as unknown as ComponentType<{
   children?: ReactNode;
-  variant?: string;
-  color?: string;
+  variant?: LabelVariant;
+  color?: LabelColor;
 }>;
 
 export function PostListView() {
@@ -153,7 +158,8 @@ export function PostListView() {
 }
 
 // `orderBy` is constrained to `Record<string, unknown>`; the `Post` interface
-// has no index signature, so widen with an intersection type for the sort call.
+// has no index signature, so widen each element with an intersection type
+// (via spread, no cast) to satisfy the sort call's generic constraint.
 type SortablePost = Post & Record<string, unknown>;
 
 const applyFilter = ({
@@ -167,7 +173,7 @@ const applyFilter = ({
 }): Post[] => {
   const { publish } = filters;
 
-  let data = inputData as SortablePost[];
+  let data: SortablePost[] = inputData.map((post) => ({ ...post }));
 
   if (sortBy === "latest") {
     data = orderBy(data, ["createdAt"], ["desc"]);

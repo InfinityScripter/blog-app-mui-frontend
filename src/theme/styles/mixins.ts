@@ -173,6 +173,16 @@ interface MaxLineProps {
   };
 }
 
+function getResponsiveFontSize(value: unknown): string | number | undefined {
+  if (typeof value === "object" && value !== null && "fontSize" in value) {
+    const { fontSize } = value;
+    if (typeof fontSize === "string" || typeof fontSize === "number") {
+      return fontSize;
+    }
+  }
+  return undefined;
+}
+
 export function maxLine({
   line,
   persistent,
@@ -188,16 +198,13 @@ export function maxLine({
   if (persistent) {
     const fontSizeBase = getFontSize(persistent.fontSize);
     const fontSizeSm = getFontSize(
-      (persistent[mediaQueries.upSm] as ResponsiveFontSize | undefined)
-        ?.fontSize,
+      getResponsiveFontSize(persistent[mediaQueries.upSm]),
     );
     const fontSizeMd = getFontSize(
-      (persistent[mediaQueries.upMd] as ResponsiveFontSize | undefined)
-        ?.fontSize,
+      getResponsiveFontSize(persistent[mediaQueries.upMd]),
     );
     const fontSizeLg = getFontSize(
-      (persistent[mediaQueries.upLg] as ResponsiveFontSize | undefined)
-        ?.fontSize,
+      getResponsiveFontSize(persistent[mediaQueries.upLg]),
     );
 
     const lineHeight = getLineHeight(persistent.lineHeight, fontSizeBase);

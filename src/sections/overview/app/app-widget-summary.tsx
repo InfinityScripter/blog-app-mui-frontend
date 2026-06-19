@@ -1,3 +1,7 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { useTheme } from "@mui/material/styles";
@@ -7,6 +11,19 @@ import { fNumber, fPercent } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 
+interface AppWidgetSummaryProps extends Omit<CardProps, "title"> {
+  title: string;
+  percent: number;
+  total: number;
+  chart: {
+    colors?: string[];
+    categories?: string[];
+    series: number[];
+    options?: ApexOptions;
+  };
+  sx?: SxProps<Theme>;
+}
+
 export function AppWidgetSummary({
   title,
   percent,
@@ -14,7 +31,7 @@ export function AppWidgetSummary({
   chart,
   sx,
   ...other
-}) {
+}: AppWidgetSummaryProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [theme.palette.primary.main];

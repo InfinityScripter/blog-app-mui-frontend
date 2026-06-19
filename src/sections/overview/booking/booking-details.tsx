@@ -1,3 +1,5 @@
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
@@ -22,13 +24,37 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
+interface BookingDetailsRow {
+  id: string;
+  destination: { name: string; coverUrl: string };
+  customer: { avatarUrl: string; name: string; phoneNumber: string };
+  status: string;
+  checkIn: string | number | Date;
+  checkOut: string | number | Date;
+}
+
+interface BookingDetailsHeadLabel {
+  id: string;
+  label?: string;
+  align?: "left" | "center" | "right" | "justify" | "inherit";
+  width?: number | string;
+  minWidth?: number | string;
+}
+
+interface BookingDetailsProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  headLabel: BookingDetailsHeadLabel[];
+  tableData: BookingDetailsRow[];
+}
+
 export function BookingDetails({
   title,
   subheader,
   headLabel,
   tableData,
   ...other
-}) {
+}: BookingDetailsProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
@@ -38,7 +64,7 @@ export function BookingDetails({
           <TableHeadCustom headLabel={headLabel} />
 
           <TableBody>
-            {tableData.map((row) => (
+            {tableData.map((row: BookingDetailsRow) => (
               <RowItem key={row.id} row={row} />
             ))}
           </TableBody>
@@ -68,7 +94,11 @@ export function BookingDetails({
 
 // ----------------------------------------------------------------------
 
-function RowItem({ row }) {
+interface RowItemProps {
+  row: BookingDetailsRow;
+}
+
+function RowItem({ row }: RowItemProps) {
   const theme = useTheme();
 
   const popover = usePopover();

@@ -63,21 +63,18 @@ const AlertErrorIcon = (props: SvgIconProps) => (
 
 // ----------------------------------------------------------------------
 
-const COLORS = ["info", "success", "warning", "error"];
+const COLORS: ColorType[] = ["info", "success", "warning", "error"];
 
 function styleColors(
   ownerState: AlertProps,
   styles: (color: ColorType) => Record<string, unknown>,
 ) {
-  const outputStyle = (COLORS as ColorType[]).reduce<Record<string, unknown>>(
-    (acc, color) => {
-      if (ownerState.severity === color) {
-        acc = styles(color);
-      }
-      return acc;
-    },
-    {},
-  );
+  const outputStyle = COLORS.reduce<Record<string, unknown>>((acc, color) => {
+    if (ownerState.severity === color) {
+      acc = styles(color);
+    }
+    return acc;
+  }, {});
 
   return outputStyle;
 }

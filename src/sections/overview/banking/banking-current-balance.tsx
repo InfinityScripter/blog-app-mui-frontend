@@ -1,3 +1,7 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { ReactNode, ComponentType } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { useCallback } from "react";
 import Box from "@mui/material/Box";
 import { CONFIG } from "src/config-global";
@@ -16,7 +20,38 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function BankingCurrentBalance({ list, sx, ...other }) {
+// The shared `useCarousel` return widens some option fields beyond the
+// `Carousel` `carousel` prop type; re-type the `Carousel` at the call site
+// (no runtime change) to accept the hook's return as-is.
+type CarouselApi = ReturnType<typeof useCarousel>;
+
+interface CarouselComponentProps {
+  carousel: CarouselApi;
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+}
+const CardCarousel =
+  Carousel as unknown as ComponentType<CarouselComponentProps>;
+
+interface BankingCard {
+  id: string;
+  balance: number;
+  cardType: string;
+  cardHolder: string;
+  cardNumber: string;
+  cardValid: string;
+}
+
+interface BankingCurrentBalanceProps extends BoxProps {
+  list: BankingCard[];
+  sx?: SxProps<Theme>;
+}
+
+export function BankingCurrentBalance({
+  list,
+  sx,
+  ...other
+}: BankingCurrentBalanceProps) {
   const currency = useBoolean();
 
   const carousel = useCarousel();
@@ -61,7 +96,7 @@ export function BankingCurrentBalance({ list, sx, ...other }) {
         }}
       />
 
-      <Carousel carousel={carousel} sx={{ color: "common.white" }}>
+      <CardCarousel carousel={carousel} sx={{ color: "common.white" }}>
         {list.map((item) => (
           <Item
             item={item}
@@ -70,14 +105,20 @@ export function BankingCurrentBalance({ list, sx, ...other }) {
             onToggleCurrency={currency.onToggle}
           />
         ))}
-      </Carousel>
+      </CardCarousel>
     </Box>
   );
 }
 
 // ----------------------------------------------------------------------
 
-function Item({ item, showCurrency, onToggleCurrency }) {
+interface ItemProps {
+  item: BankingCard;
+  showCurrency: boolean;
+  onToggleCurrency: () => void;
+}
+
+function Item({ item, showCurrency, onToggleCurrency }: ItemProps) {
   const popover = usePopover();
 
   const handleDelete = useCallback(() => {

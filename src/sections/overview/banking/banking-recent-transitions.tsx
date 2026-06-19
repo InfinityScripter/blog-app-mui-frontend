@@ -1,3 +1,7 @@
+import type { CardProps } from "@mui/material/Card";
+import type { ReactNode, ComponentType } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
@@ -24,20 +28,78 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
+interface TransitionRow {
+  id: string;
+  name: string | null;
+  avatarUrl: string | null;
+  type: string;
+  message: string;
+  category: string;
+  date: string | number;
+  status: string;
+  amount: number;
+}
+
+interface TransitionHeadLabel {
+  id: string;
+  label?: string;
+  width?: number;
+  minWidth?: number;
+}
+
+// The shared `Scrollbar`, `TableHeadCustom` and `Label` are untyped; re-type
+// them at the call site (no runtime change) so their props type-check.
+interface ScrollbarProps {
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+}
+const ScrollContainer = Scrollbar as unknown as ComponentType<ScrollbarProps>;
+
+interface TableHeadCustomProps {
+  headLabel: TransitionHeadLabel[];
+  sx?: SxProps<Theme>;
+}
+const TableHead =
+  TableHeadCustom as unknown as ComponentType<TableHeadCustomProps>;
+
+type LabelColor =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+interface LabelProps {
+  children?: ReactNode;
+  color?: LabelColor;
+  variant?: "filled" | "outlined" | "soft" | "inverted";
+  sx?: SxProps<Theme>;
+}
+const StatusLabel = Label as unknown as ComponentType<LabelProps>;
+
+interface BankingRecentTransitionsProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  tableData: TransitionRow[];
+  headLabel: TransitionHeadLabel[];
+}
+
 export function BankingRecentTransitions({
   title,
   subheader,
   tableData,
   headLabel,
   ...other
-}) {
+}: BankingRecentTransitionsProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
 
-      <Scrollbar sx={{ minHeight: 462 }}>
+      <ScrollContainer sx={{ minHeight: 462 }}>
         <Table sx={{ minWidth: 720 }}>
-          <TableHeadCustom headLabel={headLabel} />
+          <TableHead headLabel={headLabel} />
 
           <TableBody>
             {tableData.map((row) => (
@@ -45,7 +107,7 @@ export function BankingRecentTransitions({
             ))}
           </TableBody>
         </Table>
-      </Scrollbar>
+      </ScrollContainer>
 
       <Divider sx={{ borderStyle: "dashed" }} />
 
@@ -70,7 +132,11 @@ export function BankingRecentTransitions({
 
 // ----------------------------------------------------------------------
 
-function RowItem({ row }) {
+interface RowItemProps {
+  row: TransitionRow;
+}
+
+function RowItem({ row }: RowItemProps) {
   const theme = useTheme();
 
   const popover = usePopover();
@@ -161,7 +227,7 @@ function RowItem({ row }) {
         <TableCell>{fCurrency(row.amount)}</TableCell>
 
         <TableCell>
-          <Label
+          <StatusLabel
             variant={lightMode ? "soft" : "filled"}
             color={
               (row.status === "completed" && "success") ||
@@ -171,7 +237,7 @@ function RowItem({ row }) {
             sx={{ textTransform: "capitalize" }}
           >
             {row.status}
-          </Label>
+          </StatusLabel>
         </TableCell>
 
         <TableCell align="right" sx={{ pr: 1 }}>

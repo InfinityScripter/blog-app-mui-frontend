@@ -1,5 +1,7 @@
 "use client";
 
+import type { Post } from "src/types/domain";
+
 import useSWR from "swr";
 import { paths } from "src/routes/paths";
 import { useRouter } from "next/navigation";
@@ -21,6 +23,10 @@ import {
   TableContainer,
 } from "@mui/material";
 
+interface AdminPostsResponse {
+  posts: Post[];
+}
+
 export function AdminPostsView() {
   const { user } = useAuthContext();
   const accessToken = user?.accessToken;
@@ -29,7 +35,7 @@ export function AdminPostsView() {
   // до того, как setSession проставит Authorization в axios.defaults — и
   // бэкенд отдаёт посты по userId-фильтру (для админа это 0 строк) вместо
   // admin-ветки «все посты». Ключ null до появления токена → нет гонки.
-  const { data, mutate } = useSWR(
+  const { data, mutate } = useSWR<AdminPostsResponse>(
     accessToken
       ? [
           endpoints.post.list,
@@ -38,7 +44,7 @@ export function AdminPostsView() {
       : null,
     fetcher,
   );
-  const posts = (data as any)?.posts ?? [];
+  const posts = data?.posts ?? [];
   const router = useRouter();
 
   const handleDelete = async (id: string) => {
@@ -65,7 +71,7 @@ export function AdminPostsView() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {posts.map((p: any) => (
+              {posts.map((p) => (
                 <TableRow key={p.id}>
                   <TableCell>{p.title}</TableCell>
                   <TableCell>{p.author?.name}</TableCell>
@@ -77,13 +83,13 @@ export function AdminPostsView() {
                     />
                   </TableCell>
                   <TableCell>
-                    {new Date(p.createdAt).toLocaleDateString("ru-RU")}
+                    {new Date(p.createdAt ?? "").toLocaleDateString("ru-RU")}
                   </TableCell>
                   <TableCell>
                     <Tooltip title="Редактировать">
                       <IconButton
                         onClick={() =>
-                          router.push(paths.dashboard.post.edit(p.id))
+                          router.push(paths.dashboard.post.edit(p.id ?? ""))
                         }
                       >
                         <Iconify icon="solar:pen-bold" />
@@ -92,7 +98,7 @@ export function AdminPostsView() {
                     <Tooltip title="Удалить">
                       <IconButton
                         color="error"
-                        onClick={() => handleDelete(p.id)}
+                        onClick={() => handleDelete(p.id ?? "")}
                       >
                         <Iconify icon="solar:trash-bin-trash-bold" />
                       </IconButton>

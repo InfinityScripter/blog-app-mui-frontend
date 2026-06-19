@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import { useTheme } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
@@ -5,7 +9,28 @@ import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function EcommerceYearlySales({ title, subheader, chart, ...other }) {
+interface YearlySalesSeries {
+  name: string;
+  data: { name: string; data: number[] }[];
+}
+
+interface EcommerceYearlySalesProps extends Omit<CardProps, "title"> {
+  title?: ReactNode;
+  subheader?: ReactNode;
+  chart: {
+    colors?: string[];
+    categories: string[];
+    series: YearlySalesSeries[];
+    options?: ApexOptions;
+  };
+}
+
+export function EcommerceYearlySales({
+  title,
+  subheader,
+  chart,
+  ...other
+}: EcommerceYearlySalesProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [

@@ -7,9 +7,17 @@ import FormHelperText from "@mui/material/FormHelperText";
 import { Controller, useFormContext } from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+import type { RHFCheckboxProps, RHFMultiCheckboxProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFCheckbox({ name, helperText, label, slotProps, ...other }) {
+export function RHFCheckbox({
+  name,
+  helperText,
+  label,
+  slotProps,
+  ...other
+}: RHFCheckboxProps) {
   const { control } = useFormContext();
 
   const ariaLabel = `Checkbox ${name}`;
@@ -56,16 +64,16 @@ export function RHFMultiCheckbox({
   slotProps,
   helperText,
   ...other
-}) {
+}: RHFMultiCheckboxProps) {
   const { control } = useFormContext();
 
-  const getSelected = (selectedItems, item) =>
+  const getSelected = (selectedItems: string[], item: string) =>
     selectedItems.includes(item)
       ? selectedItems.filter((value) => value !== item)
       : [...selectedItems, item];
 
-  const accessibility = (val) => val;
-  const ariaLabel = (val) => `Checkbox ${val}`;
+  const accessibility = (val: string) => val;
+  const ariaLabel = (val: string) => `Checkbox ${val}`;
 
   return (
     <Controller

@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Link from "@mui/material/Link";
@@ -15,7 +18,21 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function EcommerceNewProducts({ list, sx, ...other }) {
+interface NewProductItem {
+  id: string;
+  name: string;
+  coverUrl: string;
+}
+
+interface EcommerceNewProductsProps extends CardProps {
+  list: NewProductItem[];
+}
+
+export function EcommerceNewProducts({
+  list,
+  sx,
+  ...other
+}: EcommerceNewProductsProps) {
   const carousel = useCarousel({ loop: true }, [
     Autoplay({ playOnInit: true, delay: 8000 }),
   ]);
@@ -45,7 +62,11 @@ export function EcommerceNewProducts({ list, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-function CarouselItem({ item, ...other }) {
+interface CarouselItemProps extends BoxProps {
+  item: NewProductItem;
+}
+
+function CarouselItem({ item, ...other }: CarouselItemProps) {
   const theme = useTheme();
 
   return (

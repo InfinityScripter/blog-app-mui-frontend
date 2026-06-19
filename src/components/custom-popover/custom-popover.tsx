@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { SystemStyleObject } from "@mui/system";
 import type { PopoverProps } from "@mui/material/Popover";
 import type { Theme, SxProps } from "@mui/material/styles";
 
@@ -11,12 +12,21 @@ import { type ArrowPlacement, calculateAnchorOrigin } from "./utils";
 
 // ----------------------------------------------------------------------
 
+function toStyleObject(
+  sx: SxProps<Theme> | undefined,
+): SystemStyleObject<Theme> {
+  if (sx && typeof sx === "object" && !Array.isArray(sx)) {
+    return sx;
+  }
+  return {};
+}
+
 interface CustomPopoverProps extends Omit<PopoverProps, "open" | "children"> {
   open: boolean;
   children?: ReactNode;
   slotProps?: {
     paper?: {
-      sx?: SxProps<Theme>;
+      sx?: SystemStyleObject<Theme>;
     };
     arrow?: {
       hide?: boolean;
@@ -60,9 +70,9 @@ export function CustomPopover({
             overflow: "inherit",
             [`& .${listClasses.root}`]: { minWidth: 140 },
             [`& .${menuItemClasses.root}`]: { gap: 2 },
-            ...(paperStyles as SxProps<Theme>),
-            ...(slotProps?.paper?.sx as SxProps<Theme>),
-          } as SxProps<Theme>,
+            ...toStyleObject(paperStyles),
+            ...toStyleObject(slotProps?.paper?.sx),
+          },
         },
       }}
       {...other}

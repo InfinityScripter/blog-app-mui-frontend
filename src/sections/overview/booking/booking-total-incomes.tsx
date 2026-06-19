@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { CONFIG } from "src/config-global";
@@ -9,6 +12,18 @@ import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
+interface BookingTotalIncomesProps extends Omit<CardProps, "title"> {
+  title?: string;
+  total: number;
+  percent: number;
+  chart: {
+    colors?: string[];
+    categories?: string[];
+    series: { name?: string; data: number[] }[];
+    options?: ApexOptions;
+  };
+}
+
 export function BookingTotalIncomes({
   title,
   total,
@@ -16,7 +31,7 @@ export function BookingTotalIncomes({
   chart,
   sx,
   ...other
-}) {
+}: BookingTotalIncomesProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [

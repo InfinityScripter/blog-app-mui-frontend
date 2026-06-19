@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
@@ -6,7 +9,23 @@ import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function AnalyticsCurrentSubject({ title, subheader, chart, ...other }) {
+interface AnalyticsCurrentSubjectProps extends Omit<CardProps, "title"> {
+  title?: React.ReactNode;
+  subheader?: React.ReactNode;
+  chart: {
+    colors?: string[];
+    categories?: string[];
+    series: { name: string; data: number[] }[];
+    options?: ApexOptions;
+  };
+}
+
+export function AnalyticsCurrentSubject({
+  title,
+  subheader,
+  chart,
+  ...other
+}: AnalyticsCurrentSubjectProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [

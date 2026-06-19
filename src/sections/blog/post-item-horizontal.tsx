@@ -73,7 +73,9 @@ export function PostItemHorizontal({ post }: { post: Post }) {
   };
 
   const handleClickDelete = () => {
-    handleOpenConfirm(post as Parameters<typeof handleOpenConfirm>[0]);
+    if (post._id) {
+      handleOpenConfirm({ ...post, _id: post._id });
+    }
     popover.onClose();
   };
 

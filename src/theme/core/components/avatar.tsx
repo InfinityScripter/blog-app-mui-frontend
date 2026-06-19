@@ -7,7 +7,14 @@ import { avatarGroupClasses } from "@mui/material/AvatarGroup";
 import { varAlpha } from "../../styles";
 import { type ColorType, type ThemeWithVars } from "./types";
 
-const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
+const COLORS: ColorType[] = [
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
 /**
  * The base MUI `Avatar` has no `color` prop, but the app drives its custom
@@ -38,7 +45,7 @@ const colorByName = (name: string): ColorType | "default" => {
 // ----------------------------------------------------------------------
 
 const avatarColors = {
-  colors: (COLORS as ColorType[]).map((color) => ({
+  colors: COLORS.map((color) => ({
     props: ({ ownerState }: { ownerState: AvatarOwnerState }) =>
       ownerState.color === color,
     style: ({ theme }: { theme: Theme }) => ({

@@ -1,3 +1,8 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+import type { ReactNode, ComponentType } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
@@ -11,7 +16,35 @@ import ListItemText from "@mui/material/ListItemText";
 
 // ----------------------------------------------------------------------
 
-export function BankingContacts({ title, subheader, list, ...other }) {
+// The shared `Scrollbar` is an untyped `forwardRef` (its props are not declared
+// in src/components/scrollbar/scrollbar.tsx), so the call site cannot pass
+// `children`/`sx` without re-typing it. Fixing this at the source is out of this
+// cluster's scope; re-type here (no runtime change).
+interface ScrollbarProps {
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+}
+const ScrollContainer = Scrollbar as unknown as ComponentType<ScrollbarProps>;
+
+interface BankingContact {
+  id: string;
+  name: string;
+  email: string;
+  avatarUrl: string;
+}
+
+interface BankingContactsProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  list: BankingContact[];
+}
+
+export function BankingContacts({
+  title,
+  subheader,
+  list,
+  ...other
+}: BankingContactsProps) {
   return (
     <Card {...other}>
       <CardHeader
@@ -34,7 +67,7 @@ export function BankingContacts({ title, subheader, list, ...other }) {
         }
       />
 
-      <Scrollbar sx={{ minHeight: 364 }}>
+      <ScrollContainer sx={{ minHeight: 364 }}>
         <Box
           sx={{
             p: 3,
@@ -48,12 +81,19 @@ export function BankingContacts({ title, subheader, list, ...other }) {
             <Item key={item.id} item={item} />
           ))}
         </Box>
-      </Scrollbar>
+      </ScrollContainer>
     </Card>
   );
 }
 
-function Item({ item, sx, ...other }) {
+// ----------------------------------------------------------------------
+
+interface ItemProps extends BoxProps {
+  item: BankingContact;
+  sx?: SxProps<Theme>;
+}
+
+function Item({ item, sx, ...other }: ItemProps) {
   return (
     <Box
       key={item.id}

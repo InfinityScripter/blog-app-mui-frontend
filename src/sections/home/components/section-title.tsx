@@ -1,3 +1,8 @@
+import type { ReactNode } from "react";
+import type { Variants } from "framer-motion";
+import type { StackProps } from "@mui/material/Stack";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -8,6 +13,25 @@ import { marketingTextPrimaryFadeSx } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
+interface SectionTitleSlot {
+  variants?: Variants;
+  sx?: SxProps<Theme>;
+}
+
+interface SectionTitleSlotProps {
+  caption?: SectionTitleSlot;
+  title?: SectionTitleSlot;
+  description?: SectionTitleSlot;
+}
+
+interface SectionTitleProps extends Omit<StackProps, "title"> {
+  title?: ReactNode;
+  caption?: ReactNode;
+  txtGradient?: ReactNode;
+  description?: ReactNode;
+  slotProps?: SectionTitleSlotProps;
+}
+
 export function SectionTitle({
   title,
   caption,
@@ -15,7 +39,7 @@ export function SectionTitle({
   txtGradient,
   description,
   ...other
-}) {
+}: SectionTitleProps) {
   const theme = useTheme();
 
   return (
@@ -64,7 +88,13 @@ export function SectionTitle({
 
 // ----------------------------------------------------------------------
 
-export function SectionCaption({ title, variants, sx }) {
+interface SectionCaptionProps {
+  title?: ReactNode;
+  variants?: Variants;
+  sx?: SxProps<Theme>;
+}
+
+export function SectionCaption({ title, variants, sx }: SectionCaptionProps) {
   return (
     <Stack
       component={m.span}

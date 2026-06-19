@@ -1,3 +1,5 @@
+import type { MarketingTheme } from "src/sections/home/components/types";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -33,7 +35,7 @@ const CONTACT_INFO = [
 ];
 
 export default function HomeContact() {
-  const theme = useTheme();
+  const theme = useTheme<MarketingTheme>();
 
   return (
     <Container
@@ -63,7 +65,7 @@ export default function HomeContact() {
 
       <Grid container spacing={3}>
         {/* Contact Form */}
-        <Grid xs={12} md={7}>
+        <Grid size={{ xs: 12, md: 7 }}>
           <m.div variants={varFade().inUp}>
             <Card sx={{ boxShadow: theme.customShadows.z24 }}>
               <CardContent sx={{ p: 4 }}>
@@ -93,7 +95,7 @@ export default function HomeContact() {
         </Grid>
 
         {/* Contact Info */}
-        <Grid xs={12} md={5}>
+        <Grid size={{ xs: 12, md: 5 }}>
           <Stack spacing={3}>
             {CONTACT_INFO.map((info) => (
               <m.div key={info.label} variants={varFade().inUp}>

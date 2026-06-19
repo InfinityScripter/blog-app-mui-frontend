@@ -27,7 +27,7 @@ export const fetcher = async <T = unknown>(args: FetcherArgs): Promise<T> => {
   try {
     const [url, config] = Array.isArray(args) ? args : [args, undefined];
     const res = await axiosInstance.get<T>(url, {
-      ...(config as AxiosRequestConfig),
+      ...config,
     });
     return res.data;
   } catch (error) {
@@ -76,18 +76,18 @@ export const endpoints = {
     search: "/api/product/search",
   },
   admin: {
-    users: '/api/admin/users',
+    users: "/api/admin/users",
     userById: (id: string) => `/api/admin/users/${id}`,
     postById: (id: string) => `/api/admin/posts/${id}`,
   },
   chat: {
-    channels: '/api/chat/channels',
+    channels: "/api/chat/channels",
     messages: (channelId: string) => `/api/chat/${channelId}/messages`,
     stream: (channelId: string, token: string) =>
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/chat/${channelId}/stream?token=${token}`,
   },
   kanban: {
-    boards: '/api/kanban/boards',
+    boards: "/api/kanban/boards",
     board: (id: string) => `/api/kanban/boards/${id}`,
     columns: (boardId: string) => `/api/kanban/boards/${boardId}/columns`,
     column: (columnId: string) => `/api/kanban/columns/${columnId}`,
@@ -95,7 +95,7 @@ export const endpoints = {
     task: (taskId: string) => `/api/kanban/tasks/${taskId}`,
   },
   calendar: {
-    events: '/api/calendar/events',
+    events: "/api/calendar/events",
     event: (id: string) => `/api/calendar/events/${id}`,
   },
-} as const;
+};

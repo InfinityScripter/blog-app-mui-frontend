@@ -2,9 +2,11 @@ import { MuiOtpInput } from "mui-one-time-password-input";
 import FormHelperText from "@mui/material/FormHelperText";
 import { Controller, useFormContext } from "react-hook-form";
 
+import type { RHFCodeProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFCode({ name, ...other }) {
+export function RHFCode({ name, ...other }: RHFCodeProps) {
   const { control } = useFormContext();
 
   return (

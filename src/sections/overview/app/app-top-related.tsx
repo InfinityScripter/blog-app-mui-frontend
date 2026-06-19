@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Card from "@mui/material/Card";
@@ -24,7 +27,29 @@ const TABS = [
 
 // ----------------------------------------------------------------------
 
-export function AppTopRelated({ title, subheader, list, ...other }) {
+interface RelatedItem {
+  id: string;
+  name: string;
+  size: number;
+  price: number;
+  shortcut: string;
+  downloaded: number;
+  ratingNumber: number;
+  totalReviews: number;
+}
+
+interface AppTopRelatedProps extends Omit<CardProps, "title"> {
+  title: string;
+  subheader?: string;
+  list: RelatedItem[];
+}
+
+export function AppTopRelated({
+  title,
+  subheader,
+  list,
+  ...other
+}: AppTopRelatedProps) {
   const tabs = useTabs("7days");
 
   const renderTabs = (
@@ -65,7 +90,11 @@ export function AppTopRelated({ title, subheader, list, ...other }) {
   );
 }
 
-function Item({ item, sx, ...other }) {
+interface AppTopRelatedItemProps extends BoxProps {
+  item: RelatedItem;
+}
+
+function Item({ item, sx, ...other }: AppTopRelatedItemProps) {
   return (
     <Box
       sx={{ gap: 2, display: "flex", alignItems: "center", ...sx }}

@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { varFade, MotionViewport } from "src/components/animate";
@@ -13,8 +12,6 @@ import { SKILLS } from "./const";
 // ----------------------------------------------------------------------
 
 export function HomeSkills() {
-  const theme = useTheme();
-
   return (
     <Container
       component={MotionViewport}
@@ -59,7 +56,7 @@ export function HomeSkills() {
                 borderRadius: 2,
                 display: "flex",
                 flexDirection: "column",
-                bgcolor: theme.palette.background.neutral,
+                bgcolor: "background.neutral",
               }}
             >
               <Stack spacing={3} flexGrow={1}>

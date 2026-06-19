@@ -35,11 +35,11 @@ export function OverviewAppView() {
   return (
     <DashboardContent maxWidth="xl">
       <Grid container spacing={3}>
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <EcommerceNewProducts list={_ecommerceNewProducts} />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <EcommerceWidgetSummary
             title="Product sold"
             percent={2.6}
@@ -60,7 +60,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <EcommerceWidgetSummary
             title="Total balance"
             percent={-0.1}
@@ -85,7 +85,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <EcommerceWidgetSummary
             title="Sales profit"
             percent={0.6}
@@ -110,7 +110,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <EcommerceSaleByGender
             title="Sale by gender"
             total={2324}
@@ -124,14 +124,14 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={8}>
+        <Grid size={{ xs: 12, md: 6, lg: 8 }}>
           <EcommerceSalesOverview
             title="Sales overview"
             data={_ecommerceSalesOverview}
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <EcommerceCurrentBalance
             title="Current balance"
             earning={25500}
@@ -141,7 +141,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={8}>
+        <Grid size={{ xs: 12, md: 6, lg: 8 }}>
           <EcommerceBestSalesman
             title="Best salesman"
             tableData={_ecommerceBestSalesman}
@@ -155,14 +155,14 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <EcommerceLatestProducts
             title="Latest products"
             list={_ecommerceLatestProducts}
           />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
             title="Всего пользователей"
             percent={2.6}
@@ -183,7 +183,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
             title="Всего устройств"
             percent={0.2}
@@ -205,7 +205,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <AppWidgetSummary
             title="Всего заказов"
             percent={-0.1}
@@ -227,7 +227,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <AppCurrentDownload
             title="Текущие заказы"
             subheader="От сегодня"
@@ -242,7 +242,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={8}>
+        <Grid size={{ xs: 12, md: 6, lg: 8 }}>
           <AppAreaInstalled
             title="Обзор заказов"
             subheader="(+32%) чем в прошлом году"
@@ -318,7 +318,7 @@ export function OverviewAppView() {
           />
         </Grid>
 
-        <Grid xs={12} md={6} lg={4}>
+        <Grid size={{ xs: 12, md: 6, lg: 4 }}>
           <Box sx={{ gap: 3, display: "flex", flexDirection: "column" }}>
             <AppWidget
               title="Клиенты"

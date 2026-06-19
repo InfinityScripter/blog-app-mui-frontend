@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
@@ -9,7 +13,27 @@ import { ColorPreview } from "src/components/color-utils";
 
 // ----------------------------------------------------------------------
 
-export function EcommerceLatestProducts({ title, subheader, list, ...other }) {
+interface LatestProductItem {
+  id: string;
+  name: string;
+  coverUrl: string;
+  price: number;
+  priceSale: number;
+  colors: string[];
+}
+
+interface EcommerceLatestProductsProps extends Omit<CardProps, "title"> {
+  title?: ReactNode;
+  subheader?: ReactNode;
+  list: LatestProductItem[];
+}
+
+export function EcommerceLatestProducts({
+  title,
+  subheader,
+  list,
+  ...other
+}: EcommerceLatestProductsProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -33,7 +57,11 @@ export function EcommerceLatestProducts({ title, subheader, list, ...other }) {
   );
 }
 
-function Item({ item, sx, ...other }) {
+interface ItemProps extends BoxProps {
+  item: LatestProductItem;
+}
+
+function Item({ item, sx, ...other }: ItemProps) {
   return (
     <Box
       sx={{

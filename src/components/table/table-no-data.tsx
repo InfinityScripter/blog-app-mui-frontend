@@ -3,9 +3,11 @@ import TableCell from "@mui/material/TableCell";
 
 import { EmptyContent } from "../empty-content";
 
+import type { TableNoDataProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function TableNoData({ notFound, sx }) {
+export function TableNoData({ notFound, sx }: TableNoDataProps) {
   return (
     <TableRow>
       {notFound ? (

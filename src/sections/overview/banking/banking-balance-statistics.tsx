@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import { useState, useCallback } from "react";
 import { useTheme } from "@mui/material/styles";
@@ -12,12 +15,33 @@ import {
 
 // ----------------------------------------------------------------------
 
+interface BalanceSeriesItem {
+  name: string;
+  data: number[];
+}
+
+interface BalanceSeries {
+  name: string;
+  categories: string[];
+  data: BalanceSeriesItem[];
+}
+
+interface BankingBalanceStatisticsProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  chart: {
+    colors?: string[];
+    series: BalanceSeries[];
+    options?: ApexOptions;
+  };
+}
+
 export function BankingBalanceStatistics({
   title,
   subheader,
   chart,
   ...other
-}) {
+}: BankingBalanceStatisticsProps) {
   const theme = useTheme();
 
   const [selectedSeries, setSelectedSeries] = useState("Yearly");
@@ -38,7 +62,7 @@ export function BankingBalanceStatistics({
     ...chart.options,
   });
 
-  const handleChangeSeries = useCallback((newValue) => {
+  const handleChangeSeries = useCallback((newValue: string) => {
     setSelectedSeries(newValue);
   }, []);
 

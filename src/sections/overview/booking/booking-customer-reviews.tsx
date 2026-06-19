@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
@@ -18,7 +21,28 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function BookingCustomerReviews({ title, subheader, list, ...other }) {
+interface BookingReviewItem {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  postedAt: string | number | Date;
+  rating: number;
+  description: string;
+  tags: string[];
+}
+
+interface BookingCustomerReviewsProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  list: BookingReviewItem[];
+}
+
+export function BookingCustomerReviews({
+  title,
+  subheader,
+  list,
+  ...other
+}: BookingCustomerReviewsProps) {
   const carousel = useCarousel({ align: "start" }, [AutoHeight()]);
 
   const customerInfo = list.find(
@@ -34,7 +58,7 @@ export function BookingCustomerReviews({ title, subheader, list, ...other }) {
       />
 
       <Carousel carousel={carousel}>
-        {list.map((item) => (
+        {list.map((item: BookingReviewItem) => (
           <Item key={item.id} item={item} />
         ))}
       </Carousel>
@@ -64,7 +88,11 @@ export function BookingCustomerReviews({ title, subheader, list, ...other }) {
   );
 }
 
-function Item({ item, sx, ...other }) {
+interface ItemProps extends BoxProps {
+  item: BookingReviewItem;
+}
+
+function Item({ item, sx, ...other }: ItemProps) {
   return (
     <Box
       sx={{
@@ -107,7 +135,7 @@ function Item({ item, sx, ...other }) {
       <Typography variant="body2">{item.description}</Typography>
 
       <Box sx={{ gap: 1, display: "flex", flexWrap: "wrap" }}>
-        {item.tags.map((tag) => (
+        {item.tags.map((tag: string) => (
           <Chip size="small" variant="soft" key={tag} label={tag} />
         ))}
       </Box>

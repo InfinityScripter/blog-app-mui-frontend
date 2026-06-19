@@ -15,7 +15,7 @@ interface UseCookiesReturn<T> {
   canReset: boolean;
 }
 
-export function useCookies<T>(
+export function useCookies<T extends Record<string, unknown>>(
   key: string,
   initialState: T,
   defaultValues: T,
@@ -28,40 +28,31 @@ export function useCookies<T>(
   const canReset = !isEqual(state, defaultValues);
 
   useEffect(() => {
-    const restoredValue = getStorage<T>(key);
+    const restoredValue = getStorage(key);
 
-    if (restoredValue) {
-      if (multiValue) {
-        set((prevValue) => ({ ...prevValue, ...restoredValue }) as T);
-      } else {
-        set(restoredValue);
-      }
+    if (restoredValue && typeof restoredValue === "object") {
+      set((prevValue) => ({ ...prevValue, ...restoredValue }));
     }
-  }, [key, multiValue]);
+  }, [key]);
 
   const setState = useCallback(
     (updateState: T | Partial<T>) => {
-      if (multiValue) {
-        set((prevValue) => {
-          const newValue = { ...prevValue, ...updateState } as T;
-          setStorage(key, newValue, options?.daysUntilExpiration);
-          return newValue;
-        });
-      } else {
-        setStorage(key, updateState as T, options?.daysUntilExpiration);
-        set(updateState as T);
-      }
+      set((prevValue) => {
+        const newValue: T = { ...prevValue, ...updateState };
+        setStorage(key, newValue, options?.daysUntilExpiration);
+        return newValue;
+      });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key, multiValue],
+    [key],
   );
 
   const setField = useCallback(
     <K extends keyof T>(name: K, updateValue: T[K]) => {
       if (multiValue) {
-        setState({
-          [name]: updateValue,
-        } as Partial<T>);
+        const partial: Partial<T> = {};
+        partial[name] = updateValue;
+        setState(partial);
       }
     },
     [multiValue, setState],
@@ -88,7 +79,7 @@ export function useCookies<T>(
 
 // ----------------------------------------------------------------------
 
-function getStorage<T>(key: string): T | null {
+function getStorage(key: string): unknown {
   try {
     const keyName = `${key}=`;
 
@@ -103,7 +94,8 @@ function getStorage<T>(key: string): T | null {
     });
 
     if (res) {
-      return JSON.parse(res) as T;
+      const parsed: unknown = JSON.parse(res);
+      return parsed;
     }
   } catch (error) {
     console.error("Error while getting from cookies:", error);

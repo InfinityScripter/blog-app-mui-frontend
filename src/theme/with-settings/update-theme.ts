@@ -38,6 +38,16 @@ type ThemeInput = Record<string, unknown> & {
   customShadows?: CustomShadows;
 };
 
+/** Narrows an `unknown` value to a plain object record, falling back to `{}`. */
+function toRecord(value: unknown): Record<string, unknown> {
+  if (typeof value === "object" && value !== null) {
+    return Object.fromEntries(Object.entries(value));
+  }
+  return {};
+}
+
+const toPaletteInput = toRecord;
+
 /**
  * [1] settings @primaryColor
  * [2] settings @contrast
@@ -60,7 +70,7 @@ export function updateCoreWithSettings(
           primary: getPalettePrimary(settings.primaryColor),
           /** [2] */
           background: {
-            ...(colorSchemes?.light?.palette?.background as PaletteInput),
+            ...toPaletteInput(colorSchemes?.light?.palette?.background),
             default: getBackgroundDefault(settings.contrast),
             defaultChannel: hexToRgbChannel(
               getBackgroundDefault(settings.contrast),
@@ -77,7 +87,7 @@ export function updateCoreWithSettings(
       },
     },
     customShadows: {
-      ...(customShadows ?? {}),
+      ...(customShadows ?? coreCustomShadows("light")),
       /** [1] */
       primary:
         settings.primaryColor === "default"
@@ -86,7 +96,7 @@ export function updateCoreWithSettings(
               getPalettePrimary(settings.primaryColor).mainChannel,
             ),
     },
-  } as ThemeInput;
+  };
 }
 
 // ----------------------------------------------------------------------
@@ -105,10 +115,9 @@ export function updateComponentsWithSettings(settings: SettingsState): {
           if (
             typeof coreComponents?.MuiCard?.styleOverrides?.root === "function"
           ) {
-            rootStyles =
-              (coreComponents.MuiCard.styleOverrides.root({
-                theme,
-              }) as Record<string, unknown>) ?? {};
+            rootStyles = toRecord(
+              coreComponents.MuiCard.styleOverrides.root({ theme }),
+            );
           }
 
           return {

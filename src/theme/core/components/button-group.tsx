@@ -6,21 +6,25 @@ import { buttonGroupClasses } from "@mui/material/ButtonGroup";
 import { type ColorType } from "./types";
 import { varAlpha, stylesMode } from "../../styles";
 
-const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
+const COLORS: ColorType[] = [
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
 function styleColors(
   ownerState: ButtonGroupProps,
   styles: (color: ColorType) => Record<string, unknown>,
 ) {
-  const outputStyle = (COLORS as ColorType[]).reduce<Record<string, unknown>>(
-    (acc, color) => {
-      if (!ownerState.disabled && ownerState.color === color) {
-        acc = styles(color);
-      }
-      return acc;
-    },
-    {},
-  );
+  const outputStyle = COLORS.reduce<Record<string, unknown>>((acc, color) => {
+    if (!ownerState.disabled && ownerState.color === color) {
+      acc = styles(color);
+    }
+    return acc;
+  }, {});
 
   return outputStyle;
 }
@@ -28,7 +32,7 @@ function styleColors(
 const buttonClasses = `& .${buttonGroupClasses.firstButton}, & .${buttonGroupClasses.middleButton}`;
 
 const softVariant = {
-  colors: (COLORS as ColorType[]).map((color) => ({
+  colors: COLORS.map((color) => ({
     props: ({ ownerState }: { ownerState: ButtonGroupProps }) =>
       !ownerState.disabled &&
       ownerState.variant === "soft" &&

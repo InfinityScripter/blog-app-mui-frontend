@@ -1,3 +1,7 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { useTheme } from "@mui/material/styles";
@@ -8,6 +12,19 @@ import { fNumber, fPercent } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 
+interface EcommerceWidgetSummaryProps extends Omit<CardProps, "title"> {
+  sx?: SxProps<Theme>;
+  title: string;
+  percent: number;
+  total: number;
+  chart: {
+    colors?: string[];
+    categories: string[];
+    series: number[];
+    options?: ApexOptions;
+  };
+}
+
 export function EcommerceWidgetSummary({
   title,
   percent,
@@ -15,7 +32,7 @@ export function EcommerceWidgetSummary({
   chart,
   sx,
   ...other
-}) {
+}: EcommerceWidgetSummaryProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [

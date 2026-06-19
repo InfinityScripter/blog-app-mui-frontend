@@ -1,5 +1,6 @@
 import type { SystemStyleObject } from "@mui/system";
 import type { Theme, SxProps } from "@mui/material/styles";
+import type { Transition, TargetAndTransition } from "framer-motion";
 
 import { alpha } from "@mui/material/styles";
 
@@ -11,15 +12,15 @@ import { textGradient } from "./mixins";
 // white-on-dark fades, warning↔primary blends. Prefer these over inline `textGradient(...)`.
 
 /** Framer Motion: slow drift for primary/warning gradient text (matches HomeHero). */
-export const MARKETING_HEADLINE_GRADIENT_ANIMATE = {
+export const MARKETING_HEADLINE_GRADIENT_ANIMATE: TargetAndTransition = {
   backgroundPosition: "200% center",
-} as const;
+};
 
-export const MARKETING_HEADLINE_GRADIENT_TRANSITION = {
+export const MARKETING_HEADLINE_GRADIENT_TRANSITION: Transition = {
   duration: 20,
   ease: "linear",
   repeat: Infinity,
-  repeatType: "reverse" as const,
+  repeatType: "reverse",
 };
 
 export const marketingHeadlineGradientCss = (theme: Theme): string => {

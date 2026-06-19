@@ -1,3 +1,6 @@
+import type { ComponentType } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 import { fData } from "src/utils/format-number";
@@ -5,7 +8,28 @@ import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
 
 import { Iconify } from "../../iconify";
-import { fileData, FileThumbnail } from "../../file-thumbnail";
+import {
+  fileData,
+  FileThumbnail as FileThumbnailBase,
+} from "../../file-thumbnail";
+
+import type { MultiFilePreviewProps } from "../types";
+
+// ----------------------------------------------------------------------
+
+// `FileThumbnail` is an untyped sibling component; view it through a precise
+// prop type so callers in this folder type-check without `any`.
+interface FileThumbnailViewProps {
+  file: File | string;
+  tooltip?: boolean;
+  imageView?: boolean;
+  sx?: SxProps<Theme>;
+  onRemove?: () => void;
+  slotProps?: Record<string, unknown>;
+}
+
+const FileThumbnail =
+  FileThumbnailBase as ComponentType<FileThumbnailViewProps>;
 
 // ----------------------------------------------------------------------
 
@@ -17,7 +41,7 @@ export function MultiFilePreview({
   slotProps,
   firstNode,
   files = [],
-}) {
+}: MultiFilePreviewProps) {
   const renderFirstNode = firstNode && (
     <Box
       component="li"

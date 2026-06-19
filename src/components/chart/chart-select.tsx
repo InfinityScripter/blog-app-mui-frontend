@@ -35,17 +35,19 @@ export function ChartSelect({
     <>
       <ButtonBase
         onClick={popover.onOpen}
-        sx={{
-          pr: 1,
-          pl: 1.5,
-          gap: 1.5,
-          height: 34,
-          borderRadius: 1,
-          typography: "subtitle2",
-          border: (theme) =>
-            `solid 1px ${varAlpha((theme.vars?.palette.grey as Record<string, string> | undefined)?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171", 0.24)}`,
-          ...(buttonSx as object),
-        }}
+        sx={[
+          {
+            pr: 1,
+            pl: 1.5,
+            gap: 1.5,
+            height: 34,
+            borderRadius: 1,
+            typography: "subtitle2",
+            border: (theme) =>
+              `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.24)}`,
+          },
+          ...(Array.isArray(buttonSx) ? buttonSx : [buttonSx]),
+        ]}
         {...other}
       >
         {value}

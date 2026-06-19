@@ -6,6 +6,8 @@ import { NavUl, NavLi } from "../styles";
 import { navSectionClasses } from "../classes";
 import { navSectionCssVars } from "../css-vars";
 
+import type { NavGroupProps, NavSectionProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function NavSectionMini({
@@ -15,7 +17,7 @@ export function NavSectionMini({
   slotProps,
   enabledRootRedirect,
   cssVars: overridesVars,
-}) {
+}: NavSectionProps) {
   const theme = useTheme();
 
   const cssVars = {
@@ -47,7 +49,13 @@ export function NavSectionMini({
 
 // ----------------------------------------------------------------------
 
-function Group({ items, render, slotProps, enabledRootRedirect, cssVars }) {
+function Group({
+  items,
+  render,
+  slotProps,
+  enabledRootRedirect,
+  cssVars,
+}: NavGroupProps) {
   return (
     <NavLi>
       <NavUl sx={{ gap: "var(--nav-item-gap)" }}>

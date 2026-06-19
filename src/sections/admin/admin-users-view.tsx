@@ -47,7 +47,7 @@ export function AdminUsersView() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.map((u: any) => (
+              {users.map((u) => (
                 <TableRow key={u.id}>
                   <TableCell>{u.name}</TableCell>
                   <TableCell>{u.email}</TableCell>
@@ -68,7 +68,7 @@ export function AdminUsersView() {
                     />
                   </TableCell>
                   <TableCell>
-                    {new Date(u.createdAt).toLocaleDateString("ru-RU")}
+                    {new Date(u.createdAt ?? "").toLocaleDateString("ru-RU")}
                   </TableCell>
                   <TableCell>
                     {u.id !== user?.id && (

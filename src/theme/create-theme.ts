@@ -32,15 +32,23 @@ export function createTheme(settings: SettingsState): Theme {
    * so these reads resolve to `undefined` at runtime. This typing preserves the
    * existing runtime behavior exactly — see follow-up task to correct the bug.
    */
-  const legacySettings = settings as SettingsState & {
+  const legacySettings: SettingsState & {
     themeMode?: ColorScheme;
     themeDirection?: ThemeDirection;
-  };
+  } = settings;
+
+  /**
+   * `themeMode` is always `undefined` at runtime (see NOTE above), so
+   * `?? "dark"` selects the same dark branch that `shadows`/`customShadows`
+   * took before — `undefined === "light"` was `false`. Runtime output is
+   * unchanged; this only gives the `ColorScheme`-typed params a concrete value.
+   */
+  const themeMode: ColorScheme = legacySettings.themeMode ?? "dark";
 
   const initialTheme = {
     colorSchemes,
-    shadows: shadows(legacySettings.themeMode as ColorScheme),
-    customShadows: customShadows(legacySettings.themeMode as ColorScheme),
+    shadows: shadows(themeMode),
+    customShadows: customShadows(themeMode),
     direction: legacySettings.themeDirection,
     shape: { borderRadius: 8 },
     components,

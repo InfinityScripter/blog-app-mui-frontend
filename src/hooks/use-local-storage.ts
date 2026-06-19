@@ -12,7 +12,7 @@ interface UseLocalStorageReturn<T> {
   canReset: boolean;
 }
 
-export function useLocalStorage<T>(
+export function useLocalStorage<T extends Record<string, unknown>>(
   key: string,
   initialState: T,
 ): UseLocalStorageReturn<T> {
@@ -23,39 +23,30 @@ export function useLocalStorage<T>(
   const canReset = !isEqual(state, initialState);
 
   useEffect(() => {
-    const restoredValue = getStorage<T>(key);
+    const restoredValue = getStorage(key);
 
-    if (restoredValue) {
-      if (multiValue) {
-        set((prevValue) => ({ ...prevValue, ...restoredValue }) as T);
-      } else {
-        set(restoredValue);
-      }
+    if (restoredValue && typeof restoredValue === "object") {
+      set((prevValue) => ({ ...prevValue, ...restoredValue }));
     }
-  }, [key, multiValue]);
+  }, [key]);
 
   const setState = useCallback(
     (updateState: T | Partial<T>) => {
-      if (multiValue) {
-        set((prevValue) => {
-          const newValue = { ...prevValue, ...updateState } as T;
-          setStorage(key, newValue);
-          return newValue;
-        });
-      } else {
-        setStorage(key, updateState as T);
-        set(updateState as T);
-      }
+      set((prevValue) => {
+        const newValue: T = { ...prevValue, ...updateState };
+        setStorage(key, newValue);
+        return newValue;
+      });
     },
-    [key, multiValue],
+    [key],
   );
 
   const setField = useCallback(
     <K extends keyof T>(name: K, updateValue: T[K]) => {
       if (multiValue) {
-        setState({
-          [name]: updateValue,
-        } as Partial<T>);
+        const partial: Partial<T> = {};
+        partial[name] = updateValue;
+        setState(partial);
       }
     },
     [multiValue, setState],
@@ -82,12 +73,13 @@ export function useLocalStorage<T>(
 
 // ----------------------------------------------------------------------
 
-export function getStorage<T>(key: string): T | null {
+export function getStorage(key: string): unknown {
   try {
     const result = localStorageGetItem(key);
 
     if (result) {
-      return JSON.parse(result) as T;
+      const parsed: unknown = JSON.parse(result);
+      return parsed;
     }
   } catch (error) {
     console.error("Error while getting from storage:", error);

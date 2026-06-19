@@ -1,3 +1,13 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { ColorType } from "src/theme/core/components/types";
+import type { MarketingTheme } from "src/sections/home/components/types";
+import type {
+  Variants,
+  Transition,
+  AnimationControls,
+  TargetAndTransition,
+} from "framer-motion";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -7,11 +17,15 @@ import { varFade } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
-export function Lines({ strokeCount }) {
-  const draw = {
+interface LinesProps {
+  strokeCount: number;
+}
+
+export function Lines({ strokeCount }: LinesProps) {
+  const draw: Record<"x" | "y", Variants> = {
     x: {
       hidden: { x2: 0, strokeOpacity: 0 },
-      visible: (i) => {
+      visible: (i: number) => {
         const delay = 1 + i * 0.5;
         return {
           x2: "100%",
@@ -30,7 +44,7 @@ export function Lines({ strokeCount }) {
     },
     y: {
       hidden: { y2: 0, strokeOpacity: 0 },
-      visible: (i) => {
+      visible: (i: number) => {
         const delay = 1 + i * 0.5;
         return {
           y2: "100%",
@@ -49,7 +63,7 @@ export function Lines({ strokeCount }) {
     },
   };
 
-  const translateY = (index) =>
+  const translateY = (index: number) =>
     strokeCount / 2 > index
       ? `translateY(calc(((${index} * var(--stroke-spacing)) + var(--stroke-spacing) / 2) * -1))`
       : `translateY(calc(((${strokeCount - (index + 1)} * var(--stroke-spacing)) + var(--stroke-spacing) / 2)))`;
@@ -75,7 +89,7 @@ export function Lines({ strokeCount }) {
     </>
   );
 
-  const translateX = (index) =>
+  const translateX = (index: number) =>
     strokeCount / 2 > index
       ? `translateX(calc(((${index} * var(--stroke-spacing)) + var(--stroke-spacing) / 2) * -1))`
       : `translateX(calc(((${strokeCount - (index + 1)} * var(--stroke-spacing)) + var(--stroke-spacing) / 2)))`;
@@ -112,9 +126,9 @@ export function Lines({ strokeCount }) {
 // ----------------------------------------------------------------------
 
 export function Circles() {
-  const drawCircle = {
+  const drawCircle: Variants = {
     hidden: { opacity: 0 },
-    visible: (i) => {
+    visible: (i: number) => {
       const delay = 1 + i * 0.5;
       return { opacity: 1, transition: { opacity: { delay, duration: 0.01 } } };
     },
@@ -159,9 +173,9 @@ export function Circles() {
 // ----------------------------------------------------------------------
 
 export function PlusIcon() {
-  const drawPlus = {
+  const drawPlus: Variants = {
     hidden: { opacity: 0, pathLength: 0 },
-    visible: (i) => {
+    visible: (i: number) => {
       const delay = 1 + i * 0.5;
       return {
         opacity: 1,
@@ -200,7 +214,11 @@ export function PlusIcon() {
 
 // ----------------------------------------------------------------------
 
-export function Texts({ sx, ...other }) {
+interface TextsProps {
+  sx?: SxProps<Theme>;
+}
+
+export function Texts({ sx, ...other }: TextsProps) {
   return (
     <Stack
       component={m.div}
@@ -229,7 +247,8 @@ export function Texts({ sx, ...other }) {
             textTransform: "uppercase",
             stroke: "var(--hero-text-stroke-color)",
             strokeWidth: "var(--hero-text-stroke-width)",
-            fontFamily: (theme) => theme.typography.fontSecondaryFamily,
+            fontFamily: (theme: MarketingTheme) =>
+              theme.typography.fontSecondaryFamily,
           },
         }}
       >
@@ -247,8 +266,21 @@ export function Texts({ sx, ...other }) {
   );
 }
 
-function Dot({ color = "primary", animate, transition, sx, ...other }) {
-  const theme = useTheme();
+interface DotProps {
+  color?: ColorType;
+  animate?: AnimationControls | TargetAndTransition;
+  transition?: Transition;
+  sx?: SxProps<Theme>;
+}
+
+function Dot({
+  color = "primary",
+  animate,
+  transition,
+  sx,
+  ...other
+}: DotProps) {
+  const theme = useTheme<MarketingTheme>();
 
   return (
     <Box

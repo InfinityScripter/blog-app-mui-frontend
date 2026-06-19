@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
@@ -6,6 +10,14 @@ import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
+interface EcommerceWelcomeProps extends Omit<BoxProps, "title"> {
+  sx?: SxProps<Theme>;
+  title: ReactNode;
+  description?: ReactNode;
+  action?: ReactNode;
+  img?: ReactNode;
+}
+
 export function EcommerceWelcome({
   title,
   description,
@@ -13,7 +25,7 @@ export function EcommerceWelcome({
   img,
   sx,
   ...other
-}) {
+}: EcommerceWelcomeProps) {
   const theme = useTheme();
 
   return (

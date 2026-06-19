@@ -14,6 +14,15 @@ interface NumberFormatOptions extends Intl.NumberFormatOptions {
   maximumFractionDigits?: number;
 }
 
+function resolveLocale(): Locale {
+  const locale = formatNumberLocale();
+
+  return {
+    code: locale.code ?? DEFAULT_LOCALE.code,
+    currency: locale.currency ?? DEFAULT_LOCALE.currency,
+  };
+}
+
 function processInput(inputValue: unknown): number | null {
   if (inputValue == null || Number.isNaN(inputValue)) return null;
   return Number(inputValue);
@@ -21,8 +30,11 @@ function processInput(inputValue: unknown): number | null {
 
 // ----------------------------------------------------------------------
 
-export function fNumber(inputValue: unknown, options?: NumberFormatOptions): string {
-  const locale = (formatNumberLocale() as Locale | null) || DEFAULT_LOCALE;
+export function fNumber(
+  inputValue: unknown,
+  options?: NumberFormatOptions,
+): string {
+  const locale = resolveLocale();
 
   const number = processInput(inputValue);
   if (number === null) return "";
@@ -38,8 +50,11 @@ export function fNumber(inputValue: unknown, options?: NumberFormatOptions): str
 
 // ----------------------------------------------------------------------
 
-export function fCurrency(inputValue: unknown, options?: NumberFormatOptions): string {
-  const locale = (formatNumberLocale() as Locale | null) || DEFAULT_LOCALE;
+export function fCurrency(
+  inputValue: unknown,
+  options?: NumberFormatOptions,
+): string {
+  const locale = resolveLocale();
 
   const number = processInput(inputValue);
   if (number === null) return "";
@@ -57,8 +72,11 @@ export function fCurrency(inputValue: unknown, options?: NumberFormatOptions): s
 
 // ----------------------------------------------------------------------
 
-export function fPercent(inputValue: unknown, options?: NumberFormatOptions): string {
-  const locale = (formatNumberLocale() as Locale | null) || DEFAULT_LOCALE;
+export function fPercent(
+  inputValue: unknown,
+  options?: NumberFormatOptions,
+): string {
+  const locale = resolveLocale();
 
   const number = processInput(inputValue);
   if (number === null) return "";
@@ -75,8 +93,11 @@ export function fPercent(inputValue: unknown, options?: NumberFormatOptions): st
 
 // ----------------------------------------------------------------------
 
-export function fShortenNumber(inputValue: unknown, options?: NumberFormatOptions): string {
-  const locale = (formatNumberLocale() as Locale | null) || DEFAULT_LOCALE;
+export function fShortenNumber(
+  inputValue: unknown,
+  options?: NumberFormatOptions,
+): string {
+  const locale = resolveLocale();
 
   const number = processInput(inputValue);
   if (number === null) return "";

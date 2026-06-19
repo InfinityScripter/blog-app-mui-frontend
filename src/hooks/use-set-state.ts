@@ -24,9 +24,9 @@ export function useSetState<T extends Record<string, unknown>>(
 
   const setField = useCallback(
     <K extends keyof T>(name: K, updateValue: T[K]) => {
-      setState({
-        [name]: updateValue,
-      } as Partial<T>);
+      const partial: Partial<T> = {};
+      partial[name] = updateValue;
+      setState(partial);
     },
     [setState],
   );

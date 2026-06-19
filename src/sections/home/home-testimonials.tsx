@@ -1,3 +1,5 @@
+import type { StackProps } from "@mui/material/Stack";
+
 import { m } from "framer-motion";
 import { _mock } from "src/_mock";
 import Box from "@mui/material/Box";
@@ -28,7 +30,7 @@ import { FloatLine, FloatTriangleDownIcon } from "./components/svg-elements";
 
 // ----------------------------------------------------------------------
 
-export function HomeTestimonials({ sx, ...other }) {
+export function HomeTestimonials({ sx, ...other }: StackProps) {
   const theme = useTheme();
 
   const renderLines = (
@@ -71,7 +73,7 @@ export function HomeTestimonials({ sx, ...other }) {
     />
   );
 
-  const horizontalDivider = (position) => (
+  const horizontalDivider = (position: "top" | "bottom") => (
     <Divider
       component="div"
       sx={{
@@ -241,7 +243,7 @@ export function HomeTestimonials({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-const base = (index) => ({
+const base = (index: number) => ({
   id: _mock.id(index),
   name: _mock.fullName(index),
   avatar: _mock.image.avatar(index),

@@ -6,7 +6,14 @@ import { fabClasses } from "@mui/material/Fab";
 import { varAlpha, stylesMode } from "../../styles";
 import { type ColorType, type ThemeWithVars } from "./types";
 
-const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
+const COLORS: ColorType[] = [
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
 const DEFAULT_COLORS = ["default", "inherit"];
 const EXTENDED_VARIANT = ["extended", "outlinedExtended", "softExtended"];
@@ -17,7 +24,7 @@ const SOFT_VARIANT = ["soft", "softExtended"];
 // ----------------------------------------------------------------------
 
 const filledVariant = {
-  colors: (COLORS as ColorType[]).map((color) => ({
+  colors: COLORS.map((color) => ({
     props: ({ ownerState }: { ownerState: FabProps }) =>
       !ownerState.disabled &&
       FILLED_VARIANT.includes(ownerState.variant ?? "") &&
@@ -61,7 +68,7 @@ const filledVariant = {
 };
 
 const outlinedVariant = {
-  colors: (COLORS as ColorType[]).map((color) => ({
+  colors: COLORS.map((color) => ({
     props: ({ ownerState }: { ownerState: FabProps }) =>
       !ownerState.disabled &&
       OUTLINED_VARIANT.includes(ownerState.variant ?? "") &&
@@ -101,7 +108,7 @@ const outlinedVariant = {
 };
 
 const softVariant = {
-  colors: (COLORS as ColorType[]).map((color) => ({
+  colors: COLORS.map((color) => ({
     props: ({ ownerState }: { ownerState: FabProps }) =>
       !ownerState.disabled &&
       SOFT_VARIANT.includes(ownerState.variant ?? "") &&

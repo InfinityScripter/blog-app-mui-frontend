@@ -1,3 +1,4 @@
+import type { MarketingTheme } from "src/sections/home/components/types";
 import type { ExperienceItem } from "src/sections/home/home-experience/types";
 
 import dayjs from "dayjs";
@@ -44,7 +45,7 @@ const getSortedExperience = () =>
   );
 
 export function HomeExperience() {
-  const theme = useTheme();
+  const theme = useTheme<MarketingTheme>();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isDarkMode = theme.palette.mode === "dark";
   const cardBorderColor = isDarkMode

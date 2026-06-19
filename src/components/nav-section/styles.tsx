@@ -1,3 +1,8 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CSSObject } from "@mui/material/styles";
+import type { CollapseProps } from "@mui/material/Collapse";
+import type { ListSubheaderProps } from "@mui/material/ListSubheader";
+
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import { stylesMode } from "src/theme/styles";
@@ -9,7 +14,15 @@ import { Iconify, iconifyClasses } from "../iconify";
 
 // ----------------------------------------------------------------------
 
-export function stateClasses({ open, active, disabled }) {
+export function stateClasses({
+  open,
+  active,
+  disabled,
+}: {
+  open?: boolean;
+  active?: boolean;
+  disabled?: boolean;
+}) {
   let classes = navSectionClasses.item.root;
 
   if (active) {
@@ -25,7 +38,7 @@ export function stateClasses({ open, active, disabled }) {
 
 // ----------------------------------------------------------------------
 
-export const sharedStyles = {
+export const sharedStyles: Record<string, CSSObject> = {
   icon: {
     flexShrink: 0,
     display: "inline-flex",
@@ -66,7 +79,12 @@ export const sharedStyles = {
 
 // ----------------------------------------------------------------------
 
-export function Subheader({ sx, open, children, ...other }) {
+export function Subheader({
+  sx,
+  open,
+  children,
+  ...other
+}: ListSubheaderProps & { open?: boolean }) {
   return (
     <ListSubheader
       disableSticky
@@ -119,7 +137,12 @@ export function Subheader({ sx, open, children, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function NavCollapse({ sx, depth, children, ...other }) {
+export function NavCollapse({
+  sx,
+  depth,
+  children,
+  ...other
+}: CollapseProps & { depth: number }) {
   return (
     <Collapse
       sx={{
@@ -154,7 +177,12 @@ export function NavCollapse({ sx, depth, children, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function NavLi({ sx, children, disabled, ...other }) {
+export function NavLi({
+  sx,
+  children,
+  disabled,
+  ...other
+}: BoxProps & { disabled?: boolean }) {
   return (
     <Box
       component="li"
@@ -174,7 +202,7 @@ export function NavLi({ sx, children, disabled, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function NavUl({ children, sx, ...other }) {
+export function NavUl({ children, sx, ...other }: BoxProps) {
   return (
     <Box
       component="ul"

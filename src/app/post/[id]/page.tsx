@@ -38,11 +38,7 @@ export async function generateStaticParams(): Promise<Array<{ id: string }>> {
     return posts.map((post) => {
       // The backend serialises the primary key as `_id`; `id`/`title` are
       // fallbacks for older shapes.
-      const { _id, id, title } = post as {
-        _id?: string;
-        id?: string;
-        title: string;
-      };
+      const { _id, id, title } = post;
       return { id: _id ?? id ?? paramCase(title) };
     });
   } catch {

@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { varAlpha } from "src/theme/styles";
@@ -7,7 +10,24 @@ import { fPercent, fCurrency } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 
-export function EcommerceSalesOverview({ title, subheader, data, ...other }) {
+interface SalesOverviewItem {
+  label: string;
+  totalAmount: number;
+  value: number;
+}
+
+interface EcommerceSalesOverviewProps extends Omit<CardProps, "title"> {
+  title?: ReactNode;
+  subheader?: ReactNode;
+  data: SalesOverviewItem[];
+}
+
+export function EcommerceSalesOverview({
+  title,
+  subheader,
+  data,
+  ...other
+}: EcommerceSalesOverviewProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -23,7 +43,7 @@ export function EcommerceSalesOverview({ title, subheader, data, ...other }) {
   );
 }
 
-function Item({ progress }) {
+function Item({ progress }: { progress: SalesOverviewItem }) {
   return (
     <div>
       <Box

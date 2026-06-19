@@ -10,12 +10,34 @@ import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
+interface ProjectDataItem {
+  date: string;
+  subproject: string;
+  discipline: string;
+  plan: number;
+  fact: number;
+}
+
+interface ColorRange {
+  from: number;
+  to: number;
+  color: string;
+}
+
+interface ProjectColumnNegativeBySubprojectsProps {
+  data: ProjectDataItem[];
+  rangeSettings?: ColorRange[];
+}
+
+export function ProjectColumnNegativeBySubprojects({
+  data,
+  rangeSettings,
+}: ProjectColumnNegativeBySubprojectsProps) {
   const [subproject, setSubproject] = useState("all");
   const theme = useTheme();
 
   const subprojects = useMemo(
-    () => ["all", ...new Set(data.map((item) => item.subproject))],
+    () => ["all", ...Array.from(new Set(data.map((item) => item.subproject)))],
     [data],
   );
 
@@ -29,7 +51,9 @@ export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
   }, [data, subproject]);
 
   const chartData = useMemo(() => {
-    const dates = [...new Set(filteredData.map((item) => item.date))].sort();
+    const dates = Array.from(
+      new Set(filteredData.map((item) => item.date)),
+    ).sort();
 
     // Format dates for display
     const formattedDates = dates.map((date) => {
@@ -68,7 +92,7 @@ export function ProjectColumnNegativeBySubprojects({ data, rangeSettings }) {
   }, [filteredData, subproject]);
 
   const chartOptions = useChart({
-    colors: theme.palette.primary.main,
+    colors: [theme.palette.primary.main],
     stroke: {
       show: false,
     },

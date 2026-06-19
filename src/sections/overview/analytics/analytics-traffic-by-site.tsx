@@ -1,15 +1,45 @@
+import type { ComponentType } from "react";
+import type { CardProps } from "@mui/material/Card";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
-import { SocialIcon } from "src/components/iconify";
 import { fShortenNumber } from "src/utils/format-number";
+import { SocialIcon as RawSocialIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
-export function AnalyticsTrafficBySite({ title, subheader, list, ...other }) {
+// `SocialIcon` is a shared `forwardRef` component without exported prop types;
+// re-type it precisely at the call site (no runtime change) so it accepts
+// `icon`/`width`/`sx` without resorting to `any`.
+const SocialIcon = RawSocialIcon as unknown as ComponentType<{
+  icon?: string;
+  width?: number;
+  sx?: SxProps<Theme>;
+}>;
+
+interface TrafficSite {
+  label: string;
+  value: string;
+  total: number;
+}
+
+interface AnalyticsTrafficBySiteProps extends Omit<CardProps, "title"> {
+  title?: React.ReactNode;
+  subheader?: React.ReactNode;
+  list: TrafficSite[];
+}
+
+export function AnalyticsTrafficBySite({
+  title,
+  subheader,
+  list,
+  ...other
+}: AnalyticsTrafficBySiteProps) {
   const theme = useTheme();
 
   return (

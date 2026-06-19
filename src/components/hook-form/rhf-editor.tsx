@@ -2,9 +2,11 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import { Editor } from "../editor";
 
+import type { RHFEditorProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFEditor({ name, helperText, ...other }) {
+export function RHFEditor({ name, helperText, ...other }: RHFEditorProps) {
   const {
     control,
     formState: { isSubmitSuccessful },

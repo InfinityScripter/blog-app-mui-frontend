@@ -1,3 +1,7 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { ReactNode, ChangeEvent, ComponentType } from "react";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
@@ -33,10 +37,66 @@ const MAX_AMOUNT = 1000;
 
 // ----------------------------------------------------------------------
 
-export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
+type CarouselApi = ReturnType<typeof useCarousel>;
+
+// The shared `useCarousel` types its options narrower than the Minimals
+// carousel actually accepts (`slidesToShow`/`slideSpacing`), and its return
+// widens fields beyond the `Carousel`/`CarouselArrowFloatButtons` prop types.
+// Re-type these at the call site (no runtime change) so they type-check.
+type CarouselOptionsInput = Parameters<typeof useCarousel>[0] & {
+  slidesToShow?: number | string;
+  slideSpacing?: string;
+};
+const useCarouselTyped = useCarousel as (
+  options?: CarouselOptionsInput,
+) => CarouselApi;
+
+interface ContactCarouselProps {
+  carousel: CarouselApi;
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+}
+const ContactCarousel =
+  Carousel as unknown as ComponentType<ContactCarouselProps>;
+
+interface ArrowFloatButtonsProps {
+  onClickPrev?: () => void;
+  onClickNext?: () => void;
+  disablePrev?: boolean;
+  disableNext?: boolean;
+  options?: CarouselApi["options"];
+  slotProps?: {
+    prevBtn?: { svgSize?: number; sx?: SxProps<Theme> };
+    nextBtn?: { svgSize?: number; sx?: SxProps<Theme> };
+  };
+}
+const ArrowFloatButtons =
+  CarouselArrowFloatButtons as unknown as ComponentType<ArrowFloatButtonsProps>;
+
+interface QuickTransferContact {
+  id: string;
+  name: string;
+  email: string;
+  avatarUrl: string;
+}
+
+interface BankingQuickTransferProps extends BoxProps {
+  title?: string;
+  subheader?: string;
+  list: QuickTransferContact[];
+  sx?: SxProps<Theme>;
+}
+
+export function BankingQuickTransfer({
+  title,
+  subheader,
+  list,
+  sx,
+  ...other
+}: BankingQuickTransferProps) {
   const theme = useTheme();
 
-  const carousel = useCarousel({
+  const carousel = useCarouselTyped({
     loop: true,
     dragFree: true,
     slidesToShow: "auto",
@@ -50,7 +110,8 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
   const [autoWidth, setAutoWidth] = useState(24);
 
   const contactInfo = list.find(
-    (_, index) => index === carousel.dots.selectedIndex,
+    (_: QuickTransferContact, index: number) =>
+      index === carousel.dots.selectedIndex,
   );
 
   useEffect(() => {
@@ -65,13 +126,19 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
     setAutoWidth(getNumberLength * 24);
   }, [amount]);
 
-  const handleChangeSlider = useCallback((event, newValue) => {
-    setAmount(newValue);
-  }, []);
+  const handleChangeSlider = useCallback(
+    (event: Event, newValue: number | number[]) => {
+      setAmount(Array.isArray(newValue) ? newValue[0] : newValue);
+    },
+    [],
+  );
 
-  const handleChangeInput = useCallback((event) => {
-    setAmount(Number(event.target.value));
-  }, []);
+  const handleChangeInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setAmount(Number(event.target.value));
+    },
+    [],
+  );
 
   const handleBlur = useCallback(() => {
     if (amount < 0) {
@@ -83,7 +150,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
 
   const renderCarousel = (
     <Box sx={{ position: "relative" }}>
-      <CarouselArrowFloatButtons
+      <ArrowFloatButtons
         {...carousel.arrows}
         options={carousel.options}
         slotProps={{
@@ -108,7 +175,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
         }}
       />
 
-      <Carousel carousel={carousel} sx={{ py: 5 }}>
+      <ContactCarousel carousel={carousel} sx={{ py: 5 }}>
         {list.map((contact, index) => (
           <Tooltip key={contact.id} title={contact.name} arrow placement="top">
             <Avatar
@@ -135,7 +202,7 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
             />
           </Tooltip>
         ))}
-      </Carousel>
+      </ContactCarousel>
     </Box>
   );
 
@@ -245,7 +312,25 @@ export function BankingQuickTransfer({ title, subheader, list, sx, ...other }) {
   );
 }
 
-function InputAmount({ autoWidth, amount, onBlur, onChange, sx, ...other }) {
+// ----------------------------------------------------------------------
+
+interface InputAmountProps {
+  autoWidth: number;
+  amount: number;
+  onBlur: () => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  sx?: SxProps<Theme>;
+  disableUnderline?: boolean;
+}
+
+function InputAmount({
+  autoWidth,
+  amount,
+  onBlur,
+  onChange,
+  sx,
+  ...other
+}: InputAmountProps) {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", ...sx }}>
       <Box component="span" sx={{ typography: "h5" }}>
@@ -279,6 +364,18 @@ function InputAmount({ autoWidth, amount, onBlur, onChange, sx, ...other }) {
   );
 }
 
+// ----------------------------------------------------------------------
+
+interface ConfirmTransferDialogProps {
+  open: boolean;
+  amount: number;
+  onBlur: () => void;
+  onClose: () => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  autoWidth: number;
+  contactInfo?: QuickTransferContact;
+}
+
 function ConfirmTransferDialog({
   open,
   amount,
@@ -287,7 +384,7 @@ function ConfirmTransferDialog({
   onChange,
   autoWidth,
   contactInfo,
-}) {
+}: ConfirmTransferDialogProps) {
   return (
     <Dialog open={open} fullWidth maxWidth="xs" onClose={onClose}>
       <DialogTitle>Transfer to</DialogTitle>

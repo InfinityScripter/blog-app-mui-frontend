@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
@@ -9,7 +12,24 @@ import { useResponsive } from "src/hooks/use-responsive";
 
 // ----------------------------------------------------------------------
 
-export function BookingCheckInWidgets({ chart, ...other }) {
+interface BookingCheckInSeries {
+  label: string;
+  percent: number;
+  total: number;
+}
+
+interface BookingCheckInWidgetsProps extends CardProps {
+  chart: {
+    colors?: string[][];
+    series: BookingCheckInSeries[];
+    options?: ApexOptions;
+  };
+}
+
+export function BookingCheckInWidgets({
+  chart,
+  ...other
+}: BookingCheckInWidgetsProps) {
   const theme = useTheme();
 
   const smUp = useResponsive("up", "sm");
@@ -58,7 +78,7 @@ export function BookingCheckInWidgets({ chart, ...other }) {
           />
         }
       >
-        {chart.series.map((item) => (
+        {chart.series.map((item: BookingCheckInSeries) => (
           <Box
             key={item.label}
             sx={{

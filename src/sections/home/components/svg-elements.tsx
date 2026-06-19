@@ -1,3 +1,7 @@
+import type { SystemStyleObject } from "@mui/system";
+import type { Variants, Transition } from "framer-motion";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { useId } from "react";
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
@@ -5,7 +9,7 @@ import { varFade } from "src/components/animate";
 
 // ----------------------------------------------------------------------
 
-const baseStyles = {
+const baseStyles: SystemStyleObject<Theme> = {
   zIndex: 2,
   display: "none",
   color: "grey.500",
@@ -15,11 +19,22 @@ const baseStyles = {
   "@media (min-width: 1440px)": { display: "block" },
 };
 
-const transition = { duration: 0.64, ease: [0.43, 0.13, 0.23, 0.96] };
+const transition: Transition = {
+  duration: 0.64,
+  ease: [0.43, 0.13, 0.23, 0.96],
+};
 
 // ----------------------------------------------------------------------
 
-export function FloatLine({ sx, vertical, ...other }) {
+interface SvgElementProps {
+  sx?: SxProps<Theme>;
+}
+
+interface FloatLineProps extends SvgElementProps {
+  vertical?: boolean;
+}
+
+export function FloatLine({ sx, vertical, ...other }: FloatLineProps) {
   return (
     <Box
       component={m.svg}
@@ -63,7 +78,7 @@ export function FloatLine({ sx, vertical, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function FloatPlusIcon({ sx, ...other }) {
+export function FloatPlusIcon({ sx, ...other }: SvgElementProps) {
   return (
     <Box
       component={m.svg}
@@ -91,7 +106,7 @@ export function FloatPlusIcon({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function FloatXIcon({ sx, ...other }) {
+export function FloatXIcon({ sx, ...other }: SvgElementProps) {
   return (
     <Box
       component={m.svg}
@@ -116,7 +131,7 @@ export function FloatXIcon({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function FloatTriangleLeftIcon({ sx, ...other }) {
+export function FloatTriangleLeftIcon({ sx, ...other }: SvgElementProps) {
   return (
     <Box
       component={m.svg}
@@ -141,7 +156,7 @@ export function FloatTriangleLeftIcon({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function FloatTriangleDownIcon({ sx, ...other }) {
+export function FloatTriangleDownIcon({ sx, ...other }: SvgElementProps) {
   return (
     <Box
       component={m.svg}
@@ -166,7 +181,7 @@ export function FloatTriangleDownIcon({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function FloatDotIcon({ sx, ...other }) {
+export function FloatDotIcon({ sx, ...other }: SvgElementProps) {
   return (
     <Box
       component={m.span}
@@ -189,7 +204,12 @@ export function FloatDotIcon({ sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function CircleSvg({ sx, variants }) {
+interface CircleSvgProps {
+  sx?: SxProps<Theme>;
+  variants?: Variants;
+}
+
+export function CircleSvg({ sx, variants }: CircleSvgProps) {
   const maskId = useId();
   const clipPathId = useId();
   const gradientId = useId();

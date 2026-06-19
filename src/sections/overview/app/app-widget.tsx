@@ -1,3 +1,7 @@
+import type { ApexOptions } from "apexcharts";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
@@ -8,13 +12,40 @@ import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function AppWidget({ title, total, icon, chart, sx, ...other }) {
+interface AppWidgetProps extends Omit<BoxProps, "title"> {
+  title: string;
+  total: number;
+  icon: string;
+  chart: {
+    series: number;
+    colors?: string[];
+    options?: ApexOptions;
+  };
+  sx?: SxProps<Theme>;
+}
+
+export function AppWidget({
+  title,
+  total,
+  icon,
+  chart,
+  sx,
+  ...other
+}: AppWidgetProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [
     theme.palette.primary.light,
     theme.palette.primary.main,
   ];
+
+  // ApexCharts types `fontSize` as `string`, while MUI typography exposes it as
+  // `string | number | undefined` — normalize to a CSS string here.
+  const subtitle2FontSize = theme.typography.subtitle2.fontSize;
+  const valueFontSize =
+    typeof subtitle2FontSize === "number"
+      ? `${subtitle2FontSize}px`
+      : (subtitle2FontSize ?? "");
 
   const chartOptions = useChart({
     chart: { sparkline: { enabled: true } },
@@ -35,7 +66,7 @@ export function AppWidget({ title, total, icon, chart, sx, ...other }) {
           value: {
             offsetY: 6,
             color: theme.vars.palette.common.white,
-            fontSize: theme.typography.subtitle2.fontSize,
+            fontSize: valueFontSize,
           },
         },
       },

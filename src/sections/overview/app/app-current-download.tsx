@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
@@ -7,14 +10,29 @@ import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function AppCurrentDownload({ title, subheader, chart, ...other }) {
+interface AppCurrentDownloadProps extends Omit<CardProps, "title"> {
+  title: string;
+  subheader?: string;
+  chart: {
+    colors?: string[];
+    series: { label: string; value: number }[];
+    options?: ApexOptions;
+  };
+}
+
+export function AppCurrentDownload({
+  title,
+  subheader,
+  chart,
+  ...other
+}: AppCurrentDownloadProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [
-    theme.palette.primary.lighter,
-    theme.palette.primary.light,
-    theme.palette.primary.dark,
-    theme.palette.primary.darker,
+    theme.vars.palette.primary.lighter,
+    theme.vars.palette.primary.light,
+    theme.vars.palette.primary.dark,
+    theme.vars.palette.primary.darker,
   ];
 
   const chartSeries = chart.series.map((item) => item.value);
@@ -26,8 +44,8 @@ export function AppCurrentDownload({ title, subheader, chart, ...other }) {
     stroke: { width: 0 },
     tooltip: {
       y: {
-        formatter: (value) => fNumber(value),
-        title: { formatter: (seriesName) => `${seriesName}` },
+        formatter: (value: number) => fNumber(value),
+        title: { formatter: (seriesName: string) => `${seriesName}` },
       },
     },
     plotOptions: {
@@ -35,10 +53,13 @@ export function AppCurrentDownload({ title, subheader, chart, ...other }) {
         donut: {
           size: "72%",
           labels: {
-            value: { formatter: (value) => fNumber(value) },
+            value: { formatter: (value: string) => fNumber(value) },
             total: {
-              formatter: (w) => {
-                const sum = w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+              formatter: (w: { globals: { seriesTotals: number[] } }) => {
+                const sum = w.globals.seriesTotals.reduce(
+                  (a: number, b: number) => a + b,
+                  0,
+                );
                 return fNumber(sum);
               },
             },

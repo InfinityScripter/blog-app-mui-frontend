@@ -1,8 +1,18 @@
-'use client';
+"use client";
 
-import useSWR from 'swr';
-import { useMemo } from 'react';
-import axiosInstance, { fetcher, endpoints } from 'src/utils/axios';
+import type { User } from "src/types/domain";
+
+import useSWR from "swr";
+import { useMemo } from "react";
+import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
+
+export interface AdminUser extends User {
+  createdAt?: string | Date;
+}
+
+interface AdminUsersResponse {
+  users: AdminUser[];
+}
 
 const swrOptions = {
   revalidateIfStale: true,
@@ -11,17 +21,20 @@ const swrOptions = {
 };
 
 export function useGetAdminUsers() {
-  const { data, isLoading, error, mutate } = useSWR(
+  const { data, isLoading, error, mutate } = useSWR<AdminUsersResponse>(
     endpoints.admin.users,
     fetcher,
-    swrOptions
+    swrOptions,
   );
-  return useMemo(() => ({
-    users: (data as any)?.users ?? [],
-    usersLoading: isLoading,
-    usersError: error,
-    usersMutate: mutate,
-  }), [data, isLoading, error, mutate]);
+  return useMemo(
+    () => ({
+      users: data?.users ?? [],
+      usersLoading: isLoading,
+      usersError: error,
+      usersMutate: mutate,
+    }),
+    [data, isLoading, error, mutate],
+  );
 }
 
 export async function deleteUser(id: string) {

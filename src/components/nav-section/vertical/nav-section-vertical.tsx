@@ -8,6 +8,8 @@ import { navSectionClasses } from "../classes";
 import { navSectionCssVars } from "../css-vars";
 import { NavUl, NavLi, Subheader } from "../styles";
 
+import type { NavGroupProps, NavSectionProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function NavSectionVertical({
@@ -17,7 +19,7 @@ export function NavSectionVertical({
   slotProps,
   enabledRootRedirect,
   cssVars: overridesVars,
-}) {
+}: NavSectionProps) {
   const theme = useTheme();
 
   const cssVars = {
@@ -49,7 +51,13 @@ export function NavSectionVertical({
 
 // ----------------------------------------------------------------------
 
-function Group({ items, render, subheader, slotProps, enabledRootRedirect }) {
+function Group({
+  items,
+  render,
+  subheader,
+  slotProps,
+  enabledRootRedirect,
+}: NavGroupProps) {
   const [open, setOpen] = useState(true);
 
   const handleToggle = useCallback(() => {

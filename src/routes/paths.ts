@@ -1,7 +1,7 @@
-const ROOTS = {
+const ROOTS: { AUTH: string; DASHBOARD: string } = {
   AUTH: "/auth",
   DASHBOARD: "/dashboard",
-} as const;
+};
 
 // ----------------------------------------------------------------------
 

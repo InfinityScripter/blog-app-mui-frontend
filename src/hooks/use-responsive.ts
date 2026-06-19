@@ -26,7 +26,7 @@ export function useResponsive(
       case "between":
         return theme.breakpoints.between(start, end ?? "xl");
       case "only":
-        return theme.breakpoints.only(start as Breakpoint);
+        return theme.breakpoints.only(typeof start === "number" ? "xs" : start);
       default:
         return theme.breakpoints.up("xs");
     }

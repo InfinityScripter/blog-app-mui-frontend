@@ -75,7 +75,8 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 }
 
 // `orderBy` is constrained to `Record<string, unknown>`; the `Post` interface
-// has no index signature, so widen with an intersection type for the sort call.
+// has no index signature, so widen each element with an intersection type
+// (via spread, no cast) to satisfy the sort call's generic constraint.
 type SortablePost = Post & Record<string, unknown>;
 
 const applyFilter = ({
@@ -85,9 +86,9 @@ const applyFilter = ({
   inputData: Post[];
   sortBy: string;
 }): Post[] => {
-  const publishedPosts = inputData.filter(
-    (post) => post.publish === "published",
-  ) as SortablePost[];
+  const publishedPosts: SortablePost[] = inputData
+    .filter((post) => post.publish === "published")
+    .map((post) => ({ ...post }));
 
   if (sortBy === "latest") {
     return orderBy(publishedPosts, ["createdAt"], ["desc"]);

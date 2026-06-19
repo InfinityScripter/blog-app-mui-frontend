@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
@@ -7,7 +9,7 @@ export const bulletColor = {
   light: "#EDEFF2",
 };
 
-function colorVars(theme, variant) {
+function colorVars(theme: Theme, variant: "vertical" | "horizontal" | "mini") {
   const {
     vars: { palette },
   } = theme;
@@ -41,7 +43,7 @@ function colorVars(theme, variant) {
 
 // ----------------------------------------------------------------------
 
-function verticalVars(theme) {
+function verticalVars(theme: Theme) {
   const { shape, spacing } = theme;
 
   return {
@@ -68,7 +70,7 @@ function verticalVars(theme) {
 
 // ----------------------------------------------------------------------
 
-function miniVars(theme) {
+function miniVars(theme: Theme) {
   const { shape, spacing } = theme;
 
   return {
@@ -90,14 +92,14 @@ function miniVars(theme) {
 
 // ----------------------------------------------------------------------
 
-function horizontalVars(theme) {
+function horizontalVars(theme: Theme) {
   const { shape, spacing } = theme;
 
   return {
     ...colorVars(theme, "horizontal"),
     "--nav-item-gap": spacing(0.75),
     "--nav-height": "56px",
-    "--nav-item-radius": `${shape.borderRadius * 0.75}px`,
+    "--nav-item-radius": `${Number(shape.borderRadius) * 0.75}px`,
     // root
     "--nav-item-root-height": "32px",
     "--nav-item-root-padding": spacing(0, 0.75),

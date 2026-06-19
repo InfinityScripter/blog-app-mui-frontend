@@ -1,3 +1,5 @@
+import type { IconButtonProps } from "@mui/material/IconButton";
+
 import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 import IconButton from "@mui/material/IconButton";
@@ -5,9 +7,11 @@ import IconButton from "@mui/material/IconButton";
 import { Iconify } from "../../iconify";
 import { formatImageUrl } from "../../../utils/format-image-url";
 
+import type { SingleFilePreviewProps } from "../types";
+
 // ----------------------------------------------------------------------
 
-export function SingleFilePreview({ file }) {
+export function SingleFilePreview({ file }: SingleFilePreviewProps) {
   const fileName = typeof file === "string" ? file : file.name;
   const previewUrl =
     typeof file === "string" ? formatImageUrl(file) : URL.createObjectURL(file);
@@ -40,7 +44,7 @@ export function SingleFilePreview({ file }) {
 
 // ----------------------------------------------------------------------
 
-export function DeleteButton({ sx, ...other }) {
+export function DeleteButton({ sx, ...other }: IconButtonProps) {
   return (
     <IconButton
       size="small"

@@ -1,17 +1,26 @@
 // ----------------------------------------------------------------------
 
-export const stylesMode = {
+export const stylesMode: {
+  light: '[data-mui-color-scheme="light"] &';
+  dark: '[data-mui-color-scheme="dark"] &';
+} = {
   light: '[data-mui-color-scheme="light"] &',
   dark: '[data-mui-color-scheme="dark"] &',
-} as const;
+};
 
-export const mediaQueries = {
+export const mediaQueries: {
+  upXs: "@media (min-width:0px)";
+  upSm: "@media (min-width:600px)";
+  upMd: "@media (min-width:900px)";
+  upLg: "@media (min-width:1200px)";
+  upXl: "@media (min-width:1536px)";
+} = {
   upXs: "@media (min-width:0px)",
   upSm: "@media (min-width:600px)",
   upMd: "@media (min-width:900px)",
   upLg: "@media (min-width:1200px)",
   upXl: "@media (min-width:1536px)",
-} as const;
+};
 
 const FONT_VARIABLES: Record<string, string> = {
   "Public Sans": "var(--font-public-sans)",
@@ -50,7 +59,11 @@ interface ResponsiveFontSizesParams {
   lg: number;
 }
 
-export function responsiveFontSizes({ sm, md, lg }: ResponsiveFontSizesParams): Record<string, { fontSize: string }> {
+export function responsiveFontSizes({
+  sm,
+  md,
+  lg,
+}: ResponsiveFontSizesParams): Record<string, { fontSize: string }> {
   return {
     [mediaQueries.upSm]: { fontSize: pxToRem(sm) },
     [mediaQueries.upMd]: { fontSize: pxToRem(md) },
@@ -76,7 +89,9 @@ export function hexToRgbChannel(hex: string): string {
 /**
  * Converts a hex color to RGB channels
  */
-export function createPaletteChannel(hexPalette: Record<string, string>): Record<string, string> {
+export function createPaletteChannel(
+  hexPalette: Record<string, string>,
+): Record<string, string> {
   const channelPalette: Record<string, string> = {};
 
   Object.entries(hexPalette).forEach(([key, value]) => {

@@ -1,9 +1,21 @@
+import type { CardProps } from "@mui/material/Card";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import { fCurrency } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
+
+interface EcommerceCurrentBalanceProps extends Omit<CardProps, "title"> {
+  sx?: SxProps<Theme>;
+  title: string;
+  earning: number;
+  refunded: number;
+  orderTotal: number;
+  currentBalance: number;
+}
 
 export function EcommerceCurrentBalance({
   sx,
@@ -13,8 +25,8 @@ export function EcommerceCurrentBalance({
   orderTotal,
   currentBalance,
   ...other
-}) {
-  const row = (label, value) => (
+}: EcommerceCurrentBalanceProps) {
+  const row = (label: string, value: number) => (
     <Box
       sx={{
         display: "flex",

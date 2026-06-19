@@ -1,10 +1,8 @@
 import type { Post } from "src/types/domain";
-import type { ReactNode, ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import RawGrid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import { Iconify } from "src/components/iconify";
 import { useInfiniteScroll } from "src/hooks/use-infinite-scroll";
@@ -13,21 +11,6 @@ import { PostItemSkeleton } from "./post-skeleton";
 import { PostItem, PostItemLatest } from "./post-item";
 
 // ----------------------------------------------------------------------
-
-// The app uses MUI's legacy `Grid` responsive item props (`xs`/`sm`/`md`/`lg`),
-// which the v7 `Grid` types no longer expose. Re-type the import to accept them
-// (no runtime change) instead of casting to `any`.
-interface GridItemProps {
-  children?: ReactNode;
-  container?: boolean;
-  spacing?: number;
-  xs?: number | boolean;
-  sm?: number | boolean;
-  md?: number | boolean;
-  lg?: number | boolean;
-  sx?: SxProps<Theme>;
-}
-const Grid = RawGrid as unknown as ComponentType<GridItemProps>;
 
 interface PostListProps {
   posts: Post[];
@@ -56,10 +39,7 @@ export function PostList({ posts, loading: initialLoading }: PostListProps) {
       {items.slice(0, 3).map((post, index) => (
         <Grid
           key={post._id}
-          xs={12}
-          sm={6}
-          md={4}
-          lg={index === 0 ? 6 : 3}
+          size={{ xs: 12, sm: 6, md: 4, lg: index === 0 ? 6 : 3 }}
           sx={{ display: { xs: "none", lg: "block" } }}
         >
           <PostItemLatest post={post} index={index} />
@@ -69,10 +49,7 @@ export function PostList({ posts, loading: initialLoading }: PostListProps) {
       {items.slice(0, 3).map((post) => (
         <Grid
           key={post._id}
-          xs={12}
-          sm={6}
-          md={4}
-          lg={3}
+          size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
           sx={{ display: { lg: "none" } }}
         >
           <PostItem post={post} />
@@ -80,7 +57,7 @@ export function PostList({ posts, loading: initialLoading }: PostListProps) {
       ))}
 
       {items.slice(3, items.length).map((post) => (
-        <Grid key={post._id} xs={12} sm={6} md={4} lg={3}>
+        <Grid key={post._id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
           <PostItem post={post} />
         </Grid>
       ))}

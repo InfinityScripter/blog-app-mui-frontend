@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import { Chart, useChart } from "src/components/chart";
@@ -5,7 +8,23 @@ import { useTheme, alpha as hexAlpha } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-export function AnalyticsWebsiteVisits({ title, subheader, chart, ...other }) {
+interface AnalyticsWebsiteVisitsProps extends Omit<CardProps, "title"> {
+  title?: React.ReactNode;
+  subheader?: React.ReactNode;
+  chart: {
+    colors?: string[];
+    categories?: string[];
+    series: { name: string; data: number[] }[];
+    options?: ApexOptions;
+  };
+}
+
+export function AnalyticsWebsiteVisits({
+  title,
+  subheader,
+  chart,
+  ...other
+}: AnalyticsWebsiteVisitsProps) {
   const theme = useTheme();
 
   const chartColors = chart.colors ?? [

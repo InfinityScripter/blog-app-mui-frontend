@@ -1,3 +1,6 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { sumBy } from "src/utils/helper";
@@ -9,7 +12,27 @@ import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function BookingAvailable({ title, subheader, chart, ...other }) {
+interface BookingAvailableSeries {
+  label: string;
+  value: number;
+}
+
+interface BookingAvailableProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  chart: {
+    colors?: string[];
+    series: BookingAvailableSeries[];
+    options?: ApexOptions;
+  };
+}
+
+export function BookingAvailable({
+  title,
+  subheader,
+  chart,
+  ...other
+}: BookingAvailableProps) {
   const theme = useTheme();
 
   const total = sumBy(chart.series, (series) => series.value);
@@ -72,7 +95,7 @@ export function BookingAvailable({ title, subheader, chart, ...other }) {
           flexDirection: "column",
         }}
       >
-        {chart.series.map((item) => (
+        {chart.series.map((item: BookingAvailableSeries) => (
           <Box
             key={item.label}
             sx={{

@@ -1,3 +1,5 @@
+import type { MarketingTheme } from "src/sections/home/components/types";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -32,7 +34,7 @@ const EDUCATION = [
 ];
 
 export default function HomeEducation() {
-  const theme = useTheme();
+  const theme = useTheme<MarketingTheme>();
 
   return (
     <Container

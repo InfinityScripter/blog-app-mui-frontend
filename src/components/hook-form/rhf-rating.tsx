@@ -3,9 +3,16 @@ import Rating from "@mui/material/Rating";
 import FormHelperText from "@mui/material/FormHelperText";
 import { Controller, useFormContext } from "react-hook-form";
 
+import type { RHFRatingProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFRating({ name, helperText, slotProps, ...other }) {
+export function RHFRating({
+  name,
+  helperText,
+  slotProps,
+  ...other
+}: RHFRatingProps) {
   const { control } = useFormContext();
 
   return (

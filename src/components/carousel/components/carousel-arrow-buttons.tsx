@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import type { SystemStyleObject } from "@mui/system";
 import type { StackProps } from "@mui/material/Stack";
 import type { Theme, SxProps } from "@mui/material/styles";
 import type { ButtonBaseProps } from "@mui/material/ButtonBase";
@@ -13,6 +14,26 @@ import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 import { carouselClasses } from "../classes";
 
 import type { CarouselOptions, CarouselSlotProps } from "../carousel";
+
+// ----------------------------------------------------------------------
+
+type SxArrayItem =
+  | boolean
+  | SystemStyleObject<Theme>
+  | ((theme: Theme) => SystemStyleObject<Theme>);
+
+function mergeSx(
+  base: SystemStyleObject<Theme>,
+  extra?: SxProps<Theme>,
+): SxProps<Theme> {
+  const extraItems: SxArrayItem[] = extra
+    ? Array.isArray(extra)
+      ? [...extra]
+      : [extra]
+    : [];
+
+  return [base, ...extraItems];
+}
 
 // ----------------------------------------------------------------------
 
@@ -102,11 +123,7 @@ export function CarouselArrowNumberButtons({
   ...other
 }: CarouselArrowNumberButtonsProps) {
   const theme = useTheme();
-  const greyVars = theme.vars?.palette.grey as
-    | Record<string, string>
-    | undefined;
-  const grey900Channel =
-    greyVars?.["900Channel"] ?? theme.palette.grey[900] ?? "34 40 49";
+  const grey900Channel = theme.vars.palette.grey["900Channel"];
 
   return (
     <Stack
@@ -130,11 +147,10 @@ export function CarouselArrowNumberButtons({
         options={options}
         disabled={disablePrev}
         onClick={onClickPrev}
-        sx={
-          (slotProps?.prevBtn?.sx
-            ? [{ p: 0.75, borderRadius: "inherit" }, slotProps.prevBtn.sx]
-            : { p: 0.75, borderRadius: "inherit" }) as SxProps<Theme>
-        }
+        sx={mergeSx(
+          { p: 0.75, borderRadius: "inherit" },
+          slotProps?.prevBtn?.sx,
+        )}
         svgIcon={slotProps?.prevBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize ?? 16}
       />
@@ -152,11 +168,10 @@ export function CarouselArrowNumberButtons({
         options={options}
         disabled={disableNext}
         onClick={onClickNext}
-        sx={
-          (slotProps?.nextBtn?.sx
-            ? [{ p: 0.75, borderRadius: "inherit" }, slotProps.nextBtn.sx]
-            : { p: 0.75, borderRadius: "inherit" }) as SxProps<Theme>
-        }
+        sx={mergeSx(
+          { p: 0.75, borderRadius: "inherit" },
+          slotProps?.nextBtn?.sx,
+        )}
         svgIcon={slotProps?.nextBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize ?? 16}
       />
@@ -195,11 +210,7 @@ export function CarouselArrowFloatButtons({
         onClick={onClickPrev}
         svgIcon={slotProps?.prevBtn?.svgIcon}
         svgSize={slotProps?.prevBtn?.svgSize}
-        sx={
-          (slotProps?.prevBtn?.sx
-            ? [{ left: -16, ...baseStyles }, slotProps.prevBtn.sx]
-            : { left: -16, ...baseStyles }) as SxProps<Theme>
-        }
+        sx={mergeSx({ left: -16, ...baseStyles }, slotProps?.prevBtn?.sx)}
       />
 
       <ArrowButton
@@ -209,11 +220,7 @@ export function CarouselArrowFloatButtons({
         onClick={onClickNext}
         svgIcon={slotProps?.nextBtn?.svgIcon}
         svgSize={slotProps?.nextBtn?.svgSize}
-        sx={
-          (slotProps?.nextBtn?.sx
-            ? [{ right: -16, ...baseStyles }, slotProps.nextBtn.sx]
-            : { right: -16, ...baseStyles }) as SxProps<Theme>
-        }
+        sx={mergeSx({ right: -16, ...baseStyles }, slotProps?.nextBtn?.sx)}
       />
     </>
   );
@@ -261,24 +268,26 @@ export function ArrowButton({
         arrowPrev ? carouselClasses.arrowPrev : carouselClasses.arrowPrev
       }
       aria-label={arrowPrev ? "Prev button" : "Next button"}
-      sx={{
-        p: 1,
-        borderRadius: "50%",
-        boxSizing: "content-box",
-        transition: (theme) =>
-          theme.transitions.create(["opacity", "background-color"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.short,
-          }),
-        [`&.${buttonBaseClasses.disabled}`]: {
-          opacity: 0.4,
+      sx={[
+        {
+          p: 1,
+          borderRadius: "50%",
+          boxSizing: "content-box",
+          transition: (theme) =>
+            theme.transitions.create(["opacity", "background-color"], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.short,
+            }),
+          [`&.${buttonBaseClasses.disabled}`]: {
+            opacity: 0.4,
+          },
         },
-        ...sx,
-        ...(options?.direction === "rtl" && {
+        ...(Array.isArray(sx) ? sx : [sx]),
+        options?.direction === "rtl" && {
           ...(arrowPrev && { right: -16, left: "auto" }),
           ...(arrowNext && { left: -16, right: "auto" }),
-        }),
-      }}
+        },
+      ]}
       {...other}
     >
       <SvgIcon

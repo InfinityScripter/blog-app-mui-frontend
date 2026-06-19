@@ -1,3 +1,5 @@
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { varAlpha } from "src/theme/styles";
@@ -9,7 +11,24 @@ import LinearProgress, {
 
 // ----------------------------------------------------------------------
 
-export function BookingBooked({ title, subheader, data, ...other }) {
+interface BookingBookedItem {
+  status: string;
+  quantity: number;
+  value: number;
+}
+
+interface BookingBookedProps extends Omit<CardProps, "title"> {
+  title?: string;
+  subheader?: string;
+  data: BookingBookedItem[];
+}
+
+export function BookingBooked({
+  title,
+  subheader,
+  data,
+  ...other
+}: BookingBookedProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -18,7 +37,7 @@ export function BookingBooked({ title, subheader, data, ...other }) {
         component="ul"
         sx={{ p: 3, gap: 3, display: "flex", flexDirection: "column" }}
       >
-        {data.map((progress) => (
+        {data.map((progress: BookingBookedItem) => (
           <li key={progress.status}>
             <Box sx={{ mb: 1, display: "flex", alignItems: "center" }}>
               <Box sx={{ typography: "overline", flexGrow: 1 }}>

@@ -1,3 +1,5 @@
+import type { MarketingTheme } from "src/sections/home/components/types";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -51,7 +53,7 @@ const RECOMMENDATIONS = [
 ];
 
 export default function HomeLanguages() {
-  const theme = useTheme();
+  const theme = useTheme<MarketingTheme>();
 
   return (
     <Container

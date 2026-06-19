@@ -1,49 +1,56 @@
-'use client';
+"use client";
 
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core';
+import type {
+  DragEndEvent,
+  DragOverEvent,
+  DragStartEvent,
+} from "@dnd-kit/core";
 
-import { useState } from 'react';
+import { useState } from "react";
+import { CSS } from "@dnd-kit/utilities";
+import { useAuthContext } from "src/auth/hooks";
+import { Iconify } from "src/components/iconify";
 import {
+  arrayMove,
+  useSortable,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import {
+  useSensor,
   DndContext,
+  useSensors,
   DragOverlay,
   PointerSensor,
   closestCorners,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
-import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-
+} from "@dnd-kit/core";
 import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  MenuItem,
-  Paper,
-  Select,
-  Stack,
-  TextField,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-
-import { useAuthContext } from 'src/auth/hooks';
-import { Iconify } from 'src/components/iconify';
-import {
-  createBoard,
-  createColumn,
   createTask,
-  deleteBoard,
-  deleteColumn,
   deleteTask,
   updateTask,
+  createBoard,
+  deleteBoard,
   useGetBoard,
+  createColumn,
+  deleteColumn,
   useGetBoards,
-} from 'src/actions/kanban-real';
+} from "src/actions/kanban-real";
+import {
+  Box,
+  Paper,
+  Stack,
+  Button,
+  Dialog,
+  Select,
+  Tooltip,
+  MenuItem,
+  TextField,
+  IconButton,
+  Typography,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+} from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -65,7 +72,14 @@ type Column = {
 // Sortable task card
 
 function TaskCard({ task, onDelete }: { task: Task; onDelete: () => void }) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
     id: task.id,
   });
 
@@ -77,23 +91,29 @@ function TaskCard({ task, onDelete }: { task: Task; onDelete: () => void }) {
       elevation={isDragging ? 6 : 1}
       sx={{
         p: 1.5,
-        cursor: 'grab',
+        cursor: "grab",
         opacity: isDragging ? 0.4 : 1,
         transform: CSS.Transform.toString(transform),
         transition,
-        '&:hover .task-delete': { opacity: 1 },
-        position: 'relative',
+        "&:hover .task-delete": { opacity: 1 },
+        position: "relative",
       }}
     >
       <Stack direction="row" alignItems="flex-start" spacing={1}>
-        <Typography variant="body2" sx={{ flex: 1, wordBreak: 'break-word' }}>
+        <Typography variant="body2" sx={{ flex: 1, wordBreak: "break-word" }}>
           {task.title}
         </Typography>
         <IconButton
           className="task-delete"
           size="small"
           color="error"
-          sx={{ opacity: 0, transition: 'opacity 0.2s', flexShrink: 0, mt: -0.5, mr: -0.5 }}
+          sx={{
+            opacity: 0,
+            transition: "opacity 0.2s",
+            flexShrink: 0,
+            mt: -0.5,
+            mr: -0.5,
+          }}
           onClick={(e) => {
             e.stopPropagation();
             onDelete();
@@ -110,7 +130,7 @@ function TaskCard({ task, onDelete }: { task: Task; onDelete: () => void }) {
 // Ghost card shown in DragOverlay
 function TaskCardGhost({ task }: { task: Task }) {
   return (
-    <Paper elevation={8} sx={{ p: 1.5, cursor: 'grabbing', width: 248 }}>
+    <Paper elevation={8} sx={{ p: 1.5, cursor: "grabbing", width: 248 }}>
       <Typography variant="body2">{task.title}</Typography>
     </Paper>
   );
@@ -138,13 +158,18 @@ function KanbanColumn({
         width: 280,
         flexShrink: 0,
         p: 2,
-        bgcolor: 'background.neutral',
-        display: 'flex',
-        flexDirection: 'column',
+        bgcolor: "background.neutral",
+        display: "flex",
+        flexDirection: "column",
         gap: 1,
       }}
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 0.5 }}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ mb: 0.5 }}
+      >
         <Typography variant="subtitle1">{col.name}</Typography>
         <Tooltip title="Удалить колонку">
           <IconButton size="small" color="error" onClick={onDeleteColumn}>
@@ -156,7 +181,11 @@ function KanbanColumn({
       <SortableContext items={taskIds} strategy={verticalListSortingStrategy}>
         <Stack spacing={1} sx={{ minHeight: 8 }}>
           {col.tasks.map((task) => (
-            <TaskCard key={task.id} task={task} onDelete={() => onDeleteTask(task.id)} />
+            <TaskCard
+              key={task.id}
+              task={task}
+              onDelete={() => onDeleteTask(task.id)}
+            />
           ))}
         </Stack>
       </SortableContext>
@@ -165,7 +194,7 @@ function KanbanColumn({
         size="small"
         startIcon={<Iconify icon="mingcute:add-line" />}
         onClick={onAddTask}
-        sx={{ mt: 0.5, justifyContent: 'flex-start' }}
+        sx={{ mt: 0.5, justifyContent: "flex-start" }}
       >
         Добавить задачу
       </Button>
@@ -183,17 +212,17 @@ export function KanbanView() {
 
   // Local optimistic columns state for smooth DnD
   const [localColumns, setLocalColumns] = useState<Column[] | null>(null);
-  const columns: Column[] = localColumns ?? (board?.columns ?? []);
+  const columns: Column[] = localColumns ?? board?.columns ?? [];
 
   const [activeTask, setActiveTask] = useState<Task | null>(null);
-  const [newColName, setNewColName] = useState('');
+  const [newColName, setNewColName] = useState("");
 
   const [createBoardOpen, setCreateBoardOpen] = useState(false);
-  const [newBoardName, setNewBoardName] = useState('');
-  const [newBoardDesc, setNewBoardDesc] = useState('');
+  const [newBoardName, setNewBoardName] = useState("");
+  const [newBoardDesc, setNewBoardDesc] = useState("");
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
   );
 
   // Reset local columns when board data refreshes
@@ -206,17 +235,20 @@ export function KanbanView() {
 
   const handleCreateBoard = async () => {
     if (!newBoardName.trim()) return;
-    const res = await createBoard(newBoardName.trim(), newBoardDesc.trim() || undefined);
+    const res = await createBoard(
+      newBoardName.trim(),
+      newBoardDesc.trim() || undefined,
+    );
     setCreateBoardOpen(false);
-    setNewBoardName('');
-    setNewBoardDesc('');
+    setNewBoardName("");
+    setNewBoardDesc("");
     boardsMutate();
-    setBoardId((res.data as any).board.id);
+    setBoardId(res.data.board.id);
   };
 
   const handleDeleteBoard = async () => {
     if (!boardId) return;
-    if (!window.confirm('Удалить доску и все её данные?')) return;
+    if (!window.confirm("Удалить доску и все её данные?")) return;
     await deleteBoard(boardId);
     setBoardId(null);
     setLocalColumns(null);
@@ -228,12 +260,12 @@ export function KanbanView() {
   const handleAddColumn = async () => {
     if (!boardId || !newColName.trim()) return;
     await createColumn(boardId, newColName.trim());
-    setNewColName('');
+    setNewColName("");
     syncColumns();
   };
 
   const handleDeleteColumn = async (columnId: string) => {
-    if (!window.confirm('Удалить колонку со всеми задачами?')) return;
+    if (!window.confirm("Удалить колонку со всеми задачами?")) return;
     await deleteColumn(columnId);
     syncColumns();
   };
@@ -242,7 +274,7 @@ export function KanbanView() {
 
   const handleAddTask = async (columnId: string) => {
     // eslint-disable-next-line no-alert
-    const title = window.prompt('Название задачи:');
+    const title = window.prompt("Название задачи:");
     if (!title?.trim()) return;
     await createTask(columnId, title.trim());
     syncColumns();
@@ -259,7 +291,7 @@ export function KanbanView() {
     columns.find((col) => col.tasks.some((t) => t.id === taskId));
 
   const handleDragStart = (event: DragStartEvent) => {
-    const col = findColumn(event.active.id as string);
+    const col = findColumn(String(event.active.id));
     const task = col?.tasks.find((t) => t.id === event.active.id);
     if (task) setActiveTask(task);
     // Snapshot local columns for optimistic updates
@@ -270,13 +302,17 @@ export function KanbanView() {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    const activeColIdx = columns.findIndex((col) => col.tasks.some((t) => t.id === active.id));
+    const activeColIdx = columns.findIndex((col) =>
+      col.tasks.some((t) => t.id === active.id),
+    );
     if (activeColIdx === -1) return;
 
     // Check if over a column id directly (dropping on empty column)
     const overColIdx = columns.findIndex((col) => col.id === over.id);
     // Or over a task
-    const overTaskColIdx = columns.findIndex((col) => col.tasks.some((t) => t.id === over.id));
+    const overTaskColIdx = columns.findIndex((col) =>
+      col.tasks.some((t) => t.id === over.id),
+    );
 
     const targetColIdx = overColIdx !== -1 ? overColIdx : overTaskColIdx;
     if (targetColIdx === -1) return;
@@ -297,11 +333,17 @@ export function KanbanView() {
     } else {
       // Move task to another column
       setLocalColumns((prev) => {
-        const cols = prev ? prev.map((c) => ({ ...c, tasks: [...c.tasks] })) : columns.map((c) => ({ ...c, tasks: [...c.tasks] }));
+        const cols = prev
+          ? prev.map((c) => ({ ...c, tasks: [...c.tasks] }))
+          : columns.map((c) => ({ ...c, tasks: [...c.tasks] }));
         const task = cols[activeColIdx].tasks.find((t) => t.id === active.id)!;
-        cols[activeColIdx].tasks = cols[activeColIdx].tasks.filter((t) => t.id !== active.id);
+        cols[activeColIdx].tasks = cols[activeColIdx].tasks.filter(
+          (t) => t.id !== active.id,
+        );
 
-        const overTaskIdx = cols[targetColIdx].tasks.findIndex((t) => t.id === over.id);
+        const overTaskIdx = cols[targetColIdx].tasks.findIndex(
+          (t) => t.id === over.id,
+        );
         if (overTaskIdx !== -1) {
           cols[targetColIdx].tasks.splice(overTaskIdx, 0, task);
         } else {
@@ -317,7 +359,9 @@ export function KanbanView() {
     setActiveTask(null);
     if (!over) return;
 
-    const finalColIdx = columns.findIndex((col) => col.tasks.some((t) => t.id === active.id));
+    const finalColIdx = columns.findIndex((col) =>
+      col.tasks.some((t) => t.id === active.id),
+    );
     if (finalColIdx === -1) return;
 
     const finalCol = columns[finalColIdx];
@@ -325,7 +369,7 @@ export function KanbanView() {
     const targetColumnId = finalCol.id;
     const position = taskIdx;
 
-    await updateTask(active.id as string, { columnId: targetColumnId, position });
+    await updateTask(String(active.id), { columnId: targetColumnId, position });
     setLocalColumns(null);
     boardMutate();
   };
@@ -335,19 +379,24 @@ export function KanbanView() {
   return (
     <Box>
       {/* Header */}
-      <Stack direction="row" spacing={2} sx={{ mb: 3, alignItems: 'center' }}>
+      <Stack direction="row" spacing={2} sx={{ mb: 3, alignItems: "center" }}>
         <Typography variant="h4">Kanban</Typography>
 
         <Select
-          value={boardId ?? ''}
-          onChange={(e) => { setBoardId(e.target.value || null); setLocalColumns(null); }}
+          value={boardId ?? ""}
+          onChange={(e) => {
+            setBoardId(e.target.value || null);
+            setLocalColumns(null);
+          }}
           displayEmpty
           size="small"
           sx={{ minWidth: 200 }}
         >
           <MenuItem value="">Выберите доску</MenuItem>
-          {boards.map((b: any) => (
-            <MenuItem key={b.id} value={b.id}>{b.name}</MenuItem>
+          {boards.map((b) => (
+            <MenuItem key={b.id} value={b.id}>
+              {b.name}
+            </MenuItem>
           ))}
         </Select>
 
@@ -370,7 +419,12 @@ export function KanbanView() {
       </Stack>
 
       {/* Create board dialog */}
-      <Dialog open={createBoardOpen} onClose={() => setCreateBoardOpen(false)} maxWidth="xs" fullWidth>
+      <Dialog
+        open={createBoardOpen}
+        onClose={() => setCreateBoardOpen(false)}
+        maxWidth="xs"
+        fullWidth
+      >
         <DialogTitle>Создать доску</DialogTitle>
         <DialogContent>
           <Stack spacing={2} sx={{ mt: 1 }}>
@@ -378,7 +432,9 @@ export function KanbanView() {
               label="Название"
               value={newBoardName}
               onChange={(e) => setNewBoardName(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter') handleCreateBoard(); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleCreateBoard();
+              }}
               autoFocus
             />
             <TextField
@@ -392,7 +448,11 @@ export function KanbanView() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setCreateBoardOpen(false)}>Отмена</Button>
-          <Button variant="contained" onClick={handleCreateBoard} disabled={!newBoardName.trim()}>
+          <Button
+            variant="contained"
+            onClick={handleCreateBoard}
+            disabled={!newBoardName.trim()}
+          >
             Создать
           </Button>
         </DialogActions>
@@ -407,7 +467,15 @@ export function KanbanView() {
           onDragOver={handleDragOver}
           onDragEnd={handleDragEnd}
         >
-          <Box sx={{ display: 'flex', gap: 2, overflowX: 'auto', pb: 2, alignItems: 'flex-start' }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              overflowX: "auto",
+              pb: 2,
+              alignItems: "flex-start",
+            }}
+          >
             {columns.map((col) => (
               <KanbanColumn
                 key={col.id}
@@ -419,7 +487,14 @@ export function KanbanView() {
             ))}
 
             {/* Add column */}
-            <Paper sx={{ width: 280, flexShrink: 0, p: 2, bgcolor: 'background.neutral' }}>
+            <Paper
+              sx={{
+                width: 280,
+                flexShrink: 0,
+                p: 2,
+                bgcolor: "background.neutral",
+              }}
+            >
               <Stack spacing={1}>
                 <TextField
                   fullWidth
@@ -427,7 +502,9 @@ export function KanbanView() {
                   placeholder="Название колонки"
                   value={newColName}
                   onChange={(e) => setNewColName(e.target.value)}
-                  onKeyDown={(e) => { if (e.key === 'Enter') handleAddColumn(); }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleAddColumn();
+                  }}
                 />
                 <Button
                   size="small"
@@ -451,7 +528,9 @@ export function KanbanView() {
         <Typography color="text.secondary">Загрузка доски...</Typography>
       )}
       {!boardId && (
-        <Typography color="text.secondary">Выберите доску или создайте новую</Typography>
+        <Typography color="text.secondary">
+          Выберите доску или создайте новую
+        </Typography>
       )}
     </Box>
   );

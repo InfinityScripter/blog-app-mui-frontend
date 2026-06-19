@@ -4,9 +4,17 @@ import { useDropzone } from "react-dropzone";
 
 import { Iconify } from "../iconify";
 
+import type { UploadBoxProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function UploadBox({ placeholder, error, disabled, sx, ...other }) {
+export function UploadBox({
+  placeholder,
+  error,
+  disabled,
+  sx,
+  ...other
+}: UploadBoxProps) {
   const { getRootProps, getInputProps, isDragActive, isDragReject } =
     useDropzone({
       disabled,

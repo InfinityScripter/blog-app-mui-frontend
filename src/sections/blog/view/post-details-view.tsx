@@ -32,6 +32,10 @@ const Markdown = RawMarkdown as unknown as ComponentType<{
   children?: ReactNode;
 }>;
 
+function isPublishStatus(value: string): value is PublishStatus {
+  return value === "draft" || value === "published";
+}
+
 interface PostDetailsViewProps {
   initialPost?: Post;
 }
@@ -44,11 +48,11 @@ export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
 
   const handleChangePublish = useCallback(
     async (newValue: string) => {
+      if (!isPublishStatus(newValue)) {
+        return;
+      }
       try {
-        await updatePostPublish(
-          String(currentPost?._id),
-          newValue as PublishStatus,
-        );
+        await updatePostPublish(String(currentPost?._id), newValue);
         setPublish(newValue);
       } catch (error) {
         console.error("Failed to update publish status:", error);

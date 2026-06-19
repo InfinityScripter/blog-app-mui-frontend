@@ -1,3 +1,7 @@
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+import type { ColorType } from "src/theme/core/components/types";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { CONFIG } from "src/config-global";
@@ -10,6 +14,20 @@ import { fNumber, fPercent, fShortenNumber } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
 
+interface AnalyticsWidgetSummaryProps extends CardProps {
+  title: string;
+  total: number;
+  percent: number;
+  icon: React.ReactNode;
+  color?: ColorType;
+  chart: {
+    colors?: string[];
+    categories?: string[];
+    series: number[];
+    options?: ApexOptions;
+  };
+}
+
 export function AnalyticsWidgetSummary({
   icon,
   title,
@@ -19,7 +37,7 @@ export function AnalyticsWidgetSummary({
   color = "primary",
   sx,
   ...other
-}) {
+}: AnalyticsWidgetSummaryProps) {
   const theme = useTheme();
 
   const chartColors = [theme.palette[color].dark];

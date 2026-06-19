@@ -1,3 +1,5 @@
+import type { ThemeWithVars } from "src/theme/core/components/types";
+
 import Paper from "@mui/material/Paper";
 import { paper } from "src/theme/styles";
 import Popover from "@mui/material/Popover";
@@ -11,6 +13,8 @@ import { NavItem } from "./nav-item";
 import { NavUl, NavLi } from "../styles";
 import { navSectionClasses } from "../classes";
 
+import type { NavListProps, NavSubListProps } from "../types";
+
 // ----------------------------------------------------------------------
 
 export function NavList({
@@ -20,8 +24,8 @@ export function NavList({
   cssVars,
   slotProps,
   enabledRootRedirect,
-}) {
-  const theme = useTheme();
+}: NavListProps) {
+  const theme = useTheme<ThemeWithVars>();
 
   const pathname = usePathname();
 
@@ -145,7 +149,7 @@ function NavSubList({
   slotProps,
   enabledRootRedirect,
   cssVars,
-}) {
+}: NavSubListProps) {
   return (
     <NavUl sx={{ gap: 0.5 }}>
       {data.map((list) => (

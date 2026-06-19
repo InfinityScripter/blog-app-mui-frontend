@@ -1,24 +1,32 @@
+import type { ChangeEvent } from "react";
+
 import { useState, useCallback } from "react";
+
+import type { Order, TableProps, UseTableProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export function useTable(props) {
-  const [dense, setDense] = useState(!!props?.defaultDense);
+export function useTable(props?: UseTableProps): TableProps {
+  const [dense, setDense] = useState<boolean>(!!props?.defaultDense);
 
-  const [page, setPage] = useState(props?.defaultCurrentPage || 0);
+  const [page, setPage] = useState<number>(props?.defaultCurrentPage || 0);
 
-  const [orderBy, setOrderBy] = useState(props?.defaultOrderBy || "name");
+  const [orderBy, setOrderBy] = useState<string>(
+    props?.defaultOrderBy || "name",
+  );
 
-  const [rowsPerPage, setRowsPerPage] = useState(
+  const [rowsPerPage, setRowsPerPage] = useState<number>(
     props?.defaultRowsPerPage || 5,
   );
 
-  const [order, setOrder] = useState(props?.defaultOrder || "asc");
+  const [order, setOrder] = useState<Order>(props?.defaultOrder || "asc");
 
-  const [selected, setSelected] = useState(props?.defaultSelected || []);
+  const [selected, setSelected] = useState<string[]>(
+    props?.defaultSelected || [],
+  );
 
   const onSort = useCallback(
-    (id) => {
+    (id: string) => {
       const isAsc = orderBy === id && order === "asc";
       if (id !== "") {
         setOrder(isAsc ? "desc" : "asc");
@@ -29,7 +37,7 @@ export function useTable(props) {
   );
 
   const onSelectRow = useCallback(
-    (inputValue) => {
+    (inputValue: string) => {
       const newSelected = selected.includes(inputValue)
         ? selected.filter((value) => value !== inputValue)
         : [...selected, inputValue];
@@ -39,24 +47,30 @@ export function useTable(props) {
     [selected],
   );
 
-  const onChangeRowsPerPage = useCallback((event) => {
-    setPage(0);
-    setRowsPerPage(parseInt(event.target.value, 10));
-  }, []);
+  const onChangeRowsPerPage = useCallback(
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setPage(0);
+      setRowsPerPage(parseInt(event.target.value, 10));
+    },
+    [],
+  );
 
-  const onChangeDense = useCallback((event) => {
+  const onChangeDense = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setDense(event.target.checked);
   }, []);
 
-  const onSelectAllRows = useCallback((checked, inputValue) => {
-    if (checked) {
-      setSelected(inputValue);
-      return;
-    }
-    setSelected([]);
-  }, []);
+  const onSelectAllRows = useCallback(
+    (checked: boolean, inputValue: string[]) => {
+      if (checked) {
+        setSelected(inputValue);
+        return;
+      }
+      setSelected([]);
+    },
+    [],
+  );
 
-  const onChangePage = useCallback((event, newPage) => {
+  const onChangePage = useCallback((event: unknown, newPage: number) => {
     setPage(newPage);
   }, []);
 
@@ -65,7 +79,7 @@ export function useTable(props) {
   }, []);
 
   const onUpdatePageDeleteRow = useCallback(
-    (totalRowsInPage) => {
+    (totalRowsInPage: number) => {
       setSelected([]);
       if (page) {
         if (totalRowsInPage < 2) {
@@ -77,7 +91,13 @@ export function useTable(props) {
   );
 
   const onUpdatePageDeleteRows = useCallback(
-    ({ totalRowsInPage, totalRowsFiltered }) => {
+    ({
+      totalRowsInPage,
+      totalRowsFiltered,
+    }: {
+      totalRowsInPage: number;
+      totalRowsFiltered: number;
+    }) => {
       const totalSelected = selected.length;
 
       setSelected([]);

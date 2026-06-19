@@ -31,7 +31,7 @@ function ForbiddenIllustration({
     theme.vars?.palette?.primary?.dark ?? theme.palette.primary.dark;
 
   const PRIMARY_DARKER =
-    (theme.vars?.palette?.primary as { darker?: string })?.darker ??
+    theme.vars?.palette?.primary?.darker ??
     (theme.palette.primary as { darker?: string })?.darker ??
     PRIMARY_DARK;
 

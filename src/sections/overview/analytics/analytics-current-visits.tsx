@@ -1,13 +1,54 @@
+import type { ComponentType } from "react";
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
+
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
 import CardHeader from "@mui/material/CardHeader";
 import { fNumber } from "src/utils/format-number";
-import { Chart, useChart, ChartLegends } from "src/components/chart";
+import {
+  useChart,
+  ChartLegends,
+  Chart as RawChart,
+} from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function AnalyticsCurrentVisits({ title, subheader, chart, ...other }) {
+// The shared `Chart` types `width`/`height` as `number | string`, but at
+// runtime it forwards them to a `Box`'s `sx`, which also accepts responsive
+// breakpoint objects. Re-type those two props at the call site (no runtime
+// change) so the responsive form type-checks without resorting to `any`.
+type ResponsiveSize =
+  | number
+  | string
+  | Partial<Record<Breakpoint, number | string>>;
+const Chart = RawChart as unknown as ComponentType<{
+  type: string;
+  series?: number[] | { name?: string; data: number[] }[];
+  options?: ApexOptions;
+  width?: ResponsiveSize;
+  height?: ResponsiveSize;
+  sx?: SxProps<Theme>;
+}>;
+
+interface AnalyticsCurrentVisitsProps extends Omit<CardProps, "title"> {
+  title?: React.ReactNode;
+  subheader?: React.ReactNode;
+  chart: {
+    colors?: string[];
+    series: { label: string; value: number }[];
+    options?: ApexOptions;
+  };
+}
+
+export function AnalyticsCurrentVisits({
+  title,
+  subheader,
+  chart,
+  ...other
+}: AnalyticsCurrentVisitsProps) {
   const theme = useTheme();
 
   const chartSeries = chart.series.map((item) => item.value);

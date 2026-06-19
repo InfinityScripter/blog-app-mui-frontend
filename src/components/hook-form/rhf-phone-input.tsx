@@ -1,10 +1,33 @@
+import type { ReactNode, ComponentType } from "react";
+
 import { Controller, useFormContext } from "react-hook-form";
 
-import { PhoneInput } from "../phone-input";
+import { PhoneInput as PhoneInputBase } from "../phone-input";
+
+import type { RHFPhoneInputProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export function RHFPhoneInput({ name, helperText, ...other }) {
+// `PhoneInput` is an untyped first-party `forwardRef` component (its source in
+// `../phone-input/phone-input.tsx` has no prop types). View it through a precise
+// prop type so this wrapper type-checks. The cast can only be removed by typing
+// the source component, which lives outside this file's edit scope.
+interface PhoneInputViewProps {
+  fullWidth?: boolean;
+  value?: string;
+  onChange?: (newValue: string) => void;
+  error?: boolean;
+  helperText?: ReactNode;
+  [key: string]: unknown;
+}
+
+const PhoneInput = PhoneInputBase as ComponentType<PhoneInputViewProps>;
+
+export function RHFPhoneInput({
+  name,
+  helperText,
+  ...other
+}: RHFPhoneInputProps) {
   const { control, setValue } = useFormContext();
 
   return (

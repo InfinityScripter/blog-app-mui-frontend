@@ -1,3 +1,6 @@
+import type { CardProps } from "@mui/material/Card";
+import type { TimelineItemProps } from "@mui/lab/TimelineItem";
+
 import Card from "@mui/material/Card";
 import Timeline from "@mui/lab/Timeline";
 import TimelineDot from "@mui/lab/TimelineDot";
@@ -11,7 +14,25 @@ import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 
 // ----------------------------------------------------------------------
 
-export function AnalyticsOrderTimeline({ title, subheader, list, ...other }) {
+interface TimelineEvent {
+  id: string;
+  type: string;
+  title: string;
+  time: string | number | null;
+}
+
+interface AnalyticsOrderTimelineProps extends Omit<CardProps, "title"> {
+  title?: React.ReactNode;
+  subheader?: React.ReactNode;
+  list: TimelineEvent[];
+}
+
+export function AnalyticsOrderTimeline({
+  title,
+  subheader,
+  list,
+  ...other
+}: AnalyticsOrderTimelineProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -38,7 +59,12 @@ export function AnalyticsOrderTimeline({ title, subheader, list, ...other }) {
   );
 }
 
-function Item({ item, lastItem, ...other }) {
+interface ItemProps extends TimelineItemProps {
+  item: TimelineEvent;
+  lastItem: boolean;
+}
+
+function Item({ item, lastItem, ...other }: ItemProps) {
   return (
     <TimelineItem {...other}>
       <TimelineSeparator>

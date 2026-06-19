@@ -1,5 +1,4 @@
 import type { Post } from "src/types/domain";
-import type { Theme, SxProps } from "@mui/material/styles";
 import type { ReactNode, ComponentType, HTMLAttributes } from "react";
 import type { AutocompleteRenderGetTagProps } from "@mui/material/Autocomplete";
 
@@ -31,40 +30,17 @@ import { createPost, updatePost } from "../../actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
-// The RHF `Field.*` wrappers have no exported prop types; their inferred props
-// require fields this form does not pass (helperText/hiddenLabel/multiple).
-// Re-type the ones used here precisely (no runtime change) instead of `any`.
-interface EditorFieldProps {
-  name: string;
-  sx?: SxProps<Theme>;
-}
+// `Field.Upload` (`RHFUpload`) is a shared wrapper whose source params are not
+// annotated, so its inferred props are `any` and reject the `maxSize`/`onDelete`
+// props this form passes. Re-type just this one precisely at the call site (no
+// runtime change). `Field.Editor`/`Field.Autocomplete` are typed at source and
+// used directly below.
 interface UploadFieldProps {
   name: string;
   maxSize?: number;
   onDelete?: () => void;
 }
-interface AutocompleteFieldProps {
-  name: string;
-  label?: string;
-  placeholder?: string;
-  multiple?: boolean;
-  freeSolo?: boolean;
-  disableCloseOnSelect?: boolean;
-  options: string[];
-  getOptionLabel?: (option: string) => string;
-  renderOption?: (
-    props: HTMLAttributes<HTMLLIElement>,
-    option: string,
-  ) => ReactNode;
-  renderTags?: (
-    selected: string[],
-    getTagProps: AutocompleteRenderGetTagProps,
-  ) => ReactNode;
-}
-const EditorField = Field.Editor as unknown as ComponentType<EditorFieldProps>;
 const UploadField = Field.Upload as unknown as ComponentType<UploadFieldProps>;
-const AutocompleteField =
-  Field.Autocomplete as unknown as ComponentType<AutocompleteFieldProps>;
 
 export const NewPostSchema = zod.object({
   title: zod.string().min(1, { message: "Заголовок обязателен!" }),
@@ -130,6 +106,13 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
   } = methods;
 
   const values = watch();
+
+  // `values.coverUrl` is typed `unknown` (zod `custom().transform`); narrow it
+  // to the preview prop shape with runtime guards instead of casting.
+  const previewCoverUrl: string | File | null =
+    typeof values.coverUrl === "string" || values.coverUrl instanceof File
+      ? values.coverUrl
+      : null;
 
   useEffect(() => {
     if (currentPost) {
@@ -205,7 +188,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
 
         <Stack spacing={1.5}>
           <Typography variant="subtitle2">Содержание</Typography>
-          <EditorField name="content" sx={{ maxHeight: 480 }} />
+          <Field.Editor name="content" sx={{ maxHeight: 480 }} />
         </Stack>
 
         <Stack spacing={1.5}>
@@ -231,7 +214,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
       <Divider />
 
       <Stack spacing={3} sx={{ p: 3 }}>
-        <AutocompleteField
+        <Field.Autocomplete
           name="tags"
           label="Теги"
           placeholder="+ Теги"
@@ -239,13 +222,19 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
           freeSolo
           disableCloseOnSelect
           options={_tags.map((option) => option)}
-          getOptionLabel={(option) => option}
-          renderOption={(props, option) => (
+          getOptionLabel={(option: string) => option}
+          renderOption={(
+            props: HTMLAttributes<HTMLLIElement>,
+            option: string,
+          ): ReactNode => (
             <li {...props} key={option}>
               {option}
             </li>
           )}
-          renderTags={(selected, getTagProps) =>
+          renderTags={(
+            selected: string[],
+            getTagProps: AutocompleteRenderGetTagProps,
+          ): ReactNode =>
             selected.map((option, index) => (
               <Chip
                 {...getTagProps({ index })}
@@ -269,7 +258,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
           rows={3}
         />
 
-        <AutocompleteField
+        <Field.Autocomplete
           name="metaKeywords"
           label="Мета-ключевые слова"
           placeholder="+ Ключевые слова"
@@ -277,13 +266,19 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
           freeSolo
           disableCloseOnSelect
           options={_tags.map((option) => option)}
-          getOptionLabel={(option) => option}
-          renderOption={(props, option) => (
+          getOptionLabel={(option: string) => option}
+          renderOption={(
+            props: HTMLAttributes<HTMLLIElement>,
+            option: string,
+          ): ReactNode => (
             <li {...props} key={option}>
               {option}
             </li>
           )}
-          renderTags={(selected, getTagProps) =>
+          renderTags={(
+            selected: string[],
+            getTagProps: AutocompleteRenderGetTagProps,
+          ): ReactNode =>
             selected.map((option, index) => (
               <Chip
                 {...getTagProps({ index })}
@@ -371,7 +366,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
         open={preview.value}
         content={values.content}
         onClose={preview.onFalse}
-        coverUrl={values.coverUrl as string | File | null}
+        coverUrl={previewCoverUrl}
         isSubmitting={isSubmitting}
         description={values.description}
       />

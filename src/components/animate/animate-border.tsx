@@ -134,7 +134,7 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
               }
             : undefined
         }
-        style={borderGradient({ padding: values.width }) as CSSProperties}
+        style={borderGradient({ padding: values.width })}
       />
 
       {!values.disable && !values.disableDoubleline && (
@@ -146,7 +146,7 @@ export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
             ),
           }}
           style={{
-            ...(borderGradient() as CSSProperties),
+            ...borderGradient(),
             transform: "scale(-1)",
             ...(animateStyle && {
               paddingTop: animateStyle?.paddingBottom,

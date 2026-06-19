@@ -2,11 +2,10 @@
 
 import type { Post } from "src/types/domain";
 import type { ReactNode, ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import Chip from "@mui/material/Chip";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import RawGrid from "@mui/material/Grid";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
@@ -24,20 +23,11 @@ import { PostDetailsHero } from "../post-details-hero";
 
 // ----------------------------------------------------------------------
 
-// Shared components without exported prop types: re-type precisely at the call
-// site (no runtime change). `Grid` keeps the legacy responsive item props.
+// `Markdown` is a shared component whose props are untyped (inferred as `any`)
+// in its source module; re-type it precisely at the call site (no runtime
+// change). `Grid` now uses the typed MUI v7 API directly (`size` prop).
 const Markdown = RawMarkdown as unknown as ComponentType<{
   children?: ReactNode;
-}>;
-const Grid = RawGrid as unknown as ComponentType<{
-  children?: ReactNode;
-  container?: boolean;
-  spacing?: number;
-  xs?: number | boolean;
-  sm?: number | boolean;
-  md?: number | boolean;
-  lg?: number | boolean;
-  sx?: SxProps<Theme>;
 }>;
 
 interface PostDetailsHomeViewProps {
@@ -140,7 +130,7 @@ export function PostDetailsHomeView({
 
           <Grid container spacing={3}>
             {latestPosts?.slice(latestPosts.length - 4).map((latestPost) => (
-              <Grid key={latestPost.id} xs={12} sm={6} md={4} lg={3}>
+              <Grid key={latestPost.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
                 <PostItem post={latestPost} />
               </Grid>
             ))}

@@ -14,6 +14,8 @@ import {
   SingleFilePreview,
 } from "./components/preview-single-file";
 
+import type { UploadProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 export function Upload({
@@ -29,7 +31,7 @@ export function Upload({
   onRemoveAll,
   multiple = false,
   ...other
-}) {
+}: UploadProps) {
   const {
     getRootProps,
     getInputProps,
@@ -44,7 +46,9 @@ export function Upload({
 
   const isArray = Array.isArray(value) && multiple;
 
-  const hasFile = !isArray && !!value;
+  const singleFile = !Array.isArray(value) ? value : null;
+
+  const hasFile = !isArray && !!singleFile;
 
   const hasFiles = isArray && !!value.length;
 
@@ -119,7 +123,11 @@ export function Upload({
         <input {...getInputProps()} />
 
         {/* Single file */}
-        {hasFile ? <SingleFilePreview file={value} /> : <UploadPlaceholder />}
+        {hasFile && singleFile ? (
+          <SingleFilePreview file={singleFile} />
+        ) : (
+          <UploadPlaceholder />
+        )}
       </Box>
 
       {/* Single file */}

@@ -22,7 +22,7 @@ export const formatStr = {
     dateTime: "DD-MM-YYYY h:mm a", // 17-04-2022 12:00 am
     date: "DD-MM-YYYY", // 17-04-2022
   },
-} as const;
+};
 
 export function today(format?: string): string {
   return dayjs(new Date()).startOf("day").format(format);
@@ -110,7 +110,11 @@ export function fToNow(date: DateInput): string | null {
 
 /** output: boolean
  */
-export function fIsBetween(inputDate: DateInput, startDate: DateInput, endDate: DateInput): boolean {
+export function fIsBetween(
+  inputDate: DateInput,
+  startDate: DateInput,
+  endDate: DateInput,
+): boolean {
   if (!inputDate || !startDate || !endDate) {
     return false;
   }
@@ -141,7 +145,11 @@ export function fIsAfter(startDate: DateInput, endDate: DateInput): boolean {
 
 /** output: boolean
  */
-export function fIsSame(startDate: DateInput, endDate: DateInput, units?: dayjs.OpUnitType): boolean | string {
+export function fIsSame(
+  startDate: DateInput,
+  endDate: DateInput,
+  units?: dayjs.OpUnitType,
+): boolean | string {
   if (!startDate || !endDate) {
     return false;
   }
@@ -163,7 +171,11 @@ export function fIsSame(startDate: DateInput, endDate: DateInput, units?: dayjs.
  * Same month: 25 - 26 Apr 2024
  * Same year: 25 Apr - 26 May 2024
  */
-export function fDateRangeShortLabel(startDate: DateInput, endDate: DateInput, initial?: boolean): string {
+export function fDateRangeShortLabel(
+  startDate: DateInput,
+  endDate: DateInput,
+  initial?: boolean,
+): string {
   const isValid = dayjs(startDate).isValid() && dayjs(endDate).isValid();
 
   const isAfter = fIsAfter(startDate, endDate);

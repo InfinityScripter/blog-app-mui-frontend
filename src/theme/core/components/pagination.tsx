@@ -5,7 +5,14 @@ import { paginationItemClasses } from "@mui/material/PaginationItem";
 import { varAlpha, stylesMode } from "../../styles";
 import { type ColorType, type ThemeWithVars } from "./types";
 
-const COLORS = ["primary", "secondary", "info", "success", "warning", "error"];
+const COLORS: ColorType[] = [
+  "primary",
+  "secondary",
+  "info",
+  "success",
+  "warning",
+  "error",
+];
 
 /**
  * The base `PaginationProps["color"]` only allows `primary | secondary |
@@ -18,7 +25,7 @@ type PaginationOwnerState = Omit<PaginationProps, "color"> & {
 // ----------------------------------------------------------------------
 
 const softVariant = {
-  colors: (COLORS as ColorType[]).map((color) => ({
+  colors: COLORS.map((color) => ({
     props: ({ ownerState }: { ownerState: PaginationOwnerState }) =>
       !ownerState.disabled &&
       ownerState.variant === "soft" &&

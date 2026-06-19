@@ -9,28 +9,13 @@ export function useChart(
   options?: ApexOptions & { responsive?: ApexOptions["responsive"] },
 ) {
   const theme = useTheme();
-  const successPalette = theme.palette
-    .success as typeof theme.palette.success & {
-    darker?: string;
-  };
-  const infoPalette = theme.palette.info as typeof theme.palette.info & {
-    darker?: string;
-  };
-  const greyVars = theme.vars?.palette.grey as
-    | Record<string, string>
-    | undefined;
-  const textVars = theme.vars?.palette.text;
-  const backgroundVars = theme.vars?.palette.background as
-    | Record<string, string>
-    | undefined;
-  const divider = theme.vars?.palette.divider ?? theme.palette.divider;
-  const textPrimary = textVars?.primary ?? theme.palette.text.primary;
-  const textSecondary = textVars?.secondary ?? theme.palette.text.secondary;
-  const textDisabled = textVars?.disabled ?? theme.palette.text.disabled;
-  const backgroundPaper =
-    backgroundVars?.paper ?? theme.palette.background.paper;
-  const grey500Channel =
-    greyVars?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171";
+  const { palette } = theme.vars;
+  const { divider } = palette;
+  const textPrimary = palette.text.primary;
+  const textSecondary = palette.text.secondary;
+  const textDisabled = palette.text.disabled;
+  const backgroundPaper = palette.background.paper;
+  const grey500Channel = palette.grey["500Channel"];
 
   // ApexCharts types `fontSize` as `string`, while MUI typography exposes it as
   // `string | number | undefined` — normalize to a CSS string here.
@@ -107,15 +92,15 @@ export function useChart(
      * Colors
      *************************************** */
     colors: options?.colors ?? [
-      theme.palette.primary.main,
-      theme.palette.warning.main,
-      theme.palette.info.main,
-      theme.palette.error.main,
-      theme.palette.success.main,
-      theme.palette.warning.dark,
-      successPalette.darker ?? theme.palette.success.dark,
-      theme.palette.info.dark,
-      infoPalette.darker ?? theme.palette.info.dark,
+      palette.primary.main,
+      palette.warning.main,
+      palette.info.main,
+      palette.error.main,
+      palette.success.main,
+      palette.warning.dark,
+      palette.success.darker,
+      palette.info.dark,
+      palette.info.darker,
     ],
 
     /** **************************************

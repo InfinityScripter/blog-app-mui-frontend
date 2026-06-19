@@ -1,3 +1,5 @@
+import type { BoxProps } from "@mui/material/Box";
+
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import { Label } from "src/components/label";
@@ -14,7 +16,31 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function BookingNewest({ title, subheader, list, sx, ...other }) {
+interface BookingNewestItem {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  bookedAt: string | number | Date;
+  duration: string;
+  guests: string;
+  isHot: boolean;
+  price: number;
+  coverUrl: string;
+}
+
+interface BookingNewestProps extends BoxProps {
+  title?: string;
+  subheader?: string;
+  list: BookingNewestItem[];
+}
+
+export function BookingNewest({
+  title,
+  subheader,
+  list,
+  sx,
+  ...other
+}: BookingNewestProps) {
   const carousel = useCarousel({
     align: "start",
     slideSpacing: "24px",
@@ -31,7 +57,7 @@ export function BookingNewest({ title, subheader, list, sx, ...other }) {
       />
 
       <Carousel carousel={carousel}>
-        {list.map((item) => (
+        {list.map((item: BookingNewestItem) => (
           <Item key={item.id} item={item} />
         ))}
       </Carousel>
@@ -39,7 +65,11 @@ export function BookingNewest({ title, subheader, list, sx, ...other }) {
   );
 }
 
-function Item({ item, sx, ...other }) {
+interface ItemProps extends BoxProps {
+  item: BookingNewestItem;
+}
+
+function Item({ item, sx, ...other }: ItemProps) {
   return (
     <Box
       sx={{

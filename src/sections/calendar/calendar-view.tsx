@@ -1,8 +1,12 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useAuthContext } from 'src/auth/hooks';
-import { createEvent, deleteEvent, useGetEvents } from 'src/actions/calendar-real';
+import { useState } from "react";
+import { useAuthContext } from "src/auth/hooks";
+import {
+  createEvent,
+  deleteEvent,
+  useGetEvents,
+} from "src/actions/calendar-real";
 import {
   Box,
   Grid,
@@ -19,23 +23,33 @@ import {
   FormControl,
   DialogContent,
   DialogActions,
-} from '@mui/material';
+} from "@mui/material";
 
 // ----------------------------------------------------------------------
 
 const MONTH_NAMES = [
-  'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-  'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь',
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
 ];
 
-const DAY_NAMES = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+const DAY_NAMES = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
 const EVENT_COLORS: Record<string, string> = {
-  primary: '#1976d2',
-  secondary: '#9c27b0',
-  success: '#2e7d32',
-  warning: '#ed6c02',
-  error: '#d32f2f',
+  primary: "#1976d2",
+  secondary: "#9c27b0",
+  success: "#2e7d32",
+  warning: "#ed6c02",
+  error: "#d32f2f",
 };
 
 // ----------------------------------------------------------------------
@@ -46,11 +60,11 @@ export function CalendarView() {
   const [current, setCurrent] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [newEvent, setNewEvent] = useState({
-    title: '',
-    start: '',
-    end: '',
-    type: 'personal',
-    color: 'primary',
+    title: "",
+    start: "",
+    end: "",
+    type: "personal",
+    color: "primary",
   });
 
   const year = current.getFullYear();
@@ -66,7 +80,7 @@ export function CalendarView() {
 
   const getEventsForDay = (day: number) => {
     const d = new Date(year, month, day);
-    return events.filter((e: any) => {
+    return events.filter((e) => {
       const s = new Date(e.start);
       const en = new Date(e.end);
       return (
@@ -80,7 +94,13 @@ export function CalendarView() {
     if (!newEvent.title || !newEvent.start || !newEvent.end) return;
     await createEvent({ ...newEvent });
     setOpen(false);
-    setNewEvent({ title: '', start: '', end: '', type: 'personal', color: 'primary' });
+    setNewEvent({
+      title: "",
+      start: "",
+      end: "",
+      type: "personal",
+      color: "primary",
+    });
     eventsMutate();
   };
 
@@ -91,22 +111,35 @@ export function CalendarView() {
 
   return (
     <Box>
-      <Stack direction="row" spacing={2} sx={{ mb: 3, alignItems: 'center' }}>
+      <Stack direction="row" spacing={2} sx={{ mb: 3, alignItems: "center" }}>
         <Typography variant="h4">Календарь</Typography>
         <Box sx={{ flex: 1 }} />
-        <Button onClick={() => setCurrent(new Date(year, month - 1, 1))}>←</Button>
+        <Button onClick={() => setCurrent(new Date(year, month - 1, 1))}>
+          ←
+        </Button>
         <Typography variant="h6">
           {MONTH_NAMES[month]} {year}
         </Typography>
-        <Button onClick={() => setCurrent(new Date(year, month + 1, 1))}>→</Button>
+        <Button onClick={() => setCurrent(new Date(year, month + 1, 1))}>
+          →
+        </Button>
         <Button variant="contained" onClick={() => setOpen(true)}>
           + Событие
         </Button>
       </Stack>
 
-      <Grid container columns={7} sx={{ border: 1, borderColor: 'divider' }}>
+      <Grid container columns={7} sx={{ border: 1, borderColor: "divider" }}>
         {DAY_NAMES.map((d) => (
-          <Grid key={d} size={1} sx={{ p: 1, borderBottom: 1, borderColor: 'divider', textAlign: 'center' }}>
+          <Grid
+            key={d}
+            size={1}
+            sx={{
+              p: 1,
+              borderBottom: 1,
+              borderColor: "divider",
+              textAlign: "center",
+            }}
+          >
             <Typography variant="caption" fontWeight="bold">
               {d}
             </Typography>
@@ -121,16 +154,19 @@ export function CalendarView() {
               minHeight: 100,
               p: 0.5,
               border: 0.5,
-              borderColor: 'divider',
-              bgcolor: day ? 'background.paper' : 'background.neutral',
+              borderColor: "divider",
+              bgcolor: day ? "background.paper" : "background.neutral",
             }}
           >
             {day && (
               <>
-                <Typography variant="caption" sx={{ display: 'block', mb: 0.5 }}>
+                <Typography
+                  variant="caption"
+                  sx={{ display: "block", mb: 0.5 }}
+                >
                   {day}
                 </Typography>
-                {getEventsForDay(day).map((e: any) => (
+                {getEventsForDay(day).map((e) => (
                   <Chip
                     key={e.id}
                     label={e.title}
@@ -138,12 +174,14 @@ export function CalendarView() {
                     sx={{
                       mb: 0.5,
                       bgcolor: EVENT_COLORS[e.color] ?? EVENT_COLORS.primary,
-                      color: 'white',
-                      fontSize: '0.65rem',
+                      color: "white",
+                      fontSize: "0.65rem",
                       height: 18,
                     }}
                     onDelete={
-                      e.createdBy === user?.id ? () => handleDelete(e.id) : undefined
+                      e.createdBy === user?.id
+                        ? () => handleDelete(e.id)
+                        : undefined
                     }
                   />
                 ))}
@@ -153,35 +191,48 @@ export function CalendarView() {
         ))}
       </Grid>
 
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>Новое событие</DialogTitle>
         <DialogContent>
           <Stack spacing={2} sx={{ mt: 1 }}>
             <TextField
               label="Название"
               value={newEvent.title}
-              onChange={(e) => setNewEvent((p) => ({ ...p, title: e.target.value }))}
+              onChange={(e) =>
+                setNewEvent((p) => ({ ...p, title: e.target.value }))
+              }
             />
             <TextField
               label="Начало"
               type="datetime-local"
               slotProps={{ inputLabel: { shrink: true } }}
               value={newEvent.start}
-              onChange={(e) => setNewEvent((p) => ({ ...p, start: e.target.value }))}
+              onChange={(e) =>
+                setNewEvent((p) => ({ ...p, start: e.target.value }))
+              }
             />
             <TextField
               label="Конец"
               type="datetime-local"
               slotProps={{ inputLabel: { shrink: true } }}
               value={newEvent.end}
-              onChange={(e) => setNewEvent((p) => ({ ...p, end: e.target.value }))}
+              onChange={(e) =>
+                setNewEvent((p) => ({ ...p, end: e.target.value }))
+              }
             />
             <FormControl>
               <InputLabel>Тип</InputLabel>
               <Select
                 value={newEvent.type}
                 label="Тип"
-                onChange={(e) => setNewEvent((p) => ({ ...p, type: e.target.value }))}
+                onChange={(e) =>
+                  setNewEvent((p) => ({ ...p, type: e.target.value }))
+                }
               >
                 <MenuItem value="personal">Личное</MenuItem>
                 <MenuItem value="public">Публичное</MenuItem>
@@ -192,7 +243,9 @@ export function CalendarView() {
               <Select
                 value={newEvent.color}
                 label="Цвет"
-                onChange={(e) => setNewEvent((p) => ({ ...p, color: e.target.value }))}
+                onChange={(e) =>
+                  setNewEvent((p) => ({ ...p, color: e.target.value }))
+                }
               >
                 {Object.keys(EVENT_COLORS).map((c) => (
                   <MenuItem key={c} value={c}>

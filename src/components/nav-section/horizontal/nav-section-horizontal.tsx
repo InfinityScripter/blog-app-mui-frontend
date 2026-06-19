@@ -1,13 +1,30 @@
+import type { FC, ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 
 import { NavList } from "./nav-list";
 import { NavUl, NavLi } from "../styles";
-import { Scrollbar } from "../../scrollbar";
 import { navSectionClasses } from "../classes";
 import { navSectionCssVars } from "../css-vars";
+import { Scrollbar as ScrollbarBase } from "../../scrollbar";
+
+import type { NavGroupProps, NavSectionProps } from "../types";
 
 // ----------------------------------------------------------------------
+
+/**
+ * The shared `Scrollbar` component is an untyped `forwardRef`, so its inferred
+ * props are empty. Re-type the props this nav section actually passes.
+ */
+type ScrollbarProps = {
+  sx?: SxProps<Theme>;
+  slotProps?: { content?: SxProps<Theme> };
+  children?: ReactNode;
+};
+
+const Scrollbar = ScrollbarBase as FC<ScrollbarProps>;
 
 export function NavSectionHorizontal({
   sx,
@@ -16,7 +33,7 @@ export function NavSectionHorizontal({
   slotProps,
   enabledRootRedirect,
   cssVars: overridesVars,
-}) {
+}: NavSectionProps) {
   const theme = useTheme();
 
   const cssVars = {
@@ -63,7 +80,13 @@ export function NavSectionHorizontal({
 
 // ----------------------------------------------------------------------
 
-function Group({ items, render, slotProps, enabledRootRedirect, cssVars }) {
+function Group({
+  items,
+  render,
+  slotProps,
+  enabledRootRedirect,
+  cssVars,
+}: NavGroupProps) {
   return (
     <NavLi>
       <NavUl sx={{ flexDirection: "row", gap: "var(--nav-item-gap)" }}>

@@ -1,3 +1,7 @@
+import type { Theme } from "@mui/material/styles";
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
@@ -14,7 +18,18 @@ import {
 
 // ----------------------------------------------------------------------
 
-export function AppFeatured({ list, sx, ...other }) {
+interface FeaturedItem {
+  id: string;
+  title: string;
+  description: string;
+  coverUrl: string;
+}
+
+interface AppFeaturedProps extends CardProps {
+  list: FeaturedItem[];
+}
+
+export function AppFeatured({ list, sx, ...other }: AppFeaturedProps) {
   const carousel = useCarousel({ loop: true }, [
     Autoplay({ playOnInit: true, delay: 8000 }),
   ]);
@@ -45,7 +60,11 @@ export function AppFeatured({ list, sx, ...other }) {
 
 // ----------------------------------------------------------------------
 
-function CarouselItem({ item, ...other }) {
+interface CarouselItemProps extends BoxProps {
+  item: FeaturedItem;
+}
+
+function CarouselItem({ item, ...other }: CarouselItemProps) {
   return (
     <Box sx={{ width: 1, position: "relative", ...other }}>
       <Box
@@ -79,7 +98,7 @@ function CarouselItem({ item, ...other }) {
         src={item.coverUrl}
         slotProps={{
           overlay: {
-            background: (theme) =>
+            background: (theme: Theme) =>
               `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)} 0%, ${theme.vars.palette.common.black} 75%)`,
           },
         }}

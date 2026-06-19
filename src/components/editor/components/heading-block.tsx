@@ -10,13 +10,15 @@ import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 import { Iconify } from "../../iconify";
 import { ToolbarItem } from "./toolbar-item";
 
-const HEADING_OPTIONS = [
-  "Heading 1",
-  "Heading 2",
-  "Heading 3",
-  "Heading 4",
-  "Heading 5",
-  "Heading 6",
+type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
+const HEADING_OPTIONS: { label: string; level: HeadingLevel }[] = [
+  { label: "Heading 1", level: 1 },
+  { label: "Heading 2", level: 2 },
+  { label: "Heading 3", level: 3 },
+  { label: "Heading 4", level: 4 },
+  { label: "Heading 5", level: 5 },
+  { label: "Heading 6", level: 6 },
 ];
 
 // ----------------------------------------------------------------------
@@ -57,7 +59,7 @@ export function HeadingBlock({ editor }: HeadingBlockProps) {
           typography: "body2",
           justifyContent: "space-between",
           border: (theme) =>
-            `solid 1px ${varAlpha((theme.vars?.palette.grey as Record<string, string> | undefined)?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171", 0.2)}`,
+            `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.2)}`,
         }}
       >
         {(editor.isActive("heading", { level: 1 }) && "Heading 1") ||
@@ -115,29 +117,23 @@ export function HeadingBlock({ editor }: HeadingBlockProps) {
           }}
         />
 
-        {HEADING_OPTIONS.map((heading, index) => {
-          const level = (index + 1) as 1 | 2 | 3 | 4 | 5 | 6;
-
-          return (
-            <ToolbarItem
-              aria-label={heading}
-              component="li"
-              key={heading}
-              label={heading}
-              active={editor.isActive("heading", { level })}
-              onClick={() => {
-                handleClose();
-                editor.chain().focus().toggleHeading({ level }).run();
-              }}
-              sx={{
-                ...(heading !== "Paragraph" && {
-                  fontSize: 18 - index,
-                  fontWeight: "fontWeightBold",
-                }),
-              }}
-            />
-          );
-        })}
+        {HEADING_OPTIONS.map(({ label, level }, index) => (
+          <ToolbarItem
+            aria-label={label}
+            component="li"
+            key={label}
+            label={label}
+            active={editor.isActive("heading", { level })}
+            onClick={() => {
+              handleClose();
+              editor.chain().focus().toggleHeading({ level }).run();
+            }}
+            sx={{
+              fontSize: 18 - index,
+              fontWeight: "fontWeightBold",
+            }}
+          />
+        ))}
       </Menu>
     </>
   );

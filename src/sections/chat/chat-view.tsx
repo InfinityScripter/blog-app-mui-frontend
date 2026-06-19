@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import { useAuthContext } from 'src/auth/hooks';
-import { Iconify } from 'src/components/iconify';
-import { useRef, useState, useEffect } from 'react';
+import type { ChatChannel, ChatMessage } from "src/actions/chat-real";
+
+import { useAuthContext } from "src/auth/hooks";
+import { Iconify } from "src/components/iconify";
+import { useRef, useState, useEffect } from "react";
 import {
   sendMessage,
   useChatStream,
   useGetChannels,
   useGetMessages,
-} from 'src/actions/chat-real';
+} from "src/actions/chat-real";
 import {
   Box,
   List,
@@ -22,7 +24,7 @@ import {
   IconButton,
   ListItemText,
   ListItemButton,
-} from '@mui/material';
+} from "@mui/material";
 
 // ----------------------------------------------------------------------
 
@@ -30,11 +32,12 @@ export function ChatView() {
   const { user } = useAuthContext();
   const { channels } = useGetChannels();
   const [activeChannelId, setActiveChannelId] = useState<string | null>(null);
-  const [input, setInput] = useState('');
-  const { messages: initialMessages, messagesMutate } = useGetMessages(activeChannelId);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [input, setInput] = useState("");
+  const { messages: initialMessages, messagesMutate } =
+    useGetMessages(activeChannelId);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const token = (user as any)?.accessToken;
+  const token = user?.accessToken;
 
   useEffect(() => {
     setMessages(initialMessages);
@@ -45,33 +48,39 @@ export function ChatView() {
   });
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleSend = async () => {
     if (!activeChannelId || !input.trim()) return;
     await sendMessage(activeChannelId, input.trim());
-    setInput('');
+    setInput("");
     messagesMutate();
   };
 
-  const activeChannel = channels.find((c: any) => c.id === activeChannelId);
+  const activeChannel = channels.find((c) => c.id === activeChannelId);
 
-  const channelName = (c: any) =>
-    c.type === 'direct'
-      ? c.members?.find((m: any) => m.id !== user?.id)?.name ?? 'Direct'
-      : c.name ?? 'Группа';
+  const channelName = (c: ChatChannel) =>
+    c.type === "direct"
+      ? (c.members?.find((m) => m.id !== user?.id)?.name ?? "Direct")
+      : (c.name ?? "Группа");
 
   return (
-    <Box sx={{ display: 'flex', height: 'calc(100vh - 120px)', overflow: 'hidden' }}>
+    <Box
+      sx={{
+        display: "flex",
+        height: "calc(100vh - 120px)",
+        overflow: "hidden",
+      }}
+    >
       {/* Channel list */}
       <Paper
         sx={{
           width: 280,
           flexShrink: 0,
-          overflow: 'auto',
+          overflow: "auto",
           borderRight: 1,
-          borderColor: 'divider',
+          borderColor: "divider",
         }}
       >
         <Typography variant="h6" sx={{ p: 2 }}>
@@ -79,7 +88,7 @@ export function ChatView() {
         </Typography>
         <Divider />
         <List disablePadding>
-          {channels.map((c: any) => (
+          {channels.map((c) => (
             <ListItem key={c.id} disablePadding>
               <ListItemButton
                 selected={c.id === activeChannelId}
@@ -87,7 +96,7 @@ export function ChatView() {
               >
                 <ListItemText
                   primary={channelName(c)}
-                  secondary={c.lastMessage ?? ''}
+                  secondary={c.lastMessage ?? ""}
                   secondaryTypographyProps={{ noWrap: true }}
                 />
               </ListItemButton>
@@ -97,24 +106,27 @@ export function ChatView() {
       </Paper>
 
       {/* Message area */}
-      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ flex: 1, display: "flex", flexDirection: "column" }}>
         {activeChannelId ? (
           <>
-            <Box sx={{ p: 2, borderBottom: 1, borderColor: 'divider' }}>
+            <Box sx={{ p: 2, borderBottom: 1, borderColor: "divider" }}>
               <Typography variant="h6">
-                {activeChannel ? channelName(activeChannel) : ''}
+                {activeChannel ? channelName(activeChannel) : ""}
               </Typography>
             </Box>
 
-            <Box sx={{ flex: 1, overflow: 'auto', p: 2 }}>
-              {messages.map((msg: any) => {
+            <Box sx={{ flex: 1, overflow: "auto", p: 2 }}>
+              {messages.map((msg) => {
                 const isOwn = msg.sender?.id === user?.id;
                 return (
                   <Stack
                     key={msg.id}
                     direction="row"
                     spacing={1}
-                    sx={{ mb: 1, justifyContent: isOwn ? 'flex-end' : 'flex-start' }}
+                    sx={{
+                      mb: 1,
+                      justifyContent: isOwn ? "flex-end" : "flex-start",
+                    }}
                   >
                     {!isOwn && (
                       <Avatar sx={{ width: 32, height: 32 }}>
@@ -125,13 +137,13 @@ export function ChatView() {
                       sx={{
                         px: 2,
                         py: 1,
-                        maxWidth: '70%',
-                        bgcolor: isOwn ? 'primary.main' : 'background.neutral',
+                        maxWidth: "70%",
+                        bgcolor: isOwn ? "primary.main" : "background.neutral",
                       }}
                     >
                       <Typography
                         variant="body2"
-                        color={isOwn ? 'primary.contrastText' : 'text.primary'}
+                        color={isOwn ? "primary.contrastText" : "text.primary"}
                       >
                         {msg.body}
                       </Typography>
@@ -146,8 +158,8 @@ export function ChatView() {
               sx={{
                 p: 2,
                 borderTop: 1,
-                borderColor: 'divider',
-                display: 'flex',
+                borderColor: "divider",
+                display: "flex",
                 gap: 1,
               }}
             >
@@ -158,7 +170,7 @@ export function ChatView() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
+                  if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
                     handleSend();
                   }
@@ -171,7 +183,12 @@ export function ChatView() {
           </>
         ) : (
           <Box
-            sx={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            sx={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             <Typography color="text.secondary">Выберите чат</Typography>
           </Box>

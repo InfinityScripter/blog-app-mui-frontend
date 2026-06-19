@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { ApexOptions } from "apexcharts";
+import type { CardProps } from "@mui/material/Card";
+
 import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import { varAlpha } from "src/theme/styles";
@@ -8,13 +12,29 @@ import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
+interface SaleByGenderItem {
+  label: string;
+  value: number;
+}
+
+interface EcommerceSaleByGenderProps extends Omit<CardProps, "title"> {
+  title?: ReactNode;
+  subheader?: ReactNode;
+  total: number;
+  chart: {
+    colors?: string[][];
+    series: SaleByGenderItem[];
+    options?: ApexOptions;
+  };
+}
+
 export function EcommerceSaleByGender({
   title,
   subheader,
   total,
   chart,
   ...other
-}) {
+}: EcommerceSaleByGenderProps) {
   const theme = useTheme();
 
   const chartSeries = chart.series.map((item) => item.value);
@@ -55,7 +75,13 @@ export function EcommerceSaleByGender({
         },
         dataLabels: {
           total: { formatter: () => fNumber(total) },
-          value: { offsetY: 2, fontSize: theme.typography.h5.fontSize },
+          value: {
+            offsetY: 2,
+            fontSize:
+              typeof theme.typography.h5.fontSize === "number"
+                ? `${theme.typography.h5.fontSize}px`
+                : theme.typography.h5.fontSize,
+          },
           name: { offsetY: -10 },
         },
       },

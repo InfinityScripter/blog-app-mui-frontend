@@ -26,7 +26,8 @@ export async function getPosts(): Promise<ListPostsResponse> {
   if (!res.ok) {
     throw new Error(`Failed to fetch posts: ${res.status}`);
   }
-  return res.json() as Promise<ListPostsResponse>;
+  const data: ListPostsResponse = await res.json();
+  return data;
 }
 
 // ----------------------------------------------------------------------
@@ -38,7 +39,8 @@ export async function getPost(id: string): Promise<PostResponse> {
   if (!res.ok) {
     throw new Error(`Failed to fetch post ${id}: ${res.status}`);
   }
-  return res.json() as Promise<PostResponse>;
+  const data: PostResponse = await res.json();
+  return data;
 }
 
 // ----------------------------------------------------------------------

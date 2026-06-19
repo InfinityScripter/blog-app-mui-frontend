@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
@@ -6,6 +9,14 @@ import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
+interface BankingInviteFriendsProps extends BoxProps {
+  price: string;
+  title: string;
+  imgUrl: string;
+  description: string;
+  sx?: SxProps<Theme>;
+}
+
 export function BankingInviteFriends({
   price,
   title,
@@ -13,7 +24,7 @@ export function BankingInviteFriends({
   description,
   sx,
   ...other
-}) {
+}: BankingInviteFriendsProps) {
   const theme = useTheme();
 
   return (

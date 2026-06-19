@@ -1,3 +1,6 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -8,7 +11,27 @@ import { Iconify, FlagIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
-export function AppTopInstalledCountries({ title, subheader, list, ...other }) {
+interface CountryItem {
+  id: string;
+  countryCode: string;
+  countryName: string;
+  android: number;
+  windows: number;
+  apple: number;
+}
+
+interface AppTopInstalledCountriesProps extends Omit<CardProps, "title"> {
+  title: string;
+  subheader?: string;
+  list: CountryItem[];
+}
+
+export function AppTopInstalledCountries({
+  title,
+  subheader,
+  list,
+  ...other
+}: AppTopInstalledCountriesProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} />
@@ -34,7 +57,11 @@ export function AppTopInstalledCountries({ title, subheader, list, ...other }) {
 
 // ----------------------------------------------------------------------
 
-function Item({ item, sx, ...other }) {
+interface AppTopInstalledCountriesItemProps extends BoxProps {
+  item: CountryItem;
+}
+
+function Item({ item, sx, ...other }: AppTopInstalledCountriesItemProps) {
   const largeItem = (
     <Box
       sx={{
@@ -51,7 +78,7 @@ function Item({ item, sx, ...other }) {
     </Box>
   );
 
-  const smallItem = (icon, system) => (
+  const smallItem = (icon: string, system: number) => (
     <Box
       sx={{
         gap: 0.5,

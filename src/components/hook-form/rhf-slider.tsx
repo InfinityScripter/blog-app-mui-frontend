@@ -2,9 +2,11 @@ import Slider from "@mui/material/Slider";
 import FormHelperText from "@mui/material/FormHelperText";
 import { Controller, useFormContext } from "react-hook-form";
 
+import type { RHFSliderProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFSlider({ name, helperText, ...other }) {
+export function RHFSlider({ name, helperText, ...other }: RHFSliderProps) {
   const { control } = useFormContext();
 
   return (

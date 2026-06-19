@@ -10,6 +10,15 @@ interface DecodedToken {
   [key: string]: unknown;
 }
 
+function isDecodedToken(value: unknown): value is DecodedToken {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "exp" in value &&
+    typeof value.exp === "number"
+  );
+}
+
 export function jwtDecode(token: string | null): DecodedToken | null {
   try {
     if (!token) return null;
@@ -21,7 +30,11 @@ export function jwtDecode(token: string | null): DecodedToken | null {
 
     const base64Url = parts[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    const decoded = JSON.parse(atob(base64)) as DecodedToken;
+    const decoded: unknown = JSON.parse(atob(base64));
+
+    if (!isDecodedToken(decoded)) {
+      throw new Error("Invalid token!");
+    }
 
     return decoded;
   } catch (error) {

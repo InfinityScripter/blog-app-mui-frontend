@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
@@ -6,7 +10,22 @@ import { varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
-export function AppWelcome({ title, description, action, img, sx, ...other }) {
+interface AppWelcomeProps extends Omit<BoxProps, "title"> {
+  title: ReactNode;
+  description?: ReactNode;
+  action?: ReactNode;
+  img?: ReactNode;
+  sx?: SxProps<Theme>;
+}
+
+export function AppWelcome({
+  title,
+  description,
+  action,
+  img,
+  sx,
+  ...other
+}: AppWelcomeProps) {
   const theme = useTheme();
 
   return (

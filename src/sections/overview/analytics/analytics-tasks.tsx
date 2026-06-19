@@ -1,3 +1,8 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { CardProps } from "@mui/material/Card";
+import type { ReactNode, ComponentType } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -9,16 +14,40 @@ import Checkbox from "@mui/material/Checkbox";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import CardHeader from "@mui/material/CardHeader";
-import { Scrollbar } from "src/components/scrollbar";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { Scrollbar as RawScrollbar } from "src/components/scrollbar";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
-export function AnalyticsTasks({ title, subheader, list, ...other }) {
-  const [selected, setSelected] = useState(["2"]);
+// `Scrollbar` is a shared `forwardRef` component without exported prop types;
+// re-type it precisely at the call site (no runtime change) so it accepts
+// `children`/`sx` without resorting to `any`.
+const Scrollbar = RawScrollbar as unknown as ComponentType<{
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+}>;
 
-  const handleClickComplete = (taskId) => {
+interface TaskItem {
+  id: string;
+  name: string;
+}
+
+interface AnalyticsTasksProps extends Omit<CardProps, "title"> {
+  title?: React.ReactNode;
+  subheader?: React.ReactNode;
+  list: TaskItem[];
+}
+
+export function AnalyticsTasks({
+  title,
+  subheader,
+  list,
+  ...other
+}: AnalyticsTasksProps) {
+  const [selected, setSelected] = useState<string[]>(["2"]);
+
+  const handleClickComplete = (taskId: string) => {
     const tasksCompleted = selected.includes(taskId)
       ? selected.filter((value) => value !== taskId)
       : [...selected, taskId];
@@ -49,7 +78,13 @@ export function AnalyticsTasks({ title, subheader, list, ...other }) {
   );
 }
 
-function Item({ item, checked, onChange, sx, ...other }) {
+interface ItemProps extends BoxProps {
+  item: TaskItem;
+  checked: boolean;
+  onChange: () => void;
+}
+
+function Item({ item, checked, onChange, sx, ...other }: ItemProps) {
   const popover = usePopover();
 
   const handleMarkComplete = () => {

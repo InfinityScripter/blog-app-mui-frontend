@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { CardProps } from "@mui/material/Card";
+import type { TableHeadLabel } from "src/components/table/types";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Table from "@mui/material/Table";
@@ -14,13 +18,30 @@ import { TableHeadCustom } from "src/components/table";
 
 // ----------------------------------------------------------------------
 
+interface BestSalesmanRow {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  category: string;
+  countryCode: string;
+  totalAmount: number;
+  rank: string;
+}
+
+interface EcommerceBestSalesmanProps extends Omit<CardProps, "title"> {
+  title?: ReactNode;
+  subheader?: ReactNode;
+  tableData: BestSalesmanRow[];
+  headLabel: TableHeadLabel[];
+}
+
 export function EcommerceBestSalesman({
   title,
   subheader,
   tableData,
   headLabel,
   ...other
-}) {
+}: EcommerceBestSalesmanProps) {
   return (
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
@@ -42,7 +63,7 @@ export function EcommerceBestSalesman({
 
 // ----------------------------------------------------------------------
 
-function RowItem({ row }) {
+function RowItem({ row }: { row: BestSalesmanRow }) {
   return (
     <TableRow>
       <TableCell>

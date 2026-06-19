@@ -10,31 +10,50 @@ interface Flattenable {
   children?: Flattenable[];
 }
 
-export function flattenArray<T extends Flattenable>(list: T[] | null | undefined, key = "children"): T[] {
+function isFlattenableArray<T extends Flattenable>(
+  value: unknown,
+): value is T[] {
+  return Array.isArray(value);
+}
+
+export function flattenArray<T extends Flattenable>(
+  list: T[] | null | undefined,
+  key = "children",
+): T[] {
   let children: T[] = [];
 
   const flatten = list?.map((item) => {
-    const childrenKey = item[key] as T[] | undefined;
-    if (childrenKey && Array.isArray(childrenKey) && childrenKey.length) {
+    const childrenKey = item[key];
+    if (isFlattenableArray<T>(childrenKey) && childrenKey.length) {
       children = [...children, ...childrenKey];
     }
     return item;
   });
 
-  return flatten?.concat(
-    children.length ? flattenArray(children, key) : children,
-  ) ?? [];
+  return (
+    flatten?.concat(children.length ? flattenArray(children, key) : children) ??
+    []
+  );
 }
 
 // ----------------------------------------------------------------------
 
-export function flattenDeep<T>(array: T[] | null | undefined): T[] {
-  const isArray = array && Array.isArray(array);
+type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
 
-  if (isArray) {
-    return array.flat(Infinity) as T[];
+export function flattenDeep<T>(
+  array: ReadonlyArray<T | RecursiveArray<T>> | null | undefined,
+): T[] {
+  if (!array || !Array.isArray(array)) {
+    return [];
   }
-  return [];
+
+  return array.reduce<T[]>((acc, item) => {
+    if (Array.isArray(item)) {
+      return acc.concat(flattenDeep(item));
+    }
+    acc.push(item);
+    return acc;
+  }, []);
 }
 
 // ----------------------------------------------------------------------
@@ -44,7 +63,7 @@ type OrderDirection = "asc" | "desc";
 export function orderBy<T extends Record<string, unknown>>(
   array: T[],
   properties: (keyof T)[],
-  orders?: OrderDirection[]
+  orders?: OrderDirection[],
 ): T[] {
   return array.slice().sort((a, b) => {
     for (let i = 0; i < properties.length; i += 1) {
@@ -65,13 +84,13 @@ export function orderBy<T extends Record<string, unknown>>(
 
 export function keyBy<T extends Record<string, unknown>>(
   array: T[] | null | undefined,
-  key?: keyof T
+  key?: keyof T,
 ): Record<string, T> {
-  return (array || []).reduce((result, item) => {
+  return (array || []).reduce<Record<string, T>>((result, item) => {
     const keyValue = key ? item[key] : item;
 
     return { ...result, [String(keyValue)]: item };
-  }, {} as Record<string, T>);
+  }, {});
 }
 
 // ----------------------------------------------------------------------
@@ -107,7 +126,7 @@ export function isEqual(a: unknown, b: unknown): boolean {
     return a.every((item, index) => isEqual(item, b[index]));
   }
 
-  if (typeof a === "object" && typeof b === "object") {
+  if (isObject(a) && isObject(b)) {
     const keysA = Object.keys(a);
     const keysB = Object.keys(b);
 
@@ -115,7 +134,7 @@ export function isEqual(a: unknown, b: unknown): boolean {
       return false;
     }
 
-    return keysA.every((key) => isEqual((a as Record<string, unknown>)[key], (b as Record<string, unknown>)[key]));
+    return keysA.every((key) => isEqual(a[key], b[key]));
   }
 
   return false;
@@ -127,22 +146,31 @@ function isObject(item: unknown): item is Record<string, unknown> {
   return item !== null && typeof item === "object" && !Array.isArray(item);
 }
 
-export function merge<T extends Record<string, unknown>>(target: T, ...sources: Partial<T>[]): T {
+export function merge<T extends Record<string, unknown>>(
+  target: T,
+  ...sources: Partial<T>[]
+): T {
   if (!sources.length) return target;
 
   const source = sources.shift();
 
   if (!source) return target;
 
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in source) {
-    if (isObject(source[key])) {
+  Object.keys(source).forEach((key) => {
+    const sourceValue = source[key];
+
+    if (isObject(sourceValue)) {
       if (!target[key]) Object.assign(target, { [key]: {} });
-      merge(target[key] as T, source[key] as Partial<T>);
+
+      const targetValue = target[key];
+
+      if (isObject(targetValue)) {
+        merge<Record<string, unknown>>(targetValue, sourceValue);
+      }
     } else {
-      Object.assign(target, { [key]: source[key] });
+      Object.assign(target, { [key]: sourceValue });
     }
-  }
+  });
 
   return merge(target, ...sources);
 }

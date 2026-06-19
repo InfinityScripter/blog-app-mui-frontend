@@ -1,6 +1,10 @@
+import type { StackProps } from "@mui/material/Stack";
+
 import Stack from "@mui/material/Stack";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
+
+import type { TableSelectedActionProps } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +16,7 @@ export function TableSelectedAction({
   onSelectAllRows,
   sx,
   ...other
-}) {
+}: TableSelectedActionProps & StackProps) {
   if (!numSelected) {
     return null;
   }

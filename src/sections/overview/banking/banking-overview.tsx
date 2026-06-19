@@ -1,3 +1,8 @@
+import type { CardProps } from "@mui/material/Card";
+import type { ReactNode, ComponentType } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { ThemeWithVars } from "src/theme/core/components/types";
+
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Card from "@mui/material/Card";
@@ -10,6 +15,33 @@ import { Iconify } from "src/components/iconify";
 import { Chart, useChart } from "src/components/chart";
 import { CustomTabs } from "src/components/custom-tabs";
 import { fPercent, fCurrency } from "src/utils/format-number";
+
+// ----------------------------------------------------------------------
+
+// The shared `Label` is an untyped `forwardRef`; re-type it at the call site
+// (no runtime change) so children/color/startIcon/sx type-check.
+type LabelColor =
+  | "default"
+  | "primary"
+  | "secondary"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+interface LabelProps {
+  children?: ReactNode;
+  color?: LabelColor;
+  variant?: "filled" | "outlined" | "soft" | "inverted";
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+  sx?: SxProps<Theme>;
+}
+const StatusLabel = Label as unknown as ComponentType<LabelProps>;
+
+interface BankingOverviewProps extends CardProps {
+  sx?: SxProps<Theme>;
+}
 
 // ----------------------------------------------------------------------
 
@@ -32,8 +64,8 @@ const TABS = [
 
 // ----------------------------------------------------------------------
 
-export function BankingOverview({ sx, ...other }) {
-  const theme = useTheme();
+export function BankingOverview({ sx, ...other }: BankingOverviewProps) {
+  const theme = useTheme<ThemeWithVars>();
 
   const tabs = useTabs("income");
 
@@ -192,7 +224,7 @@ export function BankingOverview({ sx, ...other }) {
                 <Box sx={{ typography: "h4" }}>{fCurrency(tab.total)}</Box>
               </div>
 
-              <Label
+              <StatusLabel
                 color={tab.percent < 0 ? "error" : "success"}
                 startIcon={
                   <Iconify
@@ -208,7 +240,7 @@ export function BankingOverview({ sx, ...other }) {
               >
                 {tab.percent > 0 && "+"}
                 {fPercent(tab.percent)}
-              </Label>
+              </StatusLabel>
             </Box>
           }
         />

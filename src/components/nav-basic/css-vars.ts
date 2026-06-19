@@ -1,13 +1,20 @@
+import type { Theme } from "@mui/material/styles";
+
 import { varAlpha } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
-function desktopVars(theme) {
+function desktopVars(theme: Theme) {
   const {
     shape,
     spacing,
     vars: { palette },
   } = theme;
+
+  const borderRadius =
+    typeof shape.borderRadius === "number"
+      ? shape.borderRadius
+      : parseFloat(shape.borderRadius);
 
   return {
     "--nav-item-gap": spacing(3),
@@ -17,7 +24,7 @@ function desktopVars(theme) {
     "--nav-item-root-padding": "0",
     "--nav-item-root-active-color": palette.primary.main,
     // sub
-    "--nav-item-sub-radius": `${shape.borderRadius * 0.75}px`,
+    "--nav-item-sub-radius": `${borderRadius * 0.75}px`,
     "--nav-item-sub-padding": spacing(0.75, 1, 0.75, 1),
     "--nav-item-sub-color": palette.text.secondary,
     "--nav-item-sub-hover-color": palette.text.primary,
@@ -34,7 +41,7 @@ function desktopVars(theme) {
 
 // ----------------------------------------------------------------------
 
-function mobileVars(theme) {
+function mobileVars(theme: Theme) {
   const {
     shape,
     spacing,

@@ -10,12 +10,26 @@ import { Chart, useChart } from "src/components/chart";
 
 // ----------------------------------------------------------------------
 
-export function ProjectProgressBySubprojects({ data }) {
+interface ProjectDataItem {
+  date: string;
+  subproject: string;
+  discipline: string;
+  plan: number;
+  fact: number;
+}
+
+interface ProjectProgressBySubprojectsProps {
+  data: ProjectDataItem[];
+}
+
+export function ProjectProgressBySubprojects({
+  data,
+}: ProjectProgressBySubprojectsProps) {
   const [subproject, setSubproject] = useState("all");
   const theme = useTheme();
 
   const subprojects = useMemo(
-    () => ["all", ...new Set(data.map((item) => item.subproject))],
+    () => ["all", ...Array.from(new Set(data.map((item) => item.subproject)))],
     [data],
   );
 
@@ -29,11 +43,13 @@ export function ProjectProgressBySubprojects({ data }) {
   }, [data, subproject]);
 
   const chartData = useMemo(() => {
-    const dates = [...new Set(filteredData.map((item) => item.date))].sort();
+    const dates = Array.from(
+      new Set(filteredData.map((item) => item.date)),
+    ).sort();
 
     // Calculate totals for each date
-    const planSeries = [];
-    const factSeries = [];
+    const planSeries: number[] = [];
+    const factSeries: number[] = [];
 
     dates.forEach((date) => {
       const dateItems = filteredData.filter((item) => item.date === date);

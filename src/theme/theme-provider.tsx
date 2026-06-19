@@ -19,8 +19,23 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
+function isSettingsState(value: unknown): value is SettingsState {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "direction" in value &&
+    "fontFamily" in value
+  );
+}
+
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const settings = useSettingsContext() as SettingsState;
+  const context: unknown = useSettingsContext();
+
+  if (!isSettingsState(context)) {
+    throw new Error("ThemeProvider requires settings from SettingsProvider");
+  }
+
+  const settings = context;
 
   const theme = createTheme(settings);
 
