@@ -32,18 +32,23 @@ export function useChart(
   const grey500Channel =
     greyVars?.["500Channel"] ?? theme.palette.grey[500] ?? "145 158 171";
 
+  // ApexCharts types `fontSize` as `string`, while MUI typography exposes it as
+  // `string | number | undefined` — normalize to a CSS string here.
+  const toFontSize = (size: string | number | undefined): string =>
+    typeof size === "number" ? `${size}px` : (size ?? "");
+
   const LABEL_TOTAL = {
     show: true,
     label: "Total",
     color: textSecondary,
-    fontSize: theme.typography.subtitle2.fontSize,
+    fontSize: toFontSize(theme.typography.subtitle2.fontSize),
     fontWeight: theme.typography.subtitle2.fontWeight,
   };
 
   const LABEL_VALUE = {
     offsetY: 8,
     color: textPrimary,
-    fontSize: theme.typography.h4.fontSize,
+    fontSize: toFontSize(theme.typography.h4.fontSize),
     fontWeight: theme.typography.h4.fontWeight,
   };
 
@@ -72,7 +77,7 @@ export function useChart(
     ...(options?.responsive ?? []),
   ];
 
-  return {
+  const merged: ApexOptions = {
     ...options,
 
     /** **************************************
@@ -122,7 +127,6 @@ export function useChart(
         ...options?.states?.hover,
         filter: {
           type: "darken",
-          value: 0.88,
           ...options?.states?.hover?.filter,
         },
       },
@@ -130,7 +134,6 @@ export function useChart(
         ...options?.states?.active,
         filter: {
           type: "darken",
-          value: 0.88,
           ...options?.states?.active?.filter,
         },
       },
@@ -238,7 +241,7 @@ export function useChart(
       fontWeight: 500,
       fontSize: "13px",
       horizontalAlign: "right",
-      markers: { radius: 12 },
+      markers: { size: 12 },
       labels: {
         colors: textPrimary,
       },
@@ -354,4 +357,6 @@ export function useChart(
       [],
     ),
   };
+
+  return merged;
 }

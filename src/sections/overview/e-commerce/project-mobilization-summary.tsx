@@ -1,4 +1,5 @@
-import PropTypes from "prop-types";
+import type { ReactNode, ChangeEvent } from "react";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -13,18 +14,31 @@ import { Chart, useChart } from "src/components/chart";
 import { varAlpha, bgGradient } from "src/theme/styles";
 import { fNumber, fPercent } from "src/utils/format-number";
 
+import {
+  type MobilizationColor,
+  type MobilizationDataItem,
+  type MobilizationChartData,
+} from "./project-mobilization-types";
+
 // ----------------------------------------------------------------------
 
-export function ProjectMobilizationSummary({ data }) {
+interface ProjectMobilizationSummaryProps {
+  data: MobilizationDataItem[];
+}
+
+export function ProjectMobilizationSummary({
+  data,
+}: ProjectMobilizationSummaryProps) {
   const [subproject, setSubproject] = useState("all");
-  const theme = useTheme();
 
   const subprojects = useMemo(() => {
-    const uniqueSubprojects = [...new Set(data.map((item) => item.subproject))];
+    const uniqueSubprojects = Array.from(
+      new Set(data.map((item) => item.subproject)),
+    );
     return ["all", ...uniqueSubprojects];
   }, [data]);
 
-  const handleChangeSubproject = (event) => {
+  const handleChangeSubproject = (event: ChangeEvent<HTMLInputElement>) => {
     setSubproject(event.target.value);
   };
 
@@ -40,7 +54,9 @@ export function ProjectMobilizationSummary({ data }) {
 
   // Get latest date data
   const latestData = useMemo(() => {
-    const latestDate = [...new Set(filteredData.map((item) => item.date))]
+    const latestDate = Array.from(
+      new Set(filteredData.map((item) => item.date)),
+    )
       .sort()
       .pop();
     return filteredData.filter((item) => item.date === latestDate);
@@ -99,8 +115,12 @@ export function ProjectMobilizationSummary({ data }) {
   }, [latestData]);
 
   // Prepare chart data for each widget
-  const getChartData = (category = null) => {
-    const dates = [...new Set(filteredData.map((item) => item.date))].sort();
+  const getChartData = (
+    category: string | null = null,
+  ): MobilizationChartData => {
+    const dates = Array.from(
+      new Set(filteredData.map((item) => item.date)),
+    ).sort();
 
     const formattedDates = dates.map((date) => {
       const [year, month, day] = date.split("-");
@@ -146,7 +166,7 @@ export function ProjectMobilizationSummary({ data }) {
       </TextField>
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <MobilizationWidget
             title="Общая мобилизация"
             total={totals.total.fact}
@@ -162,7 +182,7 @@ export function ProjectMobilizationSummary({ data }) {
           />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <MobilizationWidget
             title="Персонал"
             total={totals.personnel.fact}
@@ -178,7 +198,7 @@ export function ProjectMobilizationSummary({ data }) {
           />
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <MobilizationWidget
             title="Техника"
             total={totals.equipment.fact}
@@ -198,19 +218,16 @@ export function ProjectMobilizationSummary({ data }) {
   );
 }
 
-ProjectMobilizationSummary.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      date: PropTypes.string.isRequired,
-      subproject: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      plan: PropTypes.number.isRequired,
-      fact: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-};
-
 // ----------------------------------------------------------------------
+
+interface MobilizationWidgetProps {
+  title: string;
+  total: number;
+  percent: number;
+  color?: MobilizationColor;
+  icon: ReactNode;
+  chart: MobilizationChartData;
+}
 
 function MobilizationWidget({
   title,
@@ -219,7 +236,7 @@ function MobilizationWidget({
   color = "primary",
   icon,
   chart,
-}) {
+}: MobilizationWidgetProps) {
   const theme = useTheme();
 
   const chartColors = [theme.palette[color].main];
@@ -321,15 +338,3 @@ function MobilizationWidget({
     </Card>
   );
 }
-
-MobilizationWidget.propTypes = {
-  title: PropTypes.string.isRequired,
-  total: PropTypes.number.isRequired,
-  percent: PropTypes.number.isRequired,
-  color: PropTypes.string,
-  icon: PropTypes.node.isRequired,
-  chart: PropTypes.shape({
-    categories: PropTypes.arrayOf(PropTypes.string).isRequired,
-    series: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }).isRequired,
-};

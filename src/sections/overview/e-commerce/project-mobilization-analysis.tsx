@@ -1,4 +1,5 @@
-import PropTypes from "prop-types";
+import type { ChangeEvent } from "react";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
@@ -18,15 +19,23 @@ import { Chart, useChart } from "src/components/chart";
 import TableContainer from "@mui/material/TableContainer";
 import { fNumber, fPercent } from "src/utils/format-number";
 
+import { type MobilizationDataItem } from "./project-mobilization-types";
+
 // ----------------------------------------------------------------------
 
-export function ProjectMobilizationAnalysis({ data }) {
+interface ProjectMobilizationAnalysisProps {
+  data: MobilizationDataItem[];
+}
+
+export function ProjectMobilizationAnalysis({
+  data,
+}: ProjectMobilizationAnalysisProps) {
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("all");
   const theme = useTheme();
 
   const dates = useMemo(
-    () => [...new Set(data.map((item) => item.date))].sort(),
+    () => Array.from(new Set(data.map((item) => item.date))).sort(),
     [data],
   );
 
@@ -39,11 +48,11 @@ export function ProjectMobilizationAnalysis({ data }) {
     }
   }, [dates, date]);
 
-  const handleChangeDate = (event) => {
+  const handleChangeDate = (event: ChangeEvent<HTMLInputElement>) => {
     setDate(event.target.value);
   };
 
-  const handleChangeCategory = (event) => {
+  const handleChangeCategory = (event: ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
   };
 
@@ -61,7 +70,7 @@ export function ProjectMobilizationAnalysis({ data }) {
 
   // Group data by subproject
   const subprojectData = useMemo(() => {
-    const result = {};
+    const result: Record<string, MobilizationDataItem[]> = {};
 
     filteredData.forEach((item) => {
       if (!result[item.subproject]) {
@@ -86,8 +95,8 @@ export function ProjectMobilizationAnalysis({ data }) {
   const chartData = useMemo(() => {
     const subprojects = Object.keys(subprojectData);
 
-    const planData = [];
-    const factData = [];
+    const planData: number[] = [];
+    const factData: number[] = [];
 
     subprojects.forEach((subproject) => {
       const items = subprojectData[subproject];
@@ -135,7 +144,7 @@ export function ProjectMobilizationAnalysis({ data }) {
     },
   });
 
-  const formatDate = (dateString) => {
+  const formatDate = (dateString: string) => {
     if (!dateString) return "";
     const [year, month, day] = dateString.split("-");
     return `${day}.${month}.${year}`;
@@ -302,15 +311,3 @@ export function ProjectMobilizationAnalysis({ data }) {
     </Card>
   );
 }
-
-ProjectMobilizationAnalysis.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      date: PropTypes.string.isRequired,
-      subproject: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
-      plan: PropTypes.number.isRequired,
-      fact: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-};

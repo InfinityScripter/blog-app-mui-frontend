@@ -1,3 +1,6 @@
+import type { ChangeEvent } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
@@ -11,7 +14,20 @@ import { Chart, useChart } from "src/components/chart";
 import { varAlpha, bgGradient } from "src/theme/styles";
 import { fNumber, fPercent } from "src/utils/format-number";
 
+import {
+  type MobilizationColor,
+  type MobilizationDataItem,
+} from "./project-mobilization-types";
+
 // ----------------------------------------------------------------------
+
+interface ProjectMobilizationWidgetProps {
+  title?: string;
+  subheader?: string;
+  data: MobilizationDataItem[];
+  color?: MobilizationColor;
+  sx?: SxProps<Theme>;
+}
 
 export function ProjectMobilizationWidget({
   title,
@@ -20,23 +36,25 @@ export function ProjectMobilizationWidget({
   color = "primary",
   sx,
   ...other
-}) {
+}: ProjectMobilizationWidgetProps) {
   const theme = useTheme();
   const [subproject, setSubproject] = useState("all");
   const [category, setCategory] = useState("all");
 
   const subprojects = useMemo(() => {
-    const uniqueSubprojects = [...new Set(data.map((item) => item.subproject))];
+    const uniqueSubprojects = Array.from(
+      new Set(data.map((item) => item.subproject)),
+    );
     return ["all", ...uniqueSubprojects];
   }, [data]);
 
   const categories = ["all", "Персонал", "Техника"];
 
-  const handleChangeSubproject = (event) => {
+  const handleChangeSubproject = (event: ChangeEvent<HTMLInputElement>) => {
     setSubproject(event.target.value);
   };
 
-  const handleChangeCategory = (event) => {
+  const handleChangeCategory = (event: ChangeEvent<HTMLInputElement>) => {
     setCategory(event.target.value);
   };
 
@@ -56,11 +74,13 @@ export function ProjectMobilizationWidget({
 
   // Group data by date for chart
   const chartData = useMemo(() => {
-    const dates = [...new Set(filteredData.map((item) => item.date))].sort();
+    const dates = Array.from(
+      new Set(filteredData.map((item) => item.date)),
+    ).sort();
 
     // Calculate totals for each date
-    const planSeries = [];
-    const factSeries = [];
+    const planSeries: number[] = [];
+    const factSeries: number[] = [];
 
     dates.forEach((date) => {
       const dateItems = filteredData.filter((item) => item.date === date);
@@ -95,7 +115,9 @@ export function ProjectMobilizationWidget({
 
   // Calculate total plan and fact
   const { planTotal, factTotal, diffPercent } = useMemo(() => {
-    const latestDate = [...new Set(filteredData.map((item) => item.date))]
+    const latestDate = Array.from(
+      new Set(filteredData.map((item) => item.date)),
+    )
       .sort()
       .pop();
     const latestData = filteredData.filter((item) => item.date === latestDate);
