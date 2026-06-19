@@ -1,3 +1,5 @@
+import type { Post } from "src/types/domain";
+
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
 
@@ -6,7 +8,15 @@ import { PostItemHorizontal } from "./post-item-horizontal";
 
 // ----------------------------------------------------------------------
 
-export function PostListHorizontal({ posts, loading }) {
+interface PostListHorizontalProps {
+  posts: Post[];
+  loading?: boolean;
+}
+
+export function PostListHorizontal({
+  posts,
+  loading,
+}: PostListHorizontalProps) {
   const renderLoading = <PostItemSkeleton variant="horizontal" />;
 
   const renderList = posts.map((post) => (

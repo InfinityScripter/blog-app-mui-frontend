@@ -1,18 +1,21 @@
 "use client";
 
+import type { Post } from "src/types/domain";
+import type { ReactNode, ComponentType } from "react";
+
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { orderBy } from "src/utils/helper";
-import { Label } from "src/components/label";
 import { useState, useCallback } from "react";
 import { POST_SORT_OPTIONS } from "src/_mock";
 import { Iconify } from "src/components/iconify";
 import { RouterLink } from "src/routes/components";
 import { useDebounce } from "src/hooks/use-debounce";
 import { useSetState } from "src/hooks/use-set-state";
+import { Label as RawLabel } from "src/components/label";
 import { DashboardContent } from "src/layouts/dashboard";
 import { useGetPosts, useSearchPosts } from "src/actions/blog";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
@@ -22,6 +25,14 @@ import { PostSearch } from "../post-search";
 import { PostListHorizontal } from "../post-list-horizontal";
 
 // ----------------------------------------------------------------------
+
+// `Label` is a shared `forwardRef` component without exported prop types;
+// re-type it precisely at the call site (no runtime change).
+const Label = RawLabel as unknown as ComponentType<{
+  children?: ReactNode;
+  variant?: string;
+  color?: string;
+}>;
 
 export function PostListView() {
   const [sortBy, setSortBy] = useState("latest");
@@ -42,16 +53,16 @@ export function PostListView() {
     sortBy,
   });
 
-  const handleSortBy = useCallback((newValue) => {
+  const handleSortBy = useCallback((newValue: string) => {
     setSortBy(newValue);
   }, []);
 
-  const handleSearch = useCallback((inputValue) => {
+  const handleSearch = useCallback((inputValue: string) => {
     setSearchQuery(inputValue);
   }, []);
 
   const handleFilterPublish = useCallback(
-    (event, newValue) => {
+    (event: React.SyntheticEvent, newValue: string) => {
       filters.setState({ publish: newValue });
     },
     [filters],
@@ -141,24 +152,38 @@ export function PostListView() {
   );
 }
 
-const applyFilter = ({ inputData, filters, sortBy }) => {
+// `orderBy` is constrained to `Record<string, unknown>`; the `Post` interface
+// has no index signature, so widen with an intersection type for the sort call.
+type SortablePost = Post & Record<string, unknown>;
+
+const applyFilter = ({
+  inputData,
+  filters,
+  sortBy,
+}: {
+  inputData: Post[];
+  filters: { publish: string };
+  sortBy: string;
+}): Post[] => {
   const { publish } = filters;
 
+  let data = inputData as SortablePost[];
+
   if (sortBy === "latest") {
-    inputData = orderBy(inputData, ["createdAt"], ["desc"]);
+    data = orderBy(data, ["createdAt"], ["desc"]);
   }
 
   if (sortBy === "oldest") {
-    inputData = orderBy(inputData, ["createdAt"], ["asc"]);
+    data = orderBy(data, ["createdAt"], ["asc"]);
   }
 
   if (sortBy === "popular") {
-    inputData = orderBy(inputData, ["totalViews"], ["desc"]);
+    data = orderBy(data, ["totalViews"], ["desc"]);
   }
 
   if (publish !== "all") {
-    inputData = inputData.filter((post) => post.publish === publish);
+    data = data.filter((post) => post.publish === publish);
   }
 
-  return inputData;
+  return data;
 };

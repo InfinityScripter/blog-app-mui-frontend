@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
-export type PublishStatus = 'draft' | 'published';
+export type PublishStatus = "draft" | "published";
 
 export interface ReplyComment {
   id: string;
@@ -34,6 +34,13 @@ export interface AuthorInfo {
 
 export interface Post {
   id?: string;
+  /**
+   * Mongo-era alias for `id`. The backend `toPublicPost` mapper still emits
+   * `_id` alongside `id` (see blog-app-mui-backend `src/models/Post.ts`), and
+   * the blog UI reads `post._id` for routing/keys. Kept optional so callers
+   * that only have `id` still type-check.
+   */
+  _id?: string;
   publish: PublishStatus;
   title: string;
   description?: string;
@@ -57,11 +64,17 @@ export interface Post {
 
 export interface User {
   id: string;
+  /**
+   * Mongo-era alias for `id`. The backend `toPublicUser` mapper emits both
+   * `_id` and `id` (see blog-app-mui-backend `src/utils/public-user.ts`); the
+   * blog comment ownership check compares `user._id` to `comment.userId`.
+   */
+  _id?: string;
   name: string;
   email: string;
   avatarURL?: string;
   isEmailVerified?: boolean;
-  role?: 'user' | 'admin';
+  role?: "user" | "admin";
 }
 
 export interface FileMeta {
@@ -92,13 +105,19 @@ export interface NavSection {
 }
 
 // Theme types
-export type ColorScheme = 'light' | 'dark';
-export type ThemeDirection = 'ltr' | 'rtl';
+export type ColorScheme = "light" | "dark";
+export type ThemeDirection = "ltr" | "rtl";
 export type FontFamily = string;
-export type NavLayout = 'vertical' | 'horizontal' | 'mini';
-export type NavColor = 'integrate' | 'apparent';
-export type Contrast = 'default' | 'bold';
-export type PrimaryColor = 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red';
+export type NavLayout = "vertical" | "horizontal" | "mini";
+export type NavColor = "integrate" | "apparent";
+export type Contrast = "default" | "bold";
+export type PrimaryColor =
+  | "default"
+  | "cyan"
+  | "purple"
+  | "blue"
+  | "orange"
+  | "red";
 
 export interface SettingsState {
   colorScheme: ColorScheme;
@@ -123,4 +142,4 @@ export interface FormState<T = Record<string, unknown>> {
   touched: Record<string, boolean>;
   isSubmitting: boolean;
   isValid: boolean;
-} 
+}

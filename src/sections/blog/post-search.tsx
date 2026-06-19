@@ -1,3 +1,6 @@
+import type { ComponentType } from "react";
+import type { Post } from "src/types/domain";
+
 import Link from "@mui/material/Link";
 import Avatar from "@mui/material/Avatar";
 import { useRouter } from "src/routes/hooks";
@@ -7,25 +10,47 @@ import TextField from "@mui/material/TextField";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import InputAdornment from "@mui/material/InputAdornment";
-import { SearchNotFound } from "src/components/search-not-found";
 import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
+import { SearchNotFound as RawSearchNotFound } from "src/components/search-not-found";
 
 import { formatImageUrl } from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
-export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
+// `SearchNotFound` is a shared component without exported prop types; its
+// inferred props require both `query` and `sx`. Re-type it precisely at the
+// call site (no runtime change) instead of casting props to `any`.
+const SearchNotFound = RawSearchNotFound as unknown as ComponentType<{
+  query?: string;
+}>;
+
+interface PostSearchProps {
+  query: string;
+  results: Post[];
+  onSearch: (inputValue: string) => void;
+  hrefItem: (postId: string) => string;
+  loading?: boolean;
+  dashboard?: boolean;
+}
+
+export function PostSearch({
+  query,
+  results,
+  onSearch,
+  hrefItem,
+  loading,
+}: PostSearchProps) {
   const router = useRouter();
 
-  const handleClick = (postId) => {
+  const handleClick = (postId: string) => {
     router.push(hrefItem(postId));
   };
 
-  const handleKeyUp = (event) => {
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (query) {
       if (event.key === "Enter") {
         // Используем ID первого найденного поста
-        handleClick(results[0]._id);
+        handleClick(String(results[0]._id));
       }
     }
   };
@@ -91,7 +116,10 @@ export function PostSearch({ query, results, onSearch, hrefItem, loading }) {
               }}
             />
 
-            <Link underline="none" onClick={() => handleClick(post._id)}>
+            <Link
+              underline="none"
+              onClick={() => handleClick(String(post._id))}
+            >
               {parts.map((part, index) => (
                 <Typography
                   key={`${post._id}-part-${index}`}

@@ -1,3 +1,5 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -14,6 +16,23 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 // ----------------------------------------------------------------------
 
+interface PublishOption {
+  value: string;
+  label: string;
+}
+
+interface PostDetailsToolbarProps {
+  publish: string;
+  backLink: string;
+  editLink: string;
+  liveLink: string;
+  publishOptions: PublishOption[];
+  onChangePublish: (value: string) => void;
+  postId: string;
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
 export function PostDetailsToolbar({
   publish,
   backLink,
@@ -24,7 +43,7 @@ export function PostDetailsToolbar({
   postId,
   sx,
   ...other
-}) {
+}: PostDetailsToolbarProps) {
   const popover = usePopover();
   const {
     openConfirm,
@@ -35,7 +54,9 @@ export function PostDetailsToolbar({
   } = usePostDelete();
 
   const handleClickDelete = () => {
-    handleOpenConfirm({ _id: postId });
+    handleOpenConfirm({ _id: postId } as Parameters<
+      typeof handleOpenConfirm
+    >[0]);
   };
 
   return (

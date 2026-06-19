@@ -1,16 +1,20 @@
 "use client";
 
+import type { Post } from "src/types/domain";
+import type { ReactNode, ComponentType } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Chip from "@mui/material/Chip";
-import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import RawGrid from "@mui/material/Grid";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import { useGetPost } from "src/actions/blog";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { Markdown } from "src/components/markdown";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import { Markdown as RawMarkdown } from "src/components/markdown";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { PostItem } from "../post-item";
@@ -20,7 +24,31 @@ import { PostDetailsHero } from "../post-details-hero";
 
 // ----------------------------------------------------------------------
 
-export function PostDetailsHomeView({ post: initialPost, latestPosts }) {
+// Shared components without exported prop types: re-type precisely at the call
+// site (no runtime change). `Grid` keeps the legacy responsive item props.
+const Markdown = RawMarkdown as unknown as ComponentType<{
+  children?: ReactNode;
+}>;
+const Grid = RawGrid as unknown as ComponentType<{
+  children?: ReactNode;
+  container?: boolean;
+  spacing?: number;
+  xs?: number | boolean;
+  sm?: number | boolean;
+  md?: number | boolean;
+  lg?: number | boolean;
+  sx?: SxProps<Theme>;
+}>;
+
+interface PostDetailsHomeViewProps {
+  post?: Post;
+  latestPosts?: Post[];
+}
+
+export function PostDetailsHomeView({
+  post: initialPost,
+  latestPosts,
+}: PostDetailsHomeViewProps) {
   const { post } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
   return (
@@ -37,7 +65,7 @@ export function PostDetailsHomeView({ post: initialPost, latestPosts }) {
         sx={{
           py: 3,
           mb: 5,
-          borderBottom: (theme) => `solid 1px ${theme.vars.palette.divider}`,
+          borderBottom: `solid 1px var(--palette-divider)`,
         }}
       >
         <CustomBreadcrumbs
@@ -62,9 +90,8 @@ export function PostDetailsHomeView({ post: initialPost, latestPosts }) {
             spacing={3}
             sx={{
               py: 3,
-              borderTop: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
-              borderBottom: (theme) =>
-                `dashed 1px ${theme.vars.palette.divider}`,
+              borderTop: `dashed 1px var(--palette-divider)`,
+              borderBottom: `dashed 1px var(--palette-divider)`,
             }}
           >
             <Stack direction="row" flexWrap="wrap" spacing={1}>

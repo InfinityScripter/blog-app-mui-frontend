@@ -1,3 +1,5 @@
+import type { User } from "src/types/domain";
+
 import { z as zod } from "zod";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
@@ -23,15 +25,22 @@ export const CommentSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
+interface PostCommentFormProps {
+  postId?: string;
+  onCommentAdded?: (result: { message: string }) => void;
+  onCommentUpdated?: () => void;
+  parentCommentId?: string;
+}
+
 export function PostCommentForm({
   postId: propPostId,
   onCommentAdded,
   onCommentUpdated,
   parentCommentId,
-}) {
-  const [currentUser, setCurrentUser] = useState(null);
-  const [error, setError] = useState(null);
-  const params = useParams();
+}: PostCommentFormProps) {
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const params = useParams<{ id: string }>();
 
   // Get post ID from props or URL params
   const postId = propPostId || params?.id;
@@ -108,7 +117,9 @@ export function PostCommentForm({
       // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error("Failed to add comment:", error);
-      setError(error.message || "Failed to add comment");
+      setError(
+        error instanceof Error ? error.message : "Failed to add comment",
+      );
     }
   });
 

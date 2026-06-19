@@ -1,3 +1,7 @@
+import type { ComponentType } from "react";
+import type { AuthorInfo } from "src/types/domain";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import { _socials } from "src/_mock";
 import Stack from "@mui/material/Stack";
@@ -5,20 +9,39 @@ import Avatar from "@mui/material/Avatar";
 import { fDate } from "src/utils/format-time";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import { varAlpha, bgGradient } from "src/theme/styles";
 import { useResponsive } from "src/hooks/use-responsive";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { formatImageUrl } from "src/utils/format-image-url";
-import { Iconify, SocialIcon } from "src/components/iconify";
+import { Iconify, SocialIcon as RawSocialIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
-export function PostDetailsHero({ title, author, coverUrl, createdAt }) {
-  const theme = useTheme();
+// `SocialIcon` is a shared `forwardRef` component without exported prop types,
+// so its inferred props reject `icon`/`sx`. Re-type it precisely at the call
+// site (no runtime change) instead of casting individual props to `any`.
+interface SocialIconProps {
+  icon?: string;
+  width?: number | string;
+  sx?: SxProps<Theme>;
+}
+const SocialIcon = RawSocialIcon as unknown as ComponentType<SocialIconProps>;
 
+interface PostDetailsHeroProps {
+  title?: string;
+  author?: AuthorInfo;
+  coverUrl?: string;
+  createdAt?: string | Date;
+}
+
+export function PostDetailsHero({
+  title,
+  author,
+  coverUrl,
+  createdAt,
+}: PostDetailsHeroProps) {
   const smUp = useResponsive("up", "sm");
 
   const formattedCoverUrl = formatImageUrl(coverUrl);
@@ -27,7 +50,7 @@ export function PostDetailsHero({ title, author, coverUrl, createdAt }) {
     <Box
       sx={{
         ...bgGradient({
-          color: `0deg, ${varAlpha(theme.vars.palette.grey["900Channel"], 0.64)}, ${varAlpha(theme.vars.palette.grey["900Channel"], 0.64)}`,
+          color: `0deg, ${varAlpha("var(--palette-grey-900Channel)", 0.64)}, ${varAlpha("var(--palette-grey-900Channel)", 0.64)}`,
           imgUrl: formattedCoverUrl,
         }),
         height: 480,

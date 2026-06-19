@@ -1,3 +1,5 @@
+import type { Comment, ReplyComment } from "src/types/domain";
+
 import { useState } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -17,6 +19,19 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 
 import { PostCommentForm } from "./post-comment-form";
 
+interface PostCommentItemProps {
+  name: string;
+  avatarUrl?: string;
+  message: string;
+  tagUser?: string;
+  postedAt: string | Date;
+  hasReply?: boolean;
+  comment: Comment | ReplyComment;
+  postId?: string;
+  parentCommentId?: string;
+  onCommentUpdated?: () => void;
+}
+
 export default function PostCommentItem({
   name,
   avatarUrl,
@@ -25,13 +40,14 @@ export default function PostCommentItem({
   postedAt,
   hasReply,
   comment,
+  postId: propPostId,
   parentCommentId,
   onCommentUpdated,
-}) {
+}: PostCommentItemProps) {
   const reply = useBoolean();
   const { user } = useAuthContext();
-  const params = useParams();
-  const postId = params?.id;
+  const params = useParams<{ id: string }>();
+  const postId = propPostId || params?.id;
   const popover = usePopover();
 
   const [isEditing, setIsEditing] = useState(false);
@@ -40,11 +56,12 @@ export default function PostCommentItem({
   const handleSave = async () => {
     if (editedMessage.trim()) {
       try {
-        await updateComment(postId, comment.id, {
+        const updatePayload = {
           message: editedMessage,
           isReply: hasReply,
           parentCommentId,
-        });
+        };
+        await updateComment(postId, comment.id, updatePayload);
 
         if (onCommentUpdated) {
           onCommentUpdated();
@@ -57,7 +74,7 @@ export default function PostCommentItem({
     }
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       handleSave();

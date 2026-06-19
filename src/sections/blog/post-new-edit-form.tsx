@@ -1,3 +1,8 @@
+import type { Post } from "src/types/domain";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { ReactNode, ComponentType, HTMLAttributes } from "react";
+import type { AutocompleteRenderGetTagProps } from "@mui/material/Autocomplete";
+
 import { z as zod } from "zod";
 import { _tags } from "src/_mock";
 import Box from "@mui/material/Box";
@@ -26,11 +31,46 @@ import { createPost, updatePost } from "../../actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
+// The RHF `Field.*` wrappers have no exported prop types; their inferred props
+// require fields this form does not pass (helperText/hiddenLabel/multiple).
+// Re-type the ones used here precisely (no runtime change) instead of `any`.
+interface EditorFieldProps {
+  name: string;
+  sx?: SxProps<Theme>;
+}
+interface UploadFieldProps {
+  name: string;
+  maxSize?: number;
+  onDelete?: () => void;
+}
+interface AutocompleteFieldProps {
+  name: string;
+  label?: string;
+  placeholder?: string;
+  multiple?: boolean;
+  freeSolo?: boolean;
+  disableCloseOnSelect?: boolean;
+  options: string[];
+  getOptionLabel?: (option: string) => string;
+  renderOption?: (
+    props: HTMLAttributes<HTMLLIElement>,
+    option: string,
+  ) => ReactNode;
+  renderTags?: (
+    selected: string[],
+    getTagProps: AutocompleteRenderGetTagProps,
+  ) => ReactNode;
+}
+const EditorField = Field.Editor as unknown as ComponentType<EditorFieldProps>;
+const UploadField = Field.Upload as unknown as ComponentType<UploadFieldProps>;
+const AutocompleteField =
+  Field.Autocomplete as unknown as ComponentType<AutocompleteFieldProps>;
+
 export const NewPostSchema = zod.object({
   title: zod.string().min(1, { message: "Заголовок обязателен!" }),
   description: zod.string().min(1, { message: "Описание обязательно!" }),
   content: schemaHelper
-    .editor()
+    .editor({})
     .min(100, { message: "Содержание должно быть не менее 100 символов" }),
   coverUrl: schemaHelper.file({
     message: { required_error: "Обложка обязательна!" },
@@ -51,7 +91,11 @@ export const NewPostSchema = zod.object({
 
 // ----------------------------------------------------------------------
 
-export function PostNewEditForm({ currentPost }) {
+interface PostNewEditFormProps {
+  currentPost?: Post;
+}
+
+export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
   const router = useRouter();
 
   const preview = useBoolean();
@@ -95,9 +139,12 @@ export function PostNewEditForm({ currentPost }) {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      const finalData = { ...data };
+      const finalData: Partial<Post> = {
+        ...data,
+        publish: data.publish ? "published" : "draft",
+        coverUrl: typeof data.coverUrl === "string" ? data.coverUrl : undefined,
+      };
 
-      finalData.publish = data.publish ? "published" : "draft";
       // Handle file upload if there's a new file
       if (data.coverUrl && data.coverUrl instanceof File) {
         const formData = new FormData();
@@ -115,7 +162,10 @@ export function PostNewEditForm({ currentPost }) {
       let response;
       if (currentPost) {
         // Update an existing post
-        response = await updatePost({ ...finalData, id: currentPost._id });
+        response = await updatePost({
+          ...finalData,
+          id: String(currentPost._id),
+        });
       } else {
         // Create a new post
         response = await createPost(finalData);
@@ -128,7 +178,9 @@ export function PostNewEditForm({ currentPost }) {
       console.info("Response:", response);
     } catch (error) {
       console.error(error);
-      toast.error(error.message || "Операция не удалась");
+      toast.error(
+        error instanceof Error ? error.message : "Операция не удалась",
+      );
     }
   });
 
@@ -153,12 +205,12 @@ export function PostNewEditForm({ currentPost }) {
 
         <Stack spacing={1.5}>
           <Typography variant="subtitle2">Содержание</Typography>
-          <Field.Editor name="content" sx={{ maxHeight: 480 }} />
+          <EditorField name="content" sx={{ maxHeight: 480 }} />
         </Stack>
 
         <Stack spacing={1.5}>
           <Typography variant="subtitle2">Обложка</Typography>
-          <Field.Upload
+          <UploadField
             name="coverUrl"
             maxSize={3145728}
             onDelete={handleRemoveFile}
@@ -179,7 +231,7 @@ export function PostNewEditForm({ currentPost }) {
       <Divider />
 
       <Stack spacing={3} sx={{ p: 3 }}>
-        <Field.Autocomplete
+        <AutocompleteField
           name="tags"
           label="Теги"
           placeholder="+ Теги"
@@ -217,7 +269,7 @@ export function PostNewEditForm({ currentPost }) {
           rows={3}
         />
 
-        <Field.Autocomplete
+        <AutocompleteField
           name="metaKeywords"
           label="Мета-ключевые слова"
           placeholder="+ Ключевые слова"
@@ -319,7 +371,7 @@ export function PostNewEditForm({ currentPost }) {
         open={preview.value}
         content={values.content}
         onClose={preview.onFalse}
-        coverUrl={values.coverUrl}
+        coverUrl={values.coverUrl as string | File | null}
         isSubmitting={isSubmitting}
         description={values.description}
       />

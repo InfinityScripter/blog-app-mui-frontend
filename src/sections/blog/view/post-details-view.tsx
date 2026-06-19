@@ -1,5 +1,8 @@
 "use client";
 
+import type { ReactNode, ComponentType } from "react";
+import type { Post, PublishStatus } from "src/types/domain";
+
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
@@ -9,10 +12,10 @@ import { useGetPost } from "src/actions/blog";
 import Container from "@mui/material/Container";
 import { POST_PUBLISH_OPTIONS } from "src/_mock";
 import Typography from "@mui/material/Typography";
-import { Markdown } from "src/components/markdown";
 import { useState, useEffect, useCallback } from "react";
 import { DashboardContent } from "src/layouts/dashboard";
 import { updatePostPublish } from "src/actions/blog-ssr";
+import { Markdown as RawMarkdown } from "src/components/markdown";
 import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
 import { PostDetailsHero } from "../post-details-hero";
@@ -23,22 +26,35 @@ import { formatImageUrl } from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
-export function PostDetailsView({ initialPost }) {
+// `Markdown` is a shared component without exported prop types; re-type it
+// precisely at the call site (no runtime change).
+const Markdown = RawMarkdown as unknown as ComponentType<{
+  children?: ReactNode;
+}>;
+
+interface PostDetailsViewProps {
+  initialPost?: Post;
+}
+
+export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
   const [publish, setPublish] = useState("");
 
   const { post } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
 
   const handleChangePublish = useCallback(
-    async (newValue) => {
+    async (newValue: string) => {
       try {
-        await updatePostPublish(currentPost._id, newValue);
+        await updatePostPublish(
+          String(currentPost?._id),
+          newValue as PublishStatus,
+        );
         setPublish(newValue);
       } catch (error) {
         console.error("Failed to update publish status:", error);
       }
     },
-    [currentPost._id],
+    [currentPost?._id],
   );
 
   useEffect(() => {
@@ -57,7 +73,7 @@ export function PostDetailsView({ initialPost }) {
           publish={`${publish}`}
           onChangePublish={handleChangePublish}
           publishOptions={POST_PUBLISH_OPTIONS}
-          postId={currentPost._id}
+          postId={String(currentPost?._id)}
         />
       </Container>
 
@@ -83,8 +99,8 @@ export function PostDetailsView({ initialPost }) {
           spacing={3}
           sx={{
             py: 3,
-            borderTop: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
-            borderBottom: (theme) => `dashed 1px ${theme.vars.palette.divider}`,
+            borderTop: `dashed 1px var(--palette-divider)`,
+            borderBottom: `dashed 1px var(--palette-divider)`,
           }}
         >
           <Stack direction="row" flexWrap="wrap" spacing={1}>

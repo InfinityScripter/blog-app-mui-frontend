@@ -1,3 +1,5 @@
+import type { ReactNode, ComponentType } from "react";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -6,15 +8,37 @@ import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { Markdown } from "src/components/markdown";
-import { Scrollbar } from "src/components/scrollbar";
 import DialogActions from "@mui/material/DialogActions";
 import { formatImageUrl } from "src/utils/format-image-url";
 import { EmptyContent } from "src/components/empty-content";
+import { Markdown as RawMarkdown } from "src/components/markdown";
+import { Scrollbar as RawScrollbar } from "src/components/scrollbar";
 
 import { PostDetailsHero } from "./post-details-hero";
 
 // ----------------------------------------------------------------------
+
+// `Markdown` and `Scrollbar` are shared `forwardRef` components without
+// exported prop types; re-type them precisely at the call site (no runtime
+// change) so they accept `children`/`sx` without resorting to `any`.
+const Scrollbar = RawScrollbar as unknown as ComponentType<{
+  children?: ReactNode;
+}>;
+const Markdown = RawMarkdown as unknown as ComponentType<{
+  children?: ReactNode;
+}>;
+
+interface PostDetailsPreviewProps {
+  open: boolean;
+  title?: string;
+  content?: string;
+  isValid: boolean;
+  onClose: () => void;
+  coverUrl?: string | File | null;
+  onSubmit: () => void;
+  description?: string;
+  isSubmitting: boolean;
+}
 
 export function PostDetailsPreview({
   open,
@@ -26,7 +50,7 @@ export function PostDetailsPreview({
   onSubmit,
   description,
   isSubmitting,
-}) {
+}: PostDetailsPreviewProps) {
   const [previewUrl, setPreviewUrl] = useState("");
 
   useEffect(() => {

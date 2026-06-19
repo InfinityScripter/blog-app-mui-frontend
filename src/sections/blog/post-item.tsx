@@ -1,10 +1,13 @@
+import type { ComponentType } from "react";
+import type { Post } from "src/types/domain";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
-import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
@@ -13,19 +16,33 @@ import { RouterLink } from "src/routes/components";
 import CardContent from "@mui/material/CardContent";
 import { maxLine, varAlpha } from "src/theme/styles";
 import { AvatarShape } from "src/assets/illustrations";
+import { Image as RawImage } from "src/components/image";
 import { fShortenNumber } from "src/utils/format-number";
 import { formatImageUrl } from "src/utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
-export function PostItem({ post }) {
+// `Image` is a shared `forwardRef` component without exported prop types; its
+// inferred props reject `alt`/`src`/etc. Re-type it precisely at the call site
+// (no runtime change) instead of casting individual props to `any`.
+interface ImageProps {
+  alt?: string;
+  src?: string;
+  ratio?: string;
+  visibleByDefault?: boolean;
+  sx?: SxProps<Theme>;
+  slotProps?: { overlay?: { bgcolor?: string } };
+}
+const Image = RawImage as unknown as ComponentType<ImageProps>;
+
+export function PostItem({ post }: { post: Post }) {
   const theme = useTheme();
   console.log(
     { post },
     "данные от сервера которые нужно показывать в карточке",
   );
 
-  const linkTo = paths.post.details(post._id);
+  const linkTo = paths.post.details(String(post._id));
 
   return (
     <Card>
@@ -92,10 +109,10 @@ export function PostItem({ post }) {
 
 // ----------------------------------------------------------------------
 
-export function PostItemLatest({ post, index }) {
+export function PostItemLatest({ post, index }: { post: Post; index: number }) {
   const theme = useTheme();
 
-  const linkTo = paths.post.details(post._id);
+  const linkTo = paths.post.details(String(post._id));
 
   const postSmall = index === 1 || index === 2;
 
@@ -123,7 +140,7 @@ export function PostItemLatest({ post, index }) {
         sx={{ height: 360 }}
         slotProps={{
           overlay: {
-            bgcolor: varAlpha(theme.vars.palette.grey["900Channel"], 0.48),
+            bgcolor: varAlpha("var(--palette-grey-900Channel)", 0.48),
           },
         }}
       />
@@ -175,7 +192,19 @@ export function PostItemLatest({ post, index }) {
 
 // ----------------------------------------------------------------------
 
-export function InfoBlock({ totalComments, totalViews, totalShares, sx }) {
+interface InfoBlockProps {
+  totalComments: number;
+  totalViews: number;
+  totalShares: number;
+  sx?: SxProps<Theme>;
+}
+
+export function InfoBlock({
+  totalComments,
+  totalViews,
+  totalShares,
+  sx,
+}: InfoBlockProps) {
   return (
     <Stack
       spacing={1.5}

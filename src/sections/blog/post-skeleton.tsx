@@ -1,14 +1,23 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 
 // ----------------------------------------------------------------------
+
+interface PostItemSkeletonProps {
+  sx?: SxProps<Theme>;
+  amount?: number;
+  variant?: "vertical" | "horizontal";
+  [key: string]: unknown;
+}
 
 export function PostItemSkeleton({
   sx,
   amount = 16,
   variant = "vertical",
   ...other
-}) {
+}: PostItemSkeletonProps) {
   if (variant === "horizontal") {
     return [...Array(amount)].map((_, index) => (
       <Stack
@@ -17,7 +26,7 @@ export function PostItemSkeleton({
         sx={{
           borderRadius: 2,
           bgcolor: "background.paper",
-          border: (theme) => `solid 1px ${theme.vars.palette.divider}`,
+          border: `solid 1px var(--palette-divider)`,
           ...sx,
         }}
         {...other}
@@ -46,7 +55,7 @@ export function PostItemSkeleton({
             },
           }}
         >
-            <Skeleton sx={{ width: 170, height: 240, flexShrink: 0 }} />
+          <Skeleton sx={{ width: 170, height: 240, flexShrink: 0 }} />
         </Stack>
       </Stack>
     ));
@@ -58,7 +67,7 @@ export function PostItemSkeleton({
       sx={{
         borderRadius: 2,
         bgcolor: "background.paper",
-        border: (theme) => `solid 1px ${theme.vars.palette.divider}`,
+        border: `solid 1px var(--palette-divider)`,
         ...sx,
       }}
       {...other}

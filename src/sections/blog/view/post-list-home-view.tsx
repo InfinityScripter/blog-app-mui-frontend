@@ -1,5 +1,7 @@
 "use client";
 
+import type { Post } from "src/types/domain";
+
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import { orderBy } from "src/utils/helper";
@@ -16,7 +18,11 @@ import { PostSearch } from "../post-search";
 
 // ----------------------------------------------------------------------
 
-export function PostListHomeView({ posts }) {
+interface PostListHomeViewProps {
+  posts: Post[];
+}
+
+export function PostListHomeView({ posts }: PostListHomeViewProps) {
   const [sortBy, setSortBy] = useState("latest");
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,11 +33,11 @@ export function PostListHomeView({ posts }) {
 
   const dataFiltered = applyFilter({ inputData: posts, sortBy });
 
-  const handleSortBy = useCallback((newValue) => {
+  const handleSortBy = useCallback((newValue: string) => {
     setSortBy(newValue);
   }, []);
 
-  const handleSearch = useCallback((inputValue) => {
+  const handleSearch = useCallback((inputValue: string) => {
     setSearchQuery(inputValue);
   }, []);
 
@@ -68,10 +74,20 @@ export function PostListHomeView({ posts }) {
   );
 }
 
-const applyFilter = ({ inputData, sortBy }) => {
+// `orderBy` is constrained to `Record<string, unknown>`; the `Post` interface
+// has no index signature, so widen with an intersection type for the sort call.
+type SortablePost = Post & Record<string, unknown>;
+
+const applyFilter = ({
+  inputData,
+  sortBy,
+}: {
+  inputData: Post[];
+  sortBy: string;
+}): Post[] => {
   const publishedPosts = inputData.filter(
     (post) => post.publish === "published",
-  );
+  ) as SortablePost[];
 
   if (sortBy === "latest") {
     return orderBy(publishedPosts, ["createdAt"], ["desc"]);
