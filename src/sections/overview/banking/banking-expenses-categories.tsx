@@ -1,8 +1,6 @@
+import type { ReactNode } from "react";
 import type { ApexOptions } from "apexcharts";
-import type { BoxProps } from "@mui/material/Box";
 import type { CardProps } from "@mui/material/Card";
-import type { ReactNode, ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -13,20 +11,6 @@ import { fCurrency } from "src/utils/format-number";
 import { Chart, useChart, ChartLegends } from "src/components/chart";
 
 // ----------------------------------------------------------------------
-
-// The shared `Chart` types `width`/`height` as `number | string`, but the
-// underlying Box accepts MUI responsive objects. Re-type at the call site
-// (no runtime change) so responsive dimensions type-check.
-interface ResponsiveChartProps {
-  type: string;
-  series?: number[];
-  options?: ApexOptions;
-  width?: BoxProps["width"];
-  height?: BoxProps["height"];
-  loadingProps?: { disabled?: boolean; sx?: SxProps<Theme> };
-  sx?: SxProps<Theme>;
-}
-const ResponsiveChart = Chart as unknown as ComponentType<ResponsiveChartProps>;
 
 interface ExpensesSeriesItem {
   label: string;
@@ -92,7 +76,7 @@ export function BankingExpensesCategories({
           justifyContent: "center",
         }}
       >
-        <ResponsiveChart
+        <Chart
           type="polarArea"
           series={chartSeries}
           options={chartOptions}

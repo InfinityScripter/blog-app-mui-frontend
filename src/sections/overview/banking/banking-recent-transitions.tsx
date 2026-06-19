@@ -1,6 +1,4 @@
 import type { CardProps } from "@mui/material/Card";
-import type { ReactNode, ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -47,38 +45,6 @@ interface TransitionHeadLabel {
   minWidth?: number;
 }
 
-// The shared `Scrollbar`, `TableHeadCustom` and `Label` are untyped; re-type
-// them at the call site (no runtime change) so their props type-check.
-interface ScrollbarProps {
-  children?: ReactNode;
-  sx?: SxProps<Theme>;
-}
-const ScrollContainer = Scrollbar as unknown as ComponentType<ScrollbarProps>;
-
-interface TableHeadCustomProps {
-  headLabel: TransitionHeadLabel[];
-  sx?: SxProps<Theme>;
-}
-const TableHead =
-  TableHeadCustom as unknown as ComponentType<TableHeadCustomProps>;
-
-type LabelColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | "error";
-
-interface LabelProps {
-  children?: ReactNode;
-  color?: LabelColor;
-  variant?: "filled" | "outlined" | "soft" | "inverted";
-  sx?: SxProps<Theme>;
-}
-const StatusLabel = Label as unknown as ComponentType<LabelProps>;
-
 interface BankingRecentTransitionsProps extends Omit<CardProps, "title"> {
   title?: string;
   subheader?: string;
@@ -97,9 +63,9 @@ export function BankingRecentTransitions({
     <Card {...other}>
       <CardHeader title={title} subheader={subheader} sx={{ mb: 3 }} />
 
-      <ScrollContainer sx={{ minHeight: 462 }}>
+      <Scrollbar sx={{ minHeight: 462 }}>
         <Table sx={{ minWidth: 720 }}>
-          <TableHead headLabel={headLabel} />
+          <TableHeadCustom headLabel={headLabel} />
 
           <TableBody>
             {tableData.map((row) => (
@@ -107,7 +73,7 @@ export function BankingRecentTransitions({
             ))}
           </TableBody>
         </Table>
-      </ScrollContainer>
+      </Scrollbar>
 
       <Divider sx={{ borderStyle: "dashed" }} />
 
@@ -227,7 +193,7 @@ function RowItem({ row }: RowItemProps) {
         <TableCell>{fCurrency(row.amount)}</TableCell>
 
         <TableCell>
-          <StatusLabel
+          <Label
             variant={lightMode ? "soft" : "filled"}
             color={
               (row.status === "completed" && "success") ||
@@ -237,7 +203,7 @@ function RowItem({ row }: RowItemProps) {
             sx={{ textTransform: "capitalize" }}
           >
             {row.status}
-          </StatusLabel>
+          </Label>
         </TableCell>
 
         <TableCell align="right" sx={{ pr: 1 }}>

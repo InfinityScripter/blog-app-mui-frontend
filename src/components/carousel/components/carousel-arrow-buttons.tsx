@@ -37,13 +37,14 @@ function mergeSx(
 
 // ----------------------------------------------------------------------
 
-interface ArrowButtonSlotProps {
+export interface ArrowButtonSlotProps {
   svgIcon?: ReactNode;
   svgSize?: number;
   sx?: SxProps<Theme>;
 }
 
-interface CarouselArrowButtonsProps extends Omit<StackProps, "slotProps"> {
+export interface CarouselArrowButtonsProps
+  extends Omit<StackProps, "slotProps"> {
   options?: CarouselOptions;
   slotProps?: Pick<CarouselSlotProps, "prevBtn" | "nextBtn">;
   onClickPrev?: () => void;
@@ -53,9 +54,18 @@ interface CarouselArrowButtonsProps extends Omit<StackProps, "slotProps"> {
   sx?: SxProps<Theme>;
 }
 
-interface CarouselArrowNumberButtonsProps extends CarouselArrowButtonsProps {
+export interface CarouselArrowNumberButtonsProps
+  extends CarouselArrowButtonsProps {
   totalSlides?: number;
   selectedIndex?: number;
+}
+
+export interface ArrowButtonProps
+  extends ArrowButtonSlotProps,
+    Omit<ButtonBaseProps, "sx"> {
+  options?: CarouselOptions;
+  variant: "prev" | "next";
+  sx?: SxProps<Theme>;
 }
 
 export function CarouselArrowBasicButtons({
@@ -235,12 +245,7 @@ export function ArrowButton({
   options,
   variant,
   ...other
-}: ArrowButtonSlotProps &
-  Omit<ButtonBaseProps, "sx"> & {
-    options?: CarouselOptions;
-    variant: "prev" | "next";
-    sx?: SxProps<Theme>;
-  }) {
+}: ArrowButtonProps) {
   const arrowPrev = variant === "prev";
   const arrowNext = variant === "next";
 

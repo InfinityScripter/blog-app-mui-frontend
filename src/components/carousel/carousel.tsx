@@ -4,7 +4,7 @@ import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
-import { Children, isValidElement } from "react";
+import { Children, forwardRef, isValidElement } from "react";
 
 import { carouselClasses } from "./classes";
 import { CarouselSlide } from "./components/carousel-slide";
@@ -23,7 +23,7 @@ export interface CarouselOptions {
   axis?: CarouselAxis;
   direction?: "ltr" | "rtl";
   slideSpacing?: string;
-  parallax?: boolean;
+  parallax?: number | boolean;
   slidesToShow?: number | string | Record<string, number | string>;
 }
 
@@ -54,7 +54,7 @@ export interface CarouselSlotProps {
   };
 }
 
-interface CarouselProps {
+export interface CarouselProps extends Omit<BoxProps, "children"> {
   carousel: CarouselState;
   children?: ReactNode;
   sx?: SxProps<Theme>;
@@ -92,59 +92,64 @@ export const StyledContainer = styled(Box, {
 
 // ----------------------------------------------------------------------
 
-export function Carousel({ carousel, children, sx, slotProps }: CarouselProps) {
-  const { mainRef, options } = carousel;
+export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
+  ({ carousel, children, sx, slotProps, ...other }, _ref) => {
+    const { mainRef, options } = carousel;
 
-  const axis = options?.axis ?? "x";
+    const axis = options?.axis ?? "x";
 
-  const slideSpacing = options?.slideSpacing ?? "0px";
+    const slideSpacing = options?.slideSpacing ?? "0px";
 
-  const direction = options?.direction ?? "ltr";
+    const direction = options?.direction ?? "ltr";
 
-  const renderChildren = Children.map(children, (child) => {
-    if (isValidElement(child)) {
-      const reactChild = child;
+    const renderChildren = Children.map(children, (child) => {
+      if (isValidElement(child)) {
+        const reactChild = child;
 
-      return (
-        <CarouselSlide
-          key={reactChild.key}
-          options={carousel.options}
-          sx={slotProps?.slide}
-        >
-          {child}
-        </CarouselSlide>
-      );
-    }
-    return null;
-  });
+        return (
+          <CarouselSlide
+            key={reactChild.key}
+            options={carousel.options}
+            sx={slotProps?.slide}
+          >
+            {child}
+          </CarouselSlide>
+        );
+      }
+      return null;
+    });
 
-  return (
-    <StyledRoot
-      sx={sx}
-      axis={axis}
-      ref={mainRef}
-      dir={direction}
-      className={carouselClasses.root}
-    >
-      <StyledContainer
-        as="ul"
+    return (
+      <StyledRoot
+        sx={sx}
         axis={axis}
-        slideSpacing={slideSpacing}
-        className={carouselClasses.container}
-        sx={{
-          ...(carousel.pluginNames?.includes("autoHeight") && {
-            alignItems: "flex-start",
-            transition: (theme) =>
-              theme.transitions.create(["height"], {
-                easing: theme.transitions.easing.easeInOut,
-                duration: theme.transitions.duration.shorter,
-              }),
-          }),
-          ...slotProps?.container,
-        }}
+        ref={mainRef}
+        dir={direction}
+        className={carouselClasses.root}
+        {...other}
       >
-        {renderChildren}
-      </StyledContainer>
-    </StyledRoot>
-  );
-}
+        <StyledContainer
+          as="ul"
+          axis={axis}
+          slideSpacing={slideSpacing}
+          className={carouselClasses.container}
+          sx={{
+            ...(carousel.pluginNames?.includes("autoHeight") && {
+              alignItems: "flex-start",
+              transition: (theme) =>
+                theme.transitions.create(["height"], {
+                  easing: theme.transitions.easing.easeInOut,
+                  duration: theme.transitions.duration.shorter,
+                }),
+            }),
+            ...slotProps?.container,
+          }}
+        >
+          {renderChildren}
+        </StyledContainer>
+      </StyledRoot>
+    );
+  },
+);
+
+Carousel.displayName = "Carousel";

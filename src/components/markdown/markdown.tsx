@@ -1,5 +1,7 @@
 import "./code-highlight-block.css";
 
+import type { ComponentProps } from "react";
+
 import { useMemo } from "react";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -16,12 +18,17 @@ import { htmlToMarkdown, isMarkdownContent } from "./html-to-markdown";
 
 // ----------------------------------------------------------------------
 
-export function Markdown({ children, sx, ...other }) {
+export interface MarkdownProps extends ComponentProps<typeof StyledRoot> {
+  children?: string;
+}
+
+export function Markdown({ children, sx, ...other }: MarkdownProps) {
   const content = useMemo(() => {
-    if (isMarkdownContent(`${children}`)) {
-      return children;
+    const source = `${children ?? ""}`;
+    if (isMarkdownContent(source)) {
+      return source;
     }
-    return htmlToMarkdown(`${children}`.trim());
+    return htmlToMarkdown(source.trim());
   }, [children]);
 
   return (
@@ -40,23 +47,27 @@ export function Markdown({ children, sx, ...other }) {
   );
 }
 
-const rehypePlugins = [
+type ReactMarkdownOptions = ComponentProps<typeof ReactMarkdown>;
+
+const rehypePlugins: ReactMarkdownOptions["rehypePlugins"] = [
   rehypeRaw,
   rehypeHighlight,
   [remarkGfm, { singleTilde: false }],
 ];
 
-const components = {
-  img: ({ node, ...other }) => (
+const components: ReactMarkdownOptions["components"] = {
+  img: ({ node, src, alt, title }) => (
     <Image
       ratio="16/9"
+      src={typeof src === "string" ? src : undefined}
+      alt={alt}
+      title={title}
       className={markdownClasses.content.image}
       sx={{ borderRadius: 2 }}
-      {...other}
     />
   ),
   a: ({ href, children, node, ...other }) => {
-    const linkProps = isExternalLink(href)
+    const linkProps = isExternalLink(href ?? "")
       ? { target: "_blank", rel: "noopener" }
       : { component: RouterLink };
 

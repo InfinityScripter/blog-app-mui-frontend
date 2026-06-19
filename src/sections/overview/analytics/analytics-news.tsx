@@ -1,7 +1,5 @@
 import type { BoxProps } from "@mui/material/Box";
 import type { CardProps } from "@mui/material/Card";
-import type { ReactNode, ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -10,18 +8,10 @@ import Avatar from "@mui/material/Avatar";
 import { fToNow } from "src/utils/format-time";
 import { Iconify } from "src/components/iconify";
 import CardHeader from "@mui/material/CardHeader";
+import { Scrollbar } from "src/components/scrollbar";
 import ListItemText from "@mui/material/ListItemText";
-import { Scrollbar as RawScrollbar } from "src/components/scrollbar";
 
 // ----------------------------------------------------------------------
-
-// `Scrollbar` is a shared `forwardRef` component without exported prop types;
-// re-type it precisely at the call site (no runtime change) so it accepts
-// `children`/`sx` without resorting to `any`.
-const Scrollbar = RawScrollbar as unknown as ComponentType<{
-  children?: ReactNode;
-  sx?: SxProps<Theme>;
-}>;
 
 interface NewsItem {
   id: string;

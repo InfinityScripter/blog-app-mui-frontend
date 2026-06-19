@@ -1,3 +1,8 @@
+import type { Ref } from "react";
+import type { Country } from "react-phone-number-input";
+import type { TextFieldProps } from "@mui/material/TextField";
+import type { Props as PhoneNumberInputProps } from "react-phone-number-input/input";
+
 import { useState, forwardRef } from "react";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -8,7 +13,18 @@ import { CountryListPopover } from "./list";
 
 // ----------------------------------------------------------------------
 
-export const PhoneInput = forwardRef(
+export interface PhoneInputProps
+  extends Omit<
+    PhoneNumberInputProps<TextFieldProps>,
+    "value" | "onChange" | "country"
+  > {
+  value?: string;
+  onChange?: (newValue?: string) => void;
+  country?: Country;
+  disableSelect?: boolean;
+}
+
+export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
   (
     {
       value,
@@ -22,7 +38,8 @@ export const PhoneInput = forwardRef(
   ) => {
     const defaultCountryCode = getCountryCode(value, inputCountryCode);
 
-    const [selectedCountry, setSelectedCountry] = useState(defaultCountryCode);
+    const [selectedCountry, setSelectedCountry] =
+      useState<Country>(defaultCountryCode);
 
     return (
       <PhoneNumberInput
@@ -30,7 +47,7 @@ export const PhoneInput = forwardRef(
         country={selectedCountry}
         inputComponent={CustomInput}
         value={value}
-        onChange={onChange}
+        onChange={(newValue) => onChange?.(newValue)}
         placeholder={placeholder ?? "Enter phone number"}
         InputProps={
           disableSelect
@@ -56,6 +73,8 @@ export const PhoneInput = forwardRef(
 
 // ----------------------------------------------------------------------
 
-const CustomInput = forwardRef(({ ...props }, ref) => (
-  <TextField inputRef={ref} {...props} />
-));
+const CustomInput = forwardRef<HTMLInputElement, TextFieldProps>(
+  ({ ...props }, ref: Ref<HTMLInputElement>) => (
+    <TextField inputRef={ref} {...props} />
+  ),
+);

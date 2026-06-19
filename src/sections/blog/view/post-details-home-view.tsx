@@ -1,7 +1,6 @@
 "use client";
 
 import type { Post } from "src/types/domain";
-import type { ReactNode, ComponentType } from "react";
 
 import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
@@ -12,8 +11,8 @@ import Divider from "@mui/material/Divider";
 import { useGetPost } from "src/actions/blog";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { Markdown } from "src/components/markdown";
 import AvatarGroup from "@mui/material/AvatarGroup";
-import { Markdown as RawMarkdown } from "src/components/markdown";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { PostItem } from "../post-item";
@@ -22,13 +21,6 @@ import { PostCommentForm } from "../post-comment-form";
 import { PostDetailsHero } from "../post-details-hero";
 
 // ----------------------------------------------------------------------
-
-// `Markdown` is a shared component whose props are untyped (inferred as `any`)
-// in its source module; re-type it precisely at the call site (no runtime
-// change). `Grid` now uses the typed MUI v7 API directly (`size` prop).
-const Markdown = RawMarkdown as unknown as ComponentType<{
-  children?: ReactNode;
-}>;
 
 interface PostDetailsHomeViewProps {
   post?: Post;

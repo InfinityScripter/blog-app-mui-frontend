@@ -1,6 +1,5 @@
 "use client";
 
-import type { ReactNode, ComponentType } from "react";
 import type { Post, PublishStatus } from "src/types/domain";
 
 import Chip from "@mui/material/Chip";
@@ -12,10 +11,10 @@ import { useGetPost } from "src/actions/blog";
 import Container from "@mui/material/Container";
 import { POST_PUBLISH_OPTIONS } from "src/_mock";
 import Typography from "@mui/material/Typography";
+import { Markdown } from "src/components/markdown";
 import { useState, useEffect, useCallback } from "react";
 import { DashboardContent } from "src/layouts/dashboard";
 import { updatePostPublish } from "src/actions/blog-ssr";
-import { Markdown as RawMarkdown } from "src/components/markdown";
 import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
 import { PostDetailsHero } from "../post-details-hero";
@@ -25,12 +24,6 @@ import { PostDetailsToolbar } from "../post-details-toolbar";
 import { formatImageUrl } from "../../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
-
-// `Markdown` is a shared component without exported prop types; re-type it
-// precisely at the call site (no runtime change).
-const Markdown = RawMarkdown as unknown as ComponentType<{
-  children?: ReactNode;
-}>;
 
 function isPublishStatus(value: string): value is PublishStatus {
   return value === "draft" || value === "published";

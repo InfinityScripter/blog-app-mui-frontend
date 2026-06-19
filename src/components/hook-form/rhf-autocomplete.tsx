@@ -20,6 +20,11 @@ interface AutocompleteViewProps {
   [key: string]: unknown;
 }
 
+// Sanctioned third-party cast (see .cursor/rules/code-style.mdc): MUI
+// `Autocomplete` is generic over Value/Multiple/DisableClearable/FreeSolo, which
+// this RHF wrapper forwards generically via `field` + `...other`. Those generics
+// can't be satisfied without an assertion, so we view it through the prop subset
+// actually used here. This is the only `as` allowed to remain in this sweep.
 const TypedAutocomplete = Autocomplete as ComponentType<AutocompleteViewProps>;
 
 export function RHFAutocomplete({

@@ -11,12 +11,16 @@ import { useCarouselProgress } from "./use-carousel-progress";
 import { useCarouselAutoPlay } from "./use-carousel-auto-play";
 import { useCarouselAutoScroll } from "./use-carousel-auto-scroll";
 
+import type { CarouselOptions } from "../carousel";
+
 // ----------------------------------------------------------------------
 
 export const useCarousel = (
   options?: EmblaOptionsType & {
     thumbs?: EmblaOptionsType;
     parallax?: number | boolean;
+    slidesToShow?: CarouselOptions["slidesToShow"];
+    slideSpacing?: CarouselOptions["slideSpacing"];
   },
   plugins?: EmblaPluginType[],
 ) => {
@@ -58,11 +62,18 @@ export const useCarousel = (
     };
   }, [_autoScroll, _autoplay, onClickNext, onClickPrev, pluginNames]);
 
+  const engineOptions = mainApi?.internalEngine().options;
+
+  const carouselOptions: CarouselOptions = {
+    axis: engineOptions?.axis ?? options?.axis,
+    direction: engineOptions?.direction ?? options?.direction,
+    slideSpacing: options?.slideSpacing,
+    slidesToShow: options?.slidesToShow,
+    parallax: options?.parallax,
+  };
+
   return {
-    options: {
-      ...options,
-      ...mainApi?.internalEngine().options,
-    },
+    options: carouselOptions,
     pluginNames,
     mainRef,
     mainApi,

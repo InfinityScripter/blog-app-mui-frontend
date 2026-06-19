@@ -1,8 +1,6 @@
 "use client";
 
 import type { Post } from "src/types/domain";
-import type { ReactNode, ComponentType } from "react";
-import type { ColorType } from "src/theme/core/components/types";
 
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -10,13 +8,13 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { orderBy } from "src/utils/helper";
+import { Label } from "src/components/label";
 import { useState, useCallback } from "react";
 import { POST_SORT_OPTIONS } from "src/_mock";
 import { Iconify } from "src/components/iconify";
 import { RouterLink } from "src/routes/components";
 import { useDebounce } from "src/hooks/use-debounce";
 import { useSetState } from "src/hooks/use-set-state";
-import { Label as RawLabel } from "src/components/label";
 import { DashboardContent } from "src/layouts/dashboard";
 import { useGetPosts, useSearchPosts } from "src/actions/blog";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
@@ -26,18 +24,6 @@ import { PostSearch } from "../post-search";
 import { PostListHorizontal } from "../post-list-horizontal";
 
 // ----------------------------------------------------------------------
-
-// `Label` is a shared `forwardRef` component whose props are untyped in its
-// source module; re-type it precisely at the call site (no runtime change),
-// constraining the variant/color params to their closed sets.
-type LabelVariant = "filled" | "outlined" | "soft" | "inverted";
-type LabelColor = "default" | ColorType;
-
-const Label = RawLabel as unknown as ComponentType<{
-  children?: ReactNode;
-  variant?: LabelVariant;
-  color?: LabelColor;
-}>;
 
 export function PostListView() {
   const [sortBy, setSortBy] = useState("latest");

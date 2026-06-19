@@ -21,8 +21,26 @@ declare module "@mui/material/styles" {
   // is always present at runtime. The base MUI `Theme` types it as optional,
   // which produced ~280 "theme.vars is possibly undefined" errors across the
   // template. Make it required to match reality.
+  //
+  // `extendTheme` also attaches `customShadows`, so expose it on the base
+  // `Theme` (not just `DefaultTheme`) — `styled()` callbacks receive `Theme`
+  // and read `theme.customShadows.*` without a `ThemeWithVars` cast.
   interface Theme {
     vars: NonNullable<MuiTheme["vars"]>;
+    customShadows: CustomShadows;
+  }
+
+  // Custom typography tokens the app attaches in `core/typography.ts`; the base
+  // MUI typography types don't know about them. Declaring them here lets
+  // `theme.typography.fontWeightSemiBold` / `fontSecondaryFamily` resolve in
+  // `styled()` callbacks without a cast.
+  interface TypographyVariants {
+    fontWeightSemiBold: number | string;
+    fontSecondaryFamily: string;
+  }
+  interface TypographyVariantsOptions {
+    fontWeightSemiBold?: number | string;
+    fontSecondaryFamily?: string;
   }
 }
 

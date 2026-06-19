@@ -1,9 +1,16 @@
+import type { SvgIconProps } from "@mui/material/SvgIcon";
+
 import { forwardRef } from "react";
 import SvgIcon from "@mui/material/SvgIcon";
 
 // ----------------------------------------------------------------------
 
-export const SocialIcon = forwardRef(
+export interface SocialIconProps extends Omit<SvgIconProps, "width"> {
+  icon?: string;
+  width?: number | string;
+}
+
+export const SocialIcon = forwardRef<SVGSVGElement, SocialIconProps>(
   ({ icon, width = 20, sx, ...other }, ref) => {
     const socialName = icon?.trim().toLowerCase();
 

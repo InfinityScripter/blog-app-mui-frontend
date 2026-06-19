@@ -1,5 +1,5 @@
 import type { Post } from "src/types/domain";
-import type { ReactNode, ComponentType, HTMLAttributes } from "react";
+import type { ReactNode, HTMLAttributes } from "react";
 import type { AutocompleteRenderGetTagProps } from "@mui/material/Autocomplete";
 
 import { z as zod } from "zod";
@@ -29,18 +29,6 @@ import { PostDetailsPreview } from "./post-details-preview";
 import { createPost, updatePost } from "../../actions/blog-ssr";
 
 // ----------------------------------------------------------------------
-
-// `Field.Upload` (`RHFUpload`) is a shared wrapper whose source params are not
-// annotated, so its inferred props are `any` and reject the `maxSize`/`onDelete`
-// props this form passes. Re-type just this one precisely at the call site (no
-// runtime change). `Field.Editor`/`Field.Autocomplete` are typed at source and
-// used directly below.
-interface UploadFieldProps {
-  name: string;
-  maxSize?: number;
-  onDelete?: () => void;
-}
-const UploadField = Field.Upload as unknown as ComponentType<UploadFieldProps>;
 
 export const NewPostSchema = zod.object({
   title: zod.string().min(1, { message: "Заголовок обязателен!" }),
@@ -193,7 +181,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
 
         <Stack spacing={1.5}>
           <Typography variant="subtitle2">Обложка</Typography>
-          <UploadField
+          <Field.Upload
             name="coverUrl"
             maxSize={3145728}
             onDelete={handleRemoveFile}

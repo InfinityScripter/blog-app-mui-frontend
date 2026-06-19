@@ -1,3 +1,7 @@
+import type { BoxProps } from "@mui/material/Box";
+import type { ReactElement, HTMLAttributes } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import { CONFIG } from "src/config-global";
@@ -8,7 +12,30 @@ import { imageClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
-const ImageWrapper = styled(Box)({
+export interface ImageProps extends Omit<BoxProps, "component" | "ref"> {
+  ratio?: string;
+  disabledEffect?: boolean;
+  alt?: string;
+  src?: string;
+  delayTime?: number;
+  threshold?: number;
+  beforeLoad?: () => void;
+  delayMethod?: "debounce" | "throttle";
+  placeholder?: ReactElement;
+  wrapperProps?: HTMLAttributes<HTMLSpanElement>;
+  scrollPosition?: { x: number; y: number };
+  effect?: "blur" | "black-and-white" | "opacity" | string;
+  visibleByDefault?: boolean;
+  wrapperClassName?: string;
+  useIntersectionObserver?: boolean;
+  slotProps?: {
+    overlay?: SxProps<Theme>;
+  };
+}
+
+// ----------------------------------------------------------------------
+
+const ImageWrapper = styled(Box)<BoxProps>({
   overflow: "hidden",
   position: "relative",
   verticalAlign: "bottom",
@@ -32,7 +59,7 @@ const Overlay = styled("span")({
 
 // ----------------------------------------------------------------------
 
-export const Image = forwardRef(
+export const Image = forwardRef<HTMLSpanElement, ImageProps>(
   (
     {
       ratio,

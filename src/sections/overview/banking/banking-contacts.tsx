@@ -1,6 +1,5 @@
 import type { BoxProps } from "@mui/material/Box";
 import type { CardProps } from "@mui/material/Card";
-import type { ReactNode, ComponentType } from "react";
 import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
@@ -15,16 +14,6 @@ import { Scrollbar } from "src/components/scrollbar";
 import ListItemText from "@mui/material/ListItemText";
 
 // ----------------------------------------------------------------------
-
-// The shared `Scrollbar` is an untyped `forwardRef` (its props are not declared
-// in src/components/scrollbar/scrollbar.tsx), so the call site cannot pass
-// `children`/`sx` without re-typing it. Fixing this at the source is out of this
-// cluster's scope; re-type here (no runtime change).
-interface ScrollbarProps {
-  children?: ReactNode;
-  sx?: SxProps<Theme>;
-}
-const ScrollContainer = Scrollbar as unknown as ComponentType<ScrollbarProps>;
 
 interface BankingContact {
   id: string;
@@ -67,7 +56,7 @@ export function BankingContacts({
         }
       />
 
-      <ScrollContainer sx={{ minHeight: 364 }}>
+      <Scrollbar sx={{ minHeight: 364 }}>
         <Box
           sx={{
             p: 3,
@@ -81,7 +70,7 @@ export function BankingContacts({
             <Item key={item.id} item={item} />
           ))}
         </Box>
-      </ScrollContainer>
+      </Scrollbar>
     </Card>
   );
 }

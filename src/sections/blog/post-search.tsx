@@ -1,4 +1,3 @@
-import type { ComponentType } from "react";
 import type { Post } from "src/types/domain";
 
 import Link from "@mui/material/Link";
@@ -10,19 +9,12 @@ import TextField from "@mui/material/TextField";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import InputAdornment from "@mui/material/InputAdornment";
+import { SearchNotFound } from "src/components/search-not-found";
 import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
-import { SearchNotFound as RawSearchNotFound } from "src/components/search-not-found";
 
 import { formatImageUrl } from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
-
-// `SearchNotFound` is a shared component without exported prop types; its
-// inferred props require both `query` and `sx`. Re-type it precisely at the
-// call site (no runtime change) instead of casting props to `any`.
-const SearchNotFound = RawSearchNotFound as unknown as ComponentType<{
-  query?: string;
-}>;
 
 interface PostSearchProps {
   query: string;

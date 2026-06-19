@@ -1,6 +1,4 @@
 import type { Post } from "src/types/domain";
-import type { ReactNode, ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
@@ -10,6 +8,8 @@ import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { maxLine } from "src/theme/styles";
 import { useRouter } from "src/routes/hooks";
+import { Label } from "src/components/label";
+import { Image } from "src/components/image";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { fDate } from "src/utils/format-time";
@@ -18,8 +18,6 @@ import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
-import { Label as RawLabel } from "src/components/label";
-import { Image as RawImage } from "src/components/image";
 import { fShortenNumber } from "src/utils/format-number";
 import { usePostDelete } from "src/hooks/use-post-delete";
 import { ConfirmDialog } from "src/components/confirm-dialog";
@@ -28,20 +26,6 @@ import { usePopover, CustomPopover } from "src/components/custom-popover";
 import { formatImageUrl } from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
-
-// `Image` and `Label` are shared `forwardRef` components without exported prop
-// types; re-type them precisely at the call site (no runtime change) so they
-// accept their props without resorting to `any`.
-const Image = RawImage as unknown as ComponentType<{
-  alt?: string;
-  src?: string;
-  sx?: SxProps<Theme>;
-}>;
-const Label = RawLabel as unknown as ComponentType<{
-  children?: ReactNode;
-  variant?: string;
-  color?: string;
-}>;
 
 export function PostItemHorizontal({ post }: { post: Post }) {
   const theme = useTheme();

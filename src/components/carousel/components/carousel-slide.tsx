@@ -21,7 +21,7 @@ interface SlidesToShowByBreakpoint {
 interface CarouselSlideOptions {
   axis?: CarouselAxis;
   slideSpacing?: string;
-  parallax?: boolean;
+  parallax?: number | boolean;
   slidesToShow?: number | string | SlidesToShowByBreakpoint;
 }
 

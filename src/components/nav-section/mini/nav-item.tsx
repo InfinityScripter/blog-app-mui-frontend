@@ -1,5 +1,3 @@
-import type { ThemeWithVars } from "src/theme/core/components/types";
-
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
@@ -115,9 +113,7 @@ const StyledNavItem = styled(ButtonBase, {
     prop !== "open" &&
     prop !== "disabled" &&
     prop !== "depth",
-})<NavItemStateProps>(({ active, open, disabled, depth, theme: muiTheme }) => {
-  const theme = muiTheme as ThemeWithVars;
-
+})<NavItemStateProps>(({ active, open, disabled, depth, theme }) => {
   const rootItem = depth === 1;
 
   const subItem = !rootItem;

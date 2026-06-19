@@ -3,9 +3,15 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import { Upload, UploadBox, UploadAvatar } from "../upload";
 
+import type {
+  RHFUploadProps,
+  RHFUploadBoxProps,
+  RHFUploadAvatarProps,
+} from "./types";
+
 // ----------------------------------------------------------------------
 
-export function RHFUploadAvatar({ name, ...other }) {
+export function RHFUploadAvatar({ name, ...other }: RHFUploadAvatarProps) {
   const { control, setValue } = useFormContext();
 
   return (
@@ -13,7 +19,7 @@ export function RHFUploadAvatar({ name, ...other }) {
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => {
-        const onDrop = (acceptedFiles) => {
+        const onDrop = (acceptedFiles: File[]) => {
           const value = acceptedFiles[0];
 
           setValue(name, value, { shouldValidate: true });
@@ -42,15 +48,15 @@ export function RHFUploadAvatar({ name, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RHFUploadBox({ name, ...other }) {
+export function RHFUploadBox({ name, ...other }: RHFUploadBoxProps) {
   const { control } = useFormContext();
 
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error } }) => (
-        <UploadBox value={field.value} error={!!error} {...other} />
+      render={({ fieldState: { error } }) => (
+        <UploadBox error={!!error} {...other} />
       )}
     />
   );
@@ -58,7 +64,12 @@ export function RHFUploadBox({ name, ...other }) {
 
 // ----------------------------------------------------------------------
 
-export function RHFUpload({ name, multiple, helperText, ...other }) {
+export function RHFUpload({
+  name,
+  multiple,
+  helperText,
+  ...other
+}: RHFUploadProps) {
   const { control, setValue } = useFormContext();
 
   return (
@@ -73,7 +84,7 @@ export function RHFUpload({ name, multiple, helperText, ...other }) {
           helperText: error?.message ?? helperText,
         };
 
-        const onDrop = (acceptedFiles) => {
+        const onDrop = (acceptedFiles: File[]) => {
           const value = multiple
             ? [...field.value, ...acceptedFiles]
             : acceptedFiles[0];

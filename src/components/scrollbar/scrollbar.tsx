@@ -1,3 +1,7 @@
+import type { ReactNode } from "react";
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { Props as SimpleBarProps } from "simplebar-react";
+
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import SimpleBar from "simplebar-react";
@@ -6,7 +10,21 @@ import { scrollbarClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
-export const Scrollbar = forwardRef(
+export interface ScrollbarSlotProps {
+  wrapper?: SxProps<Theme>;
+  contentWrapper?: SxProps<Theme>;
+  content?: SxProps<Theme>;
+}
+
+export interface ScrollbarProps extends Omit<SimpleBarProps, "children"> {
+  children?: ReactNode;
+  sx?: SxProps<Theme>;
+  fillContent?: boolean;
+  naturalScroll?: boolean;
+  slotProps?: ScrollbarSlotProps;
+}
+
+export const Scrollbar = forwardRef<HTMLDivElement, ScrollbarProps>(
   ({ slotProps, children, fillContent, naturalScroll, sx, ...other }, ref) => (
     <Box
       component={SimpleBar}

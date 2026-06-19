@@ -1,6 +1,6 @@
+import type { ChangeEvent } from "react";
 import type { BoxProps } from "@mui/material/Box";
 import type { Theme, SxProps } from "@mui/material/styles";
-import type { ReactNode, ChangeEvent, ComponentType } from "react";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -37,42 +37,6 @@ const MAX_AMOUNT = 1000;
 
 // ----------------------------------------------------------------------
 
-type CarouselApi = ReturnType<typeof useCarousel>;
-
-// The shared `useCarousel` types its options narrower than the Minimals
-// carousel actually accepts (`slidesToShow`/`slideSpacing`), and its return
-// widens fields beyond the `Carousel`/`CarouselArrowFloatButtons` prop types.
-// Re-type these at the call site (no runtime change) so they type-check.
-type CarouselOptionsInput = Parameters<typeof useCarousel>[0] & {
-  slidesToShow?: number | string;
-  slideSpacing?: string;
-};
-const useCarouselTyped = useCarousel as (
-  options?: CarouselOptionsInput,
-) => CarouselApi;
-
-interface ContactCarouselProps {
-  carousel: CarouselApi;
-  children?: ReactNode;
-  sx?: SxProps<Theme>;
-}
-const ContactCarousel =
-  Carousel as unknown as ComponentType<ContactCarouselProps>;
-
-interface ArrowFloatButtonsProps {
-  onClickPrev?: () => void;
-  onClickNext?: () => void;
-  disablePrev?: boolean;
-  disableNext?: boolean;
-  options?: CarouselApi["options"];
-  slotProps?: {
-    prevBtn?: { svgSize?: number; sx?: SxProps<Theme> };
-    nextBtn?: { svgSize?: number; sx?: SxProps<Theme> };
-  };
-}
-const ArrowFloatButtons =
-  CarouselArrowFloatButtons as unknown as ComponentType<ArrowFloatButtonsProps>;
-
 interface QuickTransferContact {
   id: string;
   name: string;
@@ -96,7 +60,7 @@ export function BankingQuickTransfer({
 }: BankingQuickTransferProps) {
   const theme = useTheme();
 
-  const carousel = useCarouselTyped({
+  const carousel = useCarousel({
     loop: true,
     dragFree: true,
     slidesToShow: "auto",
@@ -150,7 +114,7 @@ export function BankingQuickTransfer({
 
   const renderCarousel = (
     <Box sx={{ position: "relative" }}>
-      <ArrowFloatButtons
+      <CarouselArrowFloatButtons
         {...carousel.arrows}
         options={carousel.options}
         slotProps={{
@@ -175,7 +139,7 @@ export function BankingQuickTransfer({
         }}
       />
 
-      <ContactCarousel carousel={carousel} sx={{ py: 5 }}>
+      <Carousel carousel={carousel} sx={{ py: 5 }}>
         {list.map((contact, index) => (
           <Tooltip key={contact.id} title={contact.name} arrow placement="top">
             <Avatar
@@ -202,7 +166,7 @@ export function BankingQuickTransfer({
             />
           </Tooltip>
         ))}
-      </ContactCarousel>
+      </Carousel>
     </Box>
   );
 

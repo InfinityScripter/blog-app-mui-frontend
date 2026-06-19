@@ -1,5 +1,9 @@
 "use client";
 
+import type { ReactNode } from "react";
+import type { BoxProps } from "@mui/material/Box";
+import type { ColorType } from "src/theme/core/components/types";
+
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
@@ -9,7 +13,18 @@ import { labelClasses } from "./classes";
 
 // ----------------------------------------------------------------------
 
-export const Label = forwardRef(
+export type LabelColor = "default" | ColorType;
+
+export type LabelVariant = "filled" | "outlined" | "soft" | "inverted";
+
+export interface LabelProps extends Omit<BoxProps, "color"> {
+  color?: LabelColor;
+  variant?: LabelVariant;
+  startIcon?: ReactNode;
+  endIcon?: ReactNode;
+}
+
+export const Label = forwardRef<HTMLSpanElement, LabelProps>(
   (
     {
       children,
@@ -76,6 +91,6 @@ export const Label = forwardRef(
 
 // ----------------------------------------------------------------------
 
-function sentenceCase(string) {
+function sentenceCase(string: string): string {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }

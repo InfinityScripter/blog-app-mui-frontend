@@ -3,6 +3,7 @@ import type { BoxProps } from "@mui/material/Box";
 import type { Theme, SxProps } from "@mui/material/styles";
 import type { Props as ReactApexChartProps } from "react-apexcharts";
 
+import { forwardRef } from "react";
 import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 
@@ -38,28 +39,32 @@ const ApexChart = withLoadingProps<ApexChartProps>((props) =>
 
 // ----------------------------------------------------------------------
 
-interface ChartProps extends BoxProps {
+export interface ChartProps extends Omit<BoxProps, "children"> {
   sx?: SxProps<Theme>;
   type: NonNullable<ReactApexChartProps["type"]>;
   series?: ReactApexChartProps["series"];
-  height?: number | string;
-  width?: number | string;
+  height?: BoxProps["height"];
+  width?: BoxProps["width"];
   options?: ApexOptions;
   loadingProps?: ChartLoadingConfig;
 }
 
-export function Chart({
-  sx,
-  type,
-  series,
-  height,
-  options,
-  loadingProps,
-  width = "100%",
-  ...other
-}: ChartProps) {
-  return (
+export const Chart = forwardRef<HTMLDivElement, ChartProps>(
+  (
+    {
+      sx,
+      type,
+      series,
+      height,
+      options,
+      loadingProps,
+      width = "100%",
+      ...other
+    },
+    ref,
+  ) => (
     <Box
+      ref={ref}
       dir="ltr"
       sx={{
         width,
@@ -80,5 +85,7 @@ export function Chart({
         loading={loadingProps}
       />
     </Box>
-  );
-}
+  ),
+);
+
+Chart.displayName = "Chart";

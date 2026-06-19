@@ -1,29 +1,14 @@
-import type { ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import { useState, useEffect } from "react";
 import { varAlpha } from "src/theme/styles";
 import { useDropzone } from "react-dropzone";
 import Typography from "@mui/material/Typography";
 
+import { Image } from "../image";
 import { Iconify } from "../iconify";
-import { Image as ImageBase } from "../image";
 import { RejectionFiles } from "./components/rejection-files";
 
 import type { UploadAvatarProps } from "./types";
-
-// ----------------------------------------------------------------------
-
-// `Image` is an untyped sibling component; view it through a precise prop type
-// so it type-checks without `any`.
-interface ImageViewProps {
-  alt?: string;
-  src?: string;
-  sx?: SxProps<Theme>;
-}
-
-const Image = ImageBase as ComponentType<ImageViewProps>;
 
 // ----------------------------------------------------------------------
 

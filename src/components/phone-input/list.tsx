@@ -1,3 +1,6 @@
+import type { ChangeEvent } from "react";
+import type { Country } from "react-phone-number-input";
+
 import Box from "@mui/material/Box";
 import Popover from "@mui/material/Popover";
 import Divider from "@mui/material/Divider";
@@ -10,6 +13,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { countries } from "src/assets/data/countries";
 import InputAdornment from "@mui/material/InputAdornment";
 import { Iconify, FlagIcon } from "src/components/iconify";
+import { isSupportedCountry } from "react-phone-number-input";
 import { SearchNotFound } from "src/components/search-not-found";
 
 import { usePopover } from "../custom-popover";
@@ -17,16 +21,27 @@ import { getCountry, applyFilter } from "./utils";
 
 // ----------------------------------------------------------------------
 
-export function CountryListPopover({ countryCode, onClickCountry }) {
+export interface CountryListPopoverProps {
+  countryCode?: Country;
+  onClickCountry: (countryCode: Country) => void;
+}
+
+export function CountryListPopover({
+  countryCode,
+  onClickCountry,
+}: CountryListPopoverProps) {
   const popover = usePopover();
 
   const selectedCountry = getCountry(countryCode);
 
   const [searchCountry, setSearchCountry] = useState("");
 
-  const handleSearchCountry = useCallback((event) => {
-    setSearchCountry(event.target.value);
-  }, []);
+  const handleSearchCountry = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setSearchCountry(event.target.value);
+    },
+    [],
+  );
 
   const dataFiltered = applyFilter({
     inputData: countries,
@@ -54,19 +69,21 @@ export function CountryListPopover({ countryCode, onClickCountry }) {
   const renderList = (
     <MenuList>
       {dataFiltered.map((country) => {
-        if (!country.code) {
+        if (!country.code || !isSupportedCountry(country.code)) {
           return null;
         }
 
+        const { code } = country;
+
         return (
           <MenuItem
-            key={country.code}
-            selected={countryCode === country.code}
-            autoFocus={countryCode === country.code}
+            key={code}
+            selected={countryCode === code}
+            autoFocus={countryCode === code}
             onClick={() => {
               popover.onClose();
               setSearchCountry("");
-              onClickCountry(country.code);
+              onClickCountry(code);
             }}
           >
             <FlagIcon

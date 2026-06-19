@@ -1,5 +1,4 @@
 import type { BoxProps } from "@mui/material/Box";
-import type { ReactNode, ComponentType } from "react";
 import type { Theme, SxProps } from "@mui/material/styles";
 
 import { useCallback } from "react";
@@ -19,19 +18,6 @@ import {
 } from "src/components/carousel";
 
 // ----------------------------------------------------------------------
-
-// The shared `useCarousel` return widens some option fields beyond the
-// `Carousel` `carousel` prop type; re-type the `Carousel` at the call site
-// (no runtime change) to accept the hook's return as-is.
-type CarouselApi = ReturnType<typeof useCarousel>;
-
-interface CarouselComponentProps {
-  carousel: CarouselApi;
-  children?: ReactNode;
-  sx?: SxProps<Theme>;
-}
-const CardCarousel =
-  Carousel as unknown as ComponentType<CarouselComponentProps>;
 
 interface BankingCard {
   id: string;
@@ -96,7 +82,7 @@ export function BankingCurrentBalance({
         }}
       />
 
-      <CardCarousel carousel={carousel} sx={{ color: "common.white" }}>
+      <Carousel carousel={carousel} sx={{ color: "common.white" }}>
         {list.map((item) => (
           <Item
             item={item}
@@ -105,7 +91,7 @@ export function BankingCurrentBalance({
             onToggleCurrency={currency.onToggle}
           />
         ))}
-      </CardCarousel>
+      </Carousel>
     </Box>
   );
 }

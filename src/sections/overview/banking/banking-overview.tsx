@@ -1,5 +1,4 @@
 import type { CardProps } from "@mui/material/Card";
-import type { ReactNode, ComponentType } from "react";
 import type { Theme, SxProps } from "@mui/material/styles";
 import type { ThemeWithVars } from "src/theme/core/components/types";
 
@@ -17,27 +16,6 @@ import { CustomTabs } from "src/components/custom-tabs";
 import { fPercent, fCurrency } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
-
-// The shared `Label` is an untyped `forwardRef`; re-type it at the call site
-// (no runtime change) so children/color/startIcon/sx type-check.
-type LabelColor =
-  | "default"
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | "error";
-
-interface LabelProps {
-  children?: ReactNode;
-  color?: LabelColor;
-  variant?: "filled" | "outlined" | "soft" | "inverted";
-  startIcon?: ReactNode;
-  endIcon?: ReactNode;
-  sx?: SxProps<Theme>;
-}
-const StatusLabel = Label as unknown as ComponentType<LabelProps>;
 
 interface BankingOverviewProps extends CardProps {
   sx?: SxProps<Theme>;
@@ -224,7 +202,7 @@ export function BankingOverview({ sx, ...other }: BankingOverviewProps) {
                 <Box sx={{ typography: "h4" }}>{fCurrency(tab.total)}</Box>
               </div>
 
-              <StatusLabel
+              <Label
                 color={tab.percent < 0 ? "error" : "success"}
                 startIcon={
                   <Iconify
@@ -240,7 +218,7 @@ export function BankingOverview({ sx, ...other }: BankingOverviewProps) {
               >
                 {tab.percent > 0 && "+"}
                 {fPercent(tab.percent)}
-              </StatusLabel>
+              </Label>
             </Box>
           }
         />

@@ -1,6 +1,4 @@
-import type { ComponentType } from "react";
 import type { AuthorInfo } from "src/types/domain";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import { _socials } from "src/_mock";
@@ -15,19 +13,9 @@ import { varAlpha, bgGradient } from "src/theme/styles";
 import { useResponsive } from "src/hooks/use-responsive";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { formatImageUrl } from "src/utils/format-image-url";
-import { Iconify, SocialIcon as RawSocialIcon } from "src/components/iconify";
+import { Iconify, SocialIcon } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
-
-// `SocialIcon` is a shared `forwardRef` component without exported prop types,
-// so its inferred props reject `icon`/`sx`. Re-type it precisely at the call
-// site (no runtime change) instead of casting individual props to `any`.
-interface SocialIconProps {
-  icon?: string;
-  width?: number | string;
-  sx?: SxProps<Theme>;
-}
-const SocialIcon = RawSocialIcon as unknown as ComponentType<SocialIconProps>;
 
 interface PostDetailsHeroProps {
   title?: string;
