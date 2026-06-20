@@ -1,9 +1,12 @@
 "use client";
 
 import { z as zod } from "zod";
+import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
+import { varAlpha } from "src/theme/styles";
 import { toast } from "src/components/snackbar";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -51,6 +54,30 @@ const defaultValues: ChangePasswordSchemaType = {
 
 // ----------------------------------------------------------------------
 
+function Requirement({ ok, children }: { ok: boolean; children: string }) {
+  return (
+    <Stack
+      direction="row"
+      spacing={1}
+      alignItems="center"
+      sx={{
+        typography: "body2",
+        color: ok ? "success.main" : "text.secondary",
+        transition: (theme) => theme.transitions.create("color"),
+      }}
+    >
+      <Iconify
+        width={18}
+        icon={ok ? "solar:check-circle-bold" : "solar:close-circle-linear"}
+        sx={{ flexShrink: 0, color: ok ? "success.main" : "text.disabled" }}
+      />
+      {children}
+    </Stack>
+  );
+}
+
+// ----------------------------------------------------------------------
+
 export function AccountChangePassword() {
   const showCurrentPassword = useBoolean();
   const showNewPassword = useBoolean();
@@ -64,10 +91,47 @@ export function AccountChangePassword() {
 
   const {
     reset,
+    watch,
     setError,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
+
+  const values = watch();
+
+  // Live requirement checks that tick green as the user types.
+  const reqLength = values.newPassword.length >= 6;
+  const reqDifferent =
+    values.newPassword.length > 0 &&
+    values.newPassword !== values.currentPassword;
+  const reqMatch =
+    values.confirmNewPassword.length > 0 &&
+    values.newPassword === values.confirmNewPassword;
+
+  const renderPasswordField = (
+    name: keyof ChangePasswordSchemaType,
+    label: string,
+    visible: ReturnType<typeof useBoolean>,
+  ) => (
+    <Field.Text
+      name={name}
+      label={label}
+      type={visible.value ? "text" : "password"}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton onClick={visible.onToggle} edge="end">
+              <Iconify
+                icon={
+                  visible.value ? "solar:eye-bold" : "solar:eye-closed-bold"
+                }
+              />
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+    />
+  );
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -91,90 +155,74 @@ export function AccountChangePassword() {
 
   return (
     <Form methods={methods} onSubmit={onSubmit}>
-      <Card sx={{ p: 3 }}>
-        <Typography variant="h6" sx={{ mb: 0.5 }}>
-          Смена пароля
-        </Typography>
-        <Typography variant="body2" sx={{ mb: 3, color: "text.secondary" }}>
-          Используйте надёжный пароль, который вы не используете на других
-          сайтах.
-        </Typography>
+      <Card sx={{ p: { xs: 3, md: 4 } }}>
+        <Grid container spacing={{ xs: 3, md: 5 }}>
+          {/* Left: context + live requirements. */}
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Stack spacing={2}>
+              <Box
+                sx={{
+                  width: 48,
+                  height: 48,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "50%",
+                  color: "primary.main",
+                  bgcolor: (theme) =>
+                    varAlpha(theme.vars.palette.primary.mainChannel, 0.12),
+                }}
+              >
+                <Iconify width={24} icon="solar:lock-keyhole-bold" />
+              </Box>
 
-        <Stack spacing={3} sx={{ maxWidth: 480 }}>
-          <Field.Text
-            name="currentPassword"
-            label="Текущий пароль"
-            type={showCurrentPassword.value ? "text" : "password"}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={showCurrentPassword.onToggle} edge="end">
-                    <Iconify
-                      icon={
-                        showCurrentPassword.value
-                          ? "solar:eye-bold"
-                          : "solar:eye-closed-bold"
-                      }
-                    />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+              <Typography variant="h6">Смена пароля</Typography>
+              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+                Используйте надёжный пароль, который вы не используете на других
+                сайтах.
+              </Typography>
 
-          <Field.Text
-            name="newPassword"
-            label="Новый пароль"
-            type={showNewPassword.value ? "text" : "password"}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={showNewPassword.onToggle} edge="end">
-                    <Iconify
-                      icon={
-                        showNewPassword.value
-                          ? "solar:eye-bold"
-                          : "solar:eye-closed-bold"
-                      }
-                    />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            helperText="Пароль должен содержать не менее 6 символов"
-          />
+              <Stack spacing={1} sx={{ mt: 1 }}>
+                <Requirement ok={reqLength}>Не менее 6 символов</Requirement>
+                <Requirement ok={reqDifferent}>
+                  Отличается от текущего
+                </Requirement>
+                <Requirement ok={reqMatch}>Пароли совпадают</Requirement>
+              </Stack>
+            </Stack>
+          </Grid>
 
-          <Field.Text
-            name="confirmNewPassword"
-            label="Подтвердите новый пароль"
-            type={showConfirmPassword.value ? "text" : "password"}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={showConfirmPassword.onToggle} edge="end">
-                    <Iconify
-                      icon={
-                        showConfirmPassword.value
-                          ? "solar:eye-bold"
-                          : "solar:eye-closed-bold"
-                      }
-                    />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+          {/* Right: the form fields. */}
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Stack spacing={3}>
+              {renderPasswordField(
+                "currentPassword",
+                "Текущий пароль",
+                showCurrentPassword,
+              )}
+              {renderPasswordField(
+                "newPassword",
+                "Новый пароль",
+                showNewPassword,
+              )}
+              {renderPasswordField(
+                "confirmNewPassword",
+                "Подтвердите новый пароль",
+                showConfirmPassword,
+              )}
 
-          <LoadingButton
-            type="submit"
-            variant="contained"
-            loading={isSubmitting}
-            startIcon={<Iconify icon="solar:lock-password-bold" />}
-            sx={{ ml: "auto" }}
-          >
-            Изменить пароль
-          </LoadingButton>
-        </Stack>
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                loading={isSubmitting}
+                startIcon={<Iconify icon="solar:lock-password-bold" />}
+                sx={{ ml: "auto" }}
+              >
+                Изменить пароль
+              </LoadingButton>
+            </Stack>
+          </Grid>
+        </Grid>
       </Card>
     </Form>
   );
