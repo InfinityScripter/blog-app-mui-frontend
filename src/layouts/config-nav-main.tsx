@@ -9,6 +9,11 @@ export const navData = [
     icon: <Iconify width={22} icon="solar:home-2-bold-duotone" />,
   },
   {
+    title: "Новости",
+    path: "/news",
+    icon: <Iconify width={22} icon="solar:notebook-bold-duotone" />,
+  },
+  {
     title: "Портфолио",
     path: "/portfolio",
     icon: <Iconify width={22} icon="solar:user-circle-bold-duotone" />,

@@ -9,6 +9,7 @@ import type {
 } from "src/types/api";
 
 import axios, { endpoints } from "src/utils/axios";
+import { NEWS_TAG } from "src/sections/news/const";
 
 // ----------------------------------------------------------------------
 
@@ -25,6 +26,19 @@ export async function getPosts(): Promise<ListPostsResponse> {
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch posts: ${res.status}`);
+  }
+  const data: ListPostsResponse = await res.json();
+  return data;
+}
+
+// ----------------------------------------------------------------------
+
+/** Published posts tagged 'новости', for the /news feed (ISR-cached). */
+export async function getNewsPosts(): Promise<ListPostsResponse> {
+  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(NEWS_TAG)}`;
+  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch news posts: ${res.status}`);
   }
   const data: ListPostsResponse = await res.json();
   return data;

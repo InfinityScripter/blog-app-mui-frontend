@@ -1,0 +1,62 @@
+import type { Post } from "src/types/domain";
+import type { LabelColor } from "src/components/label";
+
+import { TAG_TO_CATEGORY, SOURCE_TO_CATEGORY } from "./const";
+
+import type { NewsItem, NewsCategory } from "./types";
+
+// ----------------------------------------------------------------------
+
+/** Maps a рубрика to a theme semantic color for its Label (never a hex). */
+export function categoryColor(category: NewsCategory): LabelColor {
+  switch (category) {
+    case "Технологии":
+      return "warning";
+    case "Наука":
+      return "success";
+    case "Политика":
+      return "info";
+    case "Культура":
+      return "secondary";
+    case "Главное":
+    default:
+      return "info";
+  }
+}
+
+/**
+ * Parses the source feed name from the post body. The bot appends a line like
+ * "Источник: Meduza" (optionally as a markdown link), so we read the text after
+ * the last "Источник:". Returns null when absent.
+ */
+function deriveSource(post: Post): string | null {
+  const content = post.content ?? "";
+  const match = content.match(/Источник:\s*\[?([^\]\n(]+?)\]?\s*(?:\(|$|\n)/i);
+  const raw = match?.[1]?.trim();
+  return raw || null;
+}
+
+/**
+ * Derives the рубрика for a post: an explicit рубрика tag wins, else the source
+ * feed mapping, else «Главное».
+ */
+function deriveCategory(post: Post): NewsCategory {
+  const tagged = (post.tags ?? [])
+    .map((t) => TAG_TO_CATEGORY[t.toLowerCase()])
+    .find(Boolean);
+  if (tagged) return tagged;
+
+  const source = deriveSource(post);
+  if (source && SOURCE_TO_CATEGORY[source]) return SOURCE_TO_CATEGORY[source];
+
+  return "Главное";
+}
+
+/** Builds a NewsItem (post + derived category + source) from a post. */
+export function toNewsItem(post: Post): NewsItem {
+  return {
+    post,
+    category: deriveCategory(post),
+    source: deriveSource(post),
+  };
+}
