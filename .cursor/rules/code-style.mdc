@@ -125,14 +125,15 @@ No circular dependencies — `import/no-cycle` is an error (verify: `npx madge
 
 ## Linting
 
-- `yarn lint` must be 0 errors. Author folders (`actions`, `auth`,
-  `sections/{blog,admin,portfolio}`, `app`) are held to error-level
-  `unused-vars`; vendored template code stays at warn until cleaned per-folder.
-- Don't silence rules with `eslint-disable` / `@ts-ignore` to push code through.
-  Fix the cause.
+- `yarn lint` must be **0 errors AND 0 warnings** — the vendored backlog has been
+  cleaned, so `unused-vars` is now error repo-wide (`_`-prefix intentional-unused).
+- `@ts-nocheck` / `@ts-ignore` are banned (`ban-ts-comment` = error);
+  `@ts-expect-error` only with a ≥10-char reason. Don't silence rules with
+  `eslint-disable` to push code through — fix the cause.
 
 ## Dead code
 
-Vendored template code that no live route uses is either removed or isolated
-(see `/examples`). Don't add new files to the dead-but-kept template areas;
-build features in `src/sections/` + `src/app/`.
+The vendored template's dead code has been removed — `yarn knip` is at 0 unused
+files / deps; keep it there. Don't add new files to dead template areas or
+resurrect deleted ones; build features in `src/sections/` + `src/app/`. The
+component gallery is isolated under `/examples` (dev-only route `/dev/examples`).
