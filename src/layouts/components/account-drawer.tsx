@@ -19,6 +19,7 @@ import IconButton from "@mui/material/IconButton";
 import { Scrollbar } from "src/components/scrollbar";
 import { AnimateAvatar } from "src/components/animate";
 import { useRouter, usePathname } from "src/routes/hooks";
+import { formatImageUrl } from "src/utils/format-image-url";
 
 import { AccountButton } from "./account-button";
 import { SignOutButton } from "./sign-out-button";
@@ -64,7 +65,9 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
     ? {
         displayName: user.name,
         email: user.email,
-        photoURL: user.avatarURL,
+        // avatarURL is a relative backend path (/api/file/:id); resolve it to an
+        // absolute URL so the <img> hits the API, not the frontend origin.
+        photoURL: formatImageUrl(user.avatarURL),
       }
     : null;
 

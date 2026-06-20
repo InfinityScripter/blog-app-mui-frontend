@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
 import { useAuthContext } from "src/auth/hooks";
 import Typography from "@mui/material/Typography";
+import { formatImageUrl } from "src/utils/format-image-url";
 
 import type { LayoutUserView } from "./types";
 
@@ -24,7 +25,8 @@ export function NavUpgrade({ sx, ...other }: NavUpgradeProps) {
     ? {
         displayName: user.name,
         email: user.email,
-        photoURL: user.avatarURL,
+        // Resolve the relative backend path to an absolute URL (see drawer).
+        photoURL: formatImageUrl(user.avatarURL),
       }
     : null;
 

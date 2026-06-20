@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
 import { toast } from "src/components/snackbar";
 import { Iconify } from "src/components/iconify";
+import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useBoolean } from "src/hooks/use-boolean";
@@ -91,6 +92,14 @@ export function AccountChangePassword() {
   return (
     <Form methods={methods} onSubmit={onSubmit}>
       <Card sx={{ p: 3 }}>
+        <Typography variant="h6" sx={{ mb: 0.5 }}>
+          Смена пароля
+        </Typography>
+        <Typography variant="body2" sx={{ mb: 3, color: "text.secondary" }}>
+          Используйте надёжный пароль, который вы не используете на других
+          сайтах.
+        </Typography>
+
         <Stack spacing={3} sx={{ maxWidth: 480 }}>
           <Field.Text
             name="currentPassword"
@@ -160,6 +169,7 @@ export function AccountChangePassword() {
             type="submit"
             variant="contained"
             loading={isSubmitting}
+            startIcon={<Iconify icon="solar:lock-password-bold" />}
             sx={{ ml: "auto" }}
           >
             Изменить пароль
