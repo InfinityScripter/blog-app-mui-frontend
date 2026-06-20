@@ -10,7 +10,7 @@
     "e2e/global-setup.ts"
   ],
   "project": ["src/**/*.{ts,tsx,js,jsx}"],
-  "ignore": ["examples/**", "src/_mock/_map/**"],
-  "ignoreDependencies": [],
-  "ignoreBinaries": []
+  "ignore": ["examples/**"],
+  "ignoreDependencies": ["critters", "depcheck"],
+  "ignoreBinaries": ["madge"]
 }
