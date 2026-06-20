@@ -2,6 +2,7 @@ import type { Post } from "src/types/domain";
 
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
@@ -13,19 +14,21 @@ import { Image } from "src/components/image";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { fDate } from "src/utils/format-time";
+import { coverSrc } from "src/utils/cover-src";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
+import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
 import { usePostDelete } from "src/hooks/use-post-delete";
 import { ConfirmDialog } from "src/components/confirm-dialog";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
-import { coverSrc } from "../../utils/cover-src";
-
 // ----------------------------------------------------------------------
+
+const MAX_TAGS = 2;
 
 export function PostItemHorizontal({ post }: { post: Post }) {
   const theme = useTheme();
@@ -49,7 +52,12 @@ export function PostItemHorizontal({ post }: { post: Post }) {
     totalShares,
     totalComments,
     description,
+    tags,
+    content,
   } = post;
+
+  const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
+  const readingTime = getReadingTime(content);
 
   const handleEdit = () => {
     router.push(paths.dashboard.post.edit(String(post._id)));
@@ -105,6 +113,14 @@ export function PostItemHorizontal({ post }: { post: Post }) {
             >
               {description}
             </Typography>
+
+            {visibleTags.length > 0 && (
+              <Box display="flex" flexWrap="wrap" gap={0.5}>
+                {visibleTags.map((tag) => (
+                  <Chip key={tag} label={tag} size="small" variant="soft" />
+                ))}
+              </Box>
+            )}
           </Stack>
 
           <Box display="flex" alignItems="center">
@@ -120,9 +136,15 @@ export function PostItemHorizontal({ post }: { post: Post }) {
               flexGrow={1}
               display="flex"
               flexWrap="wrap"
+              alignItems="center"
               justifyContent="flex-end"
               sx={{ typography: "caption", color: "text.disabled" }}
             >
+              <Box display="flex" alignItems="center" gap={0.5}>
+                <Iconify icon="solar:clock-circle-bold" width={16} />
+                {`${readingTime} мин`}
+              </Box>
+
               <Box display="flex" alignItems="center" gap={0.5}>
                 <Iconify icon="eva:message-circle-fill" width={16} />
                 {fShortenNumber(totalComments)}

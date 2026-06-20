@@ -1,7 +1,10 @@
 "use client";
 
 import type { Post } from "src/types/domain";
+import type { FeedTag } from "src/sections/home/home-feed/const";
 
+import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import { orderBy } from "src/utils/helper";
@@ -11,6 +14,8 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useSearchPosts } from "src/actions/blog";
 import { useDebounce } from "src/hooks/use-debounce";
+import { FEED_TAGS } from "src/sections/home/home-feed/const";
+import { toggleTag } from "src/sections/home/home-feed/utils";
 
 import { PostList } from "../post-list";
 import { PostSort } from "../post-sort";
@@ -27,11 +32,13 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 
   const [searchQuery, setSearchQuery] = useState("");
 
+  const [selectedTags, setSelectedTags] = useState<FeedTag[]>([]);
+
   const debouncedQuery = useDebounce(searchQuery);
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
-  const dataFiltered = applyFilter({ inputData: posts, sortBy });
+  const dataFiltered = applyFilter({ inputData: posts, sortBy, selectedTags });
 
   const handleSortBy = useCallback((newValue: string) => {
     setSortBy(newValue);
@@ -41,10 +48,14 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
     setSearchQuery(inputValue);
   }, []);
 
+  const handleToggleTag = useCallback((tag: FeedTag) => {
+    setSelectedTags((prev) => toggleTag(prev, tag, FEED_TAGS));
+  }, []);
+
   return (
     <Container>
       <Typography variant="h4" sx={{ my: { xs: 3, md: 5 } }}>
-        Blog
+        Блог
       </Typography>
 
       <Stack
@@ -52,7 +63,7 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
         justifyContent="space-between"
         alignItems={{ xs: "flex-end", sm: "center" }}
         direction={{ xs: "column", sm: "row" }}
-        sx={{ mb: { xs: 3, md: 5 } }}
+        sx={{ mb: 3 }}
       >
         <PostSearch
           query={debouncedQuery}
@@ -69,6 +80,32 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
         />
       </Stack>
 
+      <Box
+        sx={{
+          mb: { xs: 3, md: 5 },
+          gap: 1,
+          display: "flex",
+          flexWrap: { xs: "nowrap", sm: "wrap" },
+          overflowX: { xs: "auto", sm: "visible" },
+          pb: { xs: 1, sm: 0 },
+        }}
+      >
+        {FEED_TAGS.map((tag) => {
+          const active = selectedTags.includes(tag);
+          return (
+            <Chip
+              key={tag}
+              label={tag}
+              clickable
+              onClick={() => handleToggleTag(tag)}
+              color={active ? "primary" : "default"}
+              variant={active ? "filled" : "outlined"}
+              sx={{ flexShrink: 0, minHeight: 44 }}
+            />
+          );
+        })}
+      </Box>
+
       <PostList posts={dataFiltered} />
     </Container>
   );
@@ -82,13 +119,25 @@ type SortablePost = Post & Record<string, unknown>;
 const applyFilter = ({
   inputData,
   sortBy,
+  selectedTags,
 }: {
   inputData: Post[];
   sortBy: string;
+  selectedTags: FeedTag[];
 }): Post[] => {
-  const publishedPosts: SortablePost[] = inputData
+  let publishedPosts: SortablePost[] = inputData
     .filter((post) => post.publish === "published")
     .map((post) => ({ ...post }));
+
+  if (selectedTags.length > 0) {
+    publishedPosts = publishedPosts.filter((post) =>
+      selectedTags.some((tag) =>
+        (post.tags ?? []).some(
+          (t) => t.toLowerCase().trim() === tag.toLowerCase().trim(),
+        ),
+      ),
+    );
+  }
 
   if (sortBy === "latest") {
     return orderBy(publishedPosts, ["createdAt"], ["desc"]);

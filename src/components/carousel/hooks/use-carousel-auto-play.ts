@@ -1,3 +1,7 @@
+// Pull in the autoplay plugin's type augmentation so `plugins().autoplay` and
+// the `autoplay:*` events are typed even when no component imports the plugin
+// directly (the demo overview sections that used to provide it were removed).
+import type {} from "embla-carousel-autoplay";
 import type { EmblaCarouselType } from "embla-carousel";
 
 import { useState, useEffect, useCallback } from "react";

@@ -2,17 +2,17 @@ export const SM_KEY = "sm";
 export const MD_KEY = "md";
 export const LG_KEY = "lg";
 
-export const HERO_LABEL = "Технический блог";
-export const HERO_HIGHLIGHT = "frontend, архитектура, инженерные практики";
-export const HERO_TITLE = "Практические разборы для реальной разработки";
+export const HERO_LABEL = "Пишу про";
+export const HERO_HIGHLIGHT = "AI, LLM и агентов";
+export const HERO_TITLE = "Разборы AI-инструментов для реальной разработки";
 export const HERO_SUMMARY =
-  "Публикую кейсы, гайды и разборы решений, которые помогают проектировать " +
-  "понятные, быстрые и поддерживаемые интерфейсы.";
+  "Кейсы, гайды и честные разборы: что из AI-инструментов реально работает " +
+  "в проде, а что — хайп. Без воды, с примерами из практики.";
 
-export const HERO_BLOG_INFO_TITLE = "Новые материалы по делу";
+export const HERO_BLOG_INFO_TITLE = "Свежие материалы по AI";
 export const HERO_BLOG_INFO_DESCRIPTION =
-  "Разборы production-задач, архитектурные решения и практики, " +
-  "которые можно применять в проектах сразу.";
+  "LLM, агенты, Claude Code и инструменты — что попробовал, что прижилось " +
+  "в работе и почему. Применимо в проектах сразу.";
 
 export const HERO_HEADLINE_MAX_WIDTH = 760;
 export const HERO_HEADLINE_SIZE = { xs: 34, md: 52, lg: 58 };

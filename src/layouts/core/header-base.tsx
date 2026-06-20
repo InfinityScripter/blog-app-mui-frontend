@@ -189,12 +189,12 @@ export function HeaderBase({
               {helpLink && (
                 <Link
                   data-slot="help-link"
-                  href={paths.faqs}
+                  href={paths.post.root}
                   component={RouterLink}
                   color="inherit"
                   sx={{ typography: "subtitle2" }}
                 >
-                  Нужна помощь?
+                  Блог
                 </Link>
               )}
 

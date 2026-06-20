@@ -3,6 +3,7 @@ import type { Theme, SxProps } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
@@ -17,14 +18,18 @@ import { RouterLink } from "src/routes/components";
 import CardContent from "@mui/material/CardContent";
 import { maxLine, varAlpha } from "src/theme/styles";
 import { AvatarShape } from "src/assets/illustrations";
+import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
 
 // ----------------------------------------------------------------------
+
+const MAX_TAGS = 2;
 
 export function PostItem({ post }: { post: Post }) {
   const theme = useTheme();
 
   const linkTo = paths.post.details(String(post._id));
+  const visibleTags = (post.tags ?? []).slice(0, MAX_TAGS);
 
   return (
     <Card>
@@ -75,7 +80,16 @@ export function PostItem({ post }: { post: Post }) {
           {post.title}
         </Link>
 
+        {visibleTags.length > 0 && (
+          <Box display="flex" flexWrap="wrap" gap={0.5} sx={{ mt: 1 }}>
+            {visibleTags.map((tag) => (
+              <Chip key={tag} label={tag} size="small" variant="soft" />
+            ))}
+          </Box>
+        )}
+
         <InfoBlock
+          readingTime={getReadingTime(post.content)}
           totalViews={post.totalViews}
           totalShares={post.totalShares}
           totalComments={post.totalComments}
@@ -174,6 +188,7 @@ interface InfoBlockProps {
   totalComments: number;
   totalViews: number;
   totalShares: number;
+  readingTime?: number;
   sx?: SxProps<Theme>;
 }
 
@@ -181,12 +196,14 @@ export function InfoBlock({
   totalComments,
   totalViews,
   totalShares,
+  readingTime,
   sx,
 }: InfoBlockProps) {
   return (
     <Stack
       spacing={1.5}
       direction="row"
+      flexWrap="wrap"
       justifyContent="flex-end"
       sx={{
         mt: 3,
@@ -195,6 +212,13 @@ export function InfoBlock({
         ...sx,
       }}
     >
+      {readingTime != null && (
+        <Stack direction="row" alignItems="center" sx={{ mr: "auto" }}>
+          <Iconify icon="solar:clock-circle-bold" width={16} sx={{ mr: 0.5 }} />
+          {`${readingTime} мин`}
+        </Stack>
+      )}
+
       <Stack direction="row" alignItems="center">
         <Iconify icon="eva:message-circle-fill" width={16} sx={{ mr: 0.5 }} />
         {fShortenNumber(totalComments)}

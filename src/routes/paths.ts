@@ -12,7 +12,6 @@ interface Paths {
   payment: string;
   about: string;
   contact: string;
-  faqs: string;
   page403: string;
   page404: string;
   page500: string;
@@ -39,13 +38,6 @@ interface Paths {
   };
   dashboard: {
     root: string;
-    two: string;
-    three: string;
-    group: {
-      root: string;
-      five: string;
-      six: string;
-    };
     post: {
       root: string;
       new: string;
@@ -56,9 +48,6 @@ interface Paths {
       users: string;
       posts: string;
     };
-    chat: string;
-    kanban: string;
-    calendar: string;
   };
 }
 
@@ -69,7 +58,6 @@ export const paths: Paths = {
   payment: "/payment",
   about: "/about-us",
   contact: "/contact-us",
-  faqs: "/faqs",
   page403: "/error/403",
   page404: "/error/404",
   page500: "/error/500",
@@ -99,13 +87,6 @@ export const paths: Paths = {
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
-    two: `${ROOTS.DASHBOARD}/two`,
-    three: `${ROOTS.DASHBOARD}/three`,
-    group: {
-      root: `${ROOTS.DASHBOARD}/group`,
-      five: `${ROOTS.DASHBOARD}/group/five`,
-      six: `${ROOTS.DASHBOARD}/group/six`,
-    },
     post: {
       root: `${ROOTS.DASHBOARD}/post`,
       new: `${ROOTS.DASHBOARD}/post/new`,
@@ -116,8 +97,5 @@ export const paths: Paths = {
       users: `${ROOTS.DASHBOARD}/admin/users`,
       posts: `${ROOTS.DASHBOARD}/admin/posts`,
     },
-    chat: `${ROOTS.DASHBOARD}/chat`,
-    kanban: `${ROOTS.DASHBOARD}/kanban`,
-    calendar: `${ROOTS.DASHBOARD}/calendar`,
   },
 };

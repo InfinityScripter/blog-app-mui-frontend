@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
-import { paths } from "src/routes/paths";
 import { Logo } from "src/components/logo";
 import Divider from "@mui/material/Divider";
 import { useTheme } from "@mui/material/styles";
@@ -17,10 +16,6 @@ import { SocialIcon } from "src/components/iconify";
 // ----------------------------------------------------------------------
 
 const LINKS = [
-  {
-    headline: "Разделы",
-    children: [{ name: "Вопросы и ответы", href: paths.faqs }],
-  },
   {
     headline: "Документы",
     children: [

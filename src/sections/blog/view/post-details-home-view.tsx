@@ -2,6 +2,7 @@
 
 import type { Post } from "src/types/domain";
 
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
@@ -10,12 +11,16 @@ import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import { useGetPost } from "src/actions/blog";
 import Container from "@mui/material/Container";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import { usePostView } from "src/hooks/use-post-view";
+import { getReadingTime } from "src/utils/reading-time";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { PostItem } from "../post-item";
+import { PostRelated } from "../post-related";
 import { PostCommentList } from "../post-comment-list";
 import { PostCommentForm } from "../post-comment-form";
 import { PostDetailsHero } from "../post-details-hero";
@@ -33,6 +38,11 @@ export function PostDetailsHomeView({
 }: PostDetailsHomeViewProps) {
   const { post } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
+
+  usePostView(currentPost?._id);
+
+  const readingTime = getReadingTime(currentPost?.content);
+
   return (
     <>
       <PostDetailsHero
@@ -52,8 +62,8 @@ export function PostDetailsHomeView({
       >
         <CustomBreadcrumbs
           links={[
-            { name: "Home", href: "/" },
-            { name: "Blog", href: paths.post.root },
+            { name: "Главная", href: "/" },
+            { name: "Блог", href: paths.post.root },
             { name: currentPost?.title },
           ]}
           sx={{ maxWidth: 720, mx: "auto" }}
@@ -62,6 +72,20 @@ export function PostDetailsHomeView({
 
       <Container maxWidth={false}>
         <Stack sx={{ maxWidth: 720, mx: "auto" }}>
+          <Box
+            sx={{
+              mb: 2,
+              gap: 0.5,
+              display: "flex",
+              alignItems: "center",
+              typography: "body2",
+              color: "text.secondary",
+            }}
+          >
+            <Iconify icon="solar:clock-circle-bold" width={18} />
+            {`${readingTime} мин чтения`}
+          </Box>
+
           <Typography variant="subtitle1">
             {currentPost?.description}
           </Typography>
@@ -105,7 +129,7 @@ export function PostDetailsHomeView({
           </Stack>
 
           <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-            <Typography variant="h4">Comments</Typography>
+            <Typography variant="h4">Комментарии</Typography>
 
             <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
               ({currentPost?.comments.length})
@@ -123,10 +147,15 @@ export function PostDetailsHomeView({
         </Stack>
       </Container>
 
+      <PostRelated
+        currentPostId={currentPost?._id}
+        tags={currentPost?.tags ?? []}
+      />
+
       {!!latestPosts?.length && (
         <Container sx={{ pb: 15 }}>
           <Typography variant="h4" sx={{ mb: 5 }}>
-            Recent Posts
+            Свежие посты
           </Typography>
 
           <Grid container spacing={3}>
