@@ -41,9 +41,10 @@ test.describe("public pages", () => {
     await page.goto(href!);
     await expect(page).toHaveTitle(/Post details/i);
     // .first() — after hydration the comments section can match more than one
-    // node; we only need to confirm the post detail rendered.
+    // node; we only need to confirm the post detail rendered. The heading is
+    // Russian ("Комментарии").
     await expect(
-      page.getByText("Comments", { exact: false }).first(),
+      page.getByText("Комментарии", { exact: false }).first(),
     ).toBeVisible();
   });
 

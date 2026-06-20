@@ -49,8 +49,10 @@ test.describe("auth & guards", () => {
     // The seeded post is authored by "Hello Friend" (NOT the logged-in admin),
     // so its cell only appears if the endpoint returns every post. Asserting on
     // the cell text auto-waits for the SWR fetch to populate the table body.
+    // .first() — there can be several such posts; strict mode would otherwise
+    // reject the multi-match.
     await expect(
-      authedPage.locator("table tbody").getByText("Hello Friend"),
+      authedPage.locator("table tbody").getByText("Hello Friend").first(),
     ).toBeVisible({ timeout: 15_000 });
   });
 

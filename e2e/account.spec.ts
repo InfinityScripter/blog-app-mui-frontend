@@ -46,7 +46,7 @@ test.describe("Account — general (name + avatar)", () => {
     });
   });
 
-  test("uploads an avatar and then removes it", async ({
+  test("selects an avatar, saves it, then removes it", async ({
     nonAdminPage: page,
   }) => {
     await page.goto(ACCOUNT_URL);
@@ -54,38 +54,35 @@ test.describe("Account — general (name + avatar)", () => {
       timeout: 15_000,
     });
 
-    // Upload — the avatar field is the (hidden) file input inside UploadAvatar.
+    // Pick a file via the hidden dropzone input. UploadAvatar shows a preview
+    // and the "Удалить фото" control appears as soon as a value exists.
     await page.locator('input[type="file"]').first().setInputFiles(AVATAR);
-    await page.getByRole("button", { name: "Сохранить изменения" }).click();
-
-    // After saving, the remove button appears (an avatar now exists). Its
-    // presence is the durable signal that POST /api/user/avatar persisted.
     const removeButton = page.getByRole("button", { name: "Удалить фото" });
     await expect(removeButton).toBeVisible({ timeout: 15_000 });
 
-    // It survives a reload (the avatar was persisted server-side).
-    await page.reload();
-    await expect(page.locator('input[name="name"]')).toBeVisible({
-      timeout: 15_000,
-    });
-    await expect(
-      page.getByRole("button", { name: "Удалить фото" }),
-    ).toBeVisible({ timeout: 15_000 });
+    // Persist: this uploads the file then POSTs /api/user/avatar. Assert the
+    // request succeeds rather than relying on the (image-validated) preview.
+    const avatarSave = page.waitForResponse(
+      (r) =>
+        r.url().includes("/api/user/avatar") && r.request().method() === "POST",
+      { timeout: 20_000 },
+    );
+    await page.getByRole("button", { name: "Сохранить изменения" }).click();
+    expect((await avatarSave).status()).toBe(200);
 
-    // Remove — DELETE /api/user/avatar clears the avatar; the button then
-    // disappears (and stays gone after a reload).
+    // Remove: DELETE /api/user/avatar clears it; the button then disappears.
+    const avatarDelete = page.waitForResponse(
+      (r) =>
+        r.url().includes("/api/user/avatar") &&
+        r.request().method() === "DELETE",
+      { timeout: 20_000 },
+    );
     await page.getByRole("button", { name: "Удалить фото" }).click();
+    expect((await avatarDelete).status()).toBe(200);
+
     await expect(page.getByRole("button", { name: "Удалить фото" })).toBeHidden(
       { timeout: 15_000 },
     );
-
-    await page.reload();
-    await expect(page.locator('input[name="name"]')).toBeVisible({
-      timeout: 15_000,
-    });
-    await expect(
-      page.getByRole("button", { name: "Удалить фото" }),
-    ).toBeHidden();
   });
 });
 

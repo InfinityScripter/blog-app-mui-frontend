@@ -1,12 +1,13 @@
 import { test as base, expect } from "@playwright/test";
 
 /**
- * Demo credentials seeded in the backend (`demo@minimals.cc` / `@demo1`, role: admin).
- * The sign-in form also pre-fills these by default.
+ * Admin credentials for the seeded demo account (`demo@minimals.cc`, role:
+ * admin). The password matches the provisioned local/CI admin. Override with
+ * E2E_ADMIN_PASSWORD if a given environment seeds a different one.
  */
 export const DEMO_USER = {
   email: "demo@minimals.cc",
-  password: "@demo1",
+  password: process.env.E2E_ADMIN_PASSWORD ?? "Demo!Admin2026",
 } as const;
 
 /**
