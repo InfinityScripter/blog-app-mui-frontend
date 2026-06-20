@@ -33,6 +33,36 @@ src/components/custom-popover/
 - Do NOT rename existing files to PascalCase. The whole codebase is kebab-case;
   keep it consistent.
 
+## When to split a component (thresholds)
+
+Split for a *reason*, not by reflex. This repo is Minimals.cc, not the
+"every const in its own file" house style — extract only when it removes
+noise from the component or unlocks reuse. Concretely:
+
+- **`const.ts` — extract when** the component holds a data array/config object
+  that is content, not layout: a list of cards, FAQ entries, nav items,
+  skills, projects, publish options, etc. A single scalar or a one-off style
+  object used once stays inline. Rule of thumb: if it's *data the component
+  renders* (and especially if a non-dev might edit it), it belongs in
+  `const.ts`. Animation `Variants`, parallax physics, and other tokens that
+  only make sense next to the JSX that consumes them may stay inline.
+- **`types.ts` — extract when** the component has a non-trivial own type: a
+  Props interface with many fields shared across sub-components, an enum/union
+  reused by `const.ts`/`utils.ts`, or a domain shape. A 2–3 prop inline
+  `interface FooProps` is fine inline — do NOT move it just to have a file.
+- **`utils.ts` — extract when** there is a *pure* helper (formatting, mapping
+  to `sx`, class-name builders) with no JSX. Inline a one-liner used once.
+- **`hooks/` (or a co-located `use-*.ts`) — extract when** stateful logic grows
+  past a few `useState`/`useEffect` or is reused. A single `useState` stays in
+  the component.
+- **Line count is a smell, not a rule.** A 350-line component that is mostly
+  markup + event handlers (a form, a list card) does NOT need splitting —
+  there's nothing to extract. A 120-line component carrying a 60-line inline
+  data array DOES. Split by *what's extractable*, never to hit a number.
+- **`index.ts` — add only when** the directory is imported from outside the
+  section and a barrel earns its keep. Page-private section files that nothing
+  external imports do not need an `index.ts`.
+
 ## Sections isolation
 
 `src/sections/` holds page-specific feature components. A section must NOT import
