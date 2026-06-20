@@ -39,6 +39,8 @@ Admin browser ──JWT──▶ blog-backend /api/admin/bot/*  ──Bearer BOT
 
 In: active provider+model + model list, mock toggle, bot health. **Out (deferred):** candidates queue, uptime/metrics, `nextRun` display, `hasOverride` surfacing. The bot status payload is trimmed to exactly what the UI renders.
 
+**V1 providers = `glm`, `deepseek`, `mock` ONLY** (user decision 2026-06-21: dropped `anthropic` + `gemini` — gemini is geo-limited from RU, anthropic ping is key-presence-only/dishonest). The control surface (bot `/control/providers`, backend guard, frontend const) exposes only these three. The bot's `PROVIDERS` registry still physically contains anthropic/gemini (the rewriter/`/model` Telegram command keep working with them) — but the **admin panel and its backend reject/omit anything outside `glm|deepseek|mock`**. New union `ControlProviderName = 'glm' | 'deepseek' | 'mock'` gates every admin-facing layer.
+
 ---
 
 ## Canonical wire contract (single source of truth — resolves all cross-layer drift)
@@ -59,9 +61,9 @@ All endpoints require `Authorization: Bearer ${BOT_CONTROL_TOKEN}`. Missing head
 
 Types:
 
-- `provider` / `name`: `'anthropic' | 'gemini' | 'glm' | 'deepseek' | 'mock'` (union, never raw string).
+- `provider` / `name`: `ControlProviderName = 'glm' | 'deepseek' | 'mock'` (union, never raw string). The control server validates the `?provider=` / body `provider` against this set and `400`s anything else (incl. anthropic/gemini, which exist in the bot but are not admin-controllable in V1).
 - `model.tier`: `'free' | 'paid'`; `model.note`: `string | undefined` (from `MODEL_PRICES`). **The bot enriches** `listModels` strings into `{id,tier,note}` objects by joining `MODEL_PRICES`; backend and frontend pass objects through unchanged (no duplicated price table).
-- `validation`: `'pinged' | 'key-present-only'` — `'key-present-only'` for anthropic (constraint #3: `pingModel` only checks key presence), `'pinged'` for openai-compat providers that did a real probe.
+- `validation`: `'pinged' | 'key-present-only'` — for V1 providers, `glm`/`deepseek` are openai-compat → real probe → `'pinged'`; `mock` → trivially `'pinged'`. (The `'key-present-only'` case is for anthropic, kept in the type for completeness but unreachable in V1.) Constraint #3's honesty label thus does not surface in V1 — `glm`/`deepseek` selections are genuinely probed.
 - `isMockEnabled`: the single resolved boolean (see mock precedence below).
 
 Errors: bad provider → `400 {error:'Unknown provider'}`. Ping fail on `/control/model` → `400 {error}` and the store is **not** updated.
@@ -84,7 +86,7 @@ Thin route → `src/services/bot-control.ts` → bot. Response envelope follows 
 
 ### Frontend — `src/sections/admin/admin-bot-view.tsx`
 
-Consumes the backend envelopes above. Health chip keyed off `isAlive: boolean` (not a `status` string). Model picker renders `{id,tier,note}` objects with `🆓`/`💲` icons. anthropic models labelled "ключ есть" (from `validation:'key-present-only'` / provider `hasKey`), never "проверено/валидна".
+Consumes the backend envelopes above. Health chip keyed off `isAlive: boolean` (not a `status` string). Provider Select offers only `glm | deepseek | mock`. Model picker renders `{id,tier,note}` objects with `🆓`/`💲` icons. V1 providers are genuinely probed (`validation: 'pinged'`), so no "ключ есть" caveat is shown — a successful model switch means the model answered.
 
 ---
 
@@ -134,7 +136,7 @@ Consequence stated plainly: once an admin toggles mock in the UI, the db row win
 | `src/utils/axios.ts`                    | `endpoints.admin.bot.{status, providers, models(provider), model, mock}`.                                                                                                                                                                            |
 | `src/actions/admin.ts`                  | `useGetBotStatus()` (**`revalidateOnFocus: true`** — constraint #2), `useGetBotProviders()`, `useGetBotModels(provider)` (enabled only when provider chosen), `setBotModel(provider, model)`, `setBotMock(enabled)`. Typed responses, no assertions. |
 | `src/sections/admin/types.ts`           | `BotStatus`, `BotProvider`, `BotModel`, `ProviderName` union, health-color type.                                                                                                                                                                     |
-| `src/sections/admin/const.ts`           | `BOT_PROVIDER_NAMES`, tier icons (`free='🆓'`, `paid='💲'`), `KEY_PRESENT_ONLY_LABEL = 'ключ есть'`.                                                                                                                                                 |
+| `src/sections/admin/const.ts`           | `BOT_PROVIDER_NAMES = ['glm','deepseek','mock']`, tier icons (`free='🆓'`, `paid='💲'`).                                                                                                                                                             |
 | `src/sections/admin/utils.ts`           | `getHealthColor(isAlive)`, model label formatter (tier + note), Claude honesty label.                                                                                                                                                                |
 | `src/sections/admin/admin-bot-view.tsx` | NEW. Health chip, active provider/model, provider Select → model Select (tier labels), mock Switch.                                                                                                                                                  |
 | `src/app/dashboard/admin/bot/page.tsx`  | NEW. `RoleBasedGuard acceptRoles={['admin']}`.                                                                                                                                                                                                       |
@@ -147,7 +149,7 @@ Consequence stated plainly: once an admin toggles mock in the UI, the db row win
 - **Empty model list**: disabled Select, "нет доступных моделей" (bot guarantees non-empty, but guard anyway).
 - **Provider without key** (`hasKey:false`): rendered disabled with "нет ключа".
 - **setModel failure**: revert optimistic SWR mutation, toast the bot's error string.
-- **anthropic selected**: show "ключ есть" not "проверено".
+- **mock selected**: no model picker (mock has a single trivial model); show "посты уходят без переработки LLM".
 
 ---
 
