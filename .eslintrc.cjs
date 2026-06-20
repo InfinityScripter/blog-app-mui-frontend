@@ -96,12 +96,12 @@ module.exports = {
     // Dead imports are noise and a refactor hazard — never allow them.
     // Autofixable, so this is cheap to keep at error.
     "unused-imports/no-unused-imports": 2,
-    // Unused vars are surfaced as warnings: ~100 legacy hits in vendored
-    // template code make `error` too disruptive repo-wide. Author folders are
-    // raised to error per-path in eslint `overrides` (see below). `_`-prefixed
-    // names are intentional placeholders and ignored.
+    // Unused vars are now an error repo-wide. The vendored-template backlog
+    // that once forced this to `warn` has been cleaned (lint is 0/0), so lock
+    // it shut: any new unused var fails CI instead of silently warning.
+    // `_`-prefixed names are intentional placeholders and ignored.
     "unused-imports/no-unused-vars": [
-      1,
+      2,
       {
         vars: "all",
         varsIgnorePattern: "^_",
@@ -138,30 +138,4 @@ module.exports = {
       },
     ],
   },
-  overrides: [
-    {
-      // Author-owned code is held to a stricter bar than the vendored template:
-      // unused vars become errors here so our own code stays clean. Vendored
-      // sections keep the repo-wide `warn` until they are cleaned per-folder.
-      files: [
-        "src/actions/**/*.{ts,tsx}",
-        "src/auth/**/*.{ts,tsx}",
-        "src/sections/blog/**/*.{ts,tsx,jsx}",
-        "src/sections/admin/**/*.{ts,tsx}",
-        "src/sections/portfolio/**/*.{ts,tsx}",
-        "src/app/**/*.{ts,tsx}",
-      ],
-      rules: {
-        "unused-imports/no-unused-vars": [
-          2,
-          {
-            vars: "all",
-            varsIgnorePattern: "^_",
-            args: "after-used",
-            argsIgnorePattern: "^_",
-          },
-        ],
-      },
-    },
-  ],
 };
