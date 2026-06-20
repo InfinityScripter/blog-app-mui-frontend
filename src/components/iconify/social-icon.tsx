@@ -36,12 +36,23 @@ export const SocialIcon = forwardRef<SVGSVGElement, SocialIconProps>(
         {socialName === "github" && githubSVG}
         {socialName === "vk" && vkSVG}
         {socialName === "telegram" && telegramSVG}
+        {socialName === "yandex" && yandexSVG}
       </SvgIcon>
     );
   },
 );
 
 // ----------------------------------------------------------------------
+
+const yandexSVG = (
+  <>
+    <circle cx="12" cy="12" r="10" fill="#FC3F1D" />
+    <path
+      d="M13.18 6.55h-1.4c-1.83 0-3.16 1.13-3.16 3.04 0 1.4.66 2.26 1.86 3.07l-2.1 3.79h1.66l1.96-3.46h.86v3.46h1.43V6.55Zm-1.45 5.2h-.46c-.9 0-1.66-.5-1.66-1.78 0-1.33.7-1.84 1.6-1.84h.52v3.62Z"
+      fill="#fff"
+    />
+  </>
+);
 
 const telegramSVG = (
   <path

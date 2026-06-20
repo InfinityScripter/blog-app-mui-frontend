@@ -40,7 +40,7 @@ export function SignOutButton({ onClose, ...other }: SignOutButtonProps) {
       onClick={handleLogout}
       {...other}
     >
-      Logout
+      Выйти
     </Button>
   );
 }

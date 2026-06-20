@@ -36,7 +36,7 @@ export function PostDetailsHomeView({
   post: initialPost,
   latestPosts,
 }: PostDetailsHomeViewProps) {
-  const { post } = useGetPost(initialPost?._id);
+  const { post, postMutate } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
 
   usePostView(currentPost?._id);
@@ -136,13 +136,17 @@ export function PostDetailsHomeView({
             </Typography>
           </Stack>
 
-          <PostCommentForm postId={currentPost?._id} />
+          <PostCommentForm
+            postId={currentPost?._id}
+            onCommentUpdated={postMutate}
+          />
 
           <Divider sx={{ mt: 5, mb: 2 }} />
 
           <PostCommentList
             comments={currentPost?.comments}
             postId={currentPost?._id}
+            onCommentUpdated={postMutate}
           />
         </Stack>
       </Container>

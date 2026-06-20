@@ -1,11 +1,14 @@
 import type { Post } from "src/types/domain";
 import type { LabelColor } from "src/components/label";
 
-import { TAG_TO_CATEGORY, SOURCE_TO_CATEGORY } from "./const";
+import { NEWS_CATEGORIES, TAG_TO_CATEGORY, SOURCE_TO_CATEGORY } from "./const";
 
 import type { NewsItem, NewsCategory } from "./types";
 
 // ----------------------------------------------------------------------
+
+/** The default рубрика («Главное»): selected on load, shows every post. */
+export const DEFAULT_NEWS_CATEGORY: NewsCategory = NEWS_CATEGORIES[0];
 
 /** Maps a рубрика to a theme semantic color for its Label (never a hex). */
 export function categoryColor(category: NewsCategory): LabelColor {
@@ -59,4 +62,17 @@ export function toNewsItem(post: Post): NewsItem {
     category: deriveCategory(post),
     source: deriveSource(post),
   };
+}
+
+/**
+ * Filters posts to a рубрика. «Главное» (the default) keeps everything; any
+ * other рубрика keeps posts whose derived category matches — the same mapping
+ * that drives each card's Label, so the feed stays consistent with what's shown.
+ */
+export function filterPostsByCategory(
+  posts: Post[],
+  category: NewsCategory,
+): Post[] {
+  if (category === DEFAULT_NEWS_CATEGORY) return posts;
+  return posts.filter((post) => deriveCategory(post) === category);
 }

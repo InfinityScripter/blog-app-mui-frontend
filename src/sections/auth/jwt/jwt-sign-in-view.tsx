@@ -11,7 +11,6 @@ import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import Divider from "@mui/material/Divider";
 import { useAuthContext } from "src/auth/hooks";
-import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -20,6 +19,7 @@ import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
 import InputAdornment from "@mui/material/InputAdornment";
+import { Iconify, SocialIcon } from "src/components/iconify";
 import { useRouter, useSearchParams } from "src/routes/hooks";
 import {
   signInWithGoogle,
@@ -53,8 +53,8 @@ export function JwtSignInView() {
   const password = useBoolean();
 
   const defaultValues = {
-    email: "demo@minimals.cc",
-    password: "@demo1",
+    email: "",
+    password: "",
   };
 
   const methods = useForm({
@@ -191,7 +191,7 @@ export function JwtSignInView() {
           fullWidth
           size="large"
           variant="outlined"
-          startIcon={<Iconify icon="simple-icons:yandex" />}
+          startIcon={<SocialIcon icon="yandex" />}
           onClick={signInWithYandex}
         >
           Войти через Yandex ID
@@ -203,12 +203,6 @@ export function JwtSignInView() {
   return (
     <>
       {renderHead}
-
-      <Alert severity="info" sx={{ mb: 3 }}>
-        Используйте <strong>{defaultValues.email}</strong>
-        {" с паролем "}
-        <strong>{defaultValues.password}</strong>
-      </Alert>
 
       {!!errorMsg && (
         <Alert severity="error" sx={{ mb: 3 }}>

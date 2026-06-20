@@ -36,7 +36,7 @@ interface PostDetailsViewProps {
 export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
   const [publish, setPublish] = useState("");
 
-  const { post } = useGetPost(initialPost?._id);
+  const { post, postMutate } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
 
   const handleChangePublish = useCallback(
@@ -140,13 +140,17 @@ export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
           </Typography>
         </Stack>
 
-        <PostCommentForm postId={currentPost?._id} />
+        <PostCommentForm
+          postId={currentPost?._id}
+          onCommentUpdated={postMutate}
+        />
 
         <Divider sx={{ mt: 5, mb: 2 }} />
 
         <PostCommentList
           comments={currentPost?.comments ?? []}
           postId={currentPost?._id}
+          onCommentUpdated={postMutate}
         />
       </Stack>
     </DashboardContent>

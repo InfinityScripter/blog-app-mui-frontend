@@ -96,7 +96,7 @@ export function UploadAvatar({
       <Iconify icon="solar:camera-add-bold" width={32} />
 
       <Typography variant="caption">
-        {hasFile ? "Update photo" : "Upload photo"}
+        {hasFile ? "Обновить фото" : "Загрузить фото"}
       </Typography>
     </Box>
   );

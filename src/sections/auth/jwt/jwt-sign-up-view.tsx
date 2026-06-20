@@ -10,7 +10,6 @@ import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import Divider from "@mui/material/Divider";
 import { useRouter } from "src/routes/hooks";
-import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -19,6 +18,7 @@ import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
 import InputAdornment from "@mui/material/InputAdornment";
+import { Iconify, SocialIcon } from "src/components/iconify";
 import {
   signUp,
   signInWithGoogle,
@@ -50,10 +50,10 @@ export function JwtSignUpView() {
   const [successMsg, setSuccessMsg] = useState("");
 
   const defaultValues = {
-    firstName: "Hello",
-    lastName: "Friend",
-    email: "hello@gmail.com",
-    password: "@demo1",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   };
 
   const methods = useForm({
@@ -211,7 +211,7 @@ export function JwtSignUpView() {
           fullWidth
           size="large"
           variant="outlined"
-          startIcon={<Iconify icon="simple-icons:yandex" />}
+          startIcon={<SocialIcon icon="yandex" />}
           onClick={signInWithYandex}
         >
           Продолжить через Yandex ID

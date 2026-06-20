@@ -82,4 +82,10 @@ export const endpoints = {
     postById: (id: string) => `/api/admin/posts/${id}`,
     auditLogs: "/api/admin/audit-logs",
   },
+  user: {
+    profile: "/api/user/profile",
+    avatar: "/api/user/avatar",
+    changePassword: "/api/user/change-password",
+  },
+  upload: "/api/upload",
 };

@@ -3,13 +3,10 @@
 import type { ReactNode } from "react";
 import type { Theme, SxProps } from "@mui/material/styles";
 
-import { _mock } from "src/_mock";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import Avatar from "@mui/material/Avatar";
 import Drawer from "@mui/material/Drawer";
-import Tooltip from "@mui/material/Tooltip";
 import { varAlpha } from "src/theme/styles";
 import { Label } from "src/components/label";
 import { useState, useCallback } from "react";
@@ -23,7 +20,6 @@ import { Scrollbar } from "src/components/scrollbar";
 import { AnimateAvatar } from "src/components/animate";
 import { useRouter, usePathname } from "src/routes/hooks";
 
-import { UpgradeBlock } from "./nav-upgrade";
 import { AccountButton } from "./account-button";
 import { SignOutButton } from "./sign-out-button";
 
@@ -61,7 +57,16 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
 
   const { user } = useAuthContext();
 
-  const userView: LayoutUserView | null = user;
+  // The auth `User` (`src/types/domain.ts`) exposes `name`/`avatarURL`, while the
+  // layout reads the Minimals-era `displayName`/`photoURL`. Map at the read site
+  // so a real (incl. Google/Yandex) avatar and name actually render.
+  const userView: LayoutUserView | null = user
+    ? {
+        displayName: user.name,
+        email: user.email,
+        photoURL: user.avatarURL,
+      }
+    : null;
 
   const [open, setOpen] = useState(false);
 
@@ -140,42 +145,8 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
           </Stack>
 
           <Stack
-            direction="row"
-            spacing={1}
-            flexWrap="wrap"
-            justifyContent="center"
-            sx={{ p: 3 }}
-          >
-            {[...Array(3)].map((_, index) => (
-              <Tooltip
-                key={_mock.fullName(index + 1)}
-                title={`Switch to: ${_mock.fullName(index + 1)}`}
-              >
-                <Avatar
-                  alt={_mock.fullName(index + 1)}
-                  src={_mock.image.avatar(index + 1)}
-                  onClick={() => {}}
-                />
-              </Tooltip>
-            ))}
-
-            <Tooltip title="Add account">
-              <IconButton
-                sx={{
-                  bgcolor: varAlpha(
-                    theme.vars.palette.grey["500Channel"],
-                    0.08,
-                  ),
-                  border: `dashed 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.32)}`,
-                }}
-              >
-                <Iconify icon="mingcute:add-line" />
-              </IconButton>
-            </Tooltip>
-          </Stack>
-
-          <Stack
             sx={{
+              mt: 3,
               py: 3,
               px: 2.5,
               borderTop: `dashed 1px ${theme.vars.palette.divider}`,
@@ -183,9 +154,14 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
             }}
           >
             {data.map((option) => {
+              // The first item is the dynamic root link: inside the dashboard it
+              // points "home" to the public site, elsewhere it points to the
+              // dashboard.
+              const isRoot = option.href === "/";
+
               const rootLabel = pathname.includes("/dashboard")
-                ? "Home"
-                : "Dashboard";
+                ? "Главная"
+                : "Дашборд";
 
               const rootHref = pathname.includes("/dashboard")
                 ? "/"
@@ -195,9 +171,7 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
                 <MenuItem
                   key={option.label}
                   onClick={() =>
-                    handleClickItem(
-                      option.label === "Home" ? rootHref : option.href,
-                    )
+                    handleClickItem(isRoot ? rootHref : option.href)
                   }
                   sx={{
                     py: 1,
@@ -209,7 +183,7 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
                   {option.icon}
 
                   <Box component="span" sx={{ ml: 2 }}>
-                    {option.label === "Home" ? rootLabel : option.label}
+                    {isRoot ? rootLabel : option.label}
                   </Box>
 
                   {option.info && (
@@ -221,10 +195,6 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
               );
             })}
           </Stack>
-
-          <Box sx={{ px: 2.5, py: 3 }}>
-            <UpgradeBlock />
-          </Box>
         </Scrollbar>
 
         <Box sx={{ p: 2.5 }}>
