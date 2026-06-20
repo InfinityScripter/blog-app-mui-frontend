@@ -54,6 +54,11 @@ export function getNavData(role?: string) {
           path: paths.dashboard.admin.posts,
           icon: ICONS.blog,
         },
+        {
+          title: "Журнал аудита",
+          path: paths.dashboard.admin.auditLogs,
+          icon: ICONS.dashboard,
+        },
       ],
     });
   }
