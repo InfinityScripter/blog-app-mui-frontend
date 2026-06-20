@@ -178,7 +178,11 @@ export function AdminAuditLogsView() {
                       </TableCell>
                       <TableCell>
                         <Stack spacing={0.5} alignItems="flex-start">
-                          <Chip label={log.action} size="small" />
+                          <Chip
+                            label={log.action}
+                            size="small"
+                            variant="soft"
+                          />
                           {meta && (
                             <Typography
                               variant="caption"
