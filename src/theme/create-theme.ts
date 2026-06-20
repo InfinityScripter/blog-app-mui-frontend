@@ -1,8 +1,4 @@
-import type {
-  ColorScheme,
-  SettingsState,
-  ThemeDirection,
-} from "src/types/domain";
+import type { SettingsState } from "src/types/domain";
 
 import {
   type Theme,
@@ -26,30 +22,19 @@ import {
 // ----------------------------------------------------------------------
 
 export function createTheme(settings: SettingsState): Theme {
-  /**
-   * NOTE: `themeMode` / `themeDirection` are legacy property names that are not
-   * part of `SettingsState` (the real fields are `colorScheme` / `direction`),
-   * so these reads resolve to `undefined` at runtime. This typing preserves the
-   * existing runtime behavior exactly — see follow-up task to correct the bug.
-   */
-  const legacySettings: SettingsState & {
-    themeMode?: ColorScheme;
-    themeDirection?: ThemeDirection;
-  } = settings;
-
-  /**
-   * `themeMode` is always `undefined` at runtime (see NOTE above), so
-   * `?? "dark"` selects the same dark branch that `shadows`/`customShadows`
-   * took before — `undefined === "light"` was `false`. Runtime output is
-   * unchanged; this only gives the `ColorScheme`-typed params a concrete value.
-   */
-  const themeMode: ColorScheme = legacySettings.themeMode ?? "dark";
+  // This is a CSS-vars theme (extendTheme + class color-scheme selector): both
+  // light and dark schemes are generated and the active one is toggled at
+  // runtime by CssVarsProvider, and direction is applied by the <RTL> wrapper.
+  // So `shadows`/`customShadows` here only seed the base (non-scheme) values and
+  // `direction` only sets the theme-object field — both wired to the real
+  // settings for consistency.
+  const { colorScheme, direction } = settings;
 
   const initialTheme = {
     colorSchemes,
-    shadows: shadows(themeMode),
-    customShadows: customShadows(themeMode),
-    direction: legacySettings.themeDirection,
+    shadows: shadows(colorScheme),
+    customShadows: customShadows(colorScheme),
+    direction,
     shape: { borderRadius: 8 },
     components,
     typography: {
@@ -80,7 +65,7 @@ export function createTheme(settings: SettingsState): Theme {
 
 // ----------------------------------------------------------------------
 
-function shouldSkipGeneratingVar(keys: string[], value: unknown): boolean {
+function shouldSkipGeneratingVar(keys: string[], _value: unknown): boolean {
   const skipGlobalKeys = [
     "mixins",
     "overlays",
