@@ -66,7 +66,16 @@ export function PostDetailsHomeView({
             {currentPost?.description}
           </Typography>
 
-          <Markdown children={currentPost?.content} />
+          {currentPost?.content?.trim() ? (
+            <Markdown children={currentPost.content} />
+          ) : (
+            <Typography
+              variant="body2"
+              sx={{ py: 3, color: "text.disabled", fontStyle: "italic" }}
+            >
+              У этого поста пока нет содержимого.
+            </Typography>
+          )}
 
           <Stack
             spacing={3}
