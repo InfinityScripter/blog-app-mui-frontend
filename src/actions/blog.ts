@@ -15,8 +15,16 @@ const swrOptions = {
   revalidateOnReconnect: false,
 };
 
-export function useGetPosts() {
-  const url = endpoints.post.list;
+interface UseGetPostsOptions {
+  /** Exclude posts carrying this tag (e.g. 'новости' to hide news from the feed). */
+  excludeTag?: string;
+}
+
+export function useGetPosts(options: UseGetPostsOptions = {}) {
+  const { excludeTag } = options;
+  const url = excludeTag
+    ? `${endpoints.post.list}?excludeTag=${encodeURIComponent(excludeTag)}`
+    : endpoints.post.list;
 
   const { data, isLoading, error, isValidating } = useSWR<ListPostsResponse>(
     url,

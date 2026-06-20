@@ -12,6 +12,10 @@ export const FEED_TAGS = [
 
 export type FeedTag = (typeof FEED_TAGS)[number];
 
+// News (bot-published, tag 'новости') lives only in /news — exclude it from the
+// landing feed so each post appears in exactly one place.
+export const EXCLUDED_NEWS_TAG = "новости";
+
 // How many posts to show before the "Показать ещё" button; each click adds
 // this many more. Not infinite scroll by design.
 export const FEED_PAGE_SIZE = 10;

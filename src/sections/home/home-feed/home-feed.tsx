@@ -19,6 +19,7 @@ import {
   FEED_PAGE_SIZE,
   FEED_SHOW_MORE,
   FEED_EMPTY_TEXT,
+  EXCLUDED_NEWS_TAG,
 } from "./const";
 
 import type { FeedTag } from "./const";
@@ -26,7 +27,9 @@ import type { FeedTag } from "./const";
 // ----------------------------------------------------------------------
 
 export function HomeFeed() {
-  const { posts, postsLoading } = useGetPosts();
+  const { posts, postsLoading } = useGetPosts({
+    excludeTag: EXCLUDED_NEWS_TAG,
+  });
 
   const [selectedTags, setSelectedTags] = useState<FeedTag[]>([]);
   const [visibleCount, setVisibleCount] = useState(FEED_PAGE_SIZE);

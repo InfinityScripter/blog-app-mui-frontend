@@ -1,5 +1,5 @@
 import { CONFIG } from "src/config-global";
-import { getPosts } from "src/actions/blog-ssr";
+import { getBlogPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
@@ -17,9 +17,9 @@ export default async function Page() {
   // An unreachable backend at build time must not fail the build: fall back to
   // an empty list and let ISR refill the page on the next revalidate. Mirrors
   // the try/catch in post/[id]/generateStaticParams.
-  let posts: Awaited<ReturnType<typeof getPosts>>["posts"] = [];
+  let posts: Awaited<ReturnType<typeof getBlogPosts>>["posts"] = [];
   try {
-    ({ posts } = await getPosts());
+    ({ posts } = await getBlogPosts());
   } catch {
     posts = [];
   }
