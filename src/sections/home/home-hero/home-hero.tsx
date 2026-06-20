@@ -10,9 +10,10 @@ import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { marketingHeroCtaRowSx } from "src/theme/styles";
+import { RouterLink } from "src/routes/components";
 import { useResponsive } from "src/hooks/use-responsive";
 import { varFade, MotionContainer } from "src/components/animate";
+import { varAlpha, marketingHeroCtaRowSx } from "src/theme/styles";
 import { MarketingGradientHighlight } from "src/components/marketing";
 import { m, useScroll, useSpring, useTransform } from "framer-motion";
 
@@ -173,17 +174,49 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
     </Box>
   );
 
-  // Информация о блоге
+  // Информация о блоге — кликабельный тизер, ведёт в блог (иначе это тупик:
+  // заголовок «Новые материалы» без списка постов и без перехода).
   const renderBlogInfo = (
     <MInview>
-      <Box sx={{ textAlign: "center", maxWidth: 600, mx: "auto", mt: 2 }}>
-        <Typography variant="subtitle1" sx={{ mb: 1 }}>
+      <Link
+        component={RouterLink}
+        href="/post"
+        underline="none"
+        color="inherit"
+        sx={{
+          display: "block",
+          textAlign: "center",
+          maxWidth: 600,
+          mx: "auto",
+          mt: 2,
+          borderRadius: 2,
+          p: 2,
+          transition: theme.transitions.create([
+            "background-color",
+            "transform",
+          ]),
+          "&:hover": {
+            transform: "translateY(-2px)",
+            bgcolor: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
+          },
+        }}
+      >
+        <Typography
+          variant="subtitle1"
+          sx={{
+            mb: 1,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 0.5,
+          }}
+        >
           {HERO_BLOG_INFO_TITLE}
+          <Iconify width={18} icon="eva:arrow-ios-forward-fill" />
         </Typography>
-        <Typography variant="body2" sx={{ mb: 2, color: "text.secondary" }}>
+        <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {HERO_BLOG_INFO_DESCRIPTION}
         </Typography>
-      </Box>
+      </Link>
     </MInview>
   );
 
