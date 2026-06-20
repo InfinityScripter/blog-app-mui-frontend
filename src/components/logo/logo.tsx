@@ -2,9 +2,9 @@
 
 import type { BoxProps } from "@mui/material/Box";
 
+import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import NoSsr from "@mui/material/NoSsr";
-import { useId, forwardRef } from "react";
 import { useTheme } from "@mui/material/styles";
 import { RouterLink } from "src/routes/components";
 
@@ -35,13 +35,7 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
   ) => {
     const theme = useTheme();
 
-    const gradientId = useId();
-
-    const PRIMARY_LIGHT = theme.vars.palette.primary.light;
-
     const PRIMARY_MAIN = theme.vars.palette.primary.main;
-
-    const PRIMARY_DARK = theme.vars.palette.primary.dark;
 
     /*
      * OR using local (public folder)

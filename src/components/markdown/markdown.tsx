@@ -56,7 +56,7 @@ const rehypePlugins: ReactMarkdownOptions["rehypePlugins"] = [
 ];
 
 const components: ReactMarkdownOptions["components"] = {
-  img: ({ node, src, alt, title }) => (
+  img: ({ src, alt, title }) => (
     <Image
       ratio="16/9"
       src={typeof src === "string" ? src : undefined}
@@ -66,7 +66,7 @@ const components: ReactMarkdownOptions["components"] = {
       sx={{ borderRadius: 2 }}
     />
   ),
-  a: ({ href, children, node, ...other }) => {
+  a: ({ href, children, node: _node, ...other }) => {
     const linkProps = isExternalLink(href ?? "")
       ? { target: "_blank", rel: "noopener" }
       : { component: RouterLink };
@@ -87,7 +87,7 @@ const components: ReactMarkdownOptions["components"] = {
       <pre>{children}</pre>
     </div>
   ),
-  code({ className, children, node, ...other }) {
+  code({ className, children, node: _node, ...other }) {
     const language = /language-(\w+)/.exec(className || "");
 
     return language ? (

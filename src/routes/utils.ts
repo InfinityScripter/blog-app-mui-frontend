@@ -33,7 +33,7 @@ export function removeParams(url: string): string {
     const urlObj = new URL(url, window.location.origin);
 
     return removeLastSlash(urlObj.pathname);
-  } catch (error) {
+  } catch {
     return url;
   }
 }
