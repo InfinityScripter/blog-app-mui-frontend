@@ -46,6 +46,22 @@ export async function getNewsPosts(): Promise<ListPostsResponse> {
 
 // ----------------------------------------------------------------------
 
+/**
+ * Published posts for the blog list, EXCLUDING news (tag 'новости'). News lives
+ * only in /news; the blog and home feed show authored/portfolio posts.
+ */
+export async function getBlogPosts(): Promise<ListPostsResponse> {
+  const url = `${SERVER_URL}${endpoints.post.list}?excludeTag=${encodeURIComponent(NEWS_TAG)}`;
+  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch blog posts: ${res.status}`);
+  }
+  const data: ListPostsResponse = await res.json();
+  return data;
+}
+
+// ----------------------------------------------------------------------
+
 export async function getPost(id: string): Promise<PostResponse> {
   const res = await fetch(`${SERVER_URL}${endpoints.post.details}?id=${id}`, {
     next: { revalidate: REVALIDATE_SECONDS },
