@@ -4,6 +4,11 @@ name: frontend-ci
 # pushes to main. Blocks merge on lint errors, circular dependencies, or a
 # broken production build.
 #
+# `yarn build` IS gated here: the public ISR pages (/post, /post/[id]) tolerate
+# an unreachable backend at build time — the SSR helpers fall back to an empty
+# list and ISR refills the page on the next revalidate — so the build succeeds
+# without infra and still catches real build breakage.
+#
 # Intentionally NOT gated here:
 #  - e2e: requires a running backend + seeded Postgres; too heavy for this gate.
 #  - knip: reports false positives for some live features, so it runs as a

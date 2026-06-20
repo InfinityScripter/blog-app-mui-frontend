@@ -14,7 +14,15 @@ export const metadata = { title: `Post list - ${CONFIG.site.name}` };
 export const revalidate = 3600;
 
 export default async function Page() {
-  const { posts } = await getPosts();
+  // An unreachable backend at build time must not fail the build: fall back to
+  // an empty list and let ISR refill the page on the next revalidate. Mirrors
+  // the try/catch in post/[id]/generateStaticParams.
+  let posts: Awaited<ReturnType<typeof getPosts>>["posts"] = [];
+  try {
+    ({ posts } = await getPosts());
+  } catch {
+    posts = [];
+  }
 
   return <PostListHomeView posts={posts} />;
 }
