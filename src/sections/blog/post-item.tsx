@@ -9,6 +9,7 @@ import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
+import { coverSrc } from "src/utils/cover-src";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -17,16 +18,11 @@ import CardContent from "@mui/material/CardContent";
 import { maxLine, varAlpha } from "src/theme/styles";
 import { AvatarShape } from "src/assets/illustrations";
 import { fShortenNumber } from "src/utils/format-number";
-import { formatImageUrl } from "src/utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
 export function PostItem({ post }: { post: Post }) {
   const theme = useTheme();
-  console.log(
-    { post },
-    "данные от сервера которые нужно показывать в карточке",
-  );
 
   const linkTo = paths.post.details(String(post._id));
 
@@ -55,11 +51,7 @@ export function PostItem({ post }: { post: Post }) {
           }}
         />
 
-        <Image
-          alt={post.title}
-          src={formatImageUrl(post.coverUrl)}
-          ratio="4/3"
-        />
+        <Image alt={post.title} src={coverSrc(post.coverUrl)} ratio="4/3" />
       </Box>
 
       <CardContent sx={{ pt: 6 }}>
@@ -117,7 +109,7 @@ export function PostItemLatest({ post, index }: { post: Post; index: number }) {
 
       <Image
         alt={post.title}
-        src={formatImageUrl(post.coverUrl)}
+        src={coverSrc(post.coverUrl)}
         ratio="4/3"
         // The first featured cover is the LCP element on the blog list — load
         // it eagerly instead of lazily so it doesn't gate Largest Contentful

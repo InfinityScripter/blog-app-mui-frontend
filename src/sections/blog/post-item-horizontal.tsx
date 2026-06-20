@@ -23,7 +23,7 @@ import { usePostDelete } from "src/hooks/use-post-delete";
 import { ConfirmDialog } from "src/components/confirm-dialog";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
-import { formatImageUrl } from "../../utils/format-image-url";
+import { coverSrc } from "../../utils/cover-src";
 
 // ----------------------------------------------------------------------
 
@@ -158,7 +158,7 @@ export function PostItemHorizontal({ post }: { post: Post }) {
           />
           <Image
             alt={title}
-            src={formatImageUrl(coverUrl)}
+            src={coverSrc(coverUrl)}
             sx={{ height: 1, borderRadius: 1.5 }}
           />
         </Box>

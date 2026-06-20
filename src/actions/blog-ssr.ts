@@ -58,7 +58,6 @@ export async function getLatestPosts(
 export async function createPost(
   postData: Partial<Post>,
 ): Promise<PostResponse> {
-  console.log(postData, "postData");
   const res = await axios.post<PostResponse>(endpoints.post.new, postData);
   return res.data;
 }
