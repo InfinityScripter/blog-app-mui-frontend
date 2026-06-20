@@ -25,6 +25,7 @@ export const mediaQueries: {
 const FONT_VARIABLES: Record<string, string> = {
   "Public Sans": "var(--font-public-sans)",
   Barlow: "var(--font-barlow)",
+  Onest: "var(--font-onest)",
 };
 
 /**

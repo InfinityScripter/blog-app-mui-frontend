@@ -7,10 +7,10 @@ import { CONFIG } from "src/config-global";
 import { primary } from "src/theme/core/palette";
 import { Analytics } from "@vercel/analytics/next";
 import { AuthProvider } from "src/auth/context/jwt";
-import { Barlow, Public_Sans } from "next/font/google";
 import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Onest, Barlow, Public_Sans } from "next/font/google";
 import { MotionLazy } from "src/components/animate/motion-lazy";
 import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
 import { defaultSettings, SettingsProvider } from "src/components/settings";
@@ -31,6 +31,14 @@ const barlow = Barlow({
   subsets: ["latin"],
   weight: ["600", "700", "800"],
   variable: "--font-barlow",
+  display: "swap",
+});
+
+// Editorial display face for headings — Cyrillic-first, OFL-licensed.
+const onest = Onest({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-onest",
   display: "swap",
 });
 
@@ -57,7 +65,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="ru"
       suppressHydrationWarning
-      className={`${publicSans.variable} ${barlow.variable}`}
+      className={`${publicSans.variable} ${barlow.variable} ${onest.variable}`}
     >
       <body suppressHydrationWarning>
         {getInitColorSchemeScript}

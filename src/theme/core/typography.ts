@@ -6,7 +6,9 @@ export const defaultFont = "Public Sans";
 
 export const primaryFont = setFont(defaultFont);
 
-export const secondaryFont = setFont("Barlow");
+// Editorial display face for headings (Onest — Cyrillic-first, OFL). Replaces
+// Barlow as the secondary/display family across h1–h6.
+export const secondaryFont = setFont("Onest");
 
 // ----------------------------------------------------------------------
 
@@ -43,18 +45,21 @@ export const typography = {
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: pxToRem(20),
+    fontFamily: secondaryFont,
     ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
   },
   h5: {
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: pxToRem(18),
+    fontFamily: secondaryFont,
     ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
   },
   h6: {
     fontWeight: 600,
     lineHeight: 28 / 18,
     fontSize: pxToRem(17),
+    fontFamily: secondaryFont,
     ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {

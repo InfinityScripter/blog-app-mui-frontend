@@ -26,6 +26,10 @@ interface Paths {
     root: string;
     details: (id: string) => string;
   };
+  news: {
+    root: string;
+    details: (id: string) => string;
+  };
   auth: {
     jwt: {
       signIn: string;
@@ -72,6 +76,11 @@ export const paths: Paths = {
     "https://www.figma.com/design/cAPz4pYPtQEXivqe11EcDE/%5BPreview%5D-Minimal-Web.v6.0.0",
   post: {
     root: `/post`,
+    details: (id: string) => `/post/${id}`,
+  },
+  news: {
+    root: `/news`,
+    // News items are posts — the detail page is shared with /post/[id].
     details: (id: string) => `/post/${id}`,
   },
   // AUTH

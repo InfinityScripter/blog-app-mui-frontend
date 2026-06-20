@@ -129,7 +129,10 @@ export function PostItemLatest({ post, index }: { post: Post; index: number }) {
         // it eagerly instead of lazily so it doesn't gate Largest Contentful
         // Paint on mobile.
         visibleByDefault={index === 0}
-        sx={{ height: 360 }}
+        // Let the 4/3 ratio reserve space on mobile (no fixed height → no CLS);
+        // pin the 360px featured height only from md up, where the overlay
+        // layout expects it.
+        sx={{ height: { xs: "auto", md: 360 } }}
         slotProps={{
           overlay: {
             bgcolor: varAlpha("var(--palette-grey-900Channel)", 0.48),

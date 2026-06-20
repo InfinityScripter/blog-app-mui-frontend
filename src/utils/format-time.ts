@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import "dayjs/locale/ru";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -6,20 +7,22 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+// Russian-language news portal — dates read "20 июня 2026", not "20 Jun 2026".
+dayjs.locale("ru");
 
 /**
  * Docs: https://day.js.org/docs/en/display/format
  */
 export const formatStr = {
-  dateTime: "DD MMM YYYY h:mm a", // 17 Apr 2022 12:00 am
-  date: "DD MMM YYYY", // 17 Apr 2022
-  time: "h:mm a", // 12:00 am
+  dateTime: "D MMMM YYYY HH:mm", // 17 апреля 2022 14:30
+  date: "D MMMM YYYY", // 17 апреля 2022
+  time: "HH:mm", // 14:30
   split: {
-    dateTime: "DD/MM/YYYY h:mm a", // 17/04/2022 12:00 am
+    dateTime: "DD/MM/YYYY HH:mm", // 17/04/2022 14:30
     date: "DD/MM/YYYY", // 17/04/2022
   },
   paramCase: {
-    dateTime: "DD-MM-YYYY h:mm a", // 17-04-2022 12:00 am
+    dateTime: "DD-MM-YYYY HH:mm", // 17-04-2022 14:30
     date: "DD-MM-YYYY", // 17-04-2022
   },
 };
