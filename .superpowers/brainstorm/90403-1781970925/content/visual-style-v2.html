@@ -1,0 +1,93 @@
+<h2>Light directions — round 2</h2>
+<p class="subtitle">3 new lighter looks. Bigger hero mockups with a real photo. Click one (or mix — tell me).</p>
+
+<style>
+  .heroM{height:300px;border-radius:14px;overflow:hidden;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+  .heroM .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;font-size:11px;letter-spacing:2px}
+  .heroM .nav{display:flex;gap:14px;opacity:.75}
+  .heroM .bottom{padding:18px 20px}
+  .heroM .kicker{font-size:11px;letter-spacing:3px;margin-bottom:6px}
+  .heroM .h1{font-size:30px;line-height:1.02;font-weight:800;margin:0}
+  .heroM .ctaR{margin-top:12px;display:flex;gap:8px;align-items:center}
+  .heroM .btn{padding:8px 16px;border-radius:30px;font-size:11px;font-weight:700}
+  .heroM .btn2{padding:8px 16px;border-radius:30px;font-size:11px;font-weight:600;border:1px solid currentColor}
+  .heroM .photo{position:absolute;right:0;top:0;height:100%;width:42%;object-fit:cover}
+  .heroM .fade{position:absolute;inset:0}
+  .feat{display:flex;gap:10px;margin-top:14px}
+  .feat .chip{padding:5px 11px;border-radius:8px;font-size:10px;font-weight:600}
+</style>
+
+<div class="cards">
+
+  <!-- D: Sand & Sage -->
+  <div class="card" data-choice="sand-sage" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;height:auto">
+      <div class="heroM" style="background:#f3efe7;color:#2f3a33">
+        <img class="photo" src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=500&q=70" alt="">
+        <div class="fade" style="background:linear-gradient(90deg,#f3efe7 50%,transparent 78%)"></div>
+        <div style="position:relative">
+          <div class="topbar"><b style="letter-spacing:3px">ВОРОНОВ</b><div class="nav"><span>История</span><span>Услуги</span><span>Отзывы</span><span>Блог</span></div></div>
+        </div>
+        <div class="bottom" style="position:relative;width:62%">
+          <div class="kicker" style="color:#7a8a6f">КИНОЛОГ · 12 ЛЕТ ОПЫТА</div>
+          <p class="h1" style="font-family:Georgia,serif">Послушание,<br>построенное на доверии</p>
+          <div class="ctaR"><span class="btn" style="background:#7a8a6f;color:#fff">Записаться</span><span class="btn2">Курсы</span></div>
+          <div class="feat"><span class="chip" style="background:#e3dccb">🐾 500+ собак</span><span class="chip" style="background:#e3dccb">★ 4.9 рейтинг</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>D · Sand & Sage</h3>
+      <p>Песочный фон + шалфейно-зелёный акцент. Serif-заголовок. Спокойно, натурально, «эко-доверие». Тёплый светлый минимализм.</p>
+    </div>
+  </div>
+
+  <!-- E: Cream & Sky -->
+  <div class="card" data-choice="cream-sky" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;height:auto">
+      <div class="heroM" style="background:#fbfaf7;color:#1f2933">
+        <img class="photo" src="https://images.unsplash.com/photo-1591769225440-811ad7d6eab3?w=500&q=70" alt="">
+        <div class="fade" style="background:linear-gradient(90deg,#fbfaf7 52%,transparent 80%)"></div>
+        <div style="position:relative">
+          <div class="topbar"><b style="letter-spacing:3px;color:#2563eb">МАКС ВОРОНОВ</b><div class="nav"><span>История</span><span>Услуги</span><span>Цены</span><span>Блог</span></div></div>
+        </div>
+        <div class="bottom" style="position:relative;width:62%">
+          <div class="kicker" style="color:#2563eb">СЕРТИФИЦИРОВАННЫЙ КИНОЛОГ</div>
+          <p class="h1" style="font-family:'Helvetica Neue',sans-serif;letter-spacing:-.5px">Спокойная собака.<br>Спокойная семья.</p>
+          <div class="ctaR"><span class="btn" style="background:#2563eb;color:#fff">Записаться</span><span class="btn2" style="color:#2563eb;border-color:#2563eb">Смотреть курсы</span></div>
+          <div class="feat"><span class="chip" style="background:#e8f0fe;color:#2563eb">Без жёстких методов</span><span class="chip" style="background:#e8f0fe;color:#2563eb">Любые породы</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>E · Cream & Sky</h3>
+      <p>Почти белый кремовый фон + чистый синий акцент. Современный sans, много воздуха. Профессионально, «клиника-уровень доверия», свежо.</p>
+    </div>
+  </div>
+
+  <!-- F: Soft Peach -->
+  <div class="card" data-choice="soft-peach" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;height:auto">
+      <div class="heroM" style="background:linear-gradient(135deg,#fff6f0,#ffeede);color:#43302b">
+        <img class="photo" src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=500&q=70" alt="">
+        <div class="fade" style="background:linear-gradient(90deg,#fff6f0 50%,transparent 80%)"></div>
+        <div style="position:relative">
+          <div class="topbar"><b style="letter-spacing:3px;color:#ea7c45">ВОРОНОВ·DOGS</b><div class="nav"><span>О себе</span><span>Услуги</span><span>Отзывы</span><span>Блог</span></div></div>
+        </div>
+        <div class="bottom" style="position:relative;width:62%">
+          <div class="kicker" style="color:#ea7c45">КИНОЛОГ · ЗООПСИХОЛОГ</div>
+          <p class="h1" style="font-family:'Trebuchet MS',sans-serif">Счастливый пёс,<br>счастливый хозяин</p>
+          <div class="ctaR"><span class="btn" style="background:#ea7c45;color:#fff">Записаться</span><span class="btn2" style="color:#ea7c45;border-color:#ea7c45">Как проходит</span></div>
+          <div class="feat"><span class="chip" style="background:#ffe2cf;color:#c2410c">🐕 Щенки и взрослые</span><span class="chip" style="background:#ffe2cf;color:#c2410c">Онлайн и очно</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>F · Soft Peach</h3>
+      <p>Светлый персик-крем + мягкий оранж. Округлый дружелюбный sans. Тепло, по-семейному, доступно. Самый «уютный» из светлых.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:20px">Все три — светлые. Скажи: какой ближе, или смешать (напр. «фон как E, акцент как D»).</p>

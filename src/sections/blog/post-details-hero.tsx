@@ -9,11 +9,11 @@ import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
-import { varAlpha, bgGradient } from "src/theme/styles";
 import { useResponsive } from "src/hooks/use-responsive";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { formatImageUrl } from "src/utils/format-image-url";
 import { Iconify, SocialIcon } from "src/components/iconify";
+import { maxLine, varAlpha, bgGradient } from "src/theme/styles";
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +41,8 @@ export function PostDetailsHero({
           color: `0deg, ${varAlpha("var(--palette-grey-900Channel)", 0.64)}, ${varAlpha("var(--palette-grey-900Channel)", 0.64)}`,
           imgUrl: formattedCoverUrl,
         }),
-        height: 480,
+        // Responsive hero so the cover doesn't tower on phones.
+        height: { xs: 360, md: 480 },
         overflow: "hidden",
       }}
     >
@@ -55,6 +56,8 @@ export function PostDetailsHero({
             position: "absolute",
             maxWidth: 480,
             pt: { xs: 2, md: 8 },
+            // Clamp very long RU news headlines so they can't overflow the hero.
+            ...maxLine({ line: 3 }),
           }}
         >
           {title}
