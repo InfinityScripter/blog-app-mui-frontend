@@ -54,6 +54,19 @@ module.exports = {
     // Circular deps are currently at zero (verified with madge). Lock that in
     // as an error so they can never be reintroduced.
     "import/no-cycle": [2, { maxDepth: 1, ignoreExternal: true }],
+    // Type-checker suppressions are now at zero (no @ts-nocheck anywhere).
+    // Lock it: @ts-nocheck/@ts-ignore are banned outright; @ts-expect-error is
+    // allowed only with a written justification (and self-clears once the
+    // upstream type is fixed). Forces "fix the cause", not "silence the file".
+    "@typescript-eslint/ban-ts-comment": [
+      2,
+      {
+        "ts-nocheck": true,
+        "ts-ignore": true,
+        "ts-expect-error": "allow-with-description",
+        minimumDescriptionLength: 10,
+      },
+    ],
     "import/no-relative-packages": 0,
     "import/no-extraneous-dependencies": 0,
     "import/order": 0,
