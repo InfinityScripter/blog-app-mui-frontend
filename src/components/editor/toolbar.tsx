@@ -1,4 +1,5 @@
-// @ts-nocheck
+import type { Editor } from "@tiptap/react";
+
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import { varAlpha } from "src/theme/styles";
@@ -15,9 +16,21 @@ import { HeadingBlock } from "./components/heading-block";
  * https://remixicon.com
  */
 
+interface ToolbarProps {
+  editor: Editor | null;
+  fullItem?: boolean;
+  fullScreen: boolean;
+  onToggleFullScreen: () => void;
+}
+
 // ----------------------------------------------------------------------
 
-export function Toolbar({ editor, fullItem, fullScreen, onToggleFullScreen }) {
+export function Toolbar({
+  editor,
+  fullItem,
+  fullScreen,
+  onToggleFullScreen,
+}: ToolbarProps) {
   if (!editor) {
     return null;
   }

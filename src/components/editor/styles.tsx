@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Stack from "@mui/material/Stack";
 import { varAlpha } from "src/theme/styles";
 import { styled } from "@mui/material/styles";
@@ -183,7 +182,7 @@ export const StyledRoot = styled(Stack, {
           padding: theme.spacing(0.25, 0.5),
           color: vars.palette.text.secondary,
           fontSize: theme.typography.body2.fontSize,
-          borderRadius: theme.shape.borderRadius / 2,
+          borderRadius: Number(theme.shape.borderRadius) / 2,
           backgroundColor: varAlpha(vars.palette.grey["500Channel"], 0.2),
         },
         /**

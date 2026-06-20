@@ -35,7 +35,10 @@ export function CodeHighlightBlock({
       </select>
 
       <pre>
-        {/* @ts-ignore */}
+        {/* Tiptap types `as` as only "div", but rendering code blocks with
+            `as="code"` is the documented usage. @ts-expect-error self-clears
+            if upstream widens the type. */}
+        {/* @ts-expect-error — NodeViewContent `as` prop is typed too narrowly */}
         <NodeViewContent as="code" />
       </pre>
     </NodeViewWrapper>
