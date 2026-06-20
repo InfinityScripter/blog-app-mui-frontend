@@ -69,7 +69,7 @@ export function AccountGeneral() {
     watch,
     setValue,
     handleSubmit,
-    formState: { isSubmitting, isDirty },
+    formState: { isSubmitting },
   } = methods;
 
   useEffect(() => {
@@ -77,7 +77,14 @@ export function AccountGeneral() {
   }, [defaultValues, reset]);
 
   const currentAvatar = watch("avatarURL");
+  const currentName = watch("name");
   const hasAvatar = Boolean(currentAvatar);
+
+  // RHFUploadAvatar's onDrop doesn't flag the form dirty, so derive the
+  // "changed" state ourselves: a freshly picked avatar is a File, or the name
+  // differs from the saved value.
+  const isChanged =
+    currentAvatar instanceof File || currentName !== (user?.name ?? "");
 
   const role = user?.role ?? "user";
   const verified = user?.isEmailVerified ?? false;
@@ -257,7 +264,7 @@ export function AccountGeneral() {
               <LoadingButton
                 type="submit"
                 variant="contained"
-                disabled={!isDirty}
+                disabled={!isChanged}
                 loading={isSubmitting}
                 startIcon={<Iconify icon="solar:diskette-bold" />}
               >
