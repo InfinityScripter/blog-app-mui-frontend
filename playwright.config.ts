@@ -31,10 +31,14 @@ const prodCommand = `${nextBin} build && ${nextBin} start -p ${PORT}`;
 export default defineConfig({
   testDir: "./e2e",
   globalSetup: "./e2e/global-setup.ts",
-  fullyParallel: true,
+  // Run serially. The specs share a backend + one created post and the Next
+  // dev server compiles routes lazily on first hit; running fully parallel
+  // races the cold compile and flakes (a different spec fails each run, all
+  // pass in isolation). One worker keeps the suite reliably green.
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  retries: process.env.CI ? 2 : 1,
+  workers: 1,
   reporter: process.env.CI ? "list" : [["list"], ["html", { open: "never" }]],
   timeout: 30_000,
   expect: { timeout: 10_000 },
