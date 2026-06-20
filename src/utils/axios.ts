@@ -80,5 +80,6 @@ export const endpoints = {
     users: "/api/admin/users",
     userById: (id: string) => `/api/admin/users/${id}`,
     postById: (id: string) => `/api/admin/posts/${id}`,
+    auditLogs: "/api/admin/audit-logs",
   },
 };
