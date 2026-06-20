@@ -2,7 +2,6 @@
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { useMockedUser } from "src/auth/hooks";
 import { useTheme } from "@mui/material/styles";
 import { DashboardContent } from "src/layouts/dashboard";
 import { svgColorClasses } from "src/components/svg-color";
@@ -28,8 +27,6 @@ import { EcommerceLatestProducts } from "../../e-commerce/ecommerce-latest-produ
 // ----------------------------------------------------------------------
 
 export function OverviewAppView() {
-  const { user } = useMockedUser();
-
   const theme = useTheme();
 
   return (

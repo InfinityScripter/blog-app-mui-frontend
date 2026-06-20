@@ -8,7 +8,6 @@ import type {
 
 import { useState } from "react";
 import { CSS } from "@dnd-kit/utilities";
-import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
 import {
   arrayMove,
@@ -205,7 +204,6 @@ function KanbanColumn({
 // ----------------------------------------------------------------------
 
 export function KanbanView() {
-  const { user } = useAuthContext();
   const { boards, boardsMutate } = useGetBoards();
   const [boardId, setBoardId] = useState<string | null>(null);
   const { board, boardMutate } = useGetBoard(boardId);

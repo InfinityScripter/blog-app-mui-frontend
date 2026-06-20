@@ -26,7 +26,18 @@ export interface ScrollbarProps extends Omit<SimpleBarProps, "children"> {
 }
 
 export const Scrollbar = forwardRef<HTMLDivElement, ScrollbarProps>(
-  ({ slotProps, children, fillContent, naturalScroll, sx, ...other }, ref) => (
+  (
+    {
+      slotProps,
+      children,
+      fillContent,
+      // Destructured to keep it out of the `...other` DOM spread; not used here.
+      naturalScroll: _naturalScroll,
+      sx,
+      ...other
+    },
+    ref,
+  ) => (
     <Box
       component={SimpleBar}
       scrollableNodeProps={{ ref }}

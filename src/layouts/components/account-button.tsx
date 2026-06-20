@@ -19,7 +19,8 @@ export interface AccountButtonProps {
 }
 
 export function AccountButton({
-  open,
+  // Destructured to keep it out of the `...other` DOM spread; not used here.
+  open: _open,
   photoURL,
   displayName,
   sx,

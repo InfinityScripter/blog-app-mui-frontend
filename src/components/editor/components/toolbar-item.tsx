@@ -27,7 +27,8 @@ export function ToolbarItem({
   label,
   active,
   disabled,
-  component,
+  // Destructured to keep it out of the `...other` DOM spread; not used here.
+  component: _component,
   ...other
 }: ToolbarItemProps) {
   return (

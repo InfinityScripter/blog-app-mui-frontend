@@ -31,7 +31,8 @@ export function RHFAutocomplete({
   name,
   label,
   helperText,
-  hiddenLabel,
+  // Destructured to keep it out of the `...other` DOM spread; not rendered here.
+  hiddenLabel: _hiddenLabel,
   placeholder,
   ...other
 }: RHFAutocompleteProps) {
