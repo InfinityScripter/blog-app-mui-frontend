@@ -5,7 +5,6 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
@@ -16,8 +15,6 @@ import { PROJECTS } from "./const";
 // ----------------------------------------------------------------------
 
 export function HomeProjects() {
-  const theme = useTheme();
-
   return (
     <Container
       component={MotionViewport}

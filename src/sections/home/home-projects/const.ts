@@ -8,7 +8,7 @@ export const PROJECTS: HomeProject[] = [
     icon: "mdi:blog",
     iconColor: "primary.main",
     link: "https://github.com/InfinityScripter/blog-app-mui-frontend",
-    demoLink: "https://sh0ny.ru/post",
+    demoLink: "https://talalaev.su/post",
     tech: ["React", "Material UI", "Node.js"],
     features: [
       "Аутентификация пользователей",

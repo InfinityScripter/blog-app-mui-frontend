@@ -1,5 +1,4 @@
-import type { ReactNode, ComponentType } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
+import type { Theme } from "@mui/material/styles";
 import type { ThemeWithVars } from "src/theme/core/components/types";
 
 // ----------------------------------------------------------------------
@@ -68,27 +67,3 @@ export type MarketingTheme = ThemeWithVars & {
   palette: MarketingPalette;
   vars: ThemeVars & { palette: MarketingVarsPalette };
 };
-
-// ----------------------------------------------------------------------
-
-/**
- * The home sections use MUI's legacy `Grid` responsive item props
- * (`xs`/`sm`/`md`/`lg`, `container`, `disableEqualOverflow`, `spacing`...),
- * which the v7 `Grid` types no longer expose. Re-type the import to accept
- * them (no runtime change) instead of casting to `any`.
- */
-export interface LegacyGridProps {
-  children?: ReactNode;
-  container?: boolean;
-  disableEqualOverflow?: boolean;
-  spacing?: number | Record<string, number>;
-  rowSpacing?: number | Record<string, number>;
-  columnSpacing?: number | Record<string, number>;
-  xs?: number | boolean;
-  sm?: number | boolean;
-  md?: number | boolean;
-  lg?: number | boolean;
-  sx?: SxProps<Theme>;
-}
-
-export type LegacyGrid = ComponentType<LegacyGridProps>;
