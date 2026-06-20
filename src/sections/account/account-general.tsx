@@ -11,10 +11,16 @@ import { fData } from "src/utils/format-number";
 import { useAuthContext } from "src/auth/hooks";
 import { toast } from "src/components/snackbar";
 import Typography from "@mui/material/Typography";
+import { useBoolean } from "src/hooks/use-boolean";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field, schemaHelper } from "src/components/hook-form";
-import { uploadFile, updateAvatar, updateProfile } from "src/actions/account";
+import {
+  uploadFile,
+  updateAvatar,
+  removeAvatar,
+  updateProfile,
+} from "src/actions/account";
 
 // ----------------------------------------------------------------------
 
@@ -40,6 +46,8 @@ export function AccountGeneral() {
     [user],
   );
 
+  const removingAvatar = useBoolean();
+
   const methods = useForm({
     mode: "all",
     resolver: zodResolver(AccountGeneralSchema),
@@ -48,6 +56,8 @@ export function AccountGeneral() {
 
   const {
     reset,
+    watch,
+    setValue,
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
@@ -55,6 +65,26 @@ export function AccountGeneral() {
   useEffect(() => {
     reset(defaultValues);
   }, [defaultValues, reset]);
+
+  const currentAvatar = watch("avatarURL");
+  const hasAvatar = Boolean(currentAvatar);
+
+  const handleRemoveAvatar = async () => {
+    removingAvatar.onTrue();
+    try {
+      await removeAvatar();
+      setValue("avatarURL", null, { shouldDirty: true });
+      await checkUserSession?.();
+      toast.success("Фото удалено");
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        error instanceof Error ? error.message : "Не удалось удалить фото",
+      );
+    } finally {
+      removingAvatar.onFalse();
+    }
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -102,6 +132,19 @@ export function AccountGeneral() {
                 </Typography>
               }
             />
+
+            {hasAvatar && (
+              <LoadingButton
+                variant="soft"
+                color="error"
+                size="small"
+                onClick={handleRemoveAvatar}
+                loading={removingAvatar.value}
+                sx={{ mt: 3 }}
+              >
+                Удалить фото
+              </LoadingButton>
+            )}
           </Card>
         </Grid>
 

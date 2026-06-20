@@ -66,6 +66,15 @@ export async function updateAvatar(avatarURL: string): Promise<UserResponse> {
 
 // ----------------------------------------------------------------------
 
+/** DELETE /api/user/avatar — clear the current user's avatar. */
+export async function removeAvatar(): Promise<UserResponse> {
+  const res = await axiosInstance.delete<UserResponse>(endpoints.user.avatar);
+
+  return res.data;
+}
+
+// ----------------------------------------------------------------------
+
 interface ChangePasswordParams {
   currentPassword: string;
   newPassword: string;

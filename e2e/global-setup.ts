@@ -19,14 +19,33 @@ const NON_ADMIN_PASSWORD_HASH =
   "$2b$10$8hddQPFvs0eklF9Nh9FrWeVHM9JhRDZ4lOHfq8x7p04RQZR6cmPku";
 
 function readDatabaseUrl(): string | null {
-  const envPath = resolve(
-    __dirname,
-    "..",
-    "..",
-    "blog-app-mui-backend",
-    ".env",
-  );
-  if (!existsSync(envPath)) return null;
+  // Explicit override wins (CI / non-standard checkouts).
+  if (process.env.E2E_DATABASE_URL) {
+    return process.env.E2E_DATABASE_URL;
+  }
+
+  // The backend lives next to the frontend repo. When running from a git
+  // worktree the frontend is nested under .claude/worktrees/<name>, so the
+  // plain sibling path ("../../blog-app-mui-backend") misses. Try a few
+  // candidate locations and use the first .env that exists.
+  const candidates = [
+    resolve(__dirname, "..", "..", "blog-app-mui-backend", ".env"),
+    resolve(__dirname, "..", "..", "..", "..", "blog-app-mui-backend", ".env"),
+    resolve(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "..",
+      "..",
+      "blog-app-mui-backend",
+      ".env",
+    ),
+  ];
+
+  const envPath = candidates.find((p) => existsSync(p));
+  if (!envPath) return null;
+
   const line = readFileSync(envPath, "utf8")
     .split("\n")
     .find((l) => l.startsWith("DATABASE_URL="));
