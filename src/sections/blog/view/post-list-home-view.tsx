@@ -28,7 +28,7 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const feedTags = useFeedTags(posts);
+  const feedTags = useFeedTags(posts, { pinned: selectedTags });
 
   const debouncedQuery = useDebounce(searchQuery);
 
@@ -108,7 +108,7 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
         </Box>
       )}
 
-      <PostList posts={dataFiltered} />
+      <PostList posts={dataFiltered} activeTags={selectedTags} />
     </Container>
   );
 }

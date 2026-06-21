@@ -11,6 +11,27 @@ export function normalizeTags(tags: string[] = []): Set<string> {
   return new Set(tags.map((t) => t.toLowerCase().trim()));
 }
 
+/** True if `tag` is one of the active filter tags (case-insensitive, trimmed). */
+export function isTagActive(tag: string, activeTags: string[] = []): boolean {
+  const needle = tag.toLowerCase().trim();
+  return activeTags.some((t) => t.toLowerCase().trim() === needle);
+}
+
+/**
+ * Reorders a post's tags so the ones matching the active filter come first,
+ * keeping the original relative order otherwise. Used so a card's truncated tag
+ * list always surfaces the tag the feed was filtered by.
+ */
+export function orderTagsByActive(
+  tags: string[],
+  activeTags: string[] = [],
+): string[] {
+  if (activeTags.length === 0) return tags;
+  const matched = tags.filter((tag) => isTagActive(tag, activeTags));
+  const rest = tags.filter((tag) => !isTagActive(tag, activeTags));
+  return [...matched, ...rest];
+}
+
 /**
  * Picks up to 3 published posts sharing the most tags with the current one,
  * excluding the current post. Falls back to newest posts when nothing overlaps

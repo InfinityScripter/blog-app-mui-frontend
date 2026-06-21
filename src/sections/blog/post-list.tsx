@@ -14,7 +14,11 @@ import type { PostListProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export function PostList({ posts, loading: initialLoading }: PostListProps) {
+export function PostList({
+  posts,
+  loading: initialLoading,
+  activeTags = [],
+}: PostListProps) {
   const { items, hasMore, loading, loadMore } = useInfiniteScroll<Post>(posts);
 
   const renderLoading = (
@@ -49,13 +53,13 @@ export function PostList({ posts, loading: initialLoading }: PostListProps) {
           size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
           sx={{ display: { lg: "none" } }}
         >
-          <PostItem post={post} />
+          <PostItem post={post} activeTags={activeTags} />
         </Grid>
       ))}
 
       {items.slice(3, items.length).map((post) => (
         <Grid key={post._id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
-          <PostItem post={post} />
+          <PostItem post={post} activeTags={activeTags} />
         </Grid>
       ))}
     </Grid>

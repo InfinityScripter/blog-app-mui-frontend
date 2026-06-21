@@ -85,6 +85,12 @@ export interface PostDetailsToolbarProps {
 
 export type PostItemFeedProps = {
   post: Post;
+  /**
+   * Tags the feed is currently filtered by. When set, the card surfaces any
+   * matching tag first so it's never hidden by the MAX_TAGS truncation — that
+   * truncation is why a filtered post could look like it didn't match.
+   */
+  activeTags?: string[];
 };
 
 export interface PostItemHorizontalMenuProps {
@@ -112,6 +118,8 @@ export interface PostListHorizontalProps {
 export interface PostListProps {
   posts: Post[];
   loading?: boolean;
+  /** Active filter tags — forwarded to each card so the matched tag stays visible. */
+  activeTags?: string[];
 }
 
 export interface PostNewEditActionsProps {

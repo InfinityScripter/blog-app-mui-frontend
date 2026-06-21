@@ -15,6 +15,7 @@ import { fShortenNumber } from "src/utils/format-number";
 
 import { MAX_TAGS } from "./const";
 import { InfoBlock } from "./post-item-feed-info-block";
+import { isTagActive, orderTagsByActive } from "./utils";
 
 import type { PostItemFeedProps } from "./types";
 
@@ -23,13 +24,18 @@ import type { PostItemFeedProps } from "./types";
 // Feed card for the public landing — Habr/vc.ru style horizontal row. No admin
 // menu, no publish Label (only published posts reach the feed). Cover sits on
 // the right and hides on xs.
-export function PostItemFeed({ post }: PostItemFeedProps) {
+export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
   const { title, coverUrl, createdAt, totalViews, description, tags, content } =
     post;
 
   const href = paths.post.details(post.id ?? "");
   const readingTime = getReadingTime(content);
-  const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
+  // Show the tag(s) the feed is filtered by first, so a matched post never
+  // looks unrelated just because its matching tag fell past MAX_TAGS.
+  const visibleTags = orderTagsByActive(tags ?? [], activeTags).slice(
+    0,
+    MAX_TAGS,
+  );
   const cover = coverSrc(coverUrl, String(post._id ?? post.id ?? title));
 
   return (
@@ -37,9 +43,18 @@ export function PostItemFeed({ post }: PostItemFeedProps) {
       <Stack spacing={1} sx={{ p: 3, flexGrow: 1, minWidth: 0 }}>
         {visibleTags.length > 0 && (
           <Box display="flex" flexWrap="wrap" gap={0.5}>
-            {visibleTags.map((tag) => (
-              <Chip key={tag} label={tag} size="small" variant="soft" />
-            ))}
+            {visibleTags.map((tag) => {
+              const active = isTagActive(tag, activeTags);
+              return (
+                <Chip
+                  key={tag}
+                  label={tag}
+                  size="small"
+                  variant="soft"
+                  color={active ? "primary" : "default"}
+                />
+              );
+            })}
           </Box>
         )}
 

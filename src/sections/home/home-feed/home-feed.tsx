@@ -28,9 +28,9 @@ export function HomeFeed() {
   // новых к старым. Разделение по типу живёт на /news и /post, не здесь.
   const { posts, postsLoading } = useGetPosts();
 
-  const feedTags = useFeedTags(posts);
-
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const feedTags = useFeedTags(posts, { pinned: selectedTags });
   const [visibleCount, setVisibleCount] = useState(FEED_PAGE_SIZE);
 
   const feedPosts = useMemo(
@@ -94,7 +94,7 @@ export function HomeFeed() {
       ) : (
         <Stack spacing={2} sx={{ maxWidth: 720, mx: "auto" }}>
           {visiblePosts.map((post) => (
-            <PostItemFeed key={post.id} post={post} />
+            <PostItemFeed key={post.id} post={post} activeTags={selectedTags} />
           ))}
         </Stack>
       )}

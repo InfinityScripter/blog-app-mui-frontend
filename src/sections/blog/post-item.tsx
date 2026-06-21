@@ -20,17 +20,28 @@ import { getReadingTime } from "src/utils/reading-time";
 import { MAX_TAGS } from "./const";
 import { InfoBlock } from "./post-item-info-block";
 import { PostItemLatest } from "./post-item-latest";
+import { isTagActive, orderTagsByActive } from "./utils";
 
 // Re-exported so existing importers keep `import { ... } from "./post-item"`.
 export { InfoBlock, PostItemLatest };
 
 // ----------------------------------------------------------------------
 
-export function PostItem({ post }: { post: Post }) {
+export function PostItem({
+  post,
+  activeTags = [],
+}: {
+  post: Post;
+  activeTags?: string[];
+}) {
   const theme = useTheme();
 
   const linkTo = paths.post.details(String(post._id));
-  const visibleTags = (post.tags ?? []).slice(0, MAX_TAGS);
+  // Surface a matched filter tag first so MAX_TAGS truncation never hides it.
+  const visibleTags = orderTagsByActive(post.tags ?? [], activeTags).slice(
+    0,
+    MAX_TAGS,
+  );
 
   return (
     <Card>
@@ -91,7 +102,13 @@ export function PostItem({ post }: { post: Post }) {
         {visibleTags.length > 0 && (
           <Box display="flex" flexWrap="wrap" gap={0.5} sx={{ mt: 1 }}>
             {visibleTags.map((tag) => (
-              <Chip key={tag} label={tag} size="small" variant="soft" />
+              <Chip
+                key={tag}
+                label={tag}
+                size="small"
+                variant="soft"
+                color={isTagActive(tag, activeTags) ? "primary" : "default"}
+              />
             ))}
           </Box>
         )}
