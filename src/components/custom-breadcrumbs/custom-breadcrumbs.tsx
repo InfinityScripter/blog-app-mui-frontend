@@ -1,32 +1,14 @@
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { BreadcrumbsProps } from "@mui/material/Breadcrumbs";
-
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 
-import { BreadcrumbsLink, type BreadcrumbLinkItem } from "./breadcrumb-link";
+import { BreadcrumbsLink } from "./breadcrumb-link";
+
+import type { CustomBreadcrumbsProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface CustomBreadcrumbsProps
-  extends Omit<BreadcrumbsProps, "children" | "slotProps"> {
-  links: BreadcrumbLinkItem[];
-  action?: ReactNode;
-  heading?: ReactNode;
-  moreLink?: string[];
-  activeLast?: boolean;
-  slotProps?: {
-    heading?: SxProps<Theme>;
-    breadcrumbs?: SxProps<Theme>;
-    action?: SxProps<Theme>;
-    moreLink?: SxProps<Theme>;
-  };
-  sx?: SxProps<Theme>;
-}
 
 export function CustomBreadcrumbs({
   links,

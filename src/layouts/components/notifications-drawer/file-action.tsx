@@ -1,53 +1,9 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { Label } from "src/components/label";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import { FileThumbnail } from "src/components/file-thumbnail";
-
-import { reader } from "./utils";
-
-// ----------------------------------------------------------------------
-
-export function FriendAction() {
-  return (
-    <Stack spacing={1} direction="row" sx={{ mt: 1.5 }}>
-      <Button size="small" variant="contained">
-        Accept
-      </Button>
-      <Button size="small" variant="outlined">
-        Decline
-      </Button>
-    </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function ProjectAction() {
-  return (
-    <Stack alignItems="flex-start">
-      <Box
-        sx={{
-          p: 1.5,
-          my: 1.5,
-          borderRadius: 1.5,
-          color: "text.secondary",
-          bgcolor: "background.neutral",
-        }}
-      >
-        {reader(
-          `<p><strong>@Jaydon Frankie</strong> feedback by asking questions or just leave a note of appreciation.</p>`,
-        )}
-      </Box>
-
-      <Button size="small" variant="contained">
-        Reply
-      </Button>
-    </Stack>
-  );
-}
 
 // ----------------------------------------------------------------------
 
@@ -111,37 +67,6 @@ export function FileAction() {
           Download
         </Button>
       </Stack>
-    </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function TagsAction() {
-  return (
-    <Stack direction="row" spacing={0.75} flexWrap="wrap" sx={{ mt: 1.5 }}>
-      <Label variant="outlined" color="info">
-        Design
-      </Label>
-      <Label variant="outlined" color="warning">
-        Dashboard
-      </Label>
-      <Label variant="outlined">Design system</Label>
-    </Stack>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export function PaymentAction() {
-  return (
-    <Stack direction="row" spacing={1} sx={{ mt: 1.5 }}>
-      <Button size="small" variant="contained">
-        Pay
-      </Button>
-      <Button size="small" variant="outlined">
-        Decline
-      </Button>
     </Stack>
   );
 }

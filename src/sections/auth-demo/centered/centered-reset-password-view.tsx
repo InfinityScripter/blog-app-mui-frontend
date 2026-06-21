@@ -1,29 +1,18 @@
 "use client";
 
-import { z as zod } from "zod";
 import { useState } from "react";
-import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
-import { paths } from "src/routes/paths";
 import { useForm } from "react-hook-form";
-import { PasswordIcon } from "src/assets/icons";
-import { Iconify } from "src/components/iconify";
-import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { RouterLink } from "src/routes/components";
+import { Form } from "src/components/hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, Field } from "src/components/hook-form";
 
 import axios, { endpoints } from "../../../utils/axios";
+import { ResetPasswordSchema } from "./reset-password-schema";
+import { CenteredResetPasswordHead } from "./centered-reset-password-head";
+import { CenteredResetPasswordForm } from "./centered-reset-password-form";
 
 // ----------------------------------------------------------------------
 
-export const ResetPasswordSchema = zod.object({
-  email: zod.string().min(1, { message: "Email обязателен!" }).email({
-    message: "Email должен быть действительным адресом электронной почты!",
-  }),
-});
+export { ResetPasswordSchema };
 
 // ----------------------------------------------------------------------
 
@@ -67,66 +56,16 @@ export function CenteredResetPasswordView() {
     }
   });
 
-  const renderHead = (
-    <>
-      <PasswordIcon sx={{ mx: "auto" }} />
-
-      <Stack
-        spacing={1}
-        sx={{ mt: 3, mb: 5, textAlign: "center", whiteSpace: "pre-line" }}
-      >
-        <Typography variant="h5">Забыли пароль?</Typography>
-
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Пожалуйста, введите email-адрес, связанный с вашей учетной записью, и
-          мы отправим вам ссылку для сброса пароля.
-        </Typography>
-      </Stack>
-    </>
-  );
-
-  const renderForm = (
-    <Stack spacing={3}>
-      <Field.Text
-        name="email"
-        label="Email адрес"
-        placeholder="example@gmail.com"
-        autoFocus
-        InputLabelProps={{ shrink: true }}
-      />
-      {error && <Alert severity="error">{error}</Alert>}
-      {success && <Alert severity="success">{success}</Alert>}
-
-      <LoadingButton
-        fullWidth
-        size="large"
-        type="submit"
-        variant="contained"
-        loading={isSubmitting}
-        loadingIndicator="Отправка запроса..."
-      >
-        Отправить запрос
-      </LoadingButton>
-
-      <Link
-        component={RouterLink}
-        href={paths.auth.jwt.signIn}
-        color="inherit"
-        variant="subtitle2"
-        sx={{ mx: "auto", alignItems: "center", display: "inline-flex" }}
-      >
-        <Iconify icon="eva:arrow-ios-back-fill" width={16} sx={{ mr: 0.5 }} />
-        Вернуться к входу
-      </Link>
-    </Stack>
-  );
-
   return (
     <>
-      {renderHead}
+      <CenteredResetPasswordHead />
 
       <Form methods={methods} onSubmit={onSubmit}>
-        {renderForm}
+        <CenteredResetPasswordForm
+          error={error}
+          success={success}
+          isSubmitting={isSubmitting}
+        />
       </Form>
     </>
   );

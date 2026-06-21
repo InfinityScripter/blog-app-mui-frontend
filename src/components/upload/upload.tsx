@@ -1,18 +1,13 @@
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import { varAlpha } from "src/theme/styles";
 import { useDropzone } from "react-dropzone";
 import FormHelperText from "@mui/material/FormHelperText";
 
-import { Iconify } from "../iconify";
+import { DeleteButton } from "./components/delete-button";
 import { UploadPlaceholder } from "./components/placeholder";
 import { RejectionFiles } from "./components/rejection-files";
-import { MultiFilePreview } from "./components/preview-multi-file";
-import {
-  DeleteButton,
-  SingleFilePreview,
-} from "./components/preview-single-file";
+import { SingleFilePreview } from "./components/preview-single-file";
+import { UploadMultiPreview } from "./components/upload-multi-preview";
 
 import type { UploadProps } from "./types";
 
@@ -53,43 +48,6 @@ export function Upload({
   const hasFiles = isArray && !!value.length;
 
   const hasError = isDragReject || !!error;
-
-  const renderMultiPreview = hasFiles && (
-    <>
-      <MultiFilePreview
-        files={value}
-        thumbnail={thumbnail}
-        onRemove={onRemove}
-        sx={{ my: 3 }}
-      />
-
-      {(onRemoveAll || onUpload) && (
-        <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
-          {onRemoveAll && (
-            <Button
-              color="inherit"
-              variant="outlined"
-              size="small"
-              onClick={onRemoveAll}
-            >
-              Remove all
-            </Button>
-          )}
-
-          {onUpload && (
-            <Button
-              size="small"
-              variant="contained"
-              onClick={onUpload}
-              startIcon={<Iconify icon="eva:cloud-upload-fill" />}
-            >
-              Upload
-            </Button>
-          )}
-        </Stack>
-      )}
-    </>
-  );
 
   return (
     <Box sx={{ width: 1, position: "relative", ...sx }}>
@@ -142,7 +100,14 @@ export function Upload({
       <RejectionFiles files={fileRejections} />
 
       {/* Multi files */}
-      {renderMultiPreview}
+      <UploadMultiPreview
+        hasFiles={hasFiles}
+        value={value}
+        thumbnail={thumbnail}
+        onRemove={onRemove}
+        onUpload={onUpload}
+        onRemoveAll={onRemoveAll}
+      />
     </Box>
   );
 }

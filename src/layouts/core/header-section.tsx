@@ -1,6 +1,3 @@
-import type { ReactNode } from "react";
-import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,37 +8,9 @@ import { useScrollOffSetTop } from "src/hooks/use-scroll-offset-top";
 
 import { layoutClasses } from "../classes";
 
+import type { HeaderSectionProps } from "./types";
+
 // ----------------------------------------------------------------------
-
-export interface HeaderSectionSlots {
-  topArea?: ReactNode;
-  leftArea?: ReactNode;
-  centerArea?: ReactNode;
-  rightArea?: ReactNode;
-  bottomArea?: ReactNode;
-  leftAreaStart?: ReactNode;
-  leftAreaEnd?: ReactNode;
-  rightAreaStart?: ReactNode;
-  rightAreaEnd?: ReactNode;
-}
-
-export interface HeaderSectionSlotProps {
-  toolbar?: { sx?: SxProps<Theme> } & Record<string, unknown>;
-  container?: { maxWidth?: false } & { sx?: SxProps<Theme> } & Record<
-      string,
-      unknown
-    >;
-}
-
-export interface HeaderSectionProps {
-  sx?: SxProps<Theme>;
-  slots?: HeaderSectionSlots;
-  slotProps?: HeaderSectionSlotProps;
-  disableOffset?: boolean;
-  disableElevation?: boolean;
-  layoutQuery?: Breakpoint;
-  [key: string]: unknown;
-}
 
 const StyledElevation = styled("span")(({ theme }) => ({
   left: 0,

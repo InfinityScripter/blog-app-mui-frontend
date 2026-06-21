@@ -1,5 +1,3 @@
-import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -13,56 +11,11 @@ import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { SocialIcon } from "src/components/iconify";
 
-// ----------------------------------------------------------------------
+import { LINKS, socials } from "./const";
 
-const LINKS = [
-  {
-    headline: "Документы",
-    children: [
-      { name: "Условия использования", href: "#" },
-      { name: "Политика конфиденциальности", href: "#" },
-    ],
-  },
-  {
-    headline: "Контакты",
-    children: [
-      {
-        name: "talalaev.misha@gmail.com",
-        href: "mailto:talalaev.misha@gmail.com",
-      },
-    ],
-  },
-];
-
-const socials = [
-  {
-    value: "telegram",
-    name: "Telegram",
-    path: "https://t.me/sh0ny/",
-  },
-  {
-    value: "github",
-    name: "GitHub",
-    path: "https://github.com/InfinityScripter",
-  },
-  {
-    value: "linkedin",
-    name: "Linkedin",
-    path: "https://www.linkedin.com/in/talalaevs/",
-  },
-  {
-    value: "vk",
-    name: "VK",
-    path: "https://vk.com/sh0ny",
-  },
-];
+import type { FooterProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface FooterProps {
-  layoutQuery: Breakpoint;
-  sx?: SxProps<Theme>;
-}
 
 export function Footer({ layoutQuery, sx }: FooterProps) {
   const theme = useTheme();
@@ -177,36 +130,6 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
         <Typography variant="body2" sx={{ mt: 10 }}>
           © All rights reserved.
         </Typography>
-      </Container>
-    </Box>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-export interface HomeFooterProps {
-  sx?: SxProps<Theme>;
-}
-
-export function HomeFooter({ sx }: HomeFooterProps) {
-  return (
-    <Box
-      component="footer"
-      sx={{
-        py: 5,
-        textAlign: "center",
-        position: "relative",
-        bgcolor: "background.default",
-        ...sx,
-      }}
-    >
-      <Container>
-        <Logo />
-        <Box sx={{ mt: 1, typography: "caption" }}>
-          © All rights reserved.
-          <br /> сделано
-          <Link href="https://t.me/sh0ny/"> Mikhail Talalaev </Link>
-        </Box>
       </Container>
     </Box>
   );

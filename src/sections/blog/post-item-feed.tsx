@@ -1,6 +1,3 @@
-import type { ReactNode } from "react";
-import type { Post } from "src/types/domain";
-
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
@@ -11,32 +8,21 @@ import { maxLine } from "src/theme/styles";
 import { Image } from "src/components/image";
 import { fToNow } from "src/utils/format-time";
 import { coverSrc } from "src/utils/cover-src";
-import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
+
+import { MAX_TAGS } from "./const";
+import { InfoBlock } from "./post-item-feed-info-block";
+
+import type { PostItemFeedProps } from "./types";
 
 // ----------------------------------------------------------------------
 
 // Feed card for the public landing — Habr/vc.ru style horizontal row. No admin
 // menu, no publish Label (only published posts reach the feed). Cover sits on
 // the right and hides on xs.
-const MAX_TAGS = 2;
-
-type PostItemFeedProps = {
-  post: Post;
-};
-
-function InfoBlock({ icon, value }: { icon: string; value: ReactNode }) {
-  return (
-    <Box display="flex" alignItems="center" gap={0.5}>
-      <Iconify icon={icon} width={16} />
-      {value}
-    </Box>
-  );
-}
-
 export function PostItemFeed({ post }: PostItemFeedProps) {
   const { title, coverUrl, createdAt, totalViews, description, tags, content } =
     post;

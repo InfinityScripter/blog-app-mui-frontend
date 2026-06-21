@@ -1,6 +1,3 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { TypographyProps } from "@mui/material/Typography";
-
 import { useRef, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import {
@@ -11,18 +8,9 @@ import {
   useMotionValue,
 } from "framer-motion";
 
-// ----------------------------------------------------------------------
+import type { AnimateCountUpProps } from "./types";
 
-interface AnimateCountUpProps extends Omit<TypographyProps, "children"> {
-  to: number;
-  from?: number;
-  unit?: string;
-  toFixed?: number;
-  duration?: number;
-  once?: boolean;
-  amount?: number;
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function AnimateCountUp({
   to,

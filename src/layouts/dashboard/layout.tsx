@@ -1,9 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { NavSectionDataProps } from "src/components/nav-section/types";
-
 import Alert from "@mui/material/Alert";
 import { useTheme } from "@mui/material/styles";
 import { useAuthContext } from "src/auth/hooks";
@@ -26,13 +22,7 @@ import { _workspaces } from "../config-nav-workspace";
 import { LayoutSection } from "../core/layout-section";
 import { useNavColorVars } from "./hooks/use-nav-color-vars";
 
-interface DashboardLayoutProps {
-  sx?: SxProps<Theme>;
-  children: ReactNode;
-  data?: {
-    nav?: NavSectionDataProps[];
-  };
-}
+import type { DashboardLayoutProps } from "./types";
 
 export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
   const theme = useTheme();

@@ -1,3 +1,7 @@
+import type { MarketingTheme } from "src/sections/home/components/types";
+
+// ----------------------------------------------------------------------
+
 export interface ExperienceItem {
   position: string;
   company: string;
@@ -8,4 +12,10 @@ export interface ExperienceItem {
   technologies: string;
   logo: string;
   link: string;
+}
+
+export interface ExperienceTimelineItemProps {
+  item: ExperienceItem;
+  isMobile: boolean;
+  theme: MarketingTheme;
 }

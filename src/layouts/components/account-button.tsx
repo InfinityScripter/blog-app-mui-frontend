@@ -1,5 +1,3 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { m } from "framer-motion";
 import NoSsr from "@mui/material/NoSsr";
 import Avatar from "@mui/material/Avatar";
@@ -8,15 +6,9 @@ import { useTheme } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import { varHover, AnimateAvatar } from "src/components/animate";
 
-// ----------------------------------------------------------------------
+import type { AccountButtonProps } from "./types";
 
-export interface AccountButtonProps {
-  open?: boolean;
-  photoURL?: string;
-  displayName?: string;
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
+// ----------------------------------------------------------------------
 
 export function AccountButton({
   // Destructured to keep it out of the `...other` DOM spread; not used here.

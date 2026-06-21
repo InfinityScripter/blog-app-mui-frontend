@@ -5,18 +5,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
+import type { PostSortProps } from "./types";
+
 // ----------------------------------------------------------------------
-
-interface SortOption {
-  value: string;
-  label: string;
-}
-
-interface PostSortProps {
-  sort: string;
-  sortOptions: SortOption[];
-  onSort: (value: string) => void;
-}
 
 export function PostSort({ sort, sortOptions, onSort }: PostSortProps) {
   const popover = usePopover();

@@ -1,7 +1,5 @@
 "use client";
 
-import type { Post, PublishStatus } from "src/types/domain";
-
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
@@ -17,21 +15,16 @@ import { DashboardContent } from "src/layouts/dashboard";
 import { updatePostPublish } from "src/actions/blog-ssr";
 import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
+import { isPublishStatus } from "./utils";
 import { PostDetailsHero } from "../post-details-hero";
 import { PostCommentList } from "../post-comment-list";
 import { PostCommentForm } from "../post-comment-form";
 import { PostDetailsToolbar } from "../post-details-toolbar";
 import { formatImageUrl } from "../../../utils/format-image-url";
 
+import type { PostDetailsViewProps } from "./types";
+
 // ----------------------------------------------------------------------
-
-function isPublishStatus(value: string): value is PublishStatus {
-  return value === "draft" || value === "published";
-}
-
-interface PostDetailsViewProps {
-  initialPost?: Post;
-}
 
 export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
   const [publish, setPublish] = useState("");

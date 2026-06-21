@@ -13,22 +13,9 @@ import { LanguagePopover } from "../components/language-popover";
 import { ContactsPopover } from "../components/contacts-popover";
 import { NotificationsDrawer } from "../components/notifications-drawer";
 
-import type { HeaderBaseData, HeaderBaseSlots } from "./header-base";
+import type { HeaderRightAreaProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface HeaderRightAreaProps {
-  data?: HeaderBaseData;
-  slots?: HeaderBaseSlots;
-  signIn: boolean;
-  account: boolean;
-  helpLink: boolean;
-  settings: boolean;
-  contacts: boolean;
-  searchbar: boolean;
-  localization: boolean;
-  notifications: boolean;
-}
 
 export function HeaderRightArea({
   data,

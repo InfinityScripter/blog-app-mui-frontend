@@ -1,5 +1,7 @@
 import { CONFIG } from "src/config-global";
 
+import type { FileData, FileWithMeta } from "./types";
+
 // ----------------------------------------------------------------------
 
 // Define more types here
@@ -127,24 +129,6 @@ export function fileNameByUrl(fileUrl: string) {
 }
 
 // ----------------------------------------------------------------------
-
-// Dropzone augments File with `path`/`preview`; some browsers expose the
-// legacy non-standard `lastModifiedDate`. Model them here so reads are typed.
-interface FileWithMeta extends File {
-  path?: string;
-  preview?: string;
-  lastModifiedDate?: Date;
-}
-
-interface FileData {
-  name: string | undefined;
-  size: number | undefined;
-  path: string | undefined;
-  type: string | undefined;
-  preview: string | undefined;
-  lastModified: number | undefined;
-  lastModifiedDate: Date | undefined;
-}
 
 export function fileData(file: FileWithMeta | string): FileData {
   // From url

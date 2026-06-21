@@ -1,8 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
@@ -24,30 +21,17 @@ import { formatImageUrl } from "src/utils/format-image-url";
 import { AccountButton } from "./account-button";
 import { SignOutButton } from "./sign-out-button";
 
-import type { LayoutUserView } from "./types";
+import type {
+  LayoutUserView,
+  AccountDrawerItem,
+  AccountDrawerProps,
+} from "./types";
+
+// Re-exported so external importers (e.g. `src/layouts/core/header-base.tsx`)
+// keep resolving `AccountDrawerItem` from this path.
+export type { AccountDrawerItem };
 
 // ----------------------------------------------------------------------
-
-export interface AccountDrawerItem {
-  label: string;
-  href: string;
-  icon: ReactNode;
-  info?: ReactNode;
-}
-
-/**
- * The fields the account UI reads off the authenticated user. The auth `User`
- * type (`src/types/domain.ts`) predates these Minimals-era aliases
- * (`photoURL`/`displayName`), so the layout describes its own optional view.
- * The hook's `user` (`User & { accessToken?; role? } | null`) is assignable to
- * it because every field here is optional. See the SHARED-TYPE GAP report.
- */
-
-export interface AccountDrawerProps {
-  data?: AccountDrawerItem[];
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
 
 export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
   const theme = useTheme();

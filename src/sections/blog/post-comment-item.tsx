@@ -1,5 +1,3 @@
-import type { Comment, ReplyComment } from "src/types/domain";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -16,18 +14,7 @@ import { PostCommentForm } from "./post-comment-form";
 import { PostCommentMenu } from "./post-comment-menu";
 import { usePostCommentItem } from "./hooks/use-post-comment-item";
 
-interface PostCommentItemProps {
-  name: string;
-  avatarUrl?: string;
-  message: string;
-  tagUser?: string;
-  postedAt: string | Date;
-  hasReply?: boolean;
-  comment: Comment | ReplyComment;
-  postId?: string;
-  parentCommentId?: string;
-  onCommentUpdated?: () => void;
-}
+import type { PostCommentItemProps } from "./types";
 
 export default function PostCommentItem({
   name,

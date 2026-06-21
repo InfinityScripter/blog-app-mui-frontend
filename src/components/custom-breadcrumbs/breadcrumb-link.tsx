@@ -1,22 +1,10 @@
-import type { ReactNode } from "react";
-
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import { RouterLink } from "src/routes/components";
 
+import type { BreadcrumbsLinkProps } from "./types";
+
 // ----------------------------------------------------------------------
-
-export interface BreadcrumbLinkItem {
-  name?: ReactNode;
-  href?: string;
-  icon?: ReactNode;
-}
-
-interface BreadcrumbsLinkProps {
-  link: BreadcrumbLinkItem;
-  activeLast?: boolean;
-  disabled?: boolean;
-}
 
 export function BreadcrumbsLink({
   link,

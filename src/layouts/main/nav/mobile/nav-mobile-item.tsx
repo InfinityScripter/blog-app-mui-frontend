@@ -7,6 +7,7 @@ import ButtonBase from "@mui/material/ButtonBase";
 import { useNavItem } from "src/components/nav-section/hooks";
 
 import type { MainNavItemProps } from "../types";
+import type { StyledNavItemProps } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -53,11 +54,6 @@ export const NavItem = forwardRef<HTMLButtonElement, MainNavItemProps>(
 );
 
 // ----------------------------------------------------------------------
-
-interface StyledNavItemProps {
-  active?: boolean;
-  open?: boolean;
-}
 
 const StyledNavItem = styled(ButtonBase, {
   shouldForwardProp: (prop) => prop !== "active" && prop !== "open",

@@ -1,13 +1,11 @@
 "use client";
 
-import type { Post } from "src/types/domain";
 import type { FeedTag } from "src/sections/home/home-feed/const";
 
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import { orderBy } from "src/utils/helper";
 import { useState, useCallback } from "react";
 import { POST_SORT_OPTIONS } from "src/_mock";
 import Container from "@mui/material/Container";
@@ -19,13 +17,12 @@ import { toggleTag } from "src/sections/home/home-feed/utils";
 
 import { PostList } from "../post-list";
 import { PostSort } from "../post-sort";
+import { applyHomeFilter } from "./utils";
 import { PostSearch } from "../post-search";
 
-// ----------------------------------------------------------------------
+import type { PostListHomeViewProps } from "./types";
 
-interface PostListHomeViewProps {
-  posts: Post[];
-}
+// ----------------------------------------------------------------------
 
 export function PostListHomeView({ posts }: PostListHomeViewProps) {
   const [sortBy, setSortBy] = useState("latest");
@@ -38,7 +35,11 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 
-  const dataFiltered = applyFilter({ inputData: posts, sortBy, selectedTags });
+  const dataFiltered = applyHomeFilter({
+    inputData: posts,
+    sortBy,
+    selectedTags,
+  });
 
   const handleSortBy = useCallback((newValue: string) => {
     setSortBy(newValue);
@@ -110,43 +111,3 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
     </Container>
   );
 }
-
-// `orderBy` is constrained to `Record<string, unknown>`; the `Post` interface
-// has no index signature, so widen each element with an intersection type
-// (via spread, no cast) to satisfy the sort call's generic constraint.
-type SortablePost = Post & Record<string, unknown>;
-
-const applyFilter = ({
-  inputData,
-  sortBy,
-  selectedTags,
-}: {
-  inputData: Post[];
-  sortBy: string;
-  selectedTags: FeedTag[];
-}): Post[] => {
-  let publishedPosts: SortablePost[] = inputData
-    .filter((post) => post.publish === "published")
-    .map((post) => ({ ...post }));
-
-  if (selectedTags.length > 0) {
-    publishedPosts = publishedPosts.filter((post) =>
-      selectedTags.some((tag) =>
-        (post.tags ?? []).some(
-          (t) => t.toLowerCase().trim() === tag.toLowerCase().trim(),
-        ),
-      ),
-    );
-  }
-
-  if (sortBy === "latest") {
-    return orderBy(publishedPosts, ["createdAt"], ["desc"]);
-  }
-  if (sortBy === "oldest") {
-    return orderBy(publishedPosts, ["createdAt"], ["asc"]);
-  }
-  if (sortBy === "popular") {
-    return orderBy(publishedPosts, ["totalViews"], ["desc"]);
-  }
-  return publishedPosts;
-};

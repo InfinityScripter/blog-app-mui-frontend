@@ -1,6 +1,5 @@
 import type { User } from "src/types/domain";
 
-import { z as zod } from "zod";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import { useForm } from "react-hook-form";
@@ -17,20 +16,11 @@ import { Form } from "src/components/hook-form/form-provider";
 import { addComment, getCurrentUser } from "src/actions/blog-ssr";
 import { RHFTextField } from "src/components/hook-form/rhf-text-field";
 
-// ----------------------------------------------------------------------
+import { CommentSchema } from "./post-comment-form-schema";
 
-export const CommentSchema = zod.object({
-  comment: zod.string().min(1, { message: "Необходимо ввести комментарий!" }),
-});
+import type { PostCommentFormProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface PostCommentFormProps {
-  postId?: string;
-  onCommentAdded?: (result: { message: string }) => void;
-  onCommentUpdated?: () => void;
-  parentCommentId?: string;
-}
 
 export function PostCommentForm({
   postId: propPostId,

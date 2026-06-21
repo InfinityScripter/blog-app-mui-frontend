@@ -2,28 +2,13 @@ import type { NavItemBaseProps } from "src/components/nav-section/types";
 
 import { flattenArray } from "src/utils/helper";
 
+import type {
+  SearchLoopItem,
+  SearchNavSection,
+  SearchResultItem,
+} from "./types";
+
 // ----------------------------------------------------------------------
-
-export interface SearchResultItem {
-  group: string;
-  title: string;
-  path: string;
-}
-
-/**
- * A nav item flattened with its parent subheader carried alongside. The index
- * signature keeps it compatible with `flattenArray`'s `Flattenable` constraint.
- */
-export interface SearchLoopItem extends NavItemBaseProps {
-  subheader?: string;
-  children?: SearchLoopItem[];
-  [key: string]: unknown;
-}
-
-export interface SearchNavSection {
-  subheader?: string;
-  items: NavItemBaseProps[];
-}
 
 export function getAllItems({
   data,

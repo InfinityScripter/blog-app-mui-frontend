@@ -1,7 +1,5 @@
 "use client";
 
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Stack from "@mui/material/Stack";
 import Portal from "@mui/material/Portal";
 import Backdrop from "@mui/material/Backdrop";
@@ -21,22 +19,9 @@ import { StyledRoot } from "./styles";
 import { editorClasses } from "./classes";
 import { CodeHighlightBlock } from "./components/code-highlight-block";
 
-// ----------------------------------------------------------------------
+import type { EditorProps } from "./types";
 
-interface EditorProps {
-  sx?: SxProps<Theme>;
-  error?: boolean;
-  onChange?: (value: string) => void;
-  slotProps?: {
-    wrap?: SxProps<Theme>;
-  };
-  helperText?: string;
-  resetValue?: boolean;
-  editable?: boolean;
-  fullItem?: boolean;
-  value?: string;
-  placeholder?: string;
-}
+// ----------------------------------------------------------------------
 
 export const Editor = forwardRef<HTMLDivElement, EditorProps>(
   (

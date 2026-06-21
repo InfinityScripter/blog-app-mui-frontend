@@ -2,33 +2,15 @@
 
 import type { CSSProperties } from "react";
 import type { Transition } from "framer-motion";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import { borderGradient } from "src/theme/styles";
 import { useRef, useState, useEffect } from "react";
 
-// ----------------------------------------------------------------------
+import type { AnimateBorderProps } from "./types";
 
-interface AnimateBorderProps {
-  animate?: {
-    disable?: boolean;
-    delay?: number;
-    loop?: boolean;
-    angle?: number;
-    length?: number;
-    width?: string;
-    color?: string | string[];
-    ease?: Transition["ease"];
-    duration?: number;
-    distance?: number;
-    repeatType?: Transition["repeatType"];
-    disableDoubleline?: boolean;
-    outline?: string;
-  };
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function AnimateBorder({ animate, sx }: AnimateBorderProps) {
   const rootRef = useRef<HTMLDivElement>(null);

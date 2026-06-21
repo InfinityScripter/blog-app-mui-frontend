@@ -1,30 +1,22 @@
 import type { ChangeEvent } from "react";
-import type { Country } from "react-phone-number-input";
 
 import Box from "@mui/material/Box";
 import Popover from "@mui/material/Popover";
-import Divider from "@mui/material/Divider";
 import { useState, useCallback } from "react";
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
-import ButtonBase from "@mui/material/ButtonBase";
-import ListItemText from "@mui/material/ListItemText";
+import { Iconify } from "src/components/iconify";
 import { countries } from "src/assets/data/countries";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Iconify, FlagIcon } from "src/components/iconify";
-import { isSupportedCountry } from "react-phone-number-input";
 import { SearchNotFound } from "src/components/search-not-found";
 
+import { CountryList } from "./country-list";
 import { usePopover } from "../custom-popover";
 import { getCountry, applyFilter } from "./utils";
+import { CountryListButton } from "./country-list-button";
+
+import type { CountryListPopoverProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface CountryListPopoverProps {
-  countryCode?: Country;
-  onClickCountry: (countryCode: Country) => void;
-}
 
 export function CountryListPopover({
   countryCode,
@@ -50,62 +42,9 @@ export function CountryListPopover({
 
   const notFound = !dataFiltered.length && !!setSearchCountry;
 
-  const renderButton = (
-    <ButtonBase disableRipple onClick={popover.onOpen}>
-      <FlagIcon
-        code={selectedCountry?.code}
-        sx={{ width: 22, height: 22, borderRadius: "50%" }}
-      />
-
-      <Iconify
-        icon="eva:chevron-down-fill"
-        sx={{ ml: 0.5, flexShrink: 0, color: "text.disabled" }}
-      />
-
-      <Divider orientation="vertical" flexItem sx={{ mr: 1 }} />
-    </ButtonBase>
-  );
-
-  const renderList = (
-    <MenuList>
-      {dataFiltered.map((country) => {
-        if (!country.code || !isSupportedCountry(country.code)) {
-          return null;
-        }
-
-        const { code } = country;
-
-        return (
-          <MenuItem
-            key={code}
-            selected={countryCode === code}
-            autoFocus={countryCode === code}
-            onClick={() => {
-              popover.onClose();
-              setSearchCountry("");
-              onClickCountry(code);
-            }}
-          >
-            <FlagIcon
-              code={country.code}
-              sx={{ mr: 1, width: 22, height: 22, borderRadius: "50%" }}
-            />
-
-            <ListItemText
-              primary={country.label}
-              secondary={`${country.code} (+${country.phone})`}
-              primaryTypographyProps={{ noWrap: true, typography: "body2" }}
-              secondaryTypographyProps={{ typography: "caption" }}
-            />
-          </MenuItem>
-        );
-      })}
-    </MenuList>
-  );
-
   return (
     <>
-      {renderButton}
+      <CountryListButton code={selectedCountry?.code} onOpen={popover.onOpen} />
 
       <Popover
         disableRestoreFocus
@@ -153,7 +92,15 @@ export function CountryListPopover({
           {notFound ? (
             <SearchNotFound query={searchCountry} sx={{ px: 2, pt: 5 }} />
           ) : (
-            renderList
+            <CountryList
+              countryCode={countryCode}
+              dataFiltered={dataFiltered}
+              onSelectCountry={(code) => {
+                popover.onClose();
+                setSearchCountry("");
+                onClickCountry(code);
+              }}
+            />
           )}
         </Box>
       </Popover>

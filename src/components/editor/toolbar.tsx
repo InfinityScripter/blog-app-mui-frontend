@@ -1,5 +1,3 @@
-import type { Editor } from "@tiptap/react";
-
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
 import { varAlpha } from "src/theme/styles";
@@ -12,14 +10,7 @@ import { ToolbarItem } from "./components/toolbar-item";
 import { HeadingBlock } from "./components/heading-block";
 import { ToolbarBasicItems } from "./components/toolbar-basic-items";
 
-// ----------------------------------------------------------------------
-
-interface ToolbarProps {
-  editor: Editor | null;
-  fullItem?: boolean;
-  fullScreen: boolean;
-  onToggleFullScreen: () => void;
-}
+import type { ToolbarProps } from "./types";
 
 // ----------------------------------------------------------------------
 

@@ -6,13 +6,11 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { useBoolean } from "src/hooks/use-boolean";
 import InputAdornment from "@mui/material/InputAdornment";
 
+import { JwtSignUpFormProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-type Props = {
-  isSubmitting: boolean;
-};
-
-export function JwtSignUpForm({ isSubmitting }: Props) {
+export function JwtSignUpForm({ isSubmitting }: JwtSignUpFormProps) {
   const password = useBoolean();
 
   return (

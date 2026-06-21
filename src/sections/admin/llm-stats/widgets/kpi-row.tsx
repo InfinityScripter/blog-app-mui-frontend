@@ -1,32 +1,12 @@
 import type { LlmStats } from "src/sections/admin/llm-stats/types";
 
 import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+import { Kpi } from "src/sections/admin/llm-stats/widgets/kpi";
 import { formatTokens } from "src/sections/admin/llm-stats/utils";
 import {
   FAMILY_LABEL,
   HARNESS_LABEL,
 } from "src/sections/admin/llm-stats/const";
-
-function Kpi({ label, value }: { label: string; value: string }) {
-  return (
-    <Card sx={{ p: 3, height: 1 }}>
-      <Stack spacing={0.5}>
-        <Typography
-          variant="h4"
-          sx={{ fontSize: { xs: 20, sm: 22, lg: 26 }, lineHeight: 1.2 }}
-        >
-          {value}
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {label}
-        </Typography>
-      </Stack>
-    </Card>
-  );
-}
 
 export function KpiRow({ stats }: { stats: LlmStats }) {
   const k = stats.kpis;

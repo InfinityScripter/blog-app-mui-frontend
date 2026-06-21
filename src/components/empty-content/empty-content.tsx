@@ -1,28 +1,12 @@
-import type { ReactNode } from "react";
-import type { StackProps } from "@mui/material/Stack";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { CONFIG } from "src/config-global";
 import { varAlpha } from "src/theme/styles";
 import Typography from "@mui/material/Typography";
 
-// ----------------------------------------------------------------------
+import type { EmptyContentProps } from "./types";
 
-interface EmptyContentProps extends StackProps {
-  sx?: SxProps<Theme>;
-  imgUrl?: string;
-  action?: ReactNode;
-  filled?: boolean;
-  slotProps?: {
-    img?: SxProps<Theme>;
-    title?: SxProps<Theme>;
-    description?: SxProps<Theme>;
-  };
-  description?: string;
-  title?: string;
-}
+// ----------------------------------------------------------------------
 
 export function EmptyContent({
   sx,

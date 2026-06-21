@@ -1,7 +1,5 @@
 "use client";
 
-import type { ButtonBaseProps } from "@mui/material/ButtonBase";
-
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import { Label } from "src/components/label";
@@ -12,23 +10,13 @@ import { Iconify } from "src/components/iconify";
 import ButtonBase from "@mui/material/ButtonBase";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
+import type { WorkspaceItem, WorkspacesPopoverProps } from "./types";
+
+// Re-exported so external importers (e.g. `src/layouts/core/header-base.tsx`)
+// keep resolving `WorkspaceItem` from this path.
+export type { WorkspaceItem };
+
 // ----------------------------------------------------------------------
-
-/**
- * Workspace data originates from the untyped `src/_mock` (`.js`), where `plan`
- * is inferred as `string`. Keep it `string` here so the mock assigns without a
- * cast; the popover only compares it to literals like `"Free"`.
- */
-export interface WorkspaceItem {
-  id: string;
-  name: string;
-  logo: string;
-  plan: string;
-}
-
-export interface WorkspacesPopoverProps extends ButtonBaseProps {
-  data?: WorkspaceItem[];
-}
 
 export function WorkspacesPopover({
   data = [],

@@ -1,18 +1,10 @@
-import type { Variants } from "framer-motion";
-
 import { m } from "framer-motion";
+
+import { drawCircle } from "./const";
 
 // ----------------------------------------------------------------------
 
 export function Circles() {
-  const drawCircle: Variants = {
-    hidden: { opacity: 0 },
-    visible: (i: number) => {
-      const delay = 1 + i * 0.5;
-      return { opacity: 1, transition: { opacity: { delay, duration: 0.01 } } };
-    },
-  };
-
   return (
     <>
       <m.path

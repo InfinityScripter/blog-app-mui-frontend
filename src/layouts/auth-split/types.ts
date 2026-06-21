@@ -32,3 +32,13 @@ export interface AuthSplitSectionProps {
   imgUrl?: string;
   subtitle?: string;
 }
+
+export interface AuthSplitLayoutProps {
+  sx?: SxProps<Theme>;
+  section?: {
+    title?: string;
+    subtitle?: string;
+    imgUrl?: string;
+  };
+  children: ReactNode;
+}

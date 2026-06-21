@@ -1,5 +1,4 @@
 import type { MouseEvent } from "react";
-import type { Editor } from "@tiptap/react";
 
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -11,11 +10,9 @@ import Typography from "@mui/material/Typography";
 import { editorClasses } from "../classes";
 import { ToolbarItem } from "./toolbar-item";
 
-// ----------------------------------------------------------------------
+import type { ImageBlockProps } from "./types";
 
-interface ImageBlockProps {
-  editor: Editor;
-}
+// ----------------------------------------------------------------------
 
 export function ImageBlock({ editor }: ImageBlockProps) {
   const [url, setUrl] = useState("");

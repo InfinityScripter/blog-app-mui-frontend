@@ -1,5 +1,3 @@
-import type { Post } from "src/types/domain";
-
 import Link from "@mui/material/Link";
 import Avatar from "@mui/material/Avatar";
 import { useRouter } from "src/routes/hooks";
@@ -14,16 +12,9 @@ import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
 
 import { formatImageUrl } from "../../utils/format-image-url";
 
-// ----------------------------------------------------------------------
+import type { PostSearchProps } from "./types";
 
-interface PostSearchProps {
-  query: string;
-  results: Post[];
-  onSearch: (inputValue: string) => void;
-  hrefItem: (postId: string) => string;
-  loading?: boolean;
-  dashboard?: boolean;
-}
+// ----------------------------------------------------------------------
 
 export function PostSearch({
   query,

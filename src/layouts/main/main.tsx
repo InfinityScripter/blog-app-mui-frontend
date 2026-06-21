@@ -1,17 +1,10 @@
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 
 import { layoutClasses } from "../classes";
 
-// ----------------------------------------------------------------------
+import type { MainProps } from "./types";
 
-export interface MainProps {
-  children?: ReactNode;
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
+// ----------------------------------------------------------------------
 
 export function Main({ children, sx, ...other }: MainProps) {
   return (

@@ -1,31 +1,21 @@
 "use client";
 
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Alert from "@mui/material/Alert";
 import { usePathname } from "src/routes/hooks";
 import { useTheme } from "@mui/material/styles";
 import { useBoolean } from "src/hooks/use-boolean";
 
 import { Main } from "./main";
+import { Footer } from "./footer";
 import { NavMobile } from "./nav/mobile";
 import { NavDesktop } from "./nav/desktop";
-import { Footer, HomeFooter } from "./footer";
+import { HomeFooter } from "./home-footer";
 import { HeaderBase } from "../core/header-base";
 // ----------------------------------------------------------------------
 import { LayoutSection } from "../core/layout-section";
 import { navData as mainNavData } from "../config-nav-main";
 
-import type { MainNavItem } from "./nav/types";
-
-interface MainLayoutProps {
-  sx?: SxProps<Theme>;
-  data?: {
-    nav?: MainNavItem[];
-  };
-  children: ReactNode;
-}
+import type { MainLayoutProps } from "./types";
 
 export function MainLayout({ sx, data, children }: MainLayoutProps) {
   const theme = useTheme();

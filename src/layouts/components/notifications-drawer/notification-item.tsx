@@ -8,29 +8,17 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemButton from "@mui/material/ListItemButton";
 
 import { reader } from "./utils";
-import {
-  FileAction,
-  TagsAction,
-  FriendAction,
-  PaymentAction,
-  ProjectAction,
-} from "./notification-actions";
+import { FileAction } from "./file-action";
+import { TagsAction } from "./tags-action";
+import { FriendAction } from "./friend-action";
+import { PaymentAction } from "./payment-action";
+import { ProjectAction } from "./project-action";
+
+import type { NotificationItemProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export interface NotificationItemData {
-  id: string;
-  isUnRead: boolean;
-  type: string;
-  title: string;
-  category?: string;
-  createdAt: string | Date;
-  avatarUrl: string | null;
-}
-
-export interface NotificationItemProps {
-  notification: NotificationItemData;
-}
+export type { NotificationItemData } from "./types";
 
 export function NotificationItem({ notification }: NotificationItemProps) {
   const renderAvatar = (

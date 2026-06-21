@@ -1,16 +1,10 @@
-import type { Comment } from "src/types/domain";
-
 import Box from "@mui/material/Box";
 
 import PostCommentItem from "./post-comment-item";
 
-// ----------------------------------------------------------------------
+import type { PostCommentListProps } from "./types";
 
-interface PostCommentListProps {
-  comments?: Comment[];
-  postId?: string;
-  onCommentUpdated?: () => void;
-}
+// ----------------------------------------------------------------------
 
 export function PostCommentList({
   comments = [],

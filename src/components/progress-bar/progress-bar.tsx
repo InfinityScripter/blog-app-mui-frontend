@@ -4,7 +4,8 @@ import "./styles.css";
 
 import NProgress from "nprogress";
 import { Suspense, useEffect } from "react";
-import { useRouter, usePathname, useSearchParams } from "src/routes/hooks";
+
+import { NProgressDone } from "./n-progress-done";
 
 // ----------------------------------------------------------------------
 
@@ -58,20 +59,4 @@ export function ProgressBar() {
       <NProgressDone />
     </Suspense>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function NProgressDone() {
-  const pathname = usePathname();
-
-  const router = useRouter();
-
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    NProgress.done();
-  }, [pathname, router, searchParams]);
-
-  return null;
 }

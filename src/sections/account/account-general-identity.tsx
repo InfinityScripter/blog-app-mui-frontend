@@ -10,16 +10,9 @@ import LoadingButton from "@mui/lab/LoadingButton";
 
 import { ROLE_LABEL } from "./account-general-const";
 
-// ----------------------------------------------------------------------
+import type { AccountGeneralIdentityProps } from "./types";
 
-type Props = {
-  name?: string;
-  role: string;
-  verified: boolean;
-  hasAvatar: boolean;
-  removingAvatar: boolean;
-  onRemoveAvatar: () => void;
-};
+// ----------------------------------------------------------------------
 
 export function AccountGeneralIdentity({
   name,
@@ -28,7 +21,7 @@ export function AccountGeneralIdentity({
   hasAvatar,
   removingAvatar,
   onRemoveAvatar,
-}: Props) {
+}: AccountGeneralIdentityProps) {
   return (
     <Card
       sx={{

@@ -1,5 +1,3 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -14,24 +12,9 @@ import { usePostDelete } from "src/hooks/use-post-delete";
 import { ConfirmDialog } from "src/components/confirm-dialog";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
+import type { PostDetailsToolbarProps } from "./types";
+
 // ----------------------------------------------------------------------
-
-interface PublishOption {
-  value: string;
-  label: string;
-}
-
-interface PostDetailsToolbarProps {
-  publish: string;
-  backLink: string;
-  editLink: string;
-  liveLink: string;
-  publishOptions: PublishOption[];
-  onChangePublish: (value: string) => void;
-  postId: string;
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
 
 export function PostDetailsToolbar({
   publish,

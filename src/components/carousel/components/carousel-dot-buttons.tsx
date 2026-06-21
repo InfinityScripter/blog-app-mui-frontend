@@ -1,6 +1,3 @@
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import NoSsr from "@mui/material/NoSsr";
 import { useTheme } from "@mui/material/styles";
@@ -9,21 +6,9 @@ import { varAlpha, stylesMode } from "src/theme/styles";
 
 import { carouselClasses } from "../classes";
 
-import type { CarouselSlotProps } from "../carousel";
+import type { CarouselDotButtonsProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface CarouselDotButtonsProps extends Omit<BoxProps, "slotProps"> {
-  sx?: SxProps<Theme>;
-  gap?: number;
-  slotProps?: Pick<CarouselSlotProps, "dot">;
-  onClickDot: (index: number) => void;
-  scrollSnaps: number[];
-  selectedIndex: number;
-  fallbackCount?: number;
-  variant?: "circular" | "rounded" | "number";
-  fallback?: boolean;
-}
 
 export function CarouselDotButtons({
   sx,

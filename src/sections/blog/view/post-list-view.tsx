@@ -1,13 +1,10 @@
 "use client";
 
-import type { Post } from "src/types/domain";
-
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
-import { orderBy } from "src/utils/helper";
 import { Label } from "src/components/label";
 import { useState, useCallback } from "react";
 import { POST_SORT_OPTIONS } from "src/_mock";
@@ -20,7 +17,9 @@ import { useGetPosts, useSearchPosts } from "src/actions/blog";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
 import { PostSort } from "../post-sort";
+import { applyListFilter } from "./utils";
 import { PostSearch } from "../post-search";
+import { POST_PUBLISH_TABS } from "./const";
 import { PostListHorizontal } from "../post-list-horizontal";
 
 // ----------------------------------------------------------------------
@@ -38,7 +37,7 @@ export function PostListView() {
 
   const filters = useSetState({ publish: "all" });
 
-  const dataFiltered = applyFilter({
+  const dataFiltered = applyListFilter({
     inputData: posts,
     filters: filters.state,
     sortBy,
@@ -109,7 +108,7 @@ export function PostListView() {
         onChange={handleFilterPublish}
         sx={{ mb: { xs: 3, md: 5 } }}
       >
-        {["all", "published", "draft"].map((tab) => (
+        {POST_PUBLISH_TABS.map((tab) => (
           <Tab
             key={tab}
             iconPosition="end"
@@ -142,40 +141,3 @@ export function PostListView() {
     </DashboardContent>
   );
 }
-
-// `orderBy` is constrained to `Record<string, unknown>`; the `Post` interface
-// has no index signature, so widen each element with an intersection type
-// (via spread, no cast) to satisfy the sort call's generic constraint.
-type SortablePost = Post & Record<string, unknown>;
-
-const applyFilter = ({
-  inputData,
-  filters,
-  sortBy,
-}: {
-  inputData: Post[];
-  filters: { publish: string };
-  sortBy: string;
-}): Post[] => {
-  const { publish } = filters;
-
-  let data: SortablePost[] = inputData.map((post) => ({ ...post }));
-
-  if (sortBy === "latest") {
-    data = orderBy(data, ["createdAt"], ["desc"]);
-  }
-
-  if (sortBy === "oldest") {
-    data = orderBy(data, ["createdAt"], ["asc"]);
-  }
-
-  if (sortBy === "popular") {
-    data = orderBy(data, ["totalViews"], ["desc"]);
-  }
-
-  if (publish !== "all") {
-    data = data.filter((post) => post.publish === publish);
-  }
-
-  return data;
-};

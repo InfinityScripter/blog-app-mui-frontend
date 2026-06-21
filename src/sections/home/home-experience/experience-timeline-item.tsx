@@ -1,5 +1,4 @@
-import type { MarketingTheme } from "src/sections/home/components/types";
-import type { ExperienceItem } from "src/sections/home/home-experience/types";
+import type { ExperienceTimelineItemProps } from "src/sections/home/home-experience/types";
 
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
@@ -18,12 +17,6 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import { getPeriodLabel } from "./utils";
 
 // ----------------------------------------------------------------------
-
-interface ExperienceTimelineItemProps {
-  item: ExperienceItem;
-  isMobile: boolean;
-  theme: MarketingTheme;
-}
 
 export function ExperienceTimelineItem({
   item,

@@ -1,24 +1,12 @@
-import type { ReactNode, ComponentType, SyntheticEvent } from "react";
-import type { AutocompleteRenderInputParams } from "@mui/material/Autocomplete";
+import type { ComponentType } from "react";
 
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Controller, useFormContext } from "react-hook-form";
 
-import type { RHFAutocompleteProps } from "./types";
+import type { RHFAutocompleteProps, AutocompleteViewProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-// View MUI `Autocomplete` through the subset of props used here, leaving
-// `options` (supplied via `...other`) optional so the wrapper type-checks.
-interface AutocompleteViewProps {
-  id?: string;
-  value?: unknown;
-  onChange?: (event: SyntheticEvent, newValue: unknown) => void;
-  renderInput: (params: AutocompleteRenderInputParams) => ReactNode;
-  options?: readonly unknown[];
-  [key: string]: unknown;
-}
 
 // Sanctioned third-party cast (see .cursor/rules/code-style.mdc): MUI
 // `Autocomplete` is generic over Value/Multiple/DisableClearable/FreeSolo, which

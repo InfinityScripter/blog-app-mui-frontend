@@ -1,5 +1,3 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -11,11 +9,9 @@ import { MotionContainer } from "src/components/animate";
 
 import { Dots, Lines, Texts, Circles, PlusIcon } from "./hero-svg";
 
-// ----------------------------------------------------------------------
+import type { HeroBackgroundProps } from "./types";
 
-interface HeroBackgroundProps {
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function HeroBackground({ sx }: HeroBackgroundProps) {
   const theme = useTheme();

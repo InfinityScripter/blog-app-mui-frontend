@@ -1,7 +1,5 @@
 "use client";
 
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { m } from "framer-motion";
 import { useState, useCallback } from "react";
 import MenuList from "@mui/material/MenuList";
@@ -11,19 +9,13 @@ import { varHover } from "src/components/animate";
 import { FlagIcon } from "src/components/iconify";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
 
+import type { LanguageOption, LanguagePopoverProps } from "./types";
+
+// Re-exported so external importers (e.g. `src/layouts/core/header-base.tsx`,
+// `src/layouts/dashboard/const.ts`) keep resolving `LanguageOption` from here.
+export type { LanguageOption };
+
 // ----------------------------------------------------------------------
-
-export interface LanguageOption {
-  value: string;
-  label: string;
-  countryCode: string;
-}
-
-export interface LanguagePopoverProps {
-  data?: LanguageOption[];
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
 
 export function LanguagePopover({
   data = [],

@@ -1,20 +1,13 @@
-import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
-import type { NavSectionDataProps } from "src/components/nav-section/types";
-
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { varAlpha } from "src/theme/styles";
 import { NavSectionHorizontal } from "src/components/nav-section";
 
+import type { NavHorizontalProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export interface NavHorizontalProps {
-  data: NavSectionDataProps[];
-  layoutQuery: Breakpoint;
-  sx?: SxProps<Theme>;
-  cssVars?: Record<string, string | number>;
-  [key: string]: unknown;
-}
+export type { NavHorizontalProps };
 
 export function NavHorizontal({
   data,

@@ -1,7 +1,5 @@
 "use client";
 
-import type { Post } from "src/types/domain";
-
 import useSWR from "swr";
 import { useState } from "react";
 import { paths } from "src/routes/paths";
@@ -24,9 +22,7 @@ import {
   TableContainer,
 } from "@mui/material";
 
-interface AdminPostsResponse {
-  posts: Post[];
-}
+import type { AdminPostsResponse } from "./types";
 
 export function AdminPostsView() {
   const { user } = useAuthContext();

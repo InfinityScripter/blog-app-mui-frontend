@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useGetLlmStats } from "src/actions/llm-stats";
+import { renderState } from "src/sections/admin/llm-stats/utils";
 import { KpiRow } from "src/sections/admin/llm-stats/widgets/kpi-row";
 import { ModelTable } from "src/sections/admin/llm-stats/widgets/model-table";
 import { TrendChart } from "src/sections/admin/llm-stats/widgets/trend-chart";
@@ -14,17 +15,6 @@ import { ActivityHeatmap } from "src/sections/admin/llm-stats/widgets/activity-h
 import { ModelSplitChart } from "src/sections/admin/llm-stats/widgets/model-split-chart";
 import { TopProjectsChart } from "src/sections/admin/llm-stats/widgets/top-projects-chart";
 import { HarnessSplitChart } from "src/sections/admin/llm-stats/widgets/harness-split-chart";
-
-function renderState(
-  statsError: unknown,
-  statsLoading: boolean,
-  stats: ReturnType<typeof useGetLlmStats>["stats"],
-): "error" | "loading" | "empty" | "ready" {
-  if (statsError) return "error";
-  if (statsLoading) return "loading";
-  if (!stats) return "empty";
-  return "ready";
-}
 
 export function AdminLlmStatsView() {
   const { stats, pushedAt, statsLoading, statsError } = useGetLlmStats();

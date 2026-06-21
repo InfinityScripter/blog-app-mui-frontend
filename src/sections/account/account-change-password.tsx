@@ -1,6 +1,5 @@
 "use client";
 
-import { z as zod } from "zod";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -8,73 +7,24 @@ import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
 import { varAlpha } from "src/theme/styles";
 import { toast } from "src/components/snackbar";
+import { Form } from "src/components/hook-form";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { useBoolean } from "src/hooks/use-boolean";
 import { changePassword } from "src/actions/account";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, Field } from "src/components/hook-form";
-import InputAdornment from "@mui/material/InputAdornment";
+
+import { PasswordField } from "./account-change-password-field";
+import { defaultValues } from "./account-change-password-const";
+import { Requirement } from "./account-change-password-requirement";
+import { ChangePasswordSchema } from "./account-change-password-schema";
+
+import type { ChangePasswordSchemaType } from "./types";
 
 // ----------------------------------------------------------------------
 
-export const ChangePasswordSchema = zod
-  .object({
-    currentPassword: zod
-      .string()
-      .min(1, { message: "Текущий пароль обязателен!" }),
-    newPassword: zod
-      .string()
-      .min(1, { message: "Новый пароль обязателен!" })
-      .min(6, { message: "Пароль должен содержать не менее 6 символов!" }),
-    confirmNewPassword: zod
-      .string()
-      .min(1, { message: "Подтвердите новый пароль!" }),
-  })
-  .refine((data) => data.newPassword === data.confirmNewPassword, {
-    message: "Пароли не совпадают!",
-    path: ["confirmNewPassword"],
-  })
-  .refine((data) => data.currentPassword !== data.newPassword, {
-    message: "Новый пароль должен отличаться от текущего!",
-    path: ["newPassword"],
-  });
-
-type ChangePasswordSchemaType = zod.infer<typeof ChangePasswordSchema>;
-
-// ----------------------------------------------------------------------
-
-const defaultValues: ChangePasswordSchemaType = {
-  currentPassword: "",
-  newPassword: "",
-  confirmNewPassword: "",
-};
-
-// ----------------------------------------------------------------------
-
-function Requirement({ ok, children }: { ok: boolean; children: string }) {
-  return (
-    <Stack
-      direction="row"
-      spacing={1}
-      alignItems="center"
-      sx={{
-        typography: "body2",
-        color: ok ? "success.main" : "text.secondary",
-        transition: (theme) => theme.transitions.create("color"),
-      }}
-    >
-      <Iconify
-        width={18}
-        icon={ok ? "solar:check-circle-bold" : "solar:close-circle-linear"}
-        sx={{ flexShrink: 0, color: ok ? "success.main" : "text.disabled" }}
-      />
-      {children}
-    </Stack>
-  );
-}
+export { ChangePasswordSchema };
 
 // ----------------------------------------------------------------------
 
@@ -107,31 +57,6 @@ export function AccountChangePassword() {
   const reqMatch =
     values.confirmNewPassword.length > 0 &&
     values.newPassword === values.confirmNewPassword;
-
-  const renderPasswordField = (
-    name: keyof ChangePasswordSchemaType,
-    label: string,
-    visible: ReturnType<typeof useBoolean>,
-  ) => (
-    <Field.Text
-      name={name}
-      label={label}
-      type={visible.value ? "text" : "password"}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton onClick={visible.onToggle} edge="end">
-              <Iconify
-                icon={
-                  visible.value ? "solar:eye-bold" : "solar:eye-closed-bold"
-                }
-              />
-            </IconButton>
-          </InputAdornment>
-        ),
-      }}
-    />
-  );
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -195,21 +120,21 @@ export function AccountChangePassword() {
           {/* Right: the form fields. */}
           <Grid size={{ xs: 12, md: 7 }}>
             <Stack spacing={3}>
-              {renderPasswordField(
-                "currentPassword",
-                "Текущий пароль",
-                showCurrentPassword,
-              )}
-              {renderPasswordField(
-                "newPassword",
-                "Новый пароль",
-                showNewPassword,
-              )}
-              {renderPasswordField(
-                "confirmNewPassword",
-                "Подтвердите новый пароль",
-                showConfirmPassword,
-              )}
+              <PasswordField
+                name="currentPassword"
+                label="Текущий пароль"
+                visible={showCurrentPassword}
+              />
+              <PasswordField
+                name="newPassword"
+                label="Новый пароль"
+                visible={showNewPassword}
+              />
+              <PasswordField
+                name="confirmNewPassword"
+                label="Подтвердите новый пароль"
+                visible={showConfirmPassword}
+              />
 
               <LoadingButton
                 type="submit"

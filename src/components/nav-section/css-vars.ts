@@ -2,12 +2,13 @@ import type { Theme } from "@mui/material/styles";
 
 import { varAlpha } from "src/theme/styles";
 
+import { bulletColor } from "./const";
+
 // ----------------------------------------------------------------------
 
-export const bulletColor = {
-  dark: "#282F37",
-  light: "#EDEFF2",
-};
+export { bulletColor };
+
+// ----------------------------------------------------------------------
 
 function colorVars(theme: Theme, variant: "vertical" | "horizontal" | "mini") {
   const {

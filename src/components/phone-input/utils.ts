@@ -3,6 +3,12 @@ import type { Country } from "react-phone-number-input";
 import { countries } from "src/assets/data/countries";
 import { parsePhoneNumber } from "react-phone-number-input";
 
+import type { CountryOption, ApplyFilterParams } from "./types";
+
+// ----------------------------------------------------------------------
+
+export type { CountryOption } from "./types";
+
 // ----------------------------------------------------------------------
 
 export function getCountryCode(
@@ -22,16 +28,9 @@ export function getCountryCode(
 
 // ----------------------------------------------------------------------
 
-export type CountryOption = (typeof countries)[number];
-
 export function getCountry(countryCode?: string): CountryOption | undefined {
   const option = countries.filter((country) => country.code === countryCode)[0];
   return option;
-}
-
-interface ApplyFilterParams {
-  inputData: readonly CountryOption[];
-  query: string;
 }
 
 export function applyFilter({

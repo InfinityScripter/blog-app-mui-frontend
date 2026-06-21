@@ -1,15 +1,13 @@
-import type { Theme, SxProps } from "@mui/material/styles";
+import type { Theme } from "@mui/material/styles";
 
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { varFade } from "src/components/animate";
 
-// ----------------------------------------------------------------------
+import type { TextsProps } from "./types";
 
-interface TextsProps {
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function Texts({ sx, ...other }: TextsProps) {
   return (

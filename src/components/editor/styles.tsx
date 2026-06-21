@@ -4,15 +4,11 @@ import { styled } from "@mui/material/styles";
 
 import { editorClasses } from "./classes";
 
+import type { StyledRootProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 const MARGIN = "0.75em";
-
-interface StyledRootProps {
-  error?: boolean;
-  disabled?: boolean;
-  fullScreen?: boolean;
-}
 
 export const StyledRoot = styled(Stack, {
   shouldForwardProp: (prop) =>

@@ -2,16 +2,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
 import { CustomPopover } from "src/components/custom-popover";
 
-// ----------------------------------------------------------------------
+import type { PostCommentMenuProps } from "./types";
 
-interface PostCommentMenuProps {
-  open: boolean;
-  anchorEl: Element | null;
-  deleting: boolean;
-  onClose: () => void;
-  onEdit: () => void;
-  onDelete: () => void;
-}
+// ----------------------------------------------------------------------
 
 export function PostCommentMenu({
   open,

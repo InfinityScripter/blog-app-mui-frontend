@@ -1,16 +1,10 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import SvgIcon from "@mui/material/SvgIcon";
 import { varAlpha } from "src/theme/styles";
 import IconButton from "@mui/material/IconButton";
 
-// ----------------------------------------------------------------------
+import type { NavToggleButtonProps } from "./types";
 
-export interface NavToggleButtonProps {
-  isNavMini?: boolean;
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
+// ----------------------------------------------------------------------
 
 export function NavToggleButton({
   isNavMini,

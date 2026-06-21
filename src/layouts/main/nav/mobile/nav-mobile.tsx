@@ -1,6 +1,3 @@
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -12,20 +9,9 @@ import { Scrollbar } from "src/components/scrollbar";
 import { NavList } from "./nav-mobile-list";
 import { SignInButton } from "../../../components/sign-in-button";
 
-import type { MainNavItem } from "../types";
+import type { NavMobileProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface NavMobileProps {
-  data: MainNavItem[];
-  open: boolean;
-  onClose: () => void;
-  slots?: {
-    topArea?: ReactNode;
-    bottomArea?: ReactNode;
-  };
-  sx?: SxProps<Theme>;
-}
 
 export function NavMobile({ data, open, onClose, slots, sx }: NavMobileProps) {
   const pathname = usePathname();

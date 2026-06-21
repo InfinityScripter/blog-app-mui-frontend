@@ -15,6 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { JwtSignUpForm } from "./jwt-sign-up-form";
 import { SignUpSchema } from "./jwt-sign-up-schema";
+import { JwtSignUpTerms } from "./jwt-sign-up-terms";
 import { JwtSignUpSocial } from "./jwt-sign-up-social";
 
 // ----------------------------------------------------------------------
@@ -85,28 +86,6 @@ export function JwtSignUpView() {
     </Stack>
   );
 
-  const renderTerms = (
-    <Typography
-      component="div"
-      sx={{
-        mt: 3,
-        textAlign: "center",
-        typography: "caption",
-        color: "text.secondary",
-      }}
-    >
-      {"Регистрируясь, я соглашаюсь с "}
-      <Link underline="always" color="text.primary">
-        Условиями использования
-      </Link>
-      {" и "}
-      <Link underline="always" color="text.primary">
-        Политикой конфиденциальности
-      </Link>
-      .
-    </Typography>
-  );
-
   return (
     <>
       {renderHead}
@@ -129,7 +108,7 @@ export function JwtSignUpView() {
 
       <JwtSignUpSocial />
 
-      {renderTerms}
+      <JwtSignUpTerms />
     </>
   );
 }

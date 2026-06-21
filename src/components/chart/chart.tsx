@@ -1,53 +1,13 @@
-import type { ApexOptions } from "apexcharts";
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { Props as ReactApexChartProps } from "react-apexcharts";
-
 import { forwardRef } from "react";
-import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 
-import { ChartLoading } from "./chart-loading";
-import { withLoadingProps } from "../../utils/with-loading-props";
+import { ApexChart } from "./apex-chart";
 
-interface ChartLoadingConfig {
-  disabled?: boolean;
-  sx?: SxProps<Theme>;
-}
-
-interface ApexChartProps {
-  type?: ReactApexChartProps["type"];
-  series?: ReactApexChartProps["series"];
-  options?: ApexOptions;
-  width?: ReactApexChartProps["width"];
-  height?: ReactApexChartProps["height"];
-  loading?: ChartLoadingConfig;
-}
-
-const ApexChart = withLoadingProps<ApexChartProps>((props) =>
-  dynamic(() => import("react-apexcharts").then((mod) => mod.default), {
-    ssr: false,
-    loading: () => {
-      const { loading, type } = props();
-
-      return loading?.disabled ? null : (
-        <ChartLoading type={type} sx={loading?.sx} />
-      );
-    },
-  }),
-);
+import type { ChartProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export interface ChartProps extends Omit<BoxProps, "children"> {
-  sx?: SxProps<Theme>;
-  type: NonNullable<ReactApexChartProps["type"]>;
-  series?: ReactApexChartProps["series"];
-  height?: BoxProps["height"];
-  width?: BoxProps["width"];
-  options?: ApexOptions;
-  loadingProps?: ChartLoadingConfig;
-}
+export type { ChartProps } from "./types";
 
 export const Chart = forwardRef<HTMLDivElement, ChartProps>(
   (

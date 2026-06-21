@@ -4,16 +4,9 @@ import TextField from "@mui/material/TextField";
 import { Iconify } from "src/components/iconify";
 import LoadingButton from "@mui/lab/LoadingButton";
 
-// ----------------------------------------------------------------------
+import type { PostCommentEditProps } from "./types";
 
-interface PostCommentEditProps {
-  value: string;
-  saving: boolean;
-  onChange: (value: string) => void;
-  onKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  onSave: () => void;
-  onCancel: () => void;
-}
+// ----------------------------------------------------------------------
 
 export function PostCommentEdit({
   value,

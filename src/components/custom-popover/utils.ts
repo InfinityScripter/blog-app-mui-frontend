@@ -1,29 +1,28 @@
+import type { SystemStyleObject } from "@mui/system";
 import type { Theme, SxProps } from "@mui/material/styles";
-import type { PopoverOrigin } from "@mui/material/Popover";
+
+import { POPOVER_DISTANCE } from "./const";
+
+import type { ArrowPlacement, AnchorOriginResult } from "./types";
 
 // ----------------------------------------------------------------------
 
-const POPOVER_DISTANCE = 0.75;
-
-export type ArrowPlacement =
-  | "top-left"
-  | "top-center"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-center"
-  | "bottom-right"
-  | "left-top"
-  | "left-center"
-  | "left-bottom"
-  | "right-top"
-  | "right-center"
-  | "right-bottom";
-
-interface AnchorOriginResult {
-  paperStyles?: SxProps<Theme>;
-  anchorOrigin: PopoverOrigin;
-  transformOrigin: PopoverOrigin;
+export function isStyleObject(
+  sx: SxProps<Theme>,
+): sx is Exclude<SystemStyleObject<Theme>, null> {
+  return typeof sx === "object" && !Array.isArray(sx);
 }
+
+export function toStyleObject(
+  sx: SxProps<Theme> | undefined,
+): SystemStyleObject<Theme> {
+  if (sx && isStyleObject(sx)) {
+    return sx;
+  }
+  return {};
+}
+
+// ----------------------------------------------------------------------
 
 export function calculateAnchorOrigin(
   arrow: ArrowPlacement,

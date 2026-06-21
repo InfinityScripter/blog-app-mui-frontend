@@ -1,4 +1,5 @@
 import type { Theme, SxProps } from "@mui/material/styles";
+import type { TablePaginationProps } from "@mui/material/TablePagination";
 import type { Dispatch, ReactNode, ChangeEvent, SetStateAction } from "react";
 
 // ----------------------------------------------------------------------
@@ -82,4 +83,11 @@ export interface TableSelectedActionProps {
   sx?: SxProps<Theme>;
   action?: ReactNode;
   onSelectAllRows: (checked: boolean) => void;
+}
+
+export interface TablePaginationCustomProps
+  extends Omit<TablePaginationProps, "component"> {
+  sx?: SxProps<Theme>;
+  dense?: boolean;
+  onChangeDense?: (event: ChangeEvent<HTMLInputElement>) => void;
 }

@@ -1,17 +1,12 @@
 "use client";
 
-import type { ReactNode } from "react";
-
 import { LazyMotion } from "framer-motion";
 
-const loadFeaturesAsync = async () =>
-  import("./features").then((res) => res.default);
+import { loadFeaturesAsync } from "./utils";
+
+import type { MotionLazyProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface MotionLazyProps {
-  children?: ReactNode;
-}
 
 export function MotionLazy({ children }: MotionLazyProps) {
   return (

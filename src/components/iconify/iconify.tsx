@@ -1,8 +1,5 @@
 "use client";
 
-import type { IconifyIconProps } from "@iconify/react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import { Icon } from "@iconify/react";
@@ -10,18 +7,9 @@ import NoSsr from "@mui/material/NoSsr";
 
 import { iconifyClasses } from "./classes";
 
-// ----------------------------------------------------------------------
+import type { IconifyProps } from "./types";
 
-interface IconifyProps
-  extends Omit<
-    IconifyIconProps,
-    "icon" | "width" | "height" | "color" | "onLoad"
-  > {
-  className?: string;
-  width?: number | string;
-  sx?: SxProps<Theme>;
-  icon: string;
-}
+// ----------------------------------------------------------------------
 
 export const Iconify = forwardRef<HTMLDivElement, IconifyProps>(
   ({ className, width = 20, sx, ...other }, ref) => {

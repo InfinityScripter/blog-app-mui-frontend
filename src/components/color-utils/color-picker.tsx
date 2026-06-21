@@ -1,6 +1,3 @@
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { varAlpha } from "src/theme/styles";
@@ -10,18 +7,9 @@ import { alpha as hexAlpha } from "@mui/material/styles";
 
 import { Iconify } from "../iconify";
 
-// ----------------------------------------------------------------------
+import type { ColorPickerProps } from "./types";
 
-interface ColorPickerProps extends Omit<BoxProps, "children"> {
-  colors: string[];
-  selected: string | string[];
-  onSelectColor: (value: string | string[]) => void;
-  limit?: number | "auto";
-  sx?: SxProps<Theme>;
-  slotProps?: {
-    button?: SxProps<Theme>;
-  };
-}
+// ----------------------------------------------------------------------
 
 export const ColorPicker = forwardRef<HTMLUListElement, ColorPickerProps>(
   (

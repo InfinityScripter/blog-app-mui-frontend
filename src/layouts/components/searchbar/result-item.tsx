@@ -1,26 +1,12 @@
-import type { ReactNode } from "react";
-
 import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 import { Label } from "src/components/label";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 
+import type { ResultItemProps } from "./types";
+
 // ----------------------------------------------------------------------
-
-/** A segment produced by `autosuggest-highlight/parse`. */
-export interface HighlightPart {
-  text: string;
-  highlight: boolean;
-}
-
-export interface ResultItemProps {
-  title?: HighlightPart[];
-  path?: HighlightPart[];
-  groupLabel?: ReactNode;
-  onClickItem?: () => void;
-  [key: string]: unknown;
-}
 
 export function ResultItem({
   title = [],

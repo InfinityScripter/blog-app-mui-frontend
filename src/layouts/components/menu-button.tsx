@@ -1,14 +1,9 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import SvgIcon from "@mui/material/SvgIcon";
 import IconButton from "@mui/material/IconButton";
 
-// ----------------------------------------------------------------------
+import type { MenuButtonProps } from "./types";
 
-export interface MenuButtonProps {
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
+// ----------------------------------------------------------------------
 
 export function MenuButton({ sx, ...other }: MenuButtonProps) {
   return (

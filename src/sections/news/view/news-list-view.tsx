@@ -1,7 +1,5 @@
 "use client";
 
-import type { Post } from "src/types/domain";
-
 import { useMemo, useState } from "react";
 import Container from "@mui/material/Container";
 import { EmptyContent } from "src/components/empty-content";
@@ -11,12 +9,9 @@ import { NewsSectionBar } from "../news-section-bar";
 import { filterPostsByCategory, DEFAULT_NEWS_CATEGORY } from "../utils";
 
 import type { NewsCategory } from "../types";
+import type { NewsListViewProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface NewsListViewProps {
-  posts: Post[];
-}
 
 /**
  * The /news landing view: section header bar + editorial feed. Posts arrive

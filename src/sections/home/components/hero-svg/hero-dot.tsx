@@ -1,25 +1,13 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { ColorType } from "src/theme/core/components/types";
 import type { MarketingTheme } from "src/sections/home/components/types";
-import type {
-  Transition,
-  TargetAndTransition,
-  LegacyAnimationControls,
-} from "framer-motion";
 
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import { stylesMode } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 
-// ----------------------------------------------------------------------
+import type { DotProps } from "./types";
 
-interface DotProps {
-  color?: ColorType;
-  animate?: LegacyAnimationControls | TargetAndTransition;
-  transition?: Transition;
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function Dot({
   color = "primary",

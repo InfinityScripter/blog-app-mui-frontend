@@ -1,5 +1,4 @@
 import type { MouseEvent } from "react";
-import type { Editor } from "@tiptap/react";
 
 import { useState } from "react";
 import Menu from "@mui/material/Menu";
@@ -8,24 +7,12 @@ import { listClasses } from "@mui/material/List";
 import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 
 import { Iconify } from "../../iconify";
+import { HEADING_OPTIONS } from "./const";
 import { ToolbarItem } from "./toolbar-item";
 
-type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
-
-const HEADING_OPTIONS: { label: string; level: HeadingLevel }[] = [
-  { label: "Heading 1", level: 1 },
-  { label: "Heading 2", level: 2 },
-  { label: "Heading 3", level: 3 },
-  { label: "Heading 4", level: 4 },
-  { label: "Heading 5", level: 5 },
-  { label: "Heading 6", level: 6 },
-];
+import type { HeadingBlockProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface HeadingBlockProps {
-  editor: Editor;
-}
 
 export function HeadingBlock({ editor }: HeadingBlockProps) {
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);

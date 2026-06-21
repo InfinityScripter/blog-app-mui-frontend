@@ -1,17 +1,11 @@
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import NoSsr from "@mui/material/NoSsr";
 import { CONFIG } from "src/config-global";
 
-// ----------------------------------------------------------------------
+import type { FlagIconProps } from "./types";
 
-interface FlagIconProps extends Omit<BoxProps, "children" | "component"> {
-  code?: string;
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export const FlagIcon = forwardRef<HTMLSpanElement, FlagIconProps>(
   ({ code, sx, ...other }, ref) => {

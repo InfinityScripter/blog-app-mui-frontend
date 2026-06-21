@@ -1,17 +1,12 @@
-import type { Post } from "src/types/domain";
-
 import Box from "@mui/material/Box";
 import Pagination, { paginationClasses } from "@mui/material/Pagination";
 
 import { PostItemSkeleton } from "./post-skeleton";
 import { PostItemHorizontal } from "./post-item-horizontal";
 
-// ----------------------------------------------------------------------
+import type { PostListHorizontalProps } from "./types";
 
-interface PostListHorizontalProps {
-  posts: Post[];
-  loading?: boolean;
-}
+// ----------------------------------------------------------------------
 
 export function PostListHorizontal({
   posts,

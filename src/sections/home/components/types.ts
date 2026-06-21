@@ -1,5 +1,17 @@
-import type { Theme } from "@mui/material/styles";
+import type { Theme, SxProps } from "@mui/material/styles";
 import type { ThemeWithVars } from "src/theme/core/components/types";
+
+// ----------------------------------------------------------------------
+
+export interface HeroBackgroundProps {
+  sx?: SxProps<Theme>;
+}
+
+export interface SectionHeadingProps {
+  overline?: string;
+  title: string;
+  subtitle?: string;
+}
 
 // ----------------------------------------------------------------------
 

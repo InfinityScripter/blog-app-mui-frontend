@@ -1,6 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
 import type { Theme } from "@mui/material/styles";
 import type { SystemStyleObject } from "@mui/system";
 
@@ -13,11 +12,9 @@ import {
   MARKETING_HEADLINE_GRADIENT_TRANSITION,
 } from "src/theme/styles";
 
-// ----------------------------------------------------------------------
+import type { MarketingGradientHighlightProps } from "./types";
 
-type MarketingGradientHighlightProps = {
-  children: ReactNode;
-};
+// ----------------------------------------------------------------------
 
 /** Animated primary↔warning gradient text span; same behavior as HomeHero highlight. */
 export const MarketingGradientHighlight = ({

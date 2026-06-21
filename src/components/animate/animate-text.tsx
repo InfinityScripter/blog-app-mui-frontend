@@ -1,35 +1,18 @@
 import type { Variants } from "framer-motion";
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { TypographyProps } from "@mui/material/Typography";
 
 import Box from "@mui/material/Box";
 import { useRef, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import { m, useInView, useAnimation } from "framer-motion";
 
+import { animateTextClasses } from "./const";
 import { varFade, varContainer } from "./variants";
+
+import type { AnimateTextProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export const animateTextClasses = {
-  root: "animate-text-root",
-  lines: "animate-text-lines",
-  line: "animate-text-line",
-  word: "animate-text-word",
-  char: "animate-text-char",
-  space: "animate-text-space",
-  srOnly: "sr-only",
-  dataIndex: '[data-columns="3"]',
-};
-
-interface AnimateTextProps extends Omit<TypographyProps, "children"> {
-  text: string | string[];
-  variants?: Variants;
-  once?: boolean;
-  amount?: number;
-  repeatDelay?: number;
-  sx?: SxProps<Theme>;
-}
+export { animateTextClasses } from "./const";
 
 export function AnimateText({
   sx,

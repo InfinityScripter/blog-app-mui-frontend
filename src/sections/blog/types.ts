@@ -1,0 +1,161 @@
+import type { Theme, SxProps } from "@mui/material/styles";
+import type { Post, Comment, AuthorInfo, ReplyComment } from "src/types/domain";
+
+// ----------------------------------------------------------------------
+
+export interface PostCommentEditProps {
+  value: string;
+  saving: boolean;
+  onChange: (value: string) => void;
+  onKeyPress: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onSave: () => void;
+  onCancel: () => void;
+}
+
+export interface PostCommentFormProps {
+  postId?: string;
+  onCommentAdded?: (result: { message: string }) => void;
+  onCommentUpdated?: () => void;
+  parentCommentId?: string;
+}
+
+export interface PostCommentItemProps {
+  name: string;
+  avatarUrl?: string;
+  message: string;
+  tagUser?: string;
+  postedAt: string | Date;
+  hasReply?: boolean;
+  comment: Comment | ReplyComment;
+  postId?: string;
+  parentCommentId?: string;
+  onCommentUpdated?: () => void;
+}
+
+export interface PostCommentListProps {
+  comments?: Comment[];
+  postId?: string;
+  onCommentUpdated?: () => void;
+}
+
+export interface PostCommentMenuProps {
+  open: boolean;
+  anchorEl: Element | null;
+  deleting: boolean;
+  onClose: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+}
+
+export interface PostDetailsHeroProps {
+  title?: string;
+  author?: AuthorInfo;
+  coverUrl?: string;
+  createdAt?: string | Date;
+}
+
+export interface PostDetailsPreviewProps {
+  open: boolean;
+  title?: string;
+  content?: string;
+  isValid: boolean;
+  onClose: () => void;
+  coverUrl?: string | File | null;
+  onSubmit: () => void;
+  description?: string;
+  isSubmitting: boolean;
+}
+
+export interface PublishOption {
+  value: string;
+  label: string;
+}
+
+export interface PostDetailsToolbarProps {
+  publish: string;
+  backLink: string;
+  editLink: string;
+  liveLink: string;
+  publishOptions: PublishOption[];
+  onChangePublish: (value: string) => void;
+  postId: string;
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
+export type PostItemFeedProps = {
+  post: Post;
+};
+
+export interface PostItemHorizontalMenuProps {
+  open: boolean;
+  anchorEl: Element | null;
+  onClose: () => void;
+  onView: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+}
+
+export interface InfoBlockProps {
+  totalComments: number;
+  totalViews: number;
+  totalShares: number;
+  readingTime?: number;
+  sx?: SxProps<Theme>;
+}
+
+export interface PostListHorizontalProps {
+  posts: Post[];
+  loading?: boolean;
+}
+
+export interface PostListProps {
+  posts: Post[];
+  loading?: boolean;
+}
+
+export interface PostNewEditActionsProps {
+  isEdit: boolean;
+  isSubmitting: boolean;
+  onPreview: () => void;
+}
+
+export interface PostNewEditDetailsProps {
+  onRemoveFile: () => void;
+}
+
+export interface PostNewEditFormProps {
+  currentPost?: Post;
+}
+
+export type PostRelatedProps = {
+  currentPostId?: string;
+  tags: string[];
+};
+
+export interface PostSearchProps {
+  query: string;
+  results: Post[];
+  onSearch: (inputValue: string) => void;
+  hrefItem: (postId: string) => string;
+  loading?: boolean;
+  dashboard?: boolean;
+}
+
+export interface PostItemSkeletonProps {
+  sx?: SxProps<Theme>;
+  amount?: number;
+  variant?: "vertical" | "horizontal";
+  [key: string]: unknown;
+}
+
+export interface SortOption {
+  value: string;
+  label: string;
+}
+
+export interface PostSortProps {
+  sort: string;
+  sortOptions: SortOption[];
+  onSort: (value: string) => void;
+}

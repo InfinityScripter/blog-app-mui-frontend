@@ -1,5 +1,3 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
@@ -7,14 +5,9 @@ import { useAuthContext } from "src/auth/hooks";
 import Typography from "@mui/material/Typography";
 import { formatImageUrl } from "src/utils/format-image-url";
 
-import type { LayoutUserView } from "./types";
+import type { LayoutUserView, NavUpgradeProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface NavUpgradeProps {
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
 
 export function NavUpgrade({ sx, ...other }: NavUpgradeProps) {
   const { user } = useAuthContext();

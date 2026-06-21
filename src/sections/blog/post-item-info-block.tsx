@@ -1,18 +1,10 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Stack from "@mui/material/Stack";
 import { Iconify } from "src/components/iconify";
 import { fShortenNumber } from "src/utils/format-number";
 
-// ----------------------------------------------------------------------
+import type { InfoBlockProps } from "./types";
 
-interface InfoBlockProps {
-  totalComments: number;
-  totalViews: number;
-  totalShares: number;
-  readingTime?: number;
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function InfoBlock({
   totalComments,

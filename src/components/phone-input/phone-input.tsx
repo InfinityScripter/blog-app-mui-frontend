@@ -1,28 +1,20 @@
-import type { Ref } from "react";
 import type { Country } from "react-phone-number-input";
-import type { TextFieldProps } from "@mui/material/TextField";
-import type { Props as PhoneNumberInputProps } from "react-phone-number-input/input";
 
 import { useState, forwardRef } from "react";
-import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import PhoneNumberInput from "react-phone-number-input/input";
 
 import { getCountryCode } from "./utils";
 import { CountryListPopover } from "./list";
+import { CustomInput } from "./custom-input";
+
+import type { PhoneInputProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export interface PhoneInputProps
-  extends Omit<
-    PhoneNumberInputProps<TextFieldProps>,
-    "value" | "onChange" | "country"
-  > {
-  value?: string;
-  onChange?: (newValue?: string) => void;
-  country?: Country;
-  disableSelect?: boolean;
-}
+export type { PhoneInputProps } from "./types";
+
+// ----------------------------------------------------------------------
 
 export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
   (
@@ -69,12 +61,4 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
       />
     );
   },
-);
-
-// ----------------------------------------------------------------------
-
-const CustomInput = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ ...props }, ref: Ref<HTMLInputElement>) => (
-    <TextField inputRef={ref} {...props} />
-  ),
 );

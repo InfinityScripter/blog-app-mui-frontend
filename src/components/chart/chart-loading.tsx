@@ -1,19 +1,13 @@
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Skeleton from "@mui/material/Skeleton";
 
+import { circularTypes } from "./const";
+
+import type { ChartLoadingProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-interface ChartLoadingProps extends BoxProps {
-  sx?: SxProps<Theme>;
-  type?: string;
-}
-
 export function ChartLoading({ sx, type, ...other }: ChartLoadingProps) {
-  const circularTypes = ["donut", "radialBar", "pie", "polarArea"];
-
   return (
     <Box
       alignItems="center"

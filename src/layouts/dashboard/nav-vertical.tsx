@@ -1,34 +1,17 @@
-import type { ReactNode } from "react";
-import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
-import type { NavSectionDataProps } from "src/components/nav-section/types";
-
 import Box from "@mui/material/Box";
-import { Logo } from "src/components/logo";
+import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
-import { Scrollbar } from "src/components/scrollbar";
-import { varAlpha, hideScrollY } from "src/theme/styles";
-import { NavSectionMini, NavSectionVertical } from "src/components/nav-section";
 
-import { NavUpgrade } from "../components/nav-upgrade";
+import { NavVerticalBody } from "./nav-vertical-body";
+import { NavVerticalMini } from "./nav-vertical-mini";
 import { NavToggleButton } from "../components/nav-toggle-button";
+
+import type { NavVerticalProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export interface DashboardNavSlots {
-  topArea?: ReactNode;
-  bottomArea?: ReactNode;
-}
-
-export interface NavVerticalProps {
-  sx?: SxProps<Theme>;
-  data: NavSectionDataProps[];
-  slots?: DashboardNavSlots;
-  isNavMini?: boolean;
-  layoutQuery: Breakpoint;
-  onToggleNav?: () => void;
-  cssVars?: Record<string, string | number>;
-  [key: string]: unknown;
-}
+export type { NavVerticalProps };
+export type { DashboardNavSlots } from "./types";
 
 export function NavVertical({
   sx,
@@ -40,50 +23,6 @@ export function NavVertical({
   ...other
 }: NavVerticalProps) {
   const theme = useTheme();
-
-  const renderNavVertical = (
-    <>
-      {slots?.topArea ?? (
-        <Box sx={{ pl: 3.5, pt: 2.5, pb: 1 }}>
-          <Logo />
-        </Box>
-      )}
-
-      <Scrollbar fillContent>
-        <NavSectionVertical
-          data={data}
-          sx={{ px: 2, flex: "1 1 auto" }}
-          {...other}
-        />
-
-        {slots?.bottomArea ?? <NavUpgrade />}
-      </Scrollbar>
-    </>
-  );
-
-  const renderNavMini = (
-    <>
-      {slots?.topArea ?? (
-        <Box sx={{ display: "flex", justifyContent: "center", py: 2.5 }}>
-          <Logo />
-        </Box>
-      )}
-
-      <NavSectionMini
-        data={data}
-        sx={{
-          pb: 2,
-          px: 0.5,
-          ...hideScrollY,
-          flex: "1 1 auto",
-          overflowY: "auto",
-        }}
-        {...other}
-      />
-
-      {slots?.bottomArea}
-    </>
-  );
 
   return (
     <Box
@@ -120,7 +59,11 @@ export function NavVertical({
           },
         }}
       />
-      {isNavMini ? renderNavMini : renderNavVertical}
+      {isNavMini ? (
+        <NavVerticalMini data={data} slots={slots} {...other} />
+      ) : (
+        <NavVerticalBody data={data} slots={slots} {...other} />
+      )}
     </Box>
   );
 }

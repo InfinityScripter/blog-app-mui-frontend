@@ -1,11 +1,10 @@
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 import { styled } from "@mui/material/styles";
 
 import { carouselClasses } from "../classes";
+
+import type { CarouselProgressBarProps } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -40,11 +39,6 @@ const StyledProgress = styled(Box)(() => ({
 }));
 
 // ----------------------------------------------------------------------
-
-interface CarouselProgressBarProps extends BoxProps {
-  value: number;
-  sx?: SxProps<Theme>;
-}
 
 export function CarouselProgressBar({
   value,

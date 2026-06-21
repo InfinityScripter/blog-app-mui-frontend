@@ -1,32 +1,18 @@
-import type { ReactNode } from "react";
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { ButtonBaseProps } from "@mui/material/ButtonBase";
-
-import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
-import ButtonBase from "@mui/material/ButtonBase";
 import { Children, forwardRef, isValidElement } from "react";
 
 import { carouselClasses } from "../classes";
 import { CarouselSlide } from "./carousel-slide";
 import { StyledRoot, StyledContainer } from "../carousel";
 
-import type {
-  CarouselAxis,
-  CarouselOptions,
-  CarouselSlotProps,
-} from "../carousel";
+import type { CarouselAxis } from "../carousel";
+import type { CarouselThumbsProps } from "./types";
+
+// Re-exported so importers keep resolving these from this module.
+export { CarouselThumb } from "./carousel-thumb";
 
 // ----------------------------------------------------------------------
-
-interface CarouselThumbsProps extends Omit<BoxProps, "slotProps"> {
-  children?: ReactNode;
-  slotProps?: Pick<CarouselSlotProps, "slide" | "container" | "disableMask">;
-  options?: CarouselOptions;
-  sx?: SxProps<Theme>;
-}
 
 export const CarouselThumbs = forwardRef<HTMLDivElement, CarouselThumbsProps>(
   ({ children, slotProps, options, sx, ...other }, ref) => {
@@ -82,62 +68,6 @@ export const CarouselThumbs = forwardRef<HTMLDivElement, CarouselThumbsProps>(
     );
   },
 );
-
-// ----------------------------------------------------------------------
-
-interface CarouselThumbProps extends Omit<ButtonBaseProps, "children"> {
-  sx?: SxProps<Theme>;
-  src: string;
-  index: number;
-  selected?: boolean;
-}
-
-export function CarouselThumb({
-  sx,
-  src,
-  index,
-  selected,
-  ...other
-}: CarouselThumbProps) {
-  return (
-    <ButtonBase
-      className={carouselClasses.thumb}
-      sx={{
-        width: 64,
-        height: 64,
-        opacity: 0.48,
-        flexShrink: 0,
-        cursor: "pointer",
-        borderRadius: 1.25,
-        transition: (theme) =>
-          theme.transitions.create(["opacity", "box-shadow"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.short,
-          }),
-        ...(selected && {
-          opacity: 1,
-          boxShadow: (theme) =>
-            `0 0 0 2px ${theme.vars?.palette.primary.main ?? theme.palette.primary.main}`,
-        }),
-        ...sx,
-      }}
-      {...other}
-    >
-      <Box
-        component="img"
-        alt={`carousel-thumb-${index}`}
-        src={src}
-        className={carouselClasses.thumbImage}
-        sx={{
-          width: 1,
-          height: 1,
-          objectFit: "cover",
-          borderRadius: "inherit",
-        }}
-      />
-    </ButtonBase>
-  );
-}
 
 // ----------------------------------------------------------------------
 

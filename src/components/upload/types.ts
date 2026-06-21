@@ -56,3 +56,28 @@ export interface SingleFilePreviewProps {
 export interface RejectionFilesProps {
   files: readonly FileRejection[];
 }
+
+export interface AvatarPreviewProps {
+  hasFile: boolean;
+  preview: string;
+}
+
+export interface AvatarPlaceholderProps {
+  hasFile: boolean;
+  hasError: boolean;
+}
+
+export interface AvatarContentProps {
+  hasFile: boolean;
+  hasError: boolean;
+  preview: string;
+}
+
+export interface UploadMultiPreviewProps {
+  hasFiles: boolean;
+  value?: FileUploadType | FilesUploadType;
+  thumbnail?: boolean;
+  onRemove?: (file: File | string) => void;
+  onUpload?: () => void;
+  onRemoveAll?: () => void;
+}

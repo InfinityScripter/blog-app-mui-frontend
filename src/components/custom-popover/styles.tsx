@@ -1,19 +1,10 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { CONFIG } from "src/config-global";
 import { styled } from "@mui/material/styles";
 import { varAlpha, stylesMode } from "src/theme/styles";
 
-import type { ArrowPlacement } from "./utils";
+import type { StyledArrowProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface StyledArrowProps {
-  placement: ArrowPlacement;
-  offset?: number;
-  size?: number;
-  sx?: SxProps<Theme>;
-}
 
 export const StyledArrow = styled("span", {
   shouldForwardProp: (prop) =>

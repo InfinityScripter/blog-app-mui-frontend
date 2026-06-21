@@ -1,5 +1,7 @@
 import type { HarnessId } from "src/server/llm-stats/types";
 
+export const DAYS = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+
 export const HARNESS_LABEL: Record<HarnessId, string> = {
   "claude-code": "Claude Code",
   codex: "Codex",

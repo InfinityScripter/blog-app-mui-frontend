@@ -1,19 +1,9 @@
-import TextField, { type TextFieldProps } from "@mui/material/TextField";
-import {
-  Controller,
-  useFormContext,
-  type FieldPath,
-  type FieldValues,
-} from "react-hook-form";
+import TextField from "@mui/material/TextField";
+import { Controller, useFormContext, type FieldValues } from "react-hook-form";
+
+import type { RHFTextFieldProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface RHFTextFieldProps<TFieldValues extends FieldValues = FieldValues>
-  extends Omit<TextFieldProps, "name"> {
-  name: FieldPath<TFieldValues>;
-  helperText?: string;
-  type?: string;
-}
 
 export function RHFTextField<TFieldValues extends FieldValues = FieldValues>({
   name,

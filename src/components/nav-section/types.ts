@@ -1,6 +1,6 @@
-import type { ReactNode, CSSProperties } from "react";
 import type { Theme, SxProps } from "@mui/material/styles";
 import type { ButtonBaseProps } from "@mui/material/ButtonBase";
+import type { ReactNode, ElementType, CSSProperties } from "react";
 
 // ----------------------------------------------------------------------
 
@@ -96,4 +96,25 @@ export type NavSectionProps = {
 
 type CSSObject = {
   [key: string]: CSSProperties[keyof CSSProperties] | CSSObject | string;
+};
+
+// ----------------------------------------------------------------------
+
+export type UseNavItemParams = Pick<
+  NavItemProps,
+  | "path"
+  | "icon"
+  | "info"
+  | "depth"
+  | "render"
+  | "hasChild"
+  | "externalLink"
+  | "enabledRootRedirect"
+>;
+
+export type NavItemBaseLinkProps = {
+  component?: ElementType;
+  href?: string;
+  target?: string;
+  rel?: string;
 };

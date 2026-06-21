@@ -1,18 +1,11 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Stack from "@mui/material/Stack";
 import { NavUl } from "src/components/nav-section";
 
 import { NavList } from "./nav-desktop-list";
 
-import type { MainNavItem } from "../types";
+import type { NavDesktopProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface NavDesktopProps {
-  data: MainNavItem[];
-  sx?: SxProps<Theme>;
-}
 
 export function NavDesktop({ data, sx }: NavDesktopProps) {
   return (

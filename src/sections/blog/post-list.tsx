@@ -10,12 +10,9 @@ import { useInfiniteScroll } from "src/hooks/use-infinite-scroll";
 import { PostItemSkeleton } from "./post-skeleton";
 import { PostItem, PostItemLatest } from "./post-item";
 
-// ----------------------------------------------------------------------
+import type { PostListProps } from "./types";
 
-interface PostListProps {
-  posts: Post[];
-  loading?: boolean;
-}
+// ----------------------------------------------------------------------
 
 export function PostList({ posts, loading: initialLoading }: PostListProps) {
   const { items, hasMore, loading, loadMore } = useInfiniteScroll<Post>(posts);

@@ -1,18 +1,12 @@
 "use client";
 
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Portal from "@mui/material/Portal";
 import LinearProgress from "@mui/material/LinearProgress";
 
-// ----------------------------------------------------------------------
+import type { LoadingScreenProps } from "./types";
 
-interface LoadingScreenProps extends Omit<BoxProps, "sx"> {
-  portal?: boolean;
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function LoadingScreen({ portal, sx, ...other }: LoadingScreenProps) {
   const content = (

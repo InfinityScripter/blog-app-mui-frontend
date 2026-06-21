@@ -1,14 +1,12 @@
-import type { BoxProps } from "@mui/material/Box";
-
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import type { SearchNotFoundProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-export interface SearchNotFoundProps extends BoxProps {
-  query?: string;
-}
+export type { SearchNotFoundProps } from "./types";
 
 export const SearchNotFound = forwardRef<HTMLDivElement, SearchNotFoundProps>(
   ({ query, sx, ...other }, ref) => {

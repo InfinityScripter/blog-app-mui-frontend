@@ -5,13 +5,9 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { Controller, useFormContext } from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-// ----------------------------------------------------------------------
+import type { PostNewEditActionsProps } from "./types";
 
-interface PostNewEditActionsProps {
-  isEdit: boolean;
-  isSubmitting: boolean;
-  onPreview: () => void;
-}
+// ----------------------------------------------------------------------
 
 export function PostNewEditActions({
   isEdit,

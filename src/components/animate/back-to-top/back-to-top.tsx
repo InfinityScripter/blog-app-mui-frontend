@@ -1,16 +1,11 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { useState } from "react";
+import Fab from "@mui/material/Fab";
 import { Iconify } from "src/components/iconify";
-import Fab, { type FabProps } from "@mui/material/Fab";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 
-// ----------------------------------------------------------------------
+import type { BackToTopProps } from "./types";
 
-interface BackToTopProps extends Omit<FabProps, "sx"> {
-  value?: number;
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function BackToTop({ value = 90, sx, ...other }: BackToTopProps) {
   const { scrollYProgress } = useScroll();

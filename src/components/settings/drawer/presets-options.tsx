@@ -3,7 +3,7 @@ import { CONFIG } from "src/config-global";
 import ButtonBase from "@mui/material/ButtonBase";
 import { alpha as hexAlpha } from "@mui/material/styles";
 
-import { Block } from "./styles";
+import { Block } from "./block";
 import { SvgColor } from "../../svg-color";
 
 import type { PresetsOptionsProps } from "./types";

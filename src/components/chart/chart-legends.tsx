@@ -1,42 +1,13 @@
-import type { ReactNode } from "react";
-import type { StackProps } from "@mui/material/Stack";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
+
+import { StyledDot, StyledLegend } from "./styles";
+
+import type { ChartLegendsProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export const StyledLegend = styled(Box)(({ theme }) => ({
-  gap: 6,
-  alignItems: "center",
-  display: "inline-flex",
-  justifyContent: "flex-start",
-  fontSize: theme.typography.pxToRem(13),
-  fontWeight: theme.typography.fontWeightMedium,
-}));
-
-export const StyledDot = styled(Box)(() => ({
-  width: 12,
-  height: 12,
-  flexShrink: 0,
-  display: "flex",
-  borderRadius: "50%",
-  position: "relative",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "currentColor",
-}));
-
-// ----------------------------------------------------------------------
-
-interface ChartLegendsProps extends StackProps {
-  labels?: string[];
-  colors?: string[];
-  values?: Array<string | number>;
-  sublabels?: Array<string | number>;
-  icons?: ReactNode[];
-}
+export { StyledDot, StyledLegend } from "./styles";
 
 export function ChartLegends({
   labels = [],

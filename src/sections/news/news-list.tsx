@@ -1,16 +1,12 @@
-import type { Post } from "src/types/domain";
-
 import Box from "@mui/material/Box";
 import { EmptyContent } from "src/components/empty-content";
 
 import { toNewsItem } from "./utils";
 import { NewsItemCard } from "./news-item";
 
-// ----------------------------------------------------------------------
+import type { NewsListProps } from "./types";
 
-interface NewsListProps {
-  posts: Post[];
-}
+// ----------------------------------------------------------------------
 
 /**
  * Editorial feed: the newest post as a large lead card, the rest as a dense list

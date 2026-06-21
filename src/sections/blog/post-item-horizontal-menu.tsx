@@ -3,16 +3,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
 import { CustomPopover } from "src/components/custom-popover";
 
-// ----------------------------------------------------------------------
+import type { PostItemHorizontalMenuProps } from "./types";
 
-interface PostItemHorizontalMenuProps {
-  open: boolean;
-  anchorEl: Element | null;
-  onClose: () => void;
-  onView: () => void;
-  onEdit: () => void;
-  onDelete: () => void;
-}
+// ----------------------------------------------------------------------
 
 export function PostItemHorizontalMenu({
   open,

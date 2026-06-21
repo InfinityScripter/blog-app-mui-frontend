@@ -1,7 +1,6 @@
 "use client";
 
 import type { SyntheticEvent } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
 
 import { m } from "framer-motion";
 import Tab from "@mui/material/Tab";
@@ -22,25 +21,12 @@ import { useBoolean } from "src/hooks/use-boolean";
 import { Scrollbar } from "src/components/scrollbar";
 import { CustomTabs } from "src/components/custom-tabs";
 
+import { TABS } from "./const";
 import { NotificationItem } from "./notification-item";
 
-import type { NotificationItemData } from "./notification-item";
+import type { NotificationItemData, NotificationsDrawerProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-const TABS = [
-  { value: "all", label: "All", count: 22 },
-  { value: "unread", label: "Unread", count: 12 },
-  { value: "archived", label: "Archived", count: 10 },
-];
-
-// ----------------------------------------------------------------------
-
-export interface NotificationsDrawerProps {
-  data?: NotificationItemData[];
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
 
 export function NotificationsDrawer({
   data = [],

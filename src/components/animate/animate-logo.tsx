@@ -1,18 +1,14 @@
-import type { BoxProps } from "@mui/material/Box";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 
 import { Logo } from "../logo";
 
-// ----------------------------------------------------------------------
+import type { AnimateLogo1Props } from "./types";
 
-interface AnimateLogo1Props extends Omit<BoxProps, "sx"> {
-  logo?: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
+export { AnimateLogo2 } from "./animate-logo-2";
+
+// ----------------------------------------------------------------------
 
 export function AnimateLogo1({ logo, sx, ...other }: AnimateLogo1Props) {
   const primaryDarkChannel =
@@ -78,58 +74,6 @@ export function AnimateLogo1({ logo, sx, ...other }: AnimateLogo1Props) {
           position: "absolute",
           border: (theme) =>
             `solid 8px ${varAlpha(theme.vars?.palette.primary.darkChannel ?? primaryDarkChannel, 0.24)}`,
-        }}
-      />
-    </Box>
-  );
-}
-
-// ----------------------------------------------------------------------
-
-interface AnimateLogo2Props extends Omit<BoxProps, "sx"> {
-  logo?: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
-
-export function AnimateLogo2({ logo, sx, ...other }: AnimateLogo2Props) {
-  const primaryMainChannel =
-    "var(--palette-primary-mainChannel, var(--palette-primary-main, 32 101 209))";
-  const primaryMain = "var(--palette-primary-main, #2065d1)";
-
-  return (
-    <Box
-      alignItems="center"
-      justifyContent="center"
-      sx={{
-        width: 96,
-        height: 96,
-        position: "relative",
-        alignItems: "center",
-        display: "inline-flex",
-        justifyContent: "center",
-        ...sx,
-      }}
-      {...other}
-    >
-      {logo ?? <Logo sx={{ zIndex: 9 }} />}
-
-      <Box
-        component={m.div}
-        animate={{ transform: "rotate(360deg)" }}
-        transition={{ duration: 10, ease: "linear", repeat: Infinity }}
-        sx={{
-          width: 1,
-          height: 1,
-          opacity: 0.16,
-          borderRadius: "50%",
-          position: "absolute",
-          transition: (theme) =>
-            theme.transitions.create(["opacity"], {
-              easing: theme.transitions.easing.easeInOut,
-              duration: theme.transitions.duration.shorter,
-            }),
-          background: (theme) =>
-            `linear-gradient(135deg, ${varAlpha(theme.vars?.palette.primary.mainChannel ?? primaryMainChannel, 0)} 50%, ${theme.vars?.palette.primary.main ?? primaryMain} 100%)`,
         }}
       />
     </Box>

@@ -1,16 +1,11 @@
-import Box from "@mui/material/Box";
 import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 
-import { Block } from "./styles";
-import { ColorOption } from "./color-option";
-import { LayoutOption } from "./layout-option";
+import { Block } from "./block";
+import { NavOptionsColor } from "./nav-options-color";
+import { NavOptionsLayout } from "./nav-options-layout";
 
 import type { NavOptionsProps } from "./types";
-
-// Re-exported so importers keep resolving these from this module.
-export { ColorOption } from "./color-option";
-export { LayoutOption } from "./layout-option";
 
 // ----------------------------------------------------------------------
 
@@ -41,54 +36,22 @@ export function NavOptions({
     )}`,
   };
 
-  const labelStyles = {
-    display: "block",
-    lineHeight: "14px",
-    color: "text.secondary",
-    fontWeight: "fontWeightSemiBold",
-    fontSize: theme.typography.pxToRem(11),
-  };
-
-  const renderLayout = (
-    <div>
-      <Box component="span" sx={labelStyles}>
-        Layout
-      </Box>
-      <Box gap={1.5} display="flex" sx={{ mt: 1.5 }}>
-        {options.layouts.map((option) => (
-          <LayoutOption
-            key={option}
-            option={option}
-            selected={value.layout === option}
-            onClick={() => onClickOption.layout(option)}
-          />
-        ))}
-      </Box>
-    </div>
-  );
-
-  const renderColor = (
-    <div>
-      <Box component="span" sx={labelStyles}>
-        Color
-      </Box>
-      <Box gap={1.5} display="flex" sx={{ mt: 1.5 }}>
-        {options.colors.map((option) => (
-          <ColorOption
-            key={option}
-            option={option}
-            selected={value.color === option}
-            onClick={() => onClickOption.color(option)}
-          />
-        ))}
-      </Box>
-    </div>
-  );
-
   return (
     <Block title="Nav" tooltip="Dashboard only" sx={{ ...cssVars, gap: 2.5 }}>
-      {!hideNavLayout && renderLayout}
-      {!hideNavColor && renderColor}
+      {!hideNavLayout && (
+        <NavOptionsLayout
+          options={options.layouts}
+          value={value.layout}
+          onClickOption={onClickOption.layout}
+        />
+      )}
+      {!hideNavColor && (
+        <NavOptionsColor
+          options={options.colors}
+          value={value.color}
+          onClickOption={onClickOption.color}
+        />
+      )}
     </Block>
   );
 }

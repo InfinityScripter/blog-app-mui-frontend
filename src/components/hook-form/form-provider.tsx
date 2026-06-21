@@ -1,15 +1,10 @@
-import type { ReactNode, FormEventHandler } from "react";
-import type { FieldValues, UseFormReturn } from "react-hook-form";
+import type { FieldValues } from "react-hook-form";
 
 import { FormProvider as RHFForm } from "react-hook-form";
 
-// ----------------------------------------------------------------------
+import type { FormProps } from "./types";
 
-interface FormProps<TFieldValues extends FieldValues = FieldValues> {
-  children: ReactNode;
-  onSubmit?: FormEventHandler<HTMLFormElement>;
-  methods: UseFormReturn<TFieldValues>;
-}
+// ----------------------------------------------------------------------
 
 export function Form<TFieldValues extends FieldValues = FieldValues>({
   children,

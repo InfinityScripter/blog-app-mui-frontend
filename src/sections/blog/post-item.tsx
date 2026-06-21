@@ -17,6 +17,7 @@ import CardContent from "@mui/material/CardContent";
 import { AvatarShape } from "src/assets/illustrations";
 import { getReadingTime } from "src/utils/reading-time";
 
+import { MAX_TAGS } from "./const";
 import { InfoBlock } from "./post-item-info-block";
 import { PostItemLatest } from "./post-item-latest";
 
@@ -24,8 +25,6 @@ import { PostItemLatest } from "./post-item-latest";
 export { InfoBlock, PostItemLatest };
 
 // ----------------------------------------------------------------------
-
-const MAX_TAGS = 2;
 
 export function PostItem({ post }: { post: Post }) {
   const theme = useTheme();

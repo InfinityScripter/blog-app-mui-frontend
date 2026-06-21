@@ -1,6 +1,5 @@
 "use client";
 
-import { z as zod } from "zod";
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
@@ -18,23 +17,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Form } from "src/components/hook-form/form-provider";
 import { RHFTextField } from "src/components/hook-form/rhf-text-field";
 
-// ----------------------------------------------------------------------
-
-export const VerifySchema = zod.object({
-  code: zod
-    .string()
-    .min(1, { message: "Code is required!" })
-    .length(6, { message: "Code must be exactly 6 digits!" })
-    .regex(/^\d+$/, { message: "Code must contain only digits!" }),
-  email: zod
-    .string()
-    .min(1, { message: "Email is required!" })
-    .email({ message: "Email must be a valid email address!" }),
-});
+import { SERVER_URL } from "./const";
+import { VerifySchema } from "./split-verify-schema";
 
 // ----------------------------------------------------------------------
 
-const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL;
+export { VerifySchema };
+
+// ----------------------------------------------------------------------
 
 export function SplitVerifyView() {
   const router = useRouter();

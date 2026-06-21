@@ -6,6 +6,18 @@ import type { SettingsState } from "../config-settings";
 
 // ----------------------------------------------------------------------
 
+export interface SettingsDrawerProps {
+  sx?: SxProps<Theme>;
+  hideFont?: boolean;
+  hideCompact?: boolean;
+  hidePresets?: boolean;
+  hideNavColor?: boolean;
+  hideContrast?: boolean;
+  hideNavLayout?: boolean;
+  hideDirection?: boolean;
+  hideColorScheme?: boolean;
+}
+
 export interface BlockProps {
   title: string;
   tooltip?: ReactNode;
@@ -54,8 +66,29 @@ export interface NavOptionsProps {
   hideNavLayout?: boolean;
 }
 
+export interface NavOptionsLayoutProps {
+  options: SettingsState["navLayout"][];
+  value: SettingsState["navLayout"];
+  onClickOption: (newValue: SettingsState["navLayout"]) => void;
+}
+
+export interface NavOptionsColorProps {
+  options: SettingsState["navColor"][];
+  value: SettingsState["navColor"];
+  onClickOption: (newValue: SettingsState["navColor"]) => void;
+}
+
 export interface LayoutOptionProps extends ButtonBaseProps {
   option: SettingsState["navLayout"];
+  selected: boolean;
+}
+
+export interface LayoutOptionNavProps {
+  option: SettingsState["navLayout"];
+  selected: boolean;
+}
+
+export interface LayoutOptionContentProps {
   selected: boolean;
 }
 

@@ -1,30 +1,11 @@
-import type { ReactNode, ElementType } from "react";
+import type { ReactNode } from "react";
 
 import { RouterLink } from "src/routes/components";
 import { cloneElement, isValidElement } from "react";
 
-import type { NavItemProps } from "./types";
+import type { UseNavItemParams, NavItemBaseLinkProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-type UseNavItemParams = Pick<
-  NavItemProps,
-  | "path"
-  | "icon"
-  | "info"
-  | "depth"
-  | "render"
-  | "hasChild"
-  | "externalLink"
-  | "enabledRootRedirect"
->;
-
-type NavItemBaseLinkProps = {
-  component?: ElementType;
-  href?: string;
-  target?: string;
-  rel?: string;
-};
 
 export function useNavItem({
   path,

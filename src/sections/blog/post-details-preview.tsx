@@ -14,19 +14,9 @@ import { EmptyContent } from "src/components/empty-content";
 
 import { PostDetailsHero } from "./post-details-hero";
 
-// ----------------------------------------------------------------------
+import type { PostDetailsPreviewProps } from "./types";
 
-interface PostDetailsPreviewProps {
-  open: boolean;
-  title?: string;
-  content?: string;
-  isValid: boolean;
-  onClose: () => void;
-  coverUrl?: string | File | null;
-  onSubmit: () => void;
-  description?: string;
-  isSubmitting: boolean;
-}
+// ----------------------------------------------------------------------
 
 export function PostDetailsPreview({
   open,

@@ -4,49 +4,17 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import { maxLine } from "src/theme/styles";
 import { Label } from "src/components/label";
-import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
-import { coverSrc } from "src/utils/cover-src";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 
+import { Thumb } from "./news-thumb";
 import { categoryColor } from "./utils";
 
-import type { NewsItem } from "./types";
+import type { NewsItemProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface NewsItemProps {
-  item: NewsItem;
-  /** "lead" = large hero card; "list" = compact row. */
-  variant?: "lead" | "list";
-}
-
-/**
- * Renders the thumbnail. When the post has no cover, coverSrc falls back to a
- * deterministic, varied cover asset seeded by the post id/title — so cards never
- * all share one identical placeholder.
- */
-function Thumb({
-  item,
-  ratio,
-  sx,
-}: {
-  item: NewsItem;
-  ratio: "4/3" | "16/9";
-  sx?: object;
-}) {
-  const seed = String(item.post._id ?? item.post.id ?? item.post.title);
-  return (
-    <Image
-      alt={item.post.title}
-      src={coverSrc(item.post.coverUrl, seed)}
-      ratio={ratio}
-      sx={sx}
-    />
-  );
-}
 
 export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
   const theme = useTheme();

@@ -24,11 +24,10 @@ import { usePostDelete } from "src/hooks/use-post-delete";
 import { usePopover } from "src/components/custom-popover";
 import { ConfirmDialog } from "src/components/confirm-dialog";
 
+import { MAX_TAGS } from "./const";
 import { PostItemHorizontalMenu } from "./post-item-horizontal-menu";
 
 // ----------------------------------------------------------------------
-
-const MAX_TAGS = 2;
 
 export function PostItemHorizontal({ post }: { post: Post }) {
   const theme = useTheme();

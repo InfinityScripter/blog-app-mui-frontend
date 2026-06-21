@@ -1,42 +1,28 @@
 "use client";
 
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Badge from "@mui/material/Badge";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import { paper, varAlpha } from "src/theme/styles";
-import { defaultFont } from "src/theme/core/typography";
 import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import { useTheme, useColorScheme } from "@mui/material/styles";
 
-import { Iconify } from "../../iconify";
-import { PRESET_OPTIONS } from "./const";
 import { BaseOption } from "./base-option";
 import { NavOptions } from "./nav-options";
 import { Scrollbar } from "../../scrollbar";
 import { FontOptions } from "./font-options";
 import { useSettingsContext } from "../context";
 import { PresetsOptions } from "./presets-options";
-import { defaultSettings } from "../config-settings";
-import { FullScreenButton } from "./fullscreen-button";
+import { SettingsDrawerHead } from "./settings-drawer-head";
+import {
+  FONT_OPTIONS,
+  PRESET_OPTIONS,
+  NAV_COLOR_OPTIONS,
+  NAV_LAYOUT_OPTIONS,
+} from "./const";
+
+import type { SettingsDrawerProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface SettingsDrawerProps {
-  sx?: SxProps<Theme>;
-  hideFont?: boolean;
-  hideCompact?: boolean;
-  hidePresets?: boolean;
-  hideNavColor?: boolean;
-  hideContrast?: boolean;
-  hideNavLayout?: boolean;
-  hideDirection?: boolean;
-  hideColorScheme?: boolean;
-}
 
 export function SettingsDrawer({
   sx,
@@ -54,35 +40,6 @@ export function SettingsDrawer({
   const settings = useSettingsContext();
 
   const { mode, setMode } = useColorScheme();
-
-  const renderHead = (
-    <Box display="flex" alignItems="center" sx={{ py: 2, pr: 1, pl: 2.5 }}>
-      <Typography variant="h6" sx={{ flexGrow: 1 }}>
-        Settings
-      </Typography>
-
-      <FullScreenButton />
-
-      <Tooltip title="Reset">
-        <IconButton
-          onClick={() => {
-            settings.onReset();
-            setMode(defaultSettings.colorScheme);
-          }}
-        >
-          <Badge color="error" variant="dot" invisible={!settings.canReset}>
-            <Iconify icon="solar:restart-bold" />
-          </Badge>
-        </IconButton>
-      </Tooltip>
-
-      <Tooltip title="Close">
-        <IconButton onClick={settings.onCloseDrawer}>
-          <Iconify icon="mingcute:close-line" />
-        </IconButton>
-      </Tooltip>
-    </Box>
-  );
 
   const renderMode = (
     <BaseOption
@@ -160,8 +117,8 @@ export function SettingsDrawer({
         layout: (newValue) => settings.onUpdateField("navLayout", newValue),
       }}
       options={{
-        colors: ["integrate", "apparent"],
-        layouts: ["vertical", "horizontal", "mini"],
+        colors: NAV_COLOR_OPTIONS,
+        layouts: NAV_LAYOUT_OPTIONS,
       }}
       hideNavColor={hideNavColor}
       hideNavLayout={hideNavLayout}
@@ -174,7 +131,7 @@ export function SettingsDrawer({
       onClickOption={(newValue) =>
         settings.onUpdateField("fontFamily", newValue)
       }
-      options={[defaultFont, "Inter", "Roboto", "Lato"]}
+      options={FONT_OPTIONS}
     />
   );
 
@@ -195,7 +152,7 @@ export function SettingsDrawer({
         },
       }}
     >
-      {renderHead}
+      <SettingsDrawerHead />
 
       <Scrollbar>
         <Stack spacing={6} sx={{ px: 2.5, pb: 5 }}>

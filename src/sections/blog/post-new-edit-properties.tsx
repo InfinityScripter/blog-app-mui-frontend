@@ -1,8 +1,4 @@
-import type { ReactNode, HTMLAttributes } from "react";
-import type { AutocompleteRenderGetTagProps } from "@mui/material/Autocomplete";
-
 import { _tags } from "src/_mock";
-import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
@@ -11,31 +7,10 @@ import { Field } from "src/components/hook-form";
 import CardHeader from "@mui/material/CardHeader";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+import { renderTagOption } from "./post-new-edit-properties-tag-option";
+import { renderSelectedTags } from "./post-new-edit-properties-selected-tags";
+
 // ----------------------------------------------------------------------
-
-const renderTagOption = (
-  props: HTMLAttributes<HTMLLIElement>,
-  option: string,
-): ReactNode => (
-  <li {...props} key={option}>
-    {option}
-  </li>
-);
-
-const renderSelectedTags = (
-  selected: string[],
-  getTagProps: AutocompleteRenderGetTagProps,
-): ReactNode =>
-  selected.map((option, index) => (
-    <Chip
-      {...getTagProps({ index })}
-      key={option}
-      label={option}
-      size="small"
-      color="info"
-      variant="soft"
-    />
-  ));
 
 export function PostNewEditProperties() {
   return (

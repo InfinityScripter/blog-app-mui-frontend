@@ -1,7 +1,5 @@
 "use client";
 
-import type { BoxProps } from "@mui/material/Box";
-
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import NoSsr from "@mui/material/NoSsr";
@@ -10,15 +8,9 @@ import { RouterLink } from "src/routes/components";
 
 import { logoClasses } from "./classes";
 
-// ----------------------------------------------------------------------
+import type { LogoProps } from "./types";
 
-interface LogoProps
-  extends Omit<BoxProps<typeof RouterLink>, "component" | "href"> {
-  width?: number | string;
-  height?: number | string;
-  disableLink?: boolean;
-  href?: string;
-}
+// ----------------------------------------------------------------------
 
 export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
   (

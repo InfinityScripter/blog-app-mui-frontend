@@ -1,27 +1,20 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
-import Stack from "@mui/material/Stack";
 import { paper } from "src/theme/styles";
 import Portal from "@mui/material/Portal";
 import { usePathname } from "src/routes/hooks";
 import { useTheme } from "@mui/material/styles";
-import ListSubheader from "@mui/material/ListSubheader";
+import { isExternalLink } from "src/routes/utils";
 import { NavLi, NavUl } from "src/components/nav-section";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useActiveLink } from "src/routes/hooks/use-active-link";
-import { isExternalLink, removeLastSlash } from "src/routes/utils";
 
-import { NavItem, NavItemDashboard } from "./nav-desktop-item";
+import { NavSubList } from "./nav-sub-list";
+import { NavItem } from "./nav-desktop-item";
 
-import type { MainNavItem, MainNavSubItem } from "../types";
+import type { NavListProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface NavListProps {
-  data: MainNavItem;
-}
 
 export function NavList({ data }: NavListProps) {
   const theme = useTheme();
@@ -145,59 +138,4 @@ export function NavList({ data }: NavListProps) {
   }
 
   return <NavLi sx={{ height: 1 }}>{renderNavItem}</NavLi>;
-}
-
-// ----------------------------------------------------------------------
-
-interface NavSubListProps {
-  data: MainNavSubItem[];
-  subheader: string;
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
-
-function NavSubList({ data, subheader, sx, ...other }: NavSubListProps) {
-  const pathname = usePathname();
-
-  const isDashboard = subheader === "Dashboard";
-
-  return (
-    <Stack
-      component={NavLi}
-      alignItems="flex-start"
-      sx={{
-        flex: "1 1 auto",
-        ...(isDashboard && { maxWidth: { md: 1 / 3, lg: 540 } }),
-        ...sx,
-      }}
-      {...other}
-    >
-      <NavUl>
-        <ListSubheader
-          disableSticky
-          disableGutters
-          sx={{ fontSize: 11, color: "text.primary", typography: "overline" }}
-        >
-          {subheader}
-        </ListSubheader>
-
-        {data.map((item) =>
-          isDashboard ? (
-            <NavLi key={item.title} sx={{ mt: 1.5 }}>
-              <NavItemDashboard path={item.path} />
-            </NavLi>
-          ) : (
-            <NavLi key={item.title} sx={{ mt: 1.5 }}>
-              <NavItem
-                subItem
-                title={item.title}
-                path={item.path}
-                active={item.path === removeLastSlash(pathname)}
-              />
-            </NavLi>
-          ),
-        )}
-      </NavUl>
-    </Stack>
-  );
 }

@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import type { BoxProps } from "@mui/material/Box";
 import type { ChipProps } from "@mui/material/Chip";
 import type { RadioProps } from "@mui/material/Radio";
@@ -12,6 +11,9 @@ import type { InputLabelProps } from "@mui/material/InputLabel";
 import type { FormControlProps } from "@mui/material/FormControl";
 import type { FormHelperTextProps } from "@mui/material/FormHelperText";
 import type { FormControlLabelProps } from "@mui/material/FormControlLabel";
+import type { ReactNode, SyntheticEvent, FormEventHandler } from "react";
+import type { AutocompleteRenderInputParams } from "@mui/material/Autocomplete";
+import type { FieldPath, FieldValues, UseFormReturn } from "react-hook-form";
 
 // ----------------------------------------------------------------------
 
@@ -184,4 +186,29 @@ export interface RHFUploadBoxProps {
 
 export interface RHFBoxWrapProps extends BoxProps {
   name: string;
+}
+
+export interface RHFTextFieldProps<
+  TFieldValues extends FieldValues = FieldValues,
+> extends Omit<TextFieldProps, "name"> {
+  name: FieldPath<TFieldValues>;
+  helperText?: string;
+  type?: string;
+}
+
+export interface FormProps<TFieldValues extends FieldValues = FieldValues> {
+  children: ReactNode;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
+  methods: UseFormReturn<TFieldValues>;
+}
+
+// View MUI `Autocomplete` through the subset of props used here, leaving
+// `options` (supplied via `...other`) optional so the wrapper type-checks.
+export interface AutocompleteViewProps {
+  id?: string;
+  value?: unknown;
+  onChange?: (event: SyntheticEvent, newValue: unknown) => void;
+  renderInput: (params: AutocompleteRenderInputParams) => ReactNode;
+  options?: readonly unknown[];
+  [key: string]: unknown;
 }

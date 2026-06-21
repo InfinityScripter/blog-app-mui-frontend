@@ -1,6 +1,3 @@
-import type { ReactNode } from "react";
-import type { BoxProps } from "@mui/material/Box";
-
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import { m, useReducedMotion } from "framer-motion";
@@ -8,10 +5,7 @@ import { useResponsive } from "src/hooks/use-responsive";
 
 import { varContainer } from "./variants";
 
-interface MotionViewportProps extends Omit<BoxProps, "component"> {
-  children?: ReactNode;
-  disableAnimate?: boolean;
-}
+import type { MotionViewportProps } from "./types";
 
 export const MotionViewport = forwardRef<HTMLDivElement, MotionViewportProps>(
   ({ children, disableAnimate = true, ...other }, ref) => {

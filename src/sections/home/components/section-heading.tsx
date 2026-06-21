@@ -3,13 +3,9 @@ import Stack from "@mui/material/Stack";
 import { varFade } from "src/components/animate";
 import Typography from "@mui/material/Typography";
 
-// ----------------------------------------------------------------------
+import type { SectionHeadingProps } from "./types";
 
-interface SectionHeadingProps {
-  overline?: string;
-  title: string;
-  subtitle?: string;
-}
+// ----------------------------------------------------------------------
 
 /** Consistent section header for the portfolio sections (skills / experience / projects). */
 export function SectionHeading({

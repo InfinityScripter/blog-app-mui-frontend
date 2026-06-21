@@ -1,55 +1,12 @@
-import type { Variants } from "framer-motion";
-
 import { m } from "framer-motion";
+
+import { draw } from "./const";
+
+import type { LinesProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-interface LinesProps {
-  strokeCount: number;
-}
-
 export function Lines({ strokeCount }: LinesProps) {
-  const draw: Record<"x" | "y", Variants> = {
-    x: {
-      hidden: { x2: 0, strokeOpacity: 0 },
-      visible: (i: number) => {
-        const delay = 1 + i * 0.5;
-        return {
-          x2: "100%",
-          strokeOpacity: 1,
-          transition: {
-            strokeOpacity: { delay, duration: 0.01 },
-            x2: {
-              delay,
-              bounce: 0,
-              duration: 1.5,
-              type: "spring",
-            },
-          },
-        };
-      },
-    },
-    y: {
-      hidden: { y2: 0, strokeOpacity: 0 },
-      visible: (i: number) => {
-        const delay = 1 + i * 0.5;
-        return {
-          y2: "100%",
-          strokeOpacity: 1,
-          transition: {
-            strokeOpacity: { delay, duration: 0.01 },
-            y2: {
-              delay,
-              bounce: 0,
-              duration: 1.5,
-              type: "spring",
-            },
-          },
-        };
-      },
-    },
-  };
-
   const translateY = (index: number) =>
     strokeCount / 2 > index
       ? `translateY(calc(((${index} * var(--stroke-spacing)) + var(--stroke-spacing) / 2) * -1))`

@@ -1,19 +1,14 @@
 "use client";
 
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { m } from "framer-motion";
 import Badge from "@mui/material/Badge";
 import SvgIcon from "@mui/material/SvgIcon";
 import IconButton from "@mui/material/IconButton";
 import { useSettingsContext } from "src/components/settings/context";
 
-// ----------------------------------------------------------------------
+import type { SettingsButtonProps } from "./types";
 
-export interface SettingsButtonProps {
-  sx?: SxProps<Theme>;
-  [key: string]: unknown;
-}
+// ----------------------------------------------------------------------
 
 export function SettingsButton({ sx, ...other }: SettingsButtonProps) {
   const settings = useSettingsContext();

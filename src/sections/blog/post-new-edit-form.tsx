@@ -18,15 +18,13 @@ import { PostNewEditActions } from "./post-new-edit-actions";
 import { createPost, updatePost } from "../../actions/blog-ssr";
 import { PostNewEditProperties } from "./post-new-edit-properties";
 
+import type { PostNewEditFormProps } from "./types";
+
 // ----------------------------------------------------------------------
 
 export { NewPostSchema };
 
 // ----------------------------------------------------------------------
-
-interface PostNewEditFormProps {
-  currentPost?: Post;
-}
 
 export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
   const router = useRouter();

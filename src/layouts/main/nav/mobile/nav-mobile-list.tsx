@@ -12,13 +12,9 @@ import {
 
 import { NavItem } from "./nav-mobile-item";
 
-import type { MainNavItem } from "../types";
+import type { NavListProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface NavListProps {
-  data: MainNavItem;
-}
 
 export function NavList({ data }: NavListProps) {
   const active = useActiveLink(data.path, !!data.children);

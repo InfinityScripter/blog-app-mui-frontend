@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 
 import { StyledLabel } from "./styles";
+import { sentenceCase } from "./utils";
 import { labelClasses } from "./classes";
 
 import type { LabelProps } from "./types";
@@ -77,9 +78,3 @@ export const Label = forwardRef<HTMLSpanElement, LabelProps>(
     );
   },
 );
-
-// ----------------------------------------------------------------------
-
-function sentenceCase(string: string): string {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}

@@ -5,16 +5,9 @@ import Typography from "@mui/material/Typography";
 
 import { NEWS_CATEGORIES } from "./const";
 
-import type { NewsCategory } from "./types";
+import type { NewsSectionBarProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-interface NewsSectionBarProps {
-  /** Currently selected рубрика — gets the filled, primary-colored treatment. */
-  active: NewsCategory;
-  /** Fired when a рубрика is clicked or activated via keyboard. */
-  onSelect: (category: NewsCategory) => void;
-}
 
 /**
  * Newspaper-style section header: «Новости» title with the рубрика list, under a

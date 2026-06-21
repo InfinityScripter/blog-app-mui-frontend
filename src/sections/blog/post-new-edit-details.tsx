@@ -5,11 +5,9 @@ import { Field } from "src/components/hook-form";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
 
-// ----------------------------------------------------------------------
+import type { PostNewEditDetailsProps } from "./types";
 
-interface PostNewEditDetailsProps {
-  onRemoveFile: () => void;
-}
+// ----------------------------------------------------------------------
 
 export function PostNewEditDetails({ onRemoveFile }: PostNewEditDetailsProps) {
   return (

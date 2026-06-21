@@ -5,3 +5,7 @@ export interface ContactLink {
   href?: string;
   external?: boolean;
 }
+
+export interface ContactCardProps {
+  item: ContactLink;
+}

@@ -1,16 +1,12 @@
-import type { Editor } from "@tiptap/react";
-
 import Stack from "@mui/material/Stack";
 
 import { toolbarIcons } from "../const";
 import { editorClasses } from "../classes";
 import { ToolbarItem } from "./toolbar-item";
 
-// ----------------------------------------------------------------------
+import type { ToolbarBasicItemsProps } from "./types";
 
-interface ToolbarBasicItemsProps {
-  editor: Editor;
-}
+// ----------------------------------------------------------------------
 
 export function ToolbarBasicItems({ editor }: ToolbarBasicItemsProps) {
   return (

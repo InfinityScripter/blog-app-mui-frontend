@@ -4,10 +4,11 @@ import { useState, useEffect, useCallback } from "react";
 import { useActiveLink } from "src/routes/hooks/use-active-link";
 
 import { NavItem } from "./nav-item";
+import { NavSubList } from "./nav-sub-list";
 import { navSectionClasses } from "../classes";
-import { NavUl, NavLi, NavCollapse } from "../styles";
+import { NavLi, NavCollapse } from "../styles";
 
-import type { NavListProps, NavSubListProps } from "../types";
+import type { NavListProps } from "../types";
 
 // ----------------------------------------------------------------------
 
@@ -106,29 +107,4 @@ export function NavList({
 
   // Default
   return <NavLi disabled={data.disabled}>{renderNavItem}</NavLi>;
-}
-
-// ----------------------------------------------------------------------
-
-function NavSubList({
-  data,
-  render,
-  depth,
-  slotProps,
-  enabledRootRedirect,
-}: NavSubListProps) {
-  return (
-    <NavUl sx={{ gap: "var(--nav-item-gap)" }}>
-      {data.map((list) => (
-        <NavList
-          key={list.title}
-          data={list}
-          render={render}
-          depth={depth + 1}
-          slotProps={slotProps}
-          enabledRootRedirect={enabledRootRedirect}
-        />
-      ))}
-    </NavUl>
-  );
 }

@@ -1,28 +1,18 @@
 "use client";
 
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Alert from "@mui/material/Alert";
 import { CONFIG } from "src/config-global";
 import { useBoolean } from "src/hooks/use-boolean";
 
+import { Main } from "./main";
 import { Section } from "./section";
-import { Main, Content } from "./main";
+import { Content } from "./content";
 import { HeaderBase } from "../core/header-base";
 import { LayoutSection } from "../core/layout-section";
 
-// ----------------------------------------------------------------------
+import type { AuthSplitLayoutProps } from "./types";
 
-interface AuthSplitLayoutProps {
-  sx?: SxProps<Theme>;
-  section?: {
-    title?: string;
-    subtitle?: string;
-    imgUrl?: string;
-  };
-  children: ReactNode;
-}
+// ----------------------------------------------------------------------
 
 export function AuthSplitLayout({
   sx,

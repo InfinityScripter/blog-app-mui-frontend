@@ -1,33 +1,16 @@
-import type { SystemStyleObject } from "@mui/system";
-import type { StackProps } from "@mui/material/Stack";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 
+import { RemoveButton } from "./remove-button";
 import { fileThumbnailClasses } from "./classes";
+import { DownloadButton } from "./download-button";
 import { fileData, fileThumb, fileFormat } from "./utils";
-import { RemoveButton, DownloadButton } from "./action-buttons";
+
+import type { FileThumbnailProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface FileThumbnailSlotProps {
-  img?: SystemStyleObject<Theme>;
-  icon?: SystemStyleObject<Theme>;
-  removeBtn?: SxProps<Theme>;
-  downloadBtn?: SxProps<Theme>;
-}
-
-export interface FileThumbnailProps extends Omit<StackProps, "onClick"> {
-  file: File | string;
-  tooltip?: boolean;
-  imageView?: boolean;
-  onRemove?: () => void;
-  onDownload?: () => void;
-  slotProps?: FileThumbnailSlotProps;
-}
 
 export const FileThumbnail = forwardRef<HTMLDivElement, FileThumbnailProps>(
   (

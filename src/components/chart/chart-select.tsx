@@ -1,6 +1,3 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { ButtonBaseProps } from "@mui/material/ButtonBase";
-
 import { varAlpha } from "src/theme/styles";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
@@ -9,17 +6,9 @@ import ButtonBase from "@mui/material/ButtonBase";
 
 import { usePopover, CustomPopover } from "../custom-popover";
 
-// ----------------------------------------------------------------------
+import type { ChartSelectProps } from "./types";
 
-interface ChartSelectProps extends Omit<ButtonBaseProps, "value" | "onChange"> {
-  options: string[];
-  value: string;
-  onChange: (option: string) => void;
-  slotProps?: {
-    button?: SxProps<Theme>;
-    popover?: SxProps<Theme>;
-  };
-}
+// ----------------------------------------------------------------------
 
 export function ChartSelect({
   options,

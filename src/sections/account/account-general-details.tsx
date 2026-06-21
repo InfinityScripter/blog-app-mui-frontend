@@ -7,14 +7,14 @@ import { Field } from "src/components/hook-form";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 
+import type { AccountGeneralDetailsProps } from "./types";
+
 // ----------------------------------------------------------------------
 
-type Props = {
-  isChanged: boolean;
-  isSubmitting: boolean;
-};
-
-export function AccountGeneralDetails({ isChanged, isSubmitting }: Props) {
+export function AccountGeneralDetails({
+  isChanged,
+  isSubmitting,
+}: AccountGeneralDetailsProps) {
   return (
     <Card sx={{ p: 3, height: 1 }}>
       <Typography variant="h6" sx={{ mb: 0.5 }}>

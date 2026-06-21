@@ -1,29 +1,14 @@
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { ButtonBaseProps } from "@mui/material/ButtonBase";
-
 import SvgIcon from "@mui/material/SvgIcon";
 import ButtonBase, { buttonBaseClasses } from "@mui/material/ButtonBase";
 
 import { carouselClasses } from "../classes";
 
-import type { CarouselOptions } from "../carousel";
+import type { ArrowButtonProps } from "./types";
+
+// Re-exported so importers keep resolving these from this module.
+export type { ArrowButtonProps, ArrowButtonSlotProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-export interface ArrowButtonSlotProps {
-  svgIcon?: ReactNode;
-  svgSize?: number;
-  sx?: SxProps<Theme>;
-}
-
-export interface ArrowButtonProps
-  extends ArrowButtonSlotProps,
-    Omit<ButtonBaseProps, "sx"> {
-  options?: CarouselOptions;
-  variant: "prev" | "next";
-  sx?: SxProps<Theme>;
-}
 
 export function ArrowButton({
   sx,

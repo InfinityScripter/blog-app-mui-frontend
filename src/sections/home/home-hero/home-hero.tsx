@@ -1,5 +1,3 @@
-import type { BoxProps } from "@mui/material/Box";
-
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
@@ -8,19 +6,17 @@ import { useResponsive } from "src/hooks/use-responsive";
 import { MotionContainer } from "src/components/animate";
 import { m, useSpring, useTransform } from "framer-motion";
 
+import { HeroText } from "./hero-text";
+import { HeroButtons } from "./hero-buttons";
+import { HeroHeading } from "./hero-content";
+import { HeroBlogInfo } from "./hero-blog-info";
 import { MD_KEY, PARALLAX_PHYSICS } from "./const";
 import { useScrollPercent } from "./hooks/use-scroll-percent";
 import { HeroBackground } from "../components/hero-background";
-import {
-  HeroText,
-  HeroHeading,
-  HeroButtons,
-  HeroBlogInfo,
-} from "./hero-content";
+
+import type { HomeHeroProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-type HomeHeroProps = BoxProps;
 
 export function HomeHero({ sx, ...other }: HomeHeroProps) {
   const theme = useTheme();

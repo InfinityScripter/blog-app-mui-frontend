@@ -1,16 +1,14 @@
 "use client";
 
-import { z as zod } from "zod";
 import { useState } from "react";
 import { isAxiosError } from "axios";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
-import Divider from "@mui/material/Divider";
 import { useAuthContext } from "src/auth/hooks";
+import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -18,23 +16,16 @@ import { RouterLink } from "src/routes/components";
 import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
+import { signInWithPassword } from "src/auth/context/jwt";
 import InputAdornment from "@mui/material/InputAdornment";
-import { Iconify, SocialIcon } from "src/components/iconify";
 import { useRouter, useSearchParams } from "src/routes/hooks";
-import {
-  signInWithGoogle,
-  signInWithYandex,
-  signInWithPassword,
-} from "src/auth/context/jwt";
+
+import { SignInSchema } from "./jwt-sign-in-schema";
+import { JwtSignInSocial } from "./jwt-sign-in-social";
 
 // ----------------------------------------------------------------------
 
-export const SignInSchema = zod.object({
-  email: zod.string().min(1, { message: "Email обязателен!" }).email({
-    message: "Email должен быть действительным адресом электронной почты!",
-  }),
-  password: zod.string().min(1, { message: "Пароль обязателен!" }),
-});
+export { SignInSchema };
 
 // ----------------------------------------------------------------------
 
@@ -159,43 +150,6 @@ export function JwtSignInView() {
     </Stack>
   );
 
-  const renderSocialSignIn = (
-    <>
-      <Divider
-        sx={{
-          my: 3,
-          typography: "overline",
-          color: "text.disabled",
-          "&::before, :after": { borderTopStyle: "dashed" },
-        }}
-      >
-        ИЛИ
-      </Divider>
-
-      <Stack spacing={1.5}>
-        <Button
-          fullWidth
-          size="large"
-          variant="outlined"
-          startIcon={<Iconify icon="flat-color-icons:google" />}
-          onClick={signInWithGoogle}
-        >
-          Войти через Google
-        </Button>
-
-        <Button
-          fullWidth
-          size="large"
-          variant="outlined"
-          startIcon={<SocialIcon icon="yandex" />}
-          onClick={signInWithYandex}
-        >
-          Войти через Yandex ID
-        </Button>
-      </Stack>
-    </>
-  );
-
   return (
     <>
       {renderHead}
@@ -216,7 +170,7 @@ export function JwtSignInView() {
         {renderForm}
       </Form>
 
-      {renderSocialSignIn}
+      <JwtSignInSocial />
     </>
   );
 }

@@ -1,48 +1,13 @@
-import type { ReactNode } from "react";
-import type { SystemStyleObject } from "@mui/system";
-import type { PopoverProps } from "@mui/material/Popover";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Popover from "@mui/material/Popover";
 import { listClasses } from "@mui/material/List";
 import { menuItemClasses } from "@mui/material/MenuItem";
 
 import { StyledArrow } from "./styles";
-import { type ArrowPlacement, calculateAnchorOrigin } from "./utils";
+import { toStyleObject, calculateAnchorOrigin } from "./utils";
+
+import type { CustomPopoverProps } from "./types";
 
 // ----------------------------------------------------------------------
-
-function isStyleObject(
-  sx: SxProps<Theme>,
-): sx is Exclude<SystemStyleObject<Theme>, null> {
-  return typeof sx === "object" && !Array.isArray(sx);
-}
-
-function toStyleObject(
-  sx: SxProps<Theme> | undefined,
-): SystemStyleObject<Theme> {
-  if (sx && isStyleObject(sx)) {
-    return sx;
-  }
-  return {};
-}
-
-interface CustomPopoverProps extends Omit<PopoverProps, "open" | "children"> {
-  open: boolean;
-  children?: ReactNode;
-  slotProps?: {
-    paper?: {
-      sx?: SystemStyleObject<Theme>;
-    };
-    arrow?: {
-      hide?: boolean;
-      placement?: ArrowPlacement;
-      size?: number;
-      offset?: number;
-      sx?: SxProps<Theme>;
-    };
-  };
-}
 
 export function CustomPopover({
   open,

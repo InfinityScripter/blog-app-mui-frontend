@@ -1,7 +1,5 @@
 "use client";
 
-import type { Post } from "src/types/domain";
-
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
@@ -25,12 +23,9 @@ import { PostCommentList } from "../post-comment-list";
 import { PostCommentForm } from "../post-comment-form";
 import { PostDetailsHero } from "../post-details-hero";
 
-// ----------------------------------------------------------------------
+import type { PostDetailsHomeViewProps } from "./types";
 
-interface PostDetailsHomeViewProps {
-  post?: Post;
-  latestPosts?: Post[];
-}
+// ----------------------------------------------------------------------
 
 export function PostDetailsHomeView({
   post: initialPost,

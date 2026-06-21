@@ -1,24 +1,16 @@
 "use client";
 
-import type { ReactNode } from "react";
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Alert from "@mui/material/Alert";
 import { useBoolean } from "src/hooks/use-boolean";
 
-import { Main, CompactContent } from "./main";
+import { Main } from "./main";
 import { HeaderBase } from "../core/header-base";
+import { CompactContent } from "./compact-content";
 import { LayoutSection } from "../core/layout-section";
 
-// ----------------------------------------------------------------------
+import type { SimpleLayoutProps } from "./types";
 
-interface SimpleLayoutProps {
-  sx?: SxProps<Theme>;
-  children: ReactNode;
-  content?: {
-    compact?: boolean;
-  };
-}
+// ----------------------------------------------------------------------
 
 export function SimpleLayout({ sx, children, content }: SimpleLayoutProps) {
   const mobileNavOpen = useBoolean();

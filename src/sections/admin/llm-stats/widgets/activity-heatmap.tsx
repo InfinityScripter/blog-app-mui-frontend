@@ -6,10 +6,9 @@ import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
+import { DAYS } from "src/sections/admin/llm-stats/const";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-
-const DAYS = ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
 
 export function ActivityHeatmap({ stats }: { stats: LlmStats }) {
   const byCell = new Map<string, number>();

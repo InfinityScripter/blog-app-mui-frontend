@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import type { Breakpoint } from "@mui/material/styles";
 
 import { Logo } from "src/components/logo";
 import { styled, useTheme } from "@mui/material/styles";
@@ -7,7 +6,7 @@ import { styled, useTheme } from "@mui/material/styles";
 import { MenuButton } from "../components/menu-button";
 import { WorkspacesPopover } from "../components/workspaces-popover";
 
-import type { HeaderBaseData, HeaderBaseSlots } from "./header-base";
+import type { HeaderLeftAreaProps } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -37,15 +36,6 @@ const StyledDivider = styled("span")(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
-
-interface HeaderLeftAreaProps {
-  data?: HeaderBaseData;
-  slots?: HeaderBaseSlots;
-  onOpenNav?: () => void;
-  layoutQuery: Breakpoint;
-  menuButton: boolean;
-  workspaces: boolean;
-}
 
 export function HeaderLeftArea({
   data,

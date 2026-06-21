@@ -20,3 +20,26 @@ export interface NewsItem {
   category: NewsCategory;
   source: string | null;
 }
+
+export interface NewsItemProps {
+  item: NewsItem;
+  /** "lead" = large hero card; "list" = compact row. */
+  variant?: "lead" | "list";
+}
+
+export interface ThumbProps {
+  item: NewsItem;
+  ratio: "4/3" | "16/9";
+  sx?: object;
+}
+
+export interface NewsListProps {
+  posts: Post[];
+}
+
+export interface NewsSectionBarProps {
+  /** Currently selected рубрика — gets the filled, primary-colored treatment. */
+  active: NewsCategory;
+  /** Fired when a рубрика is clicked or activated via keyboard. */
+  onSelect: (category: NewsCategory) => void;
+}

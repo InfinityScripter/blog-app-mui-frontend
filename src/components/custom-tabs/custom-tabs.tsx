@@ -1,5 +1,4 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-import type { ReactNode, ComponentPropsWithoutRef } from "react";
+import type { Theme } from "@mui/material/styles";
 
 import NoSsr from "@mui/material/NoSsr";
 import { stylesMode } from "src/theme/styles";
@@ -8,20 +7,9 @@ import { useTheme } from "@mui/material/styles";
 import Tabs, { tabsClasses } from "@mui/material/Tabs";
 import { type CustomShadows } from "src/theme/core/custom-shadows";
 
-// ----------------------------------------------------------------------
+import { type CustomTabsProps } from "./types";
 
-interface CustomTabsProps extends ComponentPropsWithoutRef<typeof Tabs> {
-  children?: ReactNode;
-  slotProps?: {
-    scroller?: object;
-    flexContainer?: object;
-    scrollButtons?: object;
-    indicator?: object;
-    tab?: object;
-    selected?: object;
-  };
-  sx?: SxProps<Theme>;
-}
+// ----------------------------------------------------------------------
 
 export function CustomTabs({
   children,

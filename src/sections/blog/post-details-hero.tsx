@@ -1,5 +1,3 @@
-import type { AuthorInfo } from "src/types/domain";
-
 import Box from "@mui/material/Box";
 import { _socials } from "src/_mock";
 import Stack from "@mui/material/Stack";
@@ -15,14 +13,9 @@ import { formatImageUrl } from "src/utils/format-image-url";
 import { Iconify, SocialIcon } from "src/components/iconify";
 import { maxLine, varAlpha, bgGradient } from "src/theme/styles";
 
-// ----------------------------------------------------------------------
+import type { PostDetailsHeroProps } from "./types";
 
-interface PostDetailsHeroProps {
-  title?: string;
-  author?: AuthorInfo;
-  coverUrl?: string;
-  createdAt?: string | Date;
-}
+// ----------------------------------------------------------------------
 
 export function PostDetailsHero({
   title,

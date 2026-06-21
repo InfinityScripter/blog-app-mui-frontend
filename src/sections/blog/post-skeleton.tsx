@@ -1,16 +1,15 @@
-import type { Theme, SxProps } from "@mui/material/styles";
-
 import Stack from "@mui/material/Stack";
 import Skeleton from "@mui/material/Skeleton";
 
-// ----------------------------------------------------------------------
+import { PostDetailsSkeleton } from "./post-details-skeleton";
 
-interface PostItemSkeletonProps {
-  sx?: SxProps<Theme>;
-  amount?: number;
-  variant?: "vertical" | "horizontal";
-  [key: string]: unknown;
-}
+import type { PostItemSkeletonProps } from "./types";
+
+// Re-exported so existing importers keep
+// `import { PostDetailsSkeleton } from "src/sections/blog/post-skeleton"`.
+export { PostDetailsSkeleton };
+
+// ----------------------------------------------------------------------
 
 export function PostItemSkeleton({
   sx,
@@ -93,24 +92,4 @@ export function PostItemSkeleton({
       </Stack>
     </Stack>
   ));
-}
-
-// ----------------------------------------------------------------------
-
-export function PostDetailsSkeleton({ ...other }) {
-  return (
-    <Stack {...other}>
-      <Skeleton variant="rectangular" sx={{ height: 480 }} />
-
-      <Stack sx={{ width: 1, maxWidth: 720, mx: "auto" }}>
-        <Stack spacing={1} sx={{ my: 8 }}>
-          <Skeleton height={10} />
-          <Skeleton height={10} sx={{ width: 0.9 }} />
-          <Skeleton height={10} sx={{ width: 0.8 }} />
-        </Stack>
-
-        <Skeleton sx={{ height: 720, mb: 8 }} />
-      </Stack>
-    </Stack>
-  );
 }
