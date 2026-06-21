@@ -43,20 +43,29 @@ export function htmlToMarkdown(html: string): string {
 // ----------------------------------------------------------------------
 
 export function isMarkdownContent(content: string): boolean {
-  // Checking if the content contains Markdown-specific patterns
+  // If it contains HTML tags, treat it as HTML (turndown converts it to markdown).
+  if (/<\/?[a-z][\s\S]*>/i.test(content)) {
+    return false;
+  }
+
+  // Checking if the content contains Markdown-specific patterns.
+  // Line-anchored patterns use the `m` flag so markers anywhere in the text are
+  // detected, not only on the first line.
   const markdownPatterns = [
     /* Heading */
-    /^#+\s/,
-    /* List item */
-    /^(\*|-|\d+\.)\s/,
+    /^#+\s/m,
+    /* Blockquote */
+    /^>\s/m,
     /* Code block */
-    /^```/,
+    /^```/m,
     /* Table */
-    /^\|/,
+    /^\|/m,
     /* Unordered list */
-    /^(\s*)[*+-] [^\r\n]+/,
+    /^\s*[*+-]\s+\S/m,
     /* Ordered list */
-    /^(\s*)\d+\. [^\r\n]+/,
+    /^\s*\d+\.\s+\S/m,
+    /* Bold / italic */
+    /(\*\*|__)[^\s].*?[^\s](\*\*|__)/,
     /* Image */
     /!\[.*?\]\(.*?\)/,
     /* Link */
