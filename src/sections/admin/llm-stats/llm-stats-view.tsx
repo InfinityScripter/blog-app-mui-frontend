@@ -15,22 +15,45 @@ import { ModelSplitChart } from "src/sections/admin/llm-stats/widgets/model-spli
 import { TopProjectsChart } from "src/sections/admin/llm-stats/widgets/top-projects-chart";
 import { HarnessSplitChart } from "src/sections/admin/llm-stats/widgets/harness-split-chart";
 
+function renderState(
+  statsError: unknown,
+  statsLoading: boolean,
+  stats: ReturnType<typeof useGetLlmStats>["stats"],
+): "error" | "loading" | "empty" | "ready" {
+  if (statsError) return "error";
+  if (statsLoading) return "loading";
+  if (!stats) return "empty";
+  return "ready";
+}
+
 export function AdminLlmStatsView() {
-  const { stats, statsLoading, statsError } = useGetLlmStats();
+  const { stats, pushedAt, statsLoading, statsError } = useGetLlmStats();
+  const state = renderState(statsError, statsLoading, stats);
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" sx={{ mb: 3 }}>
+      <Typography variant="h4" sx={{ mb: 1 }}>
         Статистика LLM
       </Typography>
-      {statsError ? (
+      <Typography variant="body2" sx={{ color: "text.secondary", mb: 3 }}>
+        {pushedAt
+          ? `Снапшот от ${new Date(pushedAt).toLocaleString("ru-RU")}`
+          : ""}
+      </Typography>
+      {state === "error" && (
         <Typography sx={{ color: "text.secondary" }}>
-          Не удалось загрузить статистику. Данные читаются локально (~/.claude и
-          др.) — на этом хосте их нет.
+          Не удалось загрузить статистику.
         </Typography>
-      ) : statsLoading || !stats ? (
-        <Typography>Загрузка…</Typography>
-      ) : (
+      )}
+      {state === "loading" && <Typography>Загрузка…</Typography>}
+      {state === "empty" && (
+        <Typography sx={{ color: "text.secondary" }}>
+          Снапшот ещё не загружен. Запусти на локальной машине{" "}
+          <code>npm run llm-stats:push</code> — он соберёт статистику из
+          ~/.claude и др. и отправит её сюда.
+        </Typography>
+      )}
+      {state === "ready" && stats && (
         <Stack spacing={3}>
           <HonestyBanner stats={stats} />
           <KpiRow stats={stats} />
@@ -47,10 +70,12 @@ export function AdminLlmStatsView() {
             <Grid size={{ xs: 12 }}>
               <ActivityHeatmap stats={stats} />
             </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <TopProjectsChart stats={stats} />
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
+            {stats.byProject.length > 0 && (
+              <Grid size={{ xs: 12, md: 6 }}>
+                <TopProjectsChart stats={stats} />
+              </Grid>
+            )}
+            <Grid size={{ xs: 12, md: stats.byProject.length > 0 ? 6 : 12 }}>
               <ModelTable stats={stats} />
             </Grid>
           </Grid>

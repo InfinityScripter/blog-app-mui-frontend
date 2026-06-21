@@ -22,6 +22,7 @@
     "knip": "knip",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest",
+    "llm-stats:push": "tsx scripts/push-llm-stats.ts",
     "analyze": "ANALYZE=true next build",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui"
@@ -120,6 +121,7 @@
     "knip": "^5.62.0",
     "lint-staged": "^16.4.0",
     "prettier": "^3.6.2",
+    "tsx": "^4.22.4",
     "typescript": "^5.9.2",
     "vitest": "^2.1.9"
   },

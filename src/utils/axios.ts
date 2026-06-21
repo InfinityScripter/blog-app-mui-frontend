@@ -89,6 +89,9 @@ export const endpoints = {
       model: "/api/admin/bot/model",
       mock: "/api/admin/bot/mock",
     },
+    llmStats: {
+      snapshot: "/api/admin/llm-stats/snapshot",
+    },
   },
   user: {
     profile: "/api/user/profile",
