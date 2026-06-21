@@ -1,6 +1,12 @@
 "use client";
 
 import type { User } from "src/types/domain";
+import type {
+  BotModel,
+  BotStatus,
+  BotProvider,
+  ControlProviderName,
+} from "src/sections/admin/bot-types";
 
 import useSWR from "swr";
 import { useMemo } from "react";
@@ -96,4 +102,107 @@ export function useGetAuditLogs(params: AuditLogsParams, accessToken?: string) {
     }),
     [data, isLoading, error, mutate],
   );
+}
+
+// ----------------------------------------------------------------------
+// Bot control
+
+interface BotStatusResponse {
+  data: BotStatus;
+}
+interface BotProvidersResponse {
+  data: { providers: BotProvider[] };
+}
+interface BotModelsResponse {
+  data: { provider: string; models: BotModel[] };
+}
+
+// Статус опрашивается с refetch-при-фокусе: Telegram /model мог сменить модель
+// в обход панели — на возврате во вкладку показываем актуальное состояние.
+const botStatusOptions = {
+  revalidateIfStale: true,
+  revalidateOnFocus: true,
+  revalidateOnReconnect: false,
+};
+
+export function useGetBotStatus(accessToken?: string) {
+  const key = accessToken
+    ? [
+        endpoints.admin.bot.status,
+        { headers: { Authorization: `Bearer ${accessToken}` } },
+      ]
+    : null;
+  const { data, isLoading, error, mutate } = useSWR<BotStatusResponse>(
+    key,
+    fetcher,
+    botStatusOptions,
+  );
+  return useMemo(
+    () => ({
+      botStatus: data?.data ?? null,
+      botStatusLoading: isLoading,
+      botStatusError: error,
+      botStatusMutate: mutate,
+    }),
+    [data, isLoading, error, mutate],
+  );
+}
+
+export function useGetBotProviders(accessToken?: string) {
+  const key = accessToken
+    ? [
+        endpoints.admin.bot.providers,
+        { headers: { Authorization: `Bearer ${accessToken}` } },
+      ]
+    : null;
+  const { data, isLoading, error } = useSWR<BotProvidersResponse>(
+    key,
+    fetcher,
+    swrOptions,
+  );
+  return useMemo(
+    () => ({
+      botProviders: data?.data.providers ?? [],
+      botProvidersLoading: isLoading,
+      botProvidersError: error,
+    }),
+    [data, isLoading, error],
+  );
+}
+
+export function useGetBotModels(
+  provider: ControlProviderName | null,
+  accessToken?: string,
+) {
+  const key =
+    accessToken && provider
+      ? [
+          endpoints.admin.bot.models(provider),
+          { headers: { Authorization: `Bearer ${accessToken}` } },
+        ]
+      : null;
+  const { data, isLoading, error } = useSWR<BotModelsResponse>(
+    key,
+    fetcher,
+    swrOptions,
+  );
+  return useMemo(
+    () => ({
+      botModels: data?.data.models ?? [],
+      botModelsLoading: isLoading,
+      botModelsError: error,
+    }),
+    [data, isLoading, error],
+  );
+}
+
+export async function setBotModel(
+  provider: ControlProviderName,
+  model: string,
+) {
+  await axiosInstance.post(endpoints.admin.bot.model, { provider, model });
+}
+
+export async function setBotMock(enabled: boolean) {
+  await axiosInstance.post(endpoints.admin.bot.mock, { enabled });
 }
