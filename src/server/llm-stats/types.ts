@@ -31,12 +31,6 @@ export interface UsageEvent {
   agent: string | null;
 }
 
-export interface SourceAdapter {
-  harness: HarnessId;
-  isAvailable: () => boolean;
-  scan: () => UsageEvent[];
-}
-
 export interface PriceRow {
   in: number; // USD per 1M input tokens
   out: number;

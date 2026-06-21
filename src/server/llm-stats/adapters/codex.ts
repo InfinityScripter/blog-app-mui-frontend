@@ -45,7 +45,7 @@ interface FileState {
   events: UsageEvent[];
 }
 
-export function findRolloutFiles(root: string): string[] {
+function findRolloutFiles(root: string): string[] {
   if (!fs.existsSync(root)) return [];
   return fs.readdirSync(root).flatMap((name) => {
     const full = path.join(root, name);

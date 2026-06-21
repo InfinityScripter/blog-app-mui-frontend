@@ -8,10 +8,3 @@ export function formatTokens(n: number): string {
 export function formatUsd(n: number): string {
   return `$${n.toFixed(2)}`;
 }
-
-export function familyLabel(
-  family: string,
-  map: Record<string, string>,
-): string {
-  return map[family] ?? family;
-}

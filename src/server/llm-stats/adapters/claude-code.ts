@@ -34,7 +34,7 @@ interface CcLine {
   };
 }
 
-export function findJsonlFiles(root: string): string[] {
+function findJsonlFiles(root: string): string[] {
   if (!fs.existsSync(root)) return [];
   return fs.readdirSync(root).flatMap((name) => {
     const full = path.join(root, name);
