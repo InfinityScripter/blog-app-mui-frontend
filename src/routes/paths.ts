@@ -55,6 +55,7 @@ interface Paths {
       users: string;
       posts: string;
       auditLogs: string;
+      llmStats: string;
     };
   };
 }
@@ -113,6 +114,7 @@ export const paths: Paths = {
       users: `${ROOTS.DASHBOARD}/admin/users`,
       posts: `${ROOTS.DASHBOARD}/admin/posts`,
       auditLogs: `${ROOTS.DASHBOARD}/admin/audit-logs`,
+      llmStats: `${ROOTS.DASHBOARD}/admin/llm-stats`,
     },
   },
 };
