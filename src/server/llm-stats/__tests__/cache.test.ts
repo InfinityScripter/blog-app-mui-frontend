@@ -66,6 +66,15 @@ describe("loadCache / saveCache", () => {
     fs.writeFileSync(cacheFile, "{not json");
     expect(loadCache(cacheFile).files).toEqual({});
   });
+
+  it("writes atomically and leaves no temp file behind", () => {
+    const c = loadCache(cacheFile);
+    c.files["/a.jsonl"] = { mtimeMs: 1, size: 2, events: [evt("opus")] };
+    saveCache(c, cacheFile);
+    const leftovers = fs.readdirSync(dir).filter((n) => n.includes(".tmp"));
+    expect(leftovers).toEqual([]);
+    expect(loadCache(cacheFile).files["/a.jsonl"].events[0].model).toBe("opus");
+  });
 });
 
 describe("cachedScan", () => {

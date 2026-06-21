@@ -39,7 +39,11 @@ export function loadCache(file: string = CACHE_FILE): Cache {
 
 export function saveCache(cache: Cache, file: string = CACHE_FILE): void {
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, JSON.stringify(cache));
+  // Write to a temp file then rename: rename is atomic on POSIX, so a crash or a
+  // concurrent reader never sees a half-written (and thus corrupt) cache file.
+  const tmp = `${file}.${process.pid}.tmp`;
+  fs.writeFileSync(tmp, JSON.stringify(cache));
+  fs.renameSync(tmp, file);
 }
 
 // For each file: reuse cached events if mtime+size are unchanged, else reparse.
