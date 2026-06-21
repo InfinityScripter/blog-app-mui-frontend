@@ -37,7 +37,6 @@ export function SimpleLayout({ sx, children, content }: SimpleLayoutProps) {
           slotsDisplay={{
             signIn: false,
             account: false,
-            purchase: false,
             contacts: false,
             searchbar: false,
             workspaces: false,

@@ -36,7 +36,7 @@ export const SignUpSchema = zod.object({
   password: zod
     .string()
     .min(1, { message: "Пароль обязателен!" })
-    .min(6, { message: "Пароль должен содержать не менее 6 символов!" }),
+    .min(8, { message: "Пароль должен содержать не менее 8 символов!" }),
 });
 
 // ----------------------------------------------------------------------
@@ -129,7 +129,6 @@ export function JwtSignUpView() {
       <Field.Text
         name="password"
         label="Пароль"
-        placeholder="Не менее 6 символов"
         type={password.value ? "text" : "password"}
         InputLabelProps={{ shrink: true }}
         InputProps={{

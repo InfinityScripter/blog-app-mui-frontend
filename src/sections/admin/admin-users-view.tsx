@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
 import { deleteUser, useGetAdminUsers } from "src/actions/admin";
@@ -21,11 +22,18 @@ import {
 export function AdminUsersView() {
   const { users, usersMutate } = useGetAdminUsers();
   const { user } = useAuthContext();
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const handleDelete = async (id: string) => {
+    if (deletingId) return;
     if (!window.confirm("Удалить пользователя?")) return;
-    await deleteUser(id);
-    usersMutate();
+    setDeletingId(id);
+    try {
+      await deleteUser(id);
+      usersMutate();
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   return (
@@ -76,6 +84,7 @@ export function AdminUsersView() {
                         <IconButton
                           color="error"
                           onClick={() => handleDelete(u.id)}
+                          disabled={deletingId === u.id}
                         >
                           <Iconify icon="solar:trash-bin-trash-bold" />
                         </IconButton>

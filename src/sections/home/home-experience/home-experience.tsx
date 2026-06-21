@@ -5,7 +5,6 @@ import dayjs from "dayjs";
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
 import Timeline from "@mui/lab/Timeline";
 import Avatar from "@mui/material/Avatar";
 import TimelineDot from "@mui/lab/TimelineDot";
@@ -20,6 +19,7 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import { varFade, MotionViewport } from "src/components/animate";
 import { EXPERIENCE } from "src/sections/home/home-experience/const";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import { SectionHeading } from "src/sections/home/components/section-heading";
 
 // ----------------------------------------------------------------------
 
@@ -47,44 +47,14 @@ const getSortedExperience = () =>
 export function HomeExperience() {
   const theme = useTheme<MarketingTheme>();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-  const isDarkMode = theme.palette.mode === "dark";
-  const cardBorderColor = isDarkMode
-    ? alpha(theme.palette.common.white, 0.34)
-    : alpha(theme.palette.common.black, 0.22);
-  const cardTitleColor = isDarkMode
-    ? "rgba(255, 255, 255, 0.96)"
-    : "text.primary";
-  const cardBodyColor = isDarkMode
-    ? "rgba(255, 255, 255, 0.84)"
-    : "text.primary";
-  const cardMetaColor = isDarkMode
-    ? "rgba(255, 255, 255, 0.72)"
-    : "text.secondary";
 
   return (
-    <Container
-      component={MotionViewport}
-      sx={{
-        py: { xs: 5, md: 10 },
-      }}
-    >
-      <Stack
-        spacing={3}
-        sx={{
-          textAlign: "center",
-          mb: { xs: 5, md: 10 },
-        }}
-      >
-        <m.div variants={varFade().inDown}>
-          <Typography variant="h2">Опыт работы</Typography>
-        </m.div>
-
-        <m.div variants={varFade().inDown}>
-          <Typography sx={{ color: "text.secondary" }}>
-            Мой профессиональный путь в разработке
-          </Typography>
-        </m.div>
-      </Stack>
+    <Container component={MotionViewport} sx={{ py: { xs: 6, md: 10 } }}>
+      <SectionHeading
+        overline="Карьера"
+        title="Опыт работы"
+        subtitle="Профессиональный путь как веб-разработчика"
+      />
 
       <Timeline
         position={isMobile ? "right" : "alternate"}
@@ -92,7 +62,6 @@ export function HomeExperience() {
           [`& .MuiTimelineItem-root`]: {
             minHeight: { xs: "auto", md: "70px" },
             "&:before": {
-              // This removes the line on the left side for mobile view
               display: { xs: "none", md: "block" },
             },
           },
@@ -109,28 +78,24 @@ export function HomeExperience() {
               }}
             >
               <m.div variants={varFade().inLeft}>
-                <Typography variant="subtitle1" color="text.primary">
+                <Typography variant="subtitle2" color="text.primary">
                   {getPeriodLabel(item)}
                 </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: isDarkMode
-                      ? "rgba(255, 255, 255, 0.76)"
-                      : "text.secondary",
-                  }}
-                >
+                <Typography variant="body2" color="text.secondary">
                   {item.location}
                 </Typography>
               </m.div>
             </TimelineOppositeContent>
 
             <TimelineSeparator>
-              <TimelineConnector />
+              <TimelineConnector
+                sx={{ bgcolor: alpha(theme.palette.grey[500], 0.2) }}
+              />
               <TimelineDot
                 sx={{
                   bgcolor: "background.paper",
-                  boxShadow: theme.customShadows.z8,
+                  border: `1px solid ${alpha(theme.palette.grey[500], 0.2)}`,
+                  boxShadow: "none",
                   p: 0,
                   overflow: "hidden",
                   width: { xs: 40, md: 48 },
@@ -145,10 +110,13 @@ export function HomeExperience() {
                     height: "100%",
                     objectFit: "contain",
                     p: 0.5,
+                    bgcolor: "transparent",
                   }}
                 />
               </TimelineDot>
-              <TimelineConnector />
+              <TimelineConnector
+                sx={{ bgcolor: alpha(theme.palette.grey[500], 0.2) }}
+              />
             </TimelineSeparator>
 
             <TimelineContent sx={{ py: "12px", px: { xs: 1, sm: 2 } }}>
@@ -160,22 +128,11 @@ export function HomeExperience() {
                   underline="none"
                   color="inherit"
                   sx={{
+                    display: "block",
                     "@media (hover: hover) and (pointer: fine)": {
-                      "&:hover": {
-                        "& .experience-card": {
-                          borderColor: isDarkMode
-                            ? alpha(theme.palette.common.white, 0.62)
-                            : alpha(theme.palette.primary.main, 0.6),
-                          backgroundColor: isDarkMode
-                            ? alpha(theme.palette.common.white, 0.03)
-                            : alpha(theme.palette.common.black, 0.02),
-                          transition: theme.transitions.create(
-                            ["border-color", "background-color"],
-                            {
-                              duration: theme.transitions.duration.shorter,
-                            },
-                          ),
-                        },
+                      "&:hover .experience-card": {
+                        borderColor: alpha(theme.palette.primary.main, 0.4),
+                        transform: "translateY(-2px)",
                       },
                     },
                   }}
@@ -184,59 +141,62 @@ export function HomeExperience() {
                     className="experience-card"
                     sx={{
                       p: { xs: 2, sm: 3 },
-                      color: cardBodyColor,
-                      bgcolor: "transparent",
                       borderRadius: 2,
-                      border: `1px solid ${cardBorderColor}`,
+                      border: `1px solid ${alpha(theme.palette.grey[500], 0.16)}`,
+                      transition: theme.transitions.create(
+                        ["border-color", "transform"],
+                        { duration: theme.transitions.duration.shorter },
+                      ),
                     }}
                   >
-                    <Typography
-                      variant="h6"
-                      component="div"
-                      gutterBottom
-                      sx={{ color: cardTitleColor }}
-                    >
+                    <Typography variant="h6" component="div">
                       {item.position}
                     </Typography>
                     <Typography
-                      variant="subtitle1"
+                      variant="subtitle2"
                       color="primary.main"
-                      gutterBottom
+                      sx={{ mb: 1 }}
                     >
                       {item.company}
                     </Typography>
 
-                    {/* Show period and location on mobile */}
                     {isMobile && (
                       <Typography
                         variant="body2"
-                        sx={{ mb: 1, color: cardMetaColor }}
+                        sx={{ mb: 1.5, color: "text.secondary" }}
                       >
                         {getPeriodLabel(item)} • {item.location}
                       </Typography>
                     )}
 
-                    <Box component="ul" sx={{ pl: 2, mb: 2 }}>
+                    <Box component="ul" sx={{ pl: 2.5, mb: 2, mt: 0 }}>
                       {item.description.map((desc, i) => (
                         <Typography
                           key={i}
                           component="li"
                           variant="body2"
-                          sx={{ mb: 0.5, color: cardBodyColor }}
+                          sx={{ mb: 0.5, color: "text.secondary" }}
                         >
                           {desc}
                         </Typography>
                       ))}
                     </Box>
+
                     <Typography
                       variant="caption"
                       sx={{
                         display: "block",
+                        color: "text.disabled",
                         fontSize: { xs: "0.7rem", sm: "0.75rem" },
-                        color: cardMetaColor,
                       }}
                     >
-                      <strong>Технологии:</strong> {item.technologies}
+                      <Box
+                        component="span"
+                        sx={{ color: "text.secondary", fontWeight: 600 }}
+                      >
+                        Технологии:{" "}
+                      </Box>
+                      {item.technologies}
                     </Typography>
                   </Box>
                 </Link>

@@ -82,6 +82,21 @@ E2E (`yarn e2e`) needs the backend on :7272 **and Postgres running** — a backe
 - **`critters`** is flagged unused by knip but required by Next `optimizeCss` —
   keep it (it's in `ignoreDependencies`).
 
+## LLM stats dashboard (local-only)
+
+- Route `/dashboard/admin/llm-stats` (admin-guarded). Shows model/harness/time/
+  project/cost stats aggregated from local AI-harness logs.
+- **Local-only by design.** The API route `src/app/api/llm-stats/route.ts`
+  (Node runtime) reads `~/.claude/projects`, `~/.codex/sessions`, and
+  `~/.local/share/opencode/opencode.db`. On the prod VDS those dirs are absent, so
+  it returns an empty `StatsBundle` with a warning — the page renders an empty
+  state. Nothing about this feature runs server-side in production.
+- Parsing lives in `src/server/llm-stats/` (pure, unit-tested with Vitest:
+  `npm run test:unit`). **Add a harness** = add an adapter in `adapters/` and
+  register it in `scan.ts`. Costs are estimates from `pricing.ts`, not billing.
+- `src/server/llm-stats/**` must stay React-free; the section
+  (`src/sections/admin/llm-stats/`) is presentation only.
+
 ## Out of scope
 
 The backend lives in a separate repo (`blog-app-mui-backend`). Don't edit it from

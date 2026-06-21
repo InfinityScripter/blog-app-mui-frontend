@@ -46,7 +46,6 @@ export function AuthSplitLayout({
           slotsDisplay={{
             signIn: false,
             account: false,
-            purchase: false,
             contacts: false,
             searchbar: false,
             workspaces: false,

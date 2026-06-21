@@ -1,14 +1,45 @@
+import type { AboutHighlight } from "./types";
+
 export const ABOUT_PROFILE = {
   name: "Михаил Талалаев",
   role: "Software Engineer",
+  email: "talalaev.misha@gmail.com",
   imageSrc: "/assets/images/about/developer.webp",
-  imageAlt: "Software Engineer",
+  imageAlt: "Михаил Талалаев",
 };
 
 export const ABOUT_TITLE = "Обо мне";
 
-export const ABOUT_PARAGRAPHS = [
-  "Software Engineer с более чем 13-летним опытом в IT и продуктовой разработке. Веду продукт через весь цикл — от проектирования архитектуры до поставки в прод и поддержки. Глубокая экспертиза во frontend (React, Next.js, Angular, TypeScript), уверенно работаю с backend (Node.js, PostgreSQL) и инфраструктурой (Docker, CI/CD).",
-  "Работал в Яндексе, СТОМПЛАН, ShurikMarket и QCup: проектировал и разрабатывал веб-приложения с нуля, внедрял новые функциональности, оптимизировал производительность и пользовательский опыт. Запускал продукты от MVP до прода и развивал их под реальную нагрузку.",
-  "Проектирую системы с чёткими границами и предсказуемым поведением, беру задачи за пределами текущей специализации и фокусируюсь на надёжности и измеримом результате для бизнеса.",
+/** Один сжатый абзац вместо трёх — лаконично и по делу. */
+export const ABOUT_LEAD =
+  "Software Engineer с 13+ годами в IT. Веду продукт через весь цикл — от проектирования архитектуры до поставки в прод. Сильная сторона — фронтенд (React, Next.js, TypeScript); уверенно работаю с backend (Node.js, PostgreSQL) и инфраструктурой (Docker, CI/CD).";
+
+/** Сканируемые «факты» — заменяют длинные абзацы. */
+export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
+  {
+    icon: "solar:clock-circle-bold-duotone",
+    label: "Опыт",
+    value: "13+ лет в IT",
+  },
+  {
+    icon: "solar:cpu-bolt-bold-duotone",
+    label: "Стек",
+    value: "React · TypeScript · Next.js",
+  },
+  {
+    icon: "solar:buildings-3-bold-duotone",
+    label: "Компании",
+    value: "Яндекс · СТОМПЛАН · ShurikMarket",
+  },
+];
+
+/** Технологии-чипы под лидом — короткий и честный список основного стека. */
+export const ABOUT_STACK = [
+  "React",
+  "TypeScript",
+  "Next.js",
+  "Angular",
+  "Node.js",
+  "Material UI",
+  "Redux",
 ];

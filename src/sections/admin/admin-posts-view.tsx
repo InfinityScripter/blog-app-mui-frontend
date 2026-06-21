@@ -3,6 +3,7 @@
 import type { Post } from "src/types/domain";
 
 import useSWR from "swr";
+import { useState } from "react";
 import { paths } from "src/routes/paths";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "src/auth/hooks";
@@ -46,11 +47,18 @@ export function AdminPostsView() {
   );
   const posts = data?.posts ?? [];
   const router = useRouter();
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const handleDelete = async (id: string) => {
+    if (deletingId) return;
     if (!window.confirm("Удалить пост?")) return;
-    await axiosInstance.delete(endpoints.admin.postById(id));
-    mutate();
+    setDeletingId(id);
+    try {
+      await axiosInstance.delete(endpoints.admin.postById(id));
+      mutate();
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   return (
@@ -99,6 +107,7 @@ export function AdminPostsView() {
                       <IconButton
                         color="error"
                         onClick={() => handleDelete(p.id ?? "")}
+                        disabled={deletingId === (p.id ?? "")}
                       >
                         <Iconify icon="solar:trash-bin-trash-bold" />
                       </IconButton>

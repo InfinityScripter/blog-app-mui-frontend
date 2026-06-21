@@ -1,8 +1,8 @@
 {
-  "name": "@minimal-kit/starter-next-js",
-  "author": "Minimals",
+  "name": "blog-app-mui-frontend",
+  "author": "Mihail Talalaev",
   "version": "6.0.1",
-  "description": "Next Starter & JavaScript",
+  "description": "Blog & portfolio — Next.js + MUI frontend",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3033 --turbo",
@@ -20,6 +20,9 @@
     "re:build-npm": "npm run rm:all && npm install && npm run build",
     "start:out": "npx serve@latest out -p 3033",
     "knip": "knip",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest",
+    "llm-stats:push": "tsx scripts/push-llm-stats.ts",
     "analyze": "ANALYZE=true next build",
     "e2e": "playwright test",
     "e2e:ui": "playwright test --ui"
@@ -54,6 +57,7 @@
     "apexcharts": "^5.3.2",
     "autosuggest-highlight": "^3.3.4",
     "axios": "^1.11.0",
+    "better-sqlite3": "^11.10.0",
     "critters": "^0.0.25",
     "dayjs": "^1.11.13",
     "embla-carousel": "^8.6.0",
@@ -92,6 +96,7 @@
     "@next/bundle-analyzer": "^16.2.9",
     "@playwright/test": "^1.60.0",
     "@types/autosuggest-highlight": "^3.2.3",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^24.2.0",
     "@types/nprogress": "^0.2.3",
     "@types/react": "^19.1.9",
@@ -116,7 +121,9 @@
     "knip": "^5.62.0",
     "lint-staged": "^16.4.0",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.2"
+    "tsx": "^4.22.4",
+    "typescript": "^5.9.2",
+    "vitest": "^2.1.9"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

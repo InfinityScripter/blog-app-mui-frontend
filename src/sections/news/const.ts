@@ -25,12 +25,27 @@ export const SOURCE_TO_CATEGORY: Record<string, NewsCategory> = {
   OpenNet: "Технологии",
 };
 
-/** Tag values (besides NEWS_TAG) that map directly to a рубрика, if present. */
+/**
+ * Maps a topical tag (besides NEWS_TAG) to a рубрика. Keys are lowercase to
+ * match the bot's whitelisted tag set: `новости` + 1-3 of технологии, наука,
+ * политика, культура, ai, llm, агенты, нейросети, безопасность, разработка,
+ * гаджеты, бизнес. Unmatched tags fall through to «Главное» (the catch-all).
+ */
 export const TAG_TO_CATEGORY: Record<string, NewsCategory> = {
+  // → Технологии (tech umbrella: AI/LLM/agents/security/dev/gadgets all live here)
   технологии: "Технологии",
-  tech: "Технологии",
+  ai: "Технологии",
+  llm: "Технологии",
+  агенты: "Технологии",
+  нейросети: "Технологии",
+  безопасность: "Технологии",
+  разработка: "Технологии",
+  гаджеты: "Технологии",
+  // → Наука
   наука: "Наука",
-  science: "Наука",
+  // → Политика
   политика: "Политика",
+  // → Культура (business reads closer to культура than to a science/tech rubric)
   культура: "Культура",
+  бизнес: "Культура",
 };
