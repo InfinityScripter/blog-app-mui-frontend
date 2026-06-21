@@ -64,6 +64,11 @@ export function getNavData(role?: string) {
           path: paths.dashboard.admin.bot,
           icon: ICONS.dashboard,
         },
+        {
+          title: "Статистика LLM",
+          path: paths.dashboard.admin.llmStats,
+          icon: ICONS.dashboard,
+        },
       ],
     });
   }
