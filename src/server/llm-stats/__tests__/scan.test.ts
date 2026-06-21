@@ -22,6 +22,20 @@ describe("runAdapters", () => {
     expect(scannedFiles).toBeGreaterThan(0);
     expect(Array.isArray(warnings)).toBe(true);
   });
+
+  it("returns an empty result without touching the cache when no harness exists (prod/serverless)", () => {
+    // Point the cache at an unwritable path: it must NOT be touched, because the
+    // cache is skipped entirely when no harness data is available.
+    const result = runAdapters({
+      claudeRoot: "/no/such/claude",
+      codexRoot: "/no/such/codex",
+      opencodeDb: "/no/such/opencode.db",
+      cacheFile: "/proc/should-never-be-written/index.json",
+    });
+    expect(result.events).toEqual([]);
+    expect(result.harnessesAvailable).toEqual([]);
+    expect(result.scannedFiles).toBe(0);
+  });
 });
 
 describe("runAdapters with cache", () => {

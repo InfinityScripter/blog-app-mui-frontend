@@ -8,15 +8,15 @@ import {
   scanOpenCode,
 } from "src/server/llm-stats/adapters/opencode";
 import {
+  CLAUDE_ROOT,
+  scanClaudeCode,
+} from "src/server/llm-stats/adapters/claude-code";
+import {
   loadCache,
   saveCache,
   pruneCache,
   CACHE_FILE,
 } from "src/server/llm-stats/cache";
-import {
-  CLAUDE_ROOT,
-  scanClaudeCode,
-} from "src/server/llm-stats/adapters/claude-code";
 
 export interface ScanRoots {
   claudeRoot?: string;
@@ -82,45 +82,56 @@ export function runAdapters(roots: ScanRoots = {}): ScanResult {
   const codexRoot = roots.codexRoot ?? CODEX_ROOT;
   const opencodeDb = roots.opencodeDb ?? OPENCODE_DB;
 
-  // One shared incremental cache: unchanged files reuse parsed events, only
-  // new/modified files are reparsed. On by default (the route relies on it);
-  // tests pass roots.useCache === false to scan fixtures without touching disk.
+  const claudeAvailable = fs.existsSync(claudeRoot);
+  const codexAvailable = fs.existsSync(codexRoot);
+  const opencodeAvailable = fs.existsSync(opencodeDb);
+  const anyAvailable = claudeAvailable || codexAvailable || opencodeAvailable;
+
+  // Incremental cache: unchanged files reuse parsed events. Only enabled when at
+  // least one harness has data — on a serverless host (e.g. Vercel) no data dir
+  // exists AND the filesystem is read-only, so loading/writing the cache would
+  // throw; skipping it there keeps the route returning a clean empty bundle.
+  // loadCache itself is failure-safe; saveCache is guarded below.
   const cacheFile = roots.cacheFile ?? CACHE_FILE;
-  const useCache = roots.useCache !== false;
+  const useCache = roots.useCache !== false && anyAvailable;
   const cache = useCache ? loadCache(cacheFile) : undefined;
 
   const results: AdapterResult[] = [
     runOne(
-      fs.existsSync(claudeRoot),
+      claudeAvailable,
       "claude-code",
       () => scanClaudeCode(claudeRoot, cache),
       () => countFiles(claudeRoot, ".jsonl"),
     ),
     runOne(
-      fs.existsSync(codexRoot),
+      codexAvailable,
       "codex",
       () => scanCodex(codexRoot, cache),
       () => countFiles(codexRoot, ".jsonl"),
     ),
     runOne(
-      fs.existsSync(opencodeDb),
+      opencodeAvailable,
       "opencode",
       () => scanOpenCode(opencodeDb, cache),
       () => 1,
     ),
   ];
 
+  const cacheWarnings: string[] = [];
   if (cache) {
-    // Prune entries for source files that vanished since the last scan, then
-    // persist. Prune uses the union of all adapters' live files so no adapter's
-    // entries get evicted by another's scan.
-    const live = [
-      ...listJsonl(claudeRoot),
-      ...listJsonl(codexRoot),
-      ...(fs.existsSync(opencodeDb) ? [opencodeDb] : []),
-    ];
-    pruneCache(cache, live);
-    saveCache(cache, cacheFile);
+    // Prune vanished source files, then persist. Wrapped so a read-only or full
+    // filesystem degrades to a warning instead of crashing the whole scan.
+    try {
+      const live = [
+        ...listJsonl(claudeRoot),
+        ...listJsonl(codexRoot),
+        ...(opencodeAvailable ? [opencodeDb] : []),
+      ];
+      pruneCache(cache, live);
+      saveCache(cache, cacheFile);
+    } catch (err) {
+      cacheWarnings.push(`cache: ${(err as Error).message}`);
+    }
   }
 
   return {
@@ -129,8 +140,9 @@ export function runAdapters(roots: ScanRoots = {}): ScanResult {
       .map((r) => r.harness)
       .filter((h): h is HarnessId => h !== null),
     scannedFiles: results.reduce((n, r) => n + r.files, 0),
-    warnings: results
-      .map((r) => r.warning)
-      .filter((w): w is string => w !== null),
+    warnings: [
+      ...results.map((r) => r.warning).filter((w): w is string => w !== null),
+      ...cacheWarnings,
+    ],
   };
 }

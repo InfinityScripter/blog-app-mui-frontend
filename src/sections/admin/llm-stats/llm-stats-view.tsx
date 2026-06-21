@@ -16,14 +16,19 @@ import { TopProjectsChart } from "src/sections/admin/llm-stats/widgets/top-proje
 import { HarnessSplitChart } from "src/sections/admin/llm-stats/widgets/harness-split-chart";
 
 export function AdminLlmStatsView() {
-  const { stats, statsLoading } = useGetLlmStats();
+  const { stats, statsLoading, statsError } = useGetLlmStats();
 
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" sx={{ mb: 3 }}>
         Статистика LLM
       </Typography>
-      {statsLoading || !stats ? (
+      {statsError ? (
+        <Typography sx={{ color: "text.secondary" }}>
+          Не удалось загрузить статистику. Данные читаются локально (~/.claude и
+          др.) — на этом хосте их нет.
+        </Typography>
+      ) : statsLoading || !stats ? (
         <Typography>Загрузка…</Typography>
       ) : (
         <Stack spacing={3}>
