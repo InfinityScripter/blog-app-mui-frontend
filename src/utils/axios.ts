@@ -81,6 +81,14 @@ export const endpoints = {
     userById: (id: string) => `/api/admin/users/${id}`,
     postById: (id: string) => `/api/admin/posts/${id}`,
     auditLogs: "/api/admin/audit-logs",
+    bot: {
+      status: "/api/admin/bot/status",
+      providers: "/api/admin/bot/providers",
+      models: (provider: string) =>
+        `/api/admin/bot/models?provider=${provider}`,
+      model: "/api/admin/bot/model",
+      mock: "/api/admin/bot/mock",
+    },
   },
   user: {
     profile: "/api/user/profile",
