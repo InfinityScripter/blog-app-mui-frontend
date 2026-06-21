@@ -12,9 +12,8 @@ export const FEED_TAGS = [
 
 export type FeedTag = (typeof FEED_TAGS)[number];
 
-// News (bot-published, tag 'новости') lives only in /news — exclude it from the
-// landing feed so each post appears in exactly one place.
-export const EXCLUDED_NEWS_TAG = "новости";
+// The landing feed (Лента) is COMMON: it lists every published post — news and
+// blog alike — newest first. Type-specific views live at /news and /post.
 
 // How many posts to show before the "Показать ещё" button; each click adds
 // this many more. Not infinite scroll by design.
@@ -22,6 +21,7 @@ export const FEED_PAGE_SIZE = 10;
 
 // Section copy.
 export const FEED_TITLE = "Лента";
-export const FEED_SUBTITLE = "Свежие разборы AI-инструментов, агентов и LLM";
+export const FEED_SUBTITLE =
+  "Всё самое свежее: новости, разборы и заметки — по порядку";
 export const FEED_EMPTY_TEXT = "Пока нет публикаций по выбранным темам.";
 export const FEED_SHOW_MORE = "Показать ещё";

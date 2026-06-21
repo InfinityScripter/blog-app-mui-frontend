@@ -3,9 +3,7 @@ import type { Theme, SxProps } from "@mui/material/styles";
 
 import { useEffect } from "react";
 import Box from "@mui/material/Box";
-import { paths } from "src/routes/paths";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import { Logo } from "src/components/logo";
 import { usePathname } from "src/routes/hooks";
 import { NavUl } from "src/components/nav-section";
@@ -75,18 +73,8 @@ export function NavMobile({ data, open, onClose, slots, sx }: NavMobileProps) {
       </Scrollbar>
 
       {slots?.bottomArea ?? (
-        <Box gap={1.5} display="flex" sx={{ px: 2.5, py: 3 }}>
+        <Box display="flex" sx={{ px: 2.5, py: 3 }}>
           <SignInButton fullWidth />
-
-          <Button
-            fullWidth
-            variant="contained"
-            rel="noopener"
-            target="_blank"
-            href={paths.minimalStore}
-          >
-            Purchase
-          </Button>
         </Box>
       )}
     </Drawer>

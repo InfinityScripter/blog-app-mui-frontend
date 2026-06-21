@@ -1,14 +1,18 @@
+import type { Theme } from "@mui/material/styles";
+
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import Link from "@mui/material/Link";
-import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { varFade, MotionViewport } from "src/components/animate";
+import { SectionHeading } from "src/sections/home/components/section-heading";
 
 import { PROJECTS } from "./const";
 
@@ -16,116 +20,105 @@ import { PROJECTS } from "./const";
 
 export function HomeProjects() {
   return (
-    <Container
-      component={MotionViewport}
-      sx={{
-        py: { xs: 5, md: 10 },
-      }}
-    >
-      <Stack
-        spacing={3}
-        sx={{
-          textAlign: "center",
-          mb: { xs: 5, md: 10 },
-        }}
-      >
-        <m.div variants={varFade().inDown}>
-          <Typography variant="h2">Проекты</Typography>
-        </m.div>
-
-        <m.div variants={varFade().inDown}>
-          <Typography sx={{ color: "text.secondary" }}>
-            Некоторые из моих недавних проектов
-          </Typography>
-        </m.div>
-      </Stack>
+    <Container component={MotionViewport} sx={{ py: { xs: 6, md: 10 } }}>
+      <SectionHeading
+        overline="Работы"
+        title="Проекты"
+        subtitle="Несколько недавних pet-проектов и продуктов"
+      />
 
       <Box
-        gap={4}
-        display="grid"
-        gridTemplateColumns={{
-          xs: "repeat(1, 1fr)",
-          md: "repeat(3, 1fr)",
+        sx={{
+          display: "grid",
+          gap: 3,
+          gridTemplateColumns: {
+            xs: "repeat(1, 1fr)",
+            md: "repeat(3, 1fr)",
+          },
         }}
       >
         {PROJECTS.map((project) => (
           <m.div key={project.title} variants={varFade().inUp}>
-            <Card
-              sx={{
-                textAlign: "left",
+            <Stack
+              sx={(theme: Theme) => ({
                 p: 3,
                 height: 1,
-                display: "flex",
-                flexDirection: "column", // Добавляем flex-направление как колонку
-              }}
+                borderRadius: 2,
+                border: `1px solid ${alpha(theme.palette.grey[500], 0.16)}`,
+                transition: theme.transitions.create(
+                  ["border-color", "transform"],
+                  { duration: theme.transitions.duration.shorter },
+                ),
+                "@media (hover: hover) and (pointer: fine)": {
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    borderColor: alpha(theme.palette.primary.main, 0.4),
+                  },
+                },
+              })}
             >
-              {/* Иконка проекта */}
-              {project.icon && (
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                sx={{ mb: 2 }}
+              >
                 <Box
-                  sx={{
-                    mb: 3,
+                  sx={(theme: Theme) => ({
+                    width: 44,
+                    height: 44,
+                    borderRadius: 1.5,
                     display: "flex",
-                    justifyContent: "end",
                     alignItems: "center",
-                    height: 24,
-                  }}
+                    justifyContent: "center",
+                    color: "primary.main",
+                    bgcolor: alpha(theme.palette.primary.main, 0.1),
+                  })}
                 >
-                  <Iconify
-                    icon={project.icon}
-                    width={24}
-                    sx={{
-                      color: project.iconColor || "primary.main",
-                    }}
-                  />
+                  <Iconify icon={project.icon} width={24} />
                 </Box>
-              )}
+              </Stack>
 
-              {/* Основное содержимое */}
               <Stack spacing={2} sx={{ flexGrow: 1 }}>
-                {" "}
-                {/* Добавляем flexGrow: 1, чтобы этот компонент занимал все доступное пространство */}
                 <Link
                   component={RouterLink}
                   href={project.link}
                   target="_blank"
+                  rel="noopener"
                   sx={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Typography variant="h5" noWrap>
-                    {project.title}
-                  </Typography>
+                  <Typography variant="h6">{project.title}</Typography>
                 </Link>
+
                 <Typography variant="body2" sx={{ color: "text.secondary" }}>
                   {project.description}
                 </Typography>
-                <Stack direction="row" flexWrap="wrap" spacing={1}>
+
+                <Stack direction="row" flexWrap="wrap" useFlexGap spacing={1}>
                   {project.tech.map((tech) => (
-                    <Typography
+                    <Chip
                       key={tech}
-                      variant="caption"
-                      sx={{
-                        px: 1,
-                        py: 0.5,
-                        borderRadius: 1,
-                        bgcolor: "action.selected",
-                      }}
-                    >
-                      {tech}
-                    </Typography>
+                      size="small"
+                      variant="outlined"
+                      label={tech}
+                      sx={{ fontWeight: 500 }}
+                    />
                   ))}
                 </Stack>
-                <Stack spacing={1} sx={{ pt: 1 }}>
+
+                <Stack spacing={1} sx={{ pt: 0.5 }}>
                   {project.features.map((feature) => (
                     <Stack
                       key={feature}
                       spacing={1}
                       direction="row"
                       alignItems="center"
-                      sx={{ typography: "body2" }}
+                      sx={{ typography: "body2", color: "text.secondary" }}
                     >
                       <Iconify
                         icon="eva:checkmark-fill"
                         width={16}
-                        sx={{ color: "primary.main" }}
+                        sx={{ color: "primary.main", flexShrink: 0 }}
                       />
                       {feature}
                     </Stack>
@@ -133,16 +126,7 @@ export function HomeProjects() {
                 </Stack>
               </Stack>
 
-              {/* Кнопки внизу */}
-              <Stack
-                direction="row"
-                spacing={2}
-                sx={{
-                  pt: 2,
-                  justifyContent: "space-between",
-                  mt: 2,
-                }}
-              >
+              <Stack direction="row" spacing={1.5} sx={{ pt: 3 }}>
                 <Button
                   component={Link}
                   href={project.link}
@@ -150,7 +134,7 @@ export function HomeProjects() {
                   rel="noopener"
                   size="small"
                   color="inherit"
-                  variant="contained"
+                  variant="outlined"
                   startIcon={<Iconify icon="eva:github-fill" />}
                   sx={{ flex: 1 }}
                 >
@@ -171,7 +155,7 @@ export function HomeProjects() {
                   Демо
                 </Button>
               </Stack>
-            </Card>
+            </Stack>
           </m.div>
         ))}
       </Box>

@@ -12,6 +12,7 @@ import TextField from "@mui/material/TextField";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
+import LoadingButton from "@mui/lab/LoadingButton";
 import { useBoolean } from "src/hooks/use-boolean";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 import { deleteComment, updateComment } from "src/actions/blog-ssr";
@@ -52,25 +53,32 @@ export default function PostCommentItem({
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
+  const saving = useBoolean();
+  const deleting = useBoolean();
 
   const handleSave = async () => {
-    if (editedMessage.trim()) {
-      try {
-        const updatePayload = {
-          message: editedMessage,
-          isReply: hasReply,
-          parentCommentId,
-        };
-        await updateComment(postId, comment.id, updatePayload);
+    if (saving.value || !editedMessage.trim()) {
+      return;
+    }
 
-        if (onCommentUpdated) {
-          onCommentUpdated();
-        }
-        setIsEditing(false);
-        popover.onClose();
-      } catch (error) {
-        console.error("Ошибка обновления комментария:", error);
+    saving.onTrue();
+    try {
+      const updatePayload = {
+        message: editedMessage,
+        isReply: hasReply,
+        parentCommentId,
+      };
+      await updateComment(postId, comment.id, updatePayload);
+
+      if (onCommentUpdated) {
+        onCommentUpdated();
       }
+      setIsEditing(false);
+      popover.onClose();
+    } catch (error) {
+      console.error("Ошибка обновления комментария:", error);
+    } finally {
+      saving.onFalse();
     }
   };
 
@@ -92,6 +100,11 @@ export default function PostCommentItem({
   };
 
   const handleDelete = async () => {
+    if (deleting.value) {
+      return;
+    }
+
+    deleting.onTrue();
     try {
       await deleteComment(postId, comment.id, {
         isReply: hasReply,
@@ -101,10 +114,12 @@ export default function PostCommentItem({
       if (onCommentUpdated) {
         onCommentUpdated();
       }
+      popover.onClose();
     } catch (error) {
       console.error("Ошибка удаления комментария:", error);
+    } finally {
+      deleting.onFalse();
     }
-    popover.onClose();
   };
 
   const isCommentOwner =
@@ -171,18 +186,20 @@ export default function PostCommentItem({
                 size="small"
                 color="inherit"
                 onClick={handleCancelEdit}
+                disabled={saving.value}
                 startIcon={<Iconify icon="eva:close-fill" />}
               >
                 Отмена
               </Button>
-              <Button
+              <LoadingButton
                 size="small"
                 onClick={handleSave}
+                loading={saving.value}
                 startIcon={<Iconify icon="eva:checkmark-fill" />}
                 color="success"
               >
                 Сохранить
-              </Button>
+              </LoadingButton>
             </Stack>
           </Stack>
         ) : (
@@ -233,7 +250,11 @@ export default function PostCommentItem({
           Редактировать
         </MenuItem>
 
-        <MenuItem onClick={handleDelete} sx={{ color: "error.main" }}>
+        <MenuItem
+          onClick={handleDelete}
+          disabled={deleting.value}
+          sx={{ color: "error.main" }}
+        >
           <Iconify icon="solar:trash-bin-trash-bold" sx={{ mr: 1 }} />
           Удалить
         </MenuItem>

@@ -5,7 +5,6 @@ import type { NavSectionDataProps } from "src/components/nav-section/types";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import { paths } from "src/routes/paths";
-import Button from "@mui/material/Button";
 import { Logo } from "src/components/logo";
 import { RouterLink } from "src/routes/components";
 import { styled, useTheme } from "@mui/material/styles";
@@ -82,7 +81,6 @@ export interface HeaderBaseSlotsDisplay {
   account?: boolean;
   helpLink?: boolean;
   settings?: boolean;
-  purchase?: boolean;
   contacts?: boolean;
   searchbar?: boolean;
   workspaces?: boolean;
@@ -119,7 +117,6 @@ export function HeaderBase({
     account = true,
     helpLink = false,
     settings = true,
-    purchase = false,
     contacts = false,
     searchbar = true,
     workspaces = false,
@@ -231,25 +228,6 @@ export function HeaderBase({
 
               {/* -- Sign in button -- */}
               {signIn && <SignInButton />}
-
-              {/* -- Purchase button -- */}
-              {purchase && (
-                <Button
-                  data-slot="purchase"
-                  variant="contained"
-                  rel="noopener"
-                  target="_blank"
-                  href={paths.minimalStore}
-                  sx={{
-                    display: "none",
-                    [theme.breakpoints.up(layoutQuery)]: {
-                      display: "inline-flex",
-                    },
-                  }}
-                >
-                  Purchase
-                </Button>
-              )}
             </Box>
 
             {slots?.rightAreaEnd}

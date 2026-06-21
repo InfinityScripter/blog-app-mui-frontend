@@ -16,10 +16,7 @@ interface Paths {
   page404: string;
   page500: string;
   components: string;
-  docs: string;
-  changelog: string;
   zoneStore: string;
-  minimalStore: string;
   freeUI: string;
   figma: string;
   post: {
@@ -71,10 +68,7 @@ export const paths: Paths = {
   page404: "/error/404",
   page500: "/error/500",
   components: "/components",
-  docs: "https://docs.minimals.cc",
-  changelog: "https://docs.minimals.cc/changelog",
   zoneStore: "https://mui.com/store/items/zone-landing-page/",
-  minimalStore: "https://mui.com/store/items/minimal-dashboard/",
   freeUI: "https://mui.com/store/items/minimal-dashboard-free/",
   figma:
     "https://www.figma.com/design/cAPz4pYPtQEXivqe11EcDE/%5BPreview%5D-Minimal-Web.v6.0.0",

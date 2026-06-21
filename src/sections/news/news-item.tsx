@@ -8,7 +8,6 @@ import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
 import { coverSrc } from "src/utils/cover-src";
 import { useTheme } from "@mui/material/styles";
-import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 
@@ -24,7 +23,11 @@ interface NewsItemProps {
   variant?: "lead" | "list";
 }
 
-/** Renders the thumbnail, or a flat muted block when the post has no cover. */
+/**
+ * Renders the thumbnail. When the post has no cover, coverSrc falls back to a
+ * deterministic, varied cover asset seeded by the post id/title — so cards never
+ * all share one identical placeholder.
+ */
 function Thumb({
   item,
   ratio,
@@ -34,26 +37,11 @@ function Thumb({
   ratio: "4/3" | "16/9";
   sx?: object;
 }) {
-  if (!item.post.coverUrl) {
-    return (
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          bgcolor: "background.neutral",
-          color: "text.disabled",
-          ...sx,
-        }}
-      >
-        <Iconify icon="solar:gallery-wide-bold-duotone" width={28} />
-      </Box>
-    );
-  }
+  const seed = String(item.post._id ?? item.post.id ?? item.post.title);
   return (
     <Image
       alt={item.post.title}
-      src={coverSrc(item.post.coverUrl)}
+      src={coverSrc(item.post.coverUrl, seed)}
       ratio={ratio}
       sx={sx}
     />
