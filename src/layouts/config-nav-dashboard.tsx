@@ -59,6 +59,11 @@ export function getNavData(role?: string) {
           path: paths.dashboard.admin.auditLogs,
           icon: ICONS.dashboard,
         },
+        {
+          title: "AI-бот",
+          path: paths.dashboard.admin.bot,
+          icon: ICONS.dashboard,
+        },
       ],
     });
   }
