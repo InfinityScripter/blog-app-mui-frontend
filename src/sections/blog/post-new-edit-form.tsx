@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "src/routes/hooks";
 import { toast } from "src/components/snackbar";
 import { Form } from "src/components/hook-form";
+import { PUBLISH_STATUS } from "src/types/domain";
 import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useEffect, useCallback } from "react";
@@ -41,7 +42,9 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
       metaKeywords: currentPost?.metaKeywords || [],
       metaTitle: currentPost?.metaTitle || "",
       metaDescription: currentPost?.metaDescription || "",
-      publish: currentPost ? currentPost.publish === "published" : false,
+      publish: currentPost
+        ? currentPost.publish === PUBLISH_STATUS.published
+        : false,
     }),
     [currentPost],
   );
@@ -79,7 +82,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
     try {
       const finalData: Partial<Post> = {
         ...data,
-        publish: data.publish ? "published" : "draft",
+        publish: data.publish ? PUBLISH_STATUS.published : PUBLISH_STATUS.draft,
         coverUrl: typeof data.coverUrl === "string" ? data.coverUrl : undefined,
       };
 

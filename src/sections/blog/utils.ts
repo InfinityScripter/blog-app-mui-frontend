@@ -1,5 +1,7 @@
 import type { Post } from "src/types/domain";
 
+import { PUBLISH_STATUS } from "src/types/domain";
+
 import { MAX_RELATED } from "./const";
 
 // ----------------------------------------------------------------------
@@ -22,7 +24,8 @@ export function selectRelated(
   const currentTags = normalizeTags(tags);
 
   const candidates = posts.filter(
-    (post) => post.publish === "published" && post.id !== currentPostId,
+    (post) =>
+      post.publish === PUBLISH_STATUS.published && post.id !== currentPostId,
   );
 
   const scored = candidates

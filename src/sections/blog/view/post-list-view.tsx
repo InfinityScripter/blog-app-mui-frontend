@@ -9,6 +9,7 @@ import { Label } from "src/components/label";
 import { useState, useCallback } from "react";
 import { POST_SORT_OPTIONS } from "src/_mock";
 import { Iconify } from "src/components/iconify";
+import { PUBLISH_STATUS } from "src/types/domain";
 import { RouterLink } from "src/routes/components";
 import { useDebounce } from "src/hooks/use-debounce";
 import { useSetState } from "src/hooks/use-set-state";
@@ -19,8 +20,8 @@ import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 import { PostSort } from "../post-sort";
 import { applyListFilter } from "./utils";
 import { PostSearch } from "../post-search";
-import { POST_PUBLISH_TABS } from "./const";
 import { PostListHorizontal } from "../post-list-horizontal";
+import { POST_PUBLISH_TAB, POST_PUBLISH_TABS } from "./const";
 
 // ----------------------------------------------------------------------
 
@@ -117,19 +118,25 @@ export function PostListView() {
             icon={
               <Label
                 variant={
-                  ((tab === "all" || tab === filters.state.publish) &&
+                  ((tab === POST_PUBLISH_TAB.all ||
+                    tab === filters.state.publish) &&
                     "filled") ||
                   "soft"
                 }
-                color={(tab === "published" && "info") || "default"}
+                color={
+                  (tab === POST_PUBLISH_TAB.published && "info") || "default"
+                }
               >
-                {tab === "all" && posts.length}
+                {tab === POST_PUBLISH_TAB.all && posts.length}
 
-                {tab === "published" &&
-                  posts.filter((post) => post.publish === "published").length}
+                {tab === POST_PUBLISH_TAB.published &&
+                  posts.filter(
+                    (post) => post.publish === PUBLISH_STATUS.published,
+                  ).length}
 
-                {tab === "draft" &&
-                  posts.filter((post) => post.publish === "draft").length}
+                {tab === POST_PUBLISH_TAB.draft &&
+                  posts.filter((post) => post.publish === PUBLISH_STATUS.draft)
+                    .length}
               </Label>
             }
             sx={{ textTransform: "capitalize" }}

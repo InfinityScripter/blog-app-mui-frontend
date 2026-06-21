@@ -76,3 +76,16 @@ export function filterPostsByCategory(
   if (category === DEFAULT_NEWS_CATEGORY) return posts;
   return posts.filter((post) => deriveCategory(post) === category);
 }
+
+/**
+ * The рубрики to actually show in the section bar: «Главное» (always — it's the
+ * "all" tab) plus only those рубрики that have at least one matching post.
+ * Empty рубрики aren't hardcoded into the bar — they simply don't appear.
+ * Order follows NEWS_CATEGORIES.
+ */
+export function availableCategories(posts: Post[]): NewsCategory[] {
+  const present = new Set(posts.map((post) => deriveCategory(post)));
+  return NEWS_CATEGORIES.filter(
+    (category) => category === DEFAULT_NEWS_CATEGORY || present.has(category),
+  );
+}

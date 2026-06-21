@@ -1,19 +1,7 @@
-// Curated filter tags for the landing feed. Posts are matched against these
-// by case-insensitive label; tags on a post that aren't in this list simply
-// don't get a filter chip (kept intentionally small, Habr/vc.ru style).
-export const FEED_TAGS = [
-  "AI/LLM",
-  "Агенты",
-  "Claude Code",
-  "Промптинг",
-  "Инструменты",
-  "Проекты",
-] as const;
-
-export type FeedTag = (typeof FEED_TAGS)[number];
-
-// The landing feed (Лента) is COMMON: it lists every published post — news and
-// blog alike — newest first. Type-specific views live at /news and /post.
+// Filter chips for the landing feed are NOT hardcoded — they are derived from
+// the tags that actually exist on published posts (see `useFeedTags`). The feed
+// (Лента) is COMMON: it lists every published post — news and blog alike —
+// newest first. Type-specific views live at /news and /post.
 
 // How many posts to show before the "Показать ещё" button; each click adds
 // this many more. Not infinite scroll by design.

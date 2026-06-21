@@ -11,17 +11,15 @@ import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { PostItemFeed } from "src/sections/blog/post-item-feed";
 
+import { useFeedTags } from "./hooks/use-feed-tags";
 import { toggleTag, selectFeedPosts } from "./utils";
 import {
-  FEED_TAGS,
   FEED_TITLE,
   FEED_SUBTITLE,
   FEED_PAGE_SIZE,
   FEED_SHOW_MORE,
   FEED_EMPTY_TEXT,
 } from "./const";
-
-import type { FeedTag } from "./const";
 
 // ----------------------------------------------------------------------
 
@@ -30,7 +28,9 @@ export function HomeFeed() {
   // новых к старым. Разделение по типу живёт на /news и /post, не здесь.
   const { posts, postsLoading } = useGetPosts();
 
-  const [selectedTags, setSelectedTags] = useState<FeedTag[]>([]);
+  const feedTags = useFeedTags(posts);
+
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [visibleCount, setVisibleCount] = useState(FEED_PAGE_SIZE);
 
   const feedPosts = useMemo(
@@ -41,8 +41,8 @@ export function HomeFeed() {
   const visiblePosts = feedPosts.slice(0, visibleCount);
   const hasMore = feedPosts.length > visibleCount;
 
-  const handleToggleTag = (tag: FeedTag) => {
-    setSelectedTags((prev) => toggleTag(prev, tag, FEED_TAGS));
+  const handleToggleTag = (tag: string) => {
+    setSelectedTags((prev) => toggleTag(prev, tag));
     setVisibleCount(FEED_PAGE_SIZE);
   };
 
@@ -55,32 +55,34 @@ export function HomeFeed() {
         </Typography>
       </Stack>
 
-      <Box
-        sx={{
-          mb: 4,
-          gap: 1,
-          display: "flex",
-          flexWrap: { xs: "nowrap", sm: "wrap" },
-          overflowX: { xs: "auto", sm: "visible" },
-          justifyContent: { sm: "center" },
-          pb: { xs: 1, sm: 0 },
-        }}
-      >
-        {FEED_TAGS.map((tag) => {
-          const active = selectedTags.includes(tag);
-          return (
-            <Chip
-              key={tag}
-              label={tag}
-              clickable
-              onClick={() => handleToggleTag(tag)}
-              color={active ? "primary" : "default"}
-              variant={active ? "filled" : "outlined"}
-              sx={{ flexShrink: 0, minHeight: 44 }}
-            />
-          );
-        })}
-      </Box>
+      {feedTags.length > 0 && (
+        <Box
+          sx={{
+            mb: 4,
+            gap: 1,
+            display: "flex",
+            flexWrap: { xs: "nowrap", sm: "wrap" },
+            overflowX: { xs: "auto", sm: "visible" },
+            justifyContent: { sm: "center" },
+            pb: { xs: 1, sm: 0 },
+          }}
+        >
+          {feedTags.map((tag) => {
+            const active = selectedTags.includes(tag);
+            return (
+              <Chip
+                key={tag}
+                label={tag}
+                clickable
+                onClick={() => handleToggleTag(tag)}
+                color={active ? "primary" : "default"}
+                variant={active ? "filled" : "outlined"}
+                sx={{ flexShrink: 0, minHeight: 44 }}
+              />
+            );
+          })}
+        </Box>
+      )}
 
       {!postsLoading && visiblePosts.length === 0 ? (
         <Typography

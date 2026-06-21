@@ -6,7 +6,11 @@ import { EmptyContent } from "src/components/empty-content";
 
 import { NewsList } from "../news-list";
 import { NewsSectionBar } from "../news-section-bar";
-import { filterPostsByCategory, DEFAULT_NEWS_CATEGORY } from "../utils";
+import {
+  availableCategories,
+  filterPostsByCategory,
+  DEFAULT_NEWS_CATEGORY,
+} from "../utils";
 
 import type { NewsCategory } from "../types";
 import type { NewsListViewProps } from "./types";
@@ -23,9 +27,17 @@ export function NewsListView({ posts }: NewsListViewProps) {
     DEFAULT_NEWS_CATEGORY,
   );
 
+  // Only рубрики that actually have posts are shown (+«Главное»). If the active
+  // one isn't among them (e.g. its last post was removed), fall back to «Главное».
+  const categories = useMemo(() => availableCategories(posts), [posts]);
+
+  const safeActive = categories.includes(activeCategory)
+    ? activeCategory
+    : DEFAULT_NEWS_CATEGORY;
+
   const filteredPosts = useMemo(
-    () => filterPostsByCategory(posts, activeCategory),
-    [posts, activeCategory],
+    () => filterPostsByCategory(posts, safeActive),
+    [posts, safeActive],
   );
 
   // Only the per-рубрика empty state lives here; an entirely empty feed is
@@ -34,7 +46,11 @@ export function NewsListView({ posts }: NewsListViewProps) {
 
   return (
     <Container sx={{ py: { xs: 5, md: 8 } }}>
-      <NewsSectionBar active={activeCategory} onSelect={setActiveCategory} />
+      <NewsSectionBar
+        categories={categories}
+        active={safeActive}
+        onSelect={setActiveCategory}
+      />
 
       {showCategoryEmptyState ? (
         <EmptyContent

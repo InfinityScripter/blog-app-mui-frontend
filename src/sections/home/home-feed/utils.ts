@@ -1,6 +1,6 @@
 import type { Post } from "src/types/domain";
 
-import type { FeedTag } from "./const";
+import { PUBLISH_STATUS } from "src/types/domain";
 
 // ----------------------------------------------------------------------
 
@@ -15,11 +15,10 @@ function postHasTag(post: Post, tag: string): boolean {
  * the selected tags (OR semantics — matches how chip multi-select reads). An
  * empty selection means "no tag filter".
  */
-export function selectFeedPosts(
-  posts: Post[],
-  selectedTags: FeedTag[],
-): Post[] {
-  const published = posts.filter((post) => post.publish === "published");
+export function selectFeedPosts(posts: Post[], selectedTags: string[]): Post[] {
+  const published = posts.filter(
+    (post) => post.publish === PUBLISH_STATUS.published,
+  );
 
   const filtered =
     selectedTags.length === 0
@@ -35,14 +34,9 @@ export function selectFeedPosts(
   });
 }
 
-/** Toggle a tag in/out of the selected set, preserving FEED_TAGS order. */
-export function toggleTag(
-  selected: FeedTag[],
-  tag: FeedTag,
-  allTags: readonly FeedTag[],
-): FeedTag[] {
-  const next = selected.includes(tag)
+/** Toggle a tag in/out of the selected set. */
+export function toggleTag(selected: string[], tag: string): string[] {
+  return selected.includes(tag)
     ? selected.filter((t) => t !== tag)
     : [...selected, tag];
-  return allTags.filter((t) => next.includes(t));
 }

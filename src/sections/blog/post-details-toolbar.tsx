@@ -6,6 +6,7 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
+import { PUBLISH_STATUS } from "src/types/domain";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
 import { usePostDelete } from "src/hooks/use-post-delete";
@@ -58,7 +59,7 @@ export function PostDetailsToolbar({
 
         <Box sx={{ flexGrow: 1 }} />
 
-        {publish === "published" && (
+        {publish === PUBLISH_STATUS.published && (
           <Tooltip title="Просмотреть">
             <IconButton component={RouterLink} href={liveLink}>
               <Iconify icon="eva:external-link-fill" />
@@ -107,10 +108,10 @@ export function PostDetailsToolbar({
                 onChangePublish(option.value);
               }}
             >
-              {option.value === "published" && (
+              {option.value === PUBLISH_STATUS.published && (
                 <Iconify icon="eva:cloud-upload-fill" />
               )}
-              {option.value === "draft" && (
+              {option.value === PUBLISH_STATUS.draft && (
                 <Iconify icon="solar:file-text-bold" />
               )}
               {option.label}

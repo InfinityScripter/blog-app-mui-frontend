@@ -3,8 +3,6 @@ import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
-import { NEWS_CATEGORIES } from "./const";
-
 import type { NewsSectionBarProps } from "./types";
 
 // ----------------------------------------------------------------------
@@ -14,7 +12,11 @@ import type { NewsSectionBarProps } from "./types";
  * thick bottom rule. Each рубрика is a clickable filter; the active one is
  * highlighted. Presentational only — selection state lives in the view.
  */
-export function NewsSectionBar({ active, onSelect }: NewsSectionBarProps) {
+export function NewsSectionBar({
+  categories,
+  active,
+  onSelect,
+}: NewsSectionBarProps) {
   return (
     <Box
       sx={{
@@ -40,7 +42,7 @@ export function NewsSectionBar({ active, onSelect }: NewsSectionBarProps) {
           typography: "body2",
         }}
       >
-        {NEWS_CATEGORIES.map((category) => {
+        {categories.map((category) => {
           const selected = category === active;
           return (
             <Box

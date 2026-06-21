@@ -1,14 +1,14 @@
 import type { Post, PublishStatus } from "src/types/domain";
-import type { FeedTag } from "src/sections/home/home-feed/const";
 
 import { orderBy } from "src/utils/helper";
+import { PUBLISH_STATUS } from "src/types/domain";
 
 import type { SortablePost } from "./types";
 
 // ----------------------------------------------------------------------
 
 export function isPublishStatus(value: string): value is PublishStatus {
-  return value === "draft" || value === "published";
+  return value === PUBLISH_STATUS.draft || value === PUBLISH_STATUS.published;
 }
 
 // ----------------------------------------------------------------------
@@ -20,10 +20,10 @@ export const applyHomeFilter = ({
 }: {
   inputData: Post[];
   sortBy: string;
-  selectedTags: FeedTag[];
+  selectedTags: string[];
 }): Post[] => {
   let publishedPosts: SortablePost[] = inputData
-    .filter((post) => post.publish === "published")
+    .filter((post) => post.publish === PUBLISH_STATUS.published)
     .map((post) => ({ ...post }));
 
   if (selectedTags.length > 0) {

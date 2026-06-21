@@ -1,7 +1,5 @@
 "use client";
 
-import type { FeedTag } from "src/sections/home/home-feed/const";
-
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
@@ -12,8 +10,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useSearchPosts } from "src/actions/blog";
 import { useDebounce } from "src/hooks/use-debounce";
-import { FEED_TAGS } from "src/sections/home/home-feed/const";
-import { toggleTag } from "src/sections/home/home-feed/utils";
+import { toggleTag, useFeedTags } from "src/sections/home/home-feed";
 
 import { PostList } from "../post-list";
 import { PostSort } from "../post-sort";
@@ -29,7 +26,9 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [selectedTags, setSelectedTags] = useState<FeedTag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  const feedTags = useFeedTags(posts);
 
   const debouncedQuery = useDebounce(searchQuery);
 
@@ -49,8 +48,8 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
     setSearchQuery(inputValue);
   }, []);
 
-  const handleToggleTag = useCallback((tag: FeedTag) => {
-    setSelectedTags((prev) => toggleTag(prev, tag, FEED_TAGS));
+  const handleToggleTag = useCallback((tag: string) => {
+    setSelectedTags((prev) => toggleTag(prev, tag));
   }, []);
 
   return (
@@ -81,31 +80,33 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
         />
       </Stack>
 
-      <Box
-        sx={{
-          mb: { xs: 3, md: 5 },
-          gap: 1,
-          display: "flex",
-          flexWrap: { xs: "nowrap", sm: "wrap" },
-          overflowX: { xs: "auto", sm: "visible" },
-          pb: { xs: 1, sm: 0 },
-        }}
-      >
-        {FEED_TAGS.map((tag) => {
-          const active = selectedTags.includes(tag);
-          return (
-            <Chip
-              key={tag}
-              label={tag}
-              clickable
-              onClick={() => handleToggleTag(tag)}
-              color={active ? "primary" : "default"}
-              variant={active ? "filled" : "outlined"}
-              sx={{ flexShrink: 0, minHeight: 44 }}
-            />
-          );
-        })}
-      </Box>
+      {feedTags.length > 0 && (
+        <Box
+          sx={{
+            mb: { xs: 3, md: 5 },
+            gap: 1,
+            display: "flex",
+            flexWrap: { xs: "nowrap", sm: "wrap" },
+            overflowX: { xs: "auto", sm: "visible" },
+            pb: { xs: 1, sm: 0 },
+          }}
+        >
+          {feedTags.map((tag) => {
+            const active = selectedTags.includes(tag);
+            return (
+              <Chip
+                key={tag}
+                label={tag}
+                clickable
+                onClick={() => handleToggleTag(tag)}
+                color={active ? "primary" : "default"}
+                variant={active ? "filled" : "outlined"}
+                sx={{ flexShrink: 0, minHeight: 44 }}
+              />
+            );
+          })}
+        </Box>
+      )}
 
       <PostList posts={dataFiltered} />
     </Container>

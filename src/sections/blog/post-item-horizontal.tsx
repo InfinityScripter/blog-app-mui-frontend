@@ -15,6 +15,7 @@ import { fDate } from "src/utils/format-time";
 import { coverSrc } from "src/utils/cover-src";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
+import { PUBLISH_STATUS } from "src/types/domain";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
@@ -87,7 +88,9 @@ export function PostItemHorizontal({ post }: { post: Post }) {
           >
             <Label
               variant="soft"
-              color={(publish === "published" && "info") || "default"}
+              color={
+                (publish === PUBLISH_STATUS.published && "info") || "default"
+              }
             >
               {publish}
             </Label>

@@ -38,6 +38,8 @@ export interface NewsListProps {
 }
 
 export interface NewsSectionBarProps {
+  /** Рубрики to render, in display order — only ones that have posts (+«Главное»). */
+  categories: NewsCategory[];
   /** Currently selected рубрика — gets the filled, primary-colored treatment. */
   active: NewsCategory;
   /** Fired when a рубрика is clicked or activated via keyboard. */

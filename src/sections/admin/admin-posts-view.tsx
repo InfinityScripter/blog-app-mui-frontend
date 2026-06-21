@@ -6,6 +6,7 @@ import { paths } from "src/routes/paths";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
+import { PUBLISH_STATUS } from "src/types/domain";
 import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
 import {
   Box,
@@ -82,7 +83,11 @@ export function AdminPostsView() {
                   <TableCell>
                     <Chip
                       label={p.publish}
-                      color={p.publish === "published" ? "success" : "default"}
+                      color={
+                        p.publish === PUBLISH_STATUS.published
+                          ? "success"
+                          : "default"
+                      }
                       size="small"
                     />
                   </TableCell>

@@ -1,6 +1,17 @@
 import type { ReactNode } from "react";
 
-export type PublishStatus = "draft" | "published";
+/**
+ * Allowed values for a post's `publish` field. Use `PUBLISH_STATUS.published` /
+ * `PUBLISH_STATUS.draft` instead of bare string literals so the union stays the
+ * single source of truth (no hardcoded "published"/"draft" scattered around).
+ */
+export const PUBLISH_STATUS = {
+  draft: "draft",
+  published: "published",
+} as const;
+
+export type PublishStatus =
+  (typeof PUBLISH_STATUS)[keyof typeof PUBLISH_STATUS];
 
 export interface ReplyComment {
   id: string;
