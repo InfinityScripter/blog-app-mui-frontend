@@ -46,9 +46,9 @@ export const PortfolioHero = () => (
             align="center"
             sx={marketingHeroLeadSx}
           >
-            Михаил Талалаев · Frontend / Web — React, Next.js, TypeScript. 13+
-            лет в IT: проектирую и поставляю продукты в прод от архитектуры до
-            релиза.
+            Михаил Талалаев · 13+ лет в IT. Проектирую и поставляю продукты в
+            прод — от архитектуры до релиза. Сильная сторона — фронтенд: React,
+            Next.js, TypeScript.
           </Typography>
         </m.div>
 

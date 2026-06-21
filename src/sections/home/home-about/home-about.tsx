@@ -1,9 +1,11 @@
 import { m } from "framer-motion";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { alpha, useTheme } from "@mui/material/styles";
 import { varFade, MotionViewport } from "src/components/animate";
 
 import { ABOUT_TITLE, ABOUT_PROFILE, ABOUT_PARAGRAPHS } from "./const";
@@ -11,8 +13,6 @@ import { ABOUT_TITLE, ABOUT_PROFILE, ABOUT_PARAGRAPHS } from "./const";
 // ----------------------------------------------------------------------
 
 export function HomeAbout() {
-  const theme = useTheme();
-
   return (
     <Container
       component={MotionViewport}
@@ -20,101 +20,62 @@ export function HomeAbout() {
         py: { xs: 5, md: 10 },
       }}
     >
-      <Box
-        sx={{
-          gap: 3,
-          display: "grid",
-          alignItems: "center",
-          gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
-        }}
-      >
-        {/* Left side - Image */}
-        <Box>
-          <m.div variants={varFade().inUp}>
-            <Card
+      <Box sx={{ maxWidth: 760, mx: "auto" }}>
+        {/* Profile header — компактный, без огромного фото */}
+        <m.div variants={varFade().inUp}>
+          <Stack
+            direction="row"
+            spacing={2.5}
+            alignItems="center"
+            sx={{ mb: 4 }}
+          >
+            <Avatar
+              src={ABOUT_PROFILE.imageSrc}
+              alt={ABOUT_PROFILE.imageAlt}
               sx={{
-                p: 2,
-                borderRadius: 2,
-                boxShadow: theme.shadows[24],
-                position: "relative",
-                overflow: "hidden",
+                width: { xs: 72, md: 88 },
+                height: { xs: 72, md: 88 },
+                boxShadow: (theme) => theme.customShadows.z8,
               }}
-            >
-              <Box
-                component="img"
-                src={ABOUT_PROFILE.imageSrc}
-                alt={ABOUT_PROFILE.imageAlt}
-                loading="lazy"
-                sx={{
-                  width: "100%",
-                  height: "auto",
-                  borderRadius: 1,
-                  transition: "transform 200ms cubic-bezier(0.23, 1, 0.32, 1)",
-                  "@media (hover: hover) and (pointer: fine)": {
-                    "&:hover": {
-                      transform: "scale(1.05)",
-                    },
-                  },
-                }}
+            />
+
+            <Box>
+              <Typography variant="h5">{ABOUT_PROFILE.name}</Typography>
+              <Chip
+                label={ABOUT_PROFILE.role}
+                size="small"
+                color="primary"
+                variant="soft"
+                sx={{ mt: 0.5 }}
               />
-              <Box
+            </Box>
+          </Stack>
+        </m.div>
+
+        <m.div variants={varFade().inUp}>
+          <Typography variant="h3" sx={{ mb: 1 }}>
+            {ABOUT_TITLE}
+          </Typography>
+        </m.div>
+
+        <m.div variants={varFade().inUp}>
+          <Divider sx={{ mb: 3 }} />
+        </m.div>
+
+        <Stack spacing={2.5}>
+          {ABOUT_PARAGRAPHS.map((paragraph, index) => (
+            <m.div key={index} variants={varFade().inUp}>
+              <Typography
                 sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  p: 2,
-                  bgcolor: alpha(theme.palette.background.default, 0.8),
-                  backdropFilter: "blur(8px)",
+                  color: "text.secondary",
+                  typography: "body1",
                 }}
               >
-                <Typography variant="h5">{ABOUT_PROFILE.name}</Typography>
-                <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                  {ABOUT_PROFILE.role}
-                </Typography>
-              </Box>
-            </Card>
-          </m.div>
-        </Box>
-
-        {/* Right side - Content */}
-        <Box>
-          <m.div variants={varFade().inUp}>
-            <Typography variant="h2" sx={{ mb: 3 }}>
-              {ABOUT_TITLE}
-            </Typography>
-
-            <Typography
-              sx={{
-                color: "text.secondary",
-                mb: 3,
-                typography: "body1",
-              }}
-            >
-              {ABOUT_PARAGRAPHS[0]}
-            </Typography>
-
-            <Typography
-              sx={{
-                color: "text.secondary",
-                mb: 3,
-                typography: "body1",
-              }}
-            >
-              {ABOUT_PARAGRAPHS[1]}
-            </Typography>
-
-            <Typography
-              sx={{
-                color: "text.secondary",
-                mb: 4,
-                typography: "body1",
-              }}
-            >
-              {ABOUT_PARAGRAPHS[2]}
-            </Typography>
-          </m.div>
-        </Box>
+                {paragraph}
+              </Typography>
+            </m.div>
+          ))}
+        </Stack>
       </Box>
     </Container>
   );
