@@ -14,7 +14,7 @@ export const navData = [
     icon: <Iconify width={22} icon="solar:notebook-bold-duotone" />,
   },
   {
-    title: "Портфолио",
+    title: "Обо мне",
     path: "/portfolio",
     icon: <Iconify width={22} icon="solar:user-circle-bold-duotone" />,
   },
