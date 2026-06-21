@@ -5,6 +5,7 @@ export function modelFamily(model: string): string {
   if (m.includes("haiku")) return "haiku";
   if (m.includes("synthetic")) return "synthetic";
   if (m.includes("gpt-4o")) return "gpt-4o";
+  if (m.includes("gpt-5") || m.includes("gpt5")) return "gpt-5";
   if (m.startsWith("o3") || m.includes("/o3")) return "o3";
   if (m.startsWith("o1") || m.includes("/o1")) return "o1";
   if (m.includes("codex")) return "codex";

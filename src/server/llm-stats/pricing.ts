@@ -7,6 +7,7 @@ export const PRICE_TABLE: PriceTable = {
   sonnet: { in: 3, out: 15, cacheRead: 0.3, cacheWrite: 3.75 },
   haiku: { in: 0.8, out: 4, cacheRead: 0.08, cacheWrite: 1 },
   "gpt-4o": { in: 2.5, out: 10, cacheRead: 1.25, cacheWrite: 0 },
+  "gpt-5": { in: 1.25, out: 10, cacheRead: 0.125, cacheWrite: 0 },
   o3: { in: 2, out: 8, cacheRead: 0.5, cacheWrite: 0 },
   o1: { in: 15, out: 60, cacheRead: 7.5, cacheWrite: 0 },
   codex: { in: 1.5, out: 6, cacheRead: 0.375, cacheWrite: 0 },
