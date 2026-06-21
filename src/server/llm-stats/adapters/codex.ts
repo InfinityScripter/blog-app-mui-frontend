@@ -1,9 +1,11 @@
+import type { Cache } from "src/server/llm-stats/cache";
 import type { UsageEvent } from "src/server/llm-stats/types";
 
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { costFor } from "src/server/llm-stats/pricing";
+import { cachedScan } from "src/server/llm-stats/cache";
 import {
   dateParts,
   projectOf,
@@ -107,6 +109,7 @@ function tokenEvent(o: CodexLine, state: FileState): UsageEvent | null {
     skill: null,
     mcpTool: null,
     agent: null,
+    messageId: null,
   };
   return { ...base, costUsd: costFor(base) };
 }
@@ -139,6 +142,7 @@ function scanFile(file: string): UsageEvent[] {
   return final.events;
 }
 
-export function scanCodex(root: string = CODEX_ROOT): UsageEvent[] {
-  return findRolloutFiles(root).flatMap(scanFile);
+export function scanCodex(root: string, cache?: Cache): UsageEvent[] {
+  const files = findRolloutFiles(root);
+  return cache ? cachedScan(files, scanFile, cache) : files.flatMap(scanFile);
 }

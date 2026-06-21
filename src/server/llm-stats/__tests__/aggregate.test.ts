@@ -25,6 +25,7 @@ function evt(p: Partial<UsageEvent>): UsageEvent {
     skill: null,
     mcpTool: null,
     agent: null,
+    messageId: null,
     ...p,
   };
 }

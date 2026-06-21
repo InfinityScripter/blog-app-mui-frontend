@@ -8,6 +8,12 @@ import {
   scanOpenCode,
 } from "src/server/llm-stats/adapters/opencode";
 import {
+  loadCache,
+  saveCache,
+  pruneCache,
+  CACHE_FILE,
+} from "src/server/llm-stats/cache";
+import {
   CLAUDE_ROOT,
   scanClaudeCode,
 } from "src/server/llm-stats/adapters/claude-code";
@@ -16,6 +22,8 @@ export interface ScanRoots {
   claudeRoot?: string;
   codexRoot?: string;
   opencodeDb?: string;
+  cacheFile?: string;
+  useCache?: boolean;
 }
 
 export interface ScanResult {
@@ -32,6 +40,15 @@ function countFiles(root: string, ext: string): number {
     if (fs.statSync(full).isDirectory()) return n + countFiles(full, ext);
     return name.endsWith(ext) ? n + 1 : n;
   }, 0);
+}
+
+function listJsonl(root: string): string[] {
+  if (!fs.existsSync(root)) return [];
+  return fs.readdirSync(root).flatMap((name) => {
+    const full = path.join(root, name);
+    if (fs.statSync(full).isDirectory()) return listJsonl(full);
+    return name.endsWith(".jsonl") ? [full] : [];
+  });
 }
 
 interface AdapterResult {
@@ -65,26 +82,46 @@ export function runAdapters(roots: ScanRoots = {}): ScanResult {
   const codexRoot = roots.codexRoot ?? CODEX_ROOT;
   const opencodeDb = roots.opencodeDb ?? OPENCODE_DB;
 
+  // One shared incremental cache: unchanged files reuse parsed events, only
+  // new/modified files are reparsed. On by default (the route relies on it);
+  // tests pass roots.useCache === false to scan fixtures without touching disk.
+  const cacheFile = roots.cacheFile ?? CACHE_FILE;
+  const useCache = roots.useCache !== false;
+  const cache = useCache ? loadCache(cacheFile) : undefined;
+
   const results: AdapterResult[] = [
     runOne(
       fs.existsSync(claudeRoot),
       "claude-code",
-      () => scanClaudeCode(claudeRoot),
+      () => scanClaudeCode(claudeRoot, cache),
       () => countFiles(claudeRoot, ".jsonl"),
     ),
     runOne(
       fs.existsSync(codexRoot),
       "codex",
-      () => scanCodex(codexRoot),
+      () => scanCodex(codexRoot, cache),
       () => countFiles(codexRoot, ".jsonl"),
     ),
     runOne(
       fs.existsSync(opencodeDb),
       "opencode",
-      () => scanOpenCode(opencodeDb),
+      () => scanOpenCode(opencodeDb, cache),
       () => 1,
     ),
   ];
+
+  if (cache) {
+    // Prune entries for source files that vanished since the last scan, then
+    // persist. Prune uses the union of all adapters' live files so no adapter's
+    // entries get evicted by another's scan.
+    const live = [
+      ...listJsonl(claudeRoot),
+      ...listJsonl(codexRoot),
+      ...(fs.existsSync(opencodeDb) ? [opencodeDb] : []),
+    ];
+    pruneCache(cache, live);
+    saveCache(cache, cacheFile);
+  }
 
   return {
     events: results.flatMap((r) => r.events),

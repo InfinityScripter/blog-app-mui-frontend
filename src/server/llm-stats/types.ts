@@ -29,6 +29,9 @@ export interface UsageEvent {
   skill: string | null;
   mcpTool: string | null;
   agent: string | null;
+  // Provider message id, when the source exposes one (Claude Code). Used to dedup
+  // the same assistant message replayed across files (e.g. subagent transcripts).
+  messageId: string | null;
 }
 
 export interface PriceRow {

@@ -1,9 +1,11 @@
+import type { Cache } from "src/server/llm-stats/cache";
 import type { UsageEvent } from "src/server/llm-stats/types";
 
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { costFor } from "src/server/llm-stats/pricing";
+import { cachedScan } from "src/server/llm-stats/cache";
 import {
   dateParts,
   projectOf,
@@ -87,26 +89,37 @@ function toEvent(o: CcLine): UsageEvent {
     skill: o.attributionSkill ?? null,
     mcpTool: o.attributionMcpTool ?? null,
     agent: o.attributionAgent ?? null,
+    messageId: o.message?.id ?? null,
   };
   return { ...base, costUsd: costFor(base) };
 }
 
-export function scanClaudeCode(root: string = CLAUDE_ROOT): UsageEvent[] {
-  const seen = new Set<string>();
-  const lines = findJsonlFiles(root).flatMap((file) =>
-    fs
-      .readFileSync(file, "utf8")
-      .split("\n")
-      .map(parseLine)
-      .filter(isUsageLine),
-  );
-  return lines
-    .filter((o) => {
-      const id = o.message?.id;
-      if (!id) return true;
-      if (seen.has(id)) return false;
-      seen.add(id);
-      return true;
-    })
+function parseClaudeFile(file: string): UsageEvent[] {
+  return fs
+    .readFileSync(file, "utf8")
+    .split("\n")
+    .map(parseLine)
+    .filter(isUsageLine)
     .map(toEvent);
+}
+
+// Dedup the same assistant message replayed across files (subagent transcripts
+// replay the parent's messages). Key on message.id, which is carried on the
+// event and survives the cache round-trip. Events without an id (rare) are kept.
+function dedupEvents(events: UsageEvent[]): UsageEvent[] {
+  const seen = new Set<string>();
+  return events.filter((e) => {
+    if (!e.messageId) return true;
+    if (seen.has(e.messageId)) return false;
+    seen.add(e.messageId);
+    return true;
+  });
+}
+
+export function scanClaudeCode(root: string, cache?: Cache): UsageEvent[] {
+  const files = findJsonlFiles(root);
+  const raw = cache
+    ? cachedScan(files, parseClaudeFile, cache)
+    : files.flatMap(parseClaudeFile);
+  return dedupEvents(raw);
 }

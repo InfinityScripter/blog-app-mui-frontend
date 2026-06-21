@@ -1,3 +1,4 @@
+import type { Cache } from "src/server/llm-stats/cache";
 import type { UsageEvent } from "src/server/llm-stats/types";
 
 import fs from "node:fs";
@@ -5,6 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import Database from "better-sqlite3";
 import { costFor } from "src/server/llm-stats/pricing";
+import { cachedScan } from "src/server/llm-stats/cache";
 import {
   dateParts,
   projectOf,
@@ -70,12 +72,12 @@ function toEvent(m: OcMessage): UsageEvent {
     skill: null,
     mcpTool: null,
     agent: null,
+    messageId: null,
   };
   return { ...base, costUsd: costFor(base) };
 }
 
-export function scanOpenCode(dbPath: string = OPENCODE_DB): UsageEvent[] {
-  if (!fs.existsSync(dbPath)) return [];
+function parseDb(dbPath: string): UsageEvent[] {
   const db = new Database(dbPath, { readonly: true, fileMustExist: true });
   try {
     const rows = db.prepare("SELECT data FROM message").all() as {
@@ -88,4 +90,12 @@ export function scanOpenCode(dbPath: string = OPENCODE_DB): UsageEvent[] {
   } finally {
     db.close();
   }
+}
+
+export function scanOpenCode(dbPath: string, cache?: Cache): UsageEvent[] {
+  if (!fs.existsSync(dbPath)) return [];
+  // Single sqlite file: cache keyed on its own mtime+size. The whole db is one
+  // "file" to cachedScan; if it grew, reparse it all (re-reading sqlite is cheap
+  // vs. 700 jsonl files, and per-row caching isn't worth the complexity).
+  return cache ? cachedScan([dbPath], parseDb, cache) : parseDb(dbPath);
 }
