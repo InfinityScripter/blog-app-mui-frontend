@@ -10,13 +10,12 @@ import { paths } from "src/routes/paths";
 import { maxLine } from "src/theme/styles";
 import { Image } from "src/components/image";
 import { fToNow } from "src/utils/format-time";
+import { coverSrc } from "src/utils/cover-src";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
-
-import { formatImageUrl } from "../../utils/format-image-url";
 
 // ----------------------------------------------------------------------
 
@@ -45,7 +44,7 @@ export function PostItemFeed({ post }: PostItemFeedProps) {
   const href = paths.post.details(post.id ?? "");
   const readingTime = getReadingTime(content);
   const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
-  const coverSrc = coverUrl ? formatImageUrl(coverUrl) : "";
+  const cover = coverSrc(coverUrl, String(post._id ?? post.id ?? title));
 
   return (
     <Card sx={{ display: "flex" }}>
@@ -91,24 +90,18 @@ export function PostItemFeed({ post }: PostItemFeedProps) {
         </Box>
       </Stack>
 
-      {coverSrc && (
-        <Box
-          sx={{
-            p: 1,
-            width: 200,
-            height: 180,
-            flexShrink: 0,
-            position: "relative",
-            display: { xs: "none", sm: "block" },
-          }}
-        >
-          <Image
-            alt={title}
-            src={coverSrc}
-            sx={{ height: 1, borderRadius: 1.5 }}
-          />
-        </Box>
-      )}
+      <Box
+        sx={{
+          p: 1,
+          width: 200,
+          height: 180,
+          flexShrink: 0,
+          position: "relative",
+          display: { xs: "none", sm: "block" },
+        }}
+      >
+        <Image alt={title} src={cover} sx={{ height: 1, borderRadius: 1.5 }} />
+      </Box>
     </Card>
   );
 }

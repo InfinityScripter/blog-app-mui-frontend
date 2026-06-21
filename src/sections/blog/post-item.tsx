@@ -56,7 +56,14 @@ export function PostItem({ post }: { post: Post }) {
           }}
         />
 
-        <Image alt={post.title} src={coverSrc(post.coverUrl)} ratio="4/3" />
+        <Image
+          alt={post.title}
+          src={coverSrc(
+            post.coverUrl,
+            String(post._id ?? post.id ?? post.title),
+          )}
+          ratio="4/3"
+        />
       </Box>
 
       <CardContent sx={{ pt: 6 }}>
@@ -123,7 +130,7 @@ export function PostItemLatest({ post, index }: { post: Post; index: number }) {
 
       <Image
         alt={post.title}
-        src={coverSrc(post.coverUrl)}
+        src={coverSrc(post.coverUrl, String(post._id ?? post.id ?? post.title))}
         ratio="4/3"
         // The first featured cover is the LCP element on the blog list — load
         // it eagerly instead of lazily so it doesn't gate Largest Contentful

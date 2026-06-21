@@ -6,7 +6,6 @@ export const PROJECTS: HomeProject[] = [
     description:
       "Полнофункциональная блог-платформа с компонентами Material UI, аутентификацией пользователей и адаптивным дизайном.",
     icon: "mdi:blog",
-    iconColor: "primary.main",
     link: "https://github.com/InfinityScripter/blog-app-mui-frontend",
     demoLink: "https://talalaev.su/post",
     tech: ["React", "Material UI", "Node.js"],
@@ -22,7 +21,6 @@ export const PROJECTS: HomeProject[] = [
     description:
       "Интерактивное погодное приложение с данными о погоде в реальном времени, прогнозами и поиском по местоположению.",
     icon: "mdi:weather-partly-cloudy",
-    iconColor: "primary.main",
     link: "https://github.com/InfinityScripter/weather-app",
     demoLink: "https://weather-app-blue-nine-95.vercel.app/",
     tech: ["React", "Weather API", "CSS"],
@@ -38,7 +36,6 @@ export const PROJECTS: HomeProject[] = [
     description:
       "Современная панель администратора, созданная с использованием Next.js, с аналитикой, управлением пользователями и визуализацией данных.",
     icon: "mdi:chart-box",
-    iconColor: "primary.main",
     link: "https://github.com/InfinityScripter/dashboard-next-js",
     demoLink: "https://dashboard-plum-zeta-47.vercel.app/",
     tech: ["Next.js", "Material UI", "Chart.js"],

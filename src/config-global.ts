@@ -50,7 +50,7 @@ interface Config {
 
 export const CONFIG: Config = {
   site: {
-    name: "Minimals",
+    name: "Mihail Talalaev",
     serverUrl: process.env.NEXT_PUBLIC_SERVER_URL ?? "",
     assetURL: process.env.NEXT_PUBLIC_ASSET_URL ?? "",
     basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",

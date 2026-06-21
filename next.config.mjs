@@ -19,6 +19,10 @@ const nextConfig = {
   pageExtensions,
   trailingSlash: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  // better-sqlite3 is a native module used only by the local-only LLM-stats
+  // route (/api/llm-stats). Keep it external so Next doesn't try to bundle the
+  // .node binary into the serverless output (which fails the Vercel build).
+  serverExternalPackages: ["better-sqlite3"],
   env: {
     BUILD_STATIC_EXPORT: isStaticExport,
   },
