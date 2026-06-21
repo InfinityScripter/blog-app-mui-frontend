@@ -19,7 +19,12 @@ import {
   marketingHeroTintBandSx,
 } from "src/theme/styles";
 
-import { PORTFOLIO_METRICS } from "./const";
+import {
+  CV_URL,
+  GITHUB_URL,
+  CV_DOWNLOAD_NAME,
+  PORTFOLIO_METRICS,
+} from "./const";
 
 // ----------------------------------------------------------------------
 
@@ -29,10 +34,8 @@ export const PortfolioHero = () => (
       <Stack spacing={4} alignItems="center">
         <m.div variants={varFade().inDown}>
           <Typography variant="h1" align="center">
-            Портфолио и{" "}
-            <MarketingGradientHighlight>
-              практический опыт
-            </MarketingGradientHighlight>
+            Software{" "}
+            <MarketingGradientHighlight>Engineer</MarketingGradientHighlight>
           </Typography>
         </m.div>
 
@@ -43,30 +46,32 @@ export const PortfolioHero = () => (
             align="center"
             sx={marketingHeroLeadSx}
           >
-            Отдельная страница с практическим опытом, проектами и
-            технологическим стеком. Главная теперь сфокусирована на блоге.
+            Михаил Талалаев · Frontend / Web — React, Next.js, TypeScript. 13+
+            лет в IT: проектирую и поставляю продукты в прод от архитектуры до
+            релиза.
           </Typography>
         </m.div>
 
         <Box sx={marketingHeroCtaRowSx}>
           <m.div variants={varFade({ distance: 24 }).inUp}>
             <Button
-              component={Link}
-              href="/post"
+              component="a"
+              href={CV_URL}
+              download={CV_DOWNLOAD_NAME}
               color="primary"
               size="large"
               variant="contained"
               startIcon={
-                <Iconify width={24} icon="mdi:newspaper-variant-outline" />
+                <Iconify width={24} icon="solar:download-minimalistic-bold" />
               }
             >
-              Перейти к статьям
+              Скачать резюме
             </Button>
           </m.div>
           <m.div variants={varFade({ distance: 24 }).inUp}>
             <Button
               component={Link}
-              href="https://github.com/InfinityScripter"
+              href={GITHUB_URL}
               target="_blank"
               rel="noopener"
               color="primary"

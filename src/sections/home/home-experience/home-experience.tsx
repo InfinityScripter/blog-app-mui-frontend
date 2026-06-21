@@ -81,7 +81,7 @@ export function HomeExperience() {
 
         <m.div variants={varFade().inDown}>
           <Typography sx={{ color: "text.secondary" }}>
-            Мой профессиональный путь как веб-разработчика
+            Мой профессиональный путь в разработке
           </Typography>
         </m.div>
       </Stack>
