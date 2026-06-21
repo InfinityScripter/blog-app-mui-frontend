@@ -2,7 +2,7 @@ import type { AboutHighlight } from "./types";
 
 export const ABOUT_PROFILE = {
   name: "Михаил Талалаев",
-  role: "Frontend Engineer",
+  role: "Software Engineer",
   email: "talalaev.misha@gmail.com",
   imageSrc: "/assets/images/about/developer.webp",
   imageAlt: "Михаил Талалаев",
@@ -12,7 +12,7 @@ export const ABOUT_TITLE = "Обо мне";
 
 /** Один сжатый абзац вместо трёх — лаконично и по делу. */
 export const ABOUT_LEAD =
-  "Frontend-инженер с 13+ годами в IT. Проектирую и развиваю продуктовые веб-интерфейсы на React, TypeScript и Next.js — с фокусом на производительность, чистую архитектуру и понятный DX.";
+  "Software Engineer с 13+ годами в IT. Веду продукт через весь цикл — от проектирования архитектуры до поставки в прод. Сильная сторона — фронтенд (React, Next.js, TypeScript); уверенно работаю с backend (Node.js, PostgreSQL) и инфраструктурой (Docker, CI/CD).";
 
 /** Сканируемые «факты» — заменяют длинные абзацы. */
 export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [

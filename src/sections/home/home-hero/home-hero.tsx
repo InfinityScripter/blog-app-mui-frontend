@@ -154,7 +154,7 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
             <Iconify width={24} icon="solar:user-circle-bold-duotone" />
           }
         >
-          Портфолио
+          Обо мне
         </Button>
       </MInview>
       <MInview>

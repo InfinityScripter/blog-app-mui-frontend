@@ -103,8 +103,8 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                 [theme.breakpoints.up(layoutQuery)]: { mx: "unset" },
               }}
             >
-              Блог и портфолио по frontend-разработке. Для связи удобнее всего
-              использовать соцсети ниже.
+              Блог и заметки о разработке. Для связи удобнее всего использовать
+              соцсети ниже.
             </Typography>
 
             <Stack

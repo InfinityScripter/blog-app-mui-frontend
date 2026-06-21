@@ -2,7 +2,7 @@
 
 import { HomeAbout } from "src/sections/home/home-about";
 import { HomeSkills } from "src/sections/home/home-skills";
-import { HomeProjects } from "src/sections/home/home-projects";
+import { HomeContact } from "src/sections/home/home-contact";
 import { HomeExperience } from "src/sections/home/home-experience";
 
 import { PortfolioHero } from "./portfolio-hero";
@@ -14,10 +14,10 @@ export function PortfolioView() {
     <>
       <PortfolioHero />
 
+      <HomeContact />
       <HomeAbout />
       <HomeSkills />
       <HomeExperience />
-      <HomeProjects />
     </>
   );
 }
