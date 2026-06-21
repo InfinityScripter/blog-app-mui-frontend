@@ -7,8 +7,7 @@ const FONT_URLS: Record<string, string> = {
     "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
   Roboto:
     "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap",
-  Lato:
-    "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700&display=swap",
+  Lato: "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700&display=swap",
 };
 
 export function useFontLoader(fontFamily: string): void {

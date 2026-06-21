@@ -1,24 +1,14 @@
 "use client";
 
-import { z as zod } from "zod";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
 import { useForm } from "react-hook-form";
 import { useMemo, useEffect } from "react";
-import Divider from "@mui/material/Divider";
-import { Label } from "src/components/label";
-import { fData } from "src/utils/format-number";
 import { useAuthContext } from "src/auth/hooks";
 import { toast } from "src/components/snackbar";
-import { Iconify } from "src/components/iconify";
-import Typography from "@mui/material/Typography";
+import { Form } from "src/components/hook-form";
 import { useBoolean } from "src/hooks/use-boolean";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formatImageUrl } from "src/utils/format-image-url";
-import { Form, Field, schemaHelper } from "src/components/hook-form";
 import {
   uploadFile,
   updateAvatar,
@@ -26,19 +16,13 @@ import {
   updateProfile,
 } from "src/actions/account";
 
+import { AccountGeneralSchema } from "./account-general-schema";
+import { AccountGeneralDetails } from "./account-general-details";
+import { AccountGeneralIdentity } from "./account-general-identity";
+
 // ----------------------------------------------------------------------
 
-export const AccountGeneralSchema = zod.object({
-  name: zod.string().min(1, { message: "Имя обязательно!" }),
-  avatarURL: schemaHelper.file().nullable(),
-  email: zod.string(),
-  role: zod.string(),
-});
-
-const ROLE_LABEL: Record<string, string> = {
-  admin: "Администратор",
-  user: "Пользователь",
-};
+export { AccountGeneralSchema };
 
 // ----------------------------------------------------------------------
 
@@ -133,145 +117,22 @@ export function AccountGeneral() {
       <Grid container spacing={3}>
         {/* Identity card — avatar, role, account status. */}
         <Grid size={{ xs: 12, md: 4 }}>
-          <Card
-            sx={{
-              p: 3,
-              pt: 5,
-              height: 1,
-              position: "relative",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-            }}
-          >
-            <Label
-              color={role === "admin" ? "info" : "default"}
-              startIcon={<Iconify icon="solar:shield-user-bold" />}
-              sx={{ position: "absolute", top: 24, left: 24 }}
-            >
-              {ROLE_LABEL[role] ?? role}
-            </Label>
-
-            <Field.UploadAvatar
-              name="avatarURL"
-              maxSize={3145728}
-              helperText={
-                <Typography
-                  variant="caption"
-                  sx={{
-                    mt: 3,
-                    mx: "auto",
-                    display: "block",
-                    textAlign: "center",
-                    color: "text.disabled",
-                  }}
-                >
-                  *.jpeg, *.jpg, *.png, *.gif
-                  <br /> до {fData(3145728)}
-                </Typography>
-              }
-            />
-
-            {hasAvatar && (
-              <LoadingButton
-                variant="soft"
-                color="error"
-                size="small"
-                startIcon={<Iconify icon="solar:trash-bin-trash-bold" />}
-                onClick={handleRemoveAvatar}
-                loading={removingAvatar.value}
-                sx={{ mt: 3 }}
-              >
-                Удалить фото
-              </LoadingButton>
-            )}
-
-            <Divider sx={{ my: 3, width: 1, borderStyle: "dashed" }} />
-
-            <Stack spacing={1} sx={{ width: 1 }}>
-              <Typography variant="subtitle1" noWrap>
-                {user?.name}
-              </Typography>
-
-              <Stack
-                direction="row"
-                spacing={0.75}
-                alignItems="center"
-                justifyContent="center"
-                sx={{ color: verified ? "success.main" : "warning.main" }}
-              >
-                <Iconify
-                  width={18}
-                  icon={
-                    verified
-                      ? "solar:verified-check-bold"
-                      : "solar:danger-triangle-bold"
-                  }
-                />
-                <Typography variant="caption">
-                  {verified ? "Email подтверждён" : "Email не подтверждён"}
-                </Typography>
-              </Stack>
-            </Stack>
-          </Card>
+          <AccountGeneralIdentity
+            name={user?.name}
+            role={role}
+            verified={verified}
+            hasAvatar={hasAvatar}
+            removingAvatar={removingAvatar.value}
+            onRemoveAvatar={handleRemoveAvatar}
+          />
         </Grid>
 
         {/* Details card — editable name + read-only contact info. */}
         <Grid size={{ xs: 12, md: 8 }}>
-          <Card sx={{ p: 3, height: 1 }}>
-            <Typography variant="h6" sx={{ mb: 0.5 }}>
-              Основная информация
-            </Typography>
-            <Typography variant="body2" sx={{ mb: 3, color: "text.secondary" }}>
-              Эти данные видны в вашем профиле и комментариях.
-            </Typography>
-
-            <Box
-              sx={{
-                rowGap: 3,
-                columnGap: 2,
-                display: "grid",
-                gridTemplateColumns: {
-                  xs: "repeat(1, 1fr)",
-                  sm: "repeat(2, 1fr)",
-                },
-              }}
-            >
-              <Field.Text
-                name="name"
-                label="Имя"
-                sx={{ gridColumn: { sm: "1 / -1" } }}
-              />
-
-              <Field.Text
-                name="email"
-                label="Email адрес"
-                disabled
-                helperText="Email изменить нельзя"
-              />
-
-              <Field.Text name="role" label="Роль" disabled />
-            </Box>
-
-            <Divider sx={{ my: 3, borderStyle: "dashed" }} />
-
-            <Stack
-              direction="row"
-              spacing={1.5}
-              sx={{ justifyContent: "flex-end" }}
-            >
-              <LoadingButton
-                type="submit"
-                variant="contained"
-                disabled={!isChanged}
-                loading={isSubmitting}
-                startIcon={<Iconify icon="solar:diskette-bold" />}
-              >
-                Сохранить изменения
-              </LoadingButton>
-            </Stack>
-          </Card>
+          <AccountGeneralDetails
+            isChanged={isChanged}
+            isSubmitting={isSubmitting}
+          />
         </Grid>
       </Grid>
     </Form>

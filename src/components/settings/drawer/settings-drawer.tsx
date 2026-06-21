@@ -6,16 +6,15 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
-import COLORS from "src/theme/core/colors.json";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { paper, varAlpha } from "src/theme/styles";
 import { defaultFont } from "src/theme/core/typography";
 import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import { useTheme, useColorScheme } from "@mui/material/styles";
-import PRIMARY_COLOR from "src/theme/with-settings/primary-color.json";
 
 import { Iconify } from "../../iconify";
+import { PRESET_OPTIONS } from "./const";
 import { BaseOption } from "./base-option";
 import { NavOptions } from "./nav-options";
 import { Scrollbar } from "../../scrollbar";
@@ -146,14 +145,7 @@ export function SettingsDrawer({
       onClickOption={(newValue) =>
         settings.onUpdateField("primaryColor", newValue)
       }
-      options={[
-        { name: "default", value: COLORS.primary.main },
-        { name: "cyan", value: PRIMARY_COLOR.cyan.main },
-        { name: "purple", value: PRIMARY_COLOR.purple.main },
-        { name: "blue", value: PRIMARY_COLOR.blue.main },
-        { name: "orange", value: PRIMARY_COLOR.orange.main },
-        { name: "red", value: PRIMARY_COLOR.red.main },
-      ]}
+      options={PRESET_OPTIONS}
     />
   );
 

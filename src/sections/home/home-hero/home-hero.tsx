@@ -1,65 +1,24 @@
 import type { BoxProps } from "@mui/material/Box";
-import type { ReactNode, ElementType } from "react";
 
-import { useRef } from "react";
 import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
-import { Iconify } from "src/components/iconify";
-import Typography from "@mui/material/Typography";
-import { RouterLink } from "src/routes/components";
 import { useResponsive } from "src/hooks/use-responsive";
-import { varFade, MotionContainer } from "src/components/animate";
-import { varAlpha, marketingHeroCtaRowSx } from "src/theme/styles";
-import { MarketingGradientHighlight } from "src/components/marketing";
-import { m, useScroll, useSpring, useTransform } from "framer-motion";
+import { MotionContainer } from "src/components/animate";
+import { m, useSpring, useTransform } from "framer-motion";
 
+import { MD_KEY, PARALLAX_PHYSICS } from "./const";
+import { useScrollPercent } from "./hooks/use-scroll-percent";
 import { HeroBackground } from "../components/hero-background";
 import {
-  LG_KEY,
-  MD_KEY,
-  SM_KEY,
-  HERO_LABEL,
-  HERO_TITLE,
-  HERO_SUMMARY,
-  HERO_HIGHLIGHT,
-  HERO_HEADLINE_SIZE,
-  HERO_BLOG_INFO_TITLE,
-  HERO_HEADLINE_MAX_WIDTH,
-  HERO_HEADLINE_LINE_HEIGHT,
-  HERO_BLOG_INFO_DESCRIPTION,
-} from "./const";
+  HeroText,
+  HeroHeading,
+  HeroButtons,
+  HeroBlogInfo,
+} from "./hero-content";
 
-// Функции-хелперы остаются без изменений
-interface MInviewProps {
-  children?: ReactNode;
-  component?: ElementType;
-}
-
-function MInview({ children, component = m.div }: MInviewProps) {
-  return (
-    <Box component={component} variants={varFade({ distance: 24 }).inUp}>
-      {children}
-    </Box>
-  );
-}
-
-const PARALLAX_PHYSICS = {
-  mass: 0.1,
-  damping: 20,
-  stiffness: 300,
-  restDelta: 0.001,
-};
-
-function useScrollPercent() {
-  const elementRef = useRef<HTMLDivElement>(null);
-  const { scrollY } = useScroll();
-
-  return { elementRef, scrollY };
-}
+// ----------------------------------------------------------------------
 
 type HomeHeroProps = BoxProps;
 
@@ -88,136 +47,6 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
 
   const opacity = useTransform(scroll.scrollY, (sv) =>
     mdUp ? Number((1 - getPercent(sv) / 100).toFixed(1)) : 1,
-  );
-
-  // Заголовок главной страницы с фокусом на блоге
-  const renderHeading = (
-    <MInview>
-      <Box
-        component="h1"
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="center"
-        sx={{
-          ...theme.typography.h2,
-          my: 0,
-          mx: "auto",
-          maxWidth: HERO_HEADLINE_MAX_WIDTH,
-          fontFamily: theme.typography.fontSecondaryFamily,
-          fontSize: HERO_HEADLINE_SIZE,
-          lineHeight: HERO_HEADLINE_LINE_HEIGHT,
-        }}
-      >
-        <Box component="span" sx={{ width: 1, opacity: 0.24, mr: 1 }}>
-          {HERO_LABEL}
-        </Box>
-        <MarketingGradientHighlight>
-          {HERO_HIGHLIGHT}
-        </MarketingGradientHighlight>
-      </Box>
-      <Box
-        component="h2"
-        sx={{ mt: 1, textAlign: "center", ...theme.typography.h5 }}
-      >
-        {HERO_TITLE}
-      </Box>
-    </MInview>
-  );
-
-  // Краткое описание тем блога
-  const renderText = (
-    <MInview>
-      <Typography
-        variant="body2"
-        sx={{
-          mx: "auto",
-          [theme.breakpoints.up(SM_KEY)]: { whiteSpace: "pre-line" },
-          [theme.breakpoints.up(LG_KEY)]: { fontSize: 20, lineHeight: "36px" },
-        }}
-      >
-        {HERO_SUMMARY}
-      </Typography>
-    </MInview>
-  );
-
-  // Кнопки для перехода к портфолио и статьям
-  const renderButtons = (
-    <Box sx={marketingHeroCtaRowSx}>
-      <MInview>
-        <Button
-          component={Link}
-          href="/portfolio"
-          color="primary"
-          size="large"
-          variant="contained"
-          startIcon={
-            <Iconify width={24} icon="solar:user-circle-bold-duotone" />
-          }
-        >
-          Обо мне
-        </Button>
-      </MInview>
-      <MInview>
-        <Button
-          component={Link}
-          href="/post"
-          color="primary"
-          size="large"
-          variant="outlined"
-          startIcon={
-            <Iconify width={24} icon="mdi:newspaper-variant-outline" />
-          }
-        >
-          Читать блог
-        </Button>
-      </MInview>
-    </Box>
-  );
-
-  // Информация о блоге — кликабельный тизер, ведёт в блог (иначе это тупик:
-  // заголовок «Новые материалы» без списка постов и без перехода).
-  const renderBlogInfo = (
-    <MInview>
-      <Link
-        component={RouterLink}
-        href="/post"
-        underline="none"
-        color="inherit"
-        sx={{
-          display: "block",
-          textAlign: "center",
-          maxWidth: 600,
-          mx: "auto",
-          mt: 2,
-          borderRadius: 2,
-          p: 2,
-          transition: theme.transitions.create([
-            "background-color",
-            "transform",
-          ]),
-          "&:hover": {
-            transform: "translateY(-2px)",
-            bgcolor: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
-          },
-        }}
-      >
-        <Typography
-          variant="subtitle1"
-          sx={{
-            mb: 1,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 0.5,
-          }}
-        >
-          {HERO_BLOG_INFO_TITLE}
-          <Iconify width={18} icon="eva:arrow-ios-forward-fill" />
-        </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          {HERO_BLOG_INFO_DESCRIPTION}
-        </Typography>
-      </Link>
-    </MInview>
   );
 
   return (
@@ -272,10 +101,18 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
           }}
         >
           <Stack spacing={3} sx={{ textAlign: "center" }}>
-            <m.div style={{ y: y1 }}>{renderHeading}</m.div>
-            <m.div style={{ y: y2 }}>{renderText}</m.div>
-            <m.div style={{ y: y4 }}>{renderButtons}</m.div>
-            <m.div style={{ y: y4 }}>{renderBlogInfo}</m.div>
+            <m.div style={{ y: y1 }}>
+              <HeroHeading theme={theme} />
+            </m.div>
+            <m.div style={{ y: y2 }}>
+              <HeroText theme={theme} />
+            </m.div>
+            <m.div style={{ y: y4 }}>
+              <HeroButtons />
+            </m.div>
+            <m.div style={{ y: y4 }}>
+              <HeroBlogInfo theme={theme} />
+            </m.div>
           </Stack>
         </Container>
 

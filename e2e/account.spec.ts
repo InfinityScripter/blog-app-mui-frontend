@@ -34,8 +34,12 @@ test.describe("Account — general (name + avatar)", () => {
     await page.getByRole("button", { name: "Сохранить изменения" }).click();
 
     // The save refreshes the auth session; the new name shows in the account
-    // drawer header. This proves PATCH /api/user/profile + checkUserSession ran.
-    await expect(page.getByRole("heading", { name: newName })).toBeVisible({
+    // page header. This proves PATCH /api/user/profile + checkUserSession ran.
+    // Scope to <main>: the same name also renders in the account-drawer header,
+    // so an unscoped heading lookup matches two elements (strict-mode violation).
+    await expect(
+      page.getByRole("main").getByRole("heading", { name: newName }),
+    ).toBeVisible({
       timeout: 15_000,
     });
 

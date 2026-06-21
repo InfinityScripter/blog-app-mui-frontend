@@ -1,50 +1,30 @@
 "use client";
 
-import { z as zod } from "zod";
 import { useState } from "react";
 import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
-import Divider from "@mui/material/Divider";
 import { useRouter } from "src/routes/hooks";
-import IconButton from "@mui/material/IconButton";
+import { signUp } from "src/auth/context/jwt";
+import { Form } from "src/components/hook-form";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
-import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, Field } from "src/components/hook-form";
-import InputAdornment from "@mui/material/InputAdornment";
-import { Iconify, SocialIcon } from "src/components/iconify";
-import {
-  signUp,
-  signInWithGoogle,
-  signInWithYandex,
-} from "src/auth/context/jwt";
+
+import { JwtSignUpForm } from "./jwt-sign-up-form";
+import { SignUpSchema } from "./jwt-sign-up-schema";
+import { JwtSignUpSocial } from "./jwt-sign-up-social";
 
 // ----------------------------------------------------------------------
 
-export const SignUpSchema = zod.object({
-  firstName: zod.string().min(1, { message: "Имя обязательно!" }),
-  lastName: zod.string().min(1, { message: "Фамилия обязательна!" }),
-  email: zod.string().min(1, { message: "Email обязателен!" }).email({
-    message: "Email должен быть действительным адресом электронной почты!",
-  }),
-  password: zod
-    .string()
-    .min(1, { message: "Пароль обязателен!" })
-    .min(8, { message: "Пароль должен содержать не менее 8 символов!" }),
-});
+export { SignUpSchema };
 
 // ----------------------------------------------------------------------
 
 export function JwtSignUpView() {
   const router = useRouter();
-
-  const password = useBoolean();
 
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
@@ -105,61 +85,6 @@ export function JwtSignUpView() {
     </Stack>
   );
 
-  const renderForm = (
-    <Stack spacing={3}>
-      <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-        <Field.Text
-          name="firstName"
-          label="Имя"
-          InputLabelProps={{ shrink: true }}
-        />
-        <Field.Text
-          name="lastName"
-          label="Фамилия"
-          InputLabelProps={{ shrink: true }}
-        />
-      </Stack>
-
-      <Field.Text
-        name="email"
-        label="Email адрес"
-        InputLabelProps={{ shrink: true }}
-      />
-
-      <Field.Text
-        name="password"
-        label="Пароль"
-        type={password.value ? "text" : "password"}
-        InputLabelProps={{ shrink: true }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify
-                  icon={
-                    password.value ? "solar:eye-bold" : "solar:eye-closed-bold"
-                  }
-                />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-
-      <LoadingButton
-        fullWidth
-        color="inherit"
-        size="large"
-        type="submit"
-        variant="contained"
-        loading={isSubmitting}
-        loadingIndicator="Создание аккаунта..."
-      >
-        Создать аккаунт
-      </LoadingButton>
-    </Stack>
-  );
-
   const renderTerms = (
     <Typography
       component="div"
@@ -182,43 +107,6 @@ export function JwtSignUpView() {
     </Typography>
   );
 
-  const renderSocialSignUp = (
-    <>
-      <Divider
-        sx={{
-          my: 3,
-          typography: "overline",
-          color: "text.disabled",
-          "&::before, :after": { borderTopStyle: "dashed" },
-        }}
-      >
-        ИЛИ
-      </Divider>
-
-      <Stack spacing={1.5}>
-        <Button
-          fullWidth
-          size="large"
-          variant="outlined"
-          startIcon={<Iconify icon="flat-color-icons:google" />}
-          onClick={signInWithGoogle}
-        >
-          Продолжить через Google
-        </Button>
-
-        <Button
-          fullWidth
-          size="large"
-          variant="outlined"
-          startIcon={<SocialIcon icon="yandex" />}
-          onClick={signInWithYandex}
-        >
-          Продолжить через Yandex ID
-        </Button>
-      </Stack>
-    </>
-  );
-
   return (
     <>
       {renderHead}
@@ -236,10 +124,10 @@ export function JwtSignUpView() {
       )}
 
       <Form methods={methods} onSubmit={onSubmit}>
-        {renderForm}
+        <JwtSignUpForm isSubmitting={isSubmitting} />
       </Form>
 
-      {renderSocialSignUp}
+      <JwtSignUpSocial />
 
       {renderTerms}
     </>

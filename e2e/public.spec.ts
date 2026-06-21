@@ -13,7 +13,7 @@ test.describe("public pages", () => {
       page.getByRole("link", { name: "Блог", exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "Портфолио" }).first(),
+      page.getByRole("link", { name: "Обо мне" }).first(),
     ).toBeVisible();
   });
 

@@ -2,7 +2,7 @@ import type { ChangeEvent } from "react";
 
 import { useState, useCallback } from "react";
 
-import type { Order, TableProps, UseTableProps } from "./types";
+import type { Order, TableProps, UseTableProps } from "../types";
 
 // ----------------------------------------------------------------------
 

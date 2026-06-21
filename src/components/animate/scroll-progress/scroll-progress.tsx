@@ -5,7 +5,7 @@ import type { Theme, SxProps } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { m, useSpring, useMotionValue } from "framer-motion";
 
-import { useScrollProgress } from "./use-scroll-progress";
+import { useScrollProgress } from "./hooks/use-scroll-progress";
 
 // ----------------------------------------------------------------------
 

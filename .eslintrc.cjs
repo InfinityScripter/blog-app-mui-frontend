@@ -137,5 +137,30 @@ module.exports = {
         ],
       },
     ],
+    // One component per file, kept small. Each component/module file targets
+    // ~150-200 lines (blanks/comments excluded). The pre-existing backlog has
+    // been split to zero, so this is now locked at `error` (same ratchet
+    // pattern as the rules above) — any new oversized file fails lint/CI
+    // instead of silently warning. Non-component sources (mock data, generated
+    // illustrations, theme overrides, static datasets) are exempted via the
+    // `overrides` block below.
+    "max-lines": [2, { max: 200, skipBlankLines: true, skipComments: true }],
   },
+  overrides: [
+    {
+      // Legitimately large non-component sources: static mock datasets,
+      // hand-exported SVG illustrations, MUI theme component overrides, and
+      // static data tables. These are data, not components — the per-component
+      // size budget does not apply.
+      files: [
+        "src/_mock/**",
+        "src/assets/illustrations/**",
+        "src/assets/data/**",
+        "src/theme/**",
+      ],
+      rules: {
+        "max-lines": 0,
+      },
+    },
+  ],
 };

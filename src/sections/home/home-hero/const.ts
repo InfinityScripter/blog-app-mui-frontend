@@ -17,3 +17,10 @@ export const HERO_BLOG_INFO_DESCRIPTION =
 export const HERO_HEADLINE_MAX_WIDTH = 760;
 export const HERO_HEADLINE_SIZE = { xs: 34, md: 52, lg: 58 };
 export const HERO_HEADLINE_LINE_HEIGHT = { xs: "44px", md: "66px", lg: "74px" };
+
+export const PARALLAX_PHYSICS = {
+  mass: 0.1,
+  damping: 20,
+  stiffness: 300,
+  restDelta: 0.001,
+};

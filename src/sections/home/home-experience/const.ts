@@ -1,5 +1,8 @@
 import type { ExperienceItem } from "./types";
 
+export const DATE_FORMAT = "MMMM YYYY";
+export const CURRENT_PERIOD_LABEL = "настоящее время";
+
 export const EXPERIENCE: ExperienceItem[] = [
   {
     position: "IT Systems Implementation Specialist",

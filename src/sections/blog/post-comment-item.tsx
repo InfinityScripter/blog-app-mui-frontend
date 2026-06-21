@@ -1,24 +1,20 @@
 import type { Comment, ReplyComment } from "src/types/domain";
 
-import { useState } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
-import { useParams } from "next/navigation";
-import MenuItem from "@mui/material/MenuItem";
 import { fDate } from "src/utils/format-time";
-import TextField from "@mui/material/TextField";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useBoolean } from "src/hooks/use-boolean";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
-import { deleteComment, updateComment } from "src/actions/blog-ssr";
-import { usePopover, CustomPopover } from "src/components/custom-popover";
 
+import { PostCommentEdit } from "./post-comment-edit";
 import { PostCommentForm } from "./post-comment-form";
+import { PostCommentMenu } from "./post-comment-menu";
+import { usePostCommentItem } from "./hooks/use-post-comment-item";
 
 interface PostCommentItemProps {
   name: string;
@@ -47,80 +43,27 @@ export default function PostCommentItem({
 }: PostCommentItemProps) {
   const reply = useBoolean();
   const { user } = useAuthContext();
-  const params = useParams<{ id: string }>();
-  const postId = propPostId || params?.id;
-  const popover = usePopover();
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedMessage, setEditedMessage] = useState(message);
-  const saving = useBoolean();
-  const deleting = useBoolean();
-
-  const handleSave = async () => {
-    if (saving.value || !editedMessage.trim()) {
-      return;
-    }
-
-    saving.onTrue();
-    try {
-      const updatePayload = {
-        message: editedMessage,
-        isReply: hasReply,
-        parentCommentId,
-      };
-      await updateComment(postId, comment.id, updatePayload);
-
-      if (onCommentUpdated) {
-        onCommentUpdated();
-      }
-      setIsEditing(false);
-      popover.onClose();
-    } catch (error) {
-      console.error("Ошибка обновления комментария:", error);
-    } finally {
-      saving.onFalse();
-    }
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      handleSave();
-    }
-  };
-
-  const handleStartEdit = () => {
-    setIsEditing(true);
-    popover.onClose();
-  };
-
-  const handleCancelEdit = () => {
-    setIsEditing(false);
-    setEditedMessage(message);
-  };
-
-  const handleDelete = async () => {
-    if (deleting.value) {
-      return;
-    }
-
-    deleting.onTrue();
-    try {
-      await deleteComment(postId, comment.id, {
-        isReply: hasReply,
-        parentCommentId,
-      });
-
-      if (onCommentUpdated) {
-        onCommentUpdated();
-      }
-      popover.onClose();
-    } catch (error) {
-      console.error("Ошибка удаления комментария:", error);
-    } finally {
-      deleting.onFalse();
-    }
-  };
+  const {
+    popover,
+    saving,
+    deleting,
+    isEditing,
+    editedMessage,
+    setEditedMessage,
+    handleSave,
+    handleKeyPress,
+    handleStartEdit,
+    handleCancelEdit,
+    handleDelete,
+  } = usePostCommentItem({
+    message,
+    hasReply,
+    comment,
+    postId: propPostId,
+    parentCommentId,
+    onCommentUpdated,
+  });
 
   const isCommentOwner =
     user?._id && comment.userId && String(user._id) === String(comment.userId);
@@ -170,38 +113,14 @@ export default function PostCommentItem({
         </Stack>
 
         {isEditing ? (
-          <Stack spacing={2}>
-            <TextField
-              fullWidth
-              multiline
-              size="small"
-              value={editedMessage}
-              onChange={(e) => setEditedMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Нажмите Enter для сохранения или Shift+Enter для новой строки"
-              sx={{ mb: 1 }}
-            />
-            <Stack direction="row" spacing={2} justifyContent="flex-end">
-              <Button
-                size="small"
-                color="inherit"
-                onClick={handleCancelEdit}
-                disabled={saving.value}
-                startIcon={<Iconify icon="eva:close-fill" />}
-              >
-                Отмена
-              </Button>
-              <LoadingButton
-                size="small"
-                onClick={handleSave}
-                loading={saving.value}
-                startIcon={<Iconify icon="eva:checkmark-fill" />}
-                color="success"
-              >
-                Сохранить
-              </LoadingButton>
-            </Stack>
-          </Stack>
+          <PostCommentEdit
+            value={editedMessage}
+            saving={saving.value}
+            onChange={setEditedMessage}
+            onKeyPress={handleKeyPress}
+            onSave={handleSave}
+            onCancel={handleCancelEdit}
+          />
         ) : (
           <Typography
             variant="body2"
@@ -239,26 +158,14 @@ export default function PostCommentItem({
         )}
       </Stack>
 
-      <CustomPopover
+      <PostCommentMenu
         open={popover.open}
-        onClose={popover.onClose}
         anchorEl={popover.anchorEl}
-        slotProps={{ arrow: { placement: "bottom-center" } }}
-      >
-        <MenuItem onClick={handleStartEdit}>
-          <Iconify icon="solar:pen-bold" sx={{ mr: 1 }} />
-          Редактировать
-        </MenuItem>
-
-        <MenuItem
-          onClick={handleDelete}
-          disabled={deleting.value}
-          sx={{ color: "error.main" }}
-        >
-          <Iconify icon="solar:trash-bin-trash-bold" sx={{ mr: 1 }} />
-          Удалить
-        </MenuItem>
-      </CustomPopover>
+        deleting={deleting.value}
+        onClose={popover.onClose}
+        onEdit={handleStartEdit}
+        onDelete={handleDelete}
+      />
     </Box>
   );
 }

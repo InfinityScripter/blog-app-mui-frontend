@@ -1,22 +1,19 @@
 "use client";
 
 import type { ReactNode } from "react";
-import type { SettingsContextValue } from "src/components/settings/types";
+import type { Theme, SxProps } from "@mui/material/styles";
 import type { NavSectionDataProps } from "src/components/nav-section/types";
-import type { Theme, SxProps, Theme as MuiTheme } from "@mui/material/styles";
 
-import { useMemo } from "react";
 import Alert from "@mui/material/Alert";
 import { useTheme } from "@mui/material/styles";
 import { useAuthContext } from "src/auth/hooks";
 import { useBoolean } from "src/hooks/use-boolean";
 import { _contacts, _notifications } from "src/_mock";
-import { varAlpha, stylesMode } from "src/theme/styles";
-import { bulletColor } from "src/components/nav-section";
 import { iconButtonClasses } from "@mui/material/IconButton";
 import { useSettingsContext } from "src/components/settings";
 
 import { Main } from "./main";
+import { _langs } from "./const";
 import { NavMobile } from "./nav-mobile";
 import { layoutClasses } from "../classes";
 import { NavVertical } from "./nav-vertical";
@@ -27,6 +24,7 @@ import { HeaderBase } from "../core/header-base";
 import { getNavData } from "../config-nav-dashboard";
 import { _workspaces } from "../config-nav-workspace";
 import { LayoutSection } from "../core/layout-section";
+import { useNavColorVars } from "./hooks/use-nav-color-vars";
 
 interface DashboardLayoutProps {
   sx?: SxProps<Theme>;
@@ -77,13 +75,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
             onOpenNav={mobileNavOpen.onTrue}
             data={{
               nav: navData,
-              langs: [
-                { value: "en", label: "English", countryCode: "GB" },
-                { value: "fr", label: "French", countryCode: "FR" },
-                { value: "vi", label: "Vietnamese", countryCode: "VN" },
-                { value: "cn", label: "Chinese", countryCode: "CN" },
-                { value: "ar", label: "Arabic", countryCode: "SA" },
-              ],
+              langs: _langs,
               account: _account,
               contacts: _contacts,
               workspaces: _workspaces,
@@ -209,97 +201,4 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
       </LayoutSection>
     </>
   );
-}
-
-// ----------------------------------------------------------------------
-
-function useNavColorVars(theme: MuiTheme, settings: SettingsContextValue) {
-  const {
-    vars: { palette },
-  } = theme;
-
-  return useMemo(() => {
-    switch (settings.navColor) {
-      case "integrate":
-        return {
-          layout: {
-            "--layout-nav-bg": palette.background.default,
-            "--layout-nav-horizontal-bg": varAlpha(
-              palette.background.defaultChannel,
-              0.8,
-            ),
-            "--layout-nav-border-color": varAlpha(
-              palette.grey["500Channel"],
-              0.12,
-            ),
-            "--layout-nav-text-primary-color": palette.text.primary,
-            "--layout-nav-text-secondary-color": palette.text.secondary,
-            "--layout-nav-text-disabled-color": palette.text.disabled,
-            [stylesMode.dark]: {
-              "--layout-nav-border-color": varAlpha(
-                palette.grey["500Channel"],
-                0.08,
-              ),
-              "--layout-nav-horizontal-bg": varAlpha(
-                palette.background.defaultChannel,
-                0.96,
-              ),
-            },
-          },
-          section: {},
-        };
-      case "apparent":
-        return {
-          layout: {
-            "--layout-nav-bg": palette.grey[900],
-            "--layout-nav-horizontal-bg": varAlpha(
-              palette.grey["900Channel"],
-              0.96,
-            ),
-            "--layout-nav-border-color": "transparent",
-            "--layout-nav-text-primary-color": palette.common.white,
-            "--layout-nav-text-secondary-color": palette.grey[500],
-            "--layout-nav-text-disabled-color": palette.grey[600],
-            [stylesMode.dark]: {
-              "--layout-nav-bg": palette.grey[800],
-              "--layout-nav-horizontal-bg": varAlpha(
-                palette.grey["800Channel"],
-                0.8,
-              ),
-            },
-          },
-          section: {
-            // caption
-            "--nav-item-caption-color": palette.grey[600],
-            // subheader
-            "--nav-subheader-color": palette.grey[600],
-            "--nav-subheader-hover-color": palette.common.white,
-            // item
-            "--nav-item-color": palette.grey[500],
-            "--nav-item-root-active-color": palette.primary.light,
-            "--nav-item-root-open-color": palette.common.white,
-            // bullet
-            "--nav-bullet-light-color": bulletColor.dark,
-            // sub
-            ...(settings.navLayout === "vertical" && {
-              "--nav-item-sub-active-color": palette.common.white,
-              "--nav-item-sub-open-color": palette.common.white,
-            }),
-          },
-        };
-      default:
-        throw new Error(`Invalid color: ${settings.navColor}`);
-    }
-  }, [
-    palette.background.default,
-    palette.background.defaultChannel,
-    palette.common.white,
-    palette.grey,
-    palette.primary.light,
-    palette.text.disabled,
-    palette.text.primary,
-    palette.text.secondary,
-    settings.navColor,
-    settings.navLayout,
-  ]);
 }

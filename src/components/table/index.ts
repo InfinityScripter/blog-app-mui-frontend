@@ -1,10 +1,10 @@
 export * from "./utils";
 
-export * from "./use-table";
-
 export * from "./table-no-data";
 
 export * from "./table-skeleton";
+
+export * from "./hooks/use-table";
 
 export * from "./table-empty-rows";
 

@@ -11,8 +11,6 @@ import { maxLine } from "src/theme/styles";
 import { useRouter } from "src/routes/hooks";
 import { Label } from "src/components/label";
 import { Image } from "src/components/image";
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
 import { fDate } from "src/utils/format-time";
 import { coverSrc } from "src/utils/cover-src";
 import { useTheme } from "@mui/material/styles";
@@ -23,8 +21,10 @@ import { RouterLink } from "src/routes/components";
 import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
 import { usePostDelete } from "src/hooks/use-post-delete";
+import { usePopover } from "src/components/custom-popover";
 import { ConfirmDialog } from "src/components/confirm-dialog";
-import { usePopover, CustomPopover } from "src/components/custom-popover";
+
+import { PostItemHorizontalMenu } from "./post-item-horizontal-menu";
 
 // ----------------------------------------------------------------------
 
@@ -62,6 +62,11 @@ export function PostItemHorizontal({ post }: { post: Post }) {
   const handleEdit = () => {
     router.push(paths.dashboard.post.edit(String(post._id)));
     popover.onClose();
+  };
+
+  const handleView = () => {
+    popover.onClose();
+    router.push(paths.dashboard.post.details(String(post._id)));
   };
 
   const handleClickDelete = () => {
@@ -185,33 +190,14 @@ export function PostItemHorizontal({ post }: { post: Post }) {
           />
         </Box>
 
-        <CustomPopover
+        <PostItemHorizontalMenu
           open={popover.open}
-          onClose={popover.onClose}
           anchorEl={popover.anchorEl}
-          slotProps={{ arrow: { placement: "bottom-center" } }}
-        >
-          <MenuList>
-            <MenuItem
-              onClick={() => {
-                popover.onClose();
-                router.push(paths.dashboard.post.details(String(post._id)));
-              }}
-            >
-              <Iconify icon="solar:eye-bold" />
-              View
-            </MenuItem>
-            <MenuItem onClick={handleEdit}>
-              <Iconify icon="solar:pen-bold" />
-              Edit
-            </MenuItem>
-
-            <MenuItem onClick={handleClickDelete} sx={{ color: "error.main" }}>
-              <Iconify icon="solar:trash-bin-trash-bold" />
-              Delete
-            </MenuItem>
-          </MenuList>
-        </CustomPopover>
+          onClose={popover.onClose}
+          onView={handleView}
+          onEdit={handleEdit}
+          onDelete={handleClickDelete}
+        />
       </Card>
       <ConfirmDialog
         open={openConfirm}

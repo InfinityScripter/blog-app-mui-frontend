@@ -1,57 +1,26 @@
 import type { Post } from "src/types/domain";
-import type { ReactNode, HTMLAttributes } from "react";
-import type { AutocompleteRenderGetTagProps } from "@mui/material/Autocomplete";
 
-import { z as zod } from "zod";
-import { _tags } from "src/_mock";
-import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import Button from "@mui/material/Button";
-import Switch from "@mui/material/Switch";
-import Divider from "@mui/material/Divider";
+import { useForm } from "react-hook-form";
 import { useRouter } from "src/routes/hooks";
 import { toast } from "src/components/snackbar";
-import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
+import { Form } from "src/components/hook-form";
 import { useBoolean } from "src/hooks/use-boolean";
-import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useEffect, useCallback } from "react";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import { Form, Field, schemaHelper } from "src/components/hook-form";
 
 import axios from "../../utils/axios";
+import { NewPostSchema } from "./post-new-edit-schema";
 import { PostDetailsPreview } from "./post-details-preview";
+import { PostNewEditDetails } from "./post-new-edit-details";
+import { PostNewEditActions } from "./post-new-edit-actions";
 import { createPost, updatePost } from "../../actions/blog-ssr";
+import { PostNewEditProperties } from "./post-new-edit-properties";
 
 // ----------------------------------------------------------------------
 
-export const NewPostSchema = zod.object({
-  title: zod.string().min(1, { message: "Заголовок обязателен!" }),
-  description: zod.string().min(1, { message: "Описание обязательно!" }),
-  content: schemaHelper
-    .editor({})
-    .min(100, { message: "Содержание должно быть не менее 100 символов" }),
-  coverUrl: schemaHelper.file({
-    message: { required_error: "Обложка обязательна!" },
-  }),
-  tags: zod
-    .string()
-    .array()
-    .min(2, { message: "Должно быть не менее 2 тегов!" }),
-  metaKeywords: zod
-    .string()
-    .array()
-    .nonempty({ message: "Мета-ключевые слова обязательны!" }),
-  publish: zod.boolean(),
-  // Not required
-  metaTitle: zod.string(),
-  metaDescription: zod.string(),
-});
+export { NewPostSchema };
 
 // ----------------------------------------------------------------------
 
@@ -159,192 +128,18 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
     setValue("coverUrl", null);
   }, [setValue]);
 
-  const renderDetails = (
-    <Card>
-      <CardHeader
-        title="Детали"
-        subheader="Заголовок, краткое описание, изображение..."
-        sx={{ mb: 3 }}
-      />
-
-      <Divider />
-
-      <Stack spacing={3} sx={{ p: 3 }}>
-        <Field.Text name="title" label="Заголовок поста" />
-
-        <Field.Text name="description" label="Описание" multiline rows={3} />
-
-        <Stack spacing={1.5}>
-          <Typography variant="subtitle2">Содержание</Typography>
-          <Field.Editor name="content" sx={{ maxHeight: 480 }} />
-        </Stack>
-
-        <Stack spacing={1.5}>
-          <Typography variant="subtitle2">Обложка</Typography>
-          <Field.Upload
-            name="coverUrl"
-            maxSize={3145728}
-            onDelete={handleRemoveFile}
-          />
-        </Stack>
-      </Stack>
-    </Card>
-  );
-
-  const renderProperties = (
-    <Card>
-      <CardHeader
-        title="Свойства"
-        subheader="Дополнительные функции и атрибуты..."
-        sx={{ mb: 3 }}
-      />
-
-      <Divider />
-
-      <Stack spacing={3} sx={{ p: 3 }}>
-        <Field.Autocomplete
-          name="tags"
-          label="Теги"
-          placeholder="+ Теги"
-          multiple
-          freeSolo
-          disableCloseOnSelect
-          options={_tags.map((option) => option)}
-          getOptionLabel={(option: string) => option}
-          renderOption={(
-            props: HTMLAttributes<HTMLLIElement>,
-            option: string,
-          ): ReactNode => (
-            <li {...props} key={option}>
-              {option}
-            </li>
-          )}
-          renderTags={(
-            selected: string[],
-            getTagProps: AutocompleteRenderGetTagProps,
-          ): ReactNode =>
-            selected.map((option, index) => (
-              <Chip
-                {...getTagProps({ index })}
-                key={option}
-                label={option}
-                size="small"
-                color="info"
-                variant="soft"
-              />
-            ))
-          }
-        />
-
-        <Field.Text name="metaTitle" label="Мета-заголовок" />
-
-        <Field.Text
-          name="metaDescription"
-          label="Мета-описание"
-          fullWidth
-          multiline
-          rows={3}
-        />
-
-        <Field.Autocomplete
-          name="metaKeywords"
-          label="Мета-ключевые слова"
-          placeholder="+ Ключевые слова"
-          multiple
-          freeSolo
-          disableCloseOnSelect
-          options={_tags.map((option) => option)}
-          getOptionLabel={(option: string) => option}
-          renderOption={(
-            props: HTMLAttributes<HTMLLIElement>,
-            option: string,
-          ): ReactNode => (
-            <li {...props} key={option}>
-              {option}
-            </li>
-          )}
-          renderTags={(
-            selected: string[],
-            getTagProps: AutocompleteRenderGetTagProps,
-          ): ReactNode =>
-            selected.map((option, index) => (
-              <Chip
-                {...getTagProps({ index })}
-                key={option}
-                label={option}
-                size="small"
-                color="info"
-                variant="soft"
-              />
-            ))
-          }
-        />
-
-        <FormControlLabel
-          control={
-            <Switch defaultChecked inputProps={{ id: "comments-switch" }} />
-          }
-          label="Включить комментарии"
-        />
-      </Stack>
-    </Card>
-  );
-
-  const renderActions = (
-    <Box
-      display="flex"
-      alignItems="center"
-      flexWrap="wrap"
-      justifyContent="flex-end"
-    >
-      <Controller
-        name="publish"
-        control={methods.control}
-        render={({ field: { value, onChange } }) => (
-          <FormControlLabel
-            control={
-              <Switch
-                checked={value}
-                onChange={(e) => onChange(e.target.checked)}
-              />
-            }
-            label="Опубликовать"
-            sx={{ pl: 3, flexGrow: 1 }}
-          />
-        )}
-      />
-
-      <div>
-        <Button
-          color="inherit"
-          variant="outlined"
-          size="large"
-          onClick={preview.onTrue}
-        >
-          Предпросмотр
-        </Button>
-
-        <LoadingButton
-          type="submit"
-          variant="contained"
-          size="large"
-          loading={isSubmitting}
-          sx={{ ml: 2 }}
-        >
-          {!currentPost ? "Создать пост" : "Сохранить изменения"}
-        </LoadingButton>
-      </div>
-    </Box>
-  );
-
   return (
     <Form methods={methods} onSubmit={onSubmit}>
       <Stack spacing={5} sx={{ mx: "auto", maxWidth: { xs: 720, xl: 880 } }}>
-        {renderDetails}
+        <PostNewEditDetails onRemoveFile={handleRemoveFile} />
 
-        {renderProperties}
+        <PostNewEditProperties />
 
-        {renderActions}
+        <PostNewEditActions
+          isEdit={Boolean(currentPost)}
+          isSubmitting={isSubmitting}
+          onPreview={preview.onTrue}
+        />
       </Stack>
 
       <PostDetailsPreview

@@ -1,68 +1,29 @@
 import type { ApexOptions } from "apexcharts";
+import type { Theme } from "@mui/material/styles";
 
-import { varAlpha } from "src/theme/styles";
-import { useTheme } from "@mui/material/styles";
+import { buildPlotOptions } from "./use-chart-plot-options";
+import { buildResponsive, buildChartLabels } from "./use-chart-base";
 
 // ----------------------------------------------------------------------
 
-export function useChart(
-  options?: ApexOptions & { responsive?: ApexOptions["responsive"] },
-) {
-  const theme = useTheme();
+type ChartOptions = ApexOptions & { responsive?: ApexOptions["responsive"] };
+
+// ----------------------------------------------------------------------
+
+export function buildChartOptions(
+  theme: Theme,
+  options?: ChartOptions,
+): ApexOptions {
   const { palette } = theme.vars;
   const { divider } = palette;
   const textPrimary = palette.text.primary;
-  const textSecondary = palette.text.secondary;
   const textDisabled = palette.text.disabled;
   const backgroundPaper = palette.background.paper;
   const grey500Channel = palette.grey["500Channel"];
 
-  // ApexCharts types `fontSize` as `string`, while MUI typography exposes it as
-  // `string | number | undefined` — normalize to a CSS string here.
-  const toFontSize = (size: string | number | undefined): string =>
-    typeof size === "number" ? `${size}px` : (size ?? "");
+  const { total: LABEL_TOTAL, value: LABEL_VALUE } = buildChartLabels(theme);
 
-  const LABEL_TOTAL = {
-    show: true,
-    label: "Total",
-    color: textSecondary,
-    fontSize: toFontSize(theme.typography.subtitle2.fontSize),
-    fontWeight: theme.typography.subtitle2.fontWeight,
-  };
-
-  const LABEL_VALUE = {
-    offsetY: 8,
-    color: textPrimary,
-    fontSize: toFontSize(theme.typography.h4.fontSize),
-    fontWeight: theme.typography.h4.fontWeight,
-  };
-
-  const RESPONSIVE = [
-    {
-      breakpoint: theme.breakpoints.values.sm, // sm ~ 600
-      options: {
-        plotOptions: {
-          bar: {
-            borderRadius: 3,
-            columnWidth: "80%",
-          },
-        },
-      },
-    },
-    {
-      breakpoint: theme.breakpoints.values.md, // md ~ 900
-      options: {
-        plotOptions: {
-          bar: {
-            columnWidth: "60%",
-          },
-        },
-      },
-    },
-    ...(options?.responsive ?? []),
-  ];
-
-  const merged: ApexOptions = {
+  return {
     ...options,
 
     /** **************************************
@@ -241,107 +202,15 @@ export function useChart(
     /** **************************************
      * plotOptions
      *************************************** */
-    plotOptions: {
-      ...options?.plotOptions,
-      // plotOptions: Bar
-      bar: {
-        borderRadius: 4,
-        columnWidth: "48%",
-        borderRadiusApplication: "end",
-        ...options?.plotOptions?.bar,
-      },
-
-      // plotOptions: Pie + Donut
-      pie: {
-        ...options?.plotOptions?.pie,
-        donut: {
-          ...options?.plotOptions?.pie?.donut,
-          labels: {
-            show: true,
-            ...options?.plotOptions?.pie?.donut?.labels,
-            value: {
-              ...LABEL_VALUE,
-              ...options?.plotOptions?.pie?.donut?.labels?.value,
-            },
-            total: {
-              ...LABEL_TOTAL,
-              ...options?.plotOptions?.pie?.donut?.labels?.total,
-            },
-          },
-        },
-      },
-
-      // plotOptions: Radialbar
-      radialBar: {
-        ...options?.plotOptions?.radialBar,
-        hollow: {
-          margin: -8,
-          size: "100%",
-          ...options?.plotOptions?.radialBar?.hollow,
-        },
-        track: {
-          margin: -8,
-          strokeWidth: "50%",
-          background: varAlpha(grey500Channel, 0.16),
-          ...options?.plotOptions?.radialBar?.track,
-        },
-        dataLabels: {
-          ...options?.plotOptions?.radialBar?.dataLabels,
-          value: {
-            ...LABEL_VALUE,
-            ...options?.plotOptions?.radialBar?.dataLabels?.value,
-          },
-          total: {
-            ...LABEL_TOTAL,
-            ...options?.plotOptions?.radialBar?.dataLabels?.total,
-          },
-        },
-      },
-
-      // plotOptions: Radar
-      radar: {
-        ...options?.plotOptions?.radar,
-        polygons: {
-          fill: {
-            colors: ["transparent"],
-          },
-          strokeColors: divider,
-          connectorColors: divider,
-          ...options?.plotOptions?.radar?.polygons,
-        },
-      },
-
-      // plotOptions: polarArea
-      polarArea: {
-        rings: {
-          strokeColor: divider,
-        },
-        spokes: {
-          connectorColors: divider,
-        },
-        ...options?.plotOptions?.polarArea,
-      },
-
-      // plotOptions: heatmap
-      heatmap: {
-        distributed: true,
-        ...options?.plotOptions?.heatmap,
-      },
-    },
+    plotOptions: buildPlotOptions(options, {
+      divider,
+      grey500Channel,
+      labels: { value: LABEL_VALUE, total: LABEL_TOTAL },
+    }),
 
     /** **************************************
      * Responsive
      *************************************** */
-    responsive: RESPONSIVE.reduce<NonNullable<ApexOptions["responsive"]>>(
-      (acc, cur) => {
-        if (!acc.some((item) => item.breakpoint === cur.breakpoint)) {
-          acc.push(cur);
-        }
-        return acc;
-      },
-      [],
-    ),
+    responsive: buildResponsive(theme, options),
   };
-
-  return merged;
 }

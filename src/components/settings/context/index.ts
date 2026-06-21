@@ -1,3 +1,3 @@
 export * from "./settings-provider";
 
-export * from "./use-settings-context";
+export * from "./hooks/use-settings-context";
