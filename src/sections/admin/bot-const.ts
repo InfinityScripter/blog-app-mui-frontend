@@ -5,7 +5,7 @@ import type { ControlProviderName } from "./bot-types";
 export const BOT_PROVIDER_NAMES: readonly ControlProviderName[] = [
   "glm",
   "deepseek",
-  "mock",
+  "openrouter",
 ] as const;
 
 export const TIER_ICON: Record<"free" | "paid", string> = {

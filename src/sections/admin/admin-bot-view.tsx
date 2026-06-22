@@ -2,34 +2,21 @@
 
 import { useState } from "react";
 import { useAuthContext } from "src/auth/hooks";
-import {
-  setBotMock,
-  setBotModel,
-  useGetBotStatus,
-  useGetBotModels,
-  useGetBotProviders,
-} from "src/actions/admin";
+import { setBotMock, setBotModel, useGetBotStatus } from "src/actions/admin";
 import {
   Box,
   Card,
-  Chip,
   Stack,
   Alert,
   Switch,
-  Select,
-  MenuItem,
   Typography,
-  InputLabel,
-  FormControl,
   CircularProgress,
   FormControlLabel,
 } from "@mui/material";
 
-import {
-  getHealthColor,
-  formatModelLabel,
-  toControlProvider,
-} from "./bot-utils";
+import { BotStatusPill } from "./bot-status-pill";
+import { BotModelsHealth } from "./bot-models-health";
+import { BotModelSelector } from "./bot-model-selector";
 
 import type { ControlProviderName } from "./bot-types";
 
@@ -39,18 +26,17 @@ export function AdminBotView() {
 
   const { botStatus, botStatusLoading, botStatusMutate } =
     useGetBotStatus(accessToken);
-  const { botProviders } = useGetBotProviders(accessToken);
 
-  const [provider, setProvider] = useState<ControlProviderName | null>(null);
-  const { botModels } = useGetBotModels(provider, accessToken);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const isAlive = botStatus?.isAlive ?? false;
   const disabled = !isAlive || busy;
 
-  const handleSetModel = async (model: string) => {
-    if (!provider) return;
+  const handleSetModel = async (
+    provider: ControlProviderName,
+    model: string,
+  ) => {
     setBusy(true);
     setError(null);
     try {
@@ -88,22 +74,7 @@ export function AdminBotView() {
         <CircularProgress />
       ) : (
         <Stack spacing={3}>
-          <Card sx={{ p: 3 }}>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Chip
-                label={isAlive ? "Бот в сети" : "Бот недоступен"}
-                color={getHealthColor(isAlive)}
-                size="small"
-              />
-              {isAlive && (
-                <Typography variant="body2" color="text.secondary">
-                  Активная модель: <b>{botStatus?.provider}</b> /{" "}
-                  {botStatus?.model}
-                  {botStatus?.isMockEnabled ? " · режим без LLM" : ""}
-                </Typography>
-              )}
-            </Stack>
-          </Card>
+          <BotStatusPill status={botStatus} isAlive={isAlive} />
 
           {!isAlive && (
             <Alert severity="error">
@@ -114,62 +85,12 @@ export function AdminBotView() {
 
           {error && <Alert severity="warning">{error}</Alert>}
 
-          <Card sx={{ p: 3 }}>
-            <Typography variant="h6" sx={{ mb: 2 }}>
-              Модель переработки
-            </Typography>
-            <Stack spacing={2}>
-              <FormControl fullWidth disabled={disabled}>
-                <InputLabel>Провайдер</InputLabel>
-                <Select
-                  label="Провайдер"
-                  value={provider ?? ""}
-                  onChange={(e) => {
-                    const next = toControlProvider(e.target.value);
-                    if (next) setProvider(next);
-                  }}
-                >
-                  {botProviders.map((p) => (
-                    <MenuItem
-                      key={p.name}
-                      value={p.name}
-                      disabled={!p.hasKey && p.name !== "mock"}
-                    >
-                      {p.label}
-                      {!p.hasKey && p.name !== "mock" ? " — нет ключа" : ""}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-
-              {provider && provider !== "mock" && (
-                <FormControl fullWidth disabled={disabled}>
-                  <InputLabel>Модель</InputLabel>
-                  <Select
-                    label="Модель"
-                    value={botStatus?.model ?? ""}
-                    onChange={(e) => handleSetModel(e.target.value)}
-                  >
-                    {botModels.length === 0 ? (
-                      <MenuItem disabled value="">
-                        нет доступных моделей
-                      </MenuItem>
-                    ) : (
-                      botModels.map((m) => (
-                        <MenuItem key={m.id} value={m.id}>
-                          {formatModelLabel(m)}
-                        </MenuItem>
-                      ))
-                    )}
-                  </Select>
-                </FormControl>
-              )}
-
-              {provider === "mock" && (
-                <Alert severity="info">Посты уходят без переработки LLM.</Alert>
-              )}
-            </Stack>
-          </Card>
+          <BotModelSelector
+            accessToken={accessToken}
+            activeModel={botStatus?.model}
+            disabled={disabled}
+            onSetModel={handleSetModel}
+          />
 
           <Card sx={{ p: 3 }}>
             <FormControlLabel
@@ -183,6 +104,8 @@ export function AdminBotView() {
               label="Режим «без LLM» (mock) — публиковать посты сырыми"
             />
           </Card>
+
+          <BotModelsHealth accessToken={accessToken} />
         </Stack>
       )}
     </Box>

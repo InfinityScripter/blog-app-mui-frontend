@@ -88,6 +88,7 @@ export const endpoints = {
         `/api/admin/bot/models?provider=${provider}`,
       model: "/api/admin/bot/model",
       mock: "/api/admin/bot/mock",
+      modelsHealth: "/api/admin/bot/models-health",
     },
     llmStats: {
       snapshot: "/api/admin/llm-stats/snapshot",
