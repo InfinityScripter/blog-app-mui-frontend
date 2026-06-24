@@ -12,7 +12,7 @@ Disallow: /api/
 Disallow: /dashboard/
 Disallow: /auth/
 Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&fbclid&gclid&yclid
-Host: https://talalaev.su
+Host: https://aifirst.us.com
 
 User-agent: PetalBot
 Disallow: /
@@ -26,4 +26,4 @@ Disallow: /
 User-agent: AhrefsBot
 Disallow: /
 
-Sitemap: https://talalaev.su/sitemap.xml
+Sitemap: https://aifirst.us.com/sitemap.xml
