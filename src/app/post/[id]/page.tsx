@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: PageProps) {
     return {
       title,
       description,
-      alternates: { canonical: `${BASE_URL}/post/${id}` },
+      alternates: { canonical: `${BASE_URL}/post/${id}/` },
       openGraph: {
         title,
         description,
-        url: `${BASE_URL}/post/${id}`,
+        url: `${BASE_URL}/post/${id}/`,
         type: "article",
         images: [{ url: image, width: 1200, height: 630, alt: title }],
       },

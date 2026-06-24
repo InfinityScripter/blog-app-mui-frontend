@@ -7,11 +7,11 @@ import { NewsListView } from "src/sections/news/view/news-list-view";
 export const metadata = {
   title: "Новости",
   description: "Новости и обновления от Михаила Талалаева.",
-  alternates: { canonical: "https://talalaev.su/news" },
+  alternates: { canonical: "https://talalaev.su/news/" },
   openGraph: {
     title: "Новости | Mihail Talalaev",
     description: "Новости и обновления от Михаила Талалаева.",
-    url: "https://talalaev.su/news",
+    url: "https://talalaev.su/news/",
     type: "website",
   },
 };

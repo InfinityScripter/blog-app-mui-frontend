@@ -53,7 +53,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    url: "https://talalaev.su",
+    url: "https://talalaev.su/",
     siteName: "Mihail Talalaev",
     title: "Mihail Talalaev — Software Engineer",
     description:
@@ -86,7 +86,7 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: "https://talalaev.su",
+    canonical: "https://talalaev.su/",
   },
   // Search-engine ownership verification. Next renders these as
   // <meta name="google-site-verification"> / <meta name="yandex-verification">
