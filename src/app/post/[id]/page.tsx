@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps) {
       },
     };
   } catch {
-    return { title: "Статья | Mihail Talalaev" };
+    return { title: "Статья | Talalaev" };
   }
 }
 

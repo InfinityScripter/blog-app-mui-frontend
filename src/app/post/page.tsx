@@ -12,7 +12,7 @@ export const metadata = {
     "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
   alternates: { canonical: "https://talalaev.su/post/" },
   openGraph: {
-    title: "Блог | Mihail Talalaev",
+    title: "Блог | Talalaev",
     description:
       "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
     url: "https://talalaev.su/post/",

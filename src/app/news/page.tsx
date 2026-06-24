@@ -5,12 +5,14 @@ import { NewsListView } from "src/sections/news/view/news-list-view";
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: "Новости",
-  description: "Новости и обновления от Михаила Талалаева.",
+  title: "Лента новостей технологий и AI",
+  description:
+    "Свежие новости технологий, IT и искусственного интеллекта. Нейросеть собирает источники и публикует краткие пересказы — лента обновляется автоматически.",
   alternates: { canonical: "https://talalaev.su/news/" },
   openGraph: {
-    title: "Новости | Mihail Talalaev",
-    description: "Новости и обновления от Михаила Талалаева.",
+    title: "Лента новостей технологий и AI | Talalaev",
+    description:
+      "Свежие новости технологий, IT и AI — нейросеть собирает источники и публикует краткие пересказы.",
     url: "https://talalaev.su/news/",
     type: "website",
   },

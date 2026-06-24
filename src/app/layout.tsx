@@ -45,33 +45,33 @@ const onest = Onest({
 export const metadata = {
   metadataBase: new URL("https://talalaev.su"),
   title: {
-    default: "Mihail Talalaev — Software Engineer",
-    template: "%s | Mihail Talalaev",
+    default: "Talalaev — AI-агрегатор новостей технологий и IT",
+    template: "%s | Talalaev",
   },
   description:
-    "Блог и портфолио Михаила Талалаева — Software Engineer. Пишу о веб-разработке, React, Next.js и TypeScript.",
+    "AI-агрегатор новостей: нейросеть собирает и кратко пересказывает свежие новости технологий, IT и искусственного интеллекта. Автор — Михаил Талалаев.",
   openGraph: {
     type: "website",
     locale: "ru_RU",
     url: "https://talalaev.su/",
-    siteName: "Mihail Talalaev",
-    title: "Mihail Talalaev — Software Engineer",
+    siteName: "Talalaev — AI-агрегатор новостей",
+    title: "Talalaev — AI-агрегатор новостей технологий и IT",
     description:
-      "Блог и портфолио Михаила Талалаева — Software Engineer. Пишу о веб-разработке, React, Next.js и TypeScript.",
+      "AI-агрегатор новостей: нейросеть собирает и кратко пересказывает свежие новости технологий, IT и искусственного интеллекта.",
     images: [
       {
         url: "/assets/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Mihail Talalaev",
+        alt: "Talalaev — AI-агрегатор новостей",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mihail Talalaev — Software Engineer",
+    title: "Talalaev — AI-агрегатор новостей технологий и IT",
     description:
-      "Блог и портфолио Михаила Талалаева — Software Engineer. Пишу о веб-разработке, React, Next.js и TypeScript.",
+      "AI-агрегатор новостей: нейросеть собирает и кратко пересказывает свежие новости технологий, IT и искусственного интеллекта.",
     images: ["/assets/og-image.jpg"],
   },
   robots: {

@@ -4,42 +4,50 @@ import { HomeView } from "src/sections/home/view";
 
 // JSON-LD structured data: lets Google/Yandex build a richer snippet (and a
 // Knowledge-panel / sitelinks-search-box) instead of guessing from page text.
+// The site is an AI-driven news aggregator; Mihail Talalaev is its author.
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
+    {
+      "@type": "WebSite",
+      name: "Talalaev — AI-агрегатор новостей",
+      url: "https://talalaev.su/",
+      inLanguage: "ru-RU",
+      description:
+        "AI-агрегатор новостей: нейросеть собирает, фильтрует и кратко пересказывает свежие новости технологий и AI.",
+      author: {
+        "@type": "Person",
+        name: "Михаил Талалаев",
+        alternateName: "Mihail Talalaev",
+        jobTitle: "Software Engineer",
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://talalaev.su/news/?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    },
     {
       "@type": "Person",
       name: "Михаил Талалаев",
       alternateName: "Mihail Talalaev",
       url: "https://talalaev.su/",
       jobTitle: "Software Engineer",
-      knowsAbout: ["React", "Next.js", "TypeScript", "Веб-разработка"],
-    },
-    {
-      "@type": "WebSite",
-      name: "Mihail Talalaev",
-      url: "https://talalaev.su/",
-      inLanguage: "ru-RU",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://talalaev.su/post/?q={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
+      knowsAbout: ["AI", "React", "Next.js", "TypeScript", "Веб-разработка"],
     },
   ],
 };
 
 // `title.absolute` opts out of the root template (`%s | Mihail Talalaev`) so
-// the homepage title isn't doubled. ~60 chars, keyword-first, brand framing.
-// Description ~150 chars in Russian (the audience is рунет) with the core
-// keywords search engines rank for.
+// the homepage title isn't doubled. ~55 chars, keyword-first, product-framed.
+// The site is an AI news aggregator; the author (Mihail Talalaev) is secondary.
+// Description ~155 chars in Russian (audience is рунет) with the core keywords.
 export const metadata = {
   title: {
-    absolute:
-      "Михаил Талалаев — Software Engineer · React, Next.js, TypeScript",
+    absolute: "Talalaev — AI-агрегатор новостей технологий и IT",
   },
   description:
-    "Михаил Талалаев — Software Engineer с 13+ годами опыта. Блог и портфолио: статьи о веб-разработке, React, Next.js и TypeScript, пет-проекты и контакты.",
+    "AI-агрегатор новостей: нейросеть собирает и кратко пересказывает свежие новости технологий, IT и искусственного интеллекта. Автор — Михаил Талалаев.",
 };
 
 export default function Page() {
