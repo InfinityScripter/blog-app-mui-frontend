@@ -42,6 +42,65 @@ const onest = Onest({
   display: "swap",
 });
 
+export const metadata = {
+  metadataBase: new URL("https://talalaev.su"),
+  title: {
+    default: "Mihail Talalaev — Software Engineer",
+    template: "%s | Mihail Talalaev",
+  },
+  description:
+    "Блог и портфолио Михаила Талалаева — Software Engineer. Пишу о веб-разработке, React, Next.js и TypeScript.",
+  openGraph: {
+    type: "website",
+    locale: "ru_RU",
+    url: "https://talalaev.su",
+    siteName: "Mihail Talalaev",
+    title: "Mihail Talalaev — Software Engineer",
+    description:
+      "Блог и портфолио Михаила Талалаева — Software Engineer. Пишу о веб-разработке, React, Next.js и TypeScript.",
+    images: [
+      {
+        url: "/assets/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mihail Talalaev",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mihail Talalaev — Software Engineer",
+    description:
+      "Блог и портфолио Михаила Талалаева — Software Engineer. Пишу о веб-разработке, React, Next.js и TypeScript.",
+    images: ["/assets/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://talalaev.su",
+  },
+  // Search-engine ownership verification. Next renders these as
+  // <meta name="google-site-verification"> / <meta name="yandex-verification">
+  // only when the env var is set, so an empty value emits nothing. Paste the
+  // token from each webmaster panel into .env.local / Vercel env — no code change.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    yandex: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION,
+    ...(process.env.NEXT_PUBLIC_BING_VERIFICATION && {
+      other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION },
+    }),
+  },
+};
+
 export const viewport = {
   width: "device-width",
   initialScale: 1,

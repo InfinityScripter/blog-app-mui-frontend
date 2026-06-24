@@ -1,11 +1,20 @@
-import { CONFIG } from "src/config-global";
 import { getNewsPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { NewsListView } from "src/sections/news/view/news-list-view";
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Новости - ${CONFIG.site.name}` };
+export const metadata = {
+  title: "Новости",
+  description: "Новости и обновления от Михаила Талалаева.",
+  alternates: { canonical: "https://talalaev.su/news" },
+  openGraph: {
+    title: "Новости | Mihail Talalaev",
+    description: "Новости и обновления от Михаила Талалаева.",
+    url: "https://talalaev.su/news",
+    type: "website",
+  },
+};
 
 // ISR: serve a cached news feed, refreshed at most hourly (getNewsPosts uses a
 // native fetch with the same revalidate window).

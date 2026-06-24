@@ -1,4 +1,3 @@
-import { CONFIG } from "src/config-global";
 import { getBlogPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
@@ -7,7 +6,19 @@ import { PostListHomeView } from "src/sections/blog/view/post-list-home-view";
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Post list - ${CONFIG.site.name}` };
+export const metadata = {
+  title: "Блог",
+  description:
+    "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
+  alternates: { canonical: "https://talalaev.su/post" },
+  openGraph: {
+    title: "Блог | Mihail Talalaev",
+    description:
+      "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
+    url: "https://talalaev.su/post",
+    type: "website",
+  },
+};
 
 // ISR: serve a cached blog list, refreshed at most hourly (getPosts uses a
 // native fetch with the same revalidate window).

@@ -1,4 +1,3 @@
-import { CONFIG } from "src/config-global";
 import { paramCase } from "src/utils/change-case";
 import { getPost, getPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not the barrel) — the barrel re-exports
@@ -8,7 +7,37 @@ import { PostDetailsHomeView } from "src/sections/blog/view/post-details-home-vi
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Post details - ${CONFIG.site.name}` };
+const BASE_URL = "https://talalaev.su";
+
+export async function generateMetadata({ params }: PageProps) {
+  try {
+    const { id } = await params;
+    const { post } = await getPost(id);
+    const title = post?.title ?? "Статья";
+    const description = post?.description ?? "Читать на talalaev.su";
+    const image = post?.coverUrl ?? `${BASE_URL}/assets/og-image.jpg`;
+    return {
+      title,
+      description,
+      alternates: { canonical: `${BASE_URL}/post/${id}` },
+      openGraph: {
+        title,
+        description,
+        url: `${BASE_URL}/post/${id}`,
+        type: "article",
+        images: [{ url: image, width: 1200, height: 630, alt: title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [image],
+      },
+    };
+  } catch {
+    return { title: "Статья | Mihail Talalaev" };
+  }
+}
 
 // ISR: prerender post pages and refresh them at most once per hour. Replaces
 // the previous force-dynamic export, which made every request a cold render.

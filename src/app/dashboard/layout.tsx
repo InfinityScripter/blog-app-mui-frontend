@@ -6,6 +6,14 @@ import { DashboardLayout } from "src/layouts/dashboard";
 
 // ----------------------------------------------------------------------
 
+// Keep the entire dashboard/admin tree out of search indexes. robots.txt is a
+// soft signal; this emits a hard `noindex, nofollow` meta tag that crawlers
+// honour even when a URL leaks via an external link. Inherited by every
+// /dashboard/* route (including /dashboard/admin/*).
+export const metadata = {
+  robots: { index: false, follow: false },
+};
+
 interface LayoutProps {
   children: ReactNode;
 }

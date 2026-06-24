@@ -1,22 +1,19 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /admin/
-Disallow: /private/
-Disallow: /login
-Disallow: /signup
-Disallow: /reset-password
-Disallow: /*?*
+Disallow: /dashboard/
+Disallow: /auth/
 
-# Allow Google bot to access everything
-User-agent: Googlebot
+# Yandex-specific: declare the canonical mirror and drop tracking params so
+# ?utm_*/fbclid variants don't fragment indexing into duplicate URLs.
+User-agent: Yandex
 Allow: /
+Disallow: /api/
+Disallow: /dashboard/
+Disallow: /auth/
+Clean-param: utm_source&utm_medium&utm_campaign&utm_term&utm_content&fbclid&gclid&yclid
+Host: https://talalaev.su
 
-# Allow Bing bot
-User-agent: Bingbot
-Allow: /
-
-# Block common bots that might overload your server
 User-agent: PetalBot
 Disallow: /
 
@@ -29,8 +26,4 @@ Disallow: /
 User-agent: AhrefsBot
 Disallow: /
 
-# Sitemap
-Sitemap: https://sh0ny.ru/sitemap.xml
-
-# Crawl delay for all bots
-Crawl-delay: 10
+Sitemap: https://talalaev.su/sitemap.xml
