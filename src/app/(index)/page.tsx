@@ -14,7 +14,9 @@ const JSON_LD = {
       url: "https://talalaev.su/",
       inLanguage: "ru-RU",
       description:
-        "AI-агрегатор новостей: нейросеть собирает, фильтрует и кратко пересказывает свежие новости технологий и AI.",
+        "AI-first агрегатор новостей: нейросеть (LLM) сама находит, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
+      keywords:
+        "AI-агрегатор, новости AI, искусственный интеллект, нейросеть, LLM, IT-новости, технологии",
       author: {
         "@type": "Person",
         name: "Михаил Талалаев",
@@ -33,7 +35,14 @@ const JSON_LD = {
       alternateName: "Mihail Talalaev",
       url: "https://talalaev.su/",
       jobTitle: "Software Engineer",
-      knowsAbout: ["AI", "React", "Next.js", "TypeScript", "Веб-разработка"],
+      knowsAbout: [
+        "Искусственный интеллект",
+        "AI",
+        "LLM",
+        "React",
+        "Next.js",
+        "TypeScript",
+      ],
     },
   ],
 };
@@ -44,10 +53,10 @@ const JSON_LD = {
 // Description ~155 chars in Russian (audience is рунет) with the core keywords.
 export const metadata = {
   title: {
-    absolute: "Talalaev — AI-агрегатор новостей технологий и IT",
+    absolute: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
   },
   description:
-    "AI-агрегатор новостей: нейросеть собирает и кратко пересказывает свежие новости технологий, IT и искусственного интеллекта. Автор — Михаил Талалаев.",
+    "AI-first агрегатор новостей: нейросеть (LLM) сама находит, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях. Без редактора — лента курируется AI.",
 };
 
 export default function Page() {
