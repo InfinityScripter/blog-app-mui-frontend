@@ -5,6 +5,8 @@ import { getPost, getPosts } from "src/actions/blog-ssr";
 // public bundle.
 import { PostDetailsHomeView } from "src/sections/blog/view/post-details-home-view";
 
+import { buildPostJsonLd } from "./json-ld";
+
 // ----------------------------------------------------------------------
 
 const BASE_URL = "https://talalaev.su";
@@ -51,21 +53,9 @@ export default async function Page({ params }: PageProps) {
   const { id } = await params;
   const { post, latestPosts } = await getPost(id); // getPost получает id
 
-  // Article JSON-LD → rich result in Google/Yandex (headline, image, date,
-  // author) instead of a bare blue link. Built from the same post payload.
-  const jsonLd = post
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        headline: post.title,
-        description: post.description,
-        image: post.coverUrl ? [post.coverUrl] : undefined,
-        datePublished: post.createdAt,
-        dateModified: post.updatedAt ?? post.createdAt,
-        author: { "@type": "Person", name: "Михаил Талалаев" },
-        mainEntityOfPage: `${BASE_URL}/post/${id}/`,
-      }
-    : null;
+  // NewsArticle (for `новости` posts, with source attribution) or Article (for
+  // authored blog posts) → rich result in Google/Yandex instead of a bare link.
+  const jsonLd = buildPostJsonLd(post, id);
 
   return (
     <>

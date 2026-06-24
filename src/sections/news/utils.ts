@@ -32,11 +32,24 @@ export function categoryColor(category: NewsCategory): LabelColor {
  * "Источник: Meduza" (optionally as a markdown link), so we read the text after
  * the last "Источник:". Returns null when absent.
  */
-function deriveSource(post: Post): string | null {
+export function deriveSource(post: Post): string | null {
   const content = post.content ?? "";
   const match = content.match(/Источник:\s*\[?([^\]\n(]+?)\]?\s*(?:\(|$|\n)/i);
   const raw = match?.[1]?.trim();
   return raw || null;
+}
+
+/**
+ * Parses the source URL when the bot wrote the source as a markdown link —
+ * "Источник: [Meduza](https://…)". Returns null for plain-text sources. Used to
+ * attribute the original article in NewsArticle JSON-LD (isBasedOn).
+ */
+export function deriveSourceUrl(post: Post): string | null {
+  const content = post.content ?? "";
+  const match = content.match(
+    /Источник:\s*\[[^\]]+\]\((https?:\/\/[^)\s]+)\)/i,
+  );
+  return match?.[1] ?? null;
 }
 
 /**
