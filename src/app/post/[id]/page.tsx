@@ -9,14 +9,14 @@ import { buildPostJsonLd } from "./json-ld";
 
 // ----------------------------------------------------------------------
 
-const BASE_URL = "https://talalaev.su";
+const BASE_URL = "https://aifirst.us.com";
 
 export async function generateMetadata({ params }: PageProps) {
   try {
     const { id } = await params;
     const { post } = await getPost(id);
     const title = post?.title ?? "Статья";
-    const description = post?.description ?? "Читать на talalaev.su";
+    const description = post?.description ?? "Читать на aifirst.us.com";
     const image = post?.coverUrl ?? `${BASE_URL}/assets/og-image.jpg`;
     return {
       title,

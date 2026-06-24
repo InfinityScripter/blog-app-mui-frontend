@@ -8,12 +8,12 @@ export const metadata = {
   title: "AI-лента новостей: искусственный интеллект, IT, технологии",
   description:
     "AI-лента новостей: нейросеть (LLM) автоматически собирает источники, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
-  alternates: { canonical: "https://talalaev.su/news/" },
+  alternates: { canonical: "https://aifirst.us.com/news/" },
   openGraph: {
     title: "AI-лента новостей: AI, IT, технологии | Talalaev",
     description:
       "Нейросеть автоматически собирает и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
-    url: "https://talalaev.su/news/",
+    url: "https://aifirst.us.com/news/",
     type: "website",
   },
 };

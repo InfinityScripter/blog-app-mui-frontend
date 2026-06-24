@@ -10,12 +10,12 @@ export const metadata = {
   title: "Блог",
   description:
     "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
-  alternates: { canonical: "https://talalaev.su/post/" },
+  alternates: { canonical: "https://aifirst.us.com/post/" },
   openGraph: {
     title: "Блог | Talalaev",
     description:
       "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
-    url: "https://talalaev.su/post/",
+    url: "https://aifirst.us.com/post/",
     type: "website",
   },
 };

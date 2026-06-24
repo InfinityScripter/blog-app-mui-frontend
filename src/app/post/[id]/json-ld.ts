@@ -5,7 +5,7 @@ import { deriveSource, deriveSourceUrl } from "src/sections/news/utils";
 
 // ----------------------------------------------------------------------
 
-const BASE_URL = "https://talalaev.su";
+const BASE_URL = "https://aifirst.us.com";
 const PUBLISHER = { "@type": "Person", name: "Михаил Талалаев" } as const;
 
 /**

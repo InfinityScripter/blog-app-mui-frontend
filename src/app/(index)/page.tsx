@@ -11,7 +11,7 @@ const JSON_LD = {
     {
       "@type": "WebSite",
       name: "Talalaev — AI-агрегатор новостей",
-      url: "https://talalaev.su/",
+      url: "https://aifirst.us.com/",
       inLanguage: "ru-RU",
       description:
         "AI-first агрегатор новостей: нейросеть (LLM) сама находит, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
@@ -25,7 +25,7 @@ const JSON_LD = {
       },
       potentialAction: {
         "@type": "SearchAction",
-        target: "https://talalaev.su/news/?q={search_term_string}",
+        target: "https://aifirst.us.com/news/?q={search_term_string}",
         "query-input": "required name=search_term_string",
       },
     },
@@ -33,7 +33,7 @@ const JSON_LD = {
       "@type": "Person",
       name: "Михаил Талалаев",
       alternateName: "Mihail Talalaev",
-      url: "https://talalaev.su/",
+      url: "https://aifirst.us.com/",
       jobTitle: "Software Engineer",
       knowsAbout: [
         "Искусственный интеллект",

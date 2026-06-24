@@ -4,7 +4,7 @@ import { getPosts } from "src/actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
-const BASE_URL = "https://talalaev.su";
+const BASE_URL = "https://aifirst.us.com";
 
 // The app runs with next.config `trailingSlash: true`, so every route's
 // canonical URL ends in a slash and the slashless form 308-redirects to it.
