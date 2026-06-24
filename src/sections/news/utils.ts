@@ -35,7 +35,9 @@ export function categoryColor(category: NewsCategory): LabelColor {
 export function deriveSource(post: Post): string | null {
   const content = post.content ?? "";
   const match = content.match(/Источник:\s*\[?([^\]\n(]+?)\]?\s*(?:\(|$|\n)/i);
-  const raw = match?.[1]?.trim();
+  // Trim trailing punctuation the feed sometimes carries (e.g. "3DNews:") so
+  // both the card label and the JSON-LD citation show a clean source name.
+  const raw = match?.[1]?.trim().replace(/[:\s·-]+$/, "");
   return raw || null;
 }
 
