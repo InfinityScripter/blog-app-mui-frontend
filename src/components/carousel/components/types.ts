@@ -4,7 +4,7 @@ import type { StackProps } from "@mui/material/Stack";
 import type { Theme, SxProps } from "@mui/material/styles";
 import type { ButtonBaseProps } from "@mui/material/ButtonBase";
 
-import type { CarouselOptions, CarouselSlotProps } from "../carousel";
+import type { CarouselOptions, CarouselSlotProps } from "../types";
 
 // ----------------------------------------------------------------------
 

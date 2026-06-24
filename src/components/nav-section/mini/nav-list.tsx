@@ -9,9 +9,8 @@ import { isExternalLink } from "src/routes/utils";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { useActiveLink } from "src/routes/hooks/use-active-link";
 
-import { NavLi } from "../styles";
 import { NavItem } from "./nav-item";
-import { NavSubList } from "./nav-sub-list";
+import { NavLi, NavUl } from "../styles";
 import { navSectionClasses } from "../classes";
 
 import type { NavListProps } from "../types";
@@ -123,14 +122,21 @@ export function NavList({
               ...slotProps?.paper,
             }}
           >
-            <NavSubList
-              data={data.children}
-              depth={depth}
-              render={render}
-              cssVars={cssVars}
-              slotProps={slotProps}
-              enabledRootRedirect={enabledRootRedirect}
-            />
+            {/* Recurse over children inline (was NavSubList) to avoid a
+                NavList <-> NavSubList circular import. */}
+            <NavUl sx={{ gap: 0.5 }}>
+              {data.children.map((list) => (
+                <NavList
+                  key={list.title}
+                  data={list}
+                  render={render}
+                  depth={depth + 1}
+                  cssVars={cssVars}
+                  slotProps={slotProps}
+                  enabledRootRedirect={enabledRootRedirect}
+                />
+              ))}
+            </NavUl>
           </Paper>
         </Popover>
       </NavLi>

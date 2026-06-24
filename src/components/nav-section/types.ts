@@ -67,10 +67,6 @@ export type NavListProps = {
   enabledRootRedirect?: boolean;
 };
 
-export type NavSubListProps = Omit<NavListProps, "data"> & {
-  data: NavItemBaseProps[];
-};
-
 export type NavGroupProps = {
   subheader?: string;
   items: NavItemBaseProps[];

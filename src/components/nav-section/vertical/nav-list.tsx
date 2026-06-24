@@ -4,9 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useActiveLink } from "src/routes/hooks/use-active-link";
 
 import { NavItem } from "./nav-item";
-import { NavSubList } from "./nav-sub-list";
 import { navSectionClasses } from "../classes";
-import { NavLi, NavCollapse } from "../styles";
+import { NavLi, NavUl, NavCollapse } from "../styles";
 
 import type { NavListProps } from "../types";
 
@@ -93,13 +92,20 @@ export function NavList({
           unmountOnExit
           mountOnEnter
         >
-          <NavSubList
-            data={data.children}
-            render={render}
-            depth={depth}
-            slotProps={slotProps}
-            enabledRootRedirect={enabledRootRedirect}
-          />
+          {/* Recurse over children inline (was NavSubList) to avoid a
+              NavList <-> NavSubList circular import. */}
+          <NavUl sx={{ gap: "var(--nav-item-gap)" }}>
+            {data.children.map((list) => (
+              <NavList
+                key={list.title}
+                data={list}
+                render={render}
+                depth={depth + 1}
+                slotProps={slotProps}
+                enabledRootRedirect={enabledRootRedirect}
+              />
+            ))}
+          </NavUl>
         </NavCollapse>
       </NavLi>
     );
