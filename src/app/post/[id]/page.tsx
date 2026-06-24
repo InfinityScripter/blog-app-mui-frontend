@@ -50,7 +50,35 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
   const { post, latestPosts } = await getPost(id); // getPost получает id
-  return <PostDetailsHomeView post={post} latestPosts={latestPosts} />;
+
+  // Article JSON-LD → rich result in Google/Yandex (headline, image, date,
+  // author) instead of a bare blue link. Built from the same post payload.
+  const jsonLd = post
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: post.title,
+        description: post.description,
+        image: post.coverUrl ? [post.coverUrl] : undefined,
+        datePublished: post.createdAt,
+        dateModified: post.updatedAt ?? post.createdAt,
+        author: { "@type": "Person", name: "Михаил Талалаев" },
+        mainEntityOfPage: `${BASE_URL}/post/${id}/`,
+      }
+    : null;
+
+  return (
+    <>
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      <PostDetailsHomeView post={post} latestPosts={latestPosts} />
+    </>
+  );
 }
 
 // ----------------------------------------------------------------------
