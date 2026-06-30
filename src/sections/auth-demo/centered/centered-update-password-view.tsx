@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Form } from "src/components/hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import axios from "../../../utils/axios";
+import axios, { endpoints } from "../../../utils/axios";
 import { UpdatePasswordSchema } from "./update-password-schema";
 import { CenteredUpdatePasswordHead } from "./centered-update-password-head";
 import { CenteredUpdatePasswordForm } from "./centered-update-password-form";
@@ -52,7 +52,7 @@ export function CenteredUpdatePasswordView() {
       setError("");
       setSuccess("");
 
-      await axios.post("/api/auth/update-password", {
+      await axios.post(endpoints.auth.updatePassword, {
         email: data.email,
         code: data.code,
         password: data.password,

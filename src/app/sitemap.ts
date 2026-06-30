@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 
+import { CONFIG } from "src/config-global";
 import { getPosts } from "src/actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
-const BASE_URL = "https://aifirst.us.com";
+const BASE_URL = CONFIG.site.url;
 
 // The app runs with next.config `trailingSlash: true`, so every route's
 // canonical URL ends in a slash and the slashless form 308-redirects to it.

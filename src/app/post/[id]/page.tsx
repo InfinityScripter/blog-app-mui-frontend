@@ -1,3 +1,4 @@
+import { CONFIG } from "src/config-global";
 import { paramCase } from "src/utils/change-case";
 import { getPost, getPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not the barrel) — the barrel re-exports
@@ -9,7 +10,7 @@ import { buildPostJsonLd } from "./json-ld";
 
 // ----------------------------------------------------------------------
 
-const BASE_URL = "https://aifirst.us.com";
+const BASE_URL = CONFIG.site.url;
 
 export async function generateMetadata({ params }: PageProps) {
   try {

@@ -1,3 +1,4 @@
+import { CONFIG } from "src/config-global";
 import { getNewsPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { NewsListView } from "src/sections/news/view/news-list-view";
@@ -8,12 +9,12 @@ export const metadata = {
   title: "AI-лента новостей: искусственный интеллект, IT, технологии",
   description:
     "AI-лента новостей: нейросеть (LLM) автоматически собирает источники, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
-  alternates: { canonical: "https://aifirst.us.com/news/" },
+  alternates: { canonical: `${CONFIG.site.url}/news/` },
   openGraph: {
     title: "AI-лента новостей: AI, IT, технологии | Talalaev",
     description:
       "Нейросеть автоматически собирает и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
-    url: "https://aifirst.us.com/news/",
+    url: `${CONFIG.site.url}/news/`,
     type: "website",
   },
 };

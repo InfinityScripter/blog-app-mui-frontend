@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import { Logo } from "src/components/logo";
+import { CONFIG } from "src/config-global";
 import Container from "@mui/material/Container";
 
 import type { HomeFooterProps } from "./types";
@@ -24,7 +25,7 @@ export function HomeFooter({ sx }: HomeFooterProps) {
         <Box sx={{ mt: 1, typography: "caption" }}>
           © All rights reserved.
           <br /> сделано
-          <Link href="https://t.me/sh0ny/"> Mikhail Talalaev </Link>
+          <Link href={CONFIG.social.telegram}> Mikhail Talalaev </Link>
         </Box>
       </Container>
     </Box>

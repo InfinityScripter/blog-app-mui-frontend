@@ -1,6 +1,8 @@
+import { CONFIG } from "src/config-global";
+
 // TODO: заменить на ссылку Telegram-канала, когда будет готова. Пока ведёт на
 // личный аккаунт (тот же, что в футере).
-export const TELEGRAM_URL = "https://t.me/sh0ny";
+export const TELEGRAM_URL = CONFIG.social.telegram;
 
 export const CTA_LABEL = "Telegram-канал";
 export const CTA_TITLE = "Разборы AI-инструментов — без воды";

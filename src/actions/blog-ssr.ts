@@ -139,7 +139,7 @@ export async function getCurrentUser(): Promise<{
   user: import("src/types/domain").User;
 }> {
   const res = await axios.get<{ user: import("src/types/domain").User }>(
-    "/api/auth/me",
+    endpoints.auth.me,
   );
   return res.data;
 }

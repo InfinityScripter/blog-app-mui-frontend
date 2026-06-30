@@ -1,3 +1,5 @@
+import { CONFIG } from "src/config-global";
+
 import type { PortfolioMetric } from "./types";
 
 // Резюме: путь к файлу в public/ и имя при скачивании.
@@ -5,7 +7,7 @@ import type { PortfolioMetric } from "./types";
 export const CV_URL = "/assets/cv/mikhail-talalaev-cv.pdf";
 export const CV_DOWNLOAD_NAME = "Mikhail-Talalaev-Software-Engineer.pdf";
 
-export const GITHUB_URL = "https://github.com/InfinityScripter";
+export const GITHUB_URL = CONFIG.social.github;
 
 export const PORTFOLIO_METRICS: PortfolioMetric[] = [
   {

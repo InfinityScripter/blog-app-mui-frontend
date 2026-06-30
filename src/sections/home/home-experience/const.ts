@@ -1,3 +1,5 @@
+import { CONFIG } from "src/config-global";
+
 import type { ExperienceItem } from "./types";
 
 export const DATE_FORMAT = "MMMM YYYY";
@@ -36,7 +38,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     technologies:
       "JavaScript, TypeScript, React, MUI UI, Git, HTML, CSS, Figma, REST API",
     logo: "/assets/icons/experience/qcup.svg",
-    link: "https://github.com/InfinityScripter",
+    link: CONFIG.social.github,
   },
   {
     position: "Frontend Developer (JS)",

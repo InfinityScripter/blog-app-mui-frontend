@@ -43,7 +43,7 @@ const onest = Onest({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://aifirst.us.com"),
+  metadataBase: new URL(CONFIG.site.url),
   title: {
     default: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
     template: "%s | Talalaev",
@@ -53,7 +53,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    url: "https://aifirst.us.com/",
+    url: `${CONFIG.site.url}/`,
     siteName: "Talalaev — AI-агрегатор новостей",
     title: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
     description:
@@ -86,7 +86,7 @@ export const metadata = {
     },
   },
   alternates: {
-    canonical: "https://aifirst.us.com/",
+    canonical: `${CONFIG.site.url}/`,
   },
   // Search-engine ownership verification. Next renders these as
   // <meta name="google-site-verification"> / <meta name="yandex-verification">

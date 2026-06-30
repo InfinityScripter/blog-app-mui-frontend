@@ -1,3 +1,5 @@
+import { CONFIG } from "src/config-global";
+
 // ----------------------------------------------------------------------
 
 export const LINKS = [
@@ -12,8 +14,8 @@ export const LINKS = [
     headline: "Контакты",
     children: [
       {
-        name: "talalaev.misha@gmail.com",
-        href: "mailto:talalaev.misha@gmail.com",
+        name: CONFIG.contacts.email,
+        href: `mailto:${CONFIG.contacts.email}`,
       },
     ],
   },
@@ -23,17 +25,17 @@ export const socials = [
   {
     value: "telegram",
     name: "Telegram",
-    path: "https://t.me/sh0ny/",
+    path: CONFIG.social.telegram,
   },
   {
     value: "github",
     name: "GitHub",
-    path: "https://github.com/InfinityScripter",
+    path: CONFIG.social.github,
   },
   {
     value: "linkedin",
     name: "Linkedin",
-    path: "https://www.linkedin.com/in/talalaevs/",
+    path: CONFIG.social.linkedin,
   },
   {
     value: "vk",

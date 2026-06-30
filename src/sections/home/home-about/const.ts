@@ -1,9 +1,11 @@
+import { CONFIG } from "src/config-global";
+
 import type { AboutHighlight } from "./types";
 
 export const ABOUT_PROFILE = {
   name: "Михаил Талалаев",
   role: "Software Engineer",
-  email: "talalaev.misha@gmail.com",
+  email: CONFIG.contacts.email,
   imageSrc: "/assets/images/about/developer.webp",
   imageAlt: "Михаил Талалаев",
 };

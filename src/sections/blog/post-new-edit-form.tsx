@@ -11,7 +11,7 @@ import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useEffect, useCallback } from "react";
 
-import axios from "../../utils/axios";
+import axios, { endpoints } from "../../utils/axios";
 import { NewPostSchema } from "./post-new-edit-schema";
 import { PostDetailsPreview } from "./post-details-preview";
 import { PostNewEditDetails } from "./post-new-edit-details";
@@ -91,7 +91,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
         const formData = new FormData();
         formData.append("file", data.coverUrl);
 
-        const uploadResponse = await axios.post("/api/upload", formData, {
+        const uploadResponse = await axios.post(endpoints.upload, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

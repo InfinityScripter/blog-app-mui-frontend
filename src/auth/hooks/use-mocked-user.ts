@@ -1,4 +1,5 @@
 import { _mock } from "src/_mock";
+import { CONFIG } from "src/config-global";
 
 // To get the user from the <AuthContext/>, you can use
 
@@ -36,7 +37,7 @@ export function useMockedUser(): UseMockedUserReturn {
   const user: MockedUser = {
     id: "8864c717-587d-472a-929a-8e5f298024da-0",
     displayName: "Михаил Талалаев",
-    email: "talalaev.misha@gmail.com",
+    email: CONFIG.contacts.email,
     photoURL: _mock.image.avatar(24),
     phoneNumber: _mock.phoneNumber(1),
     country: _mock.countryNames(1),

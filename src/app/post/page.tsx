@@ -1,3 +1,4 @@
+import { CONFIG } from "src/config-global";
 import { getBlogPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
@@ -10,12 +11,12 @@ export const metadata = {
   title: "Блог",
   description:
     "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
-  alternates: { canonical: "https://aifirst.us.com/post/" },
+  alternates: { canonical: `${CONFIG.site.url}/post/` },
   openGraph: {
     title: "Блог | Talalaev",
     description:
       "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript.",
-    url: "https://aifirst.us.com/post/",
+    url: `${CONFIG.site.url}/post/`,
     type: "website",
   },
 };

@@ -9,10 +9,19 @@ type AuthMethod = "jwt" | "amplify" | "firebase" | "supabase" | "auth0";
 interface Config {
   site: {
     name: string;
+    url: string;
     serverUrl: string;
     assetURL: string;
     basePath: string;
     version: string;
+  };
+  contacts: {
+    email: string;
+  };
+  social: {
+    telegram: string;
+    github: string;
+    linkedin: string;
   };
   isStaticExport: boolean;
   auth: {
@@ -51,10 +60,19 @@ interface Config {
 export const CONFIG: Config = {
   site: {
     name: "Mihail Talalaev",
+    url: "https://aifirst.us.com",
     serverUrl: process.env.NEXT_PUBLIC_SERVER_URL ?? "",
     assetURL: process.env.NEXT_PUBLIC_ASSET_URL ?? "",
     basePath: process.env.NEXT_PUBLIC_BASE_PATH ?? "",
     version: packageJson.version,
+  },
+  contacts: {
+    email: "talalaev.misha@gmail.com",
+  },
+  social: {
+    telegram: "https://t.me/sh0ny",
+    github: "https://github.com/InfinityScripter",
+    linkedin: "https://www.linkedin.com/in/talalaevs/",
   },
   isStaticExport: JSON.parse(`${process.env.BUILD_STATIC_EXPORT ?? "false"}`),
   /**

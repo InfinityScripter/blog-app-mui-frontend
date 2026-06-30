@@ -1,11 +1,12 @@
 import type { Post } from "src/types/domain";
 
+import { CONFIG } from "src/config-global";
 import { NEWS_TAG } from "src/sections/news/const";
 import { deriveSource, deriveSourceUrl } from "src/sections/news/utils";
 
 // ----------------------------------------------------------------------
 
-const BASE_URL = "https://aifirst.us.com";
+const BASE_URL = CONFIG.site.url;
 const PUBLISHER = { "@type": "Person", name: "Михаил Талалаев" } as const;
 
 /**
