@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
 import { paramCase } from "src/utils/change-case";
 import { getPost, getPosts } from "src/actions/blog-ssr";
@@ -52,7 +53,19 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
-  const { post, latestPosts } = await getPost(id); // getPost получает id
+
+  // A backend hiccup (e.g. a transient 500) at prerender time must not fail the
+  // whole build — one unreachable post falls back to notFound() and ISR
+  // (dynamicParams + revalidate) regenerates it on the next request. Mirrors the
+  // try/catch guards already in generateMetadata/generateStaticParams here and
+  // in the /post and /news list pages.
+  let post: Awaited<ReturnType<typeof getPost>>["post"];
+  let latestPosts: Awaited<ReturnType<typeof getPost>>["latestPosts"];
+  try {
+    ({ post, latestPosts } = await getPost(id));
+  } catch {
+    notFound();
+  }
 
   // NewsArticle (for `новости` posts, with source attribution) or Article (for
   // authored blog posts) → rich result in Google/Yandex instead of a bare link.
