@@ -10,10 +10,10 @@ import type { FormLabelProps } from "@mui/material/FormLabel";
 import type { InputLabelProps } from "@mui/material/InputLabel";
 import type { FormControlProps } from "@mui/material/FormControl";
 import type { FormHelperTextProps } from "@mui/material/FormHelperText";
-import type { FormControlLabelProps } from "@mui/material/FormControlLabel";
 import type { ReactNode, SyntheticEvent, FormEventHandler } from "react";
-import type { AutocompleteRenderInputParams } from "@mui/material/Autocomplete";
+import type { FormControlLabelProps } from "@mui/material/FormControlLabel";
 import type { FieldPath, FieldValues, UseFormReturn } from "react-hook-form";
+import type { AutocompleteRenderInputParams } from "@mui/material/Autocomplete";
 
 // ----------------------------------------------------------------------
 

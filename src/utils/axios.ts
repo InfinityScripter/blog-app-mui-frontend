@@ -75,6 +75,11 @@ export const endpoints = {
     list: "/api/changelog/list",
     details: (slug: string) => `/api/changelog/${encodeURIComponent(slug)}`,
   },
+  newsletter: {
+    subscribe: "/api/newsletter/subscribe",
+    confirm: "/api/newsletter/confirm",
+    unsubscribe: "/api/newsletter/unsubscribe",
+  },
   product: {
     list: "/api/product/list",
     details: "/api/product/details",
