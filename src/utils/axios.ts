@@ -71,6 +71,10 @@ export const endpoints = {
         `/api/post/${postId}/comments/${commentId}/reply`,
     },
   },
+  changelog: {
+    list: "/api/changelog/list",
+    details: (slug: string) => `/api/changelog/${encodeURIComponent(slug)}`,
+  },
   product: {
     list: "/api/product/list",
     details: "/api/product/details",

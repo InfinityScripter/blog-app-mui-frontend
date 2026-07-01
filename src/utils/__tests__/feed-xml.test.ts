@@ -128,4 +128,22 @@ describe("buildRssFeed", () => {
     expect(build).not.toThrow();
     expect(build()).toContain("<description><![CDATA[]]></description>");
   });
+
+  it("uses linkFor to emit a /changelog/<slug>/ item link and guid", () => {
+    const xml = buildRssFeed({
+      posts: [post({ _id: "gpt-5" })],
+      ...META,
+      linkFor: (p) => `${CONFIG.site.url}/changelog/${p._id ?? p.id ?? ""}/`,
+    });
+    const expected = `${CONFIG.site.url}/changelog/gpt-5/`;
+    expect(xml).toContain(`<link>${expected}</link>`);
+    expect(xml).toContain(`<guid isPermaLink="true">${expected}</guid>`);
+    // The default /post/ link must NOT appear when linkFor overrides it.
+    expect(xml).not.toContain("/post/gpt-5/");
+  });
+
+  it("defaults to the /post/<id>/ link when linkFor is omitted", () => {
+    const xml = buildRssFeed({ posts: [post({ _id: "keep-post" })], ...META });
+    expect(xml).toContain(`<link>${CONFIG.site.url}/post/keep-post/</link>`);
+  });
 });

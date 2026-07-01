@@ -24,3 +24,23 @@ describe("paths.tag.details", () => {
     );
   });
 });
+
+describe("paths.changelog", () => {
+  it("exposes the archive root", () => {
+    expect(paths.changelog.root).toBe("/changelog");
+  });
+
+  it("builds a plain ASCII release slug path", () => {
+    expect(paths.changelog.details("gpt-5")).toBe("/changelog/gpt-5");
+  });
+
+  it("encodes a slug with unexpected characters and round-trips", () => {
+    const url = paths.changelog.details("gpt 5/mini");
+    expect(url).not.toContain(" ");
+    // The raw slash must be encoded so it can't split the path segment.
+    expect(url).toBe(`/changelog/${encodeURIComponent("gpt 5/mini")}`);
+    expect(decodeURIComponent(url.replace("/changelog/", ""))).toBe(
+      "gpt 5/mini",
+    );
+  });
+});

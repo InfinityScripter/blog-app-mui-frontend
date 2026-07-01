@@ -31,6 +31,10 @@ interface Paths {
     root: string;
     details: (tag: string) => string;
   };
+  changelog: {
+    root: string;
+    details: (slug: string) => string;
+  };
   auth: {
     jwt: {
       signIn: string;
@@ -91,6 +95,12 @@ export const paths: Paths = {
     // Backend tag matching is exact/case-sensitive — carry the raw tag through
     // the URL encoded (paramCase would strip Cyrillic to empty).
     details: (tag: string) => `/tag/${encodeURIComponent(tag)}`,
+  },
+  changelog: {
+    root: `/changelog`,
+    // Slugs are backend-generated (ascii-safe) but encode defensively so a
+    // slug with unexpected characters can't break the URL.
+    details: (slug: string) => `/changelog/${encodeURIComponent(slug)}`,
   },
   // AUTH
   auth: {
