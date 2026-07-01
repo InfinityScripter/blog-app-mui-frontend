@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -27,7 +28,9 @@ export function PostNewsletterCta() {
         Понравился разбор? Получайте такие раз в неделю на почту
       </Typography>
 
-      <NewsletterForm />
+      <Box sx={{ width: 1, maxWidth: 480 }}>
+        <NewsletterForm />
+      </Box>
     </Stack>
   );
 }
