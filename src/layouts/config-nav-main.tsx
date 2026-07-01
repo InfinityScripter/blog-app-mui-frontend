@@ -24,6 +24,11 @@ export const navData = [
     icon: <Iconify width={22} icon="solar:rocket-2-bold-duotone" />,
   },
   {
+    title: "История LLM",
+    path: "/llm-timeline",
+    icon: <Iconify width={22} icon="solar:clock-circle-bold-duotone" />,
+  },
+  {
     title: "Обо мне",
     path: "/portfolio",
     icon: <Iconify width={22} icon="solar:user-circle-bold-duotone" />,
