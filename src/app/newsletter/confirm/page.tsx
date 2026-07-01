@@ -6,9 +6,9 @@ import { NewsletterStatus } from "../newsletter-status";
 import { useTokenAction } from "../hooks/use-token-action";
 
 export default function Page() {
-  const { status, message } = useTokenAction(
+  const { status, message, redirectIn } = useTokenAction(
     confirmSubscription,
-    "Подписка подтверждена ✅",
+    "Подписка подтверждена",
     "Ссылка недействительна — токен отсутствует",
   );
 
@@ -16,6 +16,7 @@ export default function Page() {
     <NewsletterStatus
       status={status}
       message={message}
+      redirectIn={redirectIn}
       loadingText="Подтверждаем подписку..."
     />
   );

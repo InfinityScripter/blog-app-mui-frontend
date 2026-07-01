@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 // ----------------------------------------------------------------------
 // Shared logic for the confirm / unsubscribe status pages: read the `token`
 // query param, run the given async action once, expose loading/success/error.
+// On success it counts down and redirects home so the page isn't a dead end.
 
 type TokenAction = (token: string) => Promise<unknown>;
 
@@ -11,7 +12,10 @@ type Status = "loading" | "success" | "error";
 interface TokenActionState {
   status: Status;
   message: string;
+  redirectIn: number;
 }
+
+const REDIRECT_SECONDS = 4;
 
 export function useTokenAction(
   action: TokenAction,
@@ -20,6 +24,7 @@ export function useTokenAction(
 ): TokenActionState {
   const [status, setStatus] = useState<Status>("loading");
   const [message, setMessage] = useState<string>("");
+  const [redirectIn, setRedirectIn] = useState<number>(REDIRECT_SECONDS);
   const ran = useRef(false);
 
   useEffect(() => {
@@ -54,5 +59,24 @@ export function useTokenAction(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { status, message };
+  // Once confirmed/unsubscribed, tick a countdown then send the reader home —
+  // a blank status page is a dead end. Manual "На главную" stays available.
+  useEffect(() => {
+    if (status !== "success") return undefined;
+
+    const timer = setInterval(() => {
+      setRedirectIn((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          window.location.assign("/");
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [status]);
+
+  return { status, message, redirectIn };
 }
