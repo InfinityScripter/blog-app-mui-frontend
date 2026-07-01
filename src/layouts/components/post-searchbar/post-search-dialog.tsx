@@ -19,6 +19,7 @@ import { SearchNotFound } from "src/components/search-not-found";
 
 import { usePostSearch } from "./hooks/use-post-search";
 import { PostResultList } from "./components/post-result-list";
+import { PostSearchEmpty } from "./components/post-search-empty";
 import { PostSearchButton } from "./components/post-search-button";
 
 // ----------------------------------------------------------------------
@@ -83,6 +84,10 @@ export function PostSearchDialog() {
 
   const notFound = Boolean(query) && !loading && !results.length;
 
+  // Before the visitor types, show recent posts instead of a blank panel.
+  // Gated on `search.value` so the recent-posts fetch only fires while open.
+  const showEmptyState = search.value && !query;
+
   return (
     <>
       <PostSearchButton onOpen={search.onTrue} />
@@ -136,11 +141,15 @@ export function PostSearchDialog() {
           <SearchNotFound query={query} sx={{ py: 15 }} />
         ) : (
           <Scrollbar sx={{ px: 3, pb: 3, pt: 2, height: 400 }}>
-            <PostResultList
-              results={results}
-              query={query}
-              onClickItem={handleClickItem}
-            />
+            {showEmptyState ? (
+              <PostSearchEmpty onClickItem={handleClickItem} />
+            ) : (
+              <PostResultList
+                results={results}
+                query={query}
+                onClickItem={handleClickItem}
+              />
+            )}
           </Scrollbar>
         )}
       </Dialog>

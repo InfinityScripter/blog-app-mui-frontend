@@ -20,3 +20,7 @@ export interface PostResultListProps {
   query: string;
   onClickItem: (postId: string) => void;
 }
+
+export interface PostSearchEmptyProps {
+  onClickItem: (postId: string) => void;
+}

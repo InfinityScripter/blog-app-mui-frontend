@@ -18,12 +18,22 @@ const swrOptions = {
 interface UseGetPostsOptions {
   /** Exclude posts carrying this tag (e.g. 'новости' to hide news from the feed). */
   excludeTag?: string;
+  /**
+   * Cap the number of posts. Passing this switches the backend to its paginated
+   * path, which returns posts newest-first (the unbounded default is ASC). Use
+   * for "recent posts" widgets that want the latest N without client sorting.
+   */
+  limit?: number;
 }
 
 export function useGetPosts(options: UseGetPostsOptions = {}) {
-  const { excludeTag } = options;
-  const url = excludeTag
-    ? `${endpoints.post.list}?excludeTag=${encodeURIComponent(excludeTag)}`
+  const { excludeTag, limit } = options;
+  const params = new URLSearchParams();
+  if (excludeTag) params.set("excludeTag", excludeTag);
+  if (limit) params.set("limit", String(limit));
+  const queryString = params.toString();
+  const url = queryString
+    ? `${endpoints.post.list}?${queryString}`
     : endpoints.post.list;
 
   const { data, isLoading, error, isValidating } = useSWR<ListPostsResponse>(
