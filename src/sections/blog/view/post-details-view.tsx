@@ -70,6 +70,7 @@ export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
       <PostDetailsHero
         title={`${currentPost?.title}`}
         coverUrl={`${formatImageUrl(currentPost?.coverUrl)}`}
+        postId={currentPost?._id}
       />
 
       <Stack

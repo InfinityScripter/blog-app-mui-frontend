@@ -19,7 +19,12 @@ export async function generateMetadata({ params }: PageProps) {
     const { post } = await getPost(id);
     const title = post?.title ?? "Статья";
     const description = post?.description ?? "Читать на aifirst.us.com";
-    const image = post?.coverUrl ?? `${BASE_URL}/assets/og-image.jpg`;
+    // A real uploaded cover wins as og:image. Otherwise omit images here and let
+    // the file-convention per-post image (opengraph-image.tsx) be canonical —
+    // no hardcoded /assets/og-image.jpg fallback (that file never existed).
+    const images = post?.coverUrl
+      ? [{ url: post.coverUrl, width: 1200, height: 630, alt: title }]
+      : undefined;
     return {
       title,
       description,
@@ -29,13 +34,13 @@ export async function generateMetadata({ params }: PageProps) {
         description,
         url: `${BASE_URL}/post/${id}/`,
         type: "article",
-        images: [{ url: image, width: 1200, height: 630, alt: title }],
+        ...(images && { images }),
       },
       twitter: {
         card: "summary_large_image",
         title,
         description,
-        images: [image],
+        ...(post?.coverUrl && { images: [post.coverUrl] }),
       },
     };
   } catch {

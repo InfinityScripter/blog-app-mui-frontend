@@ -5,6 +5,9 @@ export default defineConfig({
     include: [
       "src/server/llm-stats/**/*.test.ts",
       "src/components/**/*.test.ts",
+      "src/utils/**/*.test.ts",
+      "src/routes/**/*.test.ts",
+      "src/sections/**/*.test.ts",
     ],
     environment: "node",
   },

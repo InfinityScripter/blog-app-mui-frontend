@@ -52,6 +52,11 @@ export interface PostDetailsHeroProps {
   author?: AuthorInfo;
   coverUrl?: string;
   createdAt?: string | Date;
+  /**
+   * Post id used to build the share URL. When absent (e.g. the draft preview)
+   * the share actions are hidden so no `/post/undefined/` link is emitted.
+   */
+  postId?: string;
 }
 
 export interface PostDetailsPreviewProps {

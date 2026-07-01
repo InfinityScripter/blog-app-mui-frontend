@@ -62,6 +62,19 @@ export async function getBlogPosts(): Promise<ListPostsResponse> {
 
 // ----------------------------------------------------------------------
 
+/** Published posts carrying an exact tag, for the /tag/[slug] archive (ISR-cached). */
+export async function getPostsByTag(tag: string): Promise<ListPostsResponse> {
+  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(tag)}`;
+  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch posts by tag: ${res.status}`);
+  }
+  const data: ListPostsResponse = await res.json();
+  return data;
+}
+
+// ----------------------------------------------------------------------
+
 export async function getPost(id: string): Promise<PostResponse> {
   const res = await fetch(`${SERVER_URL}${endpoints.post.details}?id=${id}`, {
     next: { revalidate: REVALIDATE_SECONDS },

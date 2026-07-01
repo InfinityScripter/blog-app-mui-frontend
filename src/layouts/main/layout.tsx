@@ -14,6 +14,7 @@ import { HeaderBase } from "../core/header-base";
 // ----------------------------------------------------------------------
 import { LayoutSection } from "../core/layout-section";
 import { navData as mainNavData } from "../config-nav-main";
+import { PostSearchbar } from "../components/post-searchbar";
 
 import type { MainLayoutProps } from "./types";
 
@@ -65,16 +66,19 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
                 </Alert>
               ),
               rightAreaStart: (
-                <NavDesktop
-                  data={navData}
-                  sx={{
-                    display: "none",
-                    [theme.breakpoints.up(layoutQuery)]: {
-                      mr: 2.5,
-                      display: "flex",
-                    },
-                  }}
-                />
+                <>
+                  <PostSearchbar />
+                  <NavDesktop
+                    data={navData}
+                    sx={{
+                      display: "none",
+                      [theme.breakpoints.up(layoutQuery)]: {
+                        mr: 2.5,
+                        display: "flex",
+                      },
+                    }}
+                  />
+                </>
               ),
             }}
           />

@@ -1,17 +1,21 @@
 import Box from "@mui/material/Box";
-import { _socials } from "src/_mock";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
+import { CONFIG } from "src/config-global";
 import { fDate } from "src/utils/format-time";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
 import { useResponsive } from "src/hooks/use-responsive";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { formatImageUrl } from "src/utils/format-image-url";
-import { Iconify, SocialIcon } from "src/components/iconify";
 import { maxLine, varAlpha, bgGradient } from "src/theme/styles";
+
+import { SHARE_TARGETS } from "./const";
+import { useCopyShareLink } from "./hooks/use-copy-share-link";
 
 import type { PostDetailsHeroProps } from "./types";
 
@@ -22,10 +26,21 @@ export function PostDetailsHero({
   author,
   coverUrl,
   createdAt,
+  postId,
 }: PostDetailsHeroProps) {
   const smUp = useResponsive("up", "sm");
 
   const formattedCoverUrl = formatImageUrl(coverUrl);
+
+  // Trailing slash matches next.config trailingSlash:true. Empty when there's
+  // no postId (draft preview) → the share actions are hidden below.
+  const postUrl = postId
+    ? `${CONFIG.site.url}${paths.post.details(postId)}/`
+    : "";
+
+  const shareTitle = title ?? "";
+
+  const handleCopyLink = useCopyShareLink(postUrl);
 
   return (
     <Box
@@ -89,27 +104,47 @@ export function PostDetailsHero({
             </Stack>
           )}
 
-          <SpeedDial
-            direction={smUp ? "left" : "up"}
-            ariaLabel="Поделиться постом"
-            icon={<Iconify icon="solar:share-bold" />}
-            FabProps={{ size: "medium" }}
-            sx={{
-              position: "absolute",
-              bottom: { xs: 32, md: 64 },
-              right: { xs: 16, md: 24 },
-            }}
-          >
-            {_socials.map((action) => (
+          {postUrl && (
+            <SpeedDial
+              direction={smUp ? "left" : "up"}
+              ariaLabel="Поделиться постом"
+              icon={<Iconify icon="solar:share-bold" />}
+              FabProps={{ size: "medium" }}
+              sx={{
+                position: "absolute",
+                bottom: { xs: 32, md: 64 },
+                right: { xs: 16, md: 24 },
+              }}
+            >
+              {SHARE_TARGETS.map((target) => (
+                <SpeedDialAction
+                  key={target.name}
+                  icon={<Iconify icon={target.icon} />}
+                  tooltipTitle={target.tooltip}
+                  tooltipPlacement="top"
+                  FabProps={{ color: "default" }}
+                  // SpeedDialAction's FabProps can't type an anchor with
+                  // target/rel (no cast allowed), so open the share intent in a
+                  // new tab with noopener/noreferrer instead of an <a href>.
+                  onClick={() =>
+                    window.open(
+                      target.href(postUrl, shareTitle),
+                      "_blank",
+                      "noopener,noreferrer",
+                    )
+                  }
+                />
+              ))}
+
               <SpeedDialAction
-                key={action.name}
-                icon={<SocialIcon icon={action.name} />}
-                tooltipTitle={action.name}
+                icon={<Iconify icon="solar:copy-bold" />}
+                tooltipTitle="Скопировать ссылку"
                 tooltipPlacement="top"
                 FabProps={{ color: "default" }}
+                onClick={handleCopyLink}
               />
-            ))}
-          </SpeedDial>
+            </SpeedDial>
+          )}
         </Stack>
       </Container>
     </Box>
