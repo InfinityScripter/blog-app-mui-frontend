@@ -6,9 +6,9 @@ import { loadOgFonts } from "src/utils/og-fonts";
 // ----------------------------------------------------------------------
 
 // Per-post OpenGraph card: the RU post title over the brand background. Title is
-// Cyrillic → the Roboto TTF is embedded via `fonts` (default node runtime lets
-// fs read public/fonts) so satori doesn't render tofu. A missing/unreachable
-// post falls back to the site name, never a broken image.
+// Cyrillic → the Roboto TTF is embedded via `fonts` (fetched from public/fonts,
+// see og-fonts) so satori doesn't render tofu. A missing/unreachable post falls
+// back to the site name, never a broken image.
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

@@ -4,8 +4,9 @@ import { loadOgFonts } from "src/utils/og-fonts";
 
 // ----------------------------------------------------------------------
 
-// Site-wide OpenGraph card. Rendered dynamically (default node runtime, so `fs`
-// works) instead of shipping a static /assets/og-image.jpg that didn't exist.
+// Site-wide OpenGraph card. Rendered dynamically instead of shipping a static
+// /assets/og-image.jpg that didn't exist. Cyrillic-capable Roboto is fetched
+// from public/fonts (see og-fonts) so this works in Vercel's serverless runtime.
 // Mirrors the branded monogram tile from the in-app Logo / favicon (icon.tsx).
 
 export const size = { width: 1200, height: 630 };
