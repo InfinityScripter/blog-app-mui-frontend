@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { CONFIG } from "src/config-global";
 import { primary } from "src/theme/core/palette";
 import { Analytics } from "@vercel/analytics/next";
+import { Snackbar } from "src/components/snackbar";
 import { AuthProvider } from "src/auth/context/jwt";
 import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
@@ -139,6 +140,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <MotionLazy>
                 <ProgressBar />
                 <SettingsDrawer />
+                <Snackbar />
                 {children}
                 <Analytics />
                 <SpeedInsights />

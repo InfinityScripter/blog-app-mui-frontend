@@ -23,6 +23,7 @@ import { PostRelated } from "../post-related";
 import { PostCommentList } from "../post-comment-list";
 import { PostCommentForm } from "../post-comment-form";
 import { PostDetailsHero } from "../post-details-hero";
+import { PostNewsletterCta } from "../post-newsletter-cta";
 
 import type { PostDetailsHomeViewProps } from "./types";
 
@@ -131,6 +132,8 @@ export function PostDetailsHomeView({
               </AvatarGroup>
             </Stack>
           </Stack>
+
+          <PostNewsletterCta />
 
           <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
             <Typography variant="h4">Комментарии</Typography>
