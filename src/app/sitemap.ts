@@ -40,6 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   let postRoutes: MetadataRoute.Sitemap = [];
+  let tagRoutes: MetadataRoute.Sitemap = [];
   try {
     const { posts } = await getPosts();
     postRoutes = posts.map((post) => ({
@@ -48,9 +49,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.7,
     }));
+
+    // Distinct tags → tag archive pages, exact casing (backend match is
+    // case-sensitive), encoded, deduped, trailing slash.
+    const distinctTags = Array.from(
+      new Set(posts.flatMap((post) => post.tags ?? [])),
+    );
+    tagRoutes = distinctTags.map((tag) => ({
+      url: `${BASE_URL}/tag/${encodeURIComponent(tag)}/`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
+    }));
   } catch {
-    // backend unreachable at build time — skip post entries
+    // backend unreachable at build time — skip post/tag entries
   }
 
-  return [...staticRoutes, ...postRoutes];
+  return [...staticRoutes, ...postRoutes, ...tagRoutes];
 }

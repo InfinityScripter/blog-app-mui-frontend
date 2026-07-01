@@ -58,21 +58,16 @@ export const metadata = {
     title: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
     description:
       "AI-first агрегатор: нейросеть сама собирает, фильтрует и пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
-    images: [
-      {
-        url: "/assets/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Talalaev — AI-агрегатор новостей",
-      },
-    ],
+    // og:image comes from the file-convention src/app/opengraph-image.tsx —
+    // no hardcoded /assets/og-image.jpg (that file never existed → 404, and
+    // listing it here would emit a duplicate og:image tag).
   },
   twitter: {
     card: "summary_large_image",
     title: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
     description:
       "AI-first агрегатор: нейросеть сама собирает, фильтрует и пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
-    images: ["/assets/og-image.jpg"],
+    // twitter:image also comes from the file-convention opengraph-image.tsx.
   },
   robots: {
     index: true,
@@ -87,6 +82,12 @@ export const metadata = {
   },
   alternates: {
     canonical: `${CONFIG.site.url}/`,
+    types: {
+      "application/rss+xml": [
+        { url: `${CONFIG.site.url}/feed.xml`, title: "Блог — RSS" },
+        { url: `${CONFIG.site.url}/news/feed.xml`, title: "Новости — RSS" },
+      ],
+    },
   },
   // Search-engine ownership verification. Next renders these as
   // <meta name="google-site-verification"> / <meta name="yandex-verification">

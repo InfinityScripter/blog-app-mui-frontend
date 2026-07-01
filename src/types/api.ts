@@ -2,6 +2,9 @@ import type { Post } from './domain';
 
 export interface ListPostsResponse {
   posts: Post[];
+  /** Present only when the caller passes ?page/?limit; unbounded reads omit these. */
+  total?: number;
+  hasMore?: boolean;
 }
 
 export interface PostResponse {

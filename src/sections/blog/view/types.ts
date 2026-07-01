@@ -19,6 +19,11 @@ export interface PostListHomeViewProps {
   posts: Post[];
 }
 
+export interface TagListViewProps {
+  tag: string;
+  posts: Post[];
+}
+
 // `orderBy` is constrained to `Record<string, unknown>`; the `Post` interface
 // has no index signature, so widen each element with an intersection type
 // (via spread, no cast) to satisfy the sort call's generic constraint.

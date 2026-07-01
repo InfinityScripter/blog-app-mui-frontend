@@ -51,6 +51,9 @@ export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
                   label={tag}
                   size="small"
                   variant="soft"
+                  clickable
+                  component={RouterLink}
+                  href={paths.tag.details(tag)}
                   color={active ? "primary" : "default"}
                 />
               );

@@ -27,6 +27,10 @@ interface Paths {
     root: string;
     details: (id: string) => string;
   };
+  tag: {
+    root: string;
+    details: (tag: string) => string;
+  };
   auth: {
     jwt: {
       signIn: string;
@@ -81,6 +85,12 @@ export const paths: Paths = {
     root: `/news`,
     // News items are posts — the detail page is shared with /post/[id].
     details: (id: string) => `/post/${id}`,
+  },
+  tag: {
+    root: `/tag`,
+    // Backend tag matching is exact/case-sensitive — carry the raw tag through
+    // the URL encoded (paramCase would strip Cyrillic to empty).
+    details: (tag: string) => `/tag/${encodeURIComponent(tag)}`,
   },
   // AUTH
   auth: {

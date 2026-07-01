@@ -12,6 +12,7 @@ import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
+import { RouterLink } from "src/routes/components";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { usePostView } from "src/hooks/use-post-view";
 import { getReadingTime } from "src/utils/reading-time";
@@ -45,6 +46,7 @@ export function PostDetailsHomeView({
         author={currentPost?.author}
         coverUrl={currentPost?.coverUrl ?? ""}
         createdAt={currentPost?.createdAt}
+        postId={currentPost?._id}
       />
 
       <Container
@@ -106,7 +108,14 @@ export function PostDetailsHomeView({
           >
             <Stack direction="row" flexWrap="wrap" spacing={1}>
               {currentPost?.tags.map((tag) => (
-                <Chip key={tag} label={tag} variant="soft" />
+                <Chip
+                  key={tag}
+                  label={tag}
+                  variant="soft"
+                  clickable
+                  component={RouterLink}
+                  href={paths.tag.details(tag)}
+                />
               ))}
             </Stack>
 
