@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { Label } from "src/components/label";
 import Collapse from "@mui/material/Collapse";
@@ -14,8 +15,8 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
-import { vendorColor } from "./utils";
 import { TimelineDetail } from "./timeline-detail";
+import { vendorIcon, vendorColor, hasBrandIcon } from "./utils";
 
 import type { LlmModel } from "./types";
 
@@ -25,34 +26,50 @@ interface TimelineEntryProps {
   model: LlmModel;
   expanded: boolean;
   onToggle: (id: string) => void;
+  /** The year to show above the date when this is the first model of its year. */
+  yearStart: number | null;
 }
 
 /**
- * One model on the vertical axis: a colored dot, the opposite-side date, and a
- * clickable card (vendor Label + name + highlight) that expands the detail
- * panel inline. Card is a ButtonBase for keyboard/aria correctness.
+ * One model on the vertical axis: a brand-colored dot, opposite-side date (with
+ * a year chip when the year changes) and a clickable card carrying the vendor
+ * brand icon, Label, name and highlight. Clicking expands the detail panel.
+ * Rendered inside a `position="alternate"` Timeline, so items zig-zag L/R.
  */
-export function TimelineEntry({ model, expanded, onToggle }: TimelineEntryProps) {
+export function TimelineEntry({
+  model,
+  expanded,
+  onToggle,
+  yearStart,
+}: TimelineEntryProps) {
   const theme = useTheme();
   const color = vendorColor(model.vendor);
+  const brand = hasBrandIcon(model.vendor);
 
   return (
     <TimelineItem>
       <TimelineOppositeContent
-        sx={{ flex: 0.2, m: "auto 0", color: "text.disabled" }}
-        align="right"
+        sx={{ m: "auto 0", color: "text.disabled" }}
         variant="caption"
       >
-        {fDate(model.releaseDate)}
+        {yearStart !== null && (
+          <Chip
+            label={yearStart}
+            color="primary"
+            size="small"
+            variant="soft"
+            sx={{ mb: 0.5 }}
+          />
+        )}
+        <Typography variant="caption" sx={{ display: "block" }}>
+          {fDate(model.releaseDate)}
+        </Typography>
       </TimelineOppositeContent>
 
       <TimelineSeparator>
         <TimelineDot
           sx={{
-            bgcolor:
-              color === "default"
-                ? "text.disabled"
-                : `${color}.main`,
+            bgcolor: color === "default" ? "text.disabled" : `${color}.main`,
           }}
         />
         <TimelineConnector />
@@ -78,6 +95,11 @@ export function TimelineEntry({ model, expanded, onToggle }: TimelineEntryProps)
             spacing={1}
             sx={{ alignItems: "center", flexWrap: "wrap", mb: 0.5 }}
           >
+            <Iconify
+              width={22}
+              icon={vendorIcon(model.vendor)}
+              sx={brand ? undefined : { color: `${color}.main` }}
+            />
             <Label variant="soft" color={color}>
               {model.vendor}
             </Label>

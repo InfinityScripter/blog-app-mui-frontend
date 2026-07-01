@@ -28,8 +28,9 @@ export interface LlmModel {
   sourceUrl: string;
 }
 
-/** A year bucket of models, oldest year first; models within also ascending. */
-export interface LlmYearGroup {
-  year: number;
-  models: LlmModel[];
+/** A model in render order, tagged with the year when it opens a new year. */
+export interface LlmTimelineRow {
+  model: LlmModel;
+  /** The year to label above this row, or null if same year as the previous. */
+  yearStart: number | null;
 }

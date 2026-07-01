@@ -1,6 +1,6 @@
 import type { LabelColor } from "src/components/label";
 
-import type { LlmModel, LlmYearGroup } from "./types";
+import type { LlmModel, LlmTimelineRow } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ import type { LlmModel, LlmYearGroup } from "./types";
  * never a hex, so light/dark and primary-color changes stay predictable. An
  * unknown vendor falls back to «default» via {@link vendorColor}.
  */
-export const VENDOR_TO_COLOR: Record<string, LabelColor> = {
+const VENDOR_TO_COLOR: Record<string, LabelColor> = {
   openai: "success",
   anthropic: "warning",
   google: "info",
@@ -28,6 +28,40 @@ export const VENDOR_TO_COLOR: Record<string, LabelColor> = {
 /** Maps a vendor to a theme semantic color for its Label (never a hex). */
 export function vendorColor(vendor: string): LabelColor {
   return VENDOR_TO_COLOR[vendor.trim().toLowerCase()] ?? "default";
+}
+
+/**
+ * Brand logo icon per vendor (Iconify `logos:` set — carries its own brand
+ * colors, so the icon ignores any `color` prop). Vendors without a brand icon
+ * in Iconify (e.g. Cohere) fall back to {@link VENDOR_FALLBACK_ICON}, which is
+ * monochrome and should be tinted with the vendor's theme color by the caller.
+ */
+const VENDOR_TO_ICON: Record<string, string> = {
+  openai: "logos:openai-icon",
+  anthropic: "logos:anthropic-icon",
+  google: "logos:google",
+  deepmind: "logos:google",
+  meta: "logos:meta",
+  "mistral ai": "logos:mistral-ai-icon",
+  mistral: "logos:mistral-ai-icon",
+  deepseek: "logos:deepseek",
+  xai: "logos:grok",
+  alibaba: "logos:qwen",
+  yandex: "logos:yandex-ru",
+  microsoft: "logos:microsoft-icon",
+};
+
+/** Generic chip icon for a vendor without a brand logo in Iconify. */
+const VENDOR_FALLBACK_ICON = "solar:cpu-bolt-bold-duotone";
+
+/** Resolves a vendor's brand icon, or the generic fallback if none exists. */
+export function vendorIcon(vendor: string): string {
+  return VENDOR_TO_ICON[vendor.trim().toLowerCase()] ?? VENDOR_FALLBACK_ICON;
+}
+
+/** True when the vendor has a real brand logo (colored) vs the tinted fallback. */
+export function hasBrandIcon(vendor: string): boolean {
+  return Boolean(VENDOR_TO_ICON[vendor.trim().toLowerCase()]);
 }
 
 /** Extracts the release year from an ISO date string. */
@@ -69,25 +103,17 @@ export function sortByReleaseAsc(models: LlmModel[]): LlmModel[] {
 }
 
 /**
- * Groups models by release year, years ascending and models within each year
- * ascending. Drives the year-labelled vertical timeline.
+ * Flattens models into an ascending render list, tagging each with `yearStart`
+ * = the year when it is the first model of a new year (else null). Lets the
+ * alternating timeline show a year chip at each boundary without breaking the
+ * L/R alternation that separate year-label items would cause.
  */
-export function groupByYear(models: LlmModel[]): LlmYearGroup[] {
+export function withYearMarkers(models: LlmModel[]): LlmTimelineRow[] {
   const ordered = sortByReleaseAsc(models);
-  const byYear: Record<number, LlmModel[]> = {};
-
-  ordered.forEach((model) => {
+  return ordered.map((model, index) => {
     const year = releaseYear(model.releaseDate);
-    const bucket = byYear[year];
-    if (bucket) {
-      bucket.push(model);
-    } else {
-      byYear[year] = [model];
-    }
+    const prevYear =
+      index > 0 ? releaseYear(ordered[index - 1].releaseDate) : null;
+    return { model, yearStart: year === prevYear ? null : year };
   });
-
-  return Object.keys(byYear)
-    .map(Number)
-    .sort((a, b) => a - b)
-    .map((year) => ({ year, models: byYear[year] }));
 }
