@@ -35,6 +35,9 @@ interface Paths {
     root: string;
     details: (slug: string) => string;
   };
+  llmTimeline: {
+    root: string;
+  };
   auth: {
     jwt: {
       signIn: string;
@@ -101,6 +104,9 @@ export const paths: Paths = {
     // Slugs are backend-generated (ascii-safe) but encode defensively so a
     // slug with unexpected characters can't break the URL.
     details: (slug: string) => `/changelog/${encodeURIComponent(slug)}`,
+  },
+  llmTimeline: {
+    root: `/llm-timeline`,
   },
   // AUTH
   auth: {
