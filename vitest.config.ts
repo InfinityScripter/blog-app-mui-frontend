@@ -2,7 +2,10 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    include: ["src/server/llm-stats/**/*.test.ts"],
+    include: [
+      "src/server/llm-stats/**/*.test.ts",
+      "src/components/**/*.test.ts",
+    ],
     environment: "node",
   },
   resolve: {

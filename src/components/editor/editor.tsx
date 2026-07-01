@@ -10,7 +10,9 @@ import StarterKitExtension from "@tiptap/starter-kit";
 import FormHelperText from "@mui/material/FormHelperText";
 import TextAlignExtension from "@tiptap/extension-text-align";
 import PlaceholderExtension from "@tiptap/extension-placeholder";
-import { useState, useEffect, forwardRef, useCallback } from "react";
+import { markdownToHtml } from "src/components/markdown/markdown-to-html";
+import { isMarkdownContent } from "src/components/markdown/html-to-markdown";
+import { useMemo, useState, useEffect, forwardRef, useCallback } from "react";
 import CodeBlockLowlightExtension from "@tiptap/extension-code-block-lowlight";
 import { useEditor, EditorContent, ReactNodeViewRenderer } from "@tiptap/react";
 
@@ -48,9 +50,17 @@ export const Editor = forwardRef<HTMLDivElement, EditorProps>(
 
     const lowlight = createLowlight(common);
 
+    // Tiptap parses its input as HTML. Content authored as Markdown (e.g. bot
+    // posts) must be converted first, otherwise the markers render as literal
+    // text and break the post. HTML input passes through untouched.
+    const htmlContent = useMemo(
+      () => (isMarkdownContent(content) ? markdownToHtml(content) : content),
+      [content],
+    );
+
     const editor = useEditor({
       immediatelyRender: false,
-      content,
+      content: htmlContent,
       editable,
       extensions: [
         StarterKitExtension.configure({
@@ -104,12 +114,12 @@ export const Editor = forwardRef<HTMLDivElement, EditorProps>(
 
     useEffect(() => {
       const timer = setTimeout(() => {
-        if (editor?.isEmpty && content !== "<p></p>") {
-          editor.commands.setContent(content);
+        if (editor?.isEmpty && htmlContent !== "<p></p>") {
+          editor.commands.setContent(htmlContent);
         }
       }, 100);
       return () => clearTimeout(timer);
-    }, [content, editor]);
+    }, [htmlContent, editor]);
 
     useEffect(() => {
       if (resetValue && !content) {
