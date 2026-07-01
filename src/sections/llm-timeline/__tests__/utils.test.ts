@@ -2,11 +2,13 @@ import type { LlmModel } from "src/sections/llm-timeline/types";
 
 import { it, expect, describe } from "vitest";
 import {
-  groupByYear,
+  vendorIcon,
   vendorColor,
   releaseYear,
+  hasBrandIcon,
   formatParams,
   formatContext,
+  withYearMarkers,
   sortByReleaseAsc,
 } from "src/sections/llm-timeline/utils";
 
@@ -71,6 +73,19 @@ describe("releaseYear", () => {
   });
 });
 
+describe("vendorIcon / hasBrandIcon", () => {
+  it("returns a brand logo for a known vendor", () => {
+    expect(vendorIcon("OpenAI")).toBe("logos:openai-icon");
+    expect(vendorIcon("Mistral AI")).toBe("logos:mistral-ai-icon");
+    expect(hasBrandIcon("OpenAI")).toBe(true);
+  });
+
+  it("falls back to a generic icon for a vendor without a brand logo", () => {
+    expect(vendorIcon("Cohere")).toBe("solar:cpu-bolt-bold-duotone");
+    expect(hasBrandIcon("Cohere")).toBe(false);
+  });
+});
+
 describe("sortByReleaseAsc", () => {
   it("orders models oldest → newest without mutating the input", () => {
     const input = [
@@ -85,18 +100,23 @@ describe("sortByReleaseAsc", () => {
   });
 });
 
-describe("groupByYear", () => {
-  it("buckets by year ascending, models within ascending", () => {
-    const groups = groupByYear([
+describe("withYearMarkers", () => {
+  it("tags the first model of each year with yearStart, others null", () => {
+    const rows = withYearMarkers([
       model("y2024-b", "2024-06-01"),
       model("y2020", "2020-06-01"),
       model("y2024-a", "2024-01-01"),
     ]);
-    expect(groups.map((g) => g.year)).toEqual([2020, 2024]);
-    expect(groups[1].models.map((m) => m.id)).toEqual(["y2024-a", "y2024-b"]);
+    // ascending: 2020, 2024-a, 2024-b
+    expect(rows.map((r) => r.model.id)).toEqual([
+      "y2020",
+      "y2024-a",
+      "y2024-b",
+    ]);
+    expect(rows.map((r) => r.yearStart)).toEqual([2020, 2024, null]);
   });
 
   it("returns an empty array for no models", () => {
-    expect(groupByYear([])).toEqual([]);
+    expect(withYearMarkers([])).toEqual([]);
   });
 });
