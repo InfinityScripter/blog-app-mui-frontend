@@ -16,6 +16,12 @@ interface BuildRssFeedParams {
   feedTitle: string;
   feedDescription: string;
   feedUrl: string;
+  /**
+   * Overrides the per-item link/guid. Defaults to the `/post/<id>/` behavior so
+   * existing feeds are unchanged; the changelog feed passes a builder emitting
+   * `/changelog/<slug>/`.
+   */
+  linkFor?: (post: Post) => string;
 }
 
 /** Escapes the five XML-significant characters for safe attribute/text output. */
@@ -39,8 +45,8 @@ function postLink(post: Post): string {
   return `${CONFIG.site.url}/post/${id}/`;
 }
 
-function buildItem(post: Post): string {
-  const link = postLink(post);
+function buildItem(post: Post, linkFor: (item: Post) => string): string {
+  const link = linkFor(post);
   const title = escapeXml(post.title ?? "");
   // Neutralize a literal "]]>" so it can't close the CDATA section early and
   // produce malformed XML (standard CDATA-split escape).
@@ -71,6 +77,7 @@ export function buildRssFeed({
   feedTitle,
   feedDescription,
   feedUrl,
+  linkFor = postLink,
 }: BuildRssFeedParams): string {
   const items = [...posts]
     .sort((a, b) => {
@@ -79,7 +86,7 @@ export function buildRssFeed({
       return bTime - aTime;
     })
     .slice(0, MAX_ITEMS)
-    .map(buildItem)
+    .map((post) => buildItem(post, linkFor))
     .join("\n");
 
   return [

@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { CONFIG } from "src/config-global";
-import { getPosts } from "src/actions/blog-ssr";
+import { getPosts, getReleases } from "src/actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
@@ -37,10 +37,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/changelog/`,
+      lastModified: new Date(),
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
   ];
 
   let postRoutes: MetadataRoute.Sitemap = [];
   let tagRoutes: MetadataRoute.Sitemap = [];
+  let releaseRoutes: MetadataRoute.Sitemap = [];
   try {
     const { posts } = await getPosts();
     postRoutes = posts.map((post) => ({
@@ -65,5 +72,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // backend unreachable at build time — skip post/tag entries
   }
 
-  return [...staticRoutes, ...postRoutes, ...tagRoutes];
+  try {
+    const { releases } = await getReleases();
+    // Dedupe by slug, trailing slash, exact (ascii) slug encoded defensively.
+    const distinctSlugs = Array.from(
+      new Set(releases.map((release) => release.slug)),
+    );
+    releaseRoutes = distinctSlugs.map((slug) => ({
+      url: `${BASE_URL}/changelog/${encodeURIComponent(slug)}/`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    }));
+  } catch {
+    // backend unreachable at build time — skip release entries
+  }
+
+  return [...staticRoutes, ...postRoutes, ...tagRoutes, ...releaseRoutes];
 }

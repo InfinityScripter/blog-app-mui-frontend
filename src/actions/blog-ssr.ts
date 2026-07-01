@@ -3,8 +3,10 @@
 import type { Post, Comment, PublishStatus } from "src/types/domain";
 import type {
   PostResponse,
+  ReleaseResponse,
   ListPostsResponse,
   LatestPostsResponse,
+  ListReleasesResponse,
   GenericMessageResponse,
 } from "src/types/api";
 
@@ -84,6 +86,44 @@ export async function getPost(id: string): Promise<PostResponse> {
   }
   const data: PostResponse = await res.json();
   return data;
+}
+
+// ----------------------------------------------------------------------
+
+// ----------------------------------------------------------------------
+
+/**
+ * All model releases for the /changelog archive (ISR-cached). The list route
+ * returns BARE keys `{ releases, total }` (like `{ posts }`), so we read
+ * `data.releases` directly.
+ */
+export async function getReleases(): Promise<ListReleasesResponse> {
+  const res = await fetch(`${SERVER_URL}${endpoints.changelog.list}`, {
+    next: { revalidate: REVALIDATE_SECONDS },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch releases: ${res.status}`);
+  }
+  const data: ListReleasesResponse = await res.json();
+  return data;
+}
+
+// ----------------------------------------------------------------------
+
+/**
+ * A single model release by slug (ISR-cached). The detail route wraps its body
+ * in `ok()` → `{ success, data: { release } }`, so the release is read from
+ * `data.data.release` (NOT `data.release`).
+ */
+export async function getRelease(slug: string): Promise<ReleaseResponse> {
+  const res = await fetch(`${SERVER_URL}${endpoints.changelog.details(slug)}`, {
+    next: { revalidate: REVALIDATE_SECONDS },
+  });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch release ${slug}: ${res.status}`);
+  }
+  const data: { success: boolean; data: ReleaseResponse } = await res.json();
+  return data.data;
 }
 
 // ----------------------------------------------------------------------
