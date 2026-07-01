@@ -33,7 +33,15 @@ export function NewsletterStatus({
   const icon = isError ? "solar:close-circle-bold" : "solar:check-circle-bold";
 
   return (
-    <Container sx={{ py: { xs: 8, md: 12 } }}>
+    <Container
+      sx={{
+        py: { xs: 8, md: 12 },
+        minHeight: { md: "60vh" },
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Stack
         spacing={3}
         alignItems="center"
