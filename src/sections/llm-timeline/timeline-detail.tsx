@@ -2,6 +2,8 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { varAlpha } from "src/theme/styles";
+import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 
@@ -21,6 +23,8 @@ interface TimelineDetailProps {
  * Colors come from the theme (no hex) so light/dark stays predictable.
  */
 export function TimelineDetail({ model }: TimelineDetailProps) {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -55,23 +59,59 @@ export function TimelineDetail({ model }: TimelineDetailProps) {
         </Stack>
       )}
 
-      {model.sourceUrl && (
+      {model.funFact && (
         <Stack
           direction="row"
-          spacing={0.75}
-          sx={{ alignItems: "center", mt: 1.5 }}
+          spacing={1}
+          sx={{
+            mt: 1.5,
+            p: 1.5,
+            borderRadius: 1.5,
+            alignItems: "flex-start",
+            bgcolor: varAlpha(theme.vars.palette.warning.mainChannel, 0.08),
+          }}
         >
-          <Iconify width={18} icon="solar:link-bold-duotone" />
+          <Iconify
+            width={18}
+            icon="solar:lightbulb-bolt-bold-duotone"
+            sx={{ mt: 0.25, color: "warning.main", flexShrink: 0 }}
+          />
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            {model.funFact}
+          </Typography>
+        </Stack>
+      )}
+
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{ alignItems: "center", mt: 1.5, flexWrap: "wrap" }}
+      >
+        {model.sourceUrl && (
           <Link
             href={model.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
             variant="body2"
+            sx={{ display: "inline-flex", alignItems: "center", gap: 0.5 }}
           >
-            Источник
+            <Iconify width={18} icon="solar:link-bold-duotone" />
+            Анонс
           </Link>
-        </Stack>
-      )}
+        )}
+        {model.wikiUrl && (
+          <Link
+            href={model.wikiUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="body2"
+            sx={{ display: "inline-flex", alignItems: "center", gap: 0.5 }}
+          >
+            <Iconify width={18} icon="mdi:wikipedia" />
+            Википедия
+          </Link>
+        )}
+      </Stack>
     </Box>
   );
 }

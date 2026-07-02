@@ -1,61 +1,113 @@
 "use client";
 
-import { useMemo } from "react";
 import Timeline from "@mui/lab/Timeline";
+import { useMemo, useCallback } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { useResponsive } from "src/hooks/use-responsive";
+import { timelineOppositeContentClasses } from "@mui/lab/TimelineOppositeContent";
 
-import { withYearMarkers } from "../utils";
+import { YearNav } from "../year-nav";
+import { TimelineHero } from "../timeline-hero";
 import { TimelineEntry } from "../timeline-entry";
+import { useYearSpy } from "../hooks/use-year-spy";
+import { TimelineFilters } from "../timeline-filters";
+import { TimelineBackdrop } from "../timeline-backdrop";
+import { useVendorFilter } from "../hooks/use-vendor-filter";
 import { useTimelineSelection } from "../hooks/use-timeline-selection";
+import {
+  vendorStats,
+  yearAnchorId,
+  timelineYears,
+  filterByVendors,
+  withYearMarkers,
+} from "../utils";
 
 import type { LlmTimelineViewProps } from "./types";
 
 // ----------------------------------------------------------------------
 
 /**
- * The /llm-timeline page: a vertical timeline of landmark LLMs from oldest to
- * newest, alternating left/right (`position="alternate"`). A year chip marks
- * each year boundary on the opposite side. Clicking a model expands its detail
- * panel inline (accordion — one open at a time via {@link useTimelineSelection}).
+ * The /llm-timeline page: hero with key metrics, vendor filter, sticky year
+ * nav with scrollspy, and the vertical timeline itself — alternating L/R on
+ * desktop, left-aligned with a narrow date rail on mobile. A decorative
+ * floating-logo backdrop sits behind everything on desktop.
  */
 export function LlmTimelineView({ models }: LlmTimelineViewProps) {
-  const rows = useMemo(() => withYearMarkers(models), [models]);
+  const mdUp = useResponsive("up", "md");
+
+  const { selected, hasFilter, isActive, toggleVendor, clear } =
+    useVendorFilter();
   const { isSelected, toggle } = useTimelineSelection();
 
-  return (
-    <Container maxWidth="md" sx={{ py: { xs: 5, md: 8 } }}>
-      <Typography variant="h4" sx={{ mb: 1 }}>
-        История больших языковых моделей
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{ color: "text.secondary", mb: { xs: 3, md: 5 } }}
-      >
-        Хронология ключевых LLM от старых к новым. Нажмите на модель, чтобы
-        увидеть подробности.
-      </Typography>
+  const stats = useMemo(() => vendorStats(models), [models]);
+  const filtered = useMemo(
+    () => filterByVendors(models, selected),
+    [models, selected],
+  );
+  const rows = useMemo(() => withYearMarkers(filtered), [filtered]);
+  const years = useMemo(() => timelineYears(filtered), [filtered]);
+  const activeYear = useYearSpy(years);
 
-      {rows.length > 0 ? (
-        <Timeline position="alternate" sx={{ p: 0 }}>
-          {rows.map(({ model, yearStart }) => (
-            <TimelineEntry
-              key={model.id}
-              model={model}
-              yearStart={yearStart}
-              expanded={isSelected(model.id)}
-              onToggle={toggle}
-            />
-          ))}
-        </Timeline>
-      ) : (
-        <Typography
-          variant="body2"
-          sx={{ py: 6, textAlign: "center", color: "text.disabled" }}
-        >
-          Пока нет моделей.
-        </Typography>
-      )}
-    </Container>
+  const handleJump = useCallback((year: number) => {
+    document
+      .getElementById(yearAnchorId(year))
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  return (
+    <>
+      <TimelineBackdrop vendors={stats.map((stat) => stat.vendor)} />
+
+      <Container
+        maxWidth="md"
+        sx={{ py: { xs: 5, md: 8 }, position: "relative", zIndex: 1 }}
+      >
+        <TimelineHero models={models} />
+
+        <TimelineFilters
+          stats={stats}
+          hasFilter={hasFilter}
+          isActive={isActive}
+          onToggle={toggleVendor}
+          onClear={clear}
+        />
+
+        <YearNav years={years} activeYear={activeYear} onJump={handleJump} />
+
+        {rows.length > 0 ? (
+          <Timeline
+            position={mdUp ? "alternate" : "right"}
+            sx={{
+              p: 0,
+              ...(!mdUp && {
+                [`& .${timelineOppositeContentClasses.root}`]: {
+                  flex: "0 0 auto",
+                  width: 96,
+                  px: 1,
+                },
+              }),
+            }}
+          >
+            {rows.map(({ model, yearStart }) => (
+              <TimelineEntry
+                key={model.id}
+                model={model}
+                yearStart={yearStart}
+                expanded={isSelected(model.id)}
+                onToggle={toggle}
+              />
+            ))}
+          </Timeline>
+        ) : (
+          <Typography
+            variant="body2"
+            sx={{ py: 6, textAlign: "center", color: "text.disabled" }}
+          >
+            Нет моделей под выбранный фильтр.
+          </Typography>
+        )}
+      </Container>
+    </>
   );
 }
