@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import { useState, useCallback } from "react";
 import { POST_SORT_OPTIONS } from "src/_mock";
+import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useSearchPosts } from "src/actions/blog";
@@ -54,9 +55,14 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 
   return (
     <Container>
-      <Typography variant="h4" sx={{ my: { xs: 3, md: 5 } }}>
-        Блог
-      </Typography>
+      <Stack spacing={1} sx={{ my: { xs: 3, md: 5 } }}>
+        <Typography component="p" sx={monoLabelSx}>
+          Разборы и заметки
+        </Typography>
+        <Typography variant="h2" component="h1">
+          Блог
+        </Typography>
+      </Stack>
 
       <Stack
         spacing={3}

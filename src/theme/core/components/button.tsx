@@ -41,7 +41,8 @@ const MuiButtonBase = {
     root: ({ theme }: { theme: Theme }) => ({
       fontFamily: theme.typography.fontFamily,
       transition: "transform 160ms cubic-bezier(0.23, 1, 0.32, 1)",
-      "&:active": { transform: "scale(0.97)" },
+      // Tactile push (Editorial Ink): vertical press instead of scale.
+      "&:active": { transform: "translateY(1px)" },
     }),
   },
 };
@@ -119,8 +120,12 @@ const MuiButton = {
       ownerState: ButtonProps;
     }) => {
       const styled = {
+        // No colored halo shadows on hover — flat fill darkens instead.
         colors: styleColors(ownerState, (color) => ({
-          "&:hover": { boxShadow: theme.customShadows[color] },
+          "&:hover": {
+            boxShadow: "none",
+            backgroundColor: theme.vars.palette[color].dark,
+          },
         })),
         inheritColor: {
           ...(ownerState.color === "inherit" &&

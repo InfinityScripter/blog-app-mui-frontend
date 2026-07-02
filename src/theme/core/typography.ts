@@ -2,13 +2,16 @@ import { setFont, pxToRem, responsiveFontSizes } from "../styles/utils";
 
 // ----------------------------------------------------------------------
 
-export const defaultFont = "Public Sans";
+export const defaultFont = "Manrope";
 
 export const primaryFont = setFont(defaultFont);
 
-// Editorial display face for headings (Onest — Cyrillic-first, OFL). Replaces
-// Barlow as the secondary/display family across h1–h6.
-export const secondaryFont = setFont("Onest");
+// Display face for the two top heading levels only (Unbounded — Cyrillic-first,
+// OFL). h3–h6 stay on the workhorse grotesque so long RU strings keep fitting.
+export const secondaryFont = setFont("Unbounded");
+
+// Mono for metadata: dates, reading time, counters, model versions, code.
+export const monoFont = `var(--font-jetbrains-mono),"SFMono-Regular",Menlo,Consolas,monospace`;
 
 // ----------------------------------------------------------------------
 
@@ -21,45 +24,45 @@ export const typography = {
   fontWeightSemiBold: "600",
   fontWeightBold: "700",
   h1: {
-    fontWeight: 800,
-    lineHeight: 80 / 64,
-    fontSize: pxToRem(40),
+    fontWeight: 600,
+    lineHeight: 1.08,
+    letterSpacing: "-0.02em",
+    fontSize: pxToRem(38),
     fontFamily: secondaryFont,
-    ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
+    ...responsiveFontSizes({ sm: 46, md: 54, lg: 60 }),
   },
   h2: {
-    fontWeight: 800,
-    lineHeight: 64 / 48,
-    fontSize: pxToRem(32),
+    fontWeight: 600,
+    lineHeight: 1.12,
+    letterSpacing: "-0.02em",
+    fontSize: pxToRem(28),
     fontFamily: secondaryFont,
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
+    ...responsiveFontSizes({ sm: 32, md: 36, lg: 40 }),
   },
   h3: {
     fontWeight: 700,
-    lineHeight: 1.5,
+    lineHeight: 1.35,
+    letterSpacing: "-0.01em",
     fontSize: pxToRem(24),
-    fontFamily: secondaryFont,
-    ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
+    ...responsiveFontSizes({ sm: 26, md: 28, lg: 30 }),
   },
   h4: {
     fontWeight: 700,
-    lineHeight: 1.5,
+    lineHeight: 1.4,
+    letterSpacing: "-0.01em",
     fontSize: pxToRem(20),
-    fontFamily: secondaryFont,
-    ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
+    ...responsiveFontSizes({ sm: 20, md: 22, lg: 24 }),
   },
   h5: {
-    fontWeight: 700,
+    fontWeight: 600,
     lineHeight: 1.5,
     fontSize: pxToRem(18),
-    fontFamily: secondaryFont,
     ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
   },
   h6: {
     fontWeight: 600,
     lineHeight: 28 / 18,
     fontSize: pxToRem(17),
-    fontFamily: secondaryFont,
     ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {
@@ -73,7 +76,7 @@ export const typography = {
     fontSize: pxToRem(14),
   },
   body1: {
-    lineHeight: 1.5,
+    lineHeight: 1.6,
     fontSize: pxToRem(16),
   },
   body2: {
@@ -88,6 +91,7 @@ export const typography = {
     fontWeight: 700,
     lineHeight: 1.5,
     fontSize: pxToRem(12),
+    letterSpacing: "0.08em",
     textTransform: "uppercase",
   },
   button: {

@@ -4,6 +4,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { Logo } from "src/components/logo";
 import Divider from "@mui/material/Divider";
+import { monoValueSx } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
@@ -127,7 +128,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
           </Grid>
         </Grid>
 
-        <Typography variant="body2" sx={{ mt: 10 }}>
+        <Typography component="p" sx={{ ...monoValueSx, fontSize: 11, mt: 10 }}>
           © All rights reserved.
         </Typography>
       </Container>

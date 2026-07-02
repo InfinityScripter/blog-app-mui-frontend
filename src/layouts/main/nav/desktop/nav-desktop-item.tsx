@@ -52,13 +52,23 @@ const StyledNavItem = styled(ButtonBase, {
   const baseStyles = {
     item: {
       ...theme.typography.body2,
-      fontWeight: theme.typography.fontWeightMedium,
+      fontWeight: theme.typography.fontWeightSemiBold,
       transition: theme.transitions.create(
         ["color", "opacity", "background-color"],
         {
           duration: theme.transitions.duration.shorter,
         },
       ),
+    },
+    // Editorial Ink: активный пункт — vermilion + 2px подчёрк с отступом.
+    underline: {
+      left: 0,
+      right: 0,
+      height: 2,
+      bottom: -6,
+      content: '""',
+      position: "absolute",
+      backgroundColor: theme.vars.palette.primary.main,
     },
     dot: {
       width: 6,
@@ -83,13 +93,14 @@ const StyledNavItem = styled(ButtonBase, {
     ...(rootItem && {
       ...baseStyles.item,
       height: "100%",
-      "&:hover": { opacity: 0.64, "&::before": baseStyles.dot },
+      position: "relative",
+      "&:hover": { color: theme.vars.palette.primary.main },
       ...(active && {
         color: theme.vars.palette.primary.main,
-        fontWeight: theme.typography.fontWeightSemiBold,
-        "&::before": baseStyles.dot,
+        fontWeight: theme.typography.fontWeightBold,
+        "&::after": baseStyles.underline,
       }),
-      ...(open && { opacity: 0.64, "&::before": baseStyles.dot }),
+      ...(open && { opacity: 0.64 }),
     }),
 
     /**

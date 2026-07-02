@@ -2,7 +2,6 @@
 
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
 
 import { StyledLabel } from "./styles";
 import { sentenceCase } from "./utils";
@@ -27,8 +26,6 @@ export const Label = forwardRef<HTMLSpanElement, LabelProps>(
     },
     ref,
   ) => {
-    const theme = useTheme();
-
     const iconStyles = {
       width: 16,
       height: 16,
@@ -50,7 +47,6 @@ export const Label = forwardRef<HTMLSpanElement, LabelProps>(
           ...(endIcon && { pr: 0.75 }),
           ...sx,
         }}
-        theme={theme}
         {...other}
       >
         {startIcon && (

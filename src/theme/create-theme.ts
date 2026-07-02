@@ -35,7 +35,7 @@ export function createTheme(settings: SettingsState): Theme {
     shadows: shadows(colorScheme),
     customShadows: customShadows(colorScheme),
     direction,
-    shape: { borderRadius: 8 },
+    shape: { borderRadius: 10 },
     components,
     typography: {
       ...typography,

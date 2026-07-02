@@ -1,6 +1,8 @@
+import type { Theme } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { alpha } from "@mui/material/styles";
+import { hairline } from "src/theme/styles";
 import Typography from "@mui/material/Typography";
 import { NewsletterForm } from "src/sections/home/home-newsletter-cta";
 
@@ -19,9 +21,8 @@ export function PostNewsletterCta() {
         p: { xs: 3, md: 4 },
         borderRadius: 2,
         textAlign: "center",
-        border: (theme) =>
-          `solid 1px ${alpha(theme.palette.primary.main, 0.24)}`,
-        bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
+        border: (theme: Theme) => hairline(theme),
+        bgcolor: "background.paper",
       }}
     >
       <Typography variant="h6" sx={{ maxWidth: 480 }}>

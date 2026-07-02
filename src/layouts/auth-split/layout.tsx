@@ -70,7 +70,6 @@ export function AuthSplitLayout({
         <Section
           title={section?.title}
           layoutQuery={layoutQuery}
-          imgUrl={section?.imgUrl}
           method={CONFIG.auth.method}
           subtitle={section?.subtitle}
         />

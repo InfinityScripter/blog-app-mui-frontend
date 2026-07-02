@@ -1,9 +1,6 @@
 /** **************************************
 * Plugins
 *************************************** */
-/* portfolio section tokens */
-@import "./sections/portfolio/view/styles.css";
-
 /* llm-timeline backdrop animation */
 @import "./sections/llm-timeline/styles.css";
 

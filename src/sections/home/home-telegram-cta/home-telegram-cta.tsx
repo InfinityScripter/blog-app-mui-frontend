@@ -2,10 +2,10 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
+import { hairline, monoLabelSx } from "src/theme/styles";
 
 import {
   CTA_TEXT,
@@ -17,47 +17,43 @@ import {
 
 // ----------------------------------------------------------------------
 
-// Bottom-of-page subscription block. Border/background/text all come from the
-// theme palette (alpha over primary) so it tracks primary-color and light/dark
-// changes — no hardcoded colors per the sections guideline.
+// Bottom-of-page subscription block. Editorial Ink: компактная split-полоса
+// на бумаге с hairline-рамкой — текст слева, кнопка справа; без заливок.
 export function HomeTelegramCta() {
   return (
     <Container component="section" sx={{ py: { xs: 6, md: 10 } }}>
       <Stack
-        spacing={3}
-        alignItems="center"
+        spacing={{ xs: 3, md: 5 }}
+        direction={{ xs: "column", md: "row" }}
+        alignItems={{ xs: "flex-start", md: "center" }}
+        justifyContent="space-between"
         sx={{
-          p: { xs: 4, md: 6 },
-          borderRadius: 3,
-          textAlign: "center",
-          border: (theme) =>
-            `solid 1px ${alpha(theme.palette.primary.main, 0.24)}`,
-          bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08),
+          p: { xs: 4, md: 5 },
+          borderRadius: 2.5,
+          bgcolor: "background.paper",
+          border: (theme) => hairline(theme),
         }}
       >
-        <Box
-          sx={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 0.75,
-            typography: "overline",
-            color: "primary.main",
-          }}
-        >
-          <Iconify icon="mingcute:telegram-fill" width={20} />
-          {CTA_LABEL}
-        </Box>
+        <Stack spacing={1.5} sx={{ maxWidth: 560 }}>
+          <Box
+            sx={{
+              ...monoLabelSx,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 0.75,
+              color: "primary.main",
+            }}
+          >
+            <Iconify icon="mingcute:telegram-fill" width={18} />
+            {CTA_LABEL}
+          </Box>
 
-        <Typography variant="h3" sx={{ maxWidth: 600 }}>
-          {CTA_TITLE}
-        </Typography>
+          <Typography variant="h3">{CTA_TITLE}</Typography>
 
-        <Typography
-          variant="body1"
-          sx={{ maxWidth: 520, color: "text.secondary" }}
-        >
-          {CTA_TEXT}
-        </Typography>
+          <Typography variant="body1" sx={{ color: "text.secondary" }}>
+            {CTA_TEXT}
+          </Typography>
+        </Stack>
 
         <Button
           component={Link}
@@ -66,6 +62,7 @@ export function HomeTelegramCta() {
           rel="noopener"
           size="large"
           variant="contained"
+          sx={{ flexShrink: 0 }}
           startIcon={<Iconify icon="mingcute:telegram-fill" width={24} />}
         >
           {CTA_BUTTON}

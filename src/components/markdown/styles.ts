@@ -21,7 +21,13 @@ export const StyledRoot = styled("div")(({ theme }) => ({
   h4: { ...theme.typography.h4, marginTop: 24, marginBottom: 8 },
   h5: { ...theme.typography.h5, marginTop: 24, marginBottom: 8 },
   h6: { ...theme.typography.h6, marginTop: 24, marginBottom: 8 },
-  p: { ...theme.typography.body1, marginBottom: "1.25rem" },
+  // Reading measure: чуть крупнее и воздушнее базового body1 (Editorial Ink).
+  p: {
+    ...theme.typography.body1,
+    fontSize: 18,
+    lineHeight: 1.7,
+    marginBottom: "1.25rem",
+  },
   /**
    * Hr Divider
    */
@@ -61,14 +67,14 @@ export const StyledRoot = styled("div")(({ theme }) => ({
    * Blockquote
    */
   "& blockquote": {
-    lineHeight: 1.5,
-    fontSize: "1.5em",
+    lineHeight: 1.55,
+    fontSize: "1.25em",
+    fontStyle: "italic",
     margin: "24px auto",
     position: "relative",
-    fontFamily: "Georgia, serif",
-    padding: theme.spacing(3, 3, 3, 8),
+    padding: theme.spacing(2, 3, 2, 5),
     color: theme.vars.palette.text.secondary,
-    borderLeft: `solid 8px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.08)}`,
+    borderLeft: `solid 3px ${theme.vars.palette.primary.main}`,
     [theme.breakpoints.up("md")]: {
       width: "100%",
       maxWidth: 640,
@@ -77,15 +83,6 @@ export const StyledRoot = styled("div")(({ theme }) => ({
       margin: 0,
       fontSize: "inherit",
       fontFamily: "inherit",
-    },
-    "&::before": {
-      left: 16,
-      top: -8,
-      display: "block",
-      fontSize: "3em",
-      content: '"\\201C"',
-      position: "absolute",
-      color: theme.vars.palette.text.disabled,
     },
   },
   /**

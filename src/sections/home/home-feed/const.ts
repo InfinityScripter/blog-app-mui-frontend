@@ -14,6 +14,7 @@ export const FEED_PAGE_SIZE = 10;
 export const FEED_TAGS_LIMIT = 12;
 
 // Section copy.
+export const FEED_OVERLINE = "Свежее";
 export const FEED_TITLE = "Лента";
 export const FEED_SUBTITLE =
   "Всё самое свежее: новости, разборы и заметки — по порядку";

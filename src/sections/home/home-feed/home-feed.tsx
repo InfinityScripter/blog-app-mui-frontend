@@ -6,15 +6,18 @@ import Stack from "@mui/material/Stack";
 import { useMemo, useState } from "react";
 import Button from "@mui/material/Button";
 import { useGetPosts } from "src/actions/blog";
+import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { PostItemFeed } from "src/sections/blog/post-item-feed";
+import { PostItemFeedFeatured } from "src/sections/blog/post-item-feed-featured";
 
 import { useFeedTags } from "./hooks/use-feed-tags";
 import { toggleTag, selectFeedPosts } from "./utils";
 import {
   FEED_TITLE,
+  FEED_OVERLINE,
   FEED_SUBTITLE,
   FEED_PAGE_SIZE,
   FEED_SHOW_MORE,
@@ -39,6 +42,11 @@ export function HomeFeed() {
   );
 
   const visiblePosts = feedPosts.slice(0, visibleCount);
+  // Featured-слот — только в неотфильтрованной ленте: при активном фильтре
+  // список должен читаться однородно.
+  const showFeatured = selectedTags.length === 0 && visiblePosts.length > 0;
+  const featured = showFeatured ? visiblePosts[0] : undefined;
+  const restPosts = showFeatured ? visiblePosts.slice(1) : visiblePosts;
   const hasMore = feedPosts.length > visibleCount;
 
   const handleToggleTag = (tag: string) => {
@@ -47,9 +55,14 @@ export function HomeFeed() {
   };
 
   return (
-    <Container component="section" sx={{ py: { xs: 5, md: 8 } }}>
-      <Stack spacing={1} sx={{ mb: 4, textAlign: "center" }}>
-        <Typography variant="h3">{FEED_TITLE}</Typography>
+    <Container component="section" id="feed" sx={{ py: { xs: 6, md: 10 } }}>
+      <Stack spacing={1} sx={{ mb: 4, alignItems: "flex-start" }}>
+        <Typography component="p" sx={monoLabelSx}>
+          {FEED_OVERLINE}
+        </Typography>
+        <Typography variant="h2" component="h2">
+          {FEED_TITLE}
+        </Typography>
         <Typography variant="body1" sx={{ color: "text.secondary" }}>
           {FEED_SUBTITLE}
         </Typography>
@@ -58,12 +71,11 @@ export function HomeFeed() {
       {feedTags.length > 0 && (
         <Box
           sx={{
-            mb: 4,
+            mb: 5,
             gap: 1,
             display: "flex",
             flexWrap: { xs: "nowrap", sm: "wrap" },
             overflowX: { xs: "auto", sm: "visible" },
-            justifyContent: { sm: "center" },
             pb: { xs: 1, sm: 0 },
           }}
         >
@@ -76,7 +88,7 @@ export function HomeFeed() {
                 clickable
                 onClick={() => handleToggleTag(tag)}
                 color={active ? "primary" : "default"}
-                variant={active ? "filled" : "outlined"}
+                variant="outlined"
                 sx={{ flexShrink: 0, minHeight: 44 }}
               />
             );
@@ -85,25 +97,28 @@ export function HomeFeed() {
       )}
 
       {!postsLoading && visiblePosts.length === 0 ? (
-        <Typography
-          variant="body2"
-          sx={{ py: 6, textAlign: "center", color: "text.disabled" }}
-        >
+        <Typography variant="body2" sx={{ py: 6, color: "text.disabled" }}>
           {FEED_EMPTY_TEXT}
         </Typography>
       ) : (
-        <Stack spacing={2} sx={{ maxWidth: 720, mx: "auto" }}>
-          {visiblePosts.map((post) => (
+        <Stack sx={{ maxWidth: 860 }}>
+          {featured && (
+            <Box sx={{ mb: 4 }}>
+              <PostItemFeedFeatured post={featured} />
+            </Box>
+          )}
+          {restPosts.map((post) => (
             <PostItemFeed key={post.id} post={post} activeTags={selectedTags} />
           ))}
         </Stack>
       )}
 
       {hasMore && (
-        <Box sx={{ mt: 4, display: "flex", justifyContent: "center" }}>
+        <Box sx={{ mt: 5, display: "flex" }}>
           <Button
             size="large"
             variant="outlined"
+            color="inherit"
             onClick={() => setVisibleCount((c) => c + FEED_PAGE_SIZE)}
             endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
           >

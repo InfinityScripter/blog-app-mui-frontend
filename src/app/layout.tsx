@@ -11,8 +11,8 @@ import { AuthProvider } from "src/auth/context/jwt";
 import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Onest, Barlow, Public_Sans } from "next/font/google";
 import { MotionLazy } from "src/components/animate/motion-lazy";
+import { Manrope, Unbounded, JetBrains_Mono } from "next/font/google";
 import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
 import { defaultSettings, SettingsProvider } from "src/components/settings";
 // Lazy client wrapper: defers the settings drawer (and its simplebar-react
@@ -22,24 +22,27 @@ import { SettingsDrawer } from "src/components/settings/drawer/settings-drawer-l
 
 // ----------------------------------------------------------------------
 
-const publicSans = Public_Sans({
-  subsets: ["latin"],
-  variable: "--font-public-sans",
-  display: "swap",
-});
-
-const barlow = Barlow({
-  subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-barlow",
-  display: "swap",
-});
-
-// Editorial display face for headings — Cyrillic-first, OFL-licensed.
-const onest = Onest({
+// Editorial Ink stack (see .stitch/DESIGN.md): Manrope — workhorse grotesque
+// for body/h3–h6, Unbounded — display face for h1/h2, JetBrains Mono — dates,
+// counters, code. All three are Cyrillic-native (the RU content rendered in a
+// system fallback before — Public Sans ships no Cyrillic).
+const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-onest",
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const unbounded = Unbounded({
+  subsets: ["latin", "cyrillic"],
+  weight: ["500", "600", "700"],
+  variable: "--font-unbounded",
+  display: "swap",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -126,7 +129,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="ru"
       suppressHydrationWarning
-      className={`${publicSans.variable} ${barlow.variable} ${onest.variable}`}
+      className={`${manrope.variable} ${unbounded.variable} ${jetBrainsMono.variable}`}
     >
       <body suppressHydrationWarning>
         {getInitColorSchemeScript}

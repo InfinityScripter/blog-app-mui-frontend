@@ -1,26 +1,25 @@
-export const SM_KEY = "sm";
-export const MD_KEY = "md";
-export const LG_KEY = "lg";
+export const HERO_OVERLINE = "AI · LLM · агенты · практика";
 
-export const HERO_LABEL = "Пишу про";
-export const HERO_HIGHLIGHT = "AI, LLM и агентов";
-export const HERO_TITLE = "Разборы AI-инструментов для реальной разработки";
+// Заголовок собирается из частей, чтобы акцентное слово красилось в primary
+// без градиентов (Editorial Ink: один цветовой акцент, сплошной).
+export const HERO_TITLE_PARTS = {
+  before: "Разборы ",
+  accent: "AI-инструментов",
+  after: " для реальной разработки",
+};
+
 export const HERO_SUMMARY =
   "Кейсы, гайды и честные разборы: что из AI-инструментов реально работает " +
   "в проде, а что — хайп. Без воды, с примерами из практики.";
 
-export const HERO_BLOG_INFO_TITLE = "Свежие материалы по AI";
-export const HERO_BLOG_INFO_DESCRIPTION =
+export const HERO_PANEL_TITLE = "В журнале";
+export const HERO_PANEL_DESCRIPTION =
   "LLM, агенты, Claude Code и инструменты — что попробовал, что прижилось " +
-  "в работе и почему. Применимо в проектах сразу.";
+  "в работе и почему.";
 
-export const HERO_HEADLINE_MAX_WIDTH = 760;
-export const HERO_HEADLINE_SIZE = { xs: 34, md: 52, lg: 58 };
-export const HERO_HEADLINE_LINE_HEIGHT = { xs: "44px", md: "66px", lg: "74px" };
-
-export const PARALLAX_PHYSICS = {
-  mass: 0.1,
-  damping: 20,
-  stiffness: 300,
-  restDelta: 0.001,
-};
+export const HERO_PANEL_LINKS = [
+  { label: "Новости AI", href: "/news" },
+  { label: "Хронология LLM", href: "/llm-timeline" },
+  { label: "Релизы моделей", href: "/changelog" },
+  { label: "Обо мне", href: "/portfolio" },
+];

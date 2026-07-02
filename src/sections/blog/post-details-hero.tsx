@@ -3,16 +3,16 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { CONFIG } from "src/config-global";
+import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
+import { monoValueSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import ListItemText from "@mui/material/ListItemText";
 import { useResponsive } from "src/hooks/use-responsive";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { formatImageUrl } from "src/utils/format-image-url";
-import { maxLine, varAlpha, bgGradient } from "src/theme/styles";
 
 import { SHARE_TARGETS } from "./const";
 import { useCopyShareLink } from "./hooks/use-copy-share-link";
@@ -21,6 +21,9 @@ import type { PostDetailsHeroProps } from "./types";
 
 // ----------------------------------------------------------------------
 
+// Editorial Ink: обложка отдельно (радиус 24, без затемнения), заголовок ПОД
+// ней — текст никогда не лежит поверх изображения. Шеринг — SpeedDial у края
+// обложки.
 export function PostDetailsHero({
   title,
   author,
@@ -43,66 +46,15 @@ export function PostDetailsHero({
   const handleCopyLink = useCopyShareLink(postUrl);
 
   return (
-    <Box
-      sx={{
-        ...bgGradient({
-          color: `0deg, ${varAlpha("var(--palette-grey-900Channel)", 0.64)}, ${varAlpha("var(--palette-grey-900Channel)", 0.64)}`,
-          imgUrl: formattedCoverUrl,
-        }),
-        // Responsive hero so the cover doesn't tower on phones.
-        height: { xs: 360, md: 480 },
-        overflow: "hidden",
-      }}
-    >
-      <Container sx={{ height: 1, position: "relative" }}>
-        <Typography
-          variant="h3"
-          component="h1"
-          sx={{
-            zIndex: 9,
-            color: "common.white",
-            position: "absolute",
-            maxWidth: 480,
-            pt: { xs: 2, md: 8 },
-            // Clamp very long RU news headlines so they can't overflow the hero.
-            ...maxLine({ line: 3 }),
-          }}
-        >
-          {title}
-        </Typography>
-
-        <Stack
-          sx={{
-            left: 0,
-            width: 1,
-            bottom: 0,
-            position: "absolute",
-          }}
-        >
-          {author && createdAt && (
-            <Stack
-              direction="row"
-              alignItems="center"
-              sx={{ px: { xs: 2, md: 3 }, pb: { xs: 3, md: 8 } }}
-            >
-              <Avatar
-                alt={author.name}
-                src={author.avatarUrl}
-                sx={{ width: 64, height: 64, mr: 2 }}
-              />
-
-              <ListItemText
-                sx={{ color: "common.white" }}
-                primary={author.name}
-                secondary={fDate(createdAt)}
-                primaryTypographyProps={{ typography: "subtitle1", mb: 0.5 }}
-                secondaryTypographyProps={{
-                  color: "inherit",
-                  sx: { opacity: 0.64 },
-                }}
-              />
-            </Stack>
-          )}
+    <Container sx={{ pt: { xs: 3, md: 5 } }}>
+      <Stack spacing={3} sx={{ maxWidth: 860, mx: "auto" }}>
+        <Box sx={{ position: "relative" }}>
+          <Image
+            alt={title}
+            src={formattedCoverUrl}
+            ratio="21/9"
+            sx={{ borderRadius: 3 }}
+          />
 
           {postUrl && (
             <SpeedDial
@@ -112,7 +64,7 @@ export function PostDetailsHero({
               FabProps={{ size: "medium" }}
               sx={{
                 position: "absolute",
-                bottom: { xs: 32, md: 64 },
+                bottom: { xs: 16, md: 24 },
                 right: { xs: 16, md: 24 },
               }}
             >
@@ -145,8 +97,29 @@ export function PostDetailsHero({
               />
             </SpeedDial>
           )}
-        </Stack>
-      </Container>
-    </Box>
+        </Box>
+
+        <Typography variant="h2" component="h1" sx={{ maxWidth: 720 }}>
+          {title}
+        </Typography>
+
+        {author && createdAt && (
+          <Stack direction="row" alignItems="center" spacing={1.5}>
+            <Avatar
+              alt={author.name}
+              src={author.avatarUrl}
+              sx={{ width: 40, height: 40 }}
+            />
+            <Typography variant="subtitle2">{author.name}</Typography>
+            <Box
+              component="span"
+              sx={{ ...monoValueSx, color: "text.disabled" }}
+            >
+              {fDate(createdAt)}
+            </Box>
+          </Stack>
+        )}
+      </Stack>
+    </Container>
   );
 }
