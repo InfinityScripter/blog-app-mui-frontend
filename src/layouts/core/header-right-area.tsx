@@ -62,13 +62,8 @@ export function HeaderRightArea({
           <LanguagePopover data-slot="localization" data={data?.langs} />
         )}
 
-        {/* -- Notifications popover -- */}
-        {notifications && (
-          <NotificationsDrawer
-            data-slot="notifications"
-            data={data?.notifications}
-          />
-        )}
+        {/* -- Notifications drawer (self-fetching) -- */}
+        {notifications && <NotificationsDrawer data-slot="notifications" />}
 
         {/* -- Contacts popover -- */}
         {contacts && (

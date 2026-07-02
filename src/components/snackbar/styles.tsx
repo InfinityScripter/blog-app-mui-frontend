@@ -61,6 +61,12 @@ export const StyledToaster = styled(Toaster)(({ theme }) => {
       display: "flex",
       borderRadius: 12,
       alignItems: "center",
+      // Keep text clear of the absolutely-positioned close button.
+      [`&:has(${toasterClasses.closeBtnVisible})`]: {
+        [`& .${toasterClasses.content}`]: {
+          paddingRight: 20,
+        },
+      },
     },
     /*
      * Content
@@ -81,14 +87,24 @@ export const StyledToaster = styled(Toaster)(({ theme }) => {
      */
     [`& .${toasterClasses.actionButton}`]: {},
     [`& .${toasterClasses.cancelButton}`]: {},
+    // Sonner leaves the close button unpositioned in unstyled mode — without
+    // an explicit `position: absolute` it renders inline before the icon.
     [`& .${toasterClasses.closeButton}`]: {
-      top: 0,
-      right: 0,
+      top: 6,
+      right: 6,
       left: "auto",
+      width: 20,
+      height: 20,
+      padding: 0,
+      display: "flex",
+      cursor: "pointer",
+      alignItems: "center",
+      position: "absolute",
+      borderRadius: "50%",
+      justifyContent: "center",
       color: "currentColor",
       backgroundColor: "transparent",
-      transform: "translate(-6px, 6px)",
-      borderColor: varAlpha(theme.vars.palette.grey["500Channel"], 0.16),
+      border: `1px solid ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,
       transition: theme.transitions.create([
         "background-color",
         "border-color",
@@ -123,12 +139,6 @@ export const StyledToaster = styled(Toaster)(({ theme }) => {
 
     [`& .${toasterClasses.default}`]: {
       ...baseStyles.toastDefault,
-      [`&:has(${toasterClasses.closeBtnVisible})`]: {
-        [`& .${toasterClasses.content}`]: {
-          paddingRight: 32,
-        },
-      },
-      [`&:has(.${toasterClasses.loader})`]: baseStyles.toastLoader,
       /*
        * With loader
        */
