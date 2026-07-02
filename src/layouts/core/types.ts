@@ -6,7 +6,6 @@ import type { ContactItem } from "../components/contacts-popover";
 import type { LanguageOption } from "../components/language-popover";
 import type { WorkspaceItem } from "../components/workspaces-popover";
 import type { AccountDrawerItem } from "../components/account-drawer";
-import type { NotificationItemData } from "../components/notifications-drawer/notification-item";
 
 // ----------------------------------------------------------------------
 
@@ -16,7 +15,6 @@ export interface HeaderBaseData {
   account?: AccountDrawerItem[];
   contacts?: ContactItem[];
   workspaces?: WorkspaceItem[];
-  notifications?: NotificationItemData[];
 }
 
 export interface HeaderBaseSlots {

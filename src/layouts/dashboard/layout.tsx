@@ -1,10 +1,10 @@
 "use client";
 
+import { _contacts } from "src/_mock";
 import Alert from "@mui/material/Alert";
 import { useTheme } from "@mui/material/styles";
 import { useAuthContext } from "src/auth/hooks";
 import { useBoolean } from "src/hooks/use-boolean";
-import { _contacts, _notifications } from "src/_mock";
 import { iconButtonClasses } from "@mui/material/IconButton";
 import { useSettingsContext } from "src/components/settings";
 
@@ -69,11 +69,11 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
               account: _account,
               contacts: _contacts,
               workspaces: _workspaces,
-              notifications: _notifications,
             }}
             slotsDisplay={{
               signIn: false,
               helpLink: false,
+              notifications: true,
             }}
             slots={{
               topArea: (
