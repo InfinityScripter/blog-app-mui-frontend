@@ -24,8 +24,12 @@ export interface LlmModel {
   description: string;
   /** Short capability tags, e.g. ["multimodal", "reasoning"]. */
   capabilities: string[];
-  /** Official announcement / paper URL. */
+  /** Official announcement / paper URL — must point at the model's own page. */
   sourceUrl: string;
+  /** Wikipedia article about the model/family (ru preferred), or null. */
+  wikiUrl: string | null;
+  /** One verified curious fact shown in the detail panel, or null. */
+  funFact: string | null;
 }
 
 /** A model in render order, tagged with the year when it opens a new year. */

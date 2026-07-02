@@ -2,12 +2,17 @@ import type { LlmModel } from "src/sections/llm-timeline/types";
 
 import { it, expect, describe } from "vitest";
 import {
+  eraLabel,
   vendorIcon,
   vendorColor,
   releaseYear,
+  vendorStats,
   hasBrandIcon,
   formatParams,
+  yearAnchorId,
   formatContext,
+  timelineYears,
+  filterByVendors,
   withYearMarkers,
   sortByReleaseAsc,
 } from "src/sections/llm-timeline/utils";
@@ -27,6 +32,8 @@ function model(id: string, releaseDate: string, vendor = "OpenAI"): LlmModel {
     description: "",
     capabilities: [],
     sourceUrl: "https://example.com",
+    wikiUrl: null,
+    funFact: null,
   };
 }
 
@@ -118,5 +125,64 @@ describe("withYearMarkers", () => {
 
   it("returns an empty array for no models", () => {
     expect(withYearMarkers([])).toEqual([]);
+  });
+});
+
+describe("timelineYears", () => {
+  it("returns distinct years ascending", () => {
+    const years = timelineYears([
+      model("a", "2024-06-01"),
+      model("b", "2020-01-01"),
+      model("c", "2024-02-01"),
+    ]);
+    expect(years).toEqual([2020, 2024]);
+  });
+});
+
+describe("vendorStats", () => {
+  it("counts models per vendor, most-represented first", () => {
+    const stats = vendorStats([
+      model("a", "2024-01-01", "OpenAI"),
+      model("b", "2024-02-01", "Meta"),
+      model("c", "2024-03-01", "OpenAI"),
+    ]);
+    expect(stats).toEqual([
+      { vendor: "OpenAI", count: 2 },
+      { vendor: "Meta", count: 1 },
+    ]);
+  });
+
+  it("breaks count ties alphabetically", () => {
+    const stats = vendorStats([
+      model("a", "2024-01-01", "Meta"),
+      model("b", "2024-02-01", "Anthropic"),
+    ]);
+    expect(stats.map((s) => s.vendor)).toEqual(["Anthropic", "Meta"]);
+  });
+});
+
+describe("filterByVendors", () => {
+  const models = [
+    model("a", "2024-01-01", "OpenAI"),
+    model("b", "2024-02-01", "Meta"),
+  ];
+
+  it("returns everything for the empty selection («all»)", () => {
+    expect(filterByVendors(models, [])).toEqual(models);
+  });
+
+  it("keeps only the selected vendors", () => {
+    expect(filterByVendors(models, ["Meta"]).map((m) => m.id)).toEqual(["b"]);
+  });
+});
+
+describe("yearAnchorId / eraLabel", () => {
+  it("builds a stable DOM id for a year", () => {
+    expect(yearAnchorId(2024)).toBe("llm-year-2024");
+  });
+
+  it("returns an era caption only for era-starting years", () => {
+    expect(eraLabel(2022)).toBe("ChatGPT-момент");
+    expect(eraLabel(2019)).toBeNull();
   });
 });

@@ -16,7 +16,13 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 import { TimelineDetail } from "./timeline-detail";
-import { vendorIcon, vendorColor, hasBrandIcon } from "./utils";
+import {
+  eraLabel,
+  vendorIcon,
+  vendorColor,
+  hasBrandIcon,
+  yearAnchorId,
+} from "./utils";
 
 import type { LlmModel } from "./types";
 
@@ -46,8 +52,16 @@ export function TimelineEntry({
   const color = vendorColor(model.vendor);
   const brand = hasBrandIcon(model.vendor);
 
+  const era = yearStart !== null ? eraLabel(yearStart) : null;
+
   return (
-    <TimelineItem>
+    <TimelineItem
+      {...(yearStart !== null && {
+        id: yearAnchorId(yearStart),
+        "data-year": yearStart,
+      })}
+      sx={{ scrollMarginTop: 96 }}
+    >
       <TimelineOppositeContent
         sx={{ m: "auto 0", color: "text.disabled" }}
         variant="caption"
@@ -60,6 +74,14 @@ export function TimelineEntry({
             variant="soft"
             sx={{ mb: 0.5 }}
           />
+        )}
+        {era !== null && (
+          <Typography
+            variant="caption"
+            sx={{ display: "block", mb: 0.5, fontStyle: "italic" }}
+          >
+            {era}
+          </Typography>
         )}
         <Typography variant="caption" sx={{ display: "block" }}>
           {fDate(model.releaseDate)}
@@ -86,7 +108,10 @@ export function TimelineEntry({
             borderRadius: 1.5,
             p: 1.5,
             border: `1px solid ${theme.vars.palette.divider}`,
-            transition: theme.transitions.create(["border-color", "box-shadow"]),
+            transition: theme.transitions.create([
+              "border-color",
+              "box-shadow",
+            ]),
             "&:hover": { borderColor: "primary.main" },
           }}
         >

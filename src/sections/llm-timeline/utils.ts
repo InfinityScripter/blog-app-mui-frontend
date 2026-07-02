@@ -1,5 +1,7 @@
 import type { LabelColor } from "src/components/label";
 
+import { YEAR_ERAS } from "./const-ui";
+
 import type { LlmModel, LlmTimelineRow } from "./types";
 
 // ----------------------------------------------------------------------
@@ -23,6 +25,11 @@ const VENDOR_TO_COLOR: Record<string, LabelColor> = {
   yandex: "error",
   alibaba: "warning",
   microsoft: "info",
+  sber: "success",
+  tii: "warning",
+  bigscience: "secondary",
+  "moonshot ai": "primary",
+  "zhipu ai": "info",
 };
 
 /** Maps a vendor to a theme semantic color for its Label (never a hex). */
@@ -49,6 +56,7 @@ const VENDOR_TO_ICON: Record<string, string> = {
   alibaba: "logos:qwen",
   yandex: "logos:yandex-ru",
   microsoft: "logos:microsoft-icon",
+  "moonshot ai": "logos:moonshot-ai-icon",
 };
 
 /** Generic chip icon for a vendor without a brand logo in Iconify. */
@@ -116,4 +124,46 @@ export function withYearMarkers(models: LlmModel[]): LlmTimelineRow[] {
       index > 0 ? releaseYear(ordered[index - 1].releaseDate) : null;
     return { model, yearStart: year === prevYear ? null : year };
   });
+}
+
+/** DOM id of the first timeline item of a year — target for the year nav. */
+export function yearAnchorId(year: number): string {
+  return `llm-year-${year}`;
+}
+
+/** Era caption for a year chip, or null when the previous era continues. */
+export function eraLabel(year: number): string | null {
+  return YEAR_ERAS[year] ?? null;
+}
+
+/** Ascending list of distinct release years. */
+export function timelineYears(models: LlmModel[]): number[] {
+  const years = models.map((model) => releaseYear(model.releaseDate));
+  return Array.from(new Set(years)).sort((a, b) => a - b);
+}
+
+/** A vendor with how many of its models are on the timeline. */
+export interface VendorStat {
+  vendor: string;
+  count: number;
+}
+
+/** Vendors with model counts, most-represented first (ties — alphabetical). */
+export function vendorStats(models: LlmModel[]): VendorStat[] {
+  const counts = models.reduce<Map<string, number>>((acc, model) => {
+    acc.set(model.vendor, (acc.get(model.vendor) ?? 0) + 1);
+    return acc;
+  }, new Map());
+  return Array.from(counts, ([vendor, count]) => ({ vendor, count })).sort(
+    (a, b) => b.count - a.count || a.vendor.localeCompare(b.vendor),
+  );
+}
+
+/** Models whose vendor is selected; an empty selection means «all». */
+export function filterByVendors(
+  models: LlmModel[],
+  selected: string[],
+): LlmModel[] {
+  if (!selected.length) return models;
+  return models.filter((model) => selected.includes(model.vendor));
 }

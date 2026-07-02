@@ -159,6 +159,7 @@ module.exports = {
         "src/theme/**",
         // Curated static LLM history dataset — data, not a component.
         "src/sections/llm-timeline/const.ts",
+        "src/sections/llm-timeline/data/**",
       ],
       rules: {
         "max-lines": 0,
