@@ -3,18 +3,19 @@ import { useEffect } from "react";
 // ----------------------------------------------------------------------
 
 const FONT_URLS: Record<string, string> = {
-  Inter:
-    "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
-  Roboto:
-    "https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap",
-  Lato: "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700&display=swap",
+  "Golos Text":
+    "https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap",
+  "IBM Plex Sans":
+    "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap",
+  Rubik:
+    "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap",
 };
 
 export function useFontLoader(fontFamily: string): void {
   useEffect(() => {
     const url = FONT_URLS[fontFamily];
 
-    if (!url) return; // Public Sans and unknown fonts — skip
+    if (!url) return; // Manrope (bundled via next/font) and unknown fonts — skip
 
     const id = `font-link-${fontFamily.replace(/\s+/g, "-").toLowerCase()}`;
 

@@ -4,14 +4,18 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import { maxLine } from "src/theme/styles";
 import { Label } from "src/components/label";
 import { fDate } from "src/utils/format-time";
 import { useTheme } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
+import { maxLine, monoValueSx } from "src/theme/styles";
 
-import { vendorColor, formatPrice, formatContext } from "./utils";
+import {
+  vendorColor,
+  formatPrice,
+  formatContext,
+  isFreshRelease,
+} from "./utils";
 
 // ----------------------------------------------------------------------
 
@@ -20,68 +24,94 @@ interface ReleaseCardProps {
 }
 
 /**
- * A single row in the /changelog archive: vendor chip + «model version» heading
- * + released date, with price/context chips when known. Links to the detail
- * page. Styling mirrors the news feed card (theme colors via Label, no hex).
+ * Строка леджера /changelog: mono-дата слева, контент справа (vendor-лейбл,
+ * заголовок «model version», mono-спеки). Свежий релиз (≤7 дней) получает
+ * пульсирующую vermilion-точку — единственная постоянная микро-анимация.
  */
 export function ReleaseCard({ release }: ReleaseCardProps) {
   const theme = useTheme();
   const linkTo = paths.changelog.details(release.slug);
   const title = `${release.model} ${release.version}`.trim();
+  const fresh = isFreshRelease(release.releasedAt);
 
   return (
     <Box
       sx={{
+        py: 2.5,
+        gap: { xs: 1, sm: 3 },
         display: "flex",
-        flexDirection: "column",
-        gap: 1,
-        py: 2,
+        flexDirection: { xs: "column", sm: "row" },
         borderTop: `1px solid ${theme.vars.palette.divider}`,
       }}
     >
-      <Stack
-        direction="row"
-        spacing={1}
-        sx={{ flexWrap: "wrap", alignItems: "center" }}
-      >
-        <Label variant="soft" color={vendorColor(release.vendor)}>
-          {release.vendor}
-        </Label>
-        {release.releasedAt && (
-          <Typography variant="caption" sx={{ color: "text.secondary" }}>
-            {fDate(release.releasedAt)}
-          </Typography>
-        )}
-      </Stack>
-
-      <Link
-        component={RouterLink}
-        href={linkTo}
-        color="text.primary"
+      <Box
         sx={{
-          typography: "h6",
-          ...maxLine({ line: 2, persistent: theme.typography.h6 }),
-          transition: theme.transitions.create("color"),
-          "&:hover": { color: "primary.main" },
+          ...monoValueSx,
+          pt: 0.25,
+          flexShrink: 0,
+          width: { sm: 128 },
+          color: "text.disabled",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 1,
         }}
       >
-        {title}
-      </Link>
+        {fresh && (
+          <Box
+            component="span"
+            sx={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              bgcolor: "primary.main",
+              animation: "releasePulse 2s ease-in-out infinite",
+              "@keyframes releasePulse": {
+                "0%, 100%": { opacity: 1 },
+                "50%": { opacity: 0.35 },
+              },
+            }}
+          />
+        )}
+        {release.releasedAt ? fDate(release.releasedAt) : "—"}
+      </Box>
 
-      <Stack
-        direction="row"
-        spacing={2}
-        sx={{ flexWrap: "wrap", color: "text.secondary" }}
-      >
-        <Typography variant="caption">
-          Контекст: {formatContext(release.contextTokens)}
-        </Typography>
-        <Typography variant="caption">
-          Вход: {formatPrice(release.priceIn)} / 1M
-        </Typography>
-        <Typography variant="caption">
-          Выход: {formatPrice(release.priceOut)} / 1M
-        </Typography>
+      <Stack spacing={1} sx={{ minWidth: 0, flexGrow: 1 }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{ flexWrap: "wrap", alignItems: "center" }}
+        >
+          <Label variant="outlined" color={vendorColor(release.vendor)}>
+            {release.vendor}
+          </Label>
+        </Stack>
+
+        <Link
+          component={RouterLink}
+          href={linkTo}
+          color="text.primary"
+          underline="none"
+          sx={{
+            typography: "h5",
+            ...maxLine({ line: 2, persistent: theme.typography.h5 }),
+            transition: theme.transitions.create("color"),
+            "&:hover": { color: "primary.main" },
+          }}
+        >
+          {title}
+        </Link>
+
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ ...monoValueSx, fontSize: 12, flexWrap: "wrap", color: "text.secondary" }}
+        >
+          <Box component="span">
+            контекст {formatContext(release.contextTokens)}
+          </Box>
+          <Box component="span">вход {formatPrice(release.priceIn)}/1M</Box>
+          <Box component="span">выход {formatPrice(release.priceOut)}/1M</Box>
+        </Stack>
       </Stack>
     </Box>
   );

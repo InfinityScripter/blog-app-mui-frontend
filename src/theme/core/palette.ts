@@ -27,16 +27,26 @@ export const error = createPaletteChannel(COLORS.error);
 // Common
 export const common = createPaletteChannel(COLORS.common);
 
+// Primary — dark scheme uses a brighter vermilion for contrast on charcoal
+export const primaryDark = createPaletteChannel({
+  lighter: "#FBE3D9",
+  light: "#F2926B",
+  main: "#E06032",
+  dark: "#C2451E",
+  darker: "#9A3412",
+  contrastText: "#FFFFFF",
+});
+
 // Text
 export const text = {
   light: createPaletteChannel({
-    primary: grey[800],
+    primary: grey[900],
     secondary: grey[600],
-    disabled: grey[500],
+    disabled: grey[400],
   }),
   dark: createPaletteChannel({
-    primary: "#FFFFFF",
-    secondary: grey[500],
+    primary: "#F5F5F4",
+    secondary: grey[400],
     disabled: grey[600],
   }),
 };
@@ -45,13 +55,13 @@ export const text = {
 export const background = {
   light: createPaletteChannel({
     paper: "#FFFFFF",
-    default: "#FFFFFF",
-    neutral: grey[200],
+    default: grey[50],
+    neutral: grey[100],
   }),
   dark: createPaletteChannel({
-    paper: grey[800],
-    default: grey[900],
-    neutral: "#28323D",
+    paper: grey[900],
+    default: "#141210",
+    neutral: "#262220",
   }),
 };
 
@@ -96,6 +106,7 @@ export const lightPalette = {
 
 export const darkPalette = {
   ...basePalette,
+  primary: primaryDark,
   text: text.dark,
   background: background.dark,
   action: action.dark,

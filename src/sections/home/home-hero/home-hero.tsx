@@ -1,119 +1,51 @@
+import type { Theme } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import { hairline } from "src/theme/styles";
 import Container from "@mui/material/Container";
-import { useTheme } from "@mui/material/styles";
-import { useResponsive } from "src/hooks/use-responsive";
 import { MotionContainer } from "src/components/animate";
-import { m, useSpring, useTransform } from "framer-motion";
 
 import { HeroText } from "./hero-text";
 import { HeroButtons } from "./hero-buttons";
 import { HeroHeading } from "./hero-content";
-import { HeroBlogInfo } from "./hero-blog-info";
-import { MD_KEY, PARALLAX_PHYSICS } from "./const";
-import { useScrollPercent } from "./hooks/use-scroll-percent";
-import { HeroBackground } from "../components/hero-background";
+import { HeroMetaPanel } from "./hero-meta-panel";
 
 import type { HomeHeroProps } from "./types";
 
 // ----------------------------------------------------------------------
 
+// Асимметричный editorial-герой: текстовая колонка слева (7/12), индекс
+// журнала справа (5/12). Без параллакса, фиксированных слоёв и SVG-декора.
 export function HomeHero({ sx, ...other }: HomeHeroProps) {
-  const theme = useTheme();
-  const scroll = useScrollPercent();
-  const mdUp = useResponsive("up", MD_KEY);
-
-  const getPercent = (sv: number) => {
-    const hh = scroll.elementRef.current?.offsetHeight ?? 1;
-    return Math.min(Math.floor((sv / hh) * 100), 100);
-  };
-
-  const y1 = useSpring(
-    useTransform(scroll.scrollY, (sv) => (mdUp ? sv * getPercent(sv) * -7 : 0)),
-    PARALLAX_PHYSICS,
-  );
-  const y2 = useSpring(
-    useTransform(scroll.scrollY, (sv) => (mdUp ? sv * getPercent(sv) * -6 : 0)),
-    PARALLAX_PHYSICS,
-  );
-  const y4 = useSpring(
-    useTransform(scroll.scrollY, (sv) => (mdUp ? sv * getPercent(sv) * -4 : 0)),
-    PARALLAX_PHYSICS,
-  );
-
-  const opacity = useTransform(scroll.scrollY, (sv) =>
-    mdUp ? Number((1 - getPercent(sv) / 100).toFixed(1)) : 1,
-  );
-
   return (
-    <Stack
-      ref={scroll.elementRef}
+    <Box
       component="section"
       sx={{
-        overflow: "hidden",
-        position: "relative",
-        [theme.breakpoints.up(MD_KEY)]: {
-          minHeight: 760,
-          height: "100vh",
-          maxHeight: 1440,
-          display: "block",
-          willChange: "opacity",
-          mt: "calc(var(--layout-header-desktop-height) * -1)",
-        },
+        borderBottom: (theme: Theme) => hairline(theme),
         ...sx,
       }}
       {...other}
     >
-      <Box
-        component={m.div}
-        style={{ opacity }}
-        sx={{
-          width: 1,
-          display: "flex",
-          position: "relative",
-          flexDirection: "column",
-          transition: theme.transitions.create(["opacity"]),
-          [theme.breakpoints.up(MD_KEY)]: {
-            height: 1,
-            position: "fixed",
-            maxHeight: "inherit",
-          },
-        }}
+      <Container
+        component={MotionContainer}
+        sx={{ py: { xs: 8, md: "clamp(4rem, 9vw, 7rem)" } }}
       >
-        <Container
-          component={MotionContainer}
-          sx={{
-            py: 3,
-            gap: 5,
-            zIndex: 9,
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            [theme.breakpoints.up(MD_KEY)]: {
-              flex: "1 1 auto",
-              justifyContent: "center",
-              py: "var(--layout-header-desktop-height)",
-            },
-          }}
-        >
-          <Stack spacing={3} sx={{ textAlign: "center" }}>
-            <m.div style={{ y: y1 }}>
-              <HeroHeading theme={theme} />
-            </m.div>
-            <m.div style={{ y: y2 }}>
-              <HeroText theme={theme} />
-            </m.div>
-            <m.div style={{ y: y4 }}>
+        <Grid container spacing={{ xs: 6, md: 10 }} alignItems="center">
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Stack spacing={4} alignItems="flex-start">
+              <HeroHeading />
+              <HeroText />
               <HeroButtons />
-            </m.div>
-            <m.div style={{ y: y4 }}>
-              <HeroBlogInfo theme={theme} />
-            </m.div>
-          </Stack>
-        </Container>
+            </Stack>
+          </Grid>
 
-        <HeroBackground />
-      </Box>
-    </Stack>
+          <Grid size={{ xs: 12, md: 5 }}>
+            <HeroMetaPanel />
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
   );
 }

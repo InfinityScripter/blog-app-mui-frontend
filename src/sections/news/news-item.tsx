@@ -2,12 +2,12 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import { maxLine } from "src/theme/styles";
 import { Label } from "src/components/label";
 import { fDate } from "src/utils/format-time";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
+import { maxLine, monoValueSx } from "src/theme/styles";
 
 import { Thumb } from "./news-thumb";
 import { categoryColor } from "./utils";
@@ -52,7 +52,7 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
           sx={{ flex: 1, justifyContent: "center", py: 0.5 }}
         >
           <Label
-            variant="soft"
+            variant="outlined"
             color={categoryColor(category)}
             sx={{ alignSelf: "flex-start" }}
           >
@@ -74,7 +74,10 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
           </Link>
 
           {meta && (
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            <Typography
+              component="p"
+              sx={{ ...monoValueSx, color: "text.secondary" }}
+            >
               {meta}
             </Typography>
           )}
@@ -102,7 +105,7 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
 
       <Stack spacing={0.75} sx={{ flex: 1, minWidth: 0 }}>
         <Label
-          variant="soft"
+          variant="outlined"
           color={categoryColor(category)}
           sx={{ alignSelf: "flex-start" }}
         >
@@ -124,7 +127,10 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
         </Link>
 
         {meta && (
-          <Typography variant="caption" sx={{ color: "text.secondary" }}>
+          <Typography
+            component="p"
+            sx={{ ...monoValueSx, fontSize: 12, color: "text.secondary" }}
+          >
             {meta}
           </Typography>
         )}

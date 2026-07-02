@@ -12,6 +12,7 @@ const MuiCard = {
     root: ({ theme }: { theme: ThemeWithVars }) => ({
       position: "relative",
       boxShadow: theme.customShadows.card,
+      border: `1px solid rgba(${theme.vars.palette.grey["500Channel"]} / 0.16)`,
       borderRadius: Number(theme.shape.borderRadius) * 2,
       zIndex: 0, // Fix Safari overflow: hidden with border radius
     }),

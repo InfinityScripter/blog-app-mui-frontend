@@ -45,3 +45,16 @@ export function formatContext(tokens: number | null): string {
   }
   return String(tokens);
 }
+
+/**
+ * Релиз считается «свежим» первые 7 дней — строка леджера получает
+ * пульсирующую точку-индикатор.
+ */
+const FRESH_RELEASE_WINDOW_MS = 7 * 24 * 60 * 60 * 1000;
+
+export function isFreshRelease(releasedAt: string | null | undefined): boolean {
+  if (!releasedAt) return false;
+  const releasedTime = new Date(releasedAt).getTime();
+  if (Number.isNaN(releasedTime)) return false;
+  return Date.now() - releasedTime <= FRESH_RELEASE_WINDOW_MS;
+}

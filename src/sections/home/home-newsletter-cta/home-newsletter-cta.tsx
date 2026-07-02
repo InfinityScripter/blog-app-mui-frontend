@@ -4,33 +4,24 @@ import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
+import { monoLabelSx, monoValueSx } from "src/theme/styles";
 
 import { NewsletterForm } from "./newsletter-form";
 import { NL_TEXT, NL_NOTE, NL_TITLE, NL_LABEL } from "./const";
 
 // ----------------------------------------------------------------------
 
-// Email-capture block. A dark branded panel (primary glow over a graphite
-// gradient) with copy on the left and the form on the right — deliberately
-// contrasted with the light outlined Telegram CTA below so the two don't read
-// as duplicate boxes. All colors come from the theme palette (primary + grey)
-// so it tracks the brand color; the surface stays dark in both light/dark mode.
+// Email-capture block. Editorial Ink: сплошная чернильная плита (grey.900 в
+// обеих схемах) без градиентов; копия слева, форма справа, mono-примечание.
 export function HomeNewsletterCta() {
   return (
     <Container component="section" sx={{ py: { xs: 5, md: 8 } }}>
       <Box
         sx={{
-          position: "relative",
-          overflow: "hidden",
-          borderRadius: 4,
+          borderRadius: 2.5,
           p: { xs: 3.5, md: 6 },
           color: "common.white",
-          backgroundImage: (theme) =>
-            `radial-gradient(90% 130% at 0% 0%, ${alpha(
-              theme.palette.primary.main,
-              0.55,
-            )} 0%, ${alpha(theme.palette.primary.main, 0)} 52%), ` +
-            `linear-gradient(120deg, ${theme.palette.grey[900]} 0%, ${theme.palette.grey[800]} 100%)`,
+          bgcolor: "grey.900",
         }}
       >
         <Stack
@@ -42,10 +33,10 @@ export function HomeNewsletterCta() {
           <Stack spacing={1.5} sx={{ maxWidth: 460 }}>
             <Box
               sx={{
+                ...monoLabelSx,
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 0.75,
-                typography: "overline",
                 color: "primary.light",
               }}
             >
@@ -53,7 +44,7 @@ export function HomeNewsletterCta() {
               {NL_LABEL}
             </Box>
 
-            <Typography variant="h3" sx={{ lineHeight: 1.25 }}>
+            <Typography variant="h2" component="h3" sx={{ lineHeight: 1.15 }}>
               {NL_TITLE}
             </Typography>
 
@@ -65,8 +56,13 @@ export function HomeNewsletterCta() {
           <Box sx={{ width: 1, maxWidth: { xs: 1, md: 380 } }}>
             <NewsletterForm tone="dark" />
             <Typography
-              variant="caption"
-              sx={{ mt: 1.5, display: "block", color: alpha("#FFFFFF", 0.5) }}
+              component="p"
+              sx={{
+                ...monoValueSx,
+                fontSize: 11,
+                mt: 1.5,
+                color: alpha("#FFFFFF", 0.5),
+              }}
             >
               {NL_NOTE}
             </Typography>

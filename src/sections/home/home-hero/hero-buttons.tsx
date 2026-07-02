@@ -2,44 +2,39 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import { Iconify } from "src/components/iconify";
-import { marketingHeroCtaRowSx } from "src/theme/styles";
 
 import { MInview } from "./m-inview";
 
 // ----------------------------------------------------------------------
 
-// Кнопки для перехода к портфолио и статьям
+// Один primary CTA (контент) + тихая outlined-ссылка на портфолио.
 export function HeroButtons() {
   return (
-    <Box sx={marketingHeroCtaRowSx}>
-      <MInview>
-        <Button
-          component={Link}
-          href="/portfolio"
-          color="primary"
-          size="large"
-          variant="contained"
-          startIcon={
-            <Iconify width={24} icon="solar:user-circle-bold-duotone" />
-          }
-        >
-          Обо мне
-        </Button>
-      </MInview>
-      <MInview>
+    <MInview>
+      <Box sx={{ display: "flex", flexWrap: "wrap", gap: { xs: 1.5, sm: 2 } }}>
         <Button
           component={Link}
           href="/post"
           color="primary"
           size="large"
-          variant="outlined"
+          variant="contained"
           startIcon={
-            <Iconify width={24} icon="mdi:newspaper-variant-outline" />
+            <Iconify width={22} icon="mdi:newspaper-variant-outline" />
           }
         >
           Читать блог
         </Button>
-      </MInview>
-    </Box>
+
+        <Button
+          component={Link}
+          href="/portfolio"
+          color="inherit"
+          size="large"
+          variant="outlined"
+        >
+          Обо мне
+        </Button>
+      </Box>
+    </MInview>
   );
 }

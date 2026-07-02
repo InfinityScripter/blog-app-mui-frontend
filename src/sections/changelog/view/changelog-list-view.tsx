@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
+import Stack from "@mui/material/Stack";
+import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
@@ -28,9 +30,14 @@ export function ChangelogListView({ releases }: ChangelogListViewProps) {
 
   return (
     <Container sx={{ py: { xs: 5, md: 8 } }}>
-      <Typography variant="h4" sx={{ mb: { xs: 3, md: 5 } }}>
-        Хроника релизов AI-моделей
-      </Typography>
+      <Stack spacing={1} sx={{ mb: { xs: 3, md: 5 } }}>
+        <Typography component="p" sx={monoLabelSx}>
+          Релизы моделей
+        </Typography>
+        <Typography variant="h2" component="h1">
+          Хроника релизов AI-моделей
+        </Typography>
+      </Stack>
 
       {ordered.length > 0 ? (
         ordered.map((release) => (

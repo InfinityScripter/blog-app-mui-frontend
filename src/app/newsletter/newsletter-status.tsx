@@ -1,3 +1,5 @@
+import type { Theme } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -5,6 +7,7 @@ import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
+import { hairline, monoValueSx } from "src/theme/styles";
 import CircularProgress from "@mui/material/CircularProgress";
 
 // ----------------------------------------------------------------------
@@ -46,7 +49,15 @@ export function NewsletterStatus({
         spacing={3}
         alignItems="center"
         textAlign="center"
-        sx={{ mx: "auto", maxWidth: 440 }}
+        sx={{
+          mx: "auto",
+          maxWidth: 480,
+          width: 1,
+          p: { xs: 4, md: 6 },
+          borderRadius: 2.5,
+          bgcolor: "background.paper",
+          border: (theme: Theme) => hairline(theme),
+        }}
       >
         {status === "loading" ? (
           <>
@@ -73,10 +84,15 @@ export function NewsletterStatus({
               <Iconify icon={icon} width={40} />
             </Box>
 
-            <Typography variant="h5">{message}</Typography>
+            <Typography variant="h4" component="h1">
+              {message}
+            </Typography>
 
             {!isError && redirectIn !== undefined && (
-              <Typography variant="body2" sx={{ color: "text.secondary" }}>
+              <Typography
+                component="p"
+                sx={{ ...monoValueSx, fontSize: 12, color: "text.secondary" }}
+              >
                 Через {redirectIn} с вернём вас на главную…
               </Typography>
             )}

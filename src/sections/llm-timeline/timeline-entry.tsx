@@ -5,6 +5,7 @@ import { Label } from "src/components/label";
 import Collapse from "@mui/material/Collapse";
 import { fDate } from "src/utils/format-time";
 import TimelineDot from "@mui/lab/TimelineDot";
+import { monoValueSx } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import TimelineItem from "@mui/lab/TimelineItem";
@@ -57,11 +58,14 @@ export function TimelineEntry({
             label={yearStart}
             color="primary"
             size="small"
-            variant="soft"
-            sx={{ mb: 0.5 }}
+            variant="outlined"
+            sx={{ ...monoValueSx, mb: 0.5 }}
           />
         )}
-        <Typography variant="caption" sx={{ display: "block" }}>
+        <Typography
+          component="span"
+          sx={{ ...monoValueSx, fontSize: 12, display: "block" }}
+        >
           {fDate(model.releaseDate)}
         </Typography>
       </TimelineOppositeContent>

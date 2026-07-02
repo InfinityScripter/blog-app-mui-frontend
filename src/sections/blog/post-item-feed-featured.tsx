@@ -12,43 +12,43 @@ import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
-import { maxLine, hairline, monoValueSx } from "src/theme/styles";
+import { maxLine, hairline, hoverLiftSx, monoValueSx } from "src/theme/styles";
 
 import { MAX_TAGS } from "./const";
 import { InfoBlock } from "./post-item-feed-info-block";
-import { isTagActive, orderTagsByActive } from "./utils";
 
 import type { PostItemFeedProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-// Editorial Ink: строка ленты без карточки — hairline-линейка сверху, mono-мета,
-// заголовок с vermilion-hover, маленькая обложка справа (скрыта на xs).
-export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
+// Featured-строка ленты: широкая hairline-карточка, обложка слева, текст
+// справа. Используется для самого свежего материала на главной.
+export function PostItemFeedFeatured({ post }: PostItemFeedProps) {
   const { title, coverUrl, createdAt, totalViews, description, tags, content } =
     post;
 
   const href = paths.post.details(post.id ?? "");
   const readingTime = getReadingTime(content);
-  // Show the tag(s) the feed is filtered by first, so a matched post never
-  // looks unrelated just because its matching tag fell past MAX_TAGS.
-  const visibleTags = orderTagsByActive(tags ?? [], activeTags).slice(
-    0,
-    MAX_TAGS,
-  );
+  const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
   const cover = coverSrc(coverUrl, String(post._id ?? post.id ?? title));
 
   return (
     <Box
-      sx={{
-        py: 3,
-        gap: 3,
+      sx={(theme: Theme) => ({
         display: "flex",
-        alignItems: "flex-start",
-        borderTop: (theme: Theme) => hairline(theme),
-      }}
+        overflow: "hidden",
+        borderRadius: 2.5,
+        bgcolor: "background.paper",
+        border: hairline(theme),
+        flexDirection: { xs: "column", md: "row" },
+        ...hoverLiftSx(theme),
+      })}
     >
-      <Stack spacing={1} sx={{ flexGrow: 1, minWidth: 0 }}>
+      <Box sx={{ width: { xs: 1, md: "42%" }, flexShrink: 0 }}>
+        <Image alt={title} src={cover} ratio="16/10" sx={{ height: 1 }} />
+      </Box>
+
+      <Stack spacing={1.5} sx={{ p: { xs: 3, md: 4 }, minWidth: 0 }}>
         <Box
           gap={1.5}
           display="flex"
@@ -69,7 +69,7 @@ export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
           href={href}
           color="inherit"
           underline="none"
-          variant="h5"
+          variant="h3"
           sx={{
             ...maxLine({ line: 2 }),
             transition: (theme: Theme) =>
@@ -83,14 +83,14 @@ export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
         </Link>
 
         <Typography
-          variant="body2"
-          sx={{ ...maxLine({ line: 2 }), color: "text.secondary" }}
+          variant="body1"
+          sx={{ ...maxLine({ line: 3 }), color: "text.secondary" }}
         >
           {description}
         </Typography>
 
         {visibleTags.length > 0 && (
-          <Box display="flex" flexWrap="wrap" gap={0.5} sx={{ mt: 0.5 }}>
+          <Box display="flex" flexWrap="wrap" gap={0.5} sx={{ mt: "auto" }}>
             {visibleTags.map((tag) => (
               <Chip
                 key={tag}
@@ -100,23 +100,11 @@ export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
                 clickable
                 component={RouterLink}
                 href={paths.tag.details(tag)}
-                color={isTagActive(tag, activeTags) ? "primary" : "default"}
               />
             ))}
           </Box>
         )}
       </Stack>
-
-      <Box
-        sx={{
-          width: 168,
-          height: 126,
-          flexShrink: 0,
-          display: { xs: "none", sm: "block" },
-        }}
-      >
-        <Image alt={title} src={cover} sx={{ height: 1, borderRadius: 1.5 }} />
-      </Box>
     </Box>
   );
 }

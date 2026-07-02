@@ -29,7 +29,6 @@ export interface AuthSplitSectionProps {
   layoutQuery: Breakpoint;
   methods?: AuthSplitMethodOption[];
   title?: string;
-  imgUrl?: string;
   subtitle?: string;
 }
 
@@ -38,7 +37,6 @@ export interface AuthSplitLayoutProps {
   section?: {
     title?: string;
     subtitle?: string;
-    imgUrl?: string;
-  };
+    };
   children: ReactNode;
 }

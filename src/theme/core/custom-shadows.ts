@@ -51,10 +51,9 @@ export function customShadows(colorScheme: ColorScheme): CustomShadows {
     z24: `0 24px 48px 0 ${varAlpha(colorChannel, 0.16)}`,
     //
     dialog: `-40px 40px 80px -8px ${varAlpha(common.blackChannel, 0.24)}`,
-    card: `0 0 2px 0 ${varAlpha(
-      colorChannel,
-      0.2,
-    )}, 0 12px 24px -4px ${varAlpha(colorChannel, 0.12)}`,
+    // Editorial Ink: cards rest almost flat (hairline border carries the edge);
+    // depth is reserved for hover states at the section level.
+    card: `0 1px 2px 0 ${varAlpha(colorChannel, 0.08)}`,
     dropdown: `0 0 2px 0 ${varAlpha(
       colorChannel,
       0.24,

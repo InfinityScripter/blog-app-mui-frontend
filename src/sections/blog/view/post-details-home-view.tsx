@@ -8,6 +8,7 @@ import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import { useGetPost } from "src/actions/blog";
+import { monoValueSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -72,15 +73,15 @@ export function PostDetailsHomeView({
         <Stack sx={{ maxWidth: 720, mx: "auto" }}>
           <Box
             sx={{
+              ...monoValueSx,
               mb: 2,
               gap: 0.5,
               display: "flex",
               alignItems: "center",
-              typography: "body2",
               color: "text.secondary",
             }}
           >
-            <Iconify icon="solar:clock-circle-bold" width={18} />
+            <Iconify icon="solar:clock-circle-bold" width={16} />
             {`${readingTime} мин чтения`}
           </Box>
 
@@ -112,7 +113,7 @@ export function PostDetailsHomeView({
                 <Chip
                   key={tag}
                   label={tag}
-                  variant="soft"
+                  variant="outlined"
                   clickable
                   component={RouterLink}
                   href={paths.tag.details(tag)}

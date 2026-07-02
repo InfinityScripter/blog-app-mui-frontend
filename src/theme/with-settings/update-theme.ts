@@ -5,13 +5,14 @@ import PRIMARY_COLOR from "./primary-color.json";
 import { components as coreComponents } from "../core/components";
 import { hexToRgbChannel, createPaletteChannel } from "../styles";
 import {
-  grey as coreGreyPalette,
-  primary as corePrimaryPalette,
-} from "../core/palette";
-import {
   createShadowColor,
   customShadows as coreCustomShadows,
 } from "../core/custom-shadows";
+import {
+  grey as coreGreyPalette,
+  primary as corePrimaryPalette,
+  primaryDark as corePrimaryDarkPalette,
+} from "../core/palette";
 
 import type { CustomShadows } from "../core/custom-shadows";
 import type { ThemeWithVars } from "../core/components/types";
@@ -81,8 +82,11 @@ export function updateCoreWithSettings(
       dark: {
         palette: {
           ...colorSchemes?.dark?.palette,
-          /** [1] */
-          primary: getPalettePrimary(settings.primaryColor),
+          /** [1] — the default preset keeps the brighter dark-scheme ramp */
+          primary:
+            settings.primaryColor === "default"
+              ? corePrimaryDarkPalette
+              : getPalettePrimary(settings.primaryColor),
         },
       },
     },
@@ -159,6 +163,6 @@ function getPalettePrimary(
 }
 
 function getBackgroundDefault(contrast: SettingsState["contrast"]): string {
-  /** [2] */
-  return contrast === "default" ? "#FFFFFF" : coreGreyPalette[200];
+  /** [2] — paper canvas by default (Editorial Ink), deeper wash for contrast */
+  return contrast === "default" ? coreGreyPalette[50] : coreGreyPalette[200];
 }

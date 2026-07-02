@@ -1,5 +1,7 @@
 "use client";
 
+import Stack from "@mui/material/Stack";
+import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
@@ -14,9 +16,14 @@ import type { TagListViewProps } from "./types";
 export function TagListView({ tag, posts }: TagListViewProps) {
   return (
     <Container>
-      <Typography variant="h4" sx={{ my: { xs: 3, md: 5 } }}>
-        {`Тег: ${tag}`}
-      </Typography>
+      <Stack spacing={1} sx={{ my: { xs: 3, md: 5 } }}>
+        <Typography component="p" sx={monoLabelSx}>
+          Тег
+        </Typography>
+        <Typography variant="h2" component="h1">
+          {tag}
+        </Typography>
+      </Stack>
 
       {posts.length > 0 ? (
         <PostList posts={posts} activeTags={[tag]} />

@@ -1,22 +1,21 @@
 import Typography from "@mui/material/Typography";
 
 import { MInview } from "./m-inview";
-import { LG_KEY, SM_KEY, HERO_SUMMARY } from "./const";
-
-import type { HeroContentProps } from "./types";
+import { HERO_SUMMARY } from "./const";
 
 // ----------------------------------------------------------------------
 
-// Краткое описание тем блога
-export function HeroText({ theme }: HeroContentProps) {
+// Лид под заголовком: спокойный графитовый абзац, мера ≤65ch.
+export function HeroText() {
   return (
     <MInview>
       <Typography
-        variant="body2"
+        variant="body1"
         sx={{
-          mx: "auto",
-          [theme.breakpoints.up(SM_KEY)]: { whiteSpace: "pre-line" },
-          [theme.breakpoints.up(LG_KEY)]: { fontSize: 20, lineHeight: "36px" },
+          maxWidth: "65ch",
+          color: "text.secondary",
+          fontSize: { xs: 16, md: 18 },
+          lineHeight: 1.7,
         }}
       >
         {HERO_SUMMARY}

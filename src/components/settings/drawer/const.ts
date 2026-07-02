@@ -27,9 +27,10 @@ export const NAV_LAYOUT_OPTIONS: SettingsState["navLayout"][] = [
   "mini",
 ];
 
+// Alternatives must stay Cyrillic-capable — the site content is Russian.
 export const FONT_OPTIONS: SettingsState["fontFamily"][] = [
   defaultFont,
-  "Inter",
-  "Roboto",
-  "Lato",
+  "Golos Text",
+  "IBM Plex Sans",
+  "Rubik",
 ];

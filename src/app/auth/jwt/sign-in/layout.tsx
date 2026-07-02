@@ -11,7 +11,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <GuestGuard>
-      <AuthSplitLayout section={{ title: "Привет, С возвращением" }}>
+      <AuthSplitLayout section={{ title: "С возвращением" }}>
         {children}
       </AuthSplitLayout>
     </GuestGuard>
