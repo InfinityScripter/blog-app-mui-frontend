@@ -65,6 +65,7 @@ interface Paths {
       auditLogs: string;
       bot: string;
       llmStats: string;
+      system: string;
     };
   };
 }
@@ -137,6 +138,7 @@ export const paths: Paths = {
       auditLogs: `${ROOTS.DASHBOARD}/admin/audit-logs`,
       bot: `${ROOTS.DASHBOARD}/admin/bot`,
       llmStats: `${ROOTS.DASHBOARD}/admin/llm-stats`,
+      system: `${ROOTS.DASHBOARD}/admin/system`,
     },
   },
 };

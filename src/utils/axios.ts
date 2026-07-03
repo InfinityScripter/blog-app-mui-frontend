@@ -90,6 +90,7 @@ export const endpoints = {
     userById: (id: string) => `/api/admin/users/${id}`,
     postById: (id: string) => `/api/admin/posts/${id}`,
     auditLogs: "/api/admin/audit-logs",
+    systemMetrics: "/api/admin/system-metrics",
     bot: {
       status: "/api/admin/bot/status",
       providers: "/api/admin/bot/providers",
