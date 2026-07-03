@@ -1,13 +1,17 @@
 name: frontend-ci
 
 # Quality gate for the frontend. Runs on every PR into main and on direct
-# pushes to main. Blocks merge on lint errors, circular dependencies, or a
-# broken production build.
+# pushes to main. Blocks merge on lint errors, failing unit tests, circular
+# dependencies, or a broken production build.
 #
-# `yarn build` IS gated here: the public ISR pages (/post, /post/[id]) tolerate
-# an unreachable backend at build time — the SSR helpers fall back to an empty
-# list and ISR refills the page on the next revalidate — so the build succeeds
-# without infra and still catches real build breakage.
+# `yarn build` runs against the PRODUCTION API — the same contract as the
+# Vercel deploy build. Prerender is intentionally STRICT: since the
+# 2026-07-03 incident the SSR reads retry transients but rethrow persistent
+# failures instead of swallowing them into notFound()/empty lists (which ISR
+# then cached as real 404s/empty feeds for an hour). A red build here means
+# the deploy build would have shipped broken pages — that's the gate working,
+# not flakiness. Backend availability is monitored by prod-smoke in the
+# backend repo.
 #
 # Intentionally NOT gated here:
 #  - e2e: requires a running backend + seeded Postgres; too heavy for this gate.
@@ -46,14 +50,17 @@ jobs:
       - name: Type check
         run: npx tsc --noEmit
 
+      - name: Unit tests
+        run: yarn test:unit
+
       - name: Circular dependency check
         run: npx madge --circular --extensions ts,tsx src
 
       - name: Build
         run: yarn build
         env:
-          NEXT_PUBLIC_SERVER_URL: http://localhost:7272
-          NEXT_PUBLIC_ASSET_URL: http://localhost:7272
+          NEXT_PUBLIC_SERVER_URL: https://api.aifirst.us.com:8444
+          NEXT_PUBLIC_ASSET_URL: https://api.aifirst.us.com:8444
 
       - name: Dead-code report (non-blocking)
         run: yarn knip || true
