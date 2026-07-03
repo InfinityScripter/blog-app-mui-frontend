@@ -26,15 +26,12 @@ export const metadata = {
 export const revalidate = 3600;
 
 export default async function Page() {
-  // An unreachable backend at build time must not fail the build: fall back to
-  // an empty list and let ISR refill the page on the next revalidate. Mirrors
-  // the try/catch in post/[id]/generateStaticParams.
-  let posts: Awaited<ReturnType<typeof getBlogPosts>>["posts"] = [];
-  try {
-    ({ posts } = await getBlogPosts());
-  } catch {
-    posts = [];
-  }
+  // No error swallowing: transient backend failures are retried inside
+  // getBlogPosts; a persistent one must THROW — a failed build keeps the
+  // previous deployment live, a failed ISR regeneration keeps the stale page.
+  // Swallowing into `posts = []` cached an EMPTY blog list for an hour during
+  // the 2026-07-03 backend deploy window.
+  const { posts } = await getBlogPosts();
 
   return <PostListHomeView posts={posts} />;
 }

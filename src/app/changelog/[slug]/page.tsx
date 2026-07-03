@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
+import { NotFoundError } from "src/utils/fetch-retry";
 import { getRelease, getReleases } from "src/actions/blog-ssr";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { ChangelogDetailView } from "src/sections/changelog/view/changelog-detail-view";
@@ -65,13 +66,17 @@ export default async function Page({ params }: PageProps) {
   const { slug } = await params;
   const decoded = safeDecode(slug);
 
-  // A backend hiccup at prerender time must not fail the build — one unreachable
-  // release falls back to notFound() and ISR regenerates it on the next request.
+  // Only a REAL backend 404 (unknown release) becomes notFound(); transient
+  // failures are retried inside getRelease and anything else is rethrown so a
+  // broken backend can't get cached as a 404 by ISR (2026-07-03 incident).
   let release: Awaited<ReturnType<typeof getRelease>>["release"];
   try {
     ({ release } = await getRelease(decoded));
-  } catch {
-    notFound();
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      notFound();
+    }
+    throw error;
   }
 
   const jsonLd = buildReleaseJsonLd(release);
