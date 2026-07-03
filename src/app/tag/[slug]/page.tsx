@@ -46,14 +46,11 @@ export default async function Page({ params }: PageProps) {
   const { slug } = await params;
   const decoded = safeDecode(slug);
 
-  // A backend hiccup at prerender time must not fail the build — fall back to an
-  // empty archive and let ISR regenerate on the next request.
-  let posts: Awaited<ReturnType<typeof getPostsByTag>>["posts"] = [];
-  try {
-    ({ posts } = await getPostsByTag(decoded));
-  } catch {
-    posts = [];
-  }
+  // No error swallowing: transient backend failures are retried inside
+  // getPostsByTag; a persistent one must THROW instead of ISR-caching an empty
+  // archive for an hour (2026-07-03 incident). An unknown tag is a legitimate
+  // 200 + empty list from the backend, not an error.
+  const { posts } = await getPostsByTag(decoded);
 
   return <TagListView tag={decoded} posts={posts} />;
 }

@@ -12,30 +12,39 @@ import type {
 
 import axios, { endpoints } from "src/utils/axios";
 import { NEWS_TAG } from "src/sections/news/const";
+import { fetchJsonWithRetry } from "src/utils/fetch-retry";
 
 // ----------------------------------------------------------------------
 
 // ISR window for the public blog SSR reads. Native fetch (not axios) is used
 // here so Next can cache/revalidate these requests — axios bypasses the Next
 // fetch cache, which would keep the pages dynamic.
+//
+// All reads go through fetchJsonWithRetry: transient backend failures (5xx,
+// network) are retried with backoff instead of instantly failing a Vercel
+// build or an ISR regeneration, while a genuine 404 throws NotFoundError for
+// pages to map to notFound(). Callers must NOT swallow the remaining errors
+// into empty lists/notFound — ISR would cache that for a whole revalidate
+// window (the 2026-07-03 all-posts-404 incident).
 const REVALIDATE_SECONDS = 3600;
+
+const ISR_FETCH_INIT = { next: { revalidate: REVALIDATE_SECONDS } };
 
 // The changelog is a release feed: new model releases (seeded, or published by
 // the bot) should surface within minutes, not the 1h blog window — so its SSR
 // reads get a shorter, dedicated revalidate window.
 const CHANGELOG_REVALIDATE_SECONDS = 600;
+const CHANGELOG_FETCH_INIT = {
+  next: { revalidate: CHANGELOG_REVALIDATE_SECONDS },
+};
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 
 export async function getPosts(): Promise<ListPostsResponse> {
-  const res = await fetch(`${SERVER_URL}${endpoints.post.list}`, {
-    next: { revalidate: REVALIDATE_SECONDS },
-  });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch posts: ${res.status}`);
-  }
-  const data: ListPostsResponse = await res.json();
-  return data;
+  return fetchJsonWithRetry<ListPostsResponse>(
+    `${SERVER_URL}${endpoints.post.list}`,
+    ISR_FETCH_INIT,
+  );
 }
 
 // ----------------------------------------------------------------------
@@ -43,12 +52,7 @@ export async function getPosts(): Promise<ListPostsResponse> {
 /** Published posts tagged 'новости', for the /news feed (ISR-cached). */
 export async function getNewsPosts(): Promise<ListPostsResponse> {
   const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(NEWS_TAG)}`;
-  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch news posts: ${res.status}`);
-  }
-  const data: ListPostsResponse = await res.json();
-  return data;
+  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
@@ -59,12 +63,7 @@ export async function getNewsPosts(): Promise<ListPostsResponse> {
  */
 export async function getBlogPosts(): Promise<ListPostsResponse> {
   const url = `${SERVER_URL}${endpoints.post.list}?excludeTag=${encodeURIComponent(NEWS_TAG)}`;
-  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch blog posts: ${res.status}`);
-  }
-  const data: ListPostsResponse = await res.json();
-  return data;
+  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
@@ -72,25 +71,16 @@ export async function getBlogPosts(): Promise<ListPostsResponse> {
 /** Published posts carrying an exact tag, for the /tag/[slug] archive (ISR-cached). */
 export async function getPostsByTag(tag: string): Promise<ListPostsResponse> {
   const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(tag)}`;
-  const res = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch posts by tag: ${res.status}`);
-  }
-  const data: ListPostsResponse = await res.json();
-  return data;
+  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
 
 export async function getPost(id: string): Promise<PostResponse> {
-  const res = await fetch(`${SERVER_URL}${endpoints.post.details}?id=${id}`, {
-    next: { revalidate: REVALIDATE_SECONDS },
-  });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch post ${id}: ${res.status}`);
-  }
-  const data: PostResponse = await res.json();
-  return data;
+  return fetchJsonWithRetry<PostResponse>(
+    `${SERVER_URL}${endpoints.post.details}?id=${id}`,
+    ISR_FETCH_INIT,
+  );
 }
 
 // ----------------------------------------------------------------------
@@ -103,14 +93,10 @@ export async function getPost(id: string): Promise<PostResponse> {
  * `data.releases` directly.
  */
 export async function getReleases(): Promise<ListReleasesResponse> {
-  const res = await fetch(`${SERVER_URL}${endpoints.changelog.list}`, {
-    next: { revalidate: CHANGELOG_REVALIDATE_SECONDS },
-  });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch releases: ${res.status}`);
-  }
-  const data: ListReleasesResponse = await res.json();
-  return data;
+  return fetchJsonWithRetry<ListReleasesResponse>(
+    `${SERVER_URL}${endpoints.changelog.list}`,
+    CHANGELOG_FETCH_INIT,
+  );
 }
 
 // ----------------------------------------------------------------------
@@ -121,13 +107,10 @@ export async function getReleases(): Promise<ListReleasesResponse> {
  * `data.data.release` (NOT `data.release`).
  */
 export async function getRelease(slug: string): Promise<ReleaseResponse> {
-  const res = await fetch(`${SERVER_URL}${endpoints.changelog.details(slug)}`, {
-    next: { revalidate: CHANGELOG_REVALIDATE_SECONDS },
-  });
-  if (!res.ok) {
-    throw new Error(`Failed to fetch release ${slug}: ${res.status}`);
-  }
-  const data: { success: boolean; data: ReleaseResponse } = await res.json();
+  const data = await fetchJsonWithRetry<{
+    success: boolean;
+    data: ReleaseResponse;
+  }>(`${SERVER_URL}${endpoints.changelog.details(slug)}`, CHANGELOG_FETCH_INIT);
   return data.data;
 }
 

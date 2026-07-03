@@ -24,14 +24,12 @@ export const metadata = {
 export const revalidate = 3600;
 
 export default async function Page() {
-  // An unreachable backend at build time must not fail the build: fall back to
-  // an empty list and let ISR refill on the next revalidate.
-  let posts: Awaited<ReturnType<typeof getNewsPosts>>["posts"] = [];
-  try {
-    ({ posts } = await getNewsPosts());
-  } catch {
-    posts = [];
-  }
+  // No error swallowing: transient backend failures are retried inside
+  // getNewsPosts; a persistent one must THROW — a failed build keeps the
+  // previous deployment live, a failed ISR regeneration keeps the stale page.
+  // Swallowing into `posts = []` cached an EMPTY news feed for an hour during
+  // the 2026-07-03 backend deploy window.
+  const { posts } = await getNewsPosts();
 
   return <NewsListView posts={posts} />;
 }

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
 import { paramCase } from "src/utils/change-case";
+import { NotFoundError } from "src/utils/fetch-retry";
 import { getPost, getPosts } from "src/actions/blog-ssr";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
@@ -59,17 +60,21 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
 
-  // A backend hiccup (e.g. a transient 500) at prerender time must not fail the
-  // whole build — one unreachable post falls back to notFound() and ISR
-  // (dynamicParams + revalidate) regenerates it on the next request. Mirrors the
-  // try/catch guards already in generateMetadata/generateStaticParams here and
-  // in the /post and /news list pages.
+  // Only a REAL backend 404 (post deleted/unknown) becomes notFound(). Any
+  // other failure — after getPost's built-in retries — is rethrown: at build
+  // time that fails the deploy (the previous, working deployment stays live);
+  // at ISR-regeneration time Next keeps serving the stale page. Swallowing
+  // everything into notFound() here is what cached every post as a 404 for an
+  // hour during the 2026-07-03 backend deploy window.
   let post: Awaited<ReturnType<typeof getPost>>["post"];
   let latestPosts: Awaited<ReturnType<typeof getPost>>["latestPosts"];
   try {
     ({ post, latestPosts } = await getPost(id));
-  } catch {
-    notFound();
+  } catch (error) {
+    if (error instanceof NotFoundError) {
+      notFound();
+    }
+    throw error;
   }
 
   // NewsArticle (for `новости` posts, with source attribution) or Article (for

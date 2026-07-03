@@ -27,14 +27,10 @@ export const metadata = {
 export const revalidate = 600;
 
 export default async function Page() {
-  // An unreachable backend at build time must not fail the build: fall back to
-  // an empty list and let ISR refill on the next revalidate.
-  let releases: Awaited<ReturnType<typeof getReleases>>["releases"] = [];
-  try {
-    ({ releases } = await getReleases());
-  } catch {
-    releases = [];
-  }
+  // No error swallowing: transient backend failures are retried inside
+  // getReleases; a persistent one must THROW instead of ISR-caching an empty
+  // changelog for an hour (2026-07-03 incident).
+  const { releases } = await getReleases();
 
   // ItemList of the release detail pages → richer SERP for the archive.
   const jsonLd = {
