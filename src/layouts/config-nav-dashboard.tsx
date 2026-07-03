@@ -69,6 +69,11 @@ export function getNavData(role?: string) {
           path: paths.dashboard.admin.llmStats,
           icon: ICONS.dashboard,
         },
+        {
+          title: "Сервер",
+          path: paths.dashboard.admin.system,
+          icon: ICONS.dashboard,
+        },
       ],
     });
   }
