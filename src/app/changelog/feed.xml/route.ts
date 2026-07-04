@@ -7,8 +7,8 @@ import { getReleases } from "src/actions/blog-ssr";
 
 // ----------------------------------------------------------------------
 
-// Changelog RSS feed (AI model releases). ISR-cached.
-export const revalidate = 3600;
+// Changelog RSS feed (AI model releases). ISR-cached, refreshed every 10 minutes.
+export const revalidate = 600;
 
 // The RSS builder consumes Post-shaped items; a release carries no title/body of
 // its own, so map it: title = «model version», description = verdict or the
