@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEO-блоки — Editorial Ink</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:#FAFAF9; --surface:#FFFFFF; --ink:#1C1917; --graphite:#57534E;
+    --ash:#A8A29E; --hairline:rgba(28,25,23,0.10); --vermilion:#C2451E;
+    --vermilion-tint:#FBE3D9; --mono:"JetBrains Mono",monospace;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Manrope",sans-serif; line-height:1.6;
+    display:flex; gap:0; flex-wrap:wrap;
+  }
+  .scheme { flex:1 1 440px; padding:40px 32px; min-width:380px; }
+  .dark {
+    background:#141210; color:#F5F5F4;
+    --paper:#141210; --surface:#1C1917; --ink:#F5F5F4; --graphite:#A8A29E;
+    --hairline:rgba(245,245,244,0.12); --vermilion:#E06032; --vermilion-tint:#2A1A12;
+  }
+  .scheme-label {
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--graphite); margin-bottom:24px;
+  }
+  .article { max-width:720px; margin:0 auto; }
+  h1 { font-family:"Unbounded"; font-weight:600; letter-spacing:-.02em;
+       line-height:1.1; font-size:2rem; margin:0 0 16px; }
+
+  /* meta row: mono, «Обновлено» sits beside reading time — a hairline dot separates */
+  .meta {
+    font-family:var(--mono); font-size:13px; font-weight:500;
+    color:var(--graphite); display:flex; align-items:center; gap:10px;
+    margin-bottom:24px;
+  }
+  .meta .dot { width:3px; height:3px; border-radius:50%; background:var(--ash); }
+  .meta .updated { color:var(--vermilion); }
+
+  /* BLUF: NOT a colored box. Vermilion left hairline + mono overline. Ink logic. */
+  .bluf {
+    border-left:2px solid var(--vermilion); padding:2px 0 2px 20px;
+    margin:0 0 32px;
+  }
+  .bluf .over {
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--vermilion); margin-bottom:8px;
+  }
+  .bluf p { margin:0; font-size:1.125rem; font-weight:500; line-height:1.5; }
+
+  .body p { margin:0 0 20px; }
+  .body h3 { font-family:"Manrope"; font-weight:700; letter-spacing:-.01em;
+             font-size:1.25rem; margin:32px 0 12px; }
+
+  /* tags row — hairline pills, mono uppercase */
+  .tags { display:flex; gap:8px; padding:20px 0; border-top:1px solid var(--hairline);
+          border-bottom:1px solid var(--hairline); margin:32px 0; }
+  .tag { font-family:var(--mono); font-size:12px; text-transform:uppercase;
+         border:1px solid var(--hairline); border-radius:999px; padding:5px 12px;
+         color:var(--graphite); }
+
+  /* FAQ: hairline-ruled disclosure list, NOT a card. Mono overline heading. */
+  .faq { margin:32px 0; }
+  .faq .over {
+    font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--graphite); margin-bottom:4px;
+  }
+  .faq h2 { font-family:"Unbounded"; font-weight:600; font-size:1.5rem;
+            letter-spacing:-.02em; margin:0 0 8px; }
+  .qa { border-top:1px solid var(--hairline); }
+  .qa:last-child { border-bottom:1px solid var(--hairline); }
+  .qa summary {
+    list-style:none; cursor:pointer; padding:16px 0; display:flex;
+    justify-content:space-between; align-items:center; gap:16px;
+    font-family:"Manrope"; font-weight:600; font-size:1.0625rem;
+  }
+  .qa summary::-webkit-details-marker { display:none; }
+  .qa summary .sign { color:var(--vermilion); font-family:var(--mono);
+                      font-size:20px; flex-shrink:0; transition:transform .2s; }
+  .qa[open] summary .sign { transform:rotate(45deg); }
+  .qa .ans { padding:0 0 16px; color:var(--graphite); }
+  .qa .ans p { margin:0; }
+</style>
+</head>
+<body>
+  <section class="scheme">
+    <div class="scheme-label">Light · warm paper</div>
+    <article class="article">
+      <h1>Claude Opus 4.8 в проде: честный разбор</h1>
+      <div class="meta">
+        <span>7 мин чтения</span>
+        <span class="dot"></span>
+        <span class="updated">Обновлено 4 июля 2026</span>
+      </div>
+
+      <div class="bluf">
+        <div class="over">Коротко</div>
+        <p>Opus 4.8 стоит $15/$75 за млн токенов, держит 200K контекст. На наших задачах ускорил ревью на 40%, но на длинных агентных цепочках дороже Sonnet вдвое.</p>
+      </div>
+
+      <div class="body">
+        <p>Полный текст статьи идёт здесь — обычный markdown-рендер. Секции <code>## FAQ</code> и BLUF-выжимка из тела вырезаны и подняты в свои блоки, чтобы не дублироваться.</p>
+        <h3>Что реально изменилось</h3>
+        <p>Абзацы, списки, таблицы сравнения — всё как раньше.</p>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Claude</span><span class="tag">LLM</span><span class="tag">Прод</span>
+      </div>
+
+      <div class="faq">
+        <div class="over">Ответы</div>
+        <h2>Частые вопросы</h2>
+        <details class="qa" open>
+          <summary>Сколько стоит Claude Opus 4.8?<span class="sign">+</span></summary>
+          <div class="ans"><p>$15 за млн входных токенов, $75 за выходные. В 5 раз дороже Sonnet на выходе.</p></div>
+        </details>
+        <details class="qa">
+          <summary>Есть ли русская локализация интерфейса?<span class="sign">+</span></summary>
+          <div class="ans"><p>Нет, интерфейс только на английском. Русский поддержан в самих ответах модели.</p></div>
+        </details>
+        <details class="qa">
+          <summary>Какой размер контекста?<span class="sign">+</span></summary>
+          <div class="ans"><p>200K токенов — без изменений против 4.7.</p></div>
+        </details>
+      </div>
+    </article>
+  </section>
+
+  <section class="scheme dark">
+    <div class="scheme-label">Dark · charcoal darkroom</div>
+    <article class="article">
+      <h1>Claude Opus 4.8 в проде: честный разбор</h1>
+      <div class="meta">
+        <span>7 мин чтения</span>
+        <span class="dot"></span>
+        <span class="updated">Обновлено 4 июля 2026</span>
+      </div>
+      <div class="bluf">
+        <div class="over">Коротко</div>
+        <p>Opus 4.8 стоит $15/$75 за млн токенов, держит 200K контекст. На наших задачах ускорил ревью на 40%, но на длинных агентных цепочках дороже Sonnet вдвое.</p>
+      </div>
+      <div class="body">
+        <p>Полный текст статьи идёт здесь — обычный markdown-рендер. Секции <code>## FAQ</code> и BLUF-выжимка из тела вырезаны и подняты в свои блоки.</p>
+      </div>
+      <div class="tags">
+        <span class="tag">Claude</span><span class="tag">LLM</span><span class="tag">Прод</span>
+      </div>
+      <div class="faq">
+        <div class="over">Ответы</div>
+        <h2>Частые вопросы</h2>
+        <details class="qa" open>
+          <summary>Сколько стоит Claude Opus 4.8?<span class="sign">+</span></summary>
+          <div class="ans"><p>$15 за млн входных токенов, $75 за выходные.</p></div>
+        </details>
+        <details class="qa">
+          <summary>Есть ли русская локализация?<span class="sign">+</span></summary>
+          <div class="ans"><p>Нет, интерфейс только на английском.</p></div>
+        </details>
+      </div>
+    </article>
+  </section>
+</body>
+</html>

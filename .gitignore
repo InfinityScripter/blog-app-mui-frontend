@@ -47,3 +47,5 @@ tsconfig.tsbuildinfo
 .agents
 .claude
 skills-lock.json
+
+.superpowers/
