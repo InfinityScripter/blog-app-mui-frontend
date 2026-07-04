@@ -21,8 +21,8 @@ function safeDecode(value: string): string {
   }
 }
 
-// ISR: prerender release pages and refresh at most once per hour.
-export const revalidate = 3600;
+// ISR: prerender release pages and refresh at most every 10 minutes.
+export const revalidate = 600;
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -97,9 +97,7 @@ export default async function Page({ params }: PageProps) {
  * demand (dynamicParams defaults to true) and are cached by ISR. Wrapped so an
  * unreachable backend at build time yields no params instead of failing.
  */
-export async function generateStaticParams(): Promise<
-  Array<{ slug: string }>
-> {
+export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
   try {
     const { releases } = await getReleases();
     return releases.map((release) => ({ slug: release.slug }));

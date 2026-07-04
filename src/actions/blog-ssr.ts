@@ -20,6 +20,11 @@ import { NEWS_TAG } from "src/sections/news/const";
 // fetch cache, which would keep the pages dynamic.
 const REVALIDATE_SECONDS = 3600;
 
+// The changelog is a release feed: new model releases (seeded, or published by
+// the bot) should surface within minutes, not the 1h blog window — so its SSR
+// reads get a shorter, dedicated revalidate window.
+const CHANGELOG_REVALIDATE_SECONDS = 600;
+
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 
 export async function getPosts(): Promise<ListPostsResponse> {
@@ -99,7 +104,7 @@ export async function getPost(id: string): Promise<PostResponse> {
  */
 export async function getReleases(): Promise<ListReleasesResponse> {
   const res = await fetch(`${SERVER_URL}${endpoints.changelog.list}`, {
-    next: { revalidate: REVALIDATE_SECONDS },
+    next: { revalidate: CHANGELOG_REVALIDATE_SECONDS },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch releases: ${res.status}`);
@@ -117,7 +122,7 @@ export async function getReleases(): Promise<ListReleasesResponse> {
  */
 export async function getRelease(slug: string): Promise<ReleaseResponse> {
   const res = await fetch(`${SERVER_URL}${endpoints.changelog.details(slug)}`, {
-    next: { revalidate: REVALIDATE_SECONDS },
+    next: { revalidate: CHANGELOG_REVALIDATE_SECONDS },
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch release ${slug}: ${res.status}`);

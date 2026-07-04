@@ -21,9 +21,10 @@ export const metadata = {
   },
 };
 
-// ISR: serve a cached changelog, refreshed at most hourly (getReleases uses a
-// native fetch with the same revalidate window).
-export const revalidate = 3600;
+// ISR: serve a cached changelog, refreshed at most every 10 minutes (getReleases
+// uses a native fetch with the same revalidate window) so new releases surface
+// promptly.
+export const revalidate = 600;
 
 export default async function Page() {
   // An unreachable backend at build time must not fail the build: fall back to
