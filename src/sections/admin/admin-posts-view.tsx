@@ -4,15 +4,19 @@ import useSWR from "swr";
 import { useState } from "react";
 import { paths } from "src/routes/paths";
 import { useRouter } from "next/navigation";
+import { toast } from "src/components/snackbar";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
 import { PUBLISH_STATUS } from "src/types/domain";
 import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
+import { revalidatePublicPosts } from "src/actions/revalidate-posts";
 import {
   Box,
   Card,
   Chip,
   Table,
+  Stack,
+  Button,
   Tooltip,
   TableRow,
   TableBody,
@@ -45,6 +49,7 @@ export function AdminPostsView() {
   const posts = data?.posts ?? [];
   const router = useRouter();
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [revalidating, setRevalidating] = useState(false);
 
   const handleDelete = async (id: string) => {
     if (deletingId) return;
@@ -58,11 +63,47 @@ export function AdminPostsView() {
     }
   };
 
+  // Manually drop the public ISR cache for all post/list pages — recovery for a
+  // post stuck as a stale 404 after a backend deploy, or to force fresh content
+  // without waiting out the 1h revalidate window.
+  const handleRevalidate = async () => {
+    if (revalidating) return;
+    setRevalidating(true);
+    try {
+      const ok = await revalidatePublicPosts(accessToken);
+      if (ok) {
+        toast.success("Кеш обновлён — публичные страницы пересоберутся");
+      } else {
+        toast.error("Не удалось обновить кеш");
+      }
+    } finally {
+      setRevalidating(false);
+    }
+  };
+
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 3 }}>
-        Все посты
-      </Typography>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ mb: 3 }}
+      >
+        <Typography variant="h4">Все посты</Typography>
+        <Tooltip title="Сбросить кеш публичных страниц (посты, лента, новости). Помогает, если пост завис с ошибкой 404 после деплоя.">
+          <span>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleRevalidate}
+              disabled={revalidating}
+              startIcon={<Iconify icon="solar:refresh-bold" />}
+            >
+              Обновить кеш
+            </Button>
+          </span>
+        </Tooltip>
+      </Stack>
       <Card>
         <TableContainer>
           <Table>

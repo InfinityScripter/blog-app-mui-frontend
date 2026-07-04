@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "src/routes/hooks";
 import { toast } from "src/components/snackbar";
 import { Form } from "src/components/hook-form";
+import { useAuthContext } from "src/auth/hooks";
 import { PUBLISH_STATUS } from "src/types/domain";
 import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +19,7 @@ import { PostNewEditDetails } from "./post-new-edit-details";
 import { PostNewEditActions } from "./post-new-edit-actions";
 import { createPost, updatePost } from "../../actions/blog-ssr";
 import { PostNewEditProperties } from "./post-new-edit-properties";
+import { revalidatePublicPosts } from "../../actions/revalidate-posts";
 
 import type { PostNewEditFormProps } from "./types";
 
@@ -29,6 +31,7 @@ export { NewPostSchema };
 
 export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
   const router = useRouter();
+  const { user } = useAuthContext();
 
   const preview = useBoolean();
 
@@ -111,6 +114,12 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
         // Create a new post
         response = await createPost(finalData);
       }
+
+      // Drop the public ISR cache so the new/edited post appears immediately
+      // instead of after the 1h revalidate window. Fire-and-forget — a failed
+      // revalidation must not block the success toast or navigation (the cache
+      // still self-refreshes within the hour, and the admin has a manual button).
+      revalidatePublicPosts(user?.accessToken).catch(() => {});
 
       reset();
       preview.onFalse();
