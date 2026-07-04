@@ -4,7 +4,7 @@ import type { Theme, SxProps } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-export interface FileThumbnailSlotProps {
+interface FileThumbnailSlotProps {
   img?: SystemStyleObject<Theme>;
   icon?: SystemStyleObject<Theme>;
   removeBtn?: SxProps<Theme>;

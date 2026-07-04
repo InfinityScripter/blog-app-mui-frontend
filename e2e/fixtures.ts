@@ -29,8 +29,9 @@ async function login(
   await page.locator('input[name="password"]').fill(creds.password);
   await page.getByRole("button", { name: "Войти", exact: true }).click();
   // After a successful login the guard redirects away from the sign-in page.
+  // 30s: the first dashboard visit may hit a cold dev-server compile.
   await page.waitForURL((url) => !url.pathname.includes("/sign-in"), {
-    timeout: 15_000,
+    timeout: 30_000,
   });
 }
 

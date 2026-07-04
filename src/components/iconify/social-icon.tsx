@@ -3,8 +3,6 @@ import SvgIcon from "@mui/material/SvgIcon";
 
 import type { SocialIconProps } from "./types";
 
-export type { SocialIconProps } from "./types";
-
 // ----------------------------------------------------------------------
 
 export const SocialIcon = forwardRef<SVGSVGElement, SocialIconProps>(

@@ -19,7 +19,7 @@ function isDecodedToken(value: unknown): value is DecodedToken {
   );
 }
 
-export function jwtDecode(token: string | null): DecodedToken | null {
+function jwtDecode(token: string | null): DecodedToken | null {
   try {
     if (!token) return null;
 
@@ -68,7 +68,7 @@ export function isValidToken(accessToken: string | null): boolean {
 
 // ----------------------------------------------------------------------
 
-export function tokenExpired(exp: number): void {
+function tokenExpired(exp: number): void {
   const currentTime = Date.now();
   const timeLeft = exp * 1000 - currentTime;
 

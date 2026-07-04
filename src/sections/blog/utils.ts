@@ -7,7 +7,7 @@ import { MAX_RELATED } from "./const";
 // ----------------------------------------------------------------------
 
 /** Lowercased, trimmed tag set for overlap comparison. */
-export function normalizeTags(tags: string[] = []): Set<string> {
+function normalizeTags(tags: string[] = []): Set<string> {
   return new Set(tags.map((t) => t.toLowerCase().trim()));
 }
 

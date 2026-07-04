@@ -10,9 +10,6 @@ import type { NavVerticalProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { NavVerticalProps };
-export type { DashboardNavSlots } from "./types";
-
 export function NavVertical({
   sx,
   data,

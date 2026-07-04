@@ -8,7 +8,7 @@ import { Field } from "src/components/hook-form";
 import Typography from "@mui/material/Typography";
 import LoadingButton from "@mui/lab/LoadingButton";
 
-import { ROLE_LABEL } from "./account-general-const";
+import { ROLE_LABEL } from "./const";
 
 import type { AccountGeneralIdentityProps } from "./types";
 

@@ -7,12 +7,12 @@ import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import { useGetPost } from "src/actions/blog";
 import Container from "@mui/material/Container";
-import { POST_PUBLISH_OPTIONS } from "src/_mock";
 import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
 import { useState, useEffect, useCallback } from "react";
 import { DashboardContent } from "src/layouts/dashboard";
 import { updatePostPublish } from "src/actions/blog-ssr";
+import { POST_PUBLISH_OPTIONS } from "src/sections/blog/const";
 import AvatarGroup, { avatarGroupClasses } from "@mui/material/AvatarGroup";
 
 import { isPublishStatus } from "./utils";

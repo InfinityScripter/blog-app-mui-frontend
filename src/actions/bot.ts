@@ -1,16 +1,48 @@
 "use client";
 
-import type {
-  BotModel,
-  BotStatus,
-  BotProvider,
-  BotModelsHealth,
-  ControlProviderName,
-} from "src/sections/admin/bot-types";
-
 import useSWR from "swr";
 import { useMemo } from "react";
 import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
+
+// ----------------------------------------------------------------------
+// Контракт админ-ручек управления ботом (/api/admin/bot/*).
+
+export type ControlProviderName = "glm" | "deepseek" | "openrouter";
+
+export type BotModel = {
+  id: string;
+  tier: "free" | "paid";
+  note?: string;
+};
+
+type BotProvider = {
+  name: ControlProviderName;
+  label: string;
+  hasKey: boolean;
+};
+
+export type BotStatus = {
+  isAlive: boolean;
+  provider?: string;
+  model?: string;
+  isMockEnabled?: boolean;
+};
+
+export type BotModelProbe = {
+  provider: string;
+  label: string;
+  model: string;
+  ok: boolean;
+  ms: number;
+  error?: string;
+};
+
+type BotModelsHealth = {
+  healthy: boolean;
+  checks: BotModelProbe[];
+};
+
+// ----------------------------------------------------------------------
 
 const swrOptions = {
   revalidateIfStale: true,

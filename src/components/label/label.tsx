@@ -11,7 +11,7 @@ import type { LabelProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { LabelColor, LabelProps, LabelVariant } from "./types";
+export type { LabelColor } from "./types";
 
 export const Label = forwardRef<HTMLSpanElement, LabelProps>(
   (

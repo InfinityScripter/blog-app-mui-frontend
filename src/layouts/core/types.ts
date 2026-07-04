@@ -2,22 +2,16 @@ import type { ReactNode } from "react";
 import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
 import type { NavSectionDataProps } from "src/components/nav-section/types";
 
-import type { ContactItem } from "../components/contacts-popover";
-import type { LanguageOption } from "../components/language-popover";
-import type { WorkspaceItem } from "../components/workspaces-popover";
 import type { AccountDrawerItem } from "../components/account-drawer";
 
 // ----------------------------------------------------------------------
 
-export interface HeaderBaseData {
+interface HeaderBaseData {
   nav?: NavSectionDataProps[];
-  langs?: LanguageOption[];
   account?: AccountDrawerItem[];
-  contacts?: ContactItem[];
-  workspaces?: WorkspaceItem[];
 }
 
-export interface HeaderBaseSlots {
+interface HeaderBaseSlots {
   topArea?: ReactNode;
   leftArea?: ReactNode;
   centerArea?: ReactNode;
@@ -29,16 +23,13 @@ export interface HeaderBaseSlots {
   rightAreaEnd?: ReactNode;
 }
 
-export interface HeaderBaseSlotsDisplay {
+interface HeaderBaseSlotsDisplay {
   signIn?: boolean;
   account?: boolean;
   helpLink?: boolean;
   settings?: boolean;
-  contacts?: boolean;
   searchbar?: boolean;
-  workspaces?: boolean;
   menuButton?: boolean;
-  localization?: boolean;
   notifications?: boolean;
 }
 
@@ -60,12 +51,10 @@ export interface HeaderBaseProps {
 // ----------------------------------------------------------------------
 
 export interface HeaderLeftAreaProps {
-  data?: HeaderBaseData;
   slots?: HeaderBaseSlots;
   onOpenNav?: () => void;
   layoutQuery: Breakpoint;
   menuButton: boolean;
-  workspaces: boolean;
 }
 
 // ----------------------------------------------------------------------
@@ -77,15 +66,13 @@ export interface HeaderRightAreaProps {
   account: boolean;
   helpLink: boolean;
   settings: boolean;
-  contacts: boolean;
   searchbar: boolean;
-  localization: boolean;
   notifications: boolean;
 }
 
 // ----------------------------------------------------------------------
 
-export interface HeaderSectionSlots {
+interface HeaderSectionSlots {
   topArea?: ReactNode;
   leftArea?: ReactNode;
   centerArea?: ReactNode;
@@ -97,7 +84,7 @@ export interface HeaderSectionSlots {
   rightAreaEnd?: ReactNode;
 }
 
-export interface HeaderSectionSlotProps {
+interface HeaderSectionSlotProps {
   toolbar?: { sx?: SxProps<Theme> } & Record<string, unknown>;
   container?: { maxWidth?: false } & { sx?: SxProps<Theme> } & Record<
       string,
@@ -122,7 +109,7 @@ export interface HeaderSectionProps {
  * numbers, but entries may nest one level (e.g. a `[data-mui-color-scheme]`
  * selector block) as produced by the layouts' `navColorVars`.
  */
-export type CssVars = Record<
+type CssVars = Record<
   string,
   string | number | undefined | Record<string, string | number | undefined>
 >;

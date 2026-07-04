@@ -30,11 +30,6 @@ export function hairline(theme: Theme): string {
   return `1px solid ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`;
 }
 
-/** Section vertical rhythm: clamp(4rem, 9vw, 7rem). */
-export const sectionRhythmSx: SxProps<Theme> = {
-  py: "clamp(4rem, 9vw, 7rem)",
-};
-
 /** Card that lifts on hover with a tinted diffuse shadow (list/feature cards). */
 export function hoverLiftSx(theme: Theme): SystemStyleObject<Theme> {
   return {

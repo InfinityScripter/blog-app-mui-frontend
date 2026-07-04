@@ -1,4 +1,19 @@
-// Статические данные для admin-audit-logs-view. Без логики/JSX.
+// Статические данные admin-секций (audit-logs, bot). Без логики/JSX.
+
+import type { ControlProviderName } from "./types";
+
+export const BOT_PROVIDER_NAMES: readonly ControlProviderName[] = [
+  "glm",
+  "deepseek",
+  "openrouter",
+] as const;
+
+export const TIER_ICON: Record<"free" | "paid", string> = {
+  free: "🆓",
+  paid: "💲",
+};
+
+// ----------------------------------------------------------------------
 
 export const AUDIT_TABLE_HEAD = [
   "Время",

@@ -12,8 +12,6 @@ import type { MarkdownProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { MarkdownProps } from "./types";
-
 export function Markdown({ children, sx, ...other }: MarkdownProps) {
   const content = useMemo(() => {
     const source = `${children ?? ""}`;

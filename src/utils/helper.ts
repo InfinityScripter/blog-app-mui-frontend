@@ -38,26 +38,6 @@ export function flattenArray<T extends Flattenable>(
 
 // ----------------------------------------------------------------------
 
-type RecursiveArray<T> = Array<T | RecursiveArray<T>>;
-
-export function flattenDeep<T>(
-  array: ReadonlyArray<T | RecursiveArray<T>> | null | undefined,
-): T[] {
-  if (!array || !Array.isArray(array)) {
-    return [];
-  }
-
-  return array.reduce<T[]>((acc, item) => {
-    if (Array.isArray(item)) {
-      return acc.concat(flattenDeep(item));
-    }
-    acc.push(item);
-    return acc;
-  }, []);
-}
-
-// ----------------------------------------------------------------------
-
 type OrderDirection = "asc" | "desc";
 
 export function orderBy<T extends Record<string, unknown>>(
@@ -78,25 +58,6 @@ export function orderBy<T extends Record<string, unknown>>(
     }
     return 0;
   });
-}
-
-// ----------------------------------------------------------------------
-
-export function keyBy<T extends Record<string, unknown>>(
-  array: T[] | null | undefined,
-  key?: keyof T,
-): Record<string, T> {
-  return (array || []).reduce<Record<string, T>>((result, item) => {
-    const keyValue = key ? item[key] : item;
-
-    return { ...result, [String(keyValue)]: item };
-  }, {});
-}
-
-// ----------------------------------------------------------------------
-
-export function sumBy<T>(array: T[], iteratee: (item: T) => number): number {
-  return array.reduce((sum, item) => sum + iteratee(item), 0);
 }
 
 // ----------------------------------------------------------------------
@@ -144,33 +105,4 @@ export function isEqual(a: unknown, b: unknown): boolean {
 
 function isObject(item: unknown): item is Record<string, unknown> {
   return item !== null && typeof item === "object" && !Array.isArray(item);
-}
-
-export function merge<T extends Record<string, unknown>>(
-  target: T,
-  ...sources: Partial<T>[]
-): T {
-  if (!sources.length) return target;
-
-  const source = sources.shift();
-
-  if (!source) return target;
-
-  Object.keys(source).forEach((key) => {
-    const sourceValue = source[key];
-
-    if (isObject(sourceValue)) {
-      if (!target[key]) Object.assign(target, { [key]: {} });
-
-      const targetValue = target[key];
-
-      if (isObject(targetValue)) {
-        merge<Record<string, unknown>>(targetValue, sourceValue);
-      }
-    } else {
-      Object.assign(target, { [key]: sourceValue });
-    }
-  });
-
-  return merge(target, ...sources);
 }

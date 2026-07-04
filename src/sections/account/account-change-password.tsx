@@ -15,16 +15,12 @@ import { useBoolean } from "src/hooks/use-boolean";
 import { changePassword } from "src/actions/account";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { CHANGE_PASSWORD_DEFAULT_VALUES } from "./const";
 import { PasswordField } from "./account-change-password-field";
-import { defaultValues } from "./account-change-password-const";
 import { Requirement } from "./account-change-password-requirement";
 import { ChangePasswordSchema } from "./account-change-password-schema";
 
 import type { ChangePasswordSchemaType } from "./types";
-
-// ----------------------------------------------------------------------
-
-export { ChangePasswordSchema };
 
 // ----------------------------------------------------------------------
 
@@ -36,7 +32,7 @@ export function AccountChangePassword() {
   const methods = useForm<ChangePasswordSchemaType>({
     mode: "all",
     resolver: zodResolver(ChangePasswordSchema),
-    defaultValues,
+    defaultValues: CHANGE_PASSWORD_DEFAULT_VALUES,
   });
 
   const {

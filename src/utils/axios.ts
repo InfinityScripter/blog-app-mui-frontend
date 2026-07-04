@@ -49,26 +49,21 @@ export const endpoints = {
     resetPassword: "/api/auth/reset-password",
     updatePassword: "/api/auth/update-password",
   },
-  mail: {
-    list: "/api/mail/list",
-    details: "/api/mail/details",
-    labels: "/api/mail/labels",
-  },
   post: {
     list: "/api/post/list",
     details: "/api/post/details",
     latest: "/api/post/latest",
     search: "/api/post/search",
     new: "/api/post/new",
-    edit: "/api/post/edit",
+    edit: (postId: string) => `/api/post/${postId}/edit`,
+    publish: (postId: string) => `/api/post/${postId}/publish`,
+    delete: (postId: string) => `/api/post/${postId}/delete`,
     view: (postId: string) => `/api/post/${postId}/view`,
     comments: {
       list: (postId: string) => `/api/post/${postId}/comments`,
       add: (postId: string) => `/api/post/${postId}/comments`,
       update: (postId: string) => `/api/post/${postId}/comments`,
       delete: (postId: string) => `/api/post/${postId}/comments`,
-      reply: (postId: string, commentId: string) =>
-        `/api/post/${postId}/comments/${commentId}/reply`,
     },
   },
   changelog: {
@@ -79,11 +74,6 @@ export const endpoints = {
     subscribe: "/api/newsletter/subscribe",
     confirm: "/api/newsletter/confirm",
     unsubscribe: "/api/newsletter/unsubscribe",
-  },
-  product: {
-    list: "/api/product/list",
-    details: "/api/product/details",
-    search: "/api/product/search",
   },
   admin: {
     users: "/api/admin/users",

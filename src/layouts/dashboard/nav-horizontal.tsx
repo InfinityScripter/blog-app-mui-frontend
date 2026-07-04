@@ -7,8 +7,6 @@ import type { NavHorizontalProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { NavHorizontalProps };
-
 export function NavHorizontal({
   data,
   layoutQuery,

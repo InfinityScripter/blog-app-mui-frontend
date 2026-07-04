@@ -6,7 +6,7 @@ import type { ExperienceItem } from "./types";
 
 // ----------------------------------------------------------------------
 
-export const formatPeriodDate = (value: string) =>
+const formatPeriodDate = (value: string) =>
   dayjs(value).locale("ru").format(DATE_FORMAT);
 
 export const getPeriodLabel = (item: ExperienceItem) => {

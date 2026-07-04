@@ -4,7 +4,7 @@ import type { Theme, SxProps } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-export type ScrollProgressColor =
+type ScrollProgressColor =
   | "inherit"
   | "primary"
   | "secondary"

@@ -35,7 +35,6 @@ import { textfield } from "./textfield";
 import { typography } from "./typography";
 import { pagination } from "./pagination";
 import { breadcrumbs } from "./breadcrumbs";
-import { dataGrid } from "./mui-x-data-grid";
 import { treeView } from "./mui-x-tree-view";
 import { buttonGroup } from "./button-group";
 import { autocomplete } from "./autocomplete";
@@ -78,7 +77,6 @@ export const components = {
   ...switches,
   ...checkbox,
   ...treeView,
-  ...dataGrid,
   ...accordion,
   ...textfield,
   ...typography,

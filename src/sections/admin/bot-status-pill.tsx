@@ -2,9 +2,9 @@
 
 import { Card, Chip, Stack, Typography } from "@mui/material";
 
-import { getHealthColor } from "./bot-utils";
+import { getHealthColor } from "./utils";
 
-import type { BotStatus } from "./bot-types";
+import type { BotStatus } from "./types";
 
 type Props = {
   status: BotStatus | null;

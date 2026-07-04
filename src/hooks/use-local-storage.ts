@@ -73,7 +73,7 @@ export function useLocalStorage<T extends object>(
 
 // ----------------------------------------------------------------------
 
-export function getStorage(key: string): unknown {
+function getStorage(key: string): unknown {
   try {
     const result = localStorageGetItem(key);
 
@@ -90,7 +90,7 @@ export function getStorage(key: string): unknown {
 
 // ----------------------------------------------------------------------
 
-export function setStorage<T>(key: string, value: T): void {
+function setStorage<T>(key: string, value: T): void {
   try {
     const serializedValue = JSON.stringify(value);
     window.localStorage.setItem(key, serializedValue);
@@ -101,7 +101,7 @@ export function setStorage<T>(key: string, value: T): void {
 
 // ----------------------------------------------------------------------
 
-export function removeStorage(key: string): void {
+function removeStorage(key: string): void {
   try {
     window.localStorage.removeItem(key);
   } catch (error) {

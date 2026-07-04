@@ -23,7 +23,7 @@ import { PostItemLatest } from "./post-item-latest";
 import { isTagActive, orderTagsByActive } from "./utils";
 
 // Re-exported so existing importers keep `import { ... } from "./post-item"`.
-export { InfoBlock, PostItemLatest };
+export { PostItemLatest };
 
 // ----------------------------------------------------------------------
 

@@ -10,94 +10,14 @@ import { remToPx, varAlpha, mediaQueries } from "./utils";
 
 /**
  * Usage:
- * ...hideScrollX,
  * ...hideScrollY,
  */
-export const hideScrollX = {
-  msOverflowStyle: "none",
-  scrollbarWidth: "none",
-  overflowX: "auto",
-  "&::-webkit-scrollbar": { display: "none" },
-};
-
 export const hideScrollY = {
   msOverflowStyle: "none",
   scrollbarWidth: "none",
   overflowY: "auto",
   "&::-webkit-scrollbar": { display: "none" },
 };
-
-/**
- * Usage:
- * ...textGradient(`to right, ${theme.vars.palette.text.primary}, ${alpha(theme.vars.palette.text.primary, 0.2)}`
- */
-export function textGradient(color: string): Record<string, string> {
-  return {
-    background: `linear-gradient(${color})`,
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
-    textFillColor: "transparent",
-    color: "transparent",
-  };
-}
-
-/**
- * Usage:
- * ...borderGradient({ color: `to right, ${theme.vars.palette.text.primary}, ${alpha(theme.vars.palette.text.primary, 0.2)}`, padding: '4px' }),
- */
-interface BorderGradientProps {
-  color?: string;
-  padding?: string;
-}
-
-export function borderGradient(
-  props?: BorderGradientProps,
-): Record<string, string | number> {
-  return {
-    inset: 0,
-    width: "100%",
-    content: '""',
-    height: "100%",
-    margin: "auto",
-    position: "absolute",
-    borderRadius: "inherit",
-    padding: props?.padding ?? "2px",
-    //
-    mask: "linear-gradient(#FFF 0 0) content-box, linear-gradient(#FFF 0 0)",
-    WebkitMask:
-      "linear-gradient(#FFF 0 0) content-box, linear-gradient(#FFF 0 0)",
-    maskComposite: "exclude",
-    WebkitMaskComposite: "xor",
-    ...(props?.color && {
-      background: `linear-gradient(${props.color})`,
-    }),
-  };
-}
-
-/**
- * Usage:
- * ...bgGradient({ color: `to right, ${theme.vars.palette.grey[900]} 25%, ${varAlpha(theme.vars.palette.primary.darkerChannel, 0.88)}`, imgUrl: '/assets/background/overlay.png' }),
- */
-interface BgGradientProps {
-  color: string;
-  imgUrl?: string;
-}
-
-export function bgGradient({
-  color,
-  imgUrl,
-}: BgGradientProps): Record<string, string> {
-  if (imgUrl) {
-    return {
-      background: `linear-gradient(${color}), url(${imgUrl})`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center center",
-    };
-  }
-  return { background: `linear-gradient(${color})` };
-}
 
 /**
  * Usage:

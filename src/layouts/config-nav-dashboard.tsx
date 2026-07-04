@@ -80,6 +80,3 @@ export function getNavData(role?: string) {
 
   return baseNav;
 }
-
-// Backward compat
-export const navData = getNavData();

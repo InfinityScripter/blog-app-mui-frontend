@@ -25,10 +25,6 @@ import { JwtSignInSocial } from "./jwt-sign-in-social";
 
 // ----------------------------------------------------------------------
 
-export { SignInSchema };
-
-// ----------------------------------------------------------------------
-
 export function JwtSignInView() {
   const router = useRouter();
   const searchParams = useSearchParams();

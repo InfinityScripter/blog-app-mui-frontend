@@ -12,7 +12,7 @@ export interface MainNavSubItem {
 }
 
 /** A column (subheader + items) shown when a top-level main-nav item is open. */
-export interface MainNavChildGroup {
+interface MainNavChildGroup {
   subheader: string;
   items: MainNavSubItem[];
 }

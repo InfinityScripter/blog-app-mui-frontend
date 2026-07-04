@@ -109,8 +109,9 @@ test.describe("Account — security (password)", () => {
     await next.fill(NEW_PASSWORD);
     await confirm.fill(NEW_PASSWORD);
     await page.getByRole("button", { name: "Изменить пароль" }).click();
+    // .first() — the error shows both as a toast and as the field helper text.
     await expect(
-      page.getByText(/Current password is incorrect|неверн/i),
+      page.getByText(/Current password is incorrect|неверн/i).first(),
     ).toBeVisible({ timeout: 15_000 });
 
     // 2) Correct current password → the form clears on success (reset()).

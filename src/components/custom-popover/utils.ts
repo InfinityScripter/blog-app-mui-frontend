@@ -7,7 +7,7 @@ import type { ArrowPlacement, AnchorOriginResult } from "./types";
 
 // ----------------------------------------------------------------------
 
-export function isStyleObject(
+function isStyleObject(
   sx: SxProps<Theme>,
 ): sx is Exclude<SystemStyleObject<Theme>, null> {
   return typeof sx === "object" && !Array.isArray(sx);

@@ -10,15 +10,6 @@ export function vendorColor(vendor: string): LabelColor {
 }
 
 /**
- * A verdict is the owner's one-liner take. It has no severity axis, so it maps
- * to a single neutral-brand color rather than a heuristic sentiment — kept a
- * function so callers never hardcode a hex.
- */
-export function verdictColor(): LabelColor {
-  return "primary";
-}
-
-/**
  * Formats a $/1M-tokens price. `null` means unknown (never invented), rendered
  * as an em dash so the chip still reads cleanly.
  */

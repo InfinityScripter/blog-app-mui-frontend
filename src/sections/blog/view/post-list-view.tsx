@@ -7,13 +7,13 @@ import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { Label } from "src/components/label";
 import { useState, useCallback } from "react";
-import { POST_SORT_OPTIONS } from "src/_mock";
 import { Iconify } from "src/components/iconify";
 import { PUBLISH_STATUS } from "src/types/domain";
 import { RouterLink } from "src/routes/components";
 import { useDebounce } from "src/hooks/use-debounce";
 import { useSetState } from "src/hooks/use-set-state";
 import { DashboardContent } from "src/layouts/dashboard";
+import { POST_SORT_OPTIONS } from "src/sections/blog/const";
 import { useGetPosts, useSearchPosts } from "src/actions/blog";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 

@@ -15,5 +15,3 @@ export interface SettingsContextValue extends SettingsState {
   onCloseDrawer: () => void;
   onToggleDrawer: () => void;
 }
-
-export type { SettingsState };

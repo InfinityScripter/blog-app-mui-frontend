@@ -12,9 +12,9 @@ import {
   FormControl,
 } from "@mui/material";
 
-import { formatModelLabel, toControlProvider } from "./bot-utils";
+import { formatModelLabel, toControlProvider } from "./utils";
 
-import type { ControlProviderName } from "./bot-types";
+import type { ControlProviderName } from "./types";
 
 type Props = {
   accessToken?: string;

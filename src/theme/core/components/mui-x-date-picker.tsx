@@ -14,7 +14,7 @@ import { type ThemeWithVars } from "./types";
  * Icons
  */
 /* https://icon-sets.iconify.design/eva/chevron-down-fill */
-export const PickerSwitchIcon = (props: SvgIconProps) => (
+const PickerSwitchIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -24,7 +24,7 @@ export const PickerSwitchIcon = (props: SvgIconProps) => (
 );
 
 /* https://icon-sets.iconify.design/eva/arrow-ios-back-fill */
-export const PickerLeftIcon = (props: SvgIconProps) => (
+const PickerLeftIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -34,7 +34,7 @@ export const PickerLeftIcon = (props: SvgIconProps) => (
 );
 
 /* https://icon-sets.iconify.design/eva/arrow-ios-forward-fill */
-export const PickerRightIcon = (props: SvgIconProps) => (
+const PickerRightIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -44,7 +44,7 @@ export const PickerRightIcon = (props: SvgIconProps) => (
 );
 
 /* https://icon-sets.iconify.design/solar/calendar-mark-bold-duotone */
-export const PickerCalendarIcon = (props: SvgIconProps) => (
+const PickerCalendarIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
@@ -63,7 +63,7 @@ export const PickerCalendarIcon = (props: SvgIconProps) => (
 );
 
 /* https://icon-sets.iconify.design/solar/clock-circle-outline */
-export const PickerClockIcon = (props: SvgIconProps) => (
+const PickerClockIcon = (props: SvgIconProps) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"

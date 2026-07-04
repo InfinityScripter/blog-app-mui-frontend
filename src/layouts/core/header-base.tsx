@@ -19,11 +19,8 @@ export function HeaderBase({
     account = true,
     helpLink = false,
     settings = true,
-    contacts = false,
     searchbar = true,
-    workspaces = false,
     menuButton = true,
-    localization = false,
     notifications = false,
   } = {},
 
@@ -38,12 +35,10 @@ export function HeaderBase({
         leftAreaStart: slots?.leftAreaStart,
         leftArea: (
           <HeaderLeftArea
-            data={data}
             slots={slots}
             onOpenNav={onOpenNav}
             layoutQuery={layoutQuery}
             menuButton={menuButton}
-            workspaces={workspaces}
           />
         ),
         rightArea: (
@@ -54,9 +49,7 @@ export function HeaderBase({
             account={account}
             helpLink={helpLink}
             settings={settings}
-            contacts={contacts}
             searchbar={searchbar}
-            localization={localization}
             notifications={notifications}
           />
         ),

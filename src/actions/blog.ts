@@ -1,7 +1,6 @@
 import type {
   PostResponse,
   ListPostsResponse,
-  LatestPostsResponse,
   SearchPostsResponse,
 } from "src/types/api";
 
@@ -75,29 +74,6 @@ export function useGetPost(postId?: string) {
     }),
     [data?.post, error, isLoading, isValidating, mutate],
   );
-}
-
-export function useGetLatestPosts(title?: string) {
-  const url = title ? [endpoints.post.latest, { params: { title } }] : "";
-
-  const { data, isLoading, error, isValidating } = useSWR<LatestPostsResponse>(
-    url,
-    fetcher,
-    swrOptions,
-  );
-
-  const memoizedValue = useMemo(
-    () => ({
-      latestPosts: data?.latestPosts || [],
-      latestPostsLoading: isLoading,
-      latestPostsError: error,
-      latestPostsValidating: isValidating,
-      latestPostsEmpty: !isLoading && !(data?.latestPosts?.length ?? 0),
-    }),
-    [data?.latestPosts, error, isLoading, isValidating],
-  );
-
-  return memoizedValue;
 }
 
 export function useSearchPosts(query?: string, dashboard: boolean = false) {

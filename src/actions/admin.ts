@@ -10,7 +10,7 @@ import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
 // (admin-bot-view и др.) не зависели от внутренней раскладки.
 export * from "./bot";
 
-export interface AdminUser extends User {
+interface AdminUser extends User {
   createdAt?: string | Date;
 }
 

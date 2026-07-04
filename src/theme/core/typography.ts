@@ -4,11 +4,11 @@ import { setFont, pxToRem, responsiveFontSizes } from "../styles/utils";
 
 export const defaultFont = "Manrope";
 
-export const primaryFont = setFont(defaultFont);
+const primaryFont = setFont(defaultFont);
 
 // Display face for the two top heading levels only (Unbounded — Cyrillic-first,
 // OFL). h3–h6 stay on the workhorse grotesque so long RU strings keep fitting.
-export const secondaryFont = setFont("Unbounded");
+const secondaryFont = setFont("Unbounded");
 
 // Mono for metadata: dates, reading time, counters, model versions, code.
 export const monoFont = `var(--font-jetbrains-mono),"SFMono-Regular",Menlo,Consolas,monospace`;

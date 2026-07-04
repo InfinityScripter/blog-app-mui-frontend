@@ -3,6 +3,8 @@
 // lives in `data/`). Eras annotate year chips; slots position the floating
 // brand-logo backdrop.
 
+import type { BackdropSlot } from "./types";
+
 /**
  * Era caption shown under the year chip at the first model of the year.
  * Years without an entry show no caption (the era continues).
@@ -15,20 +17,6 @@ export const YEAR_ERAS: Record<number, string> = {
   2024: "Мультимодальность",
   2025: "Reasoning и агенты",
 };
-
-/** One floating logo slot in the decorative 3D backdrop. */
-export interface BackdropSlot {
-  /** CSS offset from the top, e.g. "12%". */
-  top: string;
-  /** CSS offset from the left, e.g. "6%". */
-  left: string;
-  /** Icon size in px. */
-  size: number;
-  /** Full float+spin cycle duration, seconds. */
-  duration: number;
-  /** Animation start offset, seconds. */
-  delay: number;
-}
 
 /**
  * Hand-tuned positions hugging the page edges so logos never sit under the

@@ -1,6 +1,5 @@
 "use client";
 
-import { _contacts } from "src/_mock";
 import Alert from "@mui/material/Alert";
 import { useTheme } from "@mui/material/styles";
 import { useAuthContext } from "src/auth/hooks";
@@ -9,7 +8,6 @@ import { iconButtonClasses } from "@mui/material/IconButton";
 import { useSettingsContext } from "src/components/settings";
 
 import { Main } from "./main";
-import { _langs } from "./const";
 import { NavMobile } from "./nav-mobile";
 import { layoutClasses } from "../classes";
 import { NavVertical } from "./nav-vertical";
@@ -18,7 +16,6 @@ import { _account } from "../config-nav-account";
 // ----------------------------------------------------------------------
 import { HeaderBase } from "../core/header-base";
 import { getNavData } from "../config-nav-dashboard";
-import { _workspaces } from "../config-nav-workspace";
 import { LayoutSection } from "../core/layout-section";
 import { useNavColorVars } from "./hooks/use-nav-color-vars";
 
@@ -65,10 +62,7 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
             onOpenNav={mobileNavOpen.onTrue}
             data={{
               nav: navData,
-              langs: _langs,
               account: _account,
-              contacts: _contacts,
-              workspaces: _workspaces,
             }}
             slotsDisplay={{
               signIn: false,
@@ -108,9 +102,6 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
                     },
                     [theme.breakpoints.up(layoutQuery)]: {
                       height: "var(--layout-nav-horizontal-height)",
-                    },
-                    [`& [data-slot="workspaces"]`]: {
-                      color: "var(--layout-nav-text-primary-color)",
                     },
                     [`& [data-slot="logo"]`]: {
                       display: "none",

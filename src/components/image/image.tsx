@@ -10,8 +10,6 @@ import { imageClasses } from "./classes";
 
 import type { ImageProps } from "./types";
 
-export type { ImageProps } from "./types";
-
 // ----------------------------------------------------------------------
 
 const ImageWrapper = styled(Box)<BoxProps>({

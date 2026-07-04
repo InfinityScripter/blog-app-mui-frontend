@@ -6,8 +6,6 @@ import { Logo } from "../logo";
 
 import type { AnimateLogo1Props } from "./types";
 
-export { AnimateLogo2 } from "./animate-logo-2";
-
 // ----------------------------------------------------------------------
 
 export function AnimateLogo1({ logo, sx, ...other }: AnimateLogo1Props) {
