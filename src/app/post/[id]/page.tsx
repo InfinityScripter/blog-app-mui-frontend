@@ -3,12 +3,13 @@ import { CONFIG } from "src/config-global";
 import { paramCase } from "src/utils/change-case";
 import { NotFoundError } from "src/utils/fetch-retry";
 import { getPost, getPosts } from "src/actions/blog-ssr";
+import { parsePostContent } from "src/utils/post-geo-content";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
 import { PostDetailsHomeView } from "src/sections/blog/view/post-details-home-view";
 
-import { buildPostJsonLd } from "./json-ld";
+import { buildFaqJsonLd, buildPostJsonLd } from "./json-ld";
 
 // ----------------------------------------------------------------------
 
@@ -81,6 +82,12 @@ export default async function Page({ params }: PageProps) {
   // authored blog posts) → rich result in Google/Yandex instead of a bare link.
   const jsonLd = buildPostJsonLd(post, id);
 
+  // Parse a `## FAQ` section out of the content and emit FAQPage schema so the
+  // post can win an FAQ rich result. Same parse the client view runs — cheap,
+  // pure — but done here it lands in the static/ISR HTML for crawlers.
+  const { faq } = parsePostContent(post?.content);
+  const faqJsonLd = buildFaqJsonLd(faq);
+
   return (
     <>
       {jsonLd && (
@@ -88,6 +95,13 @@ export default async function Page({ params }: PageProps) {
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
       <PostDetailsHomeView post={post} latestPosts={latestPosts} />
