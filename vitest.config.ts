@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     include: [
       "src/server/llm-stats/**/*.test.ts",
+      "src/app/**/*.test.ts",
       "src/components/**/*.test.ts",
       "src/utils/**/*.test.ts",
       "src/routes/**/*.test.ts",

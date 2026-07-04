@@ -8,6 +8,7 @@ import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import { useGetPost } from "src/actions/blog";
+import { fDate } from "src/utils/format-time";
 import { monoValueSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
@@ -18,8 +19,14 @@ import AvatarGroup from "@mui/material/AvatarGroup";
 import { usePostView } from "src/hooks/use-post-view";
 import { getReadingTime } from "src/utils/reading-time";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
+import {
+  parsePostContent,
+  isMeaningfullyUpdated,
+} from "src/utils/post-geo-content";
 
+import { PostFaq } from "../post-faq";
 import { PostItem } from "../post-item";
+import { PostBluf } from "../post-bluf";
 import { PostRelated } from "../post-related";
 import { PostCommentList } from "../post-comment-list";
 import { PostCommentForm } from "../post-comment-form";
@@ -40,6 +47,13 @@ export function PostDetailsHomeView({
   usePostView(currentPost?._id);
 
   const readingTime = getReadingTime(currentPost?.content);
+  // Split the `## FAQ` section out of the body: `body` renders as the article,
+  // `faq` drives the accordion (so questions aren't duplicated inline).
+  const { body, faq } = parsePostContent(currentPost?.content);
+  const showUpdated = isMeaningfullyUpdated(
+    currentPost?.createdAt,
+    currentPost?.updatedAt,
+  );
 
   return (
     <>
@@ -75,22 +89,37 @@ export function PostDetailsHomeView({
             sx={{
               ...monoValueSx,
               mb: 2,
-              gap: 0.5,
+              gap: 1,
               display: "flex",
               alignItems: "center",
               color: "text.secondary",
             }}
           >
-            <Iconify icon="solar:clock-circle-bold" width={16} />
-            {`${readingTime} мин чтения`}
+            <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
+              <Iconify icon="solar:clock-circle-bold" width={16} />
+              {`${readingTime} мин чтения`}
+            </Box>
+            {showUpdated && (
+              <>
+                <Box
+                  sx={{
+                    width: 3,
+                    height: 3,
+                    borderRadius: "50%",
+                    bgcolor: "text.disabled",
+                  }}
+                />
+                <Box component="span" sx={{ color: "primary.main" }}>
+                  {`Обновлено ${fDate(currentPost?.updatedAt)}`}
+                </Box>
+              </>
+            )}
           </Box>
 
-          <Typography variant="subtitle1">
-            {currentPost?.description}
-          </Typography>
+          <PostBluf text={currentPost?.description} />
 
-          {currentPost?.content?.trim() ? (
-            <Markdown children={currentPost.content} />
+          {body.trim() ? (
+            <Markdown children={body} />
           ) : (
             <Typography
               variant="body2"
@@ -133,6 +162,8 @@ export function PostDetailsHomeView({
               </AvatarGroup>
             </Stack>
           </Stack>
+
+          <PostFaq items={faq} />
 
           <PostNewsletterCta />
 

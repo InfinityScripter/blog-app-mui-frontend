@@ -26,4 +26,28 @@ Disallow: /
 User-agent: AhrefsBot
 Disallow: /
 
+# AI assistants / answer engines — explicitly welcome. These are already allowed
+# via `User-agent: *`, but naming them declares intent for GEO (getting posts
+# cited by ChatGPT/Perplexity/Claude) and future-proofs against a default flip.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://aifirst.us.com/sitemap.xml
