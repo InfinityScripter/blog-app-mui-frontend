@@ -4,7 +4,7 @@ import type { BreadcrumbsProps } from "@mui/material/Breadcrumbs";
 
 // ----------------------------------------------------------------------
 
-export interface BreadcrumbLinkItem {
+interface BreadcrumbLinkItem {
   name?: ReactNode;
   href?: string;
   icon?: ReactNode;

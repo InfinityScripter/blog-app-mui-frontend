@@ -25,10 +25,6 @@ import type { PostNewEditFormProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export { NewPostSchema };
-
-// ----------------------------------------------------------------------
-
 export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
   const router = useRouter();
   const { user } = useAuthContext();

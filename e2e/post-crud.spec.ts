@@ -85,7 +85,7 @@ test.describe("post CRUD (dashboard UI)", () => {
   test("view the post on the public page", async ({ page }) => {
     expect(postId).toBeTruthy();
     await page.goto(`/post/${postId}`);
-    await expect(page).toHaveTitle(/Post details/i);
+    await expect(page).toHaveTitle(/Talalaev/i);
     await expect(
       page.getByRole("heading", { name: title }).first(),
     ).toBeVisible({ timeout: 15_000 });
@@ -144,10 +144,13 @@ test.describe("post CRUD (dashboard UI)", () => {
       page.locator("table tbody tr", { hasText: editedTitle }),
     ).toHaveCount(0, { timeout: 15_000 });
 
-    // Public detail page no longer resolves to the post.
-    await page.goto(`/post/${postId}`);
-    await expect(page.getByRole("heading", { name: editedTitle })).toHaveCount(
-      0,
+    // The backend no longer resolves the post. The public /post/[id] PAGE may
+    // still serve a cached ISR render until revalidation (by design — the
+    // admin "Обновить кеш" button / the 1h window purges it), so assert the
+    // API truth rather than the cached HTML.
+    const apiRes = await page.request.get(
+      `${process.env.NEXT_PUBLIC_SERVER_URL ?? "http://localhost:7272"}/api/post/details?id=${postId}`,
     );
+    expect(apiRes.status()).toBe(404);
   });
 });

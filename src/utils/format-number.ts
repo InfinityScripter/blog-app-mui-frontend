@@ -1,7 +1,8 @@
-import { formatNumberLocale } from "src/locales";
-
 // ----------------------------------------------------------------------
 
+// Локаль Intl-форматирования чисел. Runtime-i18n в приложении нет, поэтому
+// локаль фиксированная (раньше её отдавал неинициализированный i18next и она
+// всё равно всегда сводилась к en-US).
 const DEFAULT_LOCALE = { code: "en-US", currency: "USD" };
 
 interface Locale {
@@ -15,80 +16,12 @@ interface NumberFormatOptions extends Intl.NumberFormatOptions {
 }
 
 function resolveLocale(): Locale {
-  const locale = formatNumberLocale();
-
-  return {
-    code: locale.code ?? DEFAULT_LOCALE.code,
-    currency: locale.currency ?? DEFAULT_LOCALE.currency,
-  };
+  return DEFAULT_LOCALE;
 }
 
 function processInput(inputValue: unknown): number | null {
   if (inputValue == null || Number.isNaN(inputValue)) return null;
   return Number(inputValue);
-}
-
-// ----------------------------------------------------------------------
-
-export function fNumber(
-  inputValue: unknown,
-  options?: NumberFormatOptions,
-): string {
-  const locale = resolveLocale();
-
-  const number = processInput(inputValue);
-  if (number === null) return "";
-
-  const fm = new Intl.NumberFormat(locale.code, {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-    ...options,
-  }).format(number);
-
-  return fm;
-}
-
-// ----------------------------------------------------------------------
-
-export function fCurrency(
-  inputValue: unknown,
-  options?: NumberFormatOptions,
-): string {
-  const locale = resolveLocale();
-
-  const number = processInput(inputValue);
-  if (number === null) return "";
-
-  const fm = new Intl.NumberFormat(locale.code, {
-    style: "currency",
-    currency: locale.currency,
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-    ...options,
-  }).format(number);
-
-  return fm;
-}
-
-// ----------------------------------------------------------------------
-
-export function fPercent(
-  inputValue: unknown,
-  options?: NumberFormatOptions,
-): string {
-  const locale = resolveLocale();
-
-  const number = processInput(inputValue);
-  if (number === null) return "";
-
-  const fm = new Intl.NumberFormat(locale.code, {
-    style: "percent",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 1,
-    ...options,
-  }).format(number / 100);
-
-  return fm;
 }
 
 // ----------------------------------------------------------------------

@@ -36,20 +36,3 @@ export function useResponsive(
 
   return mediaQueryResult;
 }
-
-// ----------------------------------------------------------------------
-
-export function useWidth(): Breakpoint {
-  const theme = useTheme();
-
-  const keys = useMemo(() => [...theme.breakpoints.keys].reverse(), [theme]);
-
-  const width = keys.reduce((output: Breakpoint | null, key) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const matches = useMediaQuery(theme.breakpoints.up(key));
-
-    return !output && matches ? key : output;
-  }, null);
-
-  return width || "xs";
-}

@@ -4,7 +4,6 @@ import { Logo } from "src/components/logo";
 import { styled, useTheme } from "@mui/material/styles";
 
 import { MenuButton } from "../components/menu-button";
-import { WorkspacesPopover } from "../components/workspaces-popover";
 
 import type { HeaderLeftAreaProps } from "./types";
 
@@ -38,12 +37,10 @@ const StyledDivider = styled("span")(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export function HeaderLeftArea({
-  data,
   slots,
   onOpenNav,
   layoutQuery,
   menuButton,
-  workspaces,
 }: HeaderLeftAreaProps): ReactNode {
   const theme = useTheme();
 
@@ -69,11 +66,6 @@ export function HeaderLeftArea({
 
       {/* -- Divider -- */}
       <StyledDivider data-slot="divider" />
-
-      {/* -- Workspace popover -- */}
-      {workspaces && (
-        <WorkspacesPopover data-slot="workspaces" data={data?.workspaces} />
-      )}
 
       {slots?.leftAreaEnd}
     </>

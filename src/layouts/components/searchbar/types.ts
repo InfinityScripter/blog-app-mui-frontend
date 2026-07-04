@@ -22,7 +22,7 @@ export interface SearchButtonProps {
 // ----------------------------------------------------------------------
 
 /** A segment produced by `autosuggest-highlight/parse`. */
-export interface HighlightPart {
+interface HighlightPart {
   text: string;
   highlight: boolean;
 }

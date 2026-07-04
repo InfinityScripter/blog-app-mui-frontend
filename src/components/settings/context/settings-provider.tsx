@@ -14,8 +14,6 @@ export const SettingsContext = createContext<SettingsContextValue | undefined>(
   undefined,
 );
 
-export const SettingsConsumer = SettingsContext.Consumer;
-
 // ----------------------------------------------------------------------
 
 export function SettingsProvider({

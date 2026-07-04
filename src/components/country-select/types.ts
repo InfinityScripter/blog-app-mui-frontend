@@ -7,7 +7,7 @@ import type { Country } from "./utils";
 
 // ----------------------------------------------------------------------
 
-export type CountryValueMode = "label" | "code";
+type CountryValueMode = "label" | "code";
 export type CountryOption = Country["label"] | Country["code"];
 
 export interface CountrySelectInputProps {

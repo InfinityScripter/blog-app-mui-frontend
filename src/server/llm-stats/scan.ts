@@ -18,7 +18,7 @@ import {
   CACHE_FILE,
 } from "src/server/llm-stats/cache";
 
-export interface ScanRoots {
+interface ScanRoots {
   claudeRoot?: string;
   codexRoot?: string;
   opencodeDb?: string;
@@ -26,7 +26,7 @@ export interface ScanRoots {
   useCache?: boolean;
 }
 
-export interface ScanResult {
+interface ScanResult {
   events: UsageEvent[];
   harnessesAvailable: HarnessId[];
   scannedFiles: number;

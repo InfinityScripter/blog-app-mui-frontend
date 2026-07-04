@@ -5,12 +5,12 @@ import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import { useState, useCallback } from "react";
-import { POST_SORT_OPTIONS } from "src/_mock";
 import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useSearchPosts } from "src/actions/blog";
 import { useDebounce } from "src/hooks/use-debounce";
+import { POST_SORT_OPTIONS } from "src/sections/blog/const";
 import { toggleTag, useFeedTags } from "src/sections/home/home-feed";
 
 import { PostList } from "../post-list";

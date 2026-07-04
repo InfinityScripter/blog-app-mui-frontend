@@ -9,8 +9,6 @@ import { Searchbar } from "../components/searchbar";
 import { SignInButton } from "../components/sign-in-button";
 import { AccountDrawer } from "../components/account-drawer";
 import { SettingsButton } from "../components/settings-button";
-import { LanguagePopover } from "../components/language-popover";
-import { ContactsPopover } from "../components/contacts-popover";
 import { NotificationsDrawer } from "../components/notifications-drawer";
 
 import type { HeaderRightAreaProps } from "./types";
@@ -24,9 +22,7 @@ export function HeaderRightArea({
   account,
   helpLink,
   settings,
-  contacts,
   searchbar,
-  localization,
   notifications,
 }: HeaderRightAreaProps): ReactNode {
   return (
@@ -57,18 +53,8 @@ export function HeaderRightArea({
         {/* -- Searchbar -- */}
         {searchbar && <Searchbar data-slot="searchbar" data={data?.nav} />}
 
-        {/* -- Language popover -- */}
-        {localization && (
-          <LanguagePopover data-slot="localization" data={data?.langs} />
-        )}
-
         {/* -- Notifications drawer (self-fetching) -- */}
         {notifications && <NotificationsDrawer data-slot="notifications" />}
-
-        {/* -- Contacts popover -- */}
-        {contacts && (
-          <ContactsPopover data-slot="contacts" data={data?.contacts} />
-        )}
 
         {/* -- Settings button -- */}
         {settings && <SettingsButton data-slot="settings" />}

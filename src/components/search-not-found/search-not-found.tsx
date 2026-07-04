@@ -6,8 +6,6 @@ import type { SearchNotFoundProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { SearchNotFoundProps } from "./types";
-
 export const SearchNotFound = forwardRef<HTMLDivElement, SearchNotFoundProps>(
   ({ query, sx, ...other }, ref) => {
     if (!query) {

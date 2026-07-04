@@ -3,9 +3,9 @@ import type { Theme, SxProps, Breakpoint } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-export type AuthMethod = "jwt" | "amplify" | "firebase" | "supabase" | "auth0";
+type AuthMethod = "jwt";
 
-export interface AuthSplitMethodOption {
+interface AuthSplitMethodOption {
   label: string;
   path: string;
   icon: string;

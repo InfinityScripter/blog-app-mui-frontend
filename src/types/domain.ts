@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 /**
  * Allowed values for a post's `publish` field. Use `PUBLISH_STATUS.published` /
  * `PUBLISH_STATUS.draft` instead of bare string literals so the union stays the
@@ -33,7 +31,7 @@ export interface Comment {
   replyComment: ReplyComment[];
 }
 
-export interface FavoritePerson {
+interface FavoritePerson {
   name: string;
   avatarUrl?: string;
 }
@@ -88,47 +86,14 @@ export interface User {
   role?: "user" | "admin";
 }
 
-export interface FileMeta {
-  id: string;
-  filename: string;
-  originalname: string;
-  mimetype: string;
-  size: number;
-  uploadDate: string | Date;
-  userId: string;
-}
-
-// Navigation types
-export interface NavItem {
-  title: string;
-  path: string;
-  icon?: ReactNode;
-  children?: NavItem[];
-  info?: ReactNode;
-  disabled?: boolean;
-  roles?: string[];
-  caption?: string;
-}
-
-export interface NavSection {
-  subheader: string;
-  items: NavItem[];
-}
-
 // Theme types
 export type ColorScheme = "light" | "dark";
 export type ThemeDirection = "ltr" | "rtl";
-export type FontFamily = string;
-export type NavLayout = "vertical" | "horizontal" | "mini";
-export type NavColor = "integrate" | "apparent";
-export type Contrast = "default" | "bold";
-export type PrimaryColor =
-  | "default"
-  | "cyan"
-  | "purple"
-  | "blue"
-  | "orange"
-  | "red";
+type FontFamily = string;
+type NavLayout = "vertical" | "horizontal" | "mini";
+type NavColor = "integrate" | "apparent";
+type Contrast = "default" | "bold";
+type PrimaryColor = "default" | "cyan" | "purple" | "blue" | "orange" | "red";
 
 export interface SettingsState {
   colorScheme: ColorScheme;
@@ -139,18 +104,4 @@ export interface SettingsState {
   navColor: NavColor;
   compactLayout: boolean;
   fontFamily: FontFamily;
-}
-
-// Form types
-export interface FormFieldError {
-  message?: string;
-  type?: string;
-}
-
-export interface FormState<T = Record<string, unknown>> {
-  values: T;
-  errors: Record<string, FormFieldError>;
-  touched: Record<string, boolean>;
-  isSubmitting: boolean;
-  isValid: boolean;
 }

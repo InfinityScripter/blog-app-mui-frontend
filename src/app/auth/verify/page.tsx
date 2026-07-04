@@ -1,12 +1,12 @@
 import { CONFIG } from "src/config-global";
-import { SplitVerifyView } from "src/sections/auth-demo/split";
+import { VerifyView } from "src/sections/auth/verify";
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: `Verify | Layout split - ${CONFIG.site.name}`,
+  title: `Подтверждение email - ${CONFIG.site.name}`,
 };
 
 export default function Page() {
-  return <SplitVerifyView />;
+  return <VerifyView />;
 }

@@ -12,8 +12,6 @@ import type { NavMobileProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { NavMobileProps };
-
 export function NavMobile({
   data,
   open,

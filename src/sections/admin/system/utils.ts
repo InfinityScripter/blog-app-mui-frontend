@@ -16,7 +16,7 @@ export function renderState(
   return "loading";
 }
 
-export type UsageSeverity = "success" | "warning" | "error";
+type UsageSeverity = "success" | "warning" | "error";
 
 export function usageSeverity(percent: number | null): UsageSeverity {
   if (percent === null) return "success";
@@ -29,7 +29,7 @@ export function usageSeverity(percent: number | null): UsageSeverity {
 
 const BYTE_UNITS = ["Б", "КБ", "МБ", "ГБ", "ТБ"];
 
-export function formatBytes(bytes: number): string {
+function formatBytes(bytes: number): string {
   if (bytes <= 0) return "0 Б";
   const power = Math.min(
     Math.floor(Math.log(bytes) / Math.log(1024)),
@@ -44,7 +44,7 @@ export function formatPercent(percent: number | null): string {
   return percent === null ? "—" : `${percent.toFixed(percent >= 100 ? 0 : 1)}%`;
 }
 
-export function formatUptime(seconds: number): string {
+function formatUptime(seconds: number): string {
   const days = Math.floor(seconds / 86_400);
   const hours = Math.floor((seconds % 86_400) / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
@@ -63,7 +63,10 @@ export function formatClock(timestamp: string): string {
 export function buildCpuDetails(metrics: SystemMetrics): MetricDetailRow[] {
   const { loadAvg, cores } = metrics.cpu;
   return [
-    { label: "Load avg (1/5/15 мин)", value: loadAvg.map((n) => n.toFixed(2)).join(" · ") },
+    {
+      label: "Load avg (1/5/15 мин)",
+      value: loadAvg.map((n) => n.toFixed(2)).join(" · "),
+    },
     { label: "Ядра", value: String(cores) },
   ];
 }
@@ -71,7 +74,10 @@ export function buildCpuDetails(metrics: SystemMetrics): MetricDetailRow[] {
 export function buildMemoryDetails(metrics: SystemMetrics): MetricDetailRow[] {
   const { usedBytes, totalBytes, availableBytes, swap } = metrics.memory;
   const rows = [
-    { label: "Занято", value: `${formatBytes(usedBytes)} из ${formatBytes(totalBytes)}` },
+    {
+      label: "Занято",
+      value: `${formatBytes(usedBytes)} из ${formatBytes(totalBytes)}`,
+    },
     { label: "Доступно", value: formatBytes(availableBytes) },
   ];
   return swap
@@ -89,12 +95,18 @@ export function buildDiskDetails(metrics: SystemMetrics): MetricDetailRow[] {
   const { disk } = metrics;
   if (!disk) return [];
   const rows = [
-    { label: "Занято", value: `${formatBytes(disk.usedBytes)} из ${formatBytes(disk.totalBytes)}` },
+    {
+      label: "Занято",
+      value: `${formatBytes(disk.usedBytes)} из ${formatBytes(disk.totalBytes)}`,
+    },
     { label: "Свободно", value: formatBytes(disk.availableBytes) },
   ];
   return disk.inodesUsedPercent === null
     ? rows
-    : [...rows, { label: "Inodes", value: formatPercent(disk.inodesUsedPercent) }];
+    : [
+        ...rows,
+        { label: "Inodes", value: formatPercent(disk.inodesUsedPercent) },
+      ];
 }
 
 export function buildSystemRows(metrics: SystemMetrics): MetricDetailRow[] {
@@ -125,7 +137,10 @@ export function buildProcessRows(metrics: SystemMetrics): MetricDetailRow[] {
 export function buildDatabaseRows(metrics: SystemMetrics): MetricDetailRow[] {
   const { sizeBytes, activeConnections } = metrics.database;
   return [
-    { label: "Размер БД", value: sizeBytes === null ? "—" : formatBytes(sizeBytes) },
+    {
+      label: "Размер БД",
+      value: sizeBytes === null ? "—" : formatBytes(sizeBytes),
+    },
     {
       label: "Активные подключения",
       value: activeConnections === null ? "—" : String(activeConnections),

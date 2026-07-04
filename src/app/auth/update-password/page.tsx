@@ -1,13 +1,12 @@
 import { CONFIG } from "src/config-global";
-
-import { CenteredUpdatePasswordView } from "../../../sections/auth-demo/centered";
+import { UpdatePasswordView } from "src/sections/auth/update-password";
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: `Update password | Layout split - ${CONFIG.site.name}`,
+  title: `Обновление пароля - ${CONFIG.site.name}`,
 };
 
 export default function Page() {
-  return <CenteredUpdatePasswordView />;
+  return <UpdatePasswordView />;
 }

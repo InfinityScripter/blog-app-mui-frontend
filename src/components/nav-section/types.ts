@@ -4,7 +4,7 @@ import type { ReactNode, ElementType, CSSProperties } from "react";
 
 // ----------------------------------------------------------------------
 
-export type NavItemRenderProps = {
+type NavItemRenderProps = {
   navIcon?: Record<string, ReactNode>;
   navInfo?: (val: string) => Record<string, ReactNode>;
 };
@@ -19,7 +19,7 @@ export type NavItemStateProps = {
   enabledRootRedirect?: boolean;
 };
 
-export type NavItemSlotProps = {
+type NavItemSlotProps = {
   sx?: SxProps<Theme>;
   icon?: SxProps<Theme>;
   texts?: SxProps<Theme>;
@@ -29,7 +29,7 @@ export type NavItemSlotProps = {
   arrow?: SxProps<Theme>;
 };
 
-export type NavSlotProps = {
+type NavSlotProps = {
   rootItem?: NavItemSlotProps;
   subItem?: NavItemSlotProps;
   subheader?: SxProps<Theme>;

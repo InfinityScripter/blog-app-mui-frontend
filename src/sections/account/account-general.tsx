@@ -22,10 +22,6 @@ import { AccountGeneralIdentity } from "./account-general-identity";
 
 // ----------------------------------------------------------------------
 
-export { AccountGeneralSchema };
-
-// ----------------------------------------------------------------------
-
 export function AccountGeneral() {
   const { user, checkUserSession } = useAuthContext();
 

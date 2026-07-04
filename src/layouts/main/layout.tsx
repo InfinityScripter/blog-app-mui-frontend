@@ -50,10 +50,7 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
             slotsDisplay={{
               account: false,
               helpLink: false,
-              contacts: false,
               searchbar: false,
-              workspaces: false,
-              localization: false,
               notifications: false,
             }}
             slots={{

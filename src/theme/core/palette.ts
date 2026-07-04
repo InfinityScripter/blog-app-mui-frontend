@@ -38,7 +38,7 @@ export const primaryDark = createPaletteChannel({
 });
 
 // Text
-export const text = {
+const text = {
   light: createPaletteChannel({
     primary: grey[900],
     secondary: grey[600],
@@ -52,7 +52,7 @@ export const text = {
 };
 
 // Background
-export const background = {
+const background = {
   light: createPaletteChannel({
     paper: "#FFFFFF",
     default: grey[50],
@@ -66,7 +66,7 @@ export const background = {
 };
 
 // Action
-export const baseAction = {
+const baseAction = {
   hover: varAlpha(grey["500Channel"], 0.08),
   selected: varAlpha(grey["500Channel"], 0.16),
   focus: varAlpha(grey["500Channel"], 0.24),
@@ -76,7 +76,7 @@ export const baseAction = {
   disabledOpacity: 0.48,
 };
 
-export const action = {
+const action = {
   light: { ...baseAction, active: grey[600] },
   dark: { ...baseAction, active: grey[500] },
 };
@@ -84,7 +84,7 @@ export const action = {
 /*
  * Base palette
  */
-export const basePalette = {
+const basePalette = {
   primary,
   secondary,
   info,
@@ -97,14 +97,14 @@ export const basePalette = {
   action,
 };
 
-export const lightPalette = {
+const lightPalette = {
   ...basePalette,
   text: text.light,
   background: background.light,
   action: action.light,
 };
 
-export const darkPalette = {
+const darkPalette = {
   ...basePalette,
   primary: primaryDark,
   text: text.dark,

@@ -1,4 +1,3 @@
-import { _tags } from "src/_mock";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
@@ -7,6 +6,7 @@ import { Field } from "src/components/hook-form";
 import CardHeader from "@mui/material/CardHeader";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+import { TAG_SUGGESTIONS } from "./const";
 import { renderTagOption } from "./post-new-edit-properties-tag-option";
 import { renderSelectedTags } from "./post-new-edit-properties-selected-tags";
 
@@ -31,7 +31,7 @@ export function PostNewEditProperties() {
           multiple
           freeSolo
           disableCloseOnSelect
-          options={_tags.map((option) => option)}
+          options={TAG_SUGGESTIONS}
           getOptionLabel={(option: string) => option}
           renderOption={renderTagOption}
           renderTags={renderSelectedTags}
@@ -54,7 +54,7 @@ export function PostNewEditProperties() {
           multiple
           freeSolo
           disableCloseOnSelect
-          options={_tags.map((option) => option)}
+          options={TAG_SUGGESTIONS}
           getOptionLabel={(option: string) => option}
           renderOption={renderTagOption}
           renderTags={renderSelectedTags}

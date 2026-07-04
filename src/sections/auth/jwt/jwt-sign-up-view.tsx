@@ -20,10 +20,6 @@ import { JwtSignUpSocial } from "./jwt-sign-up-social";
 
 // ----------------------------------------------------------------------
 
-export { SignUpSchema };
-
-// ----------------------------------------------------------------------
-
 export function JwtSignUpView() {
   const router = useRouter();
 

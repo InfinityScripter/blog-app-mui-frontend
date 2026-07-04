@@ -1,4 +1,5 @@
 import { revalidatePath } from "next/cache";
+import { endpoints } from "src/utils/axios";
 import { NextResponse, type NextRequest } from "next/server";
 
 // On-demand ISR revalidation. The public blog pages are cached with
@@ -24,7 +25,7 @@ const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 async function isAdmin(authHeader: string | null): Promise<boolean> {
   if (!authHeader) return false;
   try {
-    const res = await fetch(`${SERVER_URL}/api/auth/me`, {
+    const res = await fetch(`${SERVER_URL}${endpoints.auth.me}`, {
       headers: { Authorization: authHeader },
       cache: "no-store",
     });

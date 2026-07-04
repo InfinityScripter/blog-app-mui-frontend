@@ -1,13 +1,12 @@
 import { CONFIG } from "src/config-global";
-
-import { CenteredResetPasswordView } from "../../../sections/auth-demo/centered";
+import { ResetPasswordView } from "src/sections/auth/reset-password";
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: `Сброс пароля | Разделенный макет - ${CONFIG.site.name}`,
+  title: `Сброс пароля - ${CONFIG.site.name}`,
 };
 
 export default function Page() {
-  return <CenteredResetPasswordView />;
+  return <ResetPasswordView />;
 }

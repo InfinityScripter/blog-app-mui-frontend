@@ -8,7 +8,7 @@ import { test, expect } from "./fixtures";
 test.describe("public pages", () => {
   test("home renders nav and hero", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Mihail Talalaev/i);
+    await expect(page).toHaveTitle(/Talalaev/i);
     await expect(
       page.getByRole("link", { name: "Блог", exact: true }),
     ).toBeVisible();
@@ -24,7 +24,7 @@ test.describe("public pages", () => {
 
   test("blog list loads posts from the backend", async ({ page }) => {
     await page.goto("/post");
-    await expect(page).toHaveTitle(/Post list/i);
+    await expect(page).toHaveTitle(/Блог/);
     // At least one post card with a title link to a post detail route.
     await expect(detailLink(page).first()).toBeVisible({ timeout: 15_000 });
   });
@@ -39,7 +39,7 @@ test.describe("public pages", () => {
 
     // Navigate directly (fresh load) to the detail route.
     await page.goto(href!);
-    await expect(page).toHaveTitle(/Post details/i);
+    await expect(page).toHaveTitle(/Talalaev/i);
     // .first() — after hydration the comments section can match more than one
     // node; we only need to confirm the post detail rendered. The heading is
     // Russian ("Комментарии").

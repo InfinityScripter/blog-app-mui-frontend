@@ -1,3 +1,48 @@
+import type { SortOption, PublishOption } from "./types";
+
+// ----------------------------------------------------------------------
+
+// Publish-state options for the post details toolbar in the dashboard.
+export const POST_PUBLISH_OPTIONS: PublishOption[] = [
+  { value: "published", label: "Опубликовано" },
+  { value: "draft", label: "Черновик" },
+];
+
+// Sort options for the public and dashboard post lists.
+export const POST_SORT_OPTIONS: SortOption[] = [
+  { value: "latest", label: "Новые" },
+  { value: "popular", label: "Популярные" },
+  { value: "oldest", label: "Старые" },
+];
+
+// Suggestions for the tags autocomplete in the post editor.
+export const TAG_SUGGESTIONS = [
+  "Technology",
+  "Health and Wellness",
+  "Travel",
+  "Finance",
+  "Education",
+  "Food and Beverage",
+  "Fashion",
+  "Home and Garden",
+  "Sports",
+  "Entertainment",
+  "Business",
+  "Science",
+  "Automotive",
+  "Beauty",
+  "Fitness",
+  "Lifestyle",
+  "Real Estate",
+  "Parenting",
+  "Pet Care",
+  "Environmental",
+  "DIY and Crafts",
+  "Gaming",
+  "Photography",
+  "Music",
+];
+
 // ----------------------------------------------------------------------
 
 // Max tags rendered on a post card before the rest are truncated. Shared by

@@ -5,7 +5,7 @@ import { formatImageUrl } from "./format-image-url";
 // Shared fallback for post covers. A post without a cover would otherwise
 // render a broken <img> (formatImageUrl returns "" for an empty url); fall
 // back to a cover asset instead of one identical placeholder.
-export const PLACEHOLDER_COVER = `${CONFIG.site.basePath}/assets/placeholder.svg`;
+const PLACEHOLDER_COVER = `${CONFIG.site.basePath}/assets/placeholder.svg`;
 
 // Number of seeded fallback covers available on the asset host at
 // `/assets/images/cover/cover-N.webp` (served from the backend via

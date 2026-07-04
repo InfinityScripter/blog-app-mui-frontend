@@ -2,19 +2,19 @@
 // system-metrics). Поля с | null — метрики, которые бэкенд собирает
 // best-effort и отдаёт null, когда источник недоступен.
 
-export interface SystemMetricsCpu {
+interface SystemMetricsCpu {
   cores: number;
   loadAvg: number[];
   usagePercent: number | null;
 }
 
-export interface SystemMetricsSwap {
+interface SystemMetricsSwap {
   totalBytes: number;
   usedBytes: number;
   usedPercent: number;
 }
 
-export interface SystemMetricsMemory {
+interface SystemMetricsMemory {
   totalBytes: number;
   usedBytes: number;
   availableBytes: number;
@@ -22,7 +22,7 @@ export interface SystemMetricsMemory {
   swap: SystemMetricsSwap | null;
 }
 
-export interface SystemMetricsDisk {
+interface SystemMetricsDisk {
   mount: string;
   totalBytes: number;
   usedBytes: number;
@@ -31,7 +31,7 @@ export interface SystemMetricsDisk {
   inodesUsedPercent: number | null;
 }
 
-export interface SystemMetricsHost {
+interface SystemMetricsHost {
   hostname: string;
   platform: string;
   kernel: string;
@@ -40,7 +40,7 @@ export interface SystemMetricsHost {
   timestamp: string;
 }
 
-export interface SystemMetricsProcess {
+interface SystemMetricsProcess {
   pid: number;
   nodeVersion: string;
   uptimeSeconds: number;
@@ -49,7 +49,7 @@ export interface SystemMetricsProcess {
   heapTotalBytes: number;
 }
 
-export interface SystemMetricsDatabase {
+interface SystemMetricsDatabase {
   sizeBytes: number | null;
   activeConnections: number | null;
 }

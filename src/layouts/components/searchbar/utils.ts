@@ -56,10 +56,7 @@ export function applyFilter({
 
 // ----------------------------------------------------------------------
 
-export function splitPath(
-  array: SearchLoopItem[],
-  key: string,
-): string[] | null {
+function splitPath(array: SearchLoopItem[], key: string): string[] | null {
   let stack: { path: string[]; currItem: SearchLoopItem }[] = array.map(
     (item) => ({ path: [item.title ?? ""], currItem: item }),
   );
@@ -91,7 +88,7 @@ export function splitPath(
 
 // ----------------------------------------------------------------------
 
-export function handleLoop(
+function handleLoop(
   array: NavItemBaseProps[] | undefined,
   subheader?: string,
 ): SearchLoopItem[] {

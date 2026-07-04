@@ -4,9 +4,9 @@ import type { FileRejection, DropzoneOptions } from "react-dropzone";
 
 // ----------------------------------------------------------------------
 
-export type FileUploadType = File | string | null;
+type FileUploadType = File | string | null;
 
-export type FilesUploadType = (File | string)[];
+type FilesUploadType = (File | string)[];
 
 export interface UploadProps extends DropzoneOptions {
   sx?: SxProps<Theme>;

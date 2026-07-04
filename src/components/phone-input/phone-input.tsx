@@ -12,10 +12,6 @@ import type { PhoneInputProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { PhoneInputProps } from "./types";
-
-// ----------------------------------------------------------------------
-
 export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
   (
     {

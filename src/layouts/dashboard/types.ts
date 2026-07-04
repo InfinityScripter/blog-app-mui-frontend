@@ -48,7 +48,7 @@ export interface NavMobileProps {
   [key: string]: unknown;
 }
 
-export interface DashboardNavSlots {
+interface DashboardNavSlots {
   topArea?: ReactNode;
   bottomArea?: ReactNode;
 }

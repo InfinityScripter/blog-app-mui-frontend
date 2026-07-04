@@ -5,7 +5,7 @@ import type { Props as SimpleBarProps } from "simplebar-react";
 
 // ----------------------------------------------------------------------
 
-export interface ScrollbarSlotProps {
+interface ScrollbarSlotProps {
   wrapper?: SystemStyleObject<Theme>;
   contentWrapper?: SystemStyleObject<Theme>;
   content?: SystemStyleObject<Theme>;

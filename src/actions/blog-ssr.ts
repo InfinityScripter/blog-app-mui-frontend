@@ -5,7 +5,6 @@ import type {
   PostResponse,
   ReleaseResponse,
   ListPostsResponse,
-  LatestPostsResponse,
   ListReleasesResponse,
   GenericMessageResponse,
 } from "src/types/api";
@@ -116,16 +115,6 @@ export async function getRelease(slug: string): Promise<ReleaseResponse> {
 
 // ----------------------------------------------------------------------
 
-export async function getLatestPosts(
-  id?: string,
-): Promise<LatestPostsResponse> {
-  const URL = id ? `${endpoints.post.latest}?id=${id}` : "";
-
-  const res = await axios.get<LatestPostsResponse>(URL);
-
-  return res.data;
-}
-
 export async function createPost(
   postData: Partial<Post>,
 ): Promise<PostResponse> {
@@ -137,7 +126,7 @@ export async function updatePost(
   postData: Partial<Post> & { id: string },
 ): Promise<PostResponse> {
   const res = await axios.put<PostResponse>(
-    `/api/post/${postData.id}/edit`,
+    endpoints.post.edit(postData.id),
     postData,
   );
   return res.data;
@@ -149,7 +138,7 @@ export async function updatePostPublish(
 ): Promise<GenericMessageResponse> {
   try {
     const res = await axios.put<GenericMessageResponse>(
-      `/api/post/${postId}/publish`,
+      endpoints.post.publish(postId),
       {
         publish: publishStatus,
       },
@@ -165,9 +154,8 @@ export async function deletePost(
   postId: string,
 ): Promise<GenericMessageResponse> {
   try {
-    // Если вы хотите использовать динамический URL с [id]:
     const res = await axios.delete<GenericMessageResponse>(
-      `/api/post/${postId}/delete`,
+      endpoints.post.delete(postId),
     );
     return res.data;
   } catch (error) {

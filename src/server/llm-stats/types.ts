@@ -34,7 +34,7 @@ export interface UsageEvent {
   messageId: string | null;
 }
 
-export interface PriceRow {
+interface PriceRow {
   in: number; // USD per 1M input tokens
   out: number;
   cacheRead: number;

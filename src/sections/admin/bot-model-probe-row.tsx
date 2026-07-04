@@ -2,7 +2,7 @@
 
 import { Box, Stack, Typography } from "@mui/material";
 
-import type { BotModelProbe } from "./bot-types";
+import type { BotModelProbe } from "./types";
 
 type Props = {
   probe: BotModelProbe;

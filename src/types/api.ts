@@ -1,4 +1,4 @@
-import type { Post } from './domain';
+import type { Post } from "./domain";
 
 export interface ListPostsResponse {
   posts: Post[];
@@ -10,10 +10,6 @@ export interface ListPostsResponse {
 export interface PostResponse {
   post: Post;
   latestPosts?: Post[];
-}
-
-export interface LatestPostsResponse {
-  latestPosts: Post[];
 }
 
 export interface GenericMessageResponse {

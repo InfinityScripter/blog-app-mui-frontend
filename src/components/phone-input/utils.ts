@@ -7,10 +7,6 @@ import type { CountryOption, ApplyFilterParams } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { CountryOption } from "./types";
-
-// ----------------------------------------------------------------------
-
 export function getCountryCode(
   inputValue?: string,
   countryCode?: Country,

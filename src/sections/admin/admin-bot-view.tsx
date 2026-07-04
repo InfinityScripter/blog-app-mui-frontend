@@ -18,7 +18,7 @@ import { BotStatusPill } from "./bot-status-pill";
 import { BotModelsHealth } from "./bot-models-health";
 import { BotModelSelector } from "./bot-model-selector";
 
-import type { ControlProviderName } from "./bot-types";
+import type { ControlProviderName } from "./types";
 
 export function AdminBotView() {
   const { user } = useAuthContext();

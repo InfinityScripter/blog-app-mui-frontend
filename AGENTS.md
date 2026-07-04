@@ -69,31 +69,31 @@ E2E (`yarn e2e`) needs the backend on :7272 **and Postgres running** — a backe
 
 ## Gotchas (these have bitten before)
 
-- **Dual lockfiles.** The repo has BOTH `package-lock.json` and `yarn.lock`; CI
-  runs `yarn install --frozen-lockfile`. If you change deps, run `yarn install`
-  (resync yarn.lock) AND `npm install --package-lock-only`, then verify
-  `yarn install --frozen-lockfile` exits 0. A stale yarn.lock fails CI.
+- **Yarn only.** `yarn.lock` is the single lockfile (`package-lock.json` was
+  removed on purpose — don't recreate it with `npm install`). If you change
+  deps, run `yarn install`, then verify `yarn install --frozen-lockfile`
+  exits 0 — a stale yarn.lock fails CI.
 - **tsc does not trace `.css` `@import`s.** Deleting a component dir that has a
   `styles.css` imported from `src/global.css` passes tsc but fails `yarn build`.
   Always run the build after deleting component dirs.
 - **knip per-FILE list is accurate; its dir-level summary is not.** Some dirs mix
-  live and dead files (e.g. `src/sections/overview/app`, `/e-commerce`). Delete
-  only files `knip --files` flags, never a whole dir on assumption.
+  live and dead files. Delete only files `knip --files` flags, never a whole dir
+  on assumption.
 - **`critters`** is flagged unused by knip but required by Next `optimizeCss` —
   keep it (it's in `ignoreDependencies`).
 
-## LLM stats dashboard (local-only)
+## LLM stats dashboard
 
 - Route `/dashboard/admin/llm-stats` (admin-guarded). Shows model/harness/time/
   project/cost stats aggregated from local AI-harness logs.
-- **Local-only by design.** The API route `src/app/api/llm-stats/route.ts`
-  (Node runtime) reads `~/.claude/projects`, `~/.codex/sessions`, and
-  `~/.local/share/opencode/opencode.db`. On the prod VDS those dirs are absent, so
-  it returns an empty `StatsBundle` with a warning — the page renders an empty
-  state. Nothing about this feature runs server-side in production.
+- **Push model.** `yarn llm-stats:push` (`scripts/push-llm-stats.ts`) scans
+  local harness logs (`~/.claude/projects`, `~/.codex/sessions`, opencode DB)
+  and POSTs a snapshot to the backend
+  (`endpoints.admin.llmStats.snapshot`); the dashboard reads that snapshot.
+  Nothing scans the filesystem server-side in production.
 - Parsing lives in `src/server/llm-stats/` (pure, unit-tested with Vitest:
-  `npm run test:unit`). **Add a harness** = add an adapter in `adapters/` and
-  register it in `scan.ts`. Costs are estimates from `pricing.ts`, not billing.
+  `yarn test:unit`). **Add a harness** = add an adapter and register it in
+  `scan.ts`. Costs are estimates from `pricing.ts`, not billing.
 - `src/server/llm-stats/**` must stay React-free; the section
   (`src/sections/admin/llm-stats/`) is presentation only.
 

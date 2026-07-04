@@ -2,7 +2,7 @@ import type { UsageEvent, PriceTable } from "src/server/llm-stats/types";
 
 // Best-effort public list prices, USD per 1M tokens, keyed by modelFamily.
 // Editable; clearly an estimate, not billing.
-export const PRICE_TABLE: PriceTable = {
+const PRICE_TABLE: PriceTable = {
   opus: { in: 15, out: 75, cacheRead: 1.5, cacheWrite: 18.75 },
   sonnet: { in: 3, out: 15, cacheRead: 0.3, cacheWrite: 3.75 },
   haiku: { in: 0.8, out: 4, cacheRead: 0.08, cacheWrite: 1 },

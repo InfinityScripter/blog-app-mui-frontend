@@ -6,7 +6,7 @@ import type { ColorType } from "src/theme/core/components/types";
 
 export type LabelColor = "default" | ColorType;
 
-export type LabelVariant = "filled" | "outlined" | "soft" | "inverted";
+type LabelVariant = "filled" | "outlined" | "soft" | "inverted";
 
 /**
  * Internal styling state forwarded to the styled `Box` via the `ownerState`

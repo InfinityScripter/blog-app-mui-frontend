@@ -1,4 +1,3 @@
-import type { BoxProps } from "@mui/material/Box";
 import type { ChipProps } from "@mui/material/Chip";
 import type { RadioProps } from "@mui/material/Radio";
 import type { SwitchProps } from "@mui/material/Switch";
@@ -182,10 +181,6 @@ export interface RHFUploadAvatarProps {
 export interface RHFUploadBoxProps {
   name: string;
   [key: string]: unknown;
-}
-
-export interface RHFBoxWrapProps extends BoxProps {
-  name: string;
 }
 
 export interface RHFTextFieldProps<

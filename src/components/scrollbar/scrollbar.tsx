@@ -8,8 +8,6 @@ import type { ScrollbarProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-export type { ScrollbarProps, ScrollbarSlotProps } from "./types";
-
 export const Scrollbar = forwardRef<HTMLDivElement, ScrollbarProps>(
   (
     {
