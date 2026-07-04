@@ -82,4 +82,28 @@ describe("buildLlmsTxt", () => {
     expect(out).toContain("## Посты");
     expect(out).toContain("Список временно недоступен.");
   });
+
+  it("renders a Ресурсы section before Посты when resources are given", () => {
+    const out = buildLlmsTxt({
+      ...SITE,
+      posts: [post({ _id: "p1", title: "Пост" })],
+      resources: [
+        {
+          title: "Сравнение LLM",
+          url: "https://aifirst.us.com/llm-compare/",
+          description: "Матрица моделей.",
+        },
+      ],
+    });
+    expect(out).toContain(
+      "## Ресурсы\n- [Сравнение LLM](https://aifirst.us.com/llm-compare/): Матрица моделей.",
+    );
+    // Ресурсы precede Посты.
+    expect(out.indexOf("## Ресурсы")).toBeLessThan(out.indexOf("## Посты"));
+  });
+
+  it("omits the Ресурсы section entirely when none are given", () => {
+    const out = buildLlmsTxt({ ...SITE, posts: [] });
+    expect(out).not.toContain("## Ресурсы");
+  });
 });
