@@ -36,12 +36,16 @@ interface UseGetPostsOptions {
 
 export function useGetPosts(options: UseGetPostsOptions = {}) {
   const { excludeTag, limit } = options;
-  // Feeds/lists are NOT translated: rendering a large list would translate
-  // dozens of posts per request and risk the serverless/DeepL timeout. Post
-  // BODIES translate on open (useGetPost). List titles stay in the original.
+  const locale = activeLocale(useLocale());
+  // Feed/list titles ARE translated for a non-original locale. The backend
+  // returns each post's title/description from the translation cache (warmed
+  // ahead of time — POST /api/admin/translate/warm — so this is a fast DB hit,
+  // not a per-request DeepL call). `ru` sends no param → byte-identical
+  // original. A post's full BODY still translates lazily on open (useGetPost).
   const params = new URLSearchParams();
   if (excludeTag) params.set("excludeTag", excludeTag);
   if (limit) params.set("limit", String(limit));
+  if (locale !== DEFAULT_LOCALE) params.set("lang", locale);
   const queryString = params.toString();
   const url = queryString
     ? `${endpoints.post.list}?${queryString}`
@@ -92,10 +96,20 @@ export function useGetPost(postId?: string) {
 }
 
 export function useSearchPosts(query?: string, dashboard: boolean = false) {
-  // Search results are a list — not translated (see useGetPosts). The query
-  // matches the original text; results show original titles.
+  const locale = activeLocale(useLocale());
+  // The query always runs against the ORIGINAL (Russian) text server-side; only
+  // the returned titles/descriptions are translated for a non-original locale
+  // (a warmed-cache DB hit, like the feed). `ru` omits the param → original.
   const url = query
-    ? [endpoints.post.search, { params: { query, dashboard } }]
+    ? [
+        endpoints.post.search,
+        {
+          params:
+            locale === DEFAULT_LOCALE
+              ? { query, dashboard }
+              : { query, dashboard, lang: locale },
+        },
+      ]
     : "";
 
   const { data, isLoading, error, isValidating } = useSWR<SearchPostsResponse>(

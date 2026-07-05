@@ -1,4 +1,5 @@
 import { CONFIG } from "src/config-global";
+import { toAppLocale } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getBlogPosts } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
@@ -33,17 +34,22 @@ export async function generateMetadata({ params }: PageProps) {
 // native fetch with the same revalidate window).
 export const revalidate = 3600;
 
-export default async function Page() {
-  // Rendered from the ORIGINAL (Russian) posts. Like the news feed, the blog
-  // list is NOT translated server-side — a per-request feed translation risks
-  // the serverless timeout and re-burns the DeepL quota on every ISR refresh.
-  // List CHROME is localized via next-intl; a post's BODY is machine-translated
-  // when opened (/post/[id]). List item titles stay in the original.
+interface PageComponentProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Page({ params }: PageComponentProps) {
+  const { locale } = await params;
+  // List titles/descriptions are localized for a non-original locale from the
+  // warmed translation cache (fast DB hit). getBlogPosts falls back to the
+  // original (Russian) list if a cold-cache translation would overrun the
+  // serverless budget, so the page never 504s. Chrome is localized via
+  // next-intl; a post's BODY still translates when opened (/post/[id]).
   //
   // No error swallowing: transient backend failures are retried inside
-  // getBlogPosts; a persistent one must THROW — a failed build keeps the
-  // previous deployment live, a failed ISR regeneration keeps the stale page.
-  const { posts } = await getBlogPosts();
+  // getBlogPosts; a total backend outage still THROWS (the fallback fetch fails
+  // too) rather than caching an empty list for the ISR window.
+  const { posts } = await getBlogPosts(toAppLocale(locale));
 
   return <PostListHomeView posts={posts} />;
 }

@@ -13,6 +13,7 @@ import { langQuery } from "src/utils/lang-param";
 import axios, { endpoints } from "src/utils/axios";
 import { NEWS_TAG } from "src/sections/news/const";
 import { fetchJsonWithRetry } from "src/utils/fetch-retry";
+import { fetchListLocalized } from "src/utils/translated-feed";
 import { DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
 
 // ----------------------------------------------------------------------
@@ -54,8 +55,8 @@ export async function getPosts(
 export async function getNewsPosts(
   lang: AppLocale = DEFAULT_LOCALE,
 ): Promise<ListPostsResponse> {
-  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(NEWS_TAG)}${langQuery(lang, true)}`;
-  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
+  const base = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(NEWS_TAG)}`;
+  return fetchListLocalized(base, lang, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
@@ -67,8 +68,8 @@ export async function getNewsPosts(
 export async function getBlogPosts(
   lang: AppLocale = DEFAULT_LOCALE,
 ): Promise<ListPostsResponse> {
-  const url = `${SERVER_URL}${endpoints.post.list}?excludeTag=${encodeURIComponent(NEWS_TAG)}${langQuery(lang, true)}`;
-  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
+  const base = `${SERVER_URL}${endpoints.post.list}?excludeTag=${encodeURIComponent(NEWS_TAG)}`;
+  return fetchListLocalized(base, lang, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
@@ -78,8 +79,8 @@ export async function getPostsByTag(
   tag: string,
   lang: AppLocale = DEFAULT_LOCALE,
 ): Promise<ListPostsResponse> {
-  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(tag)}${langQuery(lang, true)}`;
-  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
+  const base = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(tag)}`;
+  return fetchListLocalized(base, lang, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
