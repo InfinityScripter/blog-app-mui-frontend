@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import Collapse from "@mui/material/Collapse";
 import { fDate } from "src/utils/format-time";
@@ -18,7 +19,7 @@ import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 import { TimelineDetail } from "./timeline-detail";
 import {
-  eraLabel,
+  hasEra,
   vendorIcon,
   vendorColor,
   hasBrandIcon,
@@ -50,10 +51,14 @@ export function TimelineEntry({
   yearStart,
 }: TimelineEntryProps) {
   const theme = useTheme();
+  const t = useTranslations("llmTimeline");
   const color = vendorColor(model.vendor);
   const brand = hasBrandIcon(model.vendor);
 
-  const era = yearStart !== null ? eraLabel(yearStart) : null;
+  // Era caption is shown only at a year that opens an era; text is localized by
+  // the year key (`eras.<year>`). `hasEra` gates it so unknown years show none.
+  const era =
+    yearStart !== null && hasEra(yearStart) ? t(`eras.${yearStart}`) : null;
 
   return (
     <TimelineItem

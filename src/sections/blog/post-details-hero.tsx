@@ -1,8 +1,11 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { CONFIG } from "src/config-global";
+import { useTranslations } from "next-intl";
 import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
 import { monoValueSx } from "src/theme/styles";
@@ -32,6 +35,7 @@ export function PostDetailsHero({
   postId,
 }: PostDetailsHeroProps) {
   const smUp = useResponsive("up", "sm");
+  const t = useTranslations("blog");
 
   const formattedCoverUrl = formatImageUrl(coverUrl);
 
@@ -59,7 +63,7 @@ export function PostDetailsHero({
           {postUrl && (
             <SpeedDial
               direction={smUp ? "left" : "up"}
-              ariaLabel="Поделиться постом"
+              ariaLabel={t("share.ariaLabel")}
               icon={<Iconify icon="solar:share-bold" />}
               FabProps={{ size: "medium" }}
               sx={{
@@ -72,7 +76,7 @@ export function PostDetailsHero({
                 <SpeedDialAction
                   key={target.name}
                   icon={<Iconify icon={target.icon} />}
-                  tooltipTitle={target.tooltip}
+                  tooltipTitle={t("share.tooltip", { network: target.network })}
                   tooltipPlacement="top"
                   FabProps={{ color: "default" }}
                   // SpeedDialAction's FabProps can't type an anchor with
@@ -90,7 +94,7 @@ export function PostDetailsHero({
 
               <SpeedDialAction
                 icon={<Iconify icon="solar:copy-bold" />}
-                tooltipTitle="Скопировать ссылку"
+                tooltipTitle={t("share.copyLink")}
                 tooltipPlacement="top"
                 FabProps={{ color: "default" }}
                 onClick={handleCopyLink}

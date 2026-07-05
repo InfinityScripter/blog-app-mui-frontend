@@ -10,27 +10,28 @@ export const ABOUT_PROFILE = {
   imageAlt: "Михаил Талалаев",
 };
 
-export const ABOUT_TITLE = "Обо мне";
+// Section title (`home.about.title`) and lead (`home.about.lead`) are UI copy,
+// resolved in `HomeAbout` via `useTranslations`.
 
-/** Один сжатый абзац вместо трёх — лаконично и по делу. */
-export const ABOUT_LEAD =
-  "Software Engineer с 13+ годами в IT. Веду продукт через весь цикл — от проектирования архитектуры до поставки в прод. Сильная сторона — фронтенд (React, Next.js, TypeScript); уверенно работаю с backend (Node.js, PostgreSQL) и инфраструктурой (Docker, CI/CD).";
-
-/** Сканируемые «факты» — заменяют длинные абзацы. */
+/**
+ * Сканируемые «факты». `labelKey` → `home.about.highlights.<key>.label`. The
+ * experience value is UI copy (`valueKey` → `.value`); the stack/company values
+ * are proper-noun lists kept as-is data.
+ */
 export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
   {
     icon: "solar:clock-circle-bold-duotone",
-    label: "Опыт",
-    value: "13+ лет в IT",
+    labelKey: "experience",
+    valueKey: "experience",
   },
   {
     icon: "solar:cpu-bolt-bold-duotone",
-    label: "Стек",
+    labelKey: "stack",
     value: "React · TypeScript · Next.js",
   },
   {
     icon: "solar:buildings-3-bold-duotone",
-    label: "Компании",
+    labelKey: "companies",
     value: "Яндекс · СТОМПЛАН · ShurikMarket",
   },
 ];

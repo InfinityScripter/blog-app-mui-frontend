@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
@@ -7,13 +8,14 @@ import Typography from "@mui/material/Typography";
 import { monoLabelSx, monoValueSx } from "src/theme/styles";
 
 import { NewsletterForm } from "./newsletter-form";
-import { NL_TEXT, NL_NOTE, NL_TITLE, NL_LABEL } from "./const";
 
 // ----------------------------------------------------------------------
 
 // Email-capture block. Editorial Ink: сплошная чернильная плита (grey.900 в
 // обеих схемах) без градиентов; копия слева, форма справа, mono-примечание.
 export function HomeNewsletterCta() {
+  const t = useTranslations("home");
+
   return (
     <Container component="section" sx={{ py: { xs: 5, md: 8 } }}>
       <Box
@@ -41,15 +43,15 @@ export function HomeNewsletterCta() {
               }}
             >
               <Iconify icon="solar:letter-opened-bold" width={18} />
-              {NL_LABEL}
+              {t("newsletter.label")}
             </Box>
 
             <Typography variant="h2" component="h3" sx={{ lineHeight: 1.15 }}>
-              {NL_TITLE}
+              {t("newsletter.title")}
             </Typography>
 
             <Typography variant="body2" sx={{ color: alpha("#FFFFFF", 0.72) }}>
-              {NL_TEXT}
+              {t("newsletter.text")}
             </Typography>
           </Stack>
 
@@ -64,7 +66,7 @@ export function HomeNewsletterCta() {
                 color: alpha("#FFFFFF", 0.5),
               }}
             >
-              {NL_NOTE}
+              {t("newsletter.note")}
             </Typography>
           </Box>
         </Stack>

@@ -3,6 +3,7 @@
 import type { ChangeEvent } from "react";
 
 import Box from "@mui/material/Box";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { useRouter } from "src/routes/hooks";
 import { useState, useCallback } from "react";
@@ -31,6 +32,8 @@ export function Searchbar({
   ...other
 }: SearchbarProps) {
   const theme = useTheme();
+
+  const t = useTranslations("common");
 
   const router = useRouter();
 
@@ -98,7 +101,7 @@ export function Searchbar({
           <InputBase
             fullWidth
             autoFocus
-            placeholder="Search..."
+            placeholder={t("search")}
             value={searchQuery}
             onChange={handleSearch}
             startAdornment={

@@ -1,0 +1,133 @@
+{
+  "blog": {
+    "sort": {
+      "label": "Сортировка:",
+      "latest": "Новые",
+      "popular": "Популярные",
+      "oldest": "Старые"
+    },
+    "status": {
+      "published": "Опубликовано",
+      "draft": "Черновик"
+    },
+    "publishTabs": {
+      "all": "Все",
+      "published": "Опубликованные",
+      "draft": "Черновики"
+    },
+    "share": {
+      "ariaLabel": "Поделиться постом",
+      "tooltip": "Поделиться в {network}",
+      "copyLink": "Скопировать ссылку",
+      "linkCopied": "Ссылка скопирована"
+    },
+    "toolbar": {
+      "back": "Назад",
+      "view": "Просмотреть",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "loading": "Загрузка…",
+      "deleteTitle": "Удалить пост",
+      "deleteContent": "Вы уверены, что хотите удалить этот пост?",
+      "deleteConfirm": "Удалить"
+    },
+    "itemMenu": {
+      "view": "Просмотреть",
+      "edit": "Редактировать",
+      "delete": "Удалить"
+    },
+    "comments": {
+      "title": "Комментарии",
+      "reply": "Ответить",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "cancel": "Отмена",
+      "save": "Сохранить",
+      "editPlaceholder": "Нажмите Enter для сохранения или Shift+Enter для новой строки",
+      "formPlaceholder": "Оставьте комментарий...",
+      "submit": "Отправить комментарий",
+      "submitReply": "Отправить ответ",
+      "loginRequired": "Пожалуйста, войдите чтобы оставить комментарий",
+      "postMissing": "Невозможно добавить комментарий в данный момент",
+      "required": "Необходимо ввести комментарий!"
+    },
+    "list": {
+      "loadMore": "Показать ещё",
+      "loading": "Загрузка…",
+      "empty": "У этого поста пока нет содержимого.",
+      "newPost": "Новый пост",
+      "latestPosts": "Свежие посты"
+    },
+    "readingTime": "{minutes} мин",
+    "readingTimeLong": "{minutes} мин чтения",
+    "updatedAt": "Обновлено {date}",
+    "bluf": "Коротко",
+    "faq": {
+      "overline": "Ответы",
+      "title": "Частые вопросы"
+    },
+    "related": {
+      "title": "Похожие посты"
+    },
+    "newsletterCta": "Понравился разбор? Получайте такие раз в неделю на почту",
+    "search": {
+      "placeholder": "Поиск..."
+    },
+    "tag": {
+      "overline": "Тег",
+      "empty": "По этому тегу пока нет постов."
+    },
+    "home": {
+      "overline": "Разборы и заметки",
+      "title": "Блог"
+    },
+    "breadcrumbs": {
+      "home": "Главная",
+      "blog": "Блог",
+      "list": "Список"
+    },
+    "preview": {
+      "title": "Предпросмотр",
+      "cancel": "Отмена",
+      "submit": "Пост",
+      "empty": "Нет содержимого!"
+    },
+    "form": {
+      "publish": "Опубликовать",
+      "preview": "Предпросмотр",
+      "create": "Создать пост",
+      "save": "Сохранить изменения",
+      "detailsTitle": "Детали",
+      "detailsSubheader": "Заголовок, краткое описание, изображение...",
+      "fieldTitle": "Заголовок поста",
+      "fieldDescription": "Описание",
+      "fieldContent": "Содержание",
+      "fieldCover": "Обложка",
+      "propertiesTitle": "Свойства",
+      "propertiesSubheader": "Дополнительные функции и атрибуты...",
+      "fieldTags": "Теги",
+      "fieldTagsPlaceholder": "+ Теги",
+      "fieldMetaTitle": "Мета-заголовок",
+      "fieldMetaDescription": "Мета-описание",
+      "fieldMetaKeywords": "Мета-ключевые слова",
+      "fieldMetaKeywordsPlaceholder": "+ Ключевые слова",
+      "enableComments": "Включить комментарии",
+      "createHeading": "Создать новый пост",
+      "editHeading": "Редактировать",
+      "breadcrumbDashboard": "Главная",
+      "breadcrumbBlog": "Блог",
+      "breadcrumbCreate": "Создать",
+      "createdToast": "Успешно создано!",
+      "updatedToast": "Успешно обновлено!",
+      "errorToast": "Операция не удалась"
+    },
+    "validation": {
+      "titleRequired": "Заголовок обязателен!",
+      "descriptionRequired": "Описание обязательно!",
+      "contentMin": "Содержание должно быть не менее 100 символов",
+      "coverRequired": "Обложка обязательна!",
+      "tagsMin": "Должно быть не менее 2 тегов!",
+      "metaKeywordsRequired": "Мета-ключевые слова обязательны!"
+    }
+  }
+}

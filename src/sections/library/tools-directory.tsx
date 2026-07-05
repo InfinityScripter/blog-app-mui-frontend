@@ -1,13 +1,13 @@
-import { useMemo } from "react";
 import Grid from "@mui/material/Grid";
+import { useTranslations } from "next-intl";
+import { useMemo, useCallback } from "react";
 
 import { TOOL_ITEMS } from "./data";
 import { ToolCard } from "./tool-card";
 import { FilterChips } from "./filter-chips";
-import { TOOL_CATEGORY_LABEL } from "./const";
 import { useKindFilter } from "./hooks/use-kind-filter";
 import {
-  toolCategoryLabel,
+  toolCategoryLabelKey,
   presentToolCategories,
   filterToolsByCategory,
 } from "./utils";
@@ -18,15 +18,21 @@ import type { ToolCategory } from "./types";
 
 /** «Инструменты» tab: a category-filter chip row above a responsive card grid. */
 export function ToolsDirectorySection() {
+  const t = useTranslations("library");
   const filter = useKindFilter<ToolCategory>();
+
+  const categoryLabel = useCallback(
+    (category: ToolCategory) => t(toolCategoryLabelKey(category)),
+    [t],
+  );
 
   const options = useMemo(
     () =>
-      presentToolCategories(TOOL_ITEMS).map((category) => ({
+      presentToolCategories(TOOL_ITEMS, categoryLabel).map((category) => ({
         value: category,
-        label: TOOL_CATEGORY_LABEL[category] ?? toolCategoryLabel(category),
+        label: categoryLabel(category),
       })),
-    [],
+    [categoryLabel],
   );
 
   const tools = useMemo(
@@ -37,7 +43,7 @@ export function ToolsDirectorySection() {
   return (
     <>
       <FilterChips
-        allLabel="Все"
+        allLabel={t("filter.all")}
         options={options}
         isActive={filter.isActive}
         hasFilter={filter.hasFilter}

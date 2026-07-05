@@ -1,5 +1,8 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
@@ -31,7 +34,8 @@ function PinRow({ label, value }: PinRowProps) {
       justifyContent="space-between"
       sx={{
         py: 0.5,
-        borderBottom: (t) => `1px dashed ${alpha(t.palette.grey[500], 0.16)}`,
+        borderBottom: (theme) =>
+          `1px dashed ${alpha(theme.palette.grey[500], 0.16)}`,
       }}
     >
       <Typography variant="caption" sx={{ color: "text.disabled" }}>
@@ -51,6 +55,7 @@ interface ComparePinColumnProps {
 
 /** A single pinned model rendered as a labelled column for the head-to-head. */
 export function ComparePinColumn({ model, onRemove }: ComparePinColumnProps) {
+  const t = useTranslations("llmCompare");
   const color = vendorColor(model.vendor);
 
   return (
@@ -61,7 +66,7 @@ export function ComparePinColumn({ model, onRemove }: ComparePinColumnProps) {
         p: 1.5,
         borderRadius: 1.5,
         bgcolor: "background.paper",
-        border: (t) => `1px solid ${alpha(t.palette.grey[500], 0.16)}`,
+        border: (theme) => `1px solid ${alpha(theme.palette.grey[500], 0.16)}`,
       }}
     >
       <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
@@ -84,9 +89,18 @@ export function ComparePinColumn({ model, onRemove }: ComparePinColumnProps) {
         </IconButton>
       </Stack>
 
-      <PinRow label="Вход $/1M" value={formatUsd(model.pricing.inputPerM)} />
-      <PinRow label="Выход $/1M" value={formatUsd(model.pricing.outputPerM)} />
-      <PinRow label="Контекст" value={formatContext(model.contextTokens)} />
+      <PinRow
+        label={t("columns.priceIn")}
+        value={formatUsd(model.pricing.inputPerM)}
+      />
+      <PinRow
+        label={t("columns.priceOut")}
+        value={formatUsd(model.pricing.outputPerM)}
+      />
+      <PinRow
+        label={t("columns.context")}
+        value={formatContext(model.contextTokens)}
+      />
       {BENCHMARK_COLUMNS.map((col) => (
         <PinRow
           key={col.key}

@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { useTranslations } from "next-intl";
 import Skeleton from "@mui/material/Skeleton";
 import { useGetPosts } from "src/actions/blog";
 import { Iconify } from "src/components/iconify";
@@ -16,6 +17,8 @@ const RECENT_COUNT = 6;
 // the latest posts as quick links so the panel is never blank. `limit` makes
 // the backend return newest-first (see useGetPosts), so no client sort needed.
 export function PostSearchEmpty({ onClickItem }: PostSearchEmptyProps) {
+  const t = useTranslations("common");
+
   const { posts, postsLoading } = useGetPosts({
     excludeTag: "новости",
     limit: RECENT_COUNT,
@@ -35,7 +38,7 @@ export function PostSearchEmpty({ onClickItem }: PostSearchEmptyProps) {
         }}
       >
         <Iconify icon="solar:clock-circle-outline" width={16} />
-        Свежие статьи
+        {t("recentPosts")}
       </Typography>
 
       {postsLoading ? (

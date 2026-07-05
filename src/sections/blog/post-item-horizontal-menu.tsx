@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
@@ -15,6 +18,8 @@ export function PostItemHorizontalMenu({
   onEdit,
   onDelete,
 }: PostItemHorizontalMenuProps) {
+  const t = useTranslations("blog");
+
   return (
     <CustomPopover
       open={open}
@@ -25,16 +30,16 @@ export function PostItemHorizontalMenu({
       <MenuList>
         <MenuItem onClick={onView}>
           <Iconify icon="solar:eye-bold" />
-          View
+          {t("itemMenu.view")}
         </MenuItem>
         <MenuItem onClick={onEdit}>
           <Iconify icon="solar:pen-bold" />
-          Edit
+          {t("itemMenu.edit")}
         </MenuItem>
 
         <MenuItem onClick={onDelete} sx={{ color: "error.main" }}>
           <Iconify icon="solar:trash-bin-trash-bold" />
-          Delete
+          {t("itemMenu.delete")}
         </MenuItem>
       </MenuList>
     </CustomPopover>

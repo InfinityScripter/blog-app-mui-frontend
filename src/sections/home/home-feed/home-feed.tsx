@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import { useGetPosts } from "src/actions/blog";
 import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
@@ -15,20 +16,14 @@ import { PostItemFeedFeatured } from "src/sections/blog/post-item-feed-featured"
 
 import { useFeedTags } from "./hooks/use-feed-tags";
 import { toggleTag, selectFeedPosts } from "./utils";
+import { FEED_PAGE_SIZE, FEED_SENTINEL_PRELOAD } from "./const";
 import { useFeedInfiniteScroll } from "./hooks/use-feed-infinite-scroll";
-import {
-  FEED_TITLE,
-  FEED_OVERLINE,
-  FEED_SUBTITLE,
-  FEED_PAGE_SIZE,
-  FEED_SHOW_MORE,
-  FEED_EMPTY_TEXT,
-  FEED_SENTINEL_PRELOAD,
-} from "./const";
 
 // ----------------------------------------------------------------------
 
 export function HomeFeed() {
+  const t = useTranslations("home");
+
   // Лента — общая: показывает ВСЕ опубликованные посты (и новости, и блог) от
   // новых к старым. Разделение по типу живёт на /news и /post, не здесь.
   const { posts, postsLoading } = useGetPosts();
@@ -72,13 +67,13 @@ export function HomeFeed() {
     <Container component="section" id="feed" sx={{ py: { xs: 6, md: 10 } }}>
       <Stack spacing={1} sx={{ mb: 4, alignItems: "flex-start" }}>
         <Typography component="p" sx={monoLabelSx}>
-          {FEED_OVERLINE}
+          {t("feed.overline")}
         </Typography>
         <Typography variant="h2" component="h2">
-          {FEED_TITLE}
+          {t("feed.title")}
         </Typography>
         <Typography variant="body1" sx={{ color: "text.secondary" }}>
-          {FEED_SUBTITLE}
+          {t("feed.subtitle")}
         </Typography>
       </Stack>
 
@@ -112,7 +107,7 @@ export function HomeFeed() {
 
       {!postsLoading && visiblePosts.length === 0 ? (
         <Typography variant="body2" sx={{ py: 6, color: "text.disabled" }}>
-          {FEED_EMPTY_TEXT}
+          {t("feed.empty")}
         </Typography>
       ) : (
         <Stack sx={{ maxWidth: 860 }}>
@@ -154,7 +149,7 @@ export function HomeFeed() {
               onClick={loadMore}
               endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
             >
-              {FEED_SHOW_MORE}
+              {t("feed.showMore")}
             </Button>
           </Box>
         </Box>

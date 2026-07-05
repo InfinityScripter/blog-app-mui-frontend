@@ -2,17 +2,20 @@ import type { SortOption, PublishOption } from "./types";
 
 // ----------------------------------------------------------------------
 
-// Publish-state options for the post details toolbar in the dashboard.
+// Publish-state options for the post details toolbar in the dashboard. Labels
+// are resolved per-locale from `blog.status.<value>` by `usePublishOptions`
+// (src/sections/blog/hooks) so this stays a plain data module.
 export const POST_PUBLISH_OPTIONS: PublishOption[] = [
-  { value: "published", label: "Опубликовано" },
-  { value: "draft", label: "Черновик" },
+  { value: "published" },
+  { value: "draft" },
 ];
 
-// Sort options for the public and dashboard post lists.
+// Sort options for the public and dashboard post lists. Labels are resolved
+// per-locale from `blog.sort.<value>` by `useSortOptions`.
 export const POST_SORT_OPTIONS: SortOption[] = [
-  { value: "latest", label: "Новые" },
-  { value: "popular", label: "Популярные" },
-  { value: "oldest", label: "Старые" },
+  { value: "latest" },
+  { value: "popular" },
+  { value: "oldest" },
 ];
 
 // Suggestions for the tags autocomplete in the post editor.
@@ -57,11 +60,14 @@ export const MAX_RELATED = 3;
 /**
  * Social share targets for the post hero SpeedDial. `href` builds the
  * network's share-intent URL from the (trailing-slash) post URL and title.
+ * `network` is the brand name shown in the tooltip via `blog.share.tooltip`
+ * ("Поделиться в {network}") — resolved in the hero component, so this stays a
+ * plain data module.
  */
 export interface ShareTarget {
   name: string;
   icon: string;
-  tooltip: string;
+  network: string;
   href: (url: string, title: string) => string;
 }
 
@@ -69,21 +75,21 @@ export const SHARE_TARGETS: ShareTarget[] = [
   {
     name: "telegram",
     icon: "logos:telegram",
-    tooltip: "Поделиться в Telegram",
+    network: "Telegram",
     href: (url, title) =>
       `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
   },
   {
     name: "twitter",
     icon: "ri:twitter-x-fill",
-    tooltip: "Поделиться в X",
+    network: "X",
     href: (url, title) =>
       `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
   },
   {
     name: "vk",
     icon: "logos:vk",
-    tooltip: "Поделиться во ВКонтакте",
+    network: "ВКонтакте",
     href: (url) => `https://vk.com/share.php?url=${encodeURIComponent(url)}`,
   },
 ];

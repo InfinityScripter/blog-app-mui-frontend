@@ -1,3 +1,5 @@
+"use client";
+
 import type { Theme } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
@@ -5,6 +7,7 @@ import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { Image } from "src/components/image";
 import { fToNow } from "src/utils/format-time";
 import { coverSrc } from "src/utils/cover-src";
@@ -27,6 +30,7 @@ export function PostItemFeedFeatured({ post }: PostItemFeedProps) {
   const { title, coverUrl, createdAt, totalViews, description, tags, content } =
     post;
 
+  const t = useTranslations("blog");
   const href = paths.post.details(post.id ?? "");
   const readingTime = getReadingTime(content);
   const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
@@ -59,7 +63,7 @@ export function PostItemFeedFeatured({ post }: PostItemFeedProps) {
           <Box component="span">{fToNow(createdAt)}</Box>
           <InfoBlock
             icon="solar:clock-circle-bold"
-            value={`${readingTime} мин`}
+            value={t("readingTime", { minutes: readingTime })}
           />
           <InfoBlock icon="solar:eye-bold" value={fShortenNumber(totalViews)} />
         </Box>

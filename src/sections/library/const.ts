@@ -11,32 +11,34 @@ import type {
 } from "./types";
 
 // ----------------------------------------------------------------------
-// Static config for the library hub: tab defs and label/color maps. Data-only
-// (no JSX, no logic) per the sections guideline.
+// Static config for the library hub: tab defs and key/color/icon maps. Data-only
+// (no JSX, no logic) per the sections guideline. User-visible labels are NOT
+// stored here — a data module can't call the `t()` hook at module scope, so each
+// entry carries a stable i18n key (→ `library.<group>.<key>`) resolved per-locale
+// in the components/hooks via `useTranslations("library")`.
 
-/** A hub tab: its key, RU label, and icon. */
+/** A hub tab: its value (also the `?tab=` slug) and icon; label via `tabs.<value>`. */
 export interface TabDef {
   value: LibraryTab;
-  label: string;
   icon: string;
 }
 
 export const TABS: TabDef[] = [
-  { value: "read", label: "Читать", icon: "solar:book-2-bold-duotone" },
-  { value: "tools", label: "Инструменты", icon: "solar:widget-5-bold-duotone" },
-  { value: "til", label: "TIL", icon: "solar:lightbulb-bold-duotone" },
+  { value: "read", icon: "solar:book-2-bold-duotone" },
+  { value: "tools", icon: "solar:widget-5-bold-duotone" },
+  { value: "til", icon: "solar:lightbulb-bold-duotone" },
 ];
 
 export const DEFAULT_TAB: LibraryTab = "read";
 
-/** RU labels for reading kinds (plural — used as group headings). */
-export const READING_KIND_LABEL: Record<ReadingKind, string> = {
-  blog: "Блоги",
-  newsletter: "Рассылки",
-  paper: "Статьи и препринты",
-  post: "Знаковые посты",
-  video: "Видео и подкасты",
-  book: "Книги",
+/** i18n key suffix for each reading kind (→ `library.readingKind.<key>`). */
+export const READING_KIND_KEY: Record<ReadingKind, string> = {
+  blog: "blog",
+  newsletter: "newsletter",
+  paper: "paper",
+  post: "post",
+  video: "video",
+  book: "book",
 };
 
 /** Order reading kinds appear in the grouped list. */
@@ -49,25 +51,25 @@ export const READING_KIND_ORDER: ReadingKind[] = [
   "book",
 ];
 
-/** RU labels for tool categories. */
-export const TOOL_CATEGORY_LABEL: Record<ToolCategory, string> = {
-  agents: "Агенты",
-  ide: "IDE и кодинг",
-  chat: "Чат-ассистенты",
-  search: "Поиск и research",
-  images: "Изображения",
-  audio: "Аудио и речь",
-  eval: "Оценка и тесты",
-  orchestration: "Оркестрация",
-  data: "Данные и RAG",
+/** i18n key suffix for each tool category (→ `library.toolCategory.<key>`). */
+export const TOOL_CATEGORY_KEY: Record<ToolCategory, string> = {
+  agents: "agents",
+  ide: "ide",
+  chat: "chat",
+  search: "search",
+  images: "images",
+  audio: "audio",
+  eval: "eval",
+  orchestration: "orchestration",
+  data: "data",
 };
 
-/** RU labels + Label color for pricing models. */
-export const PRICING_LABEL: Record<PricingModel, string> = {
-  free: "Бесплатно",
-  freemium: "Freemium",
-  paid: "Платно",
-  "open-source": "Open-source",
+/** i18n key suffix for each pricing model (→ `library.pricing.<key>`). */
+export const PRICING_KEY: Record<PricingModel, string> = {
+  free: "free",
+  freemium: "freemium",
+  paid: "paid",
+  "open-source": "open-source",
 };
 
 export const PRICING_COLOR: Record<PricingModel, LabelColor> = {
@@ -87,8 +89,8 @@ export const READING_KIND_ICON: Record<ReadingKind, string> = {
   book: "solar:book-bookmark-bold-duotone",
 };
 
-/** Fallbacks for any unmapped enum value (defensive rendering). */
-export const FALLBACK_LABEL = "Прочее";
+/** i18n key for the label shown when an enum value has no mapping (→ `library.fallbackLabel`). */
+export const FALLBACK_LABEL_KEY = "fallbackLabel";
 export const FALLBACK_COLOR: LabelColor = "default";
 
 // Re-export the item types so consumers can import config + types from one place.

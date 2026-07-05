@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
 import { NotFoundError } from "src/utils/fetch-retry";
 import { getRelease, getReleases } from "src/actions/blog-ssr";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { ChangelogDetailView } from "src/sections/changelog/view/changelog-detail-view";
 
@@ -26,12 +27,14 @@ function safeDecode(value: string): string {
 export const revalidate = 600;
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps) {
+  const { slug, locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("changelog");
   try {
-    const { slug } = await params;
     const decoded = safeDecode(slug);
     const { release } = await getRelease(decoded);
     const title = `${release.model} ${release.version}`.trim();
@@ -39,7 +42,11 @@ export async function generateMetadata({ params }: PageProps) {
     const description =
       release.verdict ??
       release.changes[0] ??
-      `Релиз ${title} от ${release.vendor} на ${CONFIG.site.name}`;
+      t("meta.detailDescription", {
+        title,
+        vendor: release.vendor,
+        site: CONFIG.site.name,
+      });
     const canonical = `${BASE_URL}/changelog/${encodeURIComponent(decoded)}/`;
     return {
       title: headline,
@@ -58,7 +65,7 @@ export async function generateMetadata({ params }: PageProps) {
       },
     };
   } catch {
-    return { title: "Релиз AI-модели | Talalaev" };
+    return { title: t("meta.detailFallbackTitle") };
   }
 }
 

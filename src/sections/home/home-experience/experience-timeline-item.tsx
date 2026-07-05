@@ -4,6 +4,7 @@ import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Avatar from "@mui/material/Avatar";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineItem from "@mui/lab/TimelineItem";
@@ -23,6 +24,9 @@ export function ExperienceTimelineItem({
   isMobile,
   theme,
 }: ExperienceTimelineItemProps) {
+  const t = useTranslations("home");
+  const periodLabel = getPeriodLabel(item, t("experience.present"));
+
   return (
     <TimelineItem>
       <TimelineOppositeContent
@@ -34,7 +38,7 @@ export function ExperienceTimelineItem({
       >
         <m.div variants={varFade().inLeft}>
           <Typography variant="subtitle2" color="text.primary">
-            {getPeriodLabel(item)}
+            {periodLabel}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {item.location}
@@ -120,7 +124,7 @@ export function ExperienceTimelineItem({
                   variant="body2"
                   sx={{ mb: 1.5, color: "text.secondary" }}
                 >
-                  {getPeriodLabel(item)} • {item.location}
+                  {periodLabel} • {item.location}
                 </Typography>
               )}
 
@@ -149,7 +153,7 @@ export function ExperienceTimelineItem({
                   component="span"
                   sx={{ color: "text.secondary", fontWeight: 600 }}
                 >
-                  Технологии:{" "}
+                  {t("experience.technologies")}{" "}
                 </Box>
                 {item.technologies}
               </Typography>

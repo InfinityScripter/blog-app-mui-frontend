@@ -1,6 +1,9 @@
+"use client";
+
 import type { FaqItem } from "src/utils/post-geo-content";
 
 import Box from "@mui/material/Box";
+import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
 import Accordion from "@mui/material/Accordion";
 import { Iconify } from "src/components/iconify";
@@ -20,15 +23,17 @@ interface PostFaqProps {
 }
 
 export function PostFaq({ items }: PostFaqProps) {
+  const t = useTranslations("blog");
+
   if (items.length === 0) return null;
 
   return (
     <Box sx={{ my: 5 }}>
       <Box component="p" sx={{ ...monoLabelSx, m: 0, mb: 0.5 }}>
-        Ответы
+        {t("faq.overline")}
       </Box>
       <Typography variant="h4" sx={{ mb: 1 }}>
-        Частые вопросы
+        {t("faq.title")}
       </Typography>
 
       {items.map((item, index) => (

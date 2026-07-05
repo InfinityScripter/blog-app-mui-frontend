@@ -1,3 +1,5 @@
+"use client";
+
 import type { Post } from "src/types/domain";
 
 import Box from "@mui/material/Box";
@@ -8,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { maxLine } from "src/theme/styles";
+import { useTranslations } from "next-intl";
 import { useRouter } from "src/routes/hooks";
 import { Label } from "src/components/label";
 import { Image } from "src/components/image";
@@ -27,11 +30,14 @@ import { ConfirmDialog } from "src/components/confirm-dialog";
 
 import { MAX_TAGS } from "./const";
 import { PostItemHorizontalMenu } from "./post-item-horizontal-menu";
+import { usePublishStatusLabel } from "./hooks/use-publish-status-label";
 
 // ----------------------------------------------------------------------
 
 export function PostItemHorizontal({ post }: { post: Post }) {
   const theme = useTheme();
+  const t = useTranslations("blog");
+  const statusLabel = usePublishStatusLabel();
   const popover = usePopover();
   const router = useRouter();
   const {
@@ -92,7 +98,7 @@ export function PostItemHorizontal({ post }: { post: Post }) {
                 (publish === PUBLISH_STATUS.published && "info") || "default"
               }
             >
-              {publish}
+              {statusLabel(publish)}
             </Label>
 
             <Box
@@ -149,7 +155,7 @@ export function PostItemHorizontal({ post }: { post: Post }) {
             >
               <Box display="flex" alignItems="center" gap={0.5}>
                 <Iconify icon="solar:clock-circle-bold" width={16} />
-                {`${readingTime} мин`}
+                {t("readingTime", { minutes: readingTime })}
               </Box>
 
               <Box display="flex" alignItems="center" gap={0.5}>
@@ -204,11 +210,11 @@ export function PostItemHorizontal({ post }: { post: Post }) {
       <ConfirmDialog
         open={openConfirm}
         onClose={handleCloseConfirm}
-        title="Delete Post"
-        content="Are you sure you want to delete this post?"
+        title={t("toolbar.deleteTitle")}
+        content={t("toolbar.deleteContent")}
         onConfirm={handleDelete}
         loading={loading}
-        confirmText="Delete"
+        confirmText={t("toolbar.deleteConfirm")}
         confirmColor="error"
       />
     </>

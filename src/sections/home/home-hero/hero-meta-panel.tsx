@@ -3,22 +3,21 @@ import type { Theme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { hairline, monoLabelSx } from "src/theme/styles";
 
 import { MInview } from "./m-inview";
-import {
-  HERO_PANEL_TITLE,
-  HERO_PANEL_LINKS,
-  HERO_PANEL_DESCRIPTION,
-} from "./const";
+import { HERO_PANEL_LINKS } from "./const";
 
 // ----------------------------------------------------------------------
 
 // «Оглавление журнала»: тихая панель-индекс со ссылками на разделы.
 export function HeroMetaPanel() {
+  const t = useTranslations("home");
+
   return (
     <MInview>
       <Box
@@ -30,11 +29,11 @@ export function HeroMetaPanel() {
         }}
       >
         <Typography component="p" sx={{ ...monoLabelSx, mb: 1.5 }}>
-          {HERO_PANEL_TITLE}
+          {t("hero.panel.title")}
         </Typography>
 
         <Typography variant="body2" sx={{ mb: 2.5, color: "text.secondary" }}>
-          {HERO_PANEL_DESCRIPTION}
+          {t("hero.panel.description")}
         </Typography>
 
         <Stack>
@@ -59,7 +58,7 @@ export function HeroMetaPanel() {
               }}
             >
               <Typography component="span" variant="subtitle2">
-                {item.label}
+                {t(`hero.panel.links.${item.key}`)}
               </Typography>
               <Iconify width={16} icon="eva:arrow-ios-forward-fill" />
             </Link>

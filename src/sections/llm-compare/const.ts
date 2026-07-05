@@ -32,53 +32,39 @@ export const HIGHER_IS_BETTER: Record<SortKey, boolean> = {
   aime: true,
 };
 
-/** A benchmark column: its data key and its short header label. */
+/**
+ * A benchmark column: its data key and its short header label. The `label` is a
+ * proper noun (benchmark name) and stays here as data; the longer tooltip copy
+ * is localized — resolved via `t("benchmarks.<key>.hint")` in the component.
+ */
 export interface BenchmarkColumn {
   key: BenchmarkKey;
   sortKey: SortKey;
   label: string;
-  /** Longer tooltip explaining the benchmark. */
-  hint: string;
 }
 
 /** Ordered benchmark columns shown in the matrix. */
 export const BENCHMARK_COLUMNS: BenchmarkColumn[] = [
-  {
-    key: "mmlu",
-    sortKey: "mmlu",
-    label: "MMLU",
-    hint: "MMLU — общие знания по 57 предметам, % правильных ответов.",
-  },
-  {
-    key: "gpqa",
-    sortKey: "gpqa",
-    label: "GPQA",
-    hint: "GPQA Diamond — экспертные вопросы уровня аспирантуры, %.",
-  },
-  {
-    key: "sweBench",
-    sortKey: "sweBench",
-    label: "SWE-bench",
-    hint: "SWE-bench Verified — решение реальных GitHub-задач (агентный код), %.",
-  },
-  {
-    key: "aime",
-    sortKey: "aime",
-    label: "AIME",
-    hint: "AIME — олимпиадная математика, % решённых задач.",
-  },
+  { key: "mmlu", sortKey: "mmlu", label: "MMLU" },
+  { key: "gpqa", sortKey: "gpqa", label: "GPQA" },
+  { key: "sweBench", sortKey: "sweBench", label: "SWE-bench" },
+  { key: "aime", sortKey: "aime", label: "AIME" },
 ];
 
-/** Modality filter options. */
+/**
+ * Modality filter options. `value` is the stable modality enum; the visible
+ * label is localized via `t("modalities.<labelKey>")` in the toolbar, so this
+ * stays a plain data list without calling `t()` at module scope.
+ */
 export interface ModalityOption {
   value: ComparableModel["modality"][number];
-  label: string;
+  labelKey: "vision" | "audio" | "imageGen";
 }
 
 export const MODALITY_OPTIONS: ModalityOption[] = [
-  { value: "vision", label: "Vision" },
-  { value: "audio", label: "Аудио" },
-  { value: "image-gen", label: "Генерация изображений" },
+  { value: "vision", labelKey: "vision" },
+  { value: "audio", labelKey: "audio" },
+  { value: "image-gen", labelKey: "imageGen" },
 ];
 
 /** Default sort applied on first render and on reset. */

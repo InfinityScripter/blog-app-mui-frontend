@@ -1,6 +1,9 @@
+"use client";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
+import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
@@ -29,6 +32,7 @@ export function PostDetailsPreview({
   description,
   isSubmitting,
 }: PostDetailsPreviewProps) {
+  const t = useTranslations("blog");
   const [previewUrl, setPreviewUrl] = useState("");
 
   useEffect(() => {
@@ -49,11 +53,11 @@ export function PostDetailsPreview({
     <Dialog fullScreen open={open} onClose={onClose}>
       <DialogActions sx={{ py: 2, px: 3 }}>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          Preview
+          {t("preview.title")}
         </Typography>
 
         <Button variant="outlined" color="inherit" onClick={onClose}>
-          Cancel
+          {t("preview.cancel")}
         </Button>
 
         <LoadingButton
@@ -63,7 +67,7 @@ export function PostDetailsPreview({
           loading={isSubmitting}
           onClick={onSubmit}
         >
-          Post
+          {t("preview.submit")}
         </LoadingButton>
       </DialogActions>
 
@@ -82,7 +86,7 @@ export function PostDetailsPreview({
           </Container>
         </Scrollbar>
       ) : (
-        <EmptyContent filled title="Empty content!" />
+        <EmptyContent filled title={t("preview.empty")} />
       )}
     </Dialog>
   );

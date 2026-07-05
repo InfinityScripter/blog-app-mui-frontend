@@ -6,23 +6,20 @@ import Chip from "@mui/material/Chip";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { varFade, MotionViewport } from "src/components/animate";
 
-import {
-  ABOUT_LEAD,
-  ABOUT_STACK,
-  ABOUT_TITLE,
-  ABOUT_PROFILE,
-  ABOUT_HIGHLIGHTS,
-} from "./const";
+import { ABOUT_STACK, ABOUT_PROFILE, ABOUT_HIGHLIGHTS } from "./const";
 
 // ----------------------------------------------------------------------
 
 export function HomeAbout() {
+  const t = useTranslations("home");
+
   return (
     <Container component={MotionViewport} sx={{ py: { xs: 6, md: 10 } }}>
       <Stack
@@ -58,7 +55,7 @@ export function HomeAbout() {
                 variant="overline"
                 sx={{ color: "primary.main", letterSpacing: 1.2 }}
               >
-                {ABOUT_TITLE}
+                {t("about.title")}
               </Typography>
               <Typography variant="h3" sx={{ lineHeight: 1.1 }}>
                 {ABOUT_PROFILE.name}
@@ -96,7 +93,7 @@ export function HomeAbout() {
               lineHeight: 1.7,
             }}
           >
-            {ABOUT_LEAD}
+            {t("about.lead")}
           </Typography>
         </m.div>
 
@@ -130,7 +127,7 @@ export function HomeAbout() {
           }}
         >
           {ABOUT_HIGHLIGHTS.map((item) => (
-            <m.div key={item.label} variants={varFade().inUp}>
+            <m.div key={item.labelKey} variants={varFade().inUp}>
               <Stack
                 spacing={1.5}
                 sx={(theme: Theme) => ({
@@ -156,9 +153,13 @@ export function HomeAbout() {
                       letterSpacing: 0.6,
                     }}
                   >
-                    {item.label}
+                    {t(`about.highlights.${item.labelKey}.label`)}
                   </Typography>
-                  <Typography variant="subtitle1">{item.value}</Typography>
+                  <Typography variant="subtitle1">
+                    {item.valueKey
+                      ? t(`about.highlights.${item.valueKey}.value`)
+                      : (item.value ?? "")}
+                  </Typography>
                 </Box>
               </Stack>
             </m.div>

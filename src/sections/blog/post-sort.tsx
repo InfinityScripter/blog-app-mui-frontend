@@ -1,9 +1,14 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
+
+import { useSortOptionLabel } from "./hooks/use-sort-option-label";
 
 import type { PostSortProps } from "./types";
 
@@ -11,6 +16,8 @@ import type { PostSortProps } from "./types";
 
 export function PostSort({ sort, sortOptions, onSort }: PostSortProps) {
   const popover = usePopover();
+  const t = useTranslations("blog");
+  const sortLabel = useSortOptionLabel();
 
   return (
     <>
@@ -29,9 +36,9 @@ export function PostSort({ sort, sortOptions, onSort }: PostSortProps) {
         }
         sx={{ fontWeight: "fontWeightSemiBold", textTransform: "capitalize" }}
       >
-        Сортировка:
+        {t("sort.label")}
         <Box component="span" sx={{ ml: 0.5, fontWeight: "fontWeightBold" }}>
-          {sort}
+          {sortLabel(sort)}
         </Box>
       </Button>
 
@@ -50,7 +57,7 @@ export function PostSort({ sort, sortOptions, onSort }: PostSortProps) {
                 onSort(option.value);
               }}
             >
-              {option.label}
+              {sortLabel(option.value)}
             </MenuItem>
           ))}
         </MenuList>

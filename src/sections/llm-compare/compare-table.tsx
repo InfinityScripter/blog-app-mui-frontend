@@ -1,6 +1,9 @@
+"use client";
+
 import { useMemo } from "react";
 import Table from "@mui/material/Table";
 import Tooltip from "@mui/material/Tooltip";
+import { useTranslations } from "next-intl";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableHead from "@mui/material/TableHead";
@@ -17,17 +20,18 @@ import type { SortKey, SortDir } from "./const";
 
 // ----------------------------------------------------------------------
 
-interface SortableCol {
+// Static config for the leading (non-benchmark) sortable columns: stable sort
+// `key` + the `columns.<labelKey>` translation key. Labels resolve per-locale
+// in the component so this stays a plain data list (no `t()` at module scope).
+interface LeadingCol {
   key: SortKey;
-  label: string;
-  hint?: string;
-  numeric: boolean;
+  labelKey: "priceIn" | "priceOut" | "context";
 }
 
-const LEADING_COLS: SortableCol[] = [
-  { key: "priceIn", label: "Вход $/1M", numeric: true },
-  { key: "priceOut", label: "Выход $/1M", numeric: true },
-  { key: "context", label: "Контекст", numeric: true },
+const LEADING_COLS: LeadingCol[] = [
+  { key: "priceIn", labelKey: "priceIn" },
+  { key: "priceOut", labelKey: "priceOut" },
+  { key: "context", labelKey: "context" },
 ];
 
 interface CompareTableProps {
@@ -55,6 +59,7 @@ export function CompareTable({
   isPinFull,
   onTogglePin,
 }: CompareTableProps) {
+  const t = useTranslations("llmCompare");
   const benchColumns = BENCHMARK_COLUMNS;
 
   // Best-in-column across the shown set — one pass, reused by every row.
@@ -76,7 +81,7 @@ export function CompareTable({
       <Table size="small" sx={{ minWidth: 900 }}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ minWidth: 200 }}>Модель</TableCell>
+            <TableCell sx={{ minWidth: 200 }}>{t("columns.model")}</TableCell>
 
             {LEADING_COLS.map((col) => (
               <TableCell key={col.key} align="right">
@@ -85,14 +90,18 @@ export function CompareTable({
                   direction={sortKey === col.key ? sortDir : "asc"}
                   onClick={() => onSort(col.key)}
                 >
-                  {col.label}
+                  {t(`columns.${col.labelKey}`)}
                 </TableSortLabel>
               </TableCell>
             ))}
 
             {benchColumns.map((col) => (
               <TableCell key={col.key} align="right">
-                <Tooltip title={col.hint} arrow placement="top">
+                <Tooltip
+                  title={t(`benchmarks.${col.key}.hint`)}
+                  arrow
+                  placement="top"
+                >
                   <TableSortLabel
                     active={sortKey === col.sortKey}
                     direction={sortKey === col.sortKey ? sortDir : "asc"}
@@ -105,7 +114,7 @@ export function CompareTable({
             ))}
 
             <TableCell align="center" sx={{ minWidth: 64 }}>
-              Сравнить
+              {t("columns.compare")}
             </TableCell>
           </TableRow>
         </TableHead>

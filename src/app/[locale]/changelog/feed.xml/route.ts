@@ -3,6 +3,7 @@ import type { ModelRelease } from "src/types/api";
 
 import { CONFIG } from "src/config-global";
 import { buildRssFeed } from "src/utils/feed-xml";
+import { getTranslations } from "next-intl/server";
 import { getReleases } from "src/actions/blog-ssr";
 
 // ----------------------------------------------------------------------
@@ -41,7 +42,14 @@ function releaseLink(post: Post): string {
   return `${CONFIG.site.url}/changelog/${slug}/`;
 }
 
-export async function GET() {
+interface RouteContext {
+  params: Promise<{ locale: string }>;
+}
+
+export async function GET(_request: Request, { params }: RouteContext) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "changelog" });
+
   let releases: Awaited<ReturnType<typeof getReleases>>["releases"] = [];
   try {
     ({ releases } = await getReleases());
@@ -52,9 +60,8 @@ export async function GET() {
 
   const xml = buildRssFeed({
     posts: releases.map(releaseToFeedPost),
-    feedTitle: `${CONFIG.site.name} — Релизы AI-моделей`,
-    feedDescription:
-      "Хроника релизов больших языковых моделей: версии, цены, контекст",
+    feedTitle: `${CONFIG.site.name} — ${t("feed.title")}`,
+    feedDescription: t("feed.description"),
     feedUrl: `${CONFIG.site.url}/changelog/`,
     linkFor: releaseLink,
   });

@@ -3,7 +3,8 @@ import { CONFIG } from "src/config-global";
 import type { ExperienceItem } from "./types";
 
 export const DATE_FORMAT = "MMMM YYYY";
-export const CURRENT_PERIOD_LABEL = "настоящее время";
+// The «present» period word is UI copy → resolved via `home.experience.present`
+// in the component and threaded into `getPeriodLabel` (not a static const).
 
 export const EXPERIENCE: ExperienceItem[] = [
   {

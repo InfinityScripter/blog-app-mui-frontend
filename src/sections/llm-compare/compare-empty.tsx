@@ -1,5 +1,8 @@
+"use client";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 
@@ -11,6 +14,8 @@ interface CompareEmptyProps {
 
 /** Zero-results state when filters exclude every model. Offers a reset. */
 export function CompareEmpty({ onReset }: CompareEmptyProps) {
+  const t = useTranslations("llmCompare");
+
   return (
     <Stack
       spacing={2}
@@ -22,20 +27,19 @@ export function CompareEmpty({ onReset }: CompareEmptyProps) {
         icon="solar:filter-broken"
         sx={{ color: "text.disabled" }}
       />
-      <Typography variant="h6">Ни одна модель не подходит</Typography>
+      <Typography variant="h6">{t("empty.title")}</Typography>
       <Typography
         variant="body2"
         sx={{ color: "text.secondary", maxWidth: 420 }}
       >
-        Фильтры слишком узкие — попробуйте убрать часть условий, чтобы снова
-        увидеть модели.
+        {t("empty.description")}
       </Typography>
       <Button
         variant="outlined"
         onClick={onReset}
         startIcon={<Iconify icon="solar:restart-bold-duotone" />}
       >
-        Сбросить фильтры
+        {t("empty.reset")}
       </Button>
     </Stack>
   );

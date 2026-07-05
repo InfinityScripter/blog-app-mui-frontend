@@ -7,7 +7,10 @@
     "readMore": "Read more",
     "back": "Back",
     "cancel": "Cancel",
-    "preview": "Preview"
+    "preview": "Preview",
+    "signIn": "Sign in",
+    "search": "Search…",
+    "recentPosts": "Recent posts"
   },
   "nav": {
     "home": "Home",
@@ -33,6 +36,135 @@
       "title": "Blog",
       "ogTitle": "Blog | Talalaev",
       "description": "Mikhail Talalaev's articles on web development, React, Next.js and TypeScript."
+    },
+    "sort": {
+      "label": "Sort:",
+      "latest": "Latest",
+      "popular": "Popular",
+      "oldest": "Oldest"
+    },
+    "status": {
+      "published": "Published",
+      "draft": "Draft"
+    },
+    "publishTabs": {
+      "all": "All",
+      "published": "Published",
+      "draft": "Drafts"
+    },
+    "share": {
+      "ariaLabel": "Share post",
+      "tooltip": "Share on {network}",
+      "copyLink": "Copy link",
+      "linkCopied": "Link copied"
+    },
+    "toolbar": {
+      "back": "Back",
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete",
+      "loading": "Loading…",
+      "deleteTitle": "Delete post",
+      "deleteContent": "Are you sure you want to delete this post?",
+      "deleteConfirm": "Delete"
+    },
+    "itemMenu": {
+      "view": "View",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "comments": {
+      "title": "Comments",
+      "reply": "Reply",
+      "edit": "Edit",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "save": "Save",
+      "editPlaceholder": "Press Enter to save or Shift+Enter for a new line",
+      "formPlaceholder": "Leave a comment...",
+      "submit": "Post comment",
+      "submitReply": "Post reply",
+      "loginRequired": "Please sign in to leave a comment",
+      "postMissing": "Can't add a comment right now",
+      "required": "A comment is required!"
+    },
+    "list": {
+      "loadMore": "Load more",
+      "loading": "Loading…",
+      "empty": "This post has no content yet.",
+      "newPost": "New post",
+      "latestPosts": "Latest posts"
+    },
+    "readingTime": "{minutes} min",
+    "readingTimeLong": "{minutes} min read",
+    "updatedAt": "Updated {date}",
+    "bluf": "In short",
+    "faq": {
+      "overline": "Answers",
+      "title": "Frequently asked questions"
+    },
+    "related": {
+      "title": "Related posts"
+    },
+    "newsletterCta": "Liked this write-up? Get one like it in your inbox every week",
+    "search": {
+      "placeholder": "Search..."
+    },
+    "tag": {
+      "overline": "Tag",
+      "empty": "No posts with this tag yet."
+    },
+    "home": {
+      "overline": "Write-ups and notes",
+      "title": "Blog"
+    },
+    "breadcrumbs": {
+      "home": "Home",
+      "blog": "Blog",
+      "list": "List"
+    },
+    "preview": {
+      "title": "Preview",
+      "cancel": "Cancel",
+      "submit": "Post",
+      "empty": "No content!"
+    },
+    "form": {
+      "publish": "Publish",
+      "preview": "Preview",
+      "create": "Create post",
+      "save": "Save changes",
+      "detailsTitle": "Details",
+      "detailsSubheader": "Title, short description, image...",
+      "fieldTitle": "Post title",
+      "fieldDescription": "Description",
+      "fieldContent": "Content",
+      "fieldCover": "Cover",
+      "propertiesTitle": "Properties",
+      "propertiesSubheader": "Additional features and attributes...",
+      "fieldTags": "Tags",
+      "fieldTagsPlaceholder": "+ Tags",
+      "fieldMetaTitle": "Meta title",
+      "fieldMetaDescription": "Meta description",
+      "fieldMetaKeywords": "Meta keywords",
+      "fieldMetaKeywordsPlaceholder": "+ Keywords",
+      "enableComments": "Enable comments",
+      "createHeading": "Create a new post",
+      "editHeading": "Edit",
+      "breadcrumbDashboard": "Home",
+      "breadcrumbBlog": "Blog",
+      "breadcrumbCreate": "Create",
+      "createdToast": "Created successfully!",
+      "updatedToast": "Updated successfully!",
+      "errorToast": "Operation failed"
+    },
+    "validation": {
+      "titleRequired": "Title is required!",
+      "descriptionRequired": "Description is required!",
+      "contentMin": "Content must be at least 100 characters",
+      "coverRequired": "Cover is required!",
+      "tagsMin": "There must be at least 2 tags!",
+      "metaKeywordsRequired": "Meta keywords are required!"
     }
   },
   "news": {
@@ -41,6 +173,19 @@
       "description": "AI news feed: a neural network (LLM) automatically gathers sources, filters and briefly summarizes the latest news about artificial intelligence, IT and technology.",
       "ogTitle": "AI news feed: AI, IT, technology | Talalaev",
       "ogDescription": "A neural network automatically gathers and briefly summarizes the latest news about artificial intelligence, IT and technology."
+    },
+    "title": "News",
+    "categories": {
+      "main": "Top",
+      "tech": "Technology",
+      "science": "Science",
+      "politics": "Politics",
+      "culture": "Culture"
+    },
+    "empty": {
+      "feedTitle": "No news yet",
+      "feedDescription": "New material will appear here once published.",
+      "categoryTitle": "No material in this section yet"
     }
   },
   "tag": {
@@ -53,6 +198,289 @@
     "meta": {
       "title": "AI news aggregator: AI, IT and technology | Talalaev",
       "description": "AI-first news aggregator: a neural network (LLM) finds, filters and briefly summarizes the latest news about artificial intelligence, IT and technology. No editor — the feed is curated by AI."
+    },
+    "hero": {
+      "overline": "AI · LLM · agents · practice",
+      "titleBefore": "Deep dives into ",
+      "titleAccent": "AI tools",
+      "titleAfter": " for real-world development",
+      "summary": "Case studies, guides and honest reviews: which AI tools actually work in production, and which are hype. No fluff, with examples from practice.",
+      "ctaBlog": "Read the blog",
+      "ctaAbout": "About",
+      "panel": {
+        "title": "In the journal",
+        "description": "LLMs, agents, Claude Code and tools — what I tried, what stuck in my workflow, and why.",
+        "links": {
+          "news": "AI news",
+          "llmTimeline": "LLM timeline",
+          "changelog": "Model releases",
+          "about": "About"
+        }
+      }
+    },
+    "feed": {
+      "overline": "Fresh",
+      "title": "Feed",
+      "subtitle": "Everything fresh: news, write-ups and notes — in order",
+      "empty": "No posts on the selected topics yet.",
+      "showMore": "Load more"
+    },
+    "newsletter": {
+      "label": "Newsletter",
+      "title": "A weekly digest in your inbox",
+      "text": "What actually works in LLMs, agents and Claude Code, and what's hype. Short, to the point, no spam.",
+      "button": "Subscribe",
+      "placeholder": "you@example.com",
+      "note": "Double opt-in. Unsubscribe in one click.",
+      "success": "Check your inbox — we sent a confirmation email",
+      "error": "Could not subscribe",
+      "invalidEmail": "Enter a valid email"
+    },
+    "telegram": {
+      "label": "Telegram channel",
+      "title": "AI tool deep dives — no fluff",
+      "text": "I write about LLMs, agents and Claude Code: what actually works in production, and what's hype. Short, to the point, with examples.",
+      "button": "Subscribe on Telegram"
+    },
+    "about": {
+      "title": "About me",
+      "lead": "A Software Engineer with 13+ years in IT. I take a product through its whole lifecycle — from architecture design to production delivery. My strong suit is frontend (React, Next.js, TypeScript); I'm confident with backend (Node.js, PostgreSQL) and infrastructure (Docker, CI/CD).",
+      "highlights": {
+        "experience": {
+          "label": "Experience",
+          "value": "13+ years in IT"
+        },
+        "stack": {
+          "label": "Stack"
+        },
+        "companies": {
+          "label": "Companies"
+        }
+      }
+    },
+    "skills": {
+      "overline": "Technologies",
+      "title": "Skills and stack",
+      "subtitle": "The technologies I use in product development",
+      "groups": {
+        "frontend": {
+          "name": "Frontend Development",
+          "description": "Building modern, responsive web interfaces"
+        },
+        "backend": {
+          "name": "Backend Development",
+          "description": "Server-side development and API implementation"
+        },
+        "tools": {
+          "name": "Tools & DevOps",
+          "description": "Development and deployment tooling"
+        }
+      }
+    },
+    "experience": {
+      "overline": "Career",
+      "title": "Work experience",
+      "subtitle": "My professional path as a web developer",
+      "present": "present",
+      "technologies": "Technologies:"
+    },
+    "contact": {
+      "overline": "Get in touch",
+      "title": "Contacts",
+      "subtitle": "Open to talk — pick whichever channel suits you",
+      "location": "Moscow",
+      "links": {
+        "email": "Email",
+        "github": "GitHub",
+        "linkedin": "LinkedIn",
+        "telegram": "Telegram",
+        "location": "Location"
+      }
+    }
+  },
+  "changelog": {
+    "eyebrow": "Model releases",
+    "title": "AI model release chronicle",
+    "empty": "No releases yet.",
+    "whatsNew": "What's new",
+    "verdict": "Verdict",
+    "source": "Source",
+    "specs": {
+      "context": "Context: {value}",
+      "input": "Input: {value} / 1M",
+      "output": "Output: {value} / 1M"
+    },
+    "card": {
+      "context": "context {value}",
+      "input": "input {value}/1M",
+      "output": "output {value}/1M"
+    },
+    "meta": {
+      "title": "AI model release chronicle: versions, pricing, context",
+      "description": "A feed of large language model releases: new versions, per-token pricing, context size and a brief breakdown of the changes.",
+      "ogTitle": "AI model release chronicle | Talalaev",
+      "ogDescription": "New LLM versions: pricing, context and a brief breakdown of the changes in one feed.",
+      "detailFallbackTitle": "AI model release | Talalaev",
+      "detailDescription": "{title} release by {vendor} on {site}"
+    },
+    "feed": {
+      "title": "AI model releases",
+      "description": "A chronicle of large language model releases: versions, pricing, context"
+    }
+  },
+  "library": {
+    "hero": {
+      "eyebrow": "Library",
+      "title": "What to read, what to use and what I learned",
+      "subtitle": "A curated selection: the best sources on AI and LLMs, tools that are genuinely worth your time, and short notes from practice. No hype, updated regularly."
+    },
+    "tabs": {
+      "read": "Read",
+      "tools": "Tools",
+      "til": "TIL"
+    },
+    "filter": {
+      "all": "All"
+    },
+    "readingKind": {
+      "blog": "Blogs",
+      "newsletter": "Newsletters",
+      "paper": "Papers & preprints",
+      "post": "Landmark posts",
+      "video": "Videos & podcasts",
+      "book": "Books"
+    },
+    "toolCategory": {
+      "agents": "Agents",
+      "ide": "IDE & coding",
+      "chat": "Chat assistants",
+      "search": "Search & research",
+      "images": "Images",
+      "audio": "Audio & speech",
+      "eval": "Evaluation & testing",
+      "orchestration": "Orchestration",
+      "data": "Data & RAG"
+    },
+    "pricing": {
+      "free": "Free",
+      "freemium": "Freemium",
+      "paid": "Paid",
+      "open-source": "Open source"
+    },
+    "fallbackLabel": "Other",
+    "til": {
+      "empty": "No notes yet — coming soon.",
+      "source": "Source"
+    }
+  },
+  "llmCompare": {
+    "hero": {
+      "eyebrow": "Compare LLMs",
+      "title": "Language model comparison matrix",
+      "subtitle": "Pricing, context and key benchmarks for current LLMs — by the numbers, not by promises. Sort by any column, filter, and pin up to three models for a head-to-head comparison.",
+      "provenance": "pricing (standard tier, $/1M tokens) and benchmarks per vendor data, verified {pricingAsOf}. Unknown values are shown as a dash, not invented. Benchmarks: MMLU, GPQA Diamond, SWE-bench Verified, AIME; conditions vary by vendor.",
+      "countAll": "{total} models",
+      "countFiltered": "{shown} of {total} models"
+    },
+    "empty": {
+      "title": "No model matches",
+      "description": "The filters are too narrow — try removing some conditions to see models again.",
+      "reset": "Reset filters"
+    },
+    "columns": {
+      "model": "Model",
+      "priceIn": "Input $/1M",
+      "priceOut": "Output $/1M",
+      "context": "Context",
+      "compare": "Compare"
+    },
+    "benchmarks": {
+      "mmlu": {
+        "hint": "MMLU — general knowledge across 57 subjects, % correct answers."
+      },
+      "gpqa": {
+        "hint": "GPQA Diamond — graduate-level expert questions, %."
+      },
+      "sweBench": {
+        "hint": "SWE-bench Verified — solving real GitHub issues (agentic code), %."
+      },
+      "aime": {
+        "hint": "AIME — olympiad math, % of problems solved."
+      }
+    },
+    "modalities": {
+      "vision": "Vision",
+      "audio": "Audio",
+      "imageGen": "Image generation"
+    },
+    "filters": {
+      "allVendors": "All vendors",
+      "openWeights": "Open weights",
+      "reset": "Reset"
+    },
+    "labels": {
+      "openWeights": "open weights",
+      "openWeightsSuffix": "· open weights"
+    },
+    "actions": {
+      "pin": "Pin for comparison",
+      "unpin": "Remove from comparison",
+      "pinMax": "Up to {max} models"
+    },
+    "pinBar": {
+      "title": "Comparison · {count}",
+      "share": "Share",
+      "copied": "Copied",
+      "clear": "Clear"
+    }
+  },
+  "llmTimeline": {
+    "hero": {
+      "title": "The history of large language models",
+      "subtitle": "A timeline of key LLMs — from the first transformers to reasoning models and agents. Click a model to see details, facts and sources.",
+      "stats": {
+        "models": "models",
+        "vendors": "vendors",
+        "years": "years"
+      }
+    },
+    "filters": {
+      "all": "All"
+    },
+    "detail": {
+      "context": "Context",
+      "params": "Parameters",
+      "announcement": "Announcement",
+      "wikipedia": "Wikipedia"
+    },
+    "eras": {
+      "2018": "The birth of transformers",
+      "2020": "The scaling race",
+      "2022": "The ChatGPT moment",
+      "2023": "The vendor race",
+      "2024": "Multimodality",
+      "2025": "Reasoning and agents"
+    },
+    "empty": "No models match the selected filter."
+  },
+  "portfolio": {
+    "heroEyebrow": "{name} · 13+ years in IT",
+    "heroTitleLead": "Software",
+    "heroTitleHighlight": "Engineer",
+    "heroSummary": "I design and ship products to production — from architecture to release. My strong suit is frontend: React, Next.js, TypeScript.",
+    "downloadCv": "Download résumé",
+    "metrics": {
+      "experience": {
+        "label": "Experience in IT",
+        "value": "13+ years"
+      },
+      "specialization": {
+        "label": "Specialization",
+        "value": "Software Engineer"
+      },
+      "stack": {
+        "label": "Core stack"
+      }
     }
   }
 }

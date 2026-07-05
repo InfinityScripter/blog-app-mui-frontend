@@ -1,12 +1,14 @@
+import { useTranslations } from "next-intl";
 import Typography from "@mui/material/Typography";
 
 import { MInview } from "./m-inview";
-import { HERO_SUMMARY } from "./const";
 
 // ----------------------------------------------------------------------
 
 // Лид под заголовком: спокойный графитовый абзац, мера ≤65ch.
 export function HeroText() {
+  const t = useTranslations("home");
+
   return (
     <MInview>
       <Typography
@@ -18,7 +20,7 @@ export function HeroText() {
           lineHeight: 1.7,
         }}
       >
-        {HERO_SUMMARY}
+        {t("hero.summary")}
       </Typography>
     </MInview>
   );

@@ -1,12 +1,15 @@
+"use client";
+
 import type { User } from "src/types/domain";
 
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { STORAGE_KEY } from "src/auth/context/jwt";
+import { useMemo, useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 // Import the two pieces this form needs directly — NOT from the hook-form
 // barrel. The barrel's `Field` namespace statically pulls RHFEditor (tiptap),
@@ -16,7 +19,7 @@ import { Form } from "src/components/hook-form/form-provider";
 import { addComment, getCurrentUser } from "src/actions/blog-ssr";
 import { RHFTextField } from "src/components/hook-form/rhf-text-field";
 
-import { CommentSchema } from "./post-comment-form-schema";
+import { getCommentSchema } from "./post-comment-form-schema";
 
 import type { PostCommentFormProps } from "./types";
 
@@ -31,14 +34,17 @@ export function PostCommentForm({
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [error, setError] = useState<string | null>(null);
   const params = useParams<{ id: string }>();
+  const t = useTranslations("blog");
 
   // Get post ID from props or URL params
   const postId = propPostId || params?.id;
 
   const defaultValues = { comment: "" };
 
+  const schema = useMemo(() => getCommentSchema(t), [t]);
+
   const methods = useForm({
-    resolver: zodResolver(CommentSchema),
+    resolver: zodResolver(schema),
     defaultValues,
   });
 
@@ -80,12 +86,12 @@ export function PostCommentForm({
       setError(null);
 
       if (!currentUser) {
-        setError("Пожалуйста, войдите чтобы оставить комментарий");
+        setError(t("comments.loginRequired"));
         return;
       }
 
       if (!postId) {
-        setError("Невозможно добавить комментарий в данный момент");
+        setError(t("comments.postMissing"));
         return;
       }
 
@@ -124,7 +130,7 @@ export function PostCommentForm({
 
         <RHFTextField
           name="comment"
-          placeholder="Оставьте комментарий..."
+          placeholder={t("comments.formPlaceholder")}
           multiline
           rows={4}
         />
@@ -150,7 +156,7 @@ export function PostCommentForm({
             loading={isSubmitting}
             disabled={!currentUser}
           >
-            {parentCommentId ? "Отправить ответ" : "Отправить комментарий"}
+            {parentCommentId ? t("comments.submitReply") : t("comments.submit")}
           </LoadingButton>
         </Stack>
       </Stack>

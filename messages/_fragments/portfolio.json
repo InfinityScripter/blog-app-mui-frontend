@@ -1,0 +1,22 @@
+{
+  "portfolio": {
+    "heroEyebrow": "{name} · 13+ лет в IT",
+    "heroTitleLead": "Software",
+    "heroTitleHighlight": "Engineer",
+    "heroSummary": "Проектирую и поставляю продукты в прод — от архитектуры до релиза. Сильная сторона — фронтенд: React, Next.js, TypeScript.",
+    "downloadCv": "Скачать резюме",
+    "metrics": {
+      "experience": {
+        "label": "Опыт в IT",
+        "value": "13+ лет"
+      },
+      "specialization": {
+        "label": "Специализация",
+        "value": "Software Engineer"
+      },
+      "stack": {
+        "label": "Основной стек"
+      }
+    }
+  }
+}

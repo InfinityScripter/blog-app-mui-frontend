@@ -1,7 +1,10 @@
+"use client";
+
 import type { Theme } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { hairline } from "src/theme/styles";
 import Typography from "@mui/material/Typography";
 import { NewsletterForm } from "src/sections/home/home-newsletter-cta";
@@ -12,6 +15,8 @@ import { NewsletterForm } from "src/sections/home/home-newsletter-cta";
 // home newsletter section (same subscribe action + toast). No big heading,
 // just a one-line pitch above the inline form. Palette-driven like the home CTA.
 export function PostNewsletterCta() {
+  const t = useTranslations("blog");
+
   return (
     <Stack
       spacing={2}
@@ -26,7 +31,7 @@ export function PostNewsletterCta() {
       }}
     >
       <Typography variant="h6" sx={{ maxWidth: 480 }}>
-        Понравился разбор? Получайте такие раз в неделю на почту
+        {t("newsletterCta")}
       </Typography>
 
       <Box sx={{ width: 1, maxWidth: 480 }}>

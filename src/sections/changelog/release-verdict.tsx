@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
@@ -13,6 +14,8 @@ interface ReleaseVerdictProps {
  * nothing. Uses the theme primary tint (never a hex) so it reads as a callout.
  */
 export function ReleaseVerdict({ verdict }: ReleaseVerdictProps) {
+  const t = useTranslations("changelog");
+
   if (!verdict) return null;
 
   return (
@@ -28,7 +31,7 @@ export function ReleaseVerdict({ verdict }: ReleaseVerdictProps) {
         variant="overline"
         sx={{ color: "primary.main", display: "block", mb: 0.5 }}
       >
-        Вердикт
+        {t("verdict")}
       </Typography>
       <Typography variant="body1">{verdict}</Typography>
     </Box>

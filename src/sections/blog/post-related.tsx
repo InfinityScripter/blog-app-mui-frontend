@@ -1,4 +1,7 @@
+"use client";
+
 import Grid from "@mui/material/Grid";
+import { useTranslations } from "next-intl";
 import { useGetPosts } from "src/actions/blog";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -11,6 +14,7 @@ import type { PostRelatedProps } from "./types";
 // ----------------------------------------------------------------------
 
 export function PostRelated({ currentPostId, tags }: PostRelatedProps) {
+  const t = useTranslations("blog");
   const { posts } = useGetPosts();
 
   const related = selectRelated(posts, currentPostId, tags);
@@ -22,7 +26,7 @@ export function PostRelated({ currentPostId, tags }: PostRelatedProps) {
   return (
     <Container sx={{ pb: 10 }}>
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Похожие посты
+        {t("related.title")}
       </Typography>
 
       <Grid container spacing={3}>

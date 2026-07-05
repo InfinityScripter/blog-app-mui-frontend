@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
+import { useTranslations } from "next-intl";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import { Iconify } from "src/components/iconify";
@@ -13,7 +16,7 @@ import {
   formatContext,
 } from "src/sections/llm-timeline/utils";
 
-import { BENCHMARK_COLUMNS } from "./const";
+import { MAX_PINS, BENCHMARK_COLUMNS } from "./const";
 import { formatUsd, formatBench, isColumnLeader } from "./utils";
 
 import type { SortKey } from "./const";
@@ -40,6 +43,7 @@ export function CompareTableRow({
   pinDisabled,
   onTogglePin,
 }: CompareTableRowProps) {
+  const t = useTranslations("llmCompare");
   const color = vendorColor(model.vendor);
   const leaderSx = (key: SortKey) =>
     isColumnLeader(model, key, bests[key]) ? LEADER_SX : undefined;
@@ -70,7 +74,7 @@ export function CompareTableRow({
             </Link>
             <Typography variant="caption" sx={{ color: "text.disabled" }}>
               {model.vendor}
-              {model.openWeights ? " · открытые веса" : ""}
+              {model.openWeights ? ` ${t("labels.openWeightsSuffix")}` : ""}
             </Typography>
           </Stack>
         </Stack>
@@ -96,10 +100,10 @@ export function CompareTableRow({
         <Tooltip
           title={
             pinned
-              ? "Убрать из сравнения"
+              ? t("actions.unpin")
               : pinDisabled
-                ? "Максимум 3 модели"
-                : "Закрепить для сравнения"
+                ? t("actions.pinMax", { max: MAX_PINS })
+                : t("actions.pin")
           }
           arrow
         >

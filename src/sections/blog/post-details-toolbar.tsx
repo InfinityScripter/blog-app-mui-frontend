@@ -1,7 +1,10 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
+import { useTranslations } from "next-intl";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
@@ -12,6 +15,8 @@ import { RouterLink } from "src/routes/components";
 import { usePostDelete } from "src/hooks/use-post-delete";
 import { ConfirmDialog } from "src/components/confirm-dialog";
 import { usePopover, CustomPopover } from "src/components/custom-popover";
+
+import { usePublishStatusLabel } from "./hooks/use-publish-status-label";
 
 import type { PostDetailsToolbarProps } from "./types";
 
@@ -29,6 +34,8 @@ export function PostDetailsToolbar({
   ...other
 }: PostDetailsToolbarProps) {
   const popover = usePopover();
+  const t = useTranslations("blog");
+  const statusLabel = usePublishStatusLabel();
   const {
     openConfirm,
     loading,
@@ -54,26 +61,26 @@ export function PostDetailsToolbar({
           href={backLink}
           startIcon={<Iconify icon="eva:arrow-ios-back-fill" width={16} />}
         >
-          Назад
+          {t("toolbar.back")}
         </Button>
 
         <Box sx={{ flexGrow: 1 }} />
 
         {publish === PUBLISH_STATUS.published && (
-          <Tooltip title="Просмотреть">
+          <Tooltip title={t("toolbar.view")}>
             <IconButton component={RouterLink} href={liveLink}>
               <Iconify icon="eva:external-link-fill" />
             </IconButton>
           </Tooltip>
         )}
 
-        <Tooltip title="Редактировать">
+        <Tooltip title={t("toolbar.edit")}>
           <IconButton component={RouterLink} href={editLink}>
             <Iconify icon="solar:pen-bold" />
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="Удалить">
+        <Tooltip title={t("toolbar.delete")}>
           <IconButton onClick={handleClickDelete}>
             <Iconify icon="solar:trash-bin-trash-bold" />
           </IconButton>
@@ -83,12 +90,12 @@ export function PostDetailsToolbar({
           color="inherit"
           variant="contained"
           loading={!publish}
-          loadingIndicator="Загрузка…"
+          loadingIndicator={t("toolbar.loading")}
           endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
           onClick={popover.onOpen}
           sx={{ textTransform: "capitalize" }}
         >
-          {publish}
+          {statusLabel(publish)}
         </LoadingButton>
       </Stack>
 
@@ -114,7 +121,7 @@ export function PostDetailsToolbar({
               {option.value === PUBLISH_STATUS.draft && (
                 <Iconify icon="solar:file-text-bold" />
               )}
-              {option.label}
+              {statusLabel(option.value)}
             </MenuItem>
           ))}
         </MenuList>
@@ -123,11 +130,11 @@ export function PostDetailsToolbar({
       <ConfirmDialog
         open={openConfirm}
         onClose={handleCloseConfirm}
-        title="Удалить пост"
-        content="Вы уверены, что хотите удалить этот пост?"
+        title={t("toolbar.deleteTitle")}
+        content={t("toolbar.deleteContent")}
         onConfirm={handleDelete}
         loading={loading}
-        confirmText="Удалить"
+        confirmText={t("toolbar.deleteConfirm")}
         confirmColor="error"
       />
     </>

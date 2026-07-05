@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { fDate } from "src/utils/format-time";
 import { useTheme } from "@mui/material/styles";
@@ -30,6 +31,7 @@ interface ReleaseCardProps {
  */
 export function ReleaseCard({ release }: ReleaseCardProps) {
   const theme = useTheme();
+  const t = useTranslations("changelog");
   const linkTo = paths.changelog.details(release.slug);
   const title = `${release.model} ${release.version}`.trim();
   const fresh = isFreshRelease(release.releasedAt);
@@ -112,10 +114,14 @@ export function ReleaseCard({ release }: ReleaseCardProps) {
           }}
         >
           <Box component="span">
-            контекст {formatContext(release.contextTokens)}
+            {t("card.context", { value: formatContext(release.contextTokens) })}
           </Box>
-          <Box component="span">вход {formatPrice(release.priceIn)}/1M</Box>
-          <Box component="span">выход {formatPrice(release.priceOut)}/1M</Box>
+          <Box component="span">
+            {t("card.input", { value: formatPrice(release.priceIn) })}
+          </Box>
+          <Box component="span">
+            {t("card.output", { value: formatPrice(release.priceOut) })}
+          </Box>
         </Stack>
       </Stack>
     </Box>

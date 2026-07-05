@@ -1,6 +1,7 @@
 "use client";
 
 import Timeline from "@mui/lab/Timeline";
+import { useTranslations } from "next-intl";
 import { useMemo, useCallback } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -33,6 +34,7 @@ import type { LlmTimelineViewProps } from "./types";
  * floating-logo backdrop is provided site-wide by MainLayout.
  */
 export function LlmTimelineView({ models }: LlmTimelineViewProps) {
+  const t = useTranslations("llmTimeline");
   const mdUp = useResponsive("up", "md");
 
   const { selected, hasFilter, isActive, toggleVendor, clear } =
@@ -100,7 +102,7 @@ export function LlmTimelineView({ models }: LlmTimelineViewProps) {
           variant="body2"
           sx={{ py: 6, textAlign: "center", color: "text.disabled" }}
         >
-          Нет моделей под выбранный фильтр.
+          {t("empty")}
         </Typography>
       )}
     </Container>

@@ -4,6 +4,7 @@ import type { ChangeEvent } from "react";
 
 import Box from "@mui/material/Box";
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { useRouter } from "src/routes/hooks";
 import { useState, useCallback } from "react";
@@ -29,6 +30,8 @@ import { PostSearchButton } from "./components/post-search-button";
 // posts via usePostSearch instead of nav items.
 export function PostSearchDialog() {
   const theme = useTheme();
+
+  const t = useTranslations("common");
 
   const router = useRouter();
 
@@ -111,7 +114,7 @@ export function PostSearchDialog() {
           <InputBase
             fullWidth
             autoFocus
-            placeholder="Поиск..."
+            placeholder={t("search")}
             value={inputValue}
             onChange={handleSearch}
             onKeyUp={handleKeyUp}

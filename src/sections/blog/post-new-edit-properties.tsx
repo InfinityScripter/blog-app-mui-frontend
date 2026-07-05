@@ -1,7 +1,10 @@
+"use client";
+
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
 import Divider from "@mui/material/Divider";
+import { useTranslations } from "next-intl";
 import { Field } from "src/components/hook-form";
 import CardHeader from "@mui/material/CardHeader";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -13,11 +16,13 @@ import { renderSelectedTags } from "./post-new-edit-properties-selected-tags";
 // ----------------------------------------------------------------------
 
 export function PostNewEditProperties() {
+  const t = useTranslations("blog");
+
   return (
     <Card>
       <CardHeader
-        title="Свойства"
-        subheader="Дополнительные функции и атрибуты..."
+        title={t("form.propertiesTitle")}
+        subheader={t("form.propertiesSubheader")}
         sx={{ mb: 3 }}
       />
 
@@ -26,8 +31,8 @@ export function PostNewEditProperties() {
       <Stack spacing={3} sx={{ p: 3 }}>
         <Field.Autocomplete
           name="tags"
-          label="Теги"
-          placeholder="+ Теги"
+          label={t("form.fieldTags")}
+          placeholder={t("form.fieldTagsPlaceholder")}
           multiple
           freeSolo
           disableCloseOnSelect
@@ -37,11 +42,11 @@ export function PostNewEditProperties() {
           renderTags={renderSelectedTags}
         />
 
-        <Field.Text name="metaTitle" label="Мета-заголовок" />
+        <Field.Text name="metaTitle" label={t("form.fieldMetaTitle")} />
 
         <Field.Text
           name="metaDescription"
-          label="Мета-описание"
+          label={t("form.fieldMetaDescription")}
           fullWidth
           multiline
           rows={3}
@@ -49,8 +54,8 @@ export function PostNewEditProperties() {
 
         <Field.Autocomplete
           name="metaKeywords"
-          label="Мета-ключевые слова"
-          placeholder="+ Ключевые слова"
+          label={t("form.fieldMetaKeywords")}
+          placeholder={t("form.fieldMetaKeywordsPlaceholder")}
           multiple
           freeSolo
           disableCloseOnSelect
@@ -64,7 +69,7 @@ export function PostNewEditProperties() {
           control={
             <Switch defaultChecked inputProps={{ id: "comments-switch" }} />
           }
-          label="Включить комментарии"
+          label={t("form.enableComments")}
         />
       </Stack>
     </Card>

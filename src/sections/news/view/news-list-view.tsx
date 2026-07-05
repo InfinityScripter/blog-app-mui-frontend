@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import Container from "@mui/material/Container";
 import { EmptyContent } from "src/components/empty-content";
 
@@ -23,6 +24,7 @@ import type { NewsListViewProps } from "./types";
  * view only presents them and filters by рубрика client-side.
  */
 export function NewsListView({ posts }: NewsListViewProps) {
+  const t = useTranslations("news");
   const [activeCategory, setActiveCategory] = useState<NewsCategory>(
     DEFAULT_NEWS_CATEGORY,
   );
@@ -53,10 +55,7 @@ export function NewsListView({ posts }: NewsListViewProps) {
       />
 
       {showCategoryEmptyState ? (
-        <EmptyContent
-          title="В этой рубрике пока нет материалов"
-          sx={{ py: 10 }}
-        />
+        <EmptyContent title={t("empty.categoryTitle")} sx={{ py: 10 }} />
       ) : (
         <NewsList posts={filteredPosts} />
       )}

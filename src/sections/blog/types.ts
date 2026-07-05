@@ -73,7 +73,6 @@ export interface PostDetailsPreviewProps {
 
 export interface PublishOption {
   value: string;
-  label: string;
 }
 
 export interface PostDetailsToolbarProps {
@@ -164,7 +163,6 @@ export interface PostItemSkeletonProps {
 
 export interface SortOption {
   value: string;
-  label: string;
 }
 
 export interface PostSortProps {

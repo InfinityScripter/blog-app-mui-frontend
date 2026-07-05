@@ -1,5 +1,6 @@
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
@@ -11,6 +12,8 @@ interface ReleaseSourceProps {
 
 /** Attribution link to the original announcement (opens in a new tab). */
 export function ReleaseSource({ sourceUrl, sourceName }: ReleaseSourceProps) {
+  const t = useTranslations("changelog");
+
   if (!sourceUrl) return null;
 
   return (
@@ -22,7 +25,7 @@ export function ReleaseSource({ sourceUrl, sourceName }: ReleaseSourceProps) {
         rel="noopener noreferrer"
         variant="body2"
       >
-        {sourceName ?? "Источник"}
+        {sourceName ?? t("source")}
       </Link>
     </Stack>
   );

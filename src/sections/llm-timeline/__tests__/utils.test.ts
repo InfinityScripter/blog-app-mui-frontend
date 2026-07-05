@@ -2,7 +2,7 @@ import type { LlmModel } from "src/sections/llm-timeline/types";
 
 import { it, expect, describe } from "vitest";
 import {
-  eraLabel,
+  hasEra,
   vendorIcon,
   vendorColor,
   releaseYear,
@@ -176,13 +176,13 @@ describe("filterByVendors", () => {
   });
 });
 
-describe("yearAnchorId / eraLabel", () => {
+describe("yearAnchorId / hasEra", () => {
   it("builds a stable DOM id for a year", () => {
     expect(yearAnchorId(2024)).toBe("llm-year-2024");
   });
 
-  it("returns an era caption only for era-starting years", () => {
-    expect(eraLabel(2022)).toBe("ChatGPT-момент");
-    expect(eraLabel(2019)).toBeNull();
+  it("flags only era-starting years (caption text is localized in the view)", () => {
+    expect(hasEra(2022)).toBe(true);
+    expect(hasEra(2019)).toBe(false);
   });
 });

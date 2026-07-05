@@ -1,4 +1,7 @@
+"use client";
+
 import Box from "@mui/material/Box";
+import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
 import Typography from "@mui/material/Typography";
 
@@ -14,6 +17,8 @@ interface PostBlufProps {
 }
 
 export function PostBluf({ text }: PostBlufProps) {
+  const t = useTranslations("blog");
+
   if (!text || !text.trim()) return null;
 
   return (
@@ -28,7 +33,7 @@ export function PostBluf({ text }: PostBlufProps) {
         component="p"
         sx={{ ...monoLabelSx, m: 0, mb: 1, color: "primary.main" }}
       >
-        Коротко
+        {t("bluf")}
       </Box>
       <Typography
         sx={{ m: 0, fontSize: "1.125rem", fontWeight: 500, lineHeight: 1.5 }}

@@ -1,5 +1,8 @@
+"use client";
+
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import TextField from "@mui/material/TextField";
 import { Iconify } from "src/components/iconify";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -16,6 +19,8 @@ export function PostCommentEdit({
   onSave,
   onCancel,
 }: PostCommentEditProps) {
+  const t = useTranslations("blog");
+
   return (
     <Stack spacing={2}>
       <TextField
@@ -25,7 +30,7 @@ export function PostCommentEdit({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyPress={onKeyPress}
-        placeholder="Нажмите Enter для сохранения или Shift+Enter для новой строки"
+        placeholder={t("comments.editPlaceholder")}
         sx={{ mb: 1 }}
       />
       <Stack direction="row" spacing={2} justifyContent="flex-end">
@@ -36,7 +41,7 @@ export function PostCommentEdit({
           disabled={saving}
           startIcon={<Iconify icon="eva:close-fill" />}
         >
-          Отмена
+          {t("comments.cancel")}
         </Button>
         <LoadingButton
           size="small"
@@ -45,7 +50,7 @@ export function PostCommentEdit({
           startIcon={<Iconify icon="eva:checkmark-fill" />}
           color="success"
         >
-          Сохранить
+          {t("comments.save")}
         </LoadingButton>
       </Stack>
     </Stack>

@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { useTranslations } from "next-intl";
 import { EmptyContent } from "src/components/empty-content";
 
 import { toNewsItem } from "./utils";
@@ -13,11 +14,13 @@ import type { NewsListProps } from "./types";
  * of compact rows separated by hairline rules.
  */
 export function NewsList({ posts }: NewsListProps) {
+  const t = useTranslations("news");
+
   if (posts.length === 0) {
     return (
       <EmptyContent
-        title="Пока нет новостей"
-        description="Новые материалы появятся здесь после публикации."
+        title={t("empty.feedTitle")}
+        description={t("empty.feedDescription")}
         sx={{ py: 10 }}
       />
     );

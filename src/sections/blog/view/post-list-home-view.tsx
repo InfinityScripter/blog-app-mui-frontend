@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { useState, useCallback } from "react";
 import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
@@ -23,6 +24,7 @@ import type { PostListHomeViewProps } from "./types";
 // ----------------------------------------------------------------------
 
 export function PostListHomeView({ posts }: PostListHomeViewProps) {
+  const t = useTranslations("blog");
   const [sortBy, setSortBy] = useState("latest");
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -57,10 +59,10 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
     <Container>
       <Stack spacing={1} sx={{ my: { xs: 3, md: 5 } }}>
         <Typography component="p" sx={monoLabelSx}>
-          Разборы и заметки
+          {t("home.overline")}
         </Typography>
         <Typography variant="h2" component="h1">
-          Блог
+          {t("home.title")}
         </Typography>
       </Stack>
 

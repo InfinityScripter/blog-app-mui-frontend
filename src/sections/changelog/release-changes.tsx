@@ -1,4 +1,5 @@
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import Typography from "@mui/material/Typography";
 
 // ----------------------------------------------------------------------
@@ -9,11 +10,13 @@ interface ReleaseChangesProps {
 
 /** Bulleted list of what changed. Renders nothing when the list is empty. */
 export function ReleaseChanges({ changes }: ReleaseChangesProps) {
+  const t = useTranslations("changelog");
+
   if (changes.length === 0) return null;
 
   return (
     <Stack spacing={1.5}>
-      <Typography variant="h6">Что нового</Typography>
+      <Typography variant="h6">{t("whatsNew")}</Typography>
       <Stack component="ul" spacing={1} sx={{ pl: 3, m: 0 }}>
         {changes.map((change, index) => (
           // Changes are free-text lines with no stable id; index is stable

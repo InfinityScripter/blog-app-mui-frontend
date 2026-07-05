@@ -1,6 +1,7 @@
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -18,21 +19,21 @@ interface LibraryHeroProps {
 
 /** Hub header: eyebrow, title, intent line, and the section tab switcher. */
 export function LibraryHero({ tab, onTabChange }: LibraryHeroProps) {
+  const t = useTranslations("library");
+
   return (
     <Stack spacing={1.5} sx={{ mb: { xs: 2, md: 3 } }}>
       <Typography component="p" sx={monoLabelSx}>
-        Библиотека
+        {t("hero.eyebrow")}
       </Typography>
       <Typography variant="h2" component="h1">
-        Что читать, чем пользоваться и что я узнал
+        {t("hero.title")}
       </Typography>
       <Typography
         variant="body1"
         sx={{ color: "text.secondary", maxWidth: 720 }}
       >
-        Курируемая подборка: лучшие источники про AI и LLM, инструменты, которые
-        реально стоят времени, и короткие заметки из практики. Без хайпа,
-        обновляется.
+        {t("hero.subtitle")}
       </Typography>
 
       <Tabs
@@ -44,7 +45,7 @@ export function LibraryHero({ tab, onTabChange }: LibraryHeroProps) {
           <Tab
             key={def.value}
             value={def.value}
-            label={def.label}
+            label={t(`tabs.${def.value}`)}
             iconPosition="start"
             icon={<Iconify width={20} icon={def.icon} />}
           />

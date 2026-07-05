@@ -1,7 +1,10 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import { useTranslations } from "next-intl";
 import { fDate } from "src/utils/format-time";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -29,6 +32,7 @@ export default function PostCommentItem({
   onCommentUpdated,
 }: PostCommentItemProps) {
   const reply = useBoolean();
+  const t = useTranslations("blog");
   const { user } = useAuthContext();
 
   const {
@@ -132,7 +136,7 @@ export default function PostCommentItem({
               sx={{ color: "text.disabled" }}
               startIcon={<Iconify icon="solar:reply-bold" width={24} />}
             >
-              Ответить
+              {t("comments.reply")}
             </Button>
           )}
         </Stack>

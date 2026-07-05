@@ -1,9 +1,12 @@
+"use client";
+
 import type { Post } from "src/types/domain";
 
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 import { useInfiniteScroll } from "src/hooks/use-infinite-scroll";
 
@@ -19,6 +22,7 @@ export function PostList({
   loading: initialLoading,
   activeTags = [],
 }: PostListProps) {
+  const t = useTranslations("blog");
   const { items, hasMore, loading, loadMore } = useInfiniteScroll<Post>(posts);
 
   const renderLoading = (
@@ -86,7 +90,7 @@ export function PostList({
             }
             onClick={loadMore}
           >
-            {loading ? "Loading..." : "Load More"}
+            {loading ? t("list.loading") : t("list.loadMore")}
           </Button>
         </Stack>
       )}

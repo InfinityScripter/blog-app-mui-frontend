@@ -1,4 +1,7 @@
+"use client";
+
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 import { fShortenNumber } from "src/utils/format-number";
 
@@ -13,6 +16,8 @@ export function InfoBlock({
   readingTime,
   sx,
 }: InfoBlockProps) {
+  const t = useTranslations("blog");
+
   return (
     <Stack
       spacing={1.5}
@@ -29,7 +34,7 @@ export function InfoBlock({
       {readingTime != null && (
         <Stack direction="row" alignItems="center" sx={{ mr: "auto" }}>
           <Iconify icon="solar:clock-circle-bold" width={16} sx={{ mr: 0.5 }} />
-          {`${readingTime} мин`}
+          {t("readingTime", { minutes: readingTime })}
         </Stack>
       )}
 

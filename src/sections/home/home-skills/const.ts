@@ -1,9 +1,11 @@
 import type { HomeSkill } from "./types";
 
+// `key` → `home.skills.groups.<key>.name` / `.description` (resolved in
+// `HomeSkills` via `useTranslations`). `items`/`iconSkill` are proper-noun tech
+// names and icon ids — not translated.
 export const SKILLS: HomeSkill[] = [
   {
-    name: "Frontend Разработка",
-    description: "Создание современных и адаптивных веб-интерфейсов",
+    key: "frontend",
     icon: "mdi:react",
     items: [
       "React",
@@ -25,8 +27,7 @@ export const SKILLS: HomeSkill[] = [
     ],
   },
   {
-    name: "Backend Разработка",
-    description: "Серверная разработка и реализация API",
+    key: "backend",
     icon: "mdi:database",
     items: [
       "Node.js",
@@ -50,8 +51,7 @@ export const SKILLS: HomeSkill[] = [
     ],
   },
   {
-    name: "Инструменты и DevOps",
-    description: "Инструменты разработки и развертывания",
+    key: "tools",
     icon: "mdi:tools",
     items: [
       "Git",

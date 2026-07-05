@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
 import { CustomPopover } from "src/components/custom-popover";
@@ -14,6 +17,8 @@ export function PostCommentMenu({
   onEdit,
   onDelete,
 }: PostCommentMenuProps) {
+  const t = useTranslations("blog");
+
   return (
     <CustomPopover
       open={open}
@@ -23,7 +28,7 @@ export function PostCommentMenu({
     >
       <MenuItem onClick={onEdit}>
         <Iconify icon="solar:pen-bold" sx={{ mr: 1 }} />
-        Редактировать
+        {t("comments.edit")}
       </MenuItem>
 
       <MenuItem
@@ -32,7 +37,7 @@ export function PostCommentMenu({
         sx={{ color: "error.main" }}
       >
         <Iconify icon="solar:trash-bin-trash-bold" sx={{ mr: 1 }} />
-        Удалить
+        {t("comments.delete")}
       </MenuItem>
     </CustomPopover>
   );

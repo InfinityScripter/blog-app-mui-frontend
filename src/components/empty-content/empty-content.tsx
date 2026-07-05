@@ -8,6 +8,11 @@ import type { EmptyContentProps } from "./types";
 
 // ----------------------------------------------------------------------
 
+// i18n: the default `title` stays a literal here on purpose. This is a shared
+// dual-use component — rendered both from Server Components (route `error.tsx`
+// boundaries) and Client sections — and a default parameter can't call the
+// `t()` hook. Consumers that want a localized empty state pass a translated
+// `title` (the `common.noData` message already exists for that).
 export function EmptyContent({
   sx,
   imgUrl,

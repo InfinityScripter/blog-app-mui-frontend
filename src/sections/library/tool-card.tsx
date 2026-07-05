@@ -1,11 +1,12 @@
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 
-import { pricingColor, pricingLabel, toolCategoryLabel } from "./utils";
+import { pricingColor, pricingLabelKey, toolCategoryLabelKey } from "./utils";
 
 import type { ToolItem } from "./types";
 
@@ -17,6 +18,8 @@ interface ToolCardProps {
 
 /** One tool card: name → external link, category + pricing labels, «для чего». */
 export function ToolCard({ tool }: ToolCardProps) {
+  const t = useTranslations("library");
+
   return (
     <Card
       variant="outlined"
@@ -25,7 +28,7 @@ export function ToolCard({ tool }: ToolCardProps) {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        transition: (t) => t.transitions.create("border-color"),
+        transition: (theme) => theme.transitions.create("border-color"),
         "&:hover": { borderColor: "text.primary" },
       }}
     >
@@ -53,12 +56,12 @@ export function ToolCard({ tool }: ToolCardProps) {
           <Iconify width={14} icon="solar:arrow-right-up-linear" />
         </Link>
         <Label variant="soft" color={pricingColor(tool.pricing)}>
-          {pricingLabel(tool.pricing)}
+          {t(pricingLabelKey(tool.pricing))}
         </Label>
       </Stack>
 
       <Typography variant="caption" sx={{ color: "text.disabled", mb: 1 }}>
-        {toolCategoryLabel(tool.category)}
+        {t(toolCategoryLabelKey(tool.category))}
       </Typography>
 
       <Typography variant="body2" sx={{ color: "text.secondary" }}>

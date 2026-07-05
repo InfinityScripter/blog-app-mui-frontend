@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { varAlpha } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
@@ -24,6 +25,7 @@ interface TimelineDetailProps {
  */
 export function TimelineDetail({ model }: TimelineDetailProps) {
   const theme = useTheme();
+  const t = useTranslations("llmTimeline");
 
   return (
     <Box
@@ -44,10 +46,10 @@ export function TimelineDetail({ model }: TimelineDetailProps) {
         sx={{ flexWrap: "wrap", mb: model.capabilities.length ? 1.5 : 0 }}
       >
         <Typography variant="caption" sx={{ color: "text.secondary" }}>
-          Контекст: {formatContext(model.contextTokens)}
+          {t("detail.context")}: {formatContext(model.contextTokens)}
         </Typography>
         <Typography variant="caption" sx={{ color: "text.secondary" }}>
-          Параметры: {formatParams(model.params)}
+          {t("detail.params")}: {formatParams(model.params)}
         </Typography>
       </Stack>
 
@@ -96,7 +98,7 @@ export function TimelineDetail({ model }: TimelineDetailProps) {
             sx={{ display: "inline-flex", alignItems: "center", gap: 0.5 }}
           >
             <Iconify width={18} icon="solar:link-bold-duotone" />
-            Анонс
+            {t("detail.announcement")}
           </Link>
         )}
         {model.wikiUrl && (
@@ -108,7 +110,7 @@ export function TimelineDetail({ model }: TimelineDetailProps) {
             sx={{ display: "inline-flex", alignItems: "center", gap: 0.5 }}
           >
             <Iconify width={18} icon="mdi:wikipedia" />
-            Википедия
+            {t("detail.wikipedia")}
           </Link>
         )}
       </Stack>

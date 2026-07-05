@@ -1,6 +1,6 @@
 import type { LabelColor } from "src/components/label";
 
-import { YEAR_ERAS } from "./const-ui";
+import { ERA_YEARS } from "./const-ui";
 
 import type { LlmModel, LlmTimelineRow } from "./types";
 
@@ -131,9 +131,12 @@ export function yearAnchorId(year: number): string {
   return `llm-year-${year}`;
 }
 
-/** Era caption for a year chip, or null when the previous era continues. */
-export function eraLabel(year: number): string | null {
-  return YEAR_ERAS[year] ?? null;
+/**
+ * True when a year opens a new era (so its chip shows an era caption). The
+ * caption text itself is localized in the component via `t("eras.<year>")`.
+ */
+export function hasEra(year: number): boolean {
+  return ERA_YEARS.includes(year);
 }
 
 /** Ascending list of distinct release years. */

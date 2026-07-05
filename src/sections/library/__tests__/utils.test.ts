@@ -4,17 +4,17 @@ import {
   groupByKind,
   sortTilDesc,
   pricingColor,
-  pricingLabel,
   readingKindIcon,
-  readingKindLabel,
-  toolCategoryLabel,
+  pricingLabelKey,
+  readingKindLabelKey,
   presentReadingKinds,
   filterReadingByKind,
+  toolCategoryLabelKey,
   presentToolCategories,
   filterToolsByCategory,
 } from "../utils";
 
-import type { TilItem, ToolItem, ReadingItem } from "../types";
+import type { TilItem, ToolItem, ReadingItem, ToolCategory } from "../types";
 
 // ----------------------------------------------------------------------
 
@@ -66,7 +66,7 @@ describe("groupByKind", () => {
     // blog before paper per READING_KIND_ORDER; no empty kinds present.
     expect(groups.map((g) => g.kind)).toEqual(["blog", "paper"]);
     expect(groups[0].items.map((i) => i.id)).toEqual(["b", "c"]);
-    expect(groups[0].label).toBe("Блоги");
+    expect(groups[0].labelKey).toBe("readingKind.blog");
   });
 
   it("returns empty array for no items", () => {
@@ -121,14 +121,28 @@ describe("present* helpers", () => {
     expect(presentReadingKinds(items)).toEqual(["blog", "paper"]);
   });
 
-  it("presentToolCategories → unique, sorted by RU label", () => {
+  it("presentToolCategories → unique, sorted by localized label", () => {
     const items = [
       tool({ category: "ide" }),
       tool({ category: "agents" }),
       tool({ category: "ide" }),
     ];
+    // The caller resolves labels; here a minimal RU resolver mirrors the fragment.
+    const ruLabel: Record<ToolCategory, string> = {
+      agents: "Агенты",
+      ide: "IDE и кодинг",
+      chat: "Чат-ассистенты",
+      search: "Поиск и research",
+      images: "Изображения",
+      audio: "Аудио и речь",
+      eval: "Оценка и тесты",
+      orchestration: "Оркестрация",
+      data: "Данные и RAG",
+    };
     // localeCompare orders Latin «IDE и кодинг» before Cyrillic «Агенты».
-    expect(presentToolCategories(items)).toEqual(["ide", "agents"]);
+    expect(
+      presentToolCategories(items, (category) => ruLabel[category]),
+    ).toEqual(["ide", "agents"]);
   });
 });
 
@@ -158,11 +172,11 @@ describe("sortTilDesc", () => {
   });
 });
 
-describe("label / color fallbacks", () => {
-  it("known values map correctly", () => {
-    expect(readingKindLabel("blog")).toBe("Блоги");
-    expect(toolCategoryLabel("agents")).toBe("Агенты");
-    expect(pricingLabel("free")).toBe("Бесплатно");
+describe("label-key / color / icon maps", () => {
+  it("known values map to their i18n key / color / icon", () => {
+    expect(readingKindLabelKey("blog")).toBe("readingKind.blog");
+    expect(toolCategoryLabelKey("agents")).toBe("toolCategory.agents");
+    expect(pricingLabelKey("free")).toBe("pricing.free");
     expect(pricingColor("open-source")).toBe("info");
     expect(readingKindIcon("blog")).toContain("solar:");
   });

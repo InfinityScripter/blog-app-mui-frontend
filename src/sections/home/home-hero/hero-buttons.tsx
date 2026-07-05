@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 
 import { MInview } from "./m-inview";
@@ -9,6 +10,8 @@ import { MInview } from "./m-inview";
 
 // Один primary CTA (контент) + тихая outlined-ссылка на портфолио.
 export function HeroButtons() {
+  const t = useTranslations("home");
+
   return (
     <MInview>
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: { xs: 1.5, sm: 2 } }}>
@@ -22,7 +25,7 @@ export function HeroButtons() {
             <Iconify width={22} icon="mdi:newspaper-variant-outline" />
           }
         >
-          Читать блог
+          {t("hero.ctaBlog")}
         </Button>
 
         <Button
@@ -32,7 +35,7 @@ export function HeroButtons() {
           size="large"
           variant="outlined"
         >
-          Обо мне
+          {t("hero.ctaAbout")}
         </Button>
       </Box>
     </MInview>

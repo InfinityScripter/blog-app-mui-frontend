@@ -1,7 +1,10 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 // Shared vendor display helpers live in llm-timeline (the single, documented
 // cross-section import — display-only maps that would drift if duplicated).
@@ -46,6 +49,8 @@ export function CompareToolbar({
   onToggleOpenOnly,
   onReset,
 }: CompareToolbarProps) {
+  const t = useTranslations("llmCompare");
+
   return (
     <Stack spacing={1.5} sx={{ mb: { xs: 2.5, md: 3 } }}>
       <Box
@@ -60,7 +65,7 @@ export function CompareToolbar({
         }}
       >
         <Chip
-          label="Все вендоры"
+          label={t("filters.allVendors")}
           size="small"
           color="primary"
           variant={selectedVendors.length ? "outlined" : "filled"}
@@ -114,7 +119,7 @@ export function CompareToolbar({
               variant={active ? "filled" : "outlined"}
               color={active ? "info" : "default"}
               onClick={() => onToggleModality(option.value)}
-              label={option.label}
+              label={t(`modalities.${option.labelKey}`)}
             />
           );
         })}
@@ -128,7 +133,7 @@ export function CompareToolbar({
           color={openOnly ? "success" : "default"}
           onClick={onToggleOpenOnly}
           icon={<Iconify width={16} icon="solar:code-bold-duotone" />}
-          label="Открытые веса"
+          label={t("filters.openWeights")}
         />
 
         {hasFilter && (
@@ -138,7 +143,7 @@ export function CompareToolbar({
             variant="outlined"
             onClick={onReset}
             icon={<Iconify width={16} icon="solar:restart-bold-duotone" />}
-            label="Сбросить"
+            label={t("filters.reset")}
           />
         )}
       </Box>

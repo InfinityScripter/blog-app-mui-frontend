@@ -1,6 +1,7 @@
 import type { ModelRelease } from "src/types/api";
 
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 
 import { formatPrice, formatContext } from "./utils";
@@ -17,10 +18,16 @@ interface ReleaseSpecChipsProps {
  * and consistent.
  */
 export function ReleaseSpecChips({ release }: ReleaseSpecChipsProps) {
+  const t = useTranslations("changelog");
+
   const chips = [
-    { label: `Контекст: ${formatContext(release.contextTokens)}` },
-    { label: `Вход: ${formatPrice(release.priceIn)} / 1M` },
-    { label: `Выход: ${formatPrice(release.priceOut)} / 1M` },
+    {
+      label: t("specs.context", {
+        value: formatContext(release.contextTokens),
+      }),
+    },
+    { label: t("specs.input", { value: formatPrice(release.priceIn) }) },
+    { label: t("specs.output", { value: formatPrice(release.priceOut) }) },
   ];
 
   return (

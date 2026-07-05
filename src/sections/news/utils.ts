@@ -7,21 +7,21 @@ import type { NewsItem, NewsCategory } from "./types";
 
 // ----------------------------------------------------------------------
 
-/** The default рубрика («Главное»): selected on load, shows every post. */
+/** The default category key (`main`): selected on load, shows every post. */
 export const DEFAULT_NEWS_CATEGORY: NewsCategory = NEWS_CATEGORIES[0];
 
-/** Maps a рубрика to a theme semantic color for its Label (never a hex). */
+/** Maps a category key to a theme semantic color for its Label (never a hex). */
 export function categoryColor(category: NewsCategory): LabelColor {
   switch (category) {
-    case "Технологии":
+    case "tech":
       return "warning";
-    case "Наука":
+    case "science":
       return "success";
-    case "Политика":
+    case "politics":
       return "info";
-    case "Культура":
+    case "culture":
       return "secondary";
-    case "Главное":
+    case "main":
     default:
       return "info";
   }
@@ -55,8 +55,8 @@ export function deriveSourceUrl(post: Post): string | null {
 }
 
 /**
- * Derives the рубрика for a post: an explicit рубрика tag wins, else the source
- * feed mapping, else «Главное».
+ * Derives the category key for a post: an explicit рубрика tag wins, else the
+ * source feed mapping, else `main`.
  */
 function deriveCategory(post: Post): NewsCategory {
   const tagged = (post.tags ?? [])
@@ -67,7 +67,7 @@ function deriveCategory(post: Post): NewsCategory {
   const source = deriveSource(post);
   if (source && SOURCE_TO_CATEGORY[source]) return SOURCE_TO_CATEGORY[source];
 
-  return "Главное";
+  return "main";
 }
 
 /** Builds a NewsItem (post + derived category + source) from a post. */

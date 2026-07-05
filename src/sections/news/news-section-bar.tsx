@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
@@ -17,6 +18,8 @@ export function NewsSectionBar({
   active,
   onSelect,
 }: NewsSectionBarProps) {
+  const t = useTranslations("news");
+
   return (
     <Box
       sx={{
@@ -31,7 +34,7 @@ export function NewsSectionBar({
       }}
     >
       <Typography variant="h3" component="h1">
-        Новости
+        {t("title")}
       </Typography>
 
       <Stack
@@ -83,7 +86,7 @@ export function NewsSectionBar({
                 },
               }}
             >
-              {category}
+              {t(`categories.${category}`)}
             </Box>
           );
         })}

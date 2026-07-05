@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 
@@ -23,6 +24,8 @@ interface HeroStat {
  * span) so the scope of the timeline is clear before scrolling.
  */
 export function TimelineHero({ models }: TimelineHeroProps) {
+  const t = useTranslations("llmTimeline");
+
   const vendorsCount = new Set(models.map((model) => model.vendor)).size;
   const years = models.map((model) => releaseYear(model.releaseDate));
   const span = years.length
@@ -30,22 +33,21 @@ export function TimelineHero({ models }: TimelineHeroProps) {
     : "—";
 
   const stats: HeroStat[] = [
-    { value: String(models.length), label: "моделей" },
-    { value: String(vendorsCount), label: "вендоров" },
-    { value: span, label: "годы" },
+    { value: String(models.length), label: t("hero.stats.models") },
+    { value: String(vendorsCount), label: t("hero.stats.vendors") },
+    { value: span, label: t("hero.stats.years") },
   ];
 
   return (
     <Box sx={{ mb: { xs: 3, md: 4 } }}>
       <Typography variant="h2" component="h1" sx={{ mb: 1 }}>
-        История больших языковых моделей
+        {t("hero.title")}
       </Typography>
       <Typography
         variant="body1"
         sx={{ color: "text.secondary", mb: { xs: 2, md: 3 }, maxWidth: 640 }}
       >
-        Хронология ключевых LLM — от первых трансформеров до reasoning-моделей и
-        агентов. Нажмите на модель, чтобы увидеть детали, факты и источники.
+        {t("hero.subtitle")}
       </Typography>
 
       <Stack

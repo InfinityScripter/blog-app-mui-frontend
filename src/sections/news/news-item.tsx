@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { fDate } from "src/utils/format-time";
 import { useTheme } from "@mui/material/styles";
@@ -18,7 +19,9 @@ import type { NewsItemProps } from "./types";
 
 export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
   const theme = useTheme();
+  const t = useTranslations("news");
   const { post, category, source } = item;
+  const categoryLabel = t(`categories.${category}`);
   const linkTo = paths.news.details(String(post._id ?? post.id));
 
   const meta = [source, post.createdAt ? fDate(post.createdAt) : null]
@@ -56,7 +59,7 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
             color={categoryColor(category)}
             sx={{ alignSelf: "flex-start" }}
           >
-            {category}
+            {categoryLabel}
           </Label>
 
           <Link
@@ -109,7 +112,7 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
           color={categoryColor(category)}
           sx={{ alignSelf: "flex-start" }}
         >
-          {category}
+          {categoryLabel}
         </Label>
 
         <Link

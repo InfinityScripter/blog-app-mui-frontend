@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -18,6 +19,8 @@ import type { ChangelogListViewProps } from "./types";
  * orders (newest first by releasedAt) and presents them.
  */
 export function ChangelogListView({ releases }: ChangelogListViewProps) {
+  const t = useTranslations("changelog");
+
   const ordered = useMemo(
     () =>
       [...releases].sort((a, b) => {
@@ -32,10 +35,10 @@ export function ChangelogListView({ releases }: ChangelogListViewProps) {
     <Container sx={{ py: { xs: 5, md: 8 } }}>
       <Stack spacing={1} sx={{ mb: { xs: 3, md: 5 } }}>
         <Typography component="p" sx={monoLabelSx}>
-          Релизы моделей
+          {t("eyebrow")}
         </Typography>
         <Typography variant="h2" component="h1">
-          Хроника релизов AI-моделей
+          {t("title")}
         </Typography>
       </Stack>
 
@@ -48,7 +51,7 @@ export function ChangelogListView({ releases }: ChangelogListViewProps) {
           variant="body2"
           sx={{ py: 6, textAlign: "center", color: "text.disabled" }}
         >
-          Пока нет релизов.
+          {t("empty")}
         </Typography>
       )}
     </Container>

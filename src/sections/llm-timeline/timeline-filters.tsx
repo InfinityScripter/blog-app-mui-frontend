@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
+import { useTranslations } from "next-intl";
 import { Iconify } from "src/components/iconify";
 
 import { vendorIcon, vendorColor, hasBrandIcon } from "./utils";
@@ -28,6 +29,8 @@ export function TimelineFilters({
   onToggle,
   onClear,
 }: TimelineFiltersProps) {
+  const t = useTranslations("llmTimeline");
+
   return (
     <Box
       sx={{
@@ -42,7 +45,7 @@ export function TimelineFilters({
       }}
     >
       <Chip
-        label="Все"
+        label={t("filters.all")}
         size="small"
         color="primary"
         variant={hasFilter ? "outlined" : "filled"}

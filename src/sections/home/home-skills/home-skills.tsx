@@ -4,6 +4,7 @@ import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
@@ -16,12 +17,14 @@ import { SKILLS } from "./const";
 // ----------------------------------------------------------------------
 
 export function HomeSkills() {
+  const t = useTranslations("home");
+
   return (
     <Container component={MotionViewport} sx={{ py: { xs: 6, md: 10 } }}>
       <SectionHeading
-        overline="Технологии"
-        title="Навыки и стек"
-        subtitle="Технологии, которыми я пользуюсь в продуктовой разработке"
+        overline={t("skills.overline")}
+        title={t("skills.title")}
+        subtitle={t("skills.subtitle")}
       />
 
       <Box
@@ -35,7 +38,7 @@ export function HomeSkills() {
         }}
       >
         {SKILLS.map((skill) => (
-          <m.div key={skill.name} variants={varFade().inUp}>
+          <m.div key={skill.key} variants={varFade().inUp}>
             <Stack
               spacing={2.5}
               sx={(theme: Theme) => ({
@@ -69,11 +72,13 @@ export function HomeSkills() {
                 >
                   <Iconify icon={skill.icon} width={24} />
                 </Box>
-                <Typography variant="h6">{skill.name}</Typography>
+                <Typography variant="h6">
+                  {t(`skills.groups.${skill.key}.name`)}
+                </Typography>
               </Stack>
 
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {skill.description}
+                {t(`skills.groups.${skill.key}.description`)}
               </Typography>
 
               <Stack direction="row" flexWrap="wrap" useFlexGap spacing={1}>

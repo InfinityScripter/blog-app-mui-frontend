@@ -1,14 +1,14 @@
 import type { LabelColor } from "src/components/label";
 
 import {
+  PRICING_KEY,
   PRICING_COLOR,
-  PRICING_LABEL,
-  FALLBACK_LABEL,
   FALLBACK_COLOR,
+  READING_KIND_KEY,
   READING_KIND_ICON,
-  READING_KIND_LABEL,
+  TOOL_CATEGORY_KEY,
   READING_KIND_ORDER,
-  TOOL_CATEGORY_LABEL,
+  FALLBACK_LABEL_KEY,
 } from "./const";
 
 import type {
@@ -22,12 +22,16 @@ import type {
 
 // ----------------------------------------------------------------------
 // Pure helpers for the library hub. No JSX, no side effects — every function
-// returns a new value so callers never mutate the static source.
+// returns a new value so callers never mutate the static source. Label helpers
+// return an i18n key (relative to the `library` namespace), NOT localized text —
+// the component resolves it via `useTranslations("library")`. This keeps these
+// helpers locale-agnostic and unit-testable without a translator.
 
 /** A reading kind with its items, in {@link READING_KIND_ORDER}. */
 export interface ReadingGroup {
   kind: ReadingKind;
-  label: string;
+  /** i18n key for the group heading (→ `library.readingKind.<kind>`). */
+  labelKey: string;
   items: ReadingItem[];
 }
 
@@ -38,7 +42,7 @@ export interface ReadingGroup {
 export function groupByKind(items: ReadingItem[]): ReadingGroup[] {
   return READING_KIND_ORDER.map((kind) => ({
     kind,
-    label: READING_KIND_LABEL[kind] ?? FALLBACK_LABEL,
+    labelKey: readingKindLabelKey(kind),
     items: items.filter((item) => item.kind === kind),
   })).filter((group) => group.items.length > 0);
 }
@@ -67,12 +71,17 @@ export function presentReadingKinds(items: ReadingItem[]): ReadingKind[] {
   return READING_KIND_ORDER.filter((kind) => present.has(kind));
 }
 
-/** Distinct tool categories present, sorted by their RU label. */
-export function presentToolCategories(items: ToolItem[]): ToolCategory[] {
+/**
+ * Distinct tool categories present, sorted by their localized label. The caller
+ * passes a `labelOf` resolver (a `t`-backed function) so sorting is locale-aware
+ * while this helper stays translation-agnostic.
+ */
+export function presentToolCategories(
+  items: ToolItem[],
+  labelOf: (category: ToolCategory) => string,
+): ToolCategory[] {
   const present = Array.from(new Set(items.map((item) => item.category)));
-  return present.sort((a, b) =>
-    toolCategoryLabel(a).localeCompare(toolCategoryLabel(b)),
-  );
+  return present.sort((a, b) => labelOf(a).localeCompare(labelOf(b)));
 }
 
 /**
@@ -90,9 +99,10 @@ export function sortTilDesc(items: TilItem[]): TilItem[] {
     .map((entry) => entry.item);
 }
 
-/** RU label for a reading kind, with a safe fallback for unmapped values. */
-export function readingKindLabel(kind: ReadingKind): string {
-  return READING_KIND_LABEL[kind] ?? FALLBACK_LABEL;
+/** i18n key for a reading kind's label, with a safe fallback for unmapped values. */
+export function readingKindLabelKey(kind: ReadingKind): string {
+  const key = READING_KIND_KEY[kind];
+  return key ? `readingKind.${key}` : FALLBACK_LABEL_KEY;
 }
 
 /** Icon for a reading kind, with a safe fallback. */
@@ -100,14 +110,16 @@ export function readingKindIcon(kind: ReadingKind): string {
   return READING_KIND_ICON[kind] ?? "solar:link-bold-duotone";
 }
 
-/** RU label for a tool category, with a safe fallback. */
-export function toolCategoryLabel(category: ToolCategory): string {
-  return TOOL_CATEGORY_LABEL[category] ?? FALLBACK_LABEL;
+/** i18n key for a tool category's label, with a safe fallback. */
+export function toolCategoryLabelKey(category: ToolCategory): string {
+  const key = TOOL_CATEGORY_KEY[category];
+  return key ? `toolCategory.${key}` : FALLBACK_LABEL_KEY;
 }
 
-/** RU label for a pricing model, with a safe fallback. */
-export function pricingLabel(pricing: PricingModel): string {
-  return PRICING_LABEL[pricing] ?? FALLBACK_LABEL;
+/** i18n key for a pricing model's label, with a safe fallback. */
+export function pricingLabelKey(pricing: PricingModel): string {
+  const key = PRICING_KEY[pricing];
+  return key ? `pricing.${key}` : FALLBACK_LABEL_KEY;
 }
 
 /** Label color for a pricing model, with a safe fallback. */

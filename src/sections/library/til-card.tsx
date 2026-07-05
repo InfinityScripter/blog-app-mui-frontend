@@ -2,6 +2,7 @@ import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { fDate } from "src/utils/format-time";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -16,6 +17,8 @@ interface TilCardProps {
 
 /** One TIL note: date, title, body, tag chips, and an optional source link. */
 export function TilCard({ til }: TilCardProps) {
+  const t = useTranslations("library");
+
   return (
     <Card variant="outlined" sx={{ p: { xs: 2, md: 2.5 }, mb: 2 }}>
       <Typography variant="caption" sx={{ color: "text.disabled" }}>
@@ -51,7 +54,7 @@ export function TilCard({ til }: TilCardProps) {
               ml: "auto",
             }}
           >
-            Источник
+            {t("til.source")}
             <Iconify width={14} icon="solar:arrow-right-up-linear" />
           </Link>
         )}

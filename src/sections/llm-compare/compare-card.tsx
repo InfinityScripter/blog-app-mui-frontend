@@ -1,8 +1,11 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
@@ -57,6 +60,7 @@ export function CompareCard({
   pinDisabled,
   onTogglePin,
 }: CompareCardProps) {
+  const t = useTranslations("llmCompare");
   const color = vendorColor(model.vendor);
 
   return (
@@ -91,7 +95,7 @@ export function CompareCard({
             </Typography>
             {model.openWeights && (
               <Label variant="soft" color="success">
-                открытые веса
+                {t("labels.openWeights")}
               </Label>
             )}
           </Stack>
@@ -116,9 +120,18 @@ export function CompareCard({
       <Divider sx={{ mb: 1.5 }} />
 
       <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-        <Stat label="Вход $/1M" value={formatUsd(model.pricing.inputPerM)} />
-        <Stat label="Выход $/1M" value={formatUsd(model.pricing.outputPerM)} />
-        <Stat label="Контекст" value={formatContext(model.contextTokens)} />
+        <Stat
+          label={t("columns.priceIn")}
+          value={formatUsd(model.pricing.inputPerM)}
+        />
+        <Stat
+          label={t("columns.priceOut")}
+          value={formatUsd(model.pricing.outputPerM)}
+        />
+        <Stat
+          label={t("columns.context")}
+          value={formatContext(model.contextTokens)}
+        />
         {BENCHMARK_COLUMNS.map((col) => (
           <Stat
             key={col.key}

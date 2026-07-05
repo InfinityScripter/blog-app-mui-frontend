@@ -1,6 +1,7 @@
 import type { MarketingTheme } from "src/sections/home/components/types";
 
 import Timeline from "@mui/lab/Timeline";
+import { useTranslations } from "next-intl";
 import Container from "@mui/material/Container";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -13,15 +14,16 @@ import { ExperienceTimelineItem } from "./experience-timeline-item";
 // ----------------------------------------------------------------------
 
 export function HomeExperience() {
+  const t = useTranslations("home");
   const theme = useTheme<MarketingTheme>();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Container component={MotionViewport} sx={{ py: { xs: 6, md: 10 } }}>
       <SectionHeading
-        overline="Карьера"
-        title="Опыт работы"
-        subtitle="Профессиональный путь как веб-разработчика"
+        overline={t("experience.overline")}
+        title={t("experience.title")}
+        subtitle={t("experience.subtitle")}
       />
 
       <Timeline

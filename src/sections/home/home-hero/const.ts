@@ -1,25 +1,12 @@
-export const HERO_OVERLINE = "AI · LLM · агенты · практика";
+// Structural hero config only. User-visible copy (overline, title parts, lead,
+// panel title/description, link labels) is resolved per-locale in the hero
+// components via `useTranslations("home")` — a plain data module can't call the
+// `t()` hook at module scope, so link labels carry a stable `key` instead.
 
-// Заголовок собирается из частей, чтобы акцентное слово красилось в primary
-// без градиентов (Editorial Ink: один цветовой акцент, сплошной).
-export const HERO_TITLE_PARTS = {
-  before: "Разборы ",
-  accent: "AI-инструментов",
-  after: " для реальной разработки",
-};
-
-export const HERO_SUMMARY =
-  "Кейсы, гайды и честные разборы: что из AI-инструментов реально работает " +
-  "в проде, а что — хайп. Без воды, с примерами из практики.";
-
-export const HERO_PANEL_TITLE = "В журнале";
-export const HERO_PANEL_DESCRIPTION =
-  "LLM, агенты, Claude Code и инструменты — что попробовал, что прижилось " +
-  "в работе и почему.";
-
+// Оглавление журнала: href — данные, label резолвится по `home.hero.panel.links.<key>`.
 export const HERO_PANEL_LINKS = [
-  { label: "Новости AI", href: "/news" },
-  { label: "Хронология LLM", href: "/llm-timeline" },
-  { label: "Релизы моделей", href: "/changelog" },
-  { label: "Обо мне", href: "/portfolio" },
-];
+  { key: "news", href: "/news" },
+  { key: "llmTimeline", href: "/llm-timeline" },
+  { key: "changelog", href: "/changelog" },
+  { key: "about", href: "/portfolio" },
+] as const;

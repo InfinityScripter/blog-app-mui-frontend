@@ -1,6 +1,9 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
+import { useTranslations } from "next-intl";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Controller, useFormContext } from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,6 +18,7 @@ export function PostNewEditActions({
   onPreview,
 }: PostNewEditActionsProps) {
   const { control } = useFormContext();
+  const t = useTranslations("blog");
 
   return (
     <Box
@@ -34,7 +38,7 @@ export function PostNewEditActions({
                 onChange={(e) => onChange(e.target.checked)}
               />
             }
-            label="Опубликовать"
+            label={t("form.publish")}
             sx={{ pl: 3, flexGrow: 1 }}
           />
         )}
@@ -47,7 +51,7 @@ export function PostNewEditActions({
           size="large"
           onClick={onPreview}
         >
-          Предпросмотр
+          {t("form.preview")}
         </Button>
 
         <LoadingButton
@@ -57,7 +61,7 @@ export function PostNewEditActions({
           loading={isSubmitting}
           sx={{ ml: 2 }}
         >
-          {!isEdit ? "Создать пост" : "Сохранить изменения"}
+          {!isEdit ? t("form.create") : t("form.save")}
         </LoadingButton>
       </div>
     </Box>

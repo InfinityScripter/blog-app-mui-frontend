@@ -1,8 +1,11 @@
+"use client";
+
 import type { Post } from "src/types/domain";
 
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import { useForm } from "react-hook-form";
+import { useTranslations } from "next-intl";
 import { useRouter } from "src/routes/hooks";
 import { toast } from "src/components/snackbar";
 import { Form } from "src/components/hook-form";
@@ -13,7 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMemo, useEffect, useCallback } from "react";
 
 import axios, { endpoints } from "../../utils/axios";
-import { NewPostSchema } from "./post-new-edit-schema";
+import { getNewPostSchema } from "./post-new-edit-schema";
 import { PostDetailsPreview } from "./post-details-preview";
 import { PostNewEditDetails } from "./post-new-edit-details";
 import { PostNewEditActions } from "./post-new-edit-actions";
@@ -27,6 +30,7 @@ import type { PostNewEditFormProps } from "./types";
 
 export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
   const router = useRouter();
+  const t = useTranslations("blog");
   const { user } = useAuthContext();
 
   const preview = useBoolean();
@@ -48,9 +52,11 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
     [currentPost],
   );
 
+  const schema = useMemo(() => getNewPostSchema(t), [t]);
+
   const methods = useForm({
     mode: "all",
-    resolver: zodResolver(NewPostSchema),
+    resolver: zodResolver(schema),
     defaultValues,
   });
 
@@ -119,13 +125,15 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
 
       reset();
       preview.onFalse();
-      toast.success(currentPost ? "Успешно обновлено!" : "Успешно создано!");
+      toast.success(
+        currentPost ? t("form.updatedToast") : t("form.createdToast"),
+      );
       router.push(paths.dashboard.post.root);
       console.info("Response:", response);
     } catch (error) {
       console.error(error);
       toast.error(
-        error instanceof Error ? error.message : "Операция не удалась",
+        error instanceof Error ? error.message : t("form.errorToast"),
       );
     }
   });

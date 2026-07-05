@@ -19,10 +19,5 @@ export const FEED_SENTINEL_PRELOAD = 400;
 // selected tag is always kept even if it ranks below this cap.
 export const FEED_TAGS_LIMIT = 12;
 
-// Section copy.
-export const FEED_OVERLINE = "Свежее";
-export const FEED_TITLE = "Лента";
-export const FEED_SUBTITLE =
-  "Всё самое свежее: новости, разборы и заметки — по порядку";
-export const FEED_EMPTY_TEXT = "Пока нет публикаций по выбранным темам.";
-export const FEED_SHOW_MORE = "Показать ещё";
+// Section copy is resolved per-locale in `HomeFeed` via `useTranslations("home")`
+// under the `home.feed.*` keys (overline / title / subtitle / empty / showMore).

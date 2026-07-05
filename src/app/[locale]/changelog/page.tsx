@@ -1,5 +1,6 @@
 import { CONFIG } from "src/config-global";
 import { getReleases } from "src/actions/blog-ssr";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { ChangelogListView } from "src/sections/changelog/view/changelog-list-view";
 
@@ -7,19 +8,27 @@ import { ChangelogListView } from "src/sections/changelog/view/changelog-list-vi
 
 const BASE_URL = CONFIG.site.url;
 
-export const metadata = {
-  title: "Хроника релизов AI-моделей: версии, цены, контекст",
-  description:
-    "Лента релизов больших языковых моделей: новые версии, цены за токены, размер контекста и краткий разбор изменений.",
-  alternates: { canonical: `${BASE_URL}/changelog/` },
-  openGraph: {
-    title: "Хроника релизов AI-моделей | Talalaev",
-    description:
-      "Новые версии LLM: цены, контекст и краткий разбор изменений в одной ленте.",
-    url: `${BASE_URL}/changelog/`,
-    type: "website",
-  },
-};
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("changelog");
+
+  return {
+    title: t("meta.title"),
+    description: t("meta.description"),
+    alternates: { canonical: `${BASE_URL}/changelog/` },
+    openGraph: {
+      title: t("meta.ogTitle"),
+      description: t("meta.ogDescription"),
+      url: `${BASE_URL}/changelog/`,
+      type: "website",
+    },
+  };
+}
 
 // ISR: serve a cached changelog, refreshed at most every 10 minutes (getReleases
 // uses a native fetch with the same revalidate window) so new releases surface

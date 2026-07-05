@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "@mui/material/Link";
 import Avatar from "@mui/material/Avatar";
+import { useTranslations } from "next-intl";
 import { useRouter } from "src/routes/hooks";
 import parse from "autosuggest-highlight/parse";
 import match from "autosuggest-highlight/match";
@@ -24,6 +27,7 @@ export function PostSearch({
   loading,
 }: PostSearchProps) {
   const router = useRouter();
+  const t = useTranslations("blog");
 
   const handleClick = (postId: string) => {
     router.push(hrefItem(postId));
@@ -56,7 +60,7 @@ export function PostSearch({
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Поиск..."
+          placeholder={t("search.placeholder")}
           onKeyUp={handleKeyUp}
           InputProps={{
             ...params.InputProps,

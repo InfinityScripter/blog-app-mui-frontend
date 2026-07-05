@@ -1,7 +1,10 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
@@ -33,6 +36,8 @@ export function ComparePinBar({
   onShare,
   shared,
 }: ComparePinBarProps) {
+  const t = useTranslations("llmCompare");
+
   if (!models.length) return null;
 
   return (
@@ -45,9 +50,9 @@ export function ComparePinBar({
         p: 2,
         zIndex: 5,
         borderRadius: 2,
-        border: (t) => `1px solid ${alpha(t.palette.grey[500], 0.2)}`,
+        border: (theme) => `1px solid ${alpha(theme.palette.grey[500], 0.2)}`,
         backdropFilter: "blur(6px)",
-        bgcolor: (t) => alpha(t.palette.background.default, 0.9),
+        bgcolor: (theme) => alpha(theme.palette.background.default, 0.9),
       }}
     >
       <Stack
@@ -56,7 +61,9 @@ export function ComparePinBar({
         justifyContent="space-between"
         sx={{ mb: 1.5 }}
       >
-        <Typography variant="subtitle1">Сравнение · {models.length}</Typography>
+        <Typography variant="subtitle1">
+          {t("pinBar.title", { count: models.length })}
+        </Typography>
         <Stack direction="row" spacing={1}>
           <Button
             size="small"
@@ -69,7 +76,7 @@ export function ComparePinBar({
               />
             }
           >
-            {shared ? "Скопировано" : "Поделиться"}
+            {shared ? t("pinBar.copied") : t("pinBar.share")}
           </Button>
           <Button
             size="small"
@@ -77,7 +84,7 @@ export function ComparePinBar({
             onClick={onClear}
             startIcon={<Iconify icon="solar:trash-bin-trash-linear" />}
           >
-            Очистить
+            {t("pinBar.clear")}
           </Button>
         </Stack>
       </Stack>

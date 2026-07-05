@@ -2,13 +2,13 @@ import type { Post } from "src/types/domain";
 
 // ----------------------------------------------------------------------
 
-/** News рубрика (category) — drives the colored Label on each card. */
-export type NewsCategory =
-  | "Главное"
-  | "Технологии"
-  | "Наука"
-  | "Политика"
-  | "Культура";
+/**
+ * News рубрика (category) — a stable key, NOT a display string. Drives equality,
+ * filtering, the colored Label and the derived-category mapping. The localized
+ * label is resolved separately via `t("categories.<key>")` (message fragment
+ * `messages/_fragments/news.json`), so switching locale never breaks matching.
+ */
+export type NewsCategory = "main" | "tech" | "science" | "politics" | "culture";
 
 /**
  * A news item is a published post (tagged 'новости') enriched with a derived
@@ -38,9 +38,9 @@ export interface NewsListProps {
 }
 
 export interface NewsSectionBarProps {
-  /** Рубрики to render, in display order — only ones that have posts (+«Главное»). */
+  /** Category keys to render, in display order — only ones with posts (+`main`). */
   categories: NewsCategory[];
-  /** Currently selected рубрика — gets the filled, primary-colored treatment. */
+  /** Currently selected category key — gets the filled, primary-colored treatment. */
   active: NewsCategory;
   /** Fired when a рубрика is clicked or activated via keyboard. */
   onSelect: (category: NewsCategory) => void;
