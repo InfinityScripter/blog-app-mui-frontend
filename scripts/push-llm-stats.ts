@@ -4,7 +4,7 @@ import { runAdapters } from "../src/server/llm-stats/scan";
  * snapshot to the backend so the prod dashboard can render it.
  *
  * Usage:
- *   LLM_STATS_PUSH_TOKEN=<admin-jwt> SERVER_URL=https://api.talalaev.su:8444 \
+ *   LLM_STATS_PUSH_TOKEN=<admin-jwt> SERVER_URL=https://api.aifirst.us.com:8444 \
  *     npx tsx scripts/push-llm-stats.ts
  *
  * Or with admin credentials instead of a token:

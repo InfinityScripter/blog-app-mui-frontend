@@ -1,0 +1,127 @@
+- generic [active] [ref=f10e1]:
+    - generic [ref=f10e2]:
+        - banner [ref=f10e3]:
+            - generic [ref=f10e5]:
+                - link "logo" [ref=f10e6] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=f10e7]
+                - generic [ref=f10e10] [cursor=pointer]:
+                    - button [ref=f10e11]:
+                        - img [ref=f10e12]
+                    - generic [ref=f10e14]: ⌘K
+                - navigation [ref=f10e15]:
+                    - list [ref=f10e16]:
+                        - listitem [ref=f10e17]:
+                            - link "Главная" [ref=f10e18] [cursor=pointer]:
+                                - /url: /
+                        - listitem [ref=f10e19]:
+                            - link "Новости" [ref=f10e20] [cursor=pointer]:
+                                - /url: /news/
+                        - listitem [ref=f10e21]:
+                            - link "Блог" [ref=f10e22] [cursor=pointer]:
+                                - /url: /post/
+                        - listitem [ref=f10e23]:
+                            - link "Релизы" [ref=f10e24] [cursor=pointer]:
+                                - /url: /changelog/
+                        - listitem [ref=f10e25]:
+                            - link "История LLM" [ref=f10e26] [cursor=pointer]:
+                                - /url: /llm-timeline/
+                        - listitem [ref=f10e27]:
+                            - link "Обо мне" [ref=f10e28] [cursor=pointer]:
+                                - /url: /portfolio/
+                - generic [ref=f10e29]:
+                    - button "settings" [ref=f10e30] [cursor=pointer]:
+                        - img [ref=f10e32]
+                    - link "Вход" [ref=f10e35] [cursor=pointer]:
+                        - /url: /dashboard/
+        - main [ref=f10e36]:
+            - generic [ref=f10e37]:
+                - generic [ref=f10e38]:
+                    - heading "Новости" [level=1] [ref=f10e39]
+                    - button "Главное" [pressed] [ref=f10e41] [cursor=pointer]
+                - generic [ref=f10e42]:
+                    - generic [ref=f10e44]:
+                        - link [ref=f10e45] [cursor=pointer]:
+                            - /url: /post/37d2fc99-4061-4c82-beee-ca2f3d019af1/
+                        - generic [ref=f10e49]:
+                            - generic [ref=f10e50]: Главное
+                            - link "Неожиданный цвет стал трендом в одежде летом 2026 года" [ref=f10e51] [cursor=pointer]:
+                                - /url: /post/37d2fc99-4061-4c82-beee-ca2f3d019af1/
+                            - paragraph [ref=f10e52]: "Lenta.ru : Новости · 20 июня 2026"
+                    - generic [ref=f10e53]:
+                        - generic [ref=f10e54]:
+                            - link [ref=f10e55] [cursor=pointer]:
+                                - /url: /post/70db1651-fe1d-442e-9dba-e5751189ef27/
+                            - generic [ref=f10e59]:
+                                - generic [ref=f10e60]: Главное
+                                - link "Дуа Липа показала свадебное платье" [ref=f10e61] [cursor=pointer]:
+                                    - /url: /post/70db1651-fe1d-442e-9dba-e5751189ef27/
+                                - paragraph [ref=f10e62]: "Lenta.ru : Новости · 20 июня 2026"
+                        - generic [ref=f10e63]:
+                            - link [ref=f10e64] [cursor=pointer]:
+                                - /url: /post/df813f92-c991-454f-bb2e-17253cfe6a23/
+                            - generic [ref=f10e68]:
+                                - generic [ref=f10e69]: Главное
+                                - link "В Польше высказались о вступлении Украины в ЕС" [ref=f10e70] [cursor=pointer]:
+                                    - /url: /post/df813f92-c991-454f-bb2e-17253cfe6a23/
+                                - paragraph [ref=f10e71]: "Lenta.ru : Новости · 20 июня 2026"
+                        - generic [ref=f10e72]:
+                            - link [ref=f10e73] [cursor=pointer]:
+                                - /url: /post/48f3641d-a550-4b5b-8ce7-d97146e021d5/
+                            - generic [ref=f10e77]:
+                                - generic [ref=f10e78]: Главное
+                                - link "Россиян предостерегли от совершения типичной ошибки в борьбе с летней бессонницей" [ref=f10e79] [cursor=pointer]:
+                                    - /url: /post/48f3641d-a550-4b5b-8ce7-d97146e021d5/
+                                - paragraph [ref=f10e80]: "Lenta.ru : Новости · 20 июня 2026"
+                        - generic [ref=f10e81]:
+                            - link [ref=f10e82] [cursor=pointer]:
+                                - /url: /post/3ba36873-f220-49f5-8f12-67f2b11b0cf7/
+                            - generic [ref=f10e86]:
+                                - generic [ref=f10e87]: Главное
+                                - link "Попадание в файлы Эпштейна, уголовное дело сына и страшная болезнь — все это пришлось пережить кронпринцессе Норвегии. Теперь Метте-Марит перенесла еще и опасную операцию. Спасет ли это ее жизнь?" [ref=f10e88] [cursor=pointer]:
+                                    - /url: /post/3ba36873-f220-49f5-8f12-67f2b11b0cf7/
+                                - paragraph [ref=f10e89]: Meduza.io · 20 июня 2026
+                        - generic [ref=f10e90]:
+                            - link [ref=f10e91] [cursor=pointer]:
+                                - /url: /post/f8d64a61-ce75-41cc-9def-2096dd6f6849/
+                            - generic [ref=f10e95]:
+                                - generic [ref=f10e96]: Главное
+                                - link "«германия безоговорочно капитулирует. президент выступает с речью по радио. слушая, я смотрю…" [ref=f10e97] [cursor=pointer]:
+                                    - /url: /post/f8d64a61-ce75-41cc-9def-2096dd6f6849/
+                                - paragraph [ref=f10e98]: Meduza.io · 20 июня 2026
+        - contentinfo [ref=f10e99]:
+            - separator [ref=f10e100]
+            - generic [ref=f10e101]:
+                - link "logo" [ref=f10e102] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=f10e103]
+                - generic [ref=f10e106]:
+                    - generic [ref=f10e107]:
+                        - paragraph [ref=f10e108]: Блог и заметки о разработке. Для связи удобнее всего использовать соцсети ниже.
+                        - generic [ref=f10e109]:
+                            - link [ref=f10e110] [cursor=pointer]:
+                                - /url: https://t.me/sh0ny
+                                - img [ref=f10e111]
+                            - link [ref=f10e113] [cursor=pointer]:
+                                - /url: https://github.com/InfinityScripter
+                                - img [ref=f10e114]
+                            - link [ref=f10e116] [cursor=pointer]:
+                                - /url: https://www.linkedin.com/in/talalaevs/
+                                - img [ref=f10e117]
+                            - link [ref=f10e119] [cursor=pointer]:
+                                - /url: https://vk.com/sh0ny
+                                - img [ref=f10e120]
+                    - generic [ref=f10e123]:
+                        - generic [ref=f10e124]:
+                            - generic [ref=f10e125]: Документы
+                            - link "Условия использования" [ref=f10e126] [cursor=pointer]:
+                                - /url: "#"
+                            - link "Политика конфиденциальности" [ref=f10e127] [cursor=pointer]:
+                                - /url: "#"
+                        - generic [ref=f10e128]:
+                            - generic [ref=f10e129]: Контакты
+                            - link "talalaev.misha@gmail.com" [ref=f10e130] [cursor=pointer]:
+                                - /url: mailto:talalaev.misha@gmail.com
+                - paragraph [ref=f10e131]: © All rights reserved.
+    - alert [ref=f10e132]
+    - region "Notifications alt+T"

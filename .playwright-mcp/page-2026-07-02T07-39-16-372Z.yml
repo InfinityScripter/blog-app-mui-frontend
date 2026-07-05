@@ -1,0 +1,9 @@
+- generic [active] [ref=f13e1]:
+    - button "Open Next.js Dev Tools" [ref=f13e7] [cursor=pointer]:
+        - img [ref=f13e8]
+    - alert [ref=f13e11]
+    - region "Notifications alt+T"
+    - generic [ref=f13e14]:
+        - link "logo":
+            - /url: /
+            - img

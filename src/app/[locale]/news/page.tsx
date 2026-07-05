@@ -3,6 +3,7 @@ import { toAppLocale } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getNewsPosts } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
+import { defaultLocaleStaticParams } from "src/i18n/static-params";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { NewsListView } from "src/sections/news/view/news-list-view";
 
@@ -11,6 +12,10 @@ import { NewsListView } from "src/sections/news/view/news-list-view";
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
+
+// Prebuild only /ru/news; /en/news renders on demand + ISR (translates the feed
+// lazily, once) so the build never translates the whole news list.
+export const generateStaticParams = defaultLocaleStaticParams;
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params;

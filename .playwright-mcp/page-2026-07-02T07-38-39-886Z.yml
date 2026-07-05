@@ -1,0 +1,193 @@
+- generic [active] [ref=f12e1]:
+    - generic [ref=f12e2]:
+        - banner [ref=f12e3]:
+            - generic [ref=f12e5]:
+                - link "logo" [ref=f12e6] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=f12e7]
+                - generic [ref=f12e10] [cursor=pointer]:
+                    - button [ref=f12e11]:
+                        - img [ref=f12e12]
+                    - generic [ref=f12e14]: ⌘K
+                - navigation [ref=f12e15]:
+                    - list [ref=f12e16]:
+                        - listitem [ref=f12e17]:
+                            - link "Главная" [ref=f12e18] [cursor=pointer]:
+                                - /url: /
+                        - listitem [ref=f12e19]:
+                            - link "Новости" [ref=f12e20] [cursor=pointer]:
+                                - /url: /news/
+                        - listitem [ref=f12e21]:
+                            - link "Блог" [ref=f12e22] [cursor=pointer]:
+                                - /url: /post/
+                        - listitem [ref=f12e23]:
+                            - link "Релизы" [ref=f12e24] [cursor=pointer]:
+                                - /url: /changelog/
+                        - listitem [ref=f12e25]:
+                            - link "История LLM" [ref=f12e26] [cursor=pointer]:
+                                - /url: /llm-timeline/
+                        - listitem [ref=f12e27]:
+                            - link "Обо мне" [ref=f12e28] [cursor=pointer]:
+                                - /url: /portfolio/
+                - generic [ref=f12e29]:
+                    - button "settings" [ref=f12e30] [cursor=pointer]:
+                        - img [ref=f12e32]
+                    - link "Вход" [ref=f12e35] [cursor=pointer]:
+                        - /url: /dashboard/
+        - main [ref=f12e36]:
+            - generic [ref=f12e38]:
+                - generic [ref=f12e39]:
+                    - img "Illo accusamus non e" [ref=f12e42]
+                    - button "Поделиться постом" [ref=f12e43] [cursor=pointer]
+                    - menu:
+                        - menuitem "Поделиться в Telegram"
+                        - menuitem "Поделиться в X"
+                        - menuitem "Поделиться во ВКонтакте"
+                        - menuitem "Скопировать ссылку"
+                - heading "Illo accusamus non e" [level=1] [ref=f12e44]
+                - generic [ref=f12e45]:
+                    - img [ref=f12e47]
+                    - heading "Hello Friend" [level=6] [ref=f12e49]
+                    - generic [ref=f12e50]: 30 марта 2026
+            - navigation [ref=f12e55]:
+                - list [ref=f12e56]:
+                    - listitem [ref=f12e57]:
+                        - link "Главная" [ref=f12e58] [cursor=pointer]:
+                            - /url: /
+                    - listitem [ref=f12e59]
+                    - listitem [ref=f12e61]:
+                        - link "Блог" [ref=f12e62] [cursor=pointer]:
+                            - /url: /post/
+                    - listitem [ref=f12e63]
+                    - listitem [ref=f12e65]:
+                        - generic: Illo accusamus non e
+            - generic [ref=f12e67]:
+                - generic [ref=f12e68]: 1 мин чтения
+                - heading "Ut eum voluptatibus" [level=6] [ref=f12e69]
+                - generic [ref=f12e70]:
+                    - paragraph [ref=f12e71]: Eligendi sint, corru.
+                    - paragraph [ref=f12e72]: Eligendi sint, corru.
+                    - paragraph [ref=f12e73]: Eligendi sint, corru.
+                    - paragraph [ref=f12e74]: Eligendi sint, corru.
+                    - paragraph [ref=f12e75]: Eligendi sint, corru.
+                - generic [ref=f12e77]:
+                    - link "Technology" [ref=f12e78] [cursor=pointer]:
+                        - /url: /tag/Technology/
+                        - generic [ref=f12e79]: Technology
+                    - link "Finance" [ref=f12e80] [cursor=pointer]:
+                        - /url: /tag/Finance/
+                        - generic [ref=f12e81]: Finance
+                - generic [ref=f12e82]:
+                    - heading "Понравился разбор? Получайте такие раз в неделю на почту" [level=6] [ref=f12e83]
+                    - generic [ref=f12e86]:
+                        - generic [ref=f12e88]:
+                            - textbox "you@example.com" [ref=f12e89]
+                            - group
+                        - button "Подписаться" [ref=f12e90] [cursor=pointer]
+                - generic [ref=f12e91]:
+                    - heading "Комментарии" [level=4] [ref=f12e92]
+                    - heading "(1)" [level=6] [ref=f12e93]
+                - generic [ref=f12e95]:
+                    - generic [ref=f12e97]:
+                        - textbox "Оставьте комментарий..." [ref=f12e98]
+                        - group
+                    - generic [ref=f12e99]:
+                        - button "Отправить комментарий" [disabled]
+                - separator [ref=f12e100]
+                - generic [ref=f12e102]:
+                    - img [ref=f12e104]
+                    - generic [ref=f12e106]:
+                        - heading "Demo User Edited" [level=6] [ref=f12e108]
+                        - paragraph [ref=f12e109]: Тестовый комментарий для проверки реактивности
+                        - generic [ref=f12e110]:
+                            - generic [ref=f12e111]: 20 июня 2026
+                            - button "Ответить" [ref=f12e112] [cursor=pointer]: Ответить
+            - generic [ref=f12e113]:
+                - heading "Похожие посты" [level=4] [ref=f12e114]
+                - generic [ref=f12e115]:
+                    - generic [ref=f12e117]:
+                        - generic [ref=f12e118]:
+                            - img [ref=f12e119]
+                            - img [ref=f12e122]
+                        - generic [ref=f12e127]:
+                            - generic [ref=f12e128]: 20 июня 2026
+                            - link "«германия безоговорочно капитулирует. президент выступает с речью по радио. слушая, я смотрю…" [ref=f12e129] [cursor=pointer]:
+                                - /url: /post/f8d64a61-ce75-41cc-9def-2096dd6f6849/
+                            - generic [ref=f12e132]: новости
+                            - generic [ref=f12e133]:
+                                - generic [ref=f12e134]: 3 мин
+                                - generic [ref=f12e135]:
+                                    - img [ref=f12e136]
+                                    - text: "0"
+                                - generic [ref=f12e138]: "4"
+                                - generic [ref=f12e139]: "0"
+                    - generic [ref=f12e141]:
+                        - generic [ref=f12e142]:
+                            - img [ref=f12e143]
+                            - img [ref=f12e146]
+                        - generic [ref=f12e151]:
+                            - generic [ref=f12e152]: 20 июня 2026
+                            - link "Попадание в файлы Эпштейна, уголовное дело сына и страшная болезнь — все это пришлось пережить кронпринцессе Норвегии. Теперь Метте-Марит перенесла еще и опасную операцию. Спасет ли это ее жизнь?" [ref=f12e153] [cursor=pointer]:
+                                - /url: /post/3ba36873-f220-49f5-8f12-67f2b11b0cf7/
+                            - generic [ref=f12e156]: новости
+                            - generic [ref=f12e157]:
+                                - generic [ref=f12e158]: 3 мин
+                                - generic [ref=f12e159]:
+                                    - img [ref=f12e160]
+                                    - text: "0"
+                                - generic [ref=f12e162]: "4"
+                                - generic [ref=f12e163]: "0"
+                    - generic [ref=f12e165]:
+                        - generic [ref=f12e166]:
+                            - img [ref=f12e167]
+                            - img [ref=f12e170]
+                        - generic [ref=f12e175]:
+                            - generic [ref=f12e176]: 20 июня 2026
+                            - link "Россиян предостерегли от совершения типичной ошибки в борьбе с летней бессонницей" [ref=f12e177] [cursor=pointer]:
+                                - /url: /post/48f3641d-a550-4b5b-8ce7-d97146e021d5/
+                            - generic [ref=f12e180]: новости
+                            - generic [ref=f12e181]:
+                                - generic [ref=f12e182]: 1 мин
+                                - generic [ref=f12e183]:
+                                    - img [ref=f12e184]
+                                    - text: "0"
+                                - generic [ref=f12e186]: "3"
+                                - generic [ref=f12e187]: "0"
+        - contentinfo [ref=f12e188]:
+            - separator [ref=f12e189]
+            - generic [ref=f12e190]:
+                - link "logo" [ref=f12e191] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=f12e192]
+                - generic [ref=f12e195]:
+                    - generic [ref=f12e196]:
+                        - paragraph [ref=f12e197]: Блог и заметки о разработке. Для связи удобнее всего использовать соцсети ниже.
+                        - generic [ref=f12e198]:
+                            - link [ref=f12e199] [cursor=pointer]:
+                                - /url: https://t.me/sh0ny
+                                - img [ref=f12e200]
+                            - link [ref=f12e202] [cursor=pointer]:
+                                - /url: https://github.com/InfinityScripter
+                                - img [ref=f12e203]
+                            - link [ref=f12e205] [cursor=pointer]:
+                                - /url: https://www.linkedin.com/in/talalaevs/
+                                - img [ref=f12e206]
+                            - link [ref=f12e208] [cursor=pointer]:
+                                - /url: https://vk.com/sh0ny
+                                - img [ref=f12e209]
+                    - generic [ref=f12e212]:
+                        - generic [ref=f12e213]:
+                            - generic [ref=f12e214]: Документы
+                            - link "Условия использования" [ref=f12e215] [cursor=pointer]:
+                                - /url: "#"
+                            - link "Политика конфиденциальности" [ref=f12e216] [cursor=pointer]:
+                                - /url: "#"
+                        - generic [ref=f12e217]:
+                            - generic [ref=f12e218]: Контакты
+                            - link "talalaev.misha@gmail.com" [ref=f12e219] [cursor=pointer]:
+                                - /url: mailto:talalaev.misha@gmail.com
+                - paragraph [ref=f12e220]: © All rights reserved.
+    - button "Open Next.js Dev Tools" [ref=f12e226] [cursor=pointer]:
+        - img [ref=f12e227]
+    - alert [ref=f12e230]
+    - region "Notifications alt+T"

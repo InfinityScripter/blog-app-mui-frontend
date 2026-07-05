@@ -1,0 +1,80 @@
+- generic [active] [ref=f11e1]:
+    - button "Open Next.js Dev Tools" [ref=f11e7] [cursor=pointer]:
+        - img [ref=f11e8]
+    - alert [ref=f11e11]
+    - region "Notifications alt+T"
+    - generic [ref=f11e12]:
+        - banner [ref=f11e13]:
+            - generic [ref=f11e15]:
+                - link "logo" [ref=f11e16] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=f11e17]
+                - generic [ref=f11e20] [cursor=pointer]:
+                    - button [ref=f11e21]:
+                        - img [ref=f11e22]
+                    - generic [ref=f11e24]: ⌘K
+                - navigation [ref=f11e25]:
+                    - list [ref=f11e26]:
+                        - listitem [ref=f11e27]:
+                            - link "Главная" [ref=f11e28] [cursor=pointer]:
+                                - /url: /
+                        - listitem [ref=f11e29]:
+                            - link "Новости" [ref=f11e30] [cursor=pointer]:
+                                - /url: /news/
+                        - listitem [ref=f11e31]:
+                            - link "Блог" [ref=f11e32] [cursor=pointer]:
+                                - /url: /post/
+                        - listitem [ref=f11e33]:
+                            - link "Релизы" [ref=f11e34] [cursor=pointer]:
+                                - /url: /changelog/
+                        - listitem [ref=f11e35]:
+                            - link "История LLM" [ref=f11e36] [cursor=pointer]:
+                                - /url: /llm-timeline/
+                        - listitem [ref=f11e37]:
+                            - link "Обо мне" [ref=f11e38] [cursor=pointer]:
+                                - /url: /portfolio/
+                - generic [ref=f11e39]:
+                    - button "settings" [ref=f11e40] [cursor=pointer]:
+                        - img [ref=f11e42]
+                    - link "Вход" [ref=f11e45] [cursor=pointer]:
+                        - /url: /dashboard/
+        - main [ref=f11e46]:
+            - generic [ref=f11e47]:
+                - generic [ref=f11e48]:
+                    - paragraph [ref=f11e49]: Релизы моделей
+                    - heading "Хроника релизов AI-моделей" [level=1] [ref=f11e50]
+                - paragraph [ref=f11e51]: Пока нет релизов.
+        - contentinfo [ref=f11e52]:
+            - separator [ref=f11e53]
+            - generic [ref=f11e54]:
+                - link "logo" [ref=f11e55] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=f11e56]
+                - generic [ref=f11e59]:
+                    - generic [ref=f11e60]:
+                        - paragraph [ref=f11e61]: Блог и заметки о разработке. Для связи удобнее всего использовать соцсети ниже.
+                        - generic [ref=f11e62]:
+                            - link [ref=f11e63] [cursor=pointer]:
+                                - /url: https://t.me/sh0ny
+                                - img [ref=f11e64]
+                            - link [ref=f11e66] [cursor=pointer]:
+                                - /url: https://github.com/InfinityScripter
+                                - img [ref=f11e67]
+                            - link [ref=f11e69] [cursor=pointer]:
+                                - /url: https://www.linkedin.com/in/talalaevs/
+                                - img [ref=f11e70]
+                            - link [ref=f11e72] [cursor=pointer]:
+                                - /url: https://vk.com/sh0ny
+                                - img [ref=f11e73]
+                    - generic [ref=f11e76]:
+                        - generic [ref=f11e77]:
+                            - generic [ref=f11e78]: Документы
+                            - link "Условия использования" [ref=f11e79] [cursor=pointer]:
+                                - /url: "#"
+                            - link "Политика конфиденциальности" [ref=f11e80] [cursor=pointer]:
+                                - /url: "#"
+                        - generic [ref=f11e81]:
+                            - generic [ref=f11e82]: Контакты
+                            - link "talalaev.misha@gmail.com" [ref=f11e83] [cursor=pointer]:
+                                - /url: mailto:talalaev.misha@gmail.com
+                - paragraph [ref=f11e84]: © All rights reserved.

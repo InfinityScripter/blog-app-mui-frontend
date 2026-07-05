@@ -3,6 +3,7 @@ import { toAppLocale } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getBlogPosts } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
+import { defaultLocaleStaticParams } from "src/i18n/static-params";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
@@ -13,6 +14,10 @@ import { PostListHomeView } from "src/sections/blog/view/post-list-home-view";
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
+
+// Prebuild only /ru/post; /en/post renders on demand + ISR (translates the list
+// lazily, once) so the build never translates the whole blog list.
+export const generateStaticParams = defaultLocaleStaticParams;
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params;
