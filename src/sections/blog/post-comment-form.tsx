@@ -1,19 +1,17 @@
-import type { User } from "src/types/domain";
-
+import { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import { useAuthContext } from "src/auth/hooks";
+import { addComment } from "src/actions/blog-ssr";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { STORAGE_KEY } from "src/auth/context/jwt";
 import { zodResolver } from "@hookform/resolvers/zod";
 // Import the two pieces this form needs directly — NOT from the hook-form
 // barrel. The barrel's `Field` namespace statically pulls RHFEditor (tiptap),
 // RHFUpload (dropzone) and RHFPhoneInput (libphonenumber), which would bloat
 // the public /post/[id] bundle by ~900 KB.
 import { Form } from "src/components/hook-form/form-provider";
-import { addComment, getCurrentUser } from "src/actions/blog-ssr";
 import { RHFTextField } from "src/components/hook-form/rhf-text-field";
 
 import { CommentSchema } from "./post-comment-form-schema";
@@ -28,7 +26,9 @@ export function PostCommentForm({
   onCommentUpdated,
   parentCommentId,
 }: PostCommentFormProps) {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  // Login state comes from the cookie-based auth context (the AuthProvider
+  // already resolved the session via /me). No client-readable token to inspect.
+  const { user: currentUser } = useAuthContext();
   const [error, setError] = useState<string | null>(null);
   const params = useParams<{ id: string }>();
 
@@ -47,33 +47,6 @@ export function PostCommentForm({
     handleSubmit,
     formState: { isSubmitting },
   } = methods;
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const accessToken = sessionStorage.getItem(STORAGE_KEY);
-
-      if (!accessToken) {
-        return;
-      }
-
-      try {
-        const response = await getCurrentUser();
-        setCurrentUser(response.user);
-        // eslint-disable-next-line no-shadow
-      } catch (error) {
-        if (
-          error instanceof Error &&
-          error.message === "Authorization token missing"
-        ) {
-          return;
-        }
-
-        console.error("Failed to fetch user:", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   const onSubmit = handleSubmit(async (data) => {
     try {

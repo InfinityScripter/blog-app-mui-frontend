@@ -20,6 +20,7 @@ import { formatImageUrl } from "src/utils/format-image-url";
 
 import { AccountButton } from "./account-button";
 import { SignOutButton } from "./sign-out-button";
+import { SignOutEverywhereButton } from "./sign-out-everywhere-button";
 
 import type {
   LayoutUserView,
@@ -186,6 +187,7 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
 
         <Box sx={{ p: 2.5 }}>
           <SignOutButton onClose={handleCloseDrawer} />
+          <SignOutEverywhereButton onClose={handleCloseDrawer} />
         </Box>
       </Drawer>
     </>

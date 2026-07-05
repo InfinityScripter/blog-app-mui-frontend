@@ -1,13 +1,12 @@
 "use client";
 
-import type { AccessTokenResponse } from "src/types/auth";
-
 import { CONFIG } from "src/config-global";
 import axios, { endpoints } from "src/utils/axios";
 
-import { setSession } from "./utils";
-
 // ----------------------------------------------------------------------
+// Auth is cookie-based: the backend sets httpOnly access/refresh cookies and a
+// readable CSRF cookie on the sign-in response. The client never handles the
+// token — after sign-in it just re-checks the session via /me.
 
 interface SignInParams {
   email: string;
@@ -22,20 +21,8 @@ export const signInWithPassword = async ({
   password,
 }: SignInParams): Promise<void> => {
   try {
-    const params = { email, password };
-
-    const res = await axios.post<AccessTokenResponse>(
-      endpoints.auth.signIn,
-      params,
-    );
-
-    const { accessToken } = res.data;
-
-    if (!accessToken) {
-      throw new Error("Access token not found in response");
-    }
-
-    setSession(accessToken);
+    // On success the backend sets the auth cookies; nothing to store client-side.
+    await axios.post(endpoints.auth.signIn, { email, password });
   } catch (error) {
     console.error("Error during sign in:", error);
     throw error;
@@ -87,10 +74,22 @@ export const signUp = async ({
  *************************************** */
 export const signOut = async (): Promise<void> => {
   try {
-    await setSession(null);
+    // Server revokes the refresh-token family and clears the auth cookies.
+    // Best-effort: even if the request fails, the caller clears local state.
+    await axios.post(endpoints.auth.signOut);
   } catch (error) {
     console.error("Error during sign out:", error);
-    throw error;
+  }
+};
+
+/** **************************************
+ * Sign out everywhere (all devices/sessions)
+ *************************************** */
+export const signOutAllSessions = async (): Promise<void> => {
+  try {
+    await axios.post(endpoints.auth.signOutAll);
+  } catch (error) {
+    console.error("Error during sign out (all sessions):", error);
   }
 };
 

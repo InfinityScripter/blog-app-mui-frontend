@@ -45,8 +45,7 @@ import type { AuditLogsFilters } from "./types";
 // ----------------------------------------------------------------------
 
 export function AdminAuditLogsView() {
-  const { user } = useAuthContext();
-  const accessToken = user?.accessToken;
+  const { authenticated } = useAuthContext();
 
   const filters = useSetState<AuditLogsFilters>({
     action: "",
@@ -71,7 +70,7 @@ export function AdminAuditLogsView() {
 
   const { auditLogs, auditLogsTotal, auditLogsLoading } = useGetAuditLogs(
     params,
-    accessToken,
+    authenticated,
   );
 
   // Смена любого фильтра → сброс страницы в 0.
