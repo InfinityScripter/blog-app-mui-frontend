@@ -1,23 +1,23 @@
 // Bridge between the axios refresh interceptor and the AuthProvider without a
 // circular import. When a silent token refresh fails, axios calls
-// `emitSessionExpired()`; the AuthProvider registers a handler that clears the
-// user state and (best-effort) hits sign-out. Kept tiny and framework-free.
+// `emitSessionExpired()`; each mounted AuthProvider registers a handler that
+// clears its user state. Kept tiny and framework-free.
+//
+// A Set (not a single ref) so this stays correct when more than one AuthProvider
+// is mounted — this app nests a second AuthProvider under several route-group
+// layouts, and every instance must be notified, not just the last to subscribe.
 
 type SessionExpiredHandler = () => void;
 
-let handler: SessionExpiredHandler | null = null;
+const handlers = new Set<SessionExpiredHandler>();
 
 export function onSessionExpired(next: SessionExpiredHandler): () => void {
-  handler = next;
+  handlers.add(next);
   return () => {
-    if (handler === next) {
-      handler = null;
-    }
+    handlers.delete(next);
   };
 }
 
 export function emitSessionExpired(): void {
-  if (handler) {
-    handler();
-  }
+  handlers.forEach((handler) => handler());
 }

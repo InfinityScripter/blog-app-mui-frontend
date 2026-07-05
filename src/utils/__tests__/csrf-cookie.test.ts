@@ -2,8 +2,8 @@ import { it, expect, describe, afterEach } from "vitest";
 
 import {
   isMutatingMethod,
-  readBrowserCookie,
   CSRF_COOKIE_NAME,
+  readBrowserCookie,
 } from "../csrf-cookie";
 
 // jsdom is not configured (env: node), so document is undefined by default. We

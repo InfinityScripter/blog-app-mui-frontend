@@ -4,7 +4,6 @@ import axios, {
   type AxiosInstance,
   type AxiosResponse,
   type AxiosRequestConfig,
-  type InternalAxiosRequestConfig,
 } from "axios";
 
 import {
@@ -25,13 +24,16 @@ const AUTH_BYPASS_PATHS = ["/api/auth/refresh", "/api/auth/sign-in"];
 
 const REFRESH_PATH = "/api/auth/refresh";
 
-// Retried-once marker carried on the request config.
-interface RetryableConfig extends InternalAxiosRequestConfig {
-  _retriedAfterRefresh?: boolean;
+// Carry a "retried once" marker on the request config via declaration merging
+// (the repo forbids `as` casts — augment the type instead of asserting it).
+declare module "axios" {
+  interface InternalAxiosRequestConfig {
+    _retriedAfterRefresh?: boolean;
+  }
 }
 
 // Attach the double-submit CSRF header on mutating requests.
-axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+axiosInstance.interceptors.request.use((config) => {
   if (isMutatingMethod(config.method)) {
     const csrf = readBrowserCookie(CSRF_COOKIE_NAME);
     if (csrf) {
@@ -63,7 +65,7 @@ function toError(error: AxiosError<{ message?: string }>): Error {
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error: AxiosError<{ message?: string }>) => {
-    const config = error.config as RetryableConfig | undefined;
+    const {config} = error;
     const status = error.response?.status;
     const url = config?.url ?? "";
     const isBypass = AUTH_BYPASS_PATHS.some((path) => url.includes(path));
