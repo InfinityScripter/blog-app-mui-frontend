@@ -13,8 +13,11 @@ import { langQuery } from "src/utils/lang-param";
 import axios, { endpoints } from "src/utils/axios";
 import { NEWS_TAG } from "src/sections/news/const";
 import { fetchJsonWithRetry } from "src/utils/fetch-retry";
-import { fetchListLocalized } from "src/utils/translated-feed";
 import { DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
+import {
+  fetchListLocalized,
+  fetchDetailLocalized,
+} from "src/utils/translated-feed";
 
 // ----------------------------------------------------------------------
 
@@ -89,8 +92,12 @@ export async function getPost(
   id: string,
   lang: AppLocale = DEFAULT_LOCALE,
 ): Promise<PostResponse> {
-  const url = `${SERVER_URL}${endpoints.post.details}?id=${id}${langQuery(lang, true)}`;
-  return fetchJsonWithRetry<PostResponse>(url, ISR_FETCH_INIT);
+  // Cold-cache fallback: a cold EN body translation can exceed Vercel's 10s
+  // limit (→ 504). fetchDetailLocalized serves the original (Russian) post if
+  // the translated fetch overruns its budget; the background warm then caches
+  // the body so the next ISR render is a fast translated DB hit. `ru` = original.
+  const base = `${SERVER_URL}${endpoints.post.details}?id=${id}`;
+  return fetchDetailLocalized(base, lang, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
