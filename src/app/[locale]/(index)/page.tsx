@@ -1,5 +1,7 @@
 import { CONFIG } from "src/config-global";
 import { HomeView } from "src/sections/home/view";
+import { getTranslations } from "next-intl/server";
+import { localizedAlternates } from "src/utils/seo-alternates";
 
 // ----------------------------------------------------------------------
 
@@ -48,17 +50,22 @@ const JSON_LD = {
   ],
 };
 
-// `title.absolute` opts out of the root template (`%s | Mihail Talalaev`) so
-// the homepage title isn't doubled. ~55 chars, keyword-first, product-framed.
-// The site is an AI news aggregator; the author (Mihail Talalaev) is secondary.
-// Description ~155 chars in Russian (audience is рунет) with the core keywords.
-export const metadata = {
-  title: {
-    absolute: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
-  },
-  description:
-    "AI-first агрегатор новостей: нейросеть (LLM) сама находит, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях. Без редактора — лента курируется AI.",
-};
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+// `title.absolute` opts out of the root template (`%s | Talalaev`) so the
+// homepage title isn't doubled. Localized per locale; alternates carry the
+// hreflang links for ru/en.
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "home.meta" });
+  return {
+    title: { absolute: t("title") },
+    description: t("description"),
+    ...localizedAlternates(locale, "/"),
+  };
+}
 
 export default function Page() {
   return (

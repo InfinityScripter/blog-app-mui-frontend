@@ -27,5 +27,32 @@
     "privacyPolicy": "Privacy Policy",
     "contacts": "Contacts",
     "madeBy": "made by"
+  },
+  "blog": {
+    "meta": {
+      "title": "Blog",
+      "ogTitle": "Blog | Talalaev",
+      "description": "Mikhail Talalaev's articles on web development, React, Next.js and TypeScript."
+    }
+  },
+  "news": {
+    "meta": {
+      "title": "AI news feed: artificial intelligence, IT, technology",
+      "description": "AI news feed: a neural network (LLM) automatically gathers sources, filters and briefly summarizes the latest news about artificial intelligence, IT and technology.",
+      "ogTitle": "AI news feed: AI, IT, technology | Talalaev",
+      "ogDescription": "A neural network automatically gathers and briefly summarizes the latest news about artificial intelligence, IT and technology."
+    }
+  },
+  "tag": {
+    "meta": {
+      "title": "Tag: {tag}",
+      "description": "Posts tagged “{tag}” on {site}"
+    }
+  },
+  "home": {
+    "meta": {
+      "title": "AI news aggregator: AI, IT and technology | Talalaev",
+      "description": "AI-first news aggregator: a neural network (LLM) finds, filters and briefly summarizes the latest news about artificial intelligence, IT and technology. No editor — the feed is curated by AI."
+    }
   }
 }

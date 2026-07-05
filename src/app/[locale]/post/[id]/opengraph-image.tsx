@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { CONFIG } from "src/config-global";
 import { getPost } from "src/actions/blog-ssr";
+import { toAppLocale } from "src/i18n/locales";
 import { loadOgFonts } from "src/utils/og-fonts";
 
 // ----------------------------------------------------------------------
@@ -18,12 +19,12 @@ const BRAND_GRADIENT =
   "linear-gradient(135deg, #5BE49B 0%, #00A76F 55%, #007867 100%)";
 
 interface ImageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }
 
-async function resolveTitle(id: string): Promise<string> {
+async function resolveTitle(id: string, locale: string): Promise<string> {
   try {
-    const { post } = await getPost(id);
+    const { post } = await getPost(id, toAppLocale(locale));
     return post?.title ?? CONFIG.site.name;
   } catch {
     return CONFIG.site.name;
@@ -31,8 +32,11 @@ async function resolveTitle(id: string): Promise<string> {
 }
 
 export default async function PostOpengraphImage({ params }: ImageProps) {
-  const { id } = await params;
-  const [fonts, title] = await Promise.all([loadOgFonts(), resolveTitle(id)]);
+  const { id, locale } = await params;
+  const [fonts, title] = await Promise.all([
+    loadOgFonts(),
+    resolveTitle(id, locale),
+  ]);
 
   return new ImageResponse(
     (

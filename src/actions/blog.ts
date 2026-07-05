@@ -6,7 +6,16 @@ import type {
 
 import useSWR from "swr";
 import { useMemo } from "react";
+import { useLocale } from "next-intl";
+import { langQuery } from "src/utils/lang-param";
 import { fetcher, endpoints } from "src/utils/axios";
+import { DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
+
+// useLocale() returns a plain string; narrow it to AppLocale (routing
+// guarantees the value is a supported locale) without a type assertion.
+function activeLocale(value: string): AppLocale {
+  return value === "en" ? "en" : DEFAULT_LOCALE;
+}
 
 const swrOptions = {
   revalidateIfStale: true,
@@ -27,9 +36,11 @@ interface UseGetPostsOptions {
 
 export function useGetPosts(options: UseGetPostsOptions = {}) {
   const { excludeTag, limit } = options;
+  const locale = activeLocale(useLocale());
   const params = new URLSearchParams();
   if (excludeTag) params.set("excludeTag", excludeTag);
   if (limit) params.set("limit", String(limit));
+  if (locale !== DEFAULT_LOCALE) params.set("lang", locale);
   const queryString = params.toString();
   const url = queryString
     ? `${endpoints.post.list}?${queryString}`
@@ -56,7 +67,10 @@ export function useGetPosts(options: UseGetPostsOptions = {}) {
 }
 
 export function useGetPost(postId?: string) {
-  const key = postId ? `${endpoints.post.details}?id=${postId}` : null;
+  const locale = activeLocale(useLocale());
+  const key = postId
+    ? `${endpoints.post.details}?id=${postId}${langQuery(locale, true)}`
+    : null;
 
   const { data, isLoading, error, isValidating, mutate } = useSWR<PostResponse>(
     key,
@@ -77,9 +91,12 @@ export function useGetPost(postId?: string) {
 }
 
 export function useSearchPosts(query?: string, dashboard: boolean = false) {
-  const url = query
-    ? [endpoints.post.search, { params: { query, dashboard } }]
-    : "";
+  const locale = activeLocale(useLocale());
+  const params =
+    locale === DEFAULT_LOCALE
+      ? { query, dashboard }
+      : { query, dashboard, lang: locale };
+  const url = query ? [endpoints.post.search, { params }] : "";
 
   const { data, isLoading, error, isValidating } = useSWR<SearchPostsResponse>(
     url,

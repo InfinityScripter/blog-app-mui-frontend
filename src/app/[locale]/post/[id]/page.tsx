@@ -1,9 +1,11 @@
 import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
+import { toAppLocale } from "src/i18n/locales";
 import { paramCase } from "src/utils/change-case";
 import { NotFoundError } from "src/utils/fetch-retry";
 import { getPost, getPosts } from "src/actions/blog-ssr";
 import { parsePostContent } from "src/utils/post-geo-content";
+import { localizedAlternates } from "src/utils/seo-alternates";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
@@ -17,8 +19,8 @@ const BASE_URL = CONFIG.site.url;
 
 export async function generateMetadata({ params }: PageProps) {
   try {
-    const { id } = await params;
-    const { post } = await getPost(id);
+    const { id, locale } = await params;
+    const { post } = await getPost(id, toAppLocale(locale));
     const title = post?.title ?? "Статья";
     const description = post?.description ?? "Читать на aifirst.us.com";
     // A real uploaded cover wins as og:image. Otherwise omit images here and let
@@ -30,11 +32,11 @@ export async function generateMetadata({ params }: PageProps) {
     return {
       title,
       description,
-      alternates: { canonical: `${BASE_URL}/post/${id}/` },
+      ...localizedAlternates(locale, `/post/${id}/`),
       openGraph: {
         title,
         description,
-        url: `${BASE_URL}/post/${id}/`,
+        url: `${BASE_URL}/${locale}/post/${id}/`,
         type: "article",
         ...(images && { images }),
       },
@@ -55,11 +57,11 @@ export async function generateMetadata({ params }: PageProps) {
 export const revalidate = 3600;
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: string; locale: string }>;
 }
 
 export default async function Page({ params }: PageProps) {
-  const { id } = await params;
+  const { id, locale } = await params;
 
   // Only a REAL backend 404 (post deleted/unknown) becomes notFound(). Any
   // other failure — after getPost's built-in retries — is rethrown: at build
@@ -70,7 +72,7 @@ export default async function Page({ params }: PageProps) {
   let post: Awaited<ReturnType<typeof getPost>>["post"];
   let latestPosts: Awaited<ReturnType<typeof getPost>>["latestPosts"];
   try {
-    ({ post, latestPosts } = await getPost(id));
+    ({ post, latestPosts } = await getPost(id, toAppLocale(locale)));
   } catch (error) {
     if (error instanceof NotFoundError) {
       notFound();

@@ -1,13 +1,14 @@
 import { CONFIG } from "src/config-global";
+import { toAppLocale } from "src/i18n/locales";
+import { getTranslations } from "next-intl/server";
 import { getPosts, getPostsByTag } from "src/actions/blog-ssr";
+import { localizedAlternates } from "src/utils/seo-alternates";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
 import { TagListView } from "src/sections/blog/view/tag-list-view";
 
 // ----------------------------------------------------------------------
-
-const BASE_URL = CONFIG.site.url;
 
 // On the on-demand/dynamicParams path Next may hand us an already-decoded slug;
 // a tag with a literal "%" + non-hex would make decodeURIComponent throw. Degrade
@@ -24,33 +25,31 @@ function safeDecode(value: string): string {
 export const revalidate = 3600;
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const decoded = safeDecode(slug);
-  const title = `Тег: ${decoded}`;
+  const t = await getTranslations({ locale, namespace: "tag.meta" });
   return {
-    title,
-    description: `Посты с тегом «${decoded}» на ${CONFIG.site.name}`,
+    title: t("title", { tag: decoded }),
+    description: t("description", { tag: decoded, site: CONFIG.site.name }),
     // Encode the raw (case-sensitive, possibly Cyrillic) tag; trailing slash
     // matches next.config trailingSlash:true.
-    alternates: {
-      canonical: `${BASE_URL}/tag/${encodeURIComponent(decoded)}/`,
-    },
+    ...localizedAlternates(locale, `/tag/${encodeURIComponent(decoded)}/`),
   };
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const decoded = safeDecode(slug);
 
   // No error swallowing: transient backend failures are retried inside
   // getPostsByTag; a persistent one must THROW instead of ISR-caching an empty
   // archive for an hour (2026-07-03 incident). An unknown tag is a legitimate
   // 200 + empty list from the backend, not an error.
-  const { posts } = await getPostsByTag(decoded);
+  const { posts } = await getPostsByTag(decoded, toAppLocale(locale));
 
   return <TagListView tag={decoded} posts={posts} />;
 }

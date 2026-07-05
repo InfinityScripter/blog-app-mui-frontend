@@ -9,9 +9,11 @@ import type {
   GenericMessageResponse,
 } from "src/types/api";
 
+import { langQuery } from "src/utils/lang-param";
 import axios, { endpoints } from "src/utils/axios";
 import { NEWS_TAG } from "src/sections/news/const";
 import { fetchJsonWithRetry } from "src/utils/fetch-retry";
+import { DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
 
 // ----------------------------------------------------------------------
 
@@ -39,18 +41,20 @@ const CHANGELOG_FETCH_INIT = {
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 
-export async function getPosts(): Promise<ListPostsResponse> {
-  return fetchJsonWithRetry<ListPostsResponse>(
-    `${SERVER_URL}${endpoints.post.list}`,
-    ISR_FETCH_INIT,
-  );
+export async function getPosts(
+  lang: AppLocale = DEFAULT_LOCALE,
+): Promise<ListPostsResponse> {
+  const url = `${SERVER_URL}${endpoints.post.list}${langQuery(lang, false)}`;
+  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
 
 /** Published posts tagged 'новости', for the /news feed (ISR-cached). */
-export async function getNewsPosts(): Promise<ListPostsResponse> {
-  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(NEWS_TAG)}`;
+export async function getNewsPosts(
+  lang: AppLocale = DEFAULT_LOCALE,
+): Promise<ListPostsResponse> {
+  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(NEWS_TAG)}${langQuery(lang, true)}`;
   return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
 }
 
@@ -60,26 +64,32 @@ export async function getNewsPosts(): Promise<ListPostsResponse> {
  * Published posts for the blog list, EXCLUDING news (tag 'новости'). News lives
  * only in /news; the blog and home feed show authored/portfolio posts.
  */
-export async function getBlogPosts(): Promise<ListPostsResponse> {
-  const url = `${SERVER_URL}${endpoints.post.list}?excludeTag=${encodeURIComponent(NEWS_TAG)}`;
+export async function getBlogPosts(
+  lang: AppLocale = DEFAULT_LOCALE,
+): Promise<ListPostsResponse> {
+  const url = `${SERVER_URL}${endpoints.post.list}?excludeTag=${encodeURIComponent(NEWS_TAG)}${langQuery(lang, true)}`;
   return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
 
 /** Published posts carrying an exact tag, for the /tag/[slug] archive (ISR-cached). */
-export async function getPostsByTag(tag: string): Promise<ListPostsResponse> {
-  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(tag)}`;
+export async function getPostsByTag(
+  tag: string,
+  lang: AppLocale = DEFAULT_LOCALE,
+): Promise<ListPostsResponse> {
+  const url = `${SERVER_URL}${endpoints.post.list}?tag=${encodeURIComponent(tag)}${langQuery(lang, true)}`;
   return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
 
-export async function getPost(id: string): Promise<PostResponse> {
-  return fetchJsonWithRetry<PostResponse>(
-    `${SERVER_URL}${endpoints.post.details}?id=${id}`,
-    ISR_FETCH_INIT,
-  );
+export async function getPost(
+  id: string,
+  lang: AppLocale = DEFAULT_LOCALE,
+): Promise<PostResponse> {
+  const url = `${SERVER_URL}${endpoints.post.details}?id=${id}${langQuery(lang, true)}`;
+  return fetchJsonWithRetry<PostResponse>(url, ISR_FETCH_INIT);
 }
 
 // ----------------------------------------------------------------------
