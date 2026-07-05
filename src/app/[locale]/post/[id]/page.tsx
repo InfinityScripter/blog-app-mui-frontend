@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
-import { toAppLocale } from "src/i18n/locales";
 import { paramCase } from "src/utils/change-case";
 import { NotFoundError } from "src/utils/fetch-retry";
 import { getPost, getPosts } from "src/actions/blog-ssr";
 import { parsePostContent } from "src/utils/post-geo-content";
+import { toAppLocale, DEFAULT_LOCALE } from "src/i18n/locales";
 import { localizedAlternates } from "src/utils/seo-alternates";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
@@ -114,19 +114,24 @@ export default async function Page({ params }: PageProps) {
 // ----------------------------------------------------------------------
 
 /**
- * Prerender the published posts at build time; unknown ids still render on
- * demand (dynamicParams defaults to true) and are then cached by ISR. The
- * fetch is wrapped so an unreachable backend at build time yields no params
- * instead of failing the build.
+ * Prerender the published posts at build time — but ONLY for the default locale
+ * (Russian original). The `en` variants are machine-translated per post on the
+ * backend; prebuilding every post × locale would double the build-time fetch
+ * volume and trip the backend list rate-limit (429). `en` posts render on demand
+ * on first request (dynamicParams defaults to true) and are then ISR-cached. Any
+ * unknown id also renders on demand. Wrapped so an unreachable backend at build
+ * time yields no params instead of failing the build.
  */
-export async function generateStaticParams(): Promise<Array<{ id: string }>> {
+export async function generateStaticParams(): Promise<
+  Array<{ locale: string; id: string }>
+> {
   try {
     const { posts } = await getPosts();
     return posts.map((post) => {
       // The backend serialises the primary key as `_id`; `id`/`title` are
       // fallbacks for older shapes.
       const { _id, id, title } = post;
-      return { id: _id ?? id ?? paramCase(title) };
+      return { locale: DEFAULT_LOCALE, id: _id ?? id ?? paramCase(title) };
     });
   } catch {
     return [];

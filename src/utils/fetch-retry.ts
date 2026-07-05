@@ -28,18 +28,19 @@ export class FetchFailedError extends Error {
 
   constructor(url: string, status?: number) {
     super(
-      status
-        ? `Request failed (${status}): ${url}`
-        : `Request failed: ${url}`,
+      status ? `Request failed (${status}): ${url}` : `Request failed: ${url}`,
     );
     this.name = "FetchFailedError";
     this.status = status;
   }
 }
 
-// Two retries after the initial attempt: enough to ride out a backend restart
-// (~1s) without stretching a Vercel build when the backend is genuinely down.
-const RETRY_DELAYS_MS: readonly number[] = [1000, 4000];
+// Retries after the initial attempt. The longer tail (15s) is sized for the
+// backend's per-IP list rate-limit (60/min): a big build that prerenders many
+// posts/tags can burst past the cap and get 429s, so a rate-limited read waits
+// out most of a window rather than failing the whole deploy. Short early delays
+// still absorb a backend restart (~1s) cheaply.
+const RETRY_DELAYS_MS: readonly number[] = [1000, 4000, 15000];
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => {
