@@ -3,18 +3,19 @@
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
-import { useMemo, useState } from "react";
 import Button from "@mui/material/Button";
 import { useGetPosts } from "src/actions/blog";
 import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
+import { useMemo, useState, useCallback } from "react";
 import { PostItemFeed } from "src/sections/blog/post-item-feed";
 import { PostItemFeedFeatured } from "src/sections/blog/post-item-feed-featured";
 
 import { useFeedTags } from "./hooks/use-feed-tags";
 import { toggleTag, selectFeedPosts } from "./utils";
+import { useFeedInfiniteScroll } from "./hooks/use-feed-infinite-scroll";
 import {
   FEED_TITLE,
   FEED_OVERLINE,
@@ -22,6 +23,7 @@ import {
   FEED_PAGE_SIZE,
   FEED_SHOW_MORE,
   FEED_EMPTY_TEXT,
+  FEED_SENTINEL_PRELOAD,
 } from "./const";
 
 // ----------------------------------------------------------------------
@@ -48,6 +50,18 @@ export function HomeFeed() {
   const featured = showFeatured ? visiblePosts[0] : undefined;
   const restPosts = showFeatured ? visiblePosts.slice(1) : visiblePosts;
   const hasMore = feedPosts.length > visibleCount;
+
+  // Reveal the next page — same action for the scroll sentinel and the fallback
+  // button. Stable identity so the observer effect doesn't re-run each render.
+  const loadMore = useCallback(
+    () => setVisibleCount((c) => c + FEED_PAGE_SIZE),
+    [],
+  );
+  const { sentinelRef } = useFeedInfiniteScroll({
+    hasMore,
+    onLoadMore: loadMore,
+    resetKey: visibleCount,
+  });
 
   const handleToggleTag = (tag: string) => {
     setSelectedTags((prev) => toggleTag(prev, tag));
@@ -114,16 +128,35 @@ export function HomeFeed() {
       )}
 
       {hasMore && (
-        <Box sx={{ mt: 5, display: "flex" }}>
-          <Button
-            size="large"
-            variant="outlined"
-            color="inherit"
-            onClick={() => setVisibleCount((c) => c + FEED_PAGE_SIZE)}
-            endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
-          >
-            {FEED_SHOW_MORE}
-          </Button>
+        <Box sx={{ mt: 5, position: "relative" }}>
+          {/* Кнопка — fallback (клавиатура, screen-reader, браузер без observer).
+              Sentinel — невидимый маркер, растянутый вверх на preload-высоту от
+              кнопки: как только его верх входит во viewport (+rootMargin), лента
+              автоматически раскрывает следующую порцию. position:absolute, чтобы
+              он не влиял на поток и его высота задавала зону упреждения. */}
+          <Box
+            ref={sentinelRef}
+            aria-hidden
+            sx={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              height: FEED_SENTINEL_PRELOAD,
+              pointerEvents: "none",
+            }}
+          />
+          <Box sx={{ display: "flex" }}>
+            <Button
+              size="large"
+              variant="outlined"
+              color="inherit"
+              onClick={loadMore}
+              endIcon={<Iconify icon="eva:arrow-ios-downward-fill" />}
+            >
+              {FEED_SHOW_MORE}
+            </Button>
+          </Box>
         </Box>
       )}
     </Container>

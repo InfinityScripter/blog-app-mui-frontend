@@ -3,9 +3,15 @@
 // (Лента) is COMMON: it lists every published post — news and blog alike —
 // newest first. Type-specific views live at /news and /post.
 
-// How many posts to show before the "Показать ещё" button; each click adds
-// this many more. Not infinite scroll by design.
+// How many posts to show initially; each next page adds this many more. The
+// page is revealed automatically on scroll (an IntersectionObserver sentinel,
+// see `useFeedInfiniteScroll`) and also via the "Показать ещё" fallback button.
 export const FEED_PAGE_SIZE = 10;
+
+// Высота (px) невидимого sentinel над кнопкой «Показать ещё». Это зона
+// упреждения: чем больше, тем раньше (выше по странице) начинается авто-
+// подгрузка следующей порции, чтобы читатель не упирался в конец списка.
+export const FEED_SENTINEL_PRELOAD = 400;
 
 // Max filter chips shown in the row. Tags are frequency-ranked, so the most
 // common topics win the slots; rarer tags are dropped to keep the row short
