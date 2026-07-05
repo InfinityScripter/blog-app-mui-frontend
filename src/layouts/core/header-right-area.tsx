@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import { paths } from "src/routes/paths";
 import { RouterLink } from "src/routes/components";
+import { LanguageSwitcher } from "src/components/language-switcher";
 
 import { Searchbar } from "../components/searchbar";
 import { SignInButton } from "../components/sign-in-button";
@@ -55,6 +56,9 @@ export function HeaderRightArea({
 
         {/* -- Notifications drawer (self-fetching) -- */}
         {notifications && <NotificationsDrawer data-slot="notifications" />}
+
+        {/* -- Language switcher -- */}
+        <LanguageSwitcher data-slot="language" />
 
         {/* -- Settings button -- */}
         {settings && <SettingsButton data-slot="settings" />}

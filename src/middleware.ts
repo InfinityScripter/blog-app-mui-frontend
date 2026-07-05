@@ -12,14 +12,16 @@ const LOCALE_COOKIE = "NEXT_LOCALE";
 const intlMiddleware = createMiddleware(routing);
 
 // Geo → locale seeding. On the very first visit (no locale cookie) we look at
-// the edge-provided country and, if it maps to a supported locale, plant the
-// cookie BEFORE next-intl negotiates. next-intl then redirects `/` to the
-// geo-preferred prefix. Without a geo hint it falls back to Accept-Language,
-// then to the default (Russian). This never overrides an existing choice.
+// the edge-provided country and plant a cookie BEFORE next-intl negotiates, so
+// it redirects `/` to the geo-preferred prefix. Rule: a Russophone country →
+// the Russian original; ANY other known country → English (the site's second
+// language). Only when the country is absent (no edge geo, e.g. local dev) do
+// we return undefined and let next-intl fall back to Accept-Language → default.
+// A manual switch writes the cookie, so this never overrides a real choice.
 function resolveGeoLocale(request: NextRequest): AppLocale | undefined {
   const country = request.headers.get("x-vercel-ip-country")?.toUpperCase();
   if (!country) return undefined;
-  return COUNTRY_TO_LOCALE[country];
+  return COUNTRY_TO_LOCALE[country] ?? "en";
 }
 
 export default function middleware(request: NextRequest): NextResponse {
