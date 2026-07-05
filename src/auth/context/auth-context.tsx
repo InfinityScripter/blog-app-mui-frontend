@@ -7,7 +7,7 @@ import { createContext } from "react";
 // ----------------------------------------------------------------------
 
 export interface AuthContextValue {
-  user: (User & { accessToken?: string; role?: string }) | null;
+  user: (User & { role?: string }) | null;
   checkUserSession: () => Promise<void>;
   loading: boolean;
   authenticated: boolean;

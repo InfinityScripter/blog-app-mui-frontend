@@ -71,13 +71,9 @@ const botStatusOptions = {
   revalidateOnReconnect: false,
 };
 
-export function useGetBotStatus(accessToken?: string) {
-  const key = accessToken
-    ? [
-        endpoints.admin.bot.status,
-        { headers: { Authorization: `Bearer ${accessToken}` } },
-      ]
-    : null;
+export function useGetBotStatus(enabled = true) {
+  // Cookie auth (axios withCredentials) — gate on `enabled` (authenticated).
+  const key = enabled ? endpoints.admin.bot.status : null;
   const { data, isLoading, error, mutate } = useSWR<BotStatusResponse>(
     key,
     fetcher,
@@ -94,13 +90,8 @@ export function useGetBotStatus(accessToken?: string) {
   );
 }
 
-export function useGetBotProviders(accessToken?: string) {
-  const key = accessToken
-    ? [
-        endpoints.admin.bot.providers,
-        { headers: { Authorization: `Bearer ${accessToken}` } },
-      ]
-    : null;
+export function useGetBotProviders(enabled = true) {
+  const key = enabled ? endpoints.admin.bot.providers : null;
   const { data, isLoading, error } = useSWR<BotProvidersResponse>(
     key,
     fetcher,
@@ -118,15 +109,9 @@ export function useGetBotProviders(accessToken?: string) {
 
 export function useGetBotModels(
   provider: ControlProviderName | null,
-  accessToken?: string,
+  enabled = true,
 ) {
-  const key =
-    accessToken && provider
-      ? [
-          endpoints.admin.bot.models(provider),
-          { headers: { Authorization: `Bearer ${accessToken}` } },
-        ]
-      : null;
+  const key = enabled && provider ? endpoints.admin.bot.models(provider) : null;
   const { data, isLoading, error } = useSWR<BotModelsResponse>(
     key,
     fetcher,
@@ -142,13 +127,8 @@ export function useGetBotModels(
   );
 }
 
-export function useGetBotModelsHealth(accessToken?: string) {
-  const key = accessToken
-    ? [
-        endpoints.admin.bot.modelsHealth,
-        { headers: { Authorization: `Bearer ${accessToken}` } },
-      ]
-    : null;
+export function useGetBotModelsHealth(enabled = true) {
+  const key = enabled ? endpoints.admin.bot.modelsHealth : null;
   const { data, isLoading, error, mutate } = useSWR<BotModelsHealthResponse>(
     key,
     fetcher,

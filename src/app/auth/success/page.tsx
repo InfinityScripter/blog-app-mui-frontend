@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import Container from "@mui/material/Container";
 import { useAuthContext } from "src/auth/hooks";
 import Typography from "@mui/material/Typography";
-import { setSession } from "src/auth/context/jwt";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Page() {
@@ -18,17 +17,10 @@ export default function Page() {
   const { checkUserSession } = useAuthContext();
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-
-    if (!token) {
-      setError("OAuth token is missing");
-      return;
-    }
-
+    // The OAuth callback already set the auth cookies before redirecting here —
+    // there is no token in the URL. Just confirm the session via /me and go.
     const bootstrapSession = async () => {
       try {
-        await setSession(token);
         await checkUserSession();
         router.replace(CONFIG.auth.redirectPath || paths.dashboard.root);
       } catch {

@@ -7,10 +7,12 @@ import { NextResponse, type NextRequest } from "next/server";
 // cached a transient backend error as a 404 during a deploy window — can stay
 // stale for up to an hour. This route drops that cache immediately.
 //
-// Guarded by the caller's admin JWT (the same token the dashboard already
-// holds): the incoming `Authorization: Bearer <token>` is verified against the
-// backend `/api/auth/me`, and only `role === "admin"` may revalidate. No static
-// shared secret to manage, and it reuses the existing auth model.
+// Guarded by the caller's admin session: the incoming request's auth cookies
+// are forwarded to the backend `/api/auth/me`, and only `role === "admin"` may
+// revalidate. The auth cookies are shared across the FE and API subdomains (via
+// COOKIE_DOMAIN in prod), so a same-origin request to this route carries the
+// httpOnly access_token cookie, which we relay to the backend. No static shared
+// secret to manage, and it reuses the existing cookie auth model.
 
 export const dynamic = "force-dynamic";
 
@@ -22,11 +24,11 @@ const LIST_PATHS = ["/", "/news", "/changelog"] as const;
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 
-async function isAdmin(authHeader: string | null): Promise<boolean> {
-  if (!authHeader) return false;
+async function isAdmin(cookieHeader: string | null): Promise<boolean> {
+  if (!cookieHeader) return false;
   try {
     const res = await fetch(`${SERVER_URL}${endpoints.auth.me}`, {
-      headers: { Authorization: authHeader },
+      headers: { cookie: cookieHeader },
       cache: "no-store",
     });
     if (!res.ok) return false;
@@ -38,7 +40,7 @@ async function isAdmin(authHeader: string | null): Promise<boolean> {
 }
 
 export async function POST(req: NextRequest) {
-  if (!(await isAdmin(req.headers.get("authorization")))) {
+  if (!(await isAdmin(req.headers.get("cookie")))) {
     return NextResponse.json(
       { revalidated: false, message: "Admin only" },
       { status: 403 },

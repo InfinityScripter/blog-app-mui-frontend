@@ -17,21 +17,21 @@ import { formatModelLabel, toControlProvider } from "./utils";
 import type { ControlProviderName } from "./types";
 
 type Props = {
-  accessToken?: string;
+  enabled?: boolean;
   activeModel?: string;
   disabled: boolean;
   onSetModel: (provider: ControlProviderName, model: string) => void;
 };
 
 export function BotModelSelector({
-  accessToken,
+  enabled = true,
   activeModel,
   disabled,
   onSetModel,
 }: Props) {
-  const { botProviders } = useGetBotProviders(accessToken);
+  const { botProviders } = useGetBotProviders(enabled);
   const [provider, setProvider] = useState<ControlProviderName | null>(null);
-  const { botModels } = useGetBotModels(provider, accessToken);
+  const { botModels } = useGetBotModels(provider, enabled);
 
   return (
     <Card sx={{ p: 3 }}>

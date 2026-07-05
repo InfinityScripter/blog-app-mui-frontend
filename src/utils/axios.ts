@@ -1,21 +1,90 @@
+import { emitSessionExpired } from "src/auth/context/jwt/session-events";
 import axios, {
   type AxiosError,
   type AxiosInstance,
   type AxiosResponse,
   type AxiosRequestConfig,
+  type InternalAxiosRequestConfig,
 } from "axios";
 
+import {
+  isMutatingMethod,
+  CSRF_COOKIE_NAME,
+  readBrowserCookie,
+} from "./csrf-cookie";
+
+// Auth now rides in httpOnly cookies, so every request must send credentials.
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  withCredentials: true,
 });
+
+// Endpoints that must never trigger the 401→refresh→retry loop (they ARE the
+// auth handshake; a 401 from them is terminal).
+const AUTH_BYPASS_PATHS = ["/api/auth/refresh", "/api/auth/sign-in"];
+
+const REFRESH_PATH = "/api/auth/refresh";
+
+// Retried-once marker carried on the request config.
+interface RetryableConfig extends InternalAxiosRequestConfig {
+  _retriedAfterRefresh?: boolean;
+}
+
+// Attach the double-submit CSRF header on mutating requests.
+axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  if (isMutatingMethod(config.method)) {
+    const csrf = readBrowserCookie(CSRF_COOKIE_NAME);
+    if (csrf) {
+      config.headers.set("X-CSRF-Token", csrf);
+    }
+  }
+  return config;
+});
+
+// Single-flight refresh: concurrent 401s share one refresh request.
+let refreshPromise: Promise<boolean> | null = null;
+
+async function runRefresh(): Promise<boolean> {
+  try {
+    await axiosInstance.post(REFRESH_PATH);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function toError(error: AxiosError<{ message?: string }>): Error {
+  if (error.response?.data?.message) {
+    return new Error(error.response.data.message);
+  }
+  return new Error("Something went wrong. Please try again.");
+}
 
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response,
-  (error: AxiosError<{ message?: string }>) => {
-    if (error.response?.data?.message) {
-      return Promise.reject(new Error(error.response.data.message));
+  async (error: AxiosError<{ message?: string }>) => {
+    const config = error.config as RetryableConfig | undefined;
+    const status = error.response?.status;
+    const url = config?.url ?? "";
+    const isBypass = AUTH_BYPASS_PATHS.some((path) => url.includes(path));
+
+    // A 401 on a normal request → try one silent refresh, then replay it.
+    if (status === 401 && config && !config._retriedAfterRefresh && !isBypass) {
+      config._retriedAfterRefresh = true;
+      if (!refreshPromise) {
+        refreshPromise = runRefresh();
+      }
+      const refreshed = await refreshPromise;
+      refreshPromise = null;
+
+      if (refreshed) {
+        return axiosInstance(config);
+      }
+      // Refresh failed → the session is over; let the app sign the user out.
+      emitSessionExpired();
     }
-    return Promise.reject(new Error("Something went wrong. Please try again."));
+
+    return Promise.reject(toError(error));
   },
 );
 
@@ -42,6 +111,9 @@ export const endpoints = {
     me: "/api/auth/me",
     signIn: "/api/auth/sign-in",
     signUp: "/api/auth/sign-up",
+    signOut: "/api/auth/sign-out",
+    signOutAll: "/api/auth/sign-out-all",
+    refresh: "/api/auth/refresh",
     google: "/api/auth/google",
     yandex: "/api/auth/yandex",
     verify: "/api/auth/verify",
