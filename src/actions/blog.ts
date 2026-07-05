@@ -36,11 +36,12 @@ interface UseGetPostsOptions {
 
 export function useGetPosts(options: UseGetPostsOptions = {}) {
   const { excludeTag, limit } = options;
-  const locale = activeLocale(useLocale());
+  // Feeds/lists are NOT translated: rendering a large list would translate
+  // dozens of posts per request and risk the serverless/DeepL timeout. Post
+  // BODIES translate on open (useGetPost). List titles stay in the original.
   const params = new URLSearchParams();
   if (excludeTag) params.set("excludeTag", excludeTag);
   if (limit) params.set("limit", String(limit));
-  if (locale !== DEFAULT_LOCALE) params.set("lang", locale);
   const queryString = params.toString();
   const url = queryString
     ? `${endpoints.post.list}?${queryString}`
@@ -91,12 +92,11 @@ export function useGetPost(postId?: string) {
 }
 
 export function useSearchPosts(query?: string, dashboard: boolean = false) {
-  const locale = activeLocale(useLocale());
-  const params =
-    locale === DEFAULT_LOCALE
-      ? { query, dashboard }
-      : { query, dashboard, lang: locale };
-  const url = query ? [endpoints.post.search, { params }] : "";
+  // Search results are a list — not translated (see useGetPosts). The query
+  // matches the original text; results show original titles.
+  const url = query
+    ? [endpoints.post.search, { params: { query, dashboard } }]
+    : "";
 
   const { data, isLoading, error, isValidating } = useSWR<SearchPostsResponse>(
     url,

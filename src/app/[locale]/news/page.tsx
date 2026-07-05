@@ -1,9 +1,7 @@
 import { CONFIG } from "src/config-global";
-import { toAppLocale } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getNewsPosts } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
-import { defaultLocaleStaticParams } from "src/i18n/static-params";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { NewsListView } from "src/sections/news/view/news-list-view";
 
@@ -12,10 +10,6 @@ import { NewsListView } from "src/sections/news/view/news-list-view";
 interface PageProps {
   params: Promise<{ locale: string }>;
 }
-
-// Prebuild only /ru/news; /en/news renders on demand + ISR (translates the feed
-// lazily, once) so the build never translates the whole news list.
-export const generateStaticParams = defaultLocaleStaticParams;
 
 export async function generateMetadata({ params }: PageProps) {
   const { locale } = await params;
@@ -37,15 +31,18 @@ export async function generateMetadata({ params }: PageProps) {
 // native fetch with the same revalidate window).
 export const revalidate = 3600;
 
-export default async function Page({ params }: PageProps) {
-  const { locale } = await params;
-
+export default async function Page() {
+  // The feed is rendered from the ORIGINAL (Russian) posts, not translated
+  // server-side: translating a ~60-item feed synchronously per request blows
+  // the serverless function timeout (10s). Feed CHROME (category tabs, labels,
+  // empty states) is localized via next-intl; individual post BODIES are
+  // machine-translated when opened (the /post/[id] details route). List item
+  // titles stay in the original — a deliberate scope boundary for large feeds.
+  //
   // No error swallowing: transient backend failures are retried inside
   // getNewsPosts; a persistent one must THROW — a failed build keeps the
   // previous deployment live, a failed ISR regeneration keeps the stale page.
-  // Swallowing into `posts = []` cached an EMPTY news feed for an hour during
-  // the 2026-07-03 backend deploy window.
-  const { posts } = await getNewsPosts(toAppLocale(locale));
+  const { posts } = await getNewsPosts();
 
   return <NewsListView posts={posts} />;
 }
