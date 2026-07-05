@@ -2,45 +2,48 @@ import { Iconify } from "src/components/iconify";
 
 // ----------------------------------------------------------------------
 
-export const navData = [
+// Static nav config: stable `key` (→ `nav.<key>` translation), path and icon.
+// Titles are resolved per-locale by `useNavData` (src/layouts/main/hooks) so
+// this stays a plain data module without calling the `t()` hook at module scope.
+export const NAV_ITEMS = [
   {
-    title: "Главная",
+    key: "home",
     path: "/",
     icon: <Iconify width={22} icon="solar:home-2-bold-duotone" />,
   },
   {
-    title: "Новости",
+    key: "news",
     path: "/news",
     icon: <Iconify width={22} icon="solar:notebook-bold-duotone" />,
   },
   {
-    title: "Блог",
+    key: "blog",
     path: "/post",
     icon: <Iconify width={22} icon="solar:file-bold-duotone" />,
   },
   {
-    title: "Релизы",
+    key: "releases",
     path: "/changelog",
     icon: <Iconify width={22} icon="solar:rocket-2-bold-duotone" />,
   },
   {
-    title: "История LLM",
+    key: "llmTimeline",
     path: "/llm-timeline",
     icon: <Iconify width={22} icon="solar:clock-circle-bold-duotone" />,
   },
   {
-    title: "Сравнение LLM",
+    key: "llmCompare",
     path: "/llm-compare",
     icon: <Iconify width={22} icon="solar:ranking-bold-duotone" />,
   },
   {
-    title: "Библиотека",
+    key: "library",
     path: "/library",
     icon: <Iconify width={22} icon="solar:bookmark-square-bold-duotone" />,
   },
   {
-    title: "Обо мне",
+    key: "about",
     path: "/portfolio",
     icon: <Iconify width={22} icon="solar:user-circle-bold-duotone" />,
   },
-];
+] as const;

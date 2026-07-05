@@ -2,16 +2,19 @@ import { CONFIG } from "src/config-global";
 
 // ----------------------------------------------------------------------
 
+// Footer link columns. Translatable labels reference a `footer.<key>` message
+// (`headlineKey` / `nameKey`); the contacts email is literal data, so it uses
+// `name` directly. The footer component resolves keys via `t()`.
 export const LINKS = [
   {
-    headline: "Документы",
+    headlineKey: "docs",
     children: [
-      { name: "Условия использования", href: "#" },
-      { name: "Политика конфиденциальности", href: "#" },
+      { nameKey: "termsOfUse", href: "#" },
+      { nameKey: "privacyPolicy", href: "#" },
     ],
   },
   {
-    headline: "Контакты",
+    headlineKey: "contacts",
     children: [
       {
         name: CONFIG.contacts.email,
@@ -19,7 +22,7 @@ export const LINKS = [
       },
     ],
   },
-];
+] as const;
 
 export const socials = [
   {

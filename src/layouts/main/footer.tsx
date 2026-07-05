@@ -1,8 +1,11 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { Logo } from "src/components/logo";
+import { useTranslations } from "next-intl";
 import Divider from "@mui/material/Divider";
 import { monoValueSx } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
@@ -20,6 +23,7 @@ import type { FooterProps } from "./types";
 
 export function Footer({ layoutQuery, sx }: FooterProps) {
   const theme = useTheme();
+  const t = useTranslations("footer");
 
   return (
     <Box
@@ -57,8 +61,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                 [theme.breakpoints.up(layoutQuery)]: { mx: "unset" },
               }}
             >
-              Блог и заметки о разработке. Для связи удобнее всего использовать
-              соцсети ниже.
+              {t("lead")}
             </Typography>
 
             <Stack
@@ -95,7 +98,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
             >
               {LINKS.map((list) => (
                 <Stack
-                  key={list.headline}
+                  key={list.headlineKey}
                   spacing={2}
                   sx={{
                     width: 1,
@@ -106,22 +109,26 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                   }}
                 >
                   <Typography component="div" variant="overline">
-                    {list.headline}
+                    {t(list.headlineKey)}
                   </Typography>
 
-                  {list.children.map((link) => (
-                    <Link
-                      key={link.name}
-                      component={RouterLink}
-                      href={link.href}
-                      // Low-traffic footer links — skip background prefetch.
-                      prefetch={false}
-                      color="inherit"
-                      variant="body2"
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
+                  {list.children.map((link) => {
+                    const label =
+                      "nameKey" in link ? t(link.nameKey) : link.name;
+                    return (
+                      <Link
+                        key={link.href}
+                        component={RouterLink}
+                        href={link.href}
+                        // Low-traffic footer links — skip background prefetch.
+                        prefetch={false}
+                        color="inherit"
+                        variant="body2"
+                      >
+                        {label}
+                      </Link>
+                    );
+                  })}
                 </Stack>
               ))}
             </Stack>
@@ -129,7 +136,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
         </Grid>
 
         <Typography component="p" sx={{ ...monoValueSx, fontSize: 11, mt: 10 }}>
-          © All rights reserved.
+          {t("rights")}
         </Typography>
       </Container>
     </Box>

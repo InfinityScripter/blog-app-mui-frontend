@@ -12,9 +12,9 @@ import { NavMobile } from "./nav/mobile";
 import { NavDesktop } from "./nav/desktop";
 import { HomeFooter } from "./home-footer";
 import { HeaderBase } from "../core/header-base";
+import { useNavData } from "./hooks/use-nav-data";
 // ----------------------------------------------------------------------
 import { LayoutSection } from "../core/layout-section";
-import { navData as mainNavData } from "../config-nav-main";
 import { PostSearchbar } from "../components/post-searchbar";
 
 import type { MainLayoutProps } from "./types";
@@ -33,7 +33,8 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
 
   const layoutQuery = "md";
 
-  const navData = data?.nav ?? mainNavData;
+  const defaultNav = useNavData();
+  const navData = data?.nav ?? defaultNav;
 
   return (
     <>
