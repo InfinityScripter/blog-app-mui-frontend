@@ -2,7 +2,8 @@
 
 **Date:** 2026-07-05
 **Branch:** `claude/harden-jwt-auth` (frontend) + a matching branch on `blog-app-mui-backend`
-**Status:** approved (scope + trade-offs answered via AskUserQuestion)
+**Status:** IMPLEMENTED + verified (see "Implementation refinements" and
+"Verification" at the end)
 
 ## Problem
 
@@ -277,3 +278,57 @@ Frontend (Vitest + Playwright e2e):
   `JWT_SECRET`, per-IP rate-limit, RBAC (`require-admin`), audit logging, the bot
   service-token path, and the constant-time compare helper — all untouched in
   behaviour.
+
+## Implementation refinements (better than the original plan)
+
+Two decisions during build improved on the plan; both are reflected in the code:
+
+1. **CSRF is enforced centrally inside `requireAuth`, not per-route.** The plan
+   had a `withCsrf` wrapper applied to each mutating route (~28 files, easy to
+   forget on the next new route). Instead, `requireAuth` enforces the double-submit
+   check itself: when a request authenticates via the **cookie** path AND the
+   method is mutating, `csrfValid(req)` must pass; the bearer (bot/legacy) path is
+   exempt because it authenticates before the check. Every cookie-auth mutation is
+   protected automatically. `withCsrf` is kept only for the two standalone auth
+   routes that don't use `requireAuth` (`refresh`, `sign-out`). Bonus: existing
+   tests authenticate with `Authorization: Bearer` → bearer path → CSRF-exempt, so
+   **zero existing tests needed changes** (377 backend tests still green).
+
+2. **Cross-subdomain cookie sharing via `COOKIE_DOMAIN`.** Prod runs FE
+   (`aifirst.us.com`) and API (`api.aifirst.us.com`) on sibling subdomains. The FE's
+   own `/api/revalidate` route needs to prove admin to the backend, but a
+   same-origin browser request to the FE origin wouldn't carry an API-origin
+   cookie. Setting `COOKIE_DOMAIN=.aifirst.us.com` (new env; unset in dev → host-only)
+   shares the auth cookies across both subdomains, so `/api/revalidate` forwards the
+   request's `Cookie` header to the backend `/me`. This also keeps the admin-JWT
+   revalidate model with no static shared secret. `access_token` cookie stays
+   `Path=/`; `refresh_token` stays `Path=/api/auth`.
+   **Prod deploy note:** set `COOKIE_DOMAIN=.aifirst.us.com` in the backend
+   `.env.production`. Without it, cookies are host-only and the "Обновить кеш"
+   admin button (only that feature) can't authorize — everything else still works.
+
+Also added (small, high-value): a **"Выйти на всех устройствах"** link in the
+account drawer that calls `POST /api/auth/sign-out-all`, making the server-side
+revocation visible/usable (was left as a bare endpoint in the plan).
+
+## Verification (all green)
+
+Backend: `tsc` clean (only pre-existing `passport.ts` `@types` gaps, identical on
+`main`), lint clean, **377/377 Jest tests pass** incl. 32 new
+(cookie-attr matrix, CSRF double-submit, refresh hashed-not-raw, rotation, reuse→
+family-revoke theft, cookie-auth CSRF enforce/allow, bearer back-compat).
+
+Frontend: `next build` green, `tsc` clean, lint clean, `knip` clean (no new
+orphans), **160/160 Vitest tests pass** (+6 new CSRF-cookie helper).
+
+Live browser (Playwright, real Postgres, FE→BE over localhost):
+- Login → `/dashboard`; **`document.cookie` shows only `csrf_token`** —
+  `access_token`/`refresh_token` invisible to JS (httpOnly), `sessionStorage`
+  empty, `localStorage` has no token, **URL has no token**.
+- Cookie auth: `/me` and `/api/admin/audit-logs?limit=5` → 200 with data; admin
+  audit-logs page renders fully (screenshot captured).
+- CSRF: mutation without `X-CSRF-Token` → 403; with it → passes the gate.
+- Refresh: valid → 200 + rotated token; reused rotated-out token → 401 (family
+  revoked).
+- OAuth callbacks redirect to bare `/auth/success` (no `?token=` anywhere).
+- Logout: `POST /sign-out` → 200, then `/me` → 401, `document.cookie` empty.
