@@ -1,5 +1,10 @@
 {
   "blog": {
+    "meta": {
+      "title": "Блог",
+      "ogTitle": "Блог | Talalaev",
+      "description": "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript."
+    },
     "sort": {
       "label": "Сортировка:",
       "latest": "Новые",
