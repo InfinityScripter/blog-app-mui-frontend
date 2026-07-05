@@ -1,4 +1,5 @@
 import { CONFIG } from "src/config-global";
+import { toAppLocale } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getNewsPosts } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
@@ -31,18 +32,22 @@ export async function generateMetadata({ params }: PageProps) {
 // native fetch with the same revalidate window).
 export const revalidate = 3600;
 
-export default async function Page() {
-  // The feed is rendered from the ORIGINAL (Russian) posts, not translated
-  // server-side: translating a ~60-item feed synchronously per request blows
-  // the serverless function timeout (10s). Feed CHROME (category tabs, labels,
-  // empty states) is localized via next-intl; individual post BODIES are
-  // machine-translated when opened (the /post/[id] details route). List item
-  // titles stay in the original — a deliberate scope boundary for large feeds.
+interface PageComponentProps {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function Page({ params }: PageComponentProps) {
+  const { locale } = await params;
+  // Feed titles/descriptions are localized for a non-original locale from the
+  // warmed translation cache (fast DB hit). getNewsPosts falls back to the
+  // original (Russian) feed if a cold-cache translation would overrun the
+  // serverless budget, so the page never 504s. Chrome is localized via
+  // next-intl; a post's BODY still translates when opened (/post/[id]).
   //
   // No error swallowing: transient backend failures are retried inside
-  // getNewsPosts; a persistent one must THROW — a failed build keeps the
-  // previous deployment live, a failed ISR regeneration keeps the stale page.
-  const { posts } = await getNewsPosts();
+  // getNewsPosts; a total backend outage still THROWS (the fallback fetch fails
+  // too) rather than caching an empty feed for the ISR window.
+  const { posts } = await getNewsPosts(toAppLocale(locale));
 
   return <NewsListView posts={posts} />;
 }

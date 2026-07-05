@@ -1,8 +1,8 @@
 import { CONFIG } from "src/config-global";
-import { DEFAULT_LOCALE } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getPosts, getPostsByTag } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
+import { toAppLocale, DEFAULT_LOCALE } from "src/i18n/locales";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
@@ -42,18 +42,20 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const decoded = safeDecode(slug);
 
-  // Rendered from the ORIGINAL (Russian) posts — like the other feeds, the tag
-  // archive isn't translated server-side (a large tag would risk the serverless
-  // timeout). Chrome is localized; post bodies translate when opened.
+  // Tag-archive titles are localized for a non-original locale from the warmed
+  // translation cache (fast DB hit). getPostsByTag falls back to the original
+  // (Russian) archive if a cold-cache translation would overrun the serverless
+  // budget, so the page never 504s. Chrome is localized; a post's body still
+  // translates when opened.
   //
   // No error swallowing: transient backend failures are retried inside
-  // getPostsByTag; a persistent one must THROW instead of ISR-caching an empty
-  // archive for an hour (2026-07-03 incident). An unknown tag is a legitimate
-  // 200 + empty list from the backend, not an error.
-  const { posts } = await getPostsByTag(decoded);
+  // getPostsByTag; a total backend outage still THROWS (the fallback fetch fails
+  // too) instead of ISR-caching an empty archive for an hour (2026-07-03
+  // incident). An unknown tag is a legitimate 200 + empty list, not an error.
+  const { posts } = await getPostsByTag(decoded, toAppLocale(locale));
 
   return <TagListView tag={decoded} posts={posts} />;
 }
