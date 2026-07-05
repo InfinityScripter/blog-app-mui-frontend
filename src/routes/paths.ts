@@ -38,6 +38,12 @@ interface Paths {
   llmTimeline: {
     root: string;
   };
+  llmCompare: {
+    root: string;
+  };
+  library: {
+    root: string;
+  };
   auth: {
     jwt: {
       signIn: string;
@@ -108,6 +114,12 @@ export const paths: Paths = {
   },
   llmTimeline: {
     root: `/llm-timeline`,
+  },
+  llmCompare: {
+    root: `/llm-compare`,
+  },
+  library: {
+    root: `/library`,
   },
   // AUTH
   auth: {

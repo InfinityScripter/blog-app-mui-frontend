@@ -23,6 +23,32 @@ export async function GET() {
     siteUrl: CONFIG.site.url,
     tagline:
       "Русскоязычный блог про AI, LLM и агентов: кейсы, гайды и честные разборы.",
+    resources: [
+      {
+        title: "Сравнение LLM",
+        url: `${CONFIG.site.url}/llm-compare/`,
+        description:
+          "Матрица актуальных языковых моделей: цена за 1M токенов, окно контекста и бенчмарки (MMLU, GPQA, SWE-bench, AIME).",
+      },
+      {
+        title: "История LLM",
+        url: `${CONFIG.site.url}/llm-timeline/`,
+        description:
+          "Хронология больших языковых моделей от GPT-1 до reasoning-эры.",
+      },
+      {
+        title: "Релизы AI-моделей",
+        url: `${CONFIG.site.url}/changelog/`,
+        description:
+          "Хроника релизов языковых моделей с ключевыми характеристиками.",
+      },
+      {
+        title: "Библиотека",
+        url: `${CONFIG.site.url}/library/`,
+        description:
+          "Курируемые источники про AI, каталог инструментов и заметки из практики (TIL).",
+      },
+    ],
     posts,
   });
 
