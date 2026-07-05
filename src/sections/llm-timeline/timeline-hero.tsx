@@ -37,7 +37,7 @@ export function TimelineHero({ models }: TimelineHeroProps) {
 
   return (
     <Box sx={{ mb: { xs: 3, md: 4 } }}>
-      <Typography variant="h3" component="h1" sx={{ mb: 1 }}>
+      <Typography variant="h2" component="h1" sx={{ mb: 1 }}>
         История больших языковых моделей
       </Typography>
       <Typography

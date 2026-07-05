@@ -1,0 +1,63 @@
+/* Shared decorative floating-LLM-logo backdrop (site-wide, public pages).
+   Static tokens only (opacity, keyframes) — no theme colors: brand icons
+   carry their own colors, everything else stays in sx/theme. */
+
+.llm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1000px;
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .llm-backdrop {
+    display: block;
+  }
+}
+
+.llm-backdrop__icon {
+  position: absolute;
+  transform-style: preserve-3d;
+  animation-name: llm-backdrop-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+/* Intensity presets: showcase = fuller, reading = extra-subtle behind text. */
+.llm-backdrop--showcase .llm-backdrop__icon {
+  opacity: 0.08;
+}
+
+.llm-backdrop--reading .llm-backdrop__icon {
+  opacity: 0.04;
+}
+
+/* Depth-aware drift: gentle vertical float + horizontal sway + z push and a
+   slow full spin, so logos read as floating in 3D rather than flipping flat. */
+@keyframes llm-backdrop-drift {
+  0% {
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg);
+  }
+  25% {
+    transform: translate3d(10px, -18px, 40px) rotateY(90deg) rotateX(6deg);
+  }
+  50% {
+    transform: translate3d(0, -30px, 0) rotateY(180deg) rotateX(0deg);
+  }
+  75% {
+    transform: translate3d(-10px, -18px, -40px) rotateY(270deg) rotateX(-6deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateY(360deg) rotateX(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .llm-backdrop__icon {
+    animation: none;
+  }
+}

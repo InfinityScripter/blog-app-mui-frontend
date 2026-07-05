@@ -1,8 +1,8 @@
 /** **************************************
 * Plugins
 *************************************** */
-/* llm-timeline backdrop animation */
-@import "./sections/llm-timeline/styles.css";
+/* floating LLM-logo backdrop animation (site-wide, public pages) */
+@import "./components/llm-backdrop/styles.css";
 
 /* scrollbar */
 @import "./components/scrollbar/styles.css";

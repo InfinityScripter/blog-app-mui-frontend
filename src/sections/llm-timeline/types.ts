@@ -38,17 +38,3 @@ export interface LlmTimelineRow {
   /** The year to label above this row, or null if same year as the previous. */
   yearStart: number | null;
 }
-
-/** One floating logo slot in the decorative 3D backdrop (see `const-ui.ts`). */
-export interface BackdropSlot {
-  /** CSS offset from the top, e.g. "12%". */
-  top: string;
-  /** CSS offset from the left, e.g. "6%". */
-  left: string;
-  /** Icon size in px. */
-  size: number;
-  /** Full float+spin cycle duration, seconds. */
-  duration: number;
-  /** Animation start offset, seconds. */
-  delay: number;
-}
