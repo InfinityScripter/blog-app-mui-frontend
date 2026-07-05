@@ -7,6 +7,7 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import { useTranslations } from "next-intl";
 import { useGetPost } from "src/actions/blog";
 import { fDate } from "src/utils/format-time";
 import { monoValueSx } from "src/theme/styles";
@@ -41,6 +42,7 @@ export function PostDetailsHomeView({
   post: initialPost,
   latestPosts,
 }: PostDetailsHomeViewProps) {
+  const t = useTranslations("blog");
   const { post, postMutate } = useGetPost(initialPost?._id);
   const currentPost = post || initialPost;
 
@@ -75,8 +77,8 @@ export function PostDetailsHomeView({
       >
         <CustomBreadcrumbs
           links={[
-            { name: "Главная", href: "/" },
-            { name: "Блог", href: paths.post.root },
+            { name: t("breadcrumbs.home"), href: "/" },
+            { name: t("breadcrumbs.blog"), href: paths.post.root },
             { name: currentPost?.title },
           ]}
           sx={{ maxWidth: 720, mx: "auto" }}
@@ -97,7 +99,7 @@ export function PostDetailsHomeView({
           >
             <Box sx={{ gap: 0.5, display: "flex", alignItems: "center" }}>
               <Iconify icon="solar:clock-circle-bold" width={16} />
-              {`${readingTime} мин чтения`}
+              {t("readingTimeLong", { minutes: readingTime })}
             </Box>
             {showUpdated && (
               <>
@@ -110,7 +112,9 @@ export function PostDetailsHomeView({
                   }}
                 />
                 <Box component="span" sx={{ color: "primary.main" }}>
-                  {`Обновлено ${fDate(currentPost?.updatedAt)}`}
+                  {t("updatedAt", {
+                    date: fDate(currentPost?.updatedAt) ?? "",
+                  })}
                 </Box>
               </>
             )}
@@ -125,7 +129,7 @@ export function PostDetailsHomeView({
               variant="body2"
               sx={{ py: 3, color: "text.disabled", fontStyle: "italic" }}
             >
-              У этого поста пока нет содержимого.
+              {t("list.empty")}
             </Typography>
           )}
 
@@ -168,7 +172,7 @@ export function PostDetailsHomeView({
           <PostNewsletterCta />
 
           <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-            <Typography variant="h4">Комментарии</Typography>
+            <Typography variant="h4">{t("comments.title")}</Typography>
 
             <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
               ({currentPost?.comments.length})
@@ -198,7 +202,7 @@ export function PostDetailsHomeView({
       {!!latestPosts?.length && (
         <Container sx={{ pb: 15 }}>
           <Typography variant="h4" sx={{ mb: 5 }}>
-            Свежие посты
+            {t("list.latestPosts")}
           </Typography>
 
           <Grid container spacing={3}>

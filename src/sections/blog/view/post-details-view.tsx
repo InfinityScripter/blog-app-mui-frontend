@@ -5,6 +5,7 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import { useTranslations } from "next-intl";
 import { useGetPost } from "src/actions/blog";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -27,6 +28,7 @@ import type { PostDetailsViewProps } from "./types";
 // ----------------------------------------------------------------------
 
 export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
+  const t = useTranslations("blog");
   const [publish, setPublish] = useState("");
 
   const { post, postMutate } = useGetPost(initialPost?._id);
@@ -91,7 +93,7 @@ export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
             variant="body2"
             sx={{ py: 3, color: "text.disabled", fontStyle: "italic" }}
           >
-            У этого поста пока нет содержимого.
+            {t("list.empty")}
           </Typography>
         )}
 
@@ -127,7 +129,7 @@ export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
         </Stack>
 
         <Stack direction="row" sx={{ mb: 3, mt: 5 }}>
-          <Typography variant="h4">Комментарии</Typography>
+          <Typography variant="h4">{t("comments.title")}</Typography>
 
           <Typography variant="subtitle2" sx={{ color: "text.disabled" }}>
             ({currentPost?.comments.length})

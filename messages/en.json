@@ -371,6 +371,13 @@
     "til": {
       "empty": "No notes yet — coming soon.",
       "source": "Source"
+    },
+    "meta": {
+      "title": "Library: what to read about AI, tools and TIL notes",
+      "description": "A curated selection of the best sources on AI and LLMs, a catalog of useful tools, and short notes from practice (TIL). No hype, updated regularly.",
+      "ogTitle": "Library | Talalaev",
+      "ogDescription": "The best AI sources, a tool catalog and notes from practice in one place.",
+      "jsonLdName": "Library: AI sources and tools"
     }
   },
   "llmCompare": {
@@ -432,6 +439,13 @@
       "share": "Share",
       "copied": "Copied",
       "clear": "Clear"
+    },
+    "meta": {
+      "title": "Compare LLMs: pricing, context and language-model benchmarks",
+      "description": "A comparison matrix of current LLMs: price per 1M tokens (input/output), context window and key benchmarks (MMLU, GPQA, SWE-bench, AIME). Sort, filter and compare up to three models.",
+      "ogTitle": "Compare LLMs | Talalaev",
+      "ogDescription": "Pricing, context and benchmarks of current language models in one comparison table.",
+      "jsonLdName": "Large language model comparison"
     }
   },
   "llmTimeline": {
@@ -461,7 +475,13 @@
       "2024": "Multimodality",
       "2025": "Reasoning and agents"
     },
-    "empty": "No models match the selected filter."
+    "empty": "No models match the selected filter.",
+    "meta": {
+      "title": "LLM history: a timeline of large language models",
+      "description": "A timeline of key large language models from GPT-1 to the reasoning era: release dates, context, parameters, interesting facts and links to announcements and Wikipedia.",
+      "ogTitle": "LLM history | Talalaev",
+      "ogDescription": "Key LLMs from GPT to modern models: dates, context and significance in one timeline."
+    }
   },
   "portfolio": {
     "heroEyebrow": "{name} · 13+ years in IT",
@@ -481,6 +501,10 @@
       "stack": {
         "label": "Core stack"
       }
+    },
+    "meta": {
+      "title": "About | Mikhail Talalaev",
+      "description": "Software Engineer Mikhail Talalaev — experience, stack and contacts. 13+ years in IT."
     }
   }
 }

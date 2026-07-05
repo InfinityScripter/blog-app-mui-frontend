@@ -1,10 +1,20 @@
+import { getTranslations } from "next-intl/server";
 import { PortfolioView } from "src/sections/portfolio/view";
+import { localizedAlternates } from "src/utils/seo-alternates";
 
-export const metadata = {
-  title: "Обо мне | Mihail Talalaev",
-  description:
-    "Software Engineer Михаил Талалаев — опыт, стек и контакты. 13+ лет в IT.",
-};
+interface PageProps {
+  params: Promise<{ locale: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "portfolio.meta" });
+  return {
+    title: { absolute: t("title") },
+    description: t("description"),
+    ...localizedAlternates(locale, "/portfolio/"),
+  };
+}
 
 export default function Page() {
   return <PortfolioView />;

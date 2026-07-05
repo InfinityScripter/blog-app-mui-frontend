@@ -57,7 +57,7 @@ export function usePostCommentItem({
       setIsEditing(false);
       popover.onClose();
     } catch (error) {
-      console.error("Ошибка обновления комментария:", error);
+      console.error("Failed to update comment:", error);
     } finally {
       saving.onFalse();
     }
@@ -97,7 +97,7 @@ export function usePostCommentItem({
       }
       popover.onClose();
     } catch (error) {
-      console.error("Ошибка удаления комментария:", error);
+      console.error("Failed to delete comment:", error);
     } finally {
       deleting.onFalse();
     }

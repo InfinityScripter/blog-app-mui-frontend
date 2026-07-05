@@ -5,6 +5,7 @@ import Tabs from "@mui/material/Tabs";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { useState, useCallback } from "react";
 import { Iconify } from "src/components/iconify";
@@ -22,10 +23,13 @@ import { applyListFilter } from "./utils";
 import { PostSearch } from "../post-search";
 import { PostListHorizontal } from "../post-list-horizontal";
 import { POST_PUBLISH_TAB, POST_PUBLISH_TABS } from "./const";
+import { usePublishTabLabel } from "./hooks/use-publish-tab-label";
 
 // ----------------------------------------------------------------------
 
 export function PostListView() {
+  const t = useTranslations("blog");
+  const publishTabLabel = usePublishTabLabel();
   const [sortBy, setSortBy] = useState("latest");
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -62,11 +66,11 @@ export function PostListView() {
   return (
     <DashboardContent>
       <CustomBreadcrumbs
-        heading="Список"
+        heading={t("breadcrumbs.list")}
         links={[
-          { name: "Главная", href: paths.dashboard.root },
-          { name: "Блог", href: paths.dashboard.post.root },
-          { name: "Список" },
+          { name: t("breadcrumbs.home"), href: paths.dashboard.root },
+          { name: t("breadcrumbs.blog"), href: paths.dashboard.post.root },
+          { name: t("breadcrumbs.list") },
         ]}
         action={
           <Button
@@ -75,7 +79,7 @@ export function PostListView() {
             variant="contained"
             startIcon={<Iconify icon="mingcute:add-line" />}
           >
-            Новый пост
+            {t("list.newPost")}
           </Button>
         }
         sx={{ mb: { xs: 3, md: 5 } }}
@@ -114,7 +118,7 @@ export function PostListView() {
             key={tab}
             iconPosition="end"
             value={tab}
-            label={tab}
+            label={publishTabLabel(tab)}
             icon={
               <Label
                 variant={

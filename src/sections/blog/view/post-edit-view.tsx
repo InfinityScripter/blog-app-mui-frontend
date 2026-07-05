@@ -1,6 +1,7 @@
 "use client";
 
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { DashboardContent } from "src/layouts/dashboard";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 
@@ -11,13 +12,15 @@ import type { PostEditViewProps } from "./types";
 // ----------------------------------------------------------------------
 
 export function PostEditView({ post }: PostEditViewProps) {
+  const t = useTranslations("blog");
+
   return (
     <DashboardContent>
       <CustomBreadcrumbs
-        heading="Edit"
+        heading={t("form.editHeading")}
         links={[
-          { name: "Dashboard", href: paths.dashboard.root },
-          { name: "Blog", href: paths.dashboard.post.root },
+          { name: t("form.breadcrumbDashboard"), href: paths.dashboard.root },
+          { name: t("form.breadcrumbBlog"), href: paths.dashboard.post.root },
           { name: post?.title },
         ]}
         sx={{ mb: { xs: 3, md: 5 } }}
