@@ -1,0 +1,22 @@
+{
+  "common": {
+    "language": "Язык",
+    "languageOriginal": "Русский (оригинал)",
+    "loading": "Загрузка…",
+    "noData": "Нет данных",
+    "readMore": "Читать далее",
+    "back": "Назад",
+    "cancel": "Отмена",
+    "preview": "Предпросмотр"
+  },
+  "nav": {
+    "home": "Главная",
+    "news": "Новости",
+    "blog": "Блог",
+    "releases": "Релизы",
+    "llmTimeline": "История LLM",
+    "llmCompare": "Сравнение LLM",
+    "library": "Библиотека",
+    "about": "Обо мне"
+  }
+}

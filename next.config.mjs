@@ -1,10 +1,15 @@
 import bundleAnalyzer from "@next/bundle-analyzer";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const isStaticExport = "false";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
+
+// next-intl request config lives under src/, so point the plugin at it
+// explicitly (the default lookup is ./i18n/request.ts at the project root).
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 // Dev-only pages use a `.dev.tsx` (etc.) extension. Register those extensions
 // as routable only in development, so dev-only routes (e.g. the component
@@ -67,4 +72,4 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default withNextIntl(withBundleAnalyzer(nextConfig));

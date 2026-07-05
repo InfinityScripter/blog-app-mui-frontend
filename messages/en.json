@@ -1,0 +1,22 @@
+{
+  "common": {
+    "language": "Language",
+    "languageOriginal": "Russian (original)",
+    "loading": "Loading…",
+    "noData": "No data",
+    "readMore": "Read more",
+    "back": "Back",
+    "cancel": "Cancel",
+    "preview": "Preview"
+  },
+  "nav": {
+    "home": "Home",
+    "news": "News",
+    "blog": "Blog",
+    "releases": "Releases",
+    "llmTimeline": "LLM history",
+    "llmCompare": "Compare LLMs",
+    "library": "Library",
+    "about": "About"
+  }
+}
