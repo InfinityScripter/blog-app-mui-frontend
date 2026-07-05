@@ -1,8 +1,8 @@
 import { CONFIG } from "src/config-global";
-import { toAppLocale } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getPosts, getPostsByTag } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
+import { toAppLocale, DEFAULT_LOCALE } from "src/i18n/locales";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
@@ -57,16 +57,25 @@ export default async function Page({ params }: PageProps) {
 // ----------------------------------------------------------------------
 
 /**
- * Prerender the distinct tags at build time; unknown tags still render on
- * demand (dynamicParams defaults to true) and are cached by ISR. Wrapped so an
- * unreachable backend at build time yields no params instead of failing.
+ * Prerender the distinct tags at build time — but ONLY for the default locale
+ * (Russian original). The `en` variants are machine-translated per (post, lang)
+ * on the backend; prebuilding them here would double the build-time fetch
+ * volume and trip the backend's list rate-limit (429). They render on demand on
+ * first request (dynamicParams defaults to true) and are then ISR-cached. Any
+ * unknown tag also renders on demand. Wrapped so an unreachable backend at build
+ * time yields no params instead of failing.
  */
-export async function generateStaticParams(): Promise<Array<{ slug: string }>> {
+export async function generateStaticParams(): Promise<
+  Array<{ locale: string; slug: string }>
+> {
   try {
     const { posts } = await getPosts();
     const tags = posts.flatMap((post) => post.tags ?? []);
     const distinct = Array.from(new Set(tags));
-    return distinct.map((tag) => ({ slug: encodeURIComponent(tag) }));
+    return distinct.map((tag) => ({
+      locale: DEFAULT_LOCALE,
+      slug: encodeURIComponent(tag),
+    }));
   } catch {
     return [];
   }
