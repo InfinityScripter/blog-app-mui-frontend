@@ -4,6 +4,7 @@ import Alert from "@mui/material/Alert";
 import { usePathname } from "src/routes/hooks";
 import { useTheme } from "@mui/material/styles";
 import { useBoolean } from "src/hooks/use-boolean";
+import { LlmBackdrop } from "src/components/llm-backdrop";
 
 import { Main } from "./main";
 import { Footer } from "./footer";
@@ -27,12 +28,17 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
 
   const homePage = pathname === "/";
 
+  // Dim the logo backdrop behind long article bodies; fuller on landing/lists.
+  const readingPage = pathname.startsWith("/post/");
+
   const layoutQuery = "md";
 
   const navData = data?.nav ?? mainNavData;
 
   return (
     <>
+      <LlmBackdrop variant={readingPage ? "reading" : "showcase"} />
+
       <NavMobile
         data={navData}
         open={mobileNavOpen.value}
