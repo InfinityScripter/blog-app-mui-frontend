@@ -18,15 +18,10 @@ const swrOptions = {
   refreshWhenHidden: true,
 };
 
-export function useGetSystemMetrics(accessToken?: string) {
-  // Токен в ключе SWR явно (зеркало useGetAuditLogs): на свежем логине запрос
-  // иначе уходит до setSession → 401. Ключ null до появления токена.
-  const key = accessToken
-    ? [
-        endpoints.admin.systemMetrics,
-        { headers: { Authorization: `Bearer ${accessToken}` } },
-      ]
-    : null;
+export function useGetSystemMetrics(enabled = true) {
+  // Cookie auth (axios withCredentials). Gate on `enabled` (authenticated) so
+  // the poll doesn't fire before login; null key → SWR skips it.
+  const key = enabled ? endpoints.admin.systemMetrics : null;
   const { data, isLoading, error, mutate } = useSWR<SystemMetricsResponse>(
     key,
     fetcher,

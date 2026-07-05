@@ -2,7 +2,8 @@
 // same-origin Next route handler (`/api/revalidate`). Unlike the other actions
 // in this folder, this does NOT go through the backend axios instance — the
 // route lives in THIS Next app, so it must be called same-origin (respecting
-// NEXT_PUBLIC_BASE_PATH), with the admin JWT the dashboard already holds.
+// NEXT_PUBLIC_BASE_PATH). Auth is the httpOnly cookie the browser sends
+// automatically; the route forwards it to the backend /me to confirm admin.
 //
 // Used two ways:
 //   • fire-and-forget after a post is published/edited (fresh cache, no wait);
@@ -10,14 +11,11 @@
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
-export async function revalidatePublicPosts(
-  accessToken?: string,
-): Promise<boolean> {
-  if (!accessToken) return false;
+export async function revalidatePublicPosts(): Promise<boolean> {
   try {
     const res = await fetch(`${BASE_PATH}/api/revalidate`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${accessToken}` },
+      credentials: "same-origin",
     });
     return res.ok;
   } catch {

@@ -75,16 +75,11 @@ interface AuditLogsResponse {
   offset: number;
 }
 
-export function useGetAuditLogs(params: AuditLogsParams, accessToken?: string) {
-  // Передаём токен в ключ SWR явно (зеркало admin-posts-view): на свежем
-  // логине запрос иначе уходит до setSession → бэкенд отдаёт 401/403. Ключ
-  // null до появления токена → нет гонки.
-  const key = accessToken
-    ? [
-        endpoints.admin.auditLogs,
-        { headers: { Authorization: `Bearer ${accessToken}` }, params },
-      ]
-    : null;
+export function useGetAuditLogs(params: AuditLogsParams, enabled = true) {
+  // Auth rides in the httpOnly cookie (axios withCredentials) — no token in the
+  // key. Gate on `enabled` (authenticated) so the request doesn't fire before
+  // login; null key → SWR skips it.
+  const key = enabled ? [endpoints.admin.auditLogs, { params }] : null;
   const { data, isLoading, error, mutate } = useSWR<AuditLogsResponse>(
     key,
     fetcher,

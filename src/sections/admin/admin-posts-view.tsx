@@ -30,20 +30,14 @@ import {
 import type { AdminPostsResponse } from "./types";
 
 export function AdminPostsView() {
-  const { user } = useAuthContext();
-  const accessToken = user?.accessToken;
+  const { authenticated } = useAuthContext();
 
-  // Передаём токен в ключ SWR явно: иначе на свежем логине запрос уходит
-  // до того, как setSession проставит Authorization в axios.defaults — и
-  // бэкенд отдаёт посты по userId-фильтру (для админа это 0 строк) вместо
-  // admin-ветки «все посты». Ключ null до появления токена → нет гонки.
+  // Auth rides in the httpOnly cookie (axios withCredentials). Gate the key on
+  // `authenticated` so the request doesn't fire before login — otherwise the
+  // backend answers as unauthenticated (0 admin rows) instead of the admin
+  // "all posts" branch. Null key until authenticated → no race.
   const { data, mutate } = useSWR<AdminPostsResponse>(
-    accessToken
-      ? [
-          endpoints.post.list,
-          { headers: { Authorization: `Bearer ${accessToken}` } },
-        ]
-      : null,
+    authenticated ? endpoints.post.list : null,
     fetcher,
   );
   const posts = data?.posts ?? [];
@@ -70,7 +64,7 @@ export function AdminPostsView() {
     if (revalidating) return;
     setRevalidating(true);
     try {
-      const ok = await revalidatePublicPosts(accessToken);
+      const ok = await revalidatePublicPosts();
       if (ok) {
         toast.success("Кеш обновлён — публичные страницы пересоберутся");
       } else {

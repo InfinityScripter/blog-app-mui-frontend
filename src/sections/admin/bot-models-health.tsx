@@ -15,16 +15,16 @@ import {
 import { BotModelProbeRow } from "./bot-model-probe-row";
 
 type Props = {
-  accessToken?: string;
+  enabled?: boolean;
 };
 
-export function BotModelsHealth({ accessToken }: Props) {
+export function BotModelsHealth({ enabled = true }: Props) {
   const {
     botModelsHealth,
     botModelsHealthLoading,
     botModelsHealthError,
     botModelsHealthMutate,
-  } = useGetBotModelsHealth(accessToken);
+  } = useGetBotModelsHealth(enabled);
 
   const checks = botModelsHealth?.checks ?? [];
   const hasData = botModelsHealth !== null;

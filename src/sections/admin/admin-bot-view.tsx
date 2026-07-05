@@ -21,11 +21,10 @@ import { BotModelSelector } from "./bot-model-selector";
 import type { ControlProviderName } from "./types";
 
 export function AdminBotView() {
-  const { user } = useAuthContext();
-  const accessToken = user?.accessToken;
+  const { authenticated } = useAuthContext();
 
   const { botStatus, botStatusLoading, botStatusMutate } =
-    useGetBotStatus(accessToken);
+    useGetBotStatus(authenticated);
 
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -86,7 +85,7 @@ export function AdminBotView() {
           {error && <Alert severity="warning">{error}</Alert>}
 
           <BotModelSelector
-            accessToken={accessToken}
+            enabled={authenticated}
             activeModel={botStatus?.model}
             disabled={disabled}
             onSetModel={handleSetModel}
@@ -105,7 +104,7 @@ export function AdminBotView() {
             />
           </Card>
 
-          <BotModelsHealth accessToken={accessToken} />
+          <BotModelsHealth enabled={authenticated} />
         </Stack>
       )}
     </Box>

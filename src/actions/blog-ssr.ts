@@ -174,15 +174,6 @@ export async function deletePost(
   }
 }
 
-export async function getCurrentUser(): Promise<{
-  user: import("src/types/domain").User;
-}> {
-  const res = await axios.get<{ user: import("src/types/domain").User }>(
-    endpoints.auth.me,
-  );
-  return res.data;
-}
-
 export async function addComment(
   postId: string,
   commentData: Partial<Comment>,

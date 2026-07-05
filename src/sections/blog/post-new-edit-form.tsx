@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "src/routes/hooks";
 import { toast } from "src/components/snackbar";
 import { Form } from "src/components/hook-form";
-import { useAuthContext } from "src/auth/hooks";
 import { PUBLISH_STATUS } from "src/types/domain";
 import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,7 +30,6 @@ import type { PostNewEditFormProps } from "./types";
 export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
   const router = useRouter();
   const t = useTranslations("blog");
-  const { user } = useAuthContext();
 
   const preview = useBoolean();
 
@@ -121,7 +119,7 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
       // instead of after the 1h revalidate window. Fire-and-forget — a failed
       // revalidation must not block the success toast or navigation (the cache
       // still self-refreshes within the hour, and the admin has a manual button).
-      revalidatePublicPosts(user?.accessToken).catch(() => {});
+      revalidatePublicPosts().catch(() => {});
 
       reset();
       preview.onFalse();

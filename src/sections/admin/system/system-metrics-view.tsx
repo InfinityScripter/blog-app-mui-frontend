@@ -25,10 +25,9 @@ import {
 } from "./utils";
 
 export function AdminSystemMetricsView() {
-  const { user } = useAuthContext();
-  const accessToken = user?.accessToken;
+  const { authenticated } = useAuthContext();
   const { metrics, metricsLoading, metricsError, metricsMutate } =
-    useGetSystemMetrics(accessToken);
+    useGetSystemMetrics(authenticated);
   const history = useMetricsHistory(metrics);
   const state = renderState(metricsError, metricsLoading, metrics);
 
