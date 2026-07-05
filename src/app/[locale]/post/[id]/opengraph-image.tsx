@@ -32,10 +32,7 @@ async function resolveTitle(id: string): Promise<string> {
 
 export default async function PostOpengraphImage({ params }: ImageProps) {
   const { id } = await params;
-  const [fonts, title] = await Promise.all([
-    loadOgFonts(),
-    resolveTitle(id),
-  ]);
+  const [fonts, title] = await Promise.all([loadOgFonts(), resolveTitle(id)]);
 
   return new ImageResponse(
     (

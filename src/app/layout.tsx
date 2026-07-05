@@ -1,50 +1,18 @@
-import "src/global.css";
-
-// ----------------------------------------------------------------------
 import type { ReactNode } from "react";
 
 import { CONFIG } from "src/config-global";
 import { primary } from "src/theme/core/palette";
-import { Analytics } from "@vercel/analytics/next";
-import { Snackbar } from "src/components/snackbar";
-import { AuthProvider } from "src/auth/context/jwt";
-import { ThemeProvider } from "src/theme/theme-provider";
-import { ProgressBar } from "src/components/progress-bar";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import { MotionLazy } from "src/components/animate/motion-lazy";
-import { Manrope, Unbounded, JetBrains_Mono } from "next/font/google";
-import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
-import { defaultSettings, SettingsProvider } from "src/components/settings";
-// Lazy client wrapper: defers the settings drawer (and its simplebar-react
-// dependency) out of every route's initial JS. Can't use dynamic({ssr:false})
-// directly here — this is a Server Component.
-import { SettingsDrawer } from "src/components/settings/drawer/settings-drawer-lazy";
 
 // ----------------------------------------------------------------------
-
-// Editorial Ink stack (see .stitch/DESIGN.md): Manrope — workhorse grotesque
-// for body/h3–h6, Unbounded — display face for h1/h2, JetBrains Mono — dates,
-// counters, code. All three are Cyrillic-native (the RU content rendered in a
-// system fallback before — Public Sans ships no Cyrillic).
-const manrope = Manrope({
-  subsets: ["latin", "cyrillic"],
-  variable: "--font-manrope",
-  display: "swap",
-});
-
-const unbounded = Unbounded({
-  subsets: ["latin", "cyrillic"],
-  weight: ["500", "600", "700"],
-  variable: "--font-unbounded",
-  display: "swap",
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "700"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
+//
+// Root layout is a bare passthrough: the `<html>`/`<body>` shell, fonts and the
+// whole provider tree live in `src/app/[locale]/layout.tsx`, which is the only
+// layout that can read the active locale (from the `[locale]` segment) and set
+// `<html lang>` accordingly. Next.js still requires a root layout to exist, so
+// this returns children unwrapped. Metadata here is the site-wide default;
+// per-locale routes extend it via `generateMetadata`.
+//
+// ----------------------------------------------------------------------
 
 export const metadata = {
   metadataBase: new URL(CONFIG.site.url),
@@ -117,41 +85,5 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  // Render with default settings on the server and let the client hydrate the
-  // persisted settings from the cookie (SettingsProvider's useCookies mount
-  // effect) and the persisted color mode from localStorage (the inline
-  // getInitColorSchemeScript below, before first paint). Reading the cookie
-  // here via detectSettings() would call cookies() and force EVERY route to
-  // render dynamically — defeating ISR/static generation site-wide.
-  const settings = defaultSettings;
-
-  return (
-    <html
-      lang="ru"
-      suppressHydrationWarning
-      className={`${manrope.variable} ${unbounded.variable} ${jetBrainsMono.variable}`}
-    >
-      <body suppressHydrationWarning>
-        {getInitColorSchemeScript}
-
-        <AuthProvider>
-          <SettingsProvider
-            settings={settings}
-            caches={CONFIG.isStaticExport ? "localStorage" : "cookie"}
-          >
-            <ThemeProvider>
-              <MotionLazy>
-                <ProgressBar />
-                <SettingsDrawer />
-                <Snackbar />
-                {children}
-                <Analytics />
-                <SpeedInsights />
-              </MotionLazy>
-            </ThemeProvider>
-          </SettingsProvider>
-        </AuthProvider>
-      </body>
-    </html>
-  );
+  return children;
 }

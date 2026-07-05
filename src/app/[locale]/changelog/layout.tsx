@@ -1,9 +1,8 @@
 import type { ReactNode } from "react";
 
 import { MainLayout } from "src/layouts/main";
-
 // ----------------------------------------------------------------------
-import { AuthProvider } from "../../../auth/context/jwt";
+import { AuthProvider } from "src/auth/context/jwt";
 
 interface LayoutProps {
   children: ReactNode;
