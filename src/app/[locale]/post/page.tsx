@@ -1,8 +1,8 @@
 import { CONFIG } from "src/config-global";
-import { toAppLocale } from "src/i18n/locales";
 import { getTranslations } from "next-intl/server";
 import { getBlogPosts } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
+import { toAppLocale, DEFAULT_LOCALE } from "src/i18n/locales";
 // Import directly from the view file (not the barrel) — the barrel re-exports
 // the dashboard post editor, which would drag tiptap/dropzone/etc into this
 // public bundle.
@@ -33,6 +33,18 @@ export async function generateMetadata({ params }: PageProps) {
 // ISR: serve a cached blog list, refreshed at most hourly (getPosts uses a
 // native fetch with the same revalidate window).
 export const revalidate = 3600;
+
+/**
+ * Prerender ONLY the default-locale (Russian) blog list at build; the EN list
+ * renders on-demand (dynamicParams defaults true). Building the EN variant would
+ * bake whatever the translation cache holds at build time — a cold cache would
+ * freeze the ORIGINAL titles into /en/post until the next deploy. On-demand, the
+ * first request renders against the warmed cache and is ISR-cached thereafter.
+ * Mirrors post/[id] and tag/[slug].
+ */
+export function generateStaticParams() {
+  return [{ locale: DEFAULT_LOCALE }];
+}
 
 interface PageComponentProps {
   params: Promise<{ locale: string }>;
