@@ -34,6 +34,11 @@ export const navData = [
     icon: <Iconify width={22} icon="solar:ranking-bold-duotone" />,
   },
   {
+    title: "Библиотека",
+    path: "/library",
+    icon: <Iconify width={22} icon="solar:bookmark-square-bold-duotone" />,
+  },
+  {
     title: "Обо мне",
     path: "/portfolio",
     icon: <Iconify width={22} icon="solar:user-circle-bold-duotone" />,

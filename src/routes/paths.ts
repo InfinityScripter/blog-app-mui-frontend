@@ -41,6 +41,9 @@ interface Paths {
   llmCompare: {
     root: string;
   };
+  library: {
+    root: string;
+  };
   auth: {
     jwt: {
       signIn: string;
@@ -114,6 +117,9 @@ export const paths: Paths = {
   },
   llmCompare: {
     root: `/llm-compare`,
+  },
+  library: {
+    root: `/library`,
   },
   // AUTH
   auth: {
