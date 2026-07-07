@@ -17,6 +17,12 @@ interface BuildRssFeedParams {
   feedDescription: string;
   feedUrl: string;
   /**
+   * RSS `<language>` tag (RFC 1766). Defaults to Russian — the original — so
+   * existing callers are unchanged; localized feeds pass their AppLocale so
+   * crawlers/readers see the feed in the right language.
+   */
+  language?: string;
+  /**
    * Overrides the per-item link/guid. Defaults to the `/post/<id>/` behavior so
    * existing feeds are unchanged; the changelog feed passes a builder emitting
    * `/changelog/<slug>/`.
@@ -53,7 +59,10 @@ function buildItem(post: Post, linkFor: (item: Post) => string): string {
   const safeDesc = (post.description ?? "").replace(/]]>/g, "]]]]><![CDATA[>");
   const pubDate = toRfc822(post.createdAt);
 
-  const cover = coverSrc(post.coverUrl, String(post._id ?? post.id ?? post.title));
+  const cover = coverSrc(
+    post.coverUrl,
+    String(post._id ?? post.id ?? post.title),
+  );
   const enclosure = cover
     ? `<enclosure url="${escapeXml(cover)}" type="image/webp" />`
     : "";
@@ -77,6 +86,7 @@ export function buildRssFeed({
   feedTitle,
   feedDescription,
   feedUrl,
+  language = "ru",
   linkFor = postLink,
 }: BuildRssFeedParams): string {
   const items = [...posts]
@@ -96,7 +106,7 @@ export function buildRssFeed({
     `    <title>${escapeXml(feedTitle)}</title>`,
     `    <link>${escapeXml(feedUrl)}</link>`,
     `    <description>${escapeXml(feedDescription)}</description>`,
-    "    <language>ru</language>",
+    `    <language>${escapeXml(language)}</language>`,
     `    <lastBuildDate>${toRfc822()}</lastBuildDate>`,
     items,
     "  </channel>",

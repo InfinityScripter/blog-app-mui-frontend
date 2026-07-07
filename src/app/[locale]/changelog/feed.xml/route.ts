@@ -2,6 +2,7 @@ import type { Post } from "src/types/domain";
 import type { ModelRelease } from "src/types/api";
 
 import { CONFIG } from "src/config-global";
+import { toAppLocale } from "src/i18n/locales";
 import { buildRssFeed } from "src/utils/feed-xml";
 import { getTranslations } from "next-intl/server";
 import { getReleases } from "src/actions/blog-ssr";
@@ -37,18 +38,20 @@ function releaseToFeedPost(release: ModelRelease): Post {
   };
 }
 
-function releaseLink(post: Post): string {
-  const slug = post._id ?? post.id ?? "";
-  return `${CONFIG.site.url}/changelog/${slug}/`;
-}
-
 interface RouteContext {
   params: Promise<{ locale: string }>;
 }
 
 export async function GET(_request: Request, { params }: RouteContext) {
   const { locale } = await params;
+  const lang = toAppLocale(locale);
   const t = await getTranslations({ locale, namespace: "changelog" });
+
+  // Locale-prefixed release URL so the EN feed links to the EN changelog page.
+  const releaseLink = (post: Post): string => {
+    const slug = post._id ?? post.id ?? "";
+    return `${CONFIG.site.url}/${lang}/changelog/${slug}/`;
+  };
 
   let releases: Awaited<ReturnType<typeof getReleases>>["releases"] = [];
   try {
@@ -62,7 +65,8 @@ export async function GET(_request: Request, { params }: RouteContext) {
     posts: releases.map(releaseToFeedPost),
     feedTitle: `${CONFIG.site.name} — ${t("feed.title")}`,
     feedDescription: t("feed.description"),
-    feedUrl: `${CONFIG.site.url}/changelog/`,
+    feedUrl: `${CONFIG.site.url}/${lang}/changelog/`,
+    language: lang,
     linkFor: releaseLink,
   });
 
