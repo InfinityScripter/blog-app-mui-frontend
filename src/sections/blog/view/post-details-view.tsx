@@ -7,6 +7,7 @@ import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import { useTranslations } from "next-intl";
 import { useGetPost } from "src/actions/blog";
+import { toast } from "src/components/snackbar";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
@@ -44,9 +45,10 @@ export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
         setPublish(newValue);
       } catch (error) {
         console.error("Failed to update publish status:", error);
+        toast.error(t("form.errorToast"));
       }
     },
-    [currentPost?._id],
+    [currentPost?._id, t],
   );
 
   useEffect(() => {

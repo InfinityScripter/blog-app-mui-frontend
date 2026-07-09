@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import { useState } from "react";
 import { paths } from "src/routes/paths";
-import { useRouter } from "next/navigation";
+import { useRouter } from "src/routes/hooks";
 import { toast } from "src/components/snackbar";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
@@ -52,6 +52,9 @@ export function AdminPostsView() {
     try {
       await axiosInstance.delete(endpoints.admin.postById(id));
       mutate();
+    } catch (error) {
+      console.error("Failed to delete post:", error);
+      toast.error("Не удалось удалить пост");
     } finally {
       setDeletingId(null);
     }
@@ -132,6 +135,7 @@ export function AdminPostsView() {
                   <TableCell>
                     <Tooltip title="Редактировать">
                       <IconButton
+                        aria-label="Редактировать"
                         onClick={() =>
                           router.push(paths.dashboard.post.edit(p.id ?? ""))
                         }
@@ -142,6 +146,7 @@ export function AdminPostsView() {
                     <Tooltip title="Удалить">
                       <IconButton
                         color="error"
+                        aria-label="Удалить"
                         onClick={() => handleDelete(p.id ?? "")}
                         disabled={deletingId === (p.id ?? "")}
                       >

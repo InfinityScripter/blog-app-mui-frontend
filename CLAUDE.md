@@ -39,6 +39,34 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 - **Do NOT double-wrap `MainLayout`.** A nested layout above an already-wrapped
   one renders two headers/footers (the `changelog/[slug]` bug, PR #14).
 
+### 1a. Optional-auth API routes must read the httpOnly cookie, not just the header
+
+Auth rides in the `access_token` **httpOnly cookie** (the browser SPA sends no
+`Authorization` header). Any backend route with _optional_ auth that scopes its
+response by role/userId (`post/list.ts`, `post/search.ts`) must read
+`bearerToken ?? readCookie(req, ACCESS_COOKIE)` — mirroring `require-auth.ts`.
+Reading only `req.headers.authorization` silently drops a logged-in admin to the
+anonymous `publish='published'` branch, so the dashboard "Все посты" table shows
+no drafts / no other authors' posts. (This was the "created post never appears"
+bug — fixed 2026-07-09; regression test in backend `tests/api/post/list.test.ts`.)
+
+### 1b. `/api/revalidate` must target the localized page tree
+
+Public pages live under `/[locale]/…` (`localePrefix: "always"`). On-demand ISR
+revalidation uses `revalidatePath("/[locale]", "layout")` (one call drops every
+localized page) plus per-locale feed URLs (`/${locale}/news/feed.xml`,
+`/${locale}/changelog/feed.xml`); the bare `/feed.xml`, `/llms.txt`,
+`/sitemap.xml` are NOT localized. Revalidating unprefixed page paths (`/`,
+`/post/[id]`) is a silent no-op — the cache never clears.
+
+### 1c. e2e specs assert Russian labels — pin the locale
+
+`playwright.config.ts` pins `locale: "ru-RU"` + `Accept-Language`. Without it,
+`localePrefix: "always"` + no edge-geo in local dev makes next-intl negotiate
+English from Playwright's default `en-US`, so every Russian `getByRole` name
+query fails. Internal links are locale-prefixed (`/ru/post/…`), so DOM selectors
+must match the `/post/<slug>` segment, not anchor at the string start.
+
 ### 2. Verify header/footer in a real browser — never by grepping HTML
 
 Public pages render client-side: the raw SSR/prod HTML shows `<header>` **0

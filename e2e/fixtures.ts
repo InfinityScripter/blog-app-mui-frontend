@@ -18,8 +18,6 @@ export const NON_ADMIN_USER = {
   password: "@user1",
 } as const;
 
-export const STORAGE_KEY = "jwt_access_token";
-
 async function login(
   page: import("@playwright/test").Page,
   creds: { email: string; password: string },

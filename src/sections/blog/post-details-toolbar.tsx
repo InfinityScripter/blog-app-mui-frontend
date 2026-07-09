@@ -10,7 +10,6 @@ import MenuItem from "@mui/material/MenuItem";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import { PUBLISH_STATUS } from "src/types/domain";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
 import { usePostDelete } from "src/hooks/use-post-delete";
 import { ConfirmDialog } from "src/components/confirm-dialog";
@@ -86,7 +85,7 @@ export function PostDetailsToolbar({
           </IconButton>
         </Tooltip>
 
-        <LoadingButton
+        <Button
           color="inherit"
           variant="contained"
           loading={!publish}
@@ -96,7 +95,7 @@ export function PostDetailsToolbar({
           sx={{ textTransform: "capitalize" }}
         >
           {statusLabel(publish)}
-        </LoadingButton>
+        </Button>
       </Stack>
 
       <CustomPopover

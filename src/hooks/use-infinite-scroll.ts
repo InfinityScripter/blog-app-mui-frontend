@@ -11,7 +11,10 @@ interface UseInfiniteScrollReturn<T> {
   loadMore: () => void;
 }
 
-export function useInfiniteScroll<T>(initialItems: T[] = [], itemsPerPage = 8): UseInfiniteScrollReturn<T> {
+export function useInfiniteScroll<T>(
+  initialItems: T[] = [],
+  itemsPerPage = 8,
+): UseInfiniteScrollReturn<T> {
   const [items, setItems] = useState<T[]>(initialItems.slice(0, itemsPerPage));
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(initialItems.length > itemsPerPage);

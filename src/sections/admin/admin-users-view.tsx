@@ -83,6 +83,7 @@ export function AdminUsersView() {
                       <Tooltip title="Удалить">
                         <IconButton
                           color="error"
+                          aria-label="Удалить"
                           onClick={() => handleDelete(u.id)}
                           disabled={deletingId === u.id}
                         >

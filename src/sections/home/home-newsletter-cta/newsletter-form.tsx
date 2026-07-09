@@ -1,9 +1,9 @@
 import { useMemo } from "react";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { toast } from "src/components/snackbar";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 // Import the two pieces directly — NOT from the hook-form barrel — so the
 // public bundle doesn't statically pull RHFEditor/RHFUpload/RHFPhoneInput.
@@ -78,7 +78,7 @@ export function NewsletterForm({ tone = "light" }: NewsletterFormProps) {
           sx={{ flexGrow: 1, ...(isDark ? darkFieldSx : {}) }}
         />
 
-        <LoadingButton
+        <Button
           type="submit"
           size="large"
           color="primary"
@@ -87,7 +87,7 @@ export function NewsletterForm({ tone = "light" }: NewsletterFormProps) {
           sx={{ flexShrink: 0, px: 3, width: { xs: 1, sm: "auto" } }}
         >
           {t("newsletter.button")}
-        </LoadingButton>
+        </Button>
       </Stack>
     </Form>
   );

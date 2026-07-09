@@ -4,7 +4,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Switch from "@mui/material/Switch";
 import { useTranslations } from "next-intl";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { Controller, useFormContext } from "react-hook-form";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
@@ -54,7 +53,7 @@ export function PostNewEditActions({
           {t("form.preview")}
         </Button>
 
-        <LoadingButton
+        <Button
           type="submit"
           variant="contained"
           size="large"
@@ -62,7 +61,7 @@ export function PostNewEditActions({
           sx={{ ml: 2 }}
         >
           {!isEdit ? t("form.create") : t("form.save")}
-        </LoadingButton>
+        </Button>
       </div>
     </Box>
   );

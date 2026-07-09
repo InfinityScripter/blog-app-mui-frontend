@@ -1,8 +1,5 @@
 import type { FetcherArgs } from "src/utils/axios";
-import type {
-  ListPostsResponse,
-  ListReleasesResponse,
-} from "src/types/api";
+import type { ListPostsResponse, ListReleasesResponse } from "src/types/api";
 
 import useSWR from "swr";
 import { useMemo, useCallback } from "react";

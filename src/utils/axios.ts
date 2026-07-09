@@ -59,6 +59,12 @@ function toError(error: AxiosError<{ message?: string }>): Error {
   if (error.response?.data?.message) {
     return new Error(error.response.data.message);
   }
+  // No backend message — keep the axios context ("Network Error", "Request
+  // failed with status code 500") instead of one generic string, so logs and
+  // toasts can distinguish offline / server / client failures.
+  if (error.message) {
+    return new Error(error.message);
+  }
   return new Error("Something went wrong. Please try again.");
 }
 
@@ -68,16 +74,26 @@ axiosInstance.interceptors.response.use(
     const { config } = error;
     const status = error.response?.status;
     const url = config?.url ?? "";
-    const isBypass = AUTH_BYPASS_PATHS.some((path) => url.includes(path));
+    // Anchored match (not includes): a future endpoint that merely contains a
+    // bypass path as a substring must not silently skip the refresh loop.
+    const isBypass = AUTH_BYPASS_PATHS.some(
+      (path) => url === path || url.startsWith(`${path}?`),
+    );
 
     // A 401 on a normal request → try one silent refresh, then replay it.
     if (status === 401 && config && !config._retriedAfterRefresh && !isBypass) {
       config._retriedAfterRefresh = true;
       if (!refreshPromise) {
-        refreshPromise = runRefresh();
+        // Reset via finally AT CREATION, not after each awaiter's own await:
+        // a 401 arriving between one awaiter's resolution and its manual reset
+        // would otherwise start a second refresh mid-burst — with rotating
+        // refresh tokens that second call can invalidate the first and sign
+        // the user out.
+        refreshPromise = runRefresh().finally(() => {
+          refreshPromise = null;
+        });
       }
       const refreshed = await refreshPromise;
-      refreshPromise = null;
 
       if (refreshed) {
         return axiosInstance(config);

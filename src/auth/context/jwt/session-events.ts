@@ -19,5 +19,13 @@ export function onSessionExpired(next: SessionExpiredHandler): () => void {
 }
 
 export function emitSessionExpired(): void {
-  handlers.forEach((handler) => handler());
+  // Isolate each handler: one throwing subscriber must not stop the rest of
+  // the mounted AuthProviders from being signed out.
+  handlers.forEach((handler) => {
+    try {
+      handler();
+    } catch (error) {
+      console.error("session-expired handler failed:", error);
+    }
+  });
 }

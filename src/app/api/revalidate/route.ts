@@ -1,3 +1,4 @@
+import { LOCALES } from "src/i18n/locales";
 import { revalidatePath } from "next/cache";
 import { endpoints } from "src/utils/axios";
 import { NextResponse, type NextRequest } from "next/server";
@@ -16,11 +17,21 @@ import { NextResponse, type NextRequest } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-// Revalidating the `/post/[id]` *page* segment refreshes ALL post pages at once
-// (no need to enumerate ids); same for `/tag/[slug]`. The list/feed pages that
-// embed post cards are refreshed alongside.
-const POST_PAGE_SEGMENTS = ["/post/[id]", "/tag/[slug]"] as const;
-const LIST_PATHS = ["/", "/news", "/changelog"] as const;
+// Every public PAGE lives under the localized tree (`/ru/...`, `/en/...` —
+// `localePrefix: "always"`), so one layout-scoped revalidation of `/[locale]`
+// drops every localized page cache (home feed, blog list, /post/[id],
+// /tag/[slug], /news, /changelog) for all locales at once. Feed and metadata
+// ROUTE HANDLERS sit outside the page/layout tree, so each is revalidated by
+// its literal URL — per locale where the route is localized.
+const FEED_AND_METADATA_PATHS = [
+  "/feed.xml",
+  "/llms.txt",
+  "/sitemap.xml",
+  ...LOCALES.flatMap((locale) => [
+    `/${locale}/news/feed.xml`,
+    `/${locale}/changelog/feed.xml`,
+  ]),
+];
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 
@@ -34,7 +45,10 @@ async function isAdmin(cookieHeader: string | null): Promise<boolean> {
     if (!res.ok) return false;
     const data: { user?: { role?: string } } = await res.json();
     return data.user?.role === "admin";
-  } catch {
+  } catch (error) {
+    // Deny on failure, but leave a trace: an unreachable backend otherwise
+    // presents to a legitimate admin as an inexplicable 403.
+    console.error("[revalidate] admin check failed:", error);
     return false;
   }
 }
@@ -47,10 +61,8 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Refresh every post/tag page in one shot (dynamic-segment revalidation), plus
-  // the list/feed pages that show post cards.
-  POST_PAGE_SEGMENTS.forEach((segment) => revalidatePath(segment, "page"));
-  LIST_PATHS.forEach((path) => revalidatePath(path));
+  revalidatePath("/[locale]", "layout");
+  FEED_AND_METADATA_PATHS.forEach((path) => revalidatePath(path));
 
   return NextResponse.json({ revalidated: true });
 }

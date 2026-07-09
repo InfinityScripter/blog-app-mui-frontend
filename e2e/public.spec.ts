@@ -17,10 +17,12 @@ test.describe("public pages", () => {
     ).toBeVisible();
   });
 
-  // A post *detail* link: under <main> (excludes the nav "Блог" link whose
-  // href is "/post/"), pointing at a slug below /post/.
+  // A post *detail* link: under <main> (excludes the nav "Блог" link, whose
+  // href ends at the list route), pointing at a slug below …/post/. Hrefs carry
+  // a locale prefix (`localePrefix: "always"` → /ru/post/…, /en/post/…), so
+  // match on the "/post/<slug>" segment rather than anchoring at the start.
   const detailLink = (page: import("@playwright/test").Page) =>
-    page.locator('main a[href^="/post/"]:not([href$="/post/"])');
+    page.locator('main a[href*="/post/"]:not([href$="/post/"])');
 
   test("blog list loads posts from the backend", async ({ page }) => {
     await page.goto("/post");

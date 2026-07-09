@@ -6,7 +6,11 @@ import type { PostResultListProps } from "../types";
 
 // ----------------------------------------------------------------------
 
-export function PostResultList({ results, query, onClickItem }: PostResultListProps) {
+export function PostResultList({
+  results,
+  query,
+  onClickItem,
+}: PostResultListProps) {
   return (
     <Box component="ul">
       {results.map((post) => (

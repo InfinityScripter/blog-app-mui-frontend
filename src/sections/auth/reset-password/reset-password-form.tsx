@@ -2,9 +2,9 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import { paths } from "src/routes/paths";
+import Button from "@mui/material/Button";
 import { Iconify } from "src/components/iconify";
 import { Field } from "src/components/hook-form";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
 
 import { ResetPasswordFormProps } from "./types";
@@ -28,7 +28,7 @@ export function ResetPasswordForm({
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
 
-      <LoadingButton
+      <Button
         fullWidth
         size="large"
         type="submit"
@@ -37,7 +37,7 @@ export function ResetPasswordForm({
         loadingIndicator="Отправка запроса..."
       >
         Отправить запрос
-      </LoadingButton>
+      </Button>
 
       <Link
         component={RouterLink}

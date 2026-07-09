@@ -13,7 +13,11 @@ import type { PostSearchButtonProps } from "../types";
 // (src/layouts/components/searchbar/search-button.tsx) — kept as a local
 // copy rather than a cross-module deep import since that module only
 // exports its top-level `Searchbar`.
-export function PostSearchButton({ onOpen, sx, ...other }: PostSearchButtonProps) {
+export function PostSearchButton({
+  onOpen,
+  sx,
+  ...other
+}: PostSearchButtonProps) {
   const theme = useTheme();
 
   return (

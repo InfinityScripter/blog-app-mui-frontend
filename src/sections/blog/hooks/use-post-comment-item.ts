@@ -2,6 +2,8 @@ import type { Comment, ReplyComment } from "src/types/domain";
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { toast } from "src/components/snackbar";
 import { useBoolean } from "src/hooks/use-boolean";
 import { usePopover } from "src/components/custom-popover";
 import { deleteComment, updateComment } from "src/actions/blog-ssr";
@@ -28,6 +30,7 @@ export function usePostCommentItem({
   const params = useParams<{ id: string }>();
   const postId = propPostId || params?.id;
   const popover = usePopover();
+  const t = useTranslations("blog");
 
   const [isEditing, setIsEditing] = useState(false);
   const [editedMessage, setEditedMessage] = useState(message);
@@ -58,6 +61,7 @@ export function usePostCommentItem({
       popover.onClose();
     } catch (error) {
       console.error("Failed to update comment:", error);
+      toast.error(t("form.errorToast"));
     } finally {
       saving.onFalse();
     }
@@ -98,6 +102,7 @@ export function usePostCommentItem({
       popover.onClose();
     } catch (error) {
       console.error("Failed to delete comment:", error);
+      toast.error(t("form.errorToast"));
     } finally {
       deleting.onFalse();
     }

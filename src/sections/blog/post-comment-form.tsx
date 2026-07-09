@@ -2,13 +2,13 @@
 
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
+import Button from "@mui/material/Button";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useAuthContext } from "src/auth/hooks";
 import { addComment } from "src/actions/blog-ssr";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 // Import the two pieces this form needs directly — NOT from the hook-form
 // barrel. The barrel's `Field` namespace statically pulls RHFEditor (tiptap),
@@ -123,14 +123,14 @@ export function PostCommentForm({
             {/* </IconButton> */}
           </Stack>
 
-          <LoadingButton
+          <Button
             type="submit"
             variant="contained"
             loading={isSubmitting}
             disabled={!currentUser}
           >
             {parentCommentId ? t("comments.submitReply") : t("comments.submit")}
-          </LoadingButton>
+          </Button>
         </Stack>
       </Stack>
     </Form>

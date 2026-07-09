@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import { useTranslations } from "next-intl";
 import TextField from "@mui/material/TextField";
 import { Iconify } from "src/components/iconify";
-import LoadingButton from "@mui/lab/LoadingButton";
 
 import type { PostCommentEditProps } from "./types";
 
@@ -43,7 +42,7 @@ export function PostCommentEdit({
         >
           {t("comments.cancel")}
         </Button>
-        <LoadingButton
+        <Button
           size="small"
           onClick={onSave}
           loading={saving}
@@ -51,7 +50,7 @@ export function PostCommentEdit({
           color="success"
         >
           {t("comments.save")}
-        </LoadingButton>
+        </Button>
       </Stack>
     </Stack>
   );

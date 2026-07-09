@@ -2,12 +2,10 @@
 
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
-import Switch from "@mui/material/Switch";
 import Divider from "@mui/material/Divider";
 import { useTranslations } from "next-intl";
 import { Field } from "src/components/hook-form";
 import CardHeader from "@mui/material/CardHeader";
-import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { TAG_SUGGESTIONS } from "./const";
 import { renderTagOption } from "./post-new-edit-properties-tag-option";
@@ -63,13 +61,6 @@ export function PostNewEditProperties() {
           getOptionLabel={(option: string) => option}
           renderOption={renderTagOption}
           renderTags={renderSelectedTags}
-        />
-
-        <FormControlLabel
-          control={
-            <Switch defaultChecked inputProps={{ id: "comments-switch" }} />
-          }
-          label={t("form.enableComments")}
         />
       </Stack>
     </Card>

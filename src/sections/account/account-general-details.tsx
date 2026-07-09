@@ -1,11 +1,11 @@
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { Iconify } from "src/components/iconify";
 import { Field } from "src/components/hook-form";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
 
 import type { AccountGeneralDetailsProps } from "./types";
 
@@ -54,7 +54,7 @@ export function AccountGeneralDetails({
       <Divider sx={{ my: 3, borderStyle: "dashed" }} />
 
       <Stack direction="row" spacing={1.5} sx={{ justifyContent: "flex-end" }}>
-        <LoadingButton
+        <Button
           type="submit"
           variant="contained"
           disabled={!isChanged}
@@ -62,7 +62,7 @@ export function AccountGeneralDetails({
           startIcon={<Iconify icon="solar:diskette-bold" />}
         >
           Сохранить изменения
-        </LoadingButton>
+        </Button>
       </Stack>
     </Card>
   );

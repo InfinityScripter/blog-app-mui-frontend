@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import LoadingButton from "@mui/lab/LoadingButton";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -49,14 +48,14 @@ export function ConfirmDialog({
             </Button>
 
             {onConfirm && (
-              <LoadingButton
+              <Button
                 variant="contained"
                 color={confirmColor}
                 onClick={onConfirm}
                 loading={loading}
               >
                 {confirmText}
-              </LoadingButton>
+              </Button>
             )}
           </>
         )}

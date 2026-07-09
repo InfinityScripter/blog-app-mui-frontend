@@ -66,13 +66,17 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
     formState: { isSubmitting, isValid },
   } = methods;
 
-  const values = watch();
+  // Scope the subscription to only the fields the preview dialog renders, so a
+  // keystroke in the Tiptap editor doesn't re-render the whole form tree (a bare
+  // `watch()` subscribes to every field).
+  const values = watch(["title", "description", "content", "coverUrl"]);
+  const [title, description, content, coverUrlValue] = values;
 
-  // `values.coverUrl` is typed `unknown` (zod `custom().transform`); narrow it
+  // `coverUrlValue` is typed `unknown` (zod `custom().transform`); narrow it
   // to the preview prop shape with runtime guards instead of casting.
   const previewCoverUrl: string | File | null =
-    typeof values.coverUrl === "string" || values.coverUrl instanceof File
-      ? values.coverUrl
+    typeof coverUrlValue === "string" || coverUrlValue instanceof File
+      ? coverUrlValue
       : null;
 
   useEffect(() => {
@@ -119,7 +123,9 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
       // instead of after the 1h revalidate window. Fire-and-forget — a failed
       // revalidation must not block the success toast or navigation (the cache
       // still self-refreshes within the hour, and the admin has a manual button).
-      revalidatePublicPosts().catch(() => {});
+      revalidatePublicPosts().catch((error) => {
+        console.error("Background post-publish revalidation failed:", error);
+      });
 
       reset();
       preview.onFalse();
@@ -157,13 +163,13 @@ export function PostNewEditForm({ currentPost }: PostNewEditFormProps) {
       <PostDetailsPreview
         isValid={isValid}
         onSubmit={onSubmit}
-        title={values.title}
+        title={title}
         open={preview.value}
-        content={values.content}
+        content={content}
         onClose={preview.onFalse}
         coverUrl={previewCoverUrl}
         isSubmitting={isSubmitting}
-        description={values.description}
+        description={description}
       />
     </Form>
   );

@@ -1,8 +1,8 @@
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import { Field } from "src/components/hook-form";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useBoolean } from "src/hooks/use-boolean";
 import InputAdornment from "@mui/material/InputAdornment";
 
@@ -54,7 +54,7 @@ export function JwtSignUpForm({ isSubmitting }: JwtSignUpFormProps) {
         }}
       />
 
-      <LoadingButton
+      <Button
         fullWidth
         color="inherit"
         size="large"
@@ -64,7 +64,7 @@ export function JwtSignUpForm({ isSubmitting }: JwtSignUpFormProps) {
         loadingIndicator="Создание аккаунта..."
       >
         Создать аккаунт
-      </LoadingButton>
+      </Button>
     </Stack>
   );
 }

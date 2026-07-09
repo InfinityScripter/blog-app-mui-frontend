@@ -16,7 +16,11 @@ export function PasswordField({ name, label, visible }: PasswordFieldProps) {
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton onClick={visible.onToggle} edge="end">
+            <IconButton
+              onClick={visible.onToggle}
+              edge="end"
+              aria-label={visible.value ? "Скрыть пароль" : "Показать пароль"}
+            >
               <Iconify
                 icon={
                   visible.value ? "solar:eye-bold" : "solar:eye-closed-bold"

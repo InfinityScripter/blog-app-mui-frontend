@@ -1,12 +1,12 @@
 import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { Label } from "src/components/label";
 import { fData } from "src/utils/format-number";
 import { Iconify } from "src/components/iconify";
 import { Field } from "src/components/hook-form";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
 
 import { ROLE_LABEL } from "./const";
 
@@ -64,7 +64,7 @@ export function AccountGeneralIdentity({
       />
 
       {hasAvatar && (
-        <LoadingButton
+        <Button
           variant="soft"
           color="error"
           size="small"
@@ -74,7 +74,7 @@ export function AccountGeneralIdentity({
           sx={{ mt: 3 }}
         >
           Удалить фото
-        </LoadingButton>
+        </Button>
       )}
 
       <Divider sx={{ my: 3, width: 1, borderStyle: "dashed" }} />

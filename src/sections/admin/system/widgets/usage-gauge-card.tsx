@@ -18,13 +18,21 @@ interface UsageGaugeCardProps {
 
 // Карточка занятости ресурса: крупный процент, полоса с порогами
 // (зелёный → оранжевый → красный) и строки деталей под ней.
-export function UsageGaugeCard({ title, percent, details }: UsageGaugeCardProps) {
+export function UsageGaugeCard({
+  title,
+  percent,
+  details,
+}: UsageGaugeCardProps) {
   const severity = usageSeverity(percent);
 
   return (
     <Card sx={{ p: 3, height: 1 }}>
       <Stack spacing={2}>
-        <Stack direction="row" alignItems="baseline" justifyContent="space-between">
+        <Stack
+          direction="row"
+          alignItems="baseline"
+          justifyContent="space-between"
+        >
           <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
             {title}
           </Typography>

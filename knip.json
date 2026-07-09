@@ -2,6 +2,7 @@
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
     "src/app/**/{page,layout,loading,error,not-found,template,default,route}.{ts,tsx}",
+    "src/i18n/request.ts",
     "src/app/**/{sitemap,robots,manifest,icon,apple-icon,opengraph-image,twitter-image}.{ts,tsx}",
     "next.config.mjs",
     "playwright.config.ts",

@@ -78,9 +78,7 @@ describe("buildRssFeed", () => {
     const xml = buildRssFeed({ posts: [post({ _id: "xyz789" })], ...META });
     const expected = `${CONFIG.site.url}/post/xyz789/`;
     expect(xml).toContain(`<link>${expected}</link>`);
-    expect(xml).toContain(
-      `<guid isPermaLink="true">${expected}</guid>`,
-    );
+    expect(xml).toContain(`<guid isPermaLink="true">${expected}</guid>`);
     expect(expected.endsWith("/post/xyz789/")).toBe(true);
   });
 

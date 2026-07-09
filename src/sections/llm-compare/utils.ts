@@ -29,11 +29,6 @@ export function formatBench(score: BenchmarkScore | null | undefined): string {
   return `${rounded % 1 === 0 ? rounded.toFixed(0) : rounded.toFixed(1)}%`;
 }
 
-/** Extracts the release year from an ISO date string. */
-export function releaseYear(isoDate: string): number {
-  return new Date(isoDate).getUTCFullYear();
-}
-
 /**
  * The raw numeric a model contributes to a sort/compare column, or `null` when
  * that model has no value for the column. Central mapping used by both sorting

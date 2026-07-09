@@ -6,12 +6,12 @@ import Link from "@mui/material/Link";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
 import { useBoolean } from "src/hooks/use-boolean";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -132,7 +132,7 @@ export function JwtSignInView() {
         />
       </Stack>
 
-      <LoadingButton
+      <Button
         fullWidth
         color="inherit"
         size="large"
@@ -142,7 +142,7 @@ export function JwtSignInView() {
         loadingIndicator="Вход..."
       >
         Войти
-      </LoadingButton>
+      </Button>
     </Stack>
   );
 

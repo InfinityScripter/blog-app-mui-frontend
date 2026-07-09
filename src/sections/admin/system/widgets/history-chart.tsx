@@ -38,7 +38,11 @@ export function HistoryChart({ history }: { history: MetricsHistoryPoint[] }) {
             series={series}
             options={{
               xaxis: { categories, tickAmount: 6 },
-              yaxis: { min: 0, max: 100, labels: { formatter: (v) => `${v}%` } },
+              yaxis: {
+                min: 0,
+                max: 100,
+                labels: { formatter: (v) => `${v}%` },
+              },
               dataLabels: { enabled: false },
               stroke: { curve: "smooth", width: 2 },
               fill: { opacity: 0.16 },

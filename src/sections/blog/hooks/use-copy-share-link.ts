@@ -18,6 +18,7 @@ export function useCopyShareLink(url: string) {
       toast.success(t("share.linkCopied"));
     } catch (error) {
       console.error("Failed to copy link:", error);
+      toast.error(t("share.copyFailed"));
     }
   }, [t, url]);
 }

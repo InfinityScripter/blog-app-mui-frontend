@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 import Divider from "@mui/material/Divider";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { Markdown } from "src/components/markdown";
 import { Scrollbar } from "src/components/scrollbar";
 import DialogActions from "@mui/material/DialogActions";
@@ -36,13 +35,18 @@ export function PostDetailsPreview({
   const [previewUrl, setPreviewUrl] = useState("");
 
   useEffect(() => {
-    if (coverUrl) {
-      if (typeof coverUrl === "string") {
-        setPreviewUrl(formatImageUrl(coverUrl));
-      } else {
-        setPreviewUrl(URL.createObjectURL(coverUrl));
-      }
+    if (!coverUrl) {
+      return undefined;
     }
+    if (typeof coverUrl === "string") {
+      setPreviewUrl(formatImageUrl(coverUrl));
+      return undefined;
+    }
+    // Blob URL for a freshly-picked File — revoke the previous one on the next
+    // change/unmount so iterating on the cover doesn't leak object URLs.
+    const objectUrl = URL.createObjectURL(coverUrl);
+    setPreviewUrl(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
   }, [coverUrl]);
 
   const hasHero = title || previewUrl;
@@ -60,7 +64,7 @@ export function PostDetailsPreview({
           {t("preview.cancel")}
         </Button>
 
-        <LoadingButton
+        <Button
           type="submit"
           variant="contained"
           disabled={!isValid}
@@ -68,7 +72,7 @@ export function PostDetailsPreview({
           onClick={onSubmit}
         >
           {t("preview.submit")}
-        </LoadingButton>
+        </Button>
       </DialogActions>
 
       <Divider />

@@ -13,7 +13,11 @@ import type { PostResultItemProps } from "../types";
 // Visual polish (border/hover) matches the dashboard cmd+k ResultItem
 // (src/layouts/components/searchbar/result-item.tsx), swapped for a post
 // avatar + highlighted title instead of grouped nav text.
-export function PostResultItem({ post, query, onClickItem }: PostResultItemProps) {
+export function PostResultItem({
+  post,
+  query,
+  onClickItem,
+}: PostResultItemProps) {
   const parts = parse(post.title, match(post.title, query));
 
   return (
@@ -49,7 +53,9 @@ export function PostResultItem({ post, query, onClickItem }: PostResultItemProps
             component="span"
             sx={{
               color: part.highlight ? "primary.main" : "text.primary",
-              fontWeight: part.highlight ? "fontWeightSemiBold" : "fontWeightMedium",
+              fontWeight: part.highlight
+                ? "fontWeightSemiBold"
+                : "fontWeightMedium",
             }}
           >
             {part.text}

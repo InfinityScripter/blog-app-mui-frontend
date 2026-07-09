@@ -58,6 +58,10 @@ export const metadata = {
       "application/rss+xml": [
         { url: `${CONFIG.site.url}/feed.xml`, title: "Блог — RSS" },
         { url: `${CONFIG.site.url}/news/feed.xml`, title: "Новости — RSS" },
+        {
+          url: `${CONFIG.site.url}/changelog/feed.xml`,
+          title: "Changelog — RSS",
+        },
       ],
     },
   },

@@ -46,6 +46,13 @@ export default defineConfig({
     baseURL: BASE_URL,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
+    // The specs assert Russian accessible names ("Заголовок поста", "Войти",
+    // …). With `localePrefix: "always"` and no edge-geo header in local dev,
+    // next-intl negotiates the locale from Accept-Language — Playwright's
+    // default (en-US) would resolve English labels and fail every role query.
+    // Pin the browser to Russian so the negotiated locale matches the specs.
+    locale: "ru-RU",
+    extraHTTPHeaders: { "Accept-Language": "ru-RU,ru;q=0.9" },
   },
   projects: [
     {

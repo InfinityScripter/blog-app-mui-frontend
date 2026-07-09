@@ -6,5 +6,4 @@ import { routing } from "./routing";
 // through these so the active locale prefix is preserved automatically. The
 // existing `src/routes/hooks` re-exports point here, so every consumer of
 // useRouter/usePathname/Link across the app becomes locale-aware in one place.
-export const { Link, redirect, usePathname, useRouter, getPathname } =
-  createNavigation(routing);
+export const { Link, usePathname, useRouter } = createNavigation(routing);

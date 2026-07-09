@@ -4,13 +4,13 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { varAlpha } from "src/theme/styles";
 import { toast } from "src/components/snackbar";
 import { Form } from "src/components/hook-form";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { useBoolean } from "src/hooks/use-boolean";
 import { changePassword } from "src/actions/account";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -132,7 +132,7 @@ export function AccountChangePassword() {
                 visible={showConfirmPassword}
               />
 
-              <LoadingButton
+              <Button
                 type="submit"
                 variant="contained"
                 loading={isSubmitting}
@@ -140,7 +140,7 @@ export function AccountChangePassword() {
                 sx={{ ml: "auto" }}
               >
                 Изменить пароль
-              </LoadingButton>
+              </Button>
             </Stack>
           </Grid>
         </Grid>

@@ -45,8 +45,7 @@ export function OverviewView() {
         <Stack spacing={0.5}>
           <Typography variant="h5">{subheading}</Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            Делитесь мыслями, публикуйте статьи и следите за тем, как их
-            читают.
+            Делитесь мыслями, публикуйте статьи и следите за тем, как их читают.
           </Typography>
         </Stack>
 

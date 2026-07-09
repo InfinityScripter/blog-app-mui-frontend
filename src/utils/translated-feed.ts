@@ -113,10 +113,7 @@ export function fetchDetailLocalized(
   init: RequestInit,
 ): Promise<PostResponse> {
   const read = (at: AppLocale) =>
-    fetchJsonWithRetry<PostResponse>(
-      `${baseUrl}${langQuery(at, true)}`,
-      init,
-    );
+    fetchJsonWithRetry<PostResponse>(`${baseUrl}${langQuery(at, true)}`, init);
   return withColdCacheFallback(
     lang,
     TRANSLATED_DETAIL_BUDGET_MS,

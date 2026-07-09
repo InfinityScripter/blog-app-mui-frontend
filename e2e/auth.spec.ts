@@ -1,4 +1,4 @@
-import { test, expect, STORAGE_KEY } from "./fixtures";
+import { test, expect } from "./fixtures";
 
 /**
  * Authentication + guard smoke flow.
@@ -18,17 +18,18 @@ test.describe("auth & guards", () => {
     ).toBeVisible();
   });
 
-  test("sign-in stores a JWT and lands on the dashboard", async ({
+  test("sign-in sets the httpOnly access_token cookie and lands on the dashboard", async ({
     authedPage,
   }) => {
     // The authedPage fixture already performed the login.
     await expect(authedPage).toHaveURL(/\/dashboard/);
 
-    const token = await authedPage.evaluate(
-      (key) => window.sessionStorage.getItem(key),
-      STORAGE_KEY,
-    );
-    expect(token, "JWT should be persisted in sessionStorage").toBeTruthy();
+    // Auth rides in an httpOnly cookie (not sessionStorage) after the
+    // cookie-auth migration, so assert the cookie is present in the context.
+    const cookies = await authedPage.context().cookies();
+    const accessCookie = cookies.find((c) => c.name === "access_token");
+    expect(accessCookie, "access_token cookie should be set").toBeTruthy();
+    expect(accessCookie?.httpOnly, "access_token must be httpOnly").toBe(true);
   });
 
   test("admin posts page lists all posts (not just the admin's own)", async ({

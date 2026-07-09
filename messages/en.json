@@ -56,7 +56,8 @@
       "ariaLabel": "Share post",
       "tooltip": "Share on {network}",
       "copyLink": "Copy link",
-      "linkCopied": "Link copied"
+      "linkCopied": "Link copied",
+      "copyFailed": "Failed to copy link"
     },
     "toolbar": {
       "back": "Back",

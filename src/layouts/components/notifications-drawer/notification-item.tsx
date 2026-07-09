@@ -72,7 +72,10 @@ export function NotificationItem({
         />
       )}
 
-      <Box component="span" sx={{ ...metaLineSx, color: `${config.color}.main` }}>
+      <Box
+        component="span"
+        sx={{ ...metaLineSx, color: `${config.color}.main` }}
+      >
         {config.label}
       </Box>
 

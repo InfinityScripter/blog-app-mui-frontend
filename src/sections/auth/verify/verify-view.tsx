@@ -5,11 +5,11 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import { paths } from "src/routes/paths";
+import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { EmailInboxIcon } from "src/assets/icons";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
 import axios, { endpoints } from "src/utils/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -115,7 +115,7 @@ export function VerifyView() {
           {error && <Alert severity="error">{error}</Alert>}
           {success && <Alert severity="success">{success}</Alert>}
 
-          <LoadingButton
+          <Button
             fullWidth
             size="large"
             type="submit"
@@ -123,7 +123,7 @@ export function VerifyView() {
             loading={isSubmitting}
           >
             Verify
-          </LoadingButton>
+          </Button>
 
           <Typography variant="body2" align="center">
             {`Don't have a code? `}

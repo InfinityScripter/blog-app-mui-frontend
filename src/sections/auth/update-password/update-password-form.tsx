@@ -2,10 +2,10 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import { paths } from "src/routes/paths";
+import Button from "@mui/material/Button";
 import { Iconify } from "src/components/iconify";
 import { Field } from "src/components/hook-form";
 import IconButton from "@mui/material/IconButton";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { RouterLink } from "src/routes/components";
 import { useBoolean } from "src/hooks/use-boolean";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -75,7 +75,7 @@ export function UpdatePasswordForm({
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}
 
-      <LoadingButton
+      <Button
         fullWidth
         size="large"
         type="submit"
@@ -83,7 +83,7 @@ export function UpdatePasswordForm({
         loading={isSubmitting}
       >
         Update Password
-      </LoadingButton>
+      </Button>
 
       <Link
         component={RouterLink}

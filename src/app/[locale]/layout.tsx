@@ -13,10 +13,11 @@ import { AuthProvider } from "src/auth/context/jwt";
 import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { schemeConfig } from "src/theme/color-scheme-script";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { MotionLazy } from "src/components/animate/motion-lazy";
 import { Manrope, Unbounded, JetBrains_Mono } from "next/font/google";
-import { getInitColorSchemeScript } from "src/theme/color-scheme-script";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import { defaultSettings, SettingsProvider } from "src/components/settings";
 // Lazy client wrapper: defers the settings drawer (and its simplebar-react
 // dependency) out of every route's initial JS. Can't use dynamic({ssr:false})
@@ -87,7 +88,7 @@ export default async function LocaleLayout({
       className={`${manrope.variable} ${unbounded.variable} ${jetBrainsMono.variable}`}
     >
       <body suppressHydrationWarning>
-        {getInitColorSchemeScript}
+        <InitColorSchemeScript {...schemeConfig} />
 
         <NextIntlClientProvider>
           <AuthProvider>
