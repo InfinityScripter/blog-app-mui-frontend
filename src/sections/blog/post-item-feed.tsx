@@ -28,12 +28,13 @@ import type { PostItemFeedProps } from "./types";
 // Editorial Ink: строка ленты без карточки — hairline-линейка сверху, mono-мета,
 // заголовок с vermilion-hover, маленькая обложка справа (скрыта на xs).
 export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
-  const { title, coverUrl, createdAt, totalViews, description, tags, content } =
-    post;
+  const { title, coverUrl, createdAt, totalViews, description, tags } = post;
 
   const t = useTranslations("blog");
   const href = paths.post.details(post.id ?? "");
-  const readingTime = getReadingTime(content);
+  // List rows carry a precomputed readingTime (content is stripped for a lean
+  // payload); fall back to deriving it where a full body is present.
+  const readingTime = post.readingTime ?? getReadingTime(post.content);
   // Show the tag(s) the feed is filtered by first, so a matched post never
   // looks unrelated just because its matching tag fell past MAX_TAGS.
   const visibleTags = orderTagsByActive(tags ?? [], activeTags).slice(

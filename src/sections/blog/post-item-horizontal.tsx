@@ -59,11 +59,10 @@ export function PostItemHorizontal({ post }: { post: Post }) {
     totalComments,
     description,
     tags,
-    content,
   } = post;
 
   const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
-  const readingTime = getReadingTime(content);
+  const readingTime = post.readingTime ?? getReadingTime(post.content);
 
   const handleEdit = () => {
     router.push(paths.dashboard.post.edit(String(post._id)));

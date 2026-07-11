@@ -27,12 +27,11 @@ import type { PostItemFeedProps } from "./types";
 // Featured-строка ленты: широкая hairline-карточка, обложка слева, текст
 // справа. Используется для самого свежего материала на главной.
 export function PostItemFeedFeatured({ post }: PostItemFeedProps) {
-  const { title, coverUrl, createdAt, totalViews, description, tags, content } =
-    post;
+  const { title, coverUrl, createdAt, totalViews, description, tags } = post;
 
   const t = useTranslations("blog");
   const href = paths.post.details(post.id ?? "");
-  const readingTime = getReadingTime(content);
+  const readingTime = post.readingTime ?? getReadingTime(post.content);
   const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
   const cover = coverSrc(coverUrl, String(post._id ?? post.id ?? title));
 

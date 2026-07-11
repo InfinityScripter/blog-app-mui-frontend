@@ -114,7 +114,7 @@ export function PostItem({
         )}
 
         <InfoBlock
-          readingTime={getReadingTime(post.content)}
+          readingTime={post.readingTime ?? getReadingTime(post.content)}
           totalViews={post.totalViews}
           totalShares={post.totalShares}
           totalComments={post.totalComments}

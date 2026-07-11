@@ -53,7 +53,14 @@ export interface Post {
   publish: PublishStatus;
   title: string;
   description?: string;
+  /**
+   * Full HTML body. Present on detail responses; OMITTED from list responses
+   * (the backend strips it for a lean feed payload — C7). Cards use `readingTime`
+   * instead of deriving it from this.
+   */
   content?: string;
+  /** Server-computed reading time in minutes; present on list rows (see `content`). */
+  readingTime?: number;
   coverUrl?: string;
   tags: string[];
   metaTitle?: string;
