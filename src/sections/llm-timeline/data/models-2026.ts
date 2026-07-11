@@ -406,4 +406,65 @@ export const LLM_MODELS_2026: LlmModel[] = [
     funFact:
       "OpenAI публично раскритиковала правительственный гейтинг в собственном анонсе: «Мы не считаем, что такой процесс доступа со стороны государства должен стать нормой по умолчанию».",
   },
+  {
+    id: "zhipu-glm-5-2",
+    slug: "glm-5-2",
+    vendor: "Zhipu AI",
+    name: "GLM-5.2",
+    releaseDate: "2026-06-13",
+    contextTokens: 1000000,
+    params: "744B total / ~40B active (MoE)",
+    highlight:
+      "Открытая MIT-модель вплотную к Claude Opus 4.8 на длинногоризонтном кодинге — при цене в 5–7 раз ниже.",
+    description:
+      "GLM-5.2 — флагман Z.ai и отдельный, более поздний релиз, чем GLM-5: sparse-MoE на 744B параметров (~40B активных) под MIT с реально используемым окном в 1 млн токенов и двумя уровнями reasoning-усилия (High/Max). По официальным замерам — 81.0 на Terminal-Bench 2.1 и 62.1 на SWE-bench Pro, в пределах 1% от Opus 4.8 на FrontierSWE. Цена — $1.4/$4.4 за млн токенов.",
+    capabilities: ["open-weights", "MoE", "coding", "agentic", "long-context"],
+    sourceUrl: "https://docs.z.ai/guides/llm/glm-5.2",
+    wikiUrl: "https://en.wikipedia.org/wiki/GLM-4.5",
+    funFact:
+      "Анонс вышел на следующий день после того, как власти США ограничили иностранцам доступ к Claude Fable 5 — Z.ai подчёркивала, что скачанные MIT-веса «нельзя отключить» никаким госрегулятором.",
+  },
+  {
+    id: "xai-grok-4-5",
+    slug: "grok-4-5",
+    vendor: "xAI",
+    name: "Grok 4.5",
+    releaseDate: "2026-07-08",
+    contextTokens: null,
+    params: null,
+    highlight:
+      "Модель класса Opus по коду и агентным задачам, но втрое дешевле и в разы токен-эффективнее (80 TPS).",
+    description:
+      "Grok 4.5 — сильнейшая модель xAI, выпущенная 8 июля 2026 и заточенная под кодинг, агентные задачи и работу со знаниями; обучена совместно с Cursor на GPU NVIDIA GB300. Цена $2/$6 за млн токенов, скорость 80 токенов/с, 64.7% на SWE-bench Pro и 83.3% на Terminal-Bench 2.1. Стала моделью по умолчанию в Grok Build, Cursor и плагинах MS Office; на старте недоступна в ЕС.",
+    capabilities: ["coding", "agentic", "tool-use", "reasoning"],
+    sourceUrl: "https://x.ai/news/grok-4-5",
+    wikiUrl: "https://ru.wikipedia.org/wiki/Grok",
+    funFact:
+      "На SWE-bench Pro Grok 4.5 решает задачу в среднем за 15 954 выходных токена — примерно вчетверо экономнее, чем Opus 4.8 с его 67 020 токенами.",
+  },
+  {
+    id: "meta-muse-spark-1-1",
+    slug: "muse-spark-1-1",
+    vendor: "Meta",
+    name: "Muse Spark 1.1",
+    releaseDate: "2026-07-09",
+    contextTokens: 1000000,
+    params: null,
+    highlight:
+      "Разворот Meta от открытых Llama к закрытым весам: первая платная модель компании и её первый коммерческий API.",
+    description:
+      "Muse Spark 1.1 — проприетарная агентная мультимодальная reasoning-модель Meta Superintelligence Labs, выпущенная 9 июля 2026 вместе с новым платным Meta Model API (публичное превью, только США). Заточена под оркестрацию мульти-агентов, tool use и контекст в 1 млн токенов; API совместим с SDK OpenAI и Anthropic. По заявлению Meta — 61.5 на SWE-bench Pro и 88.1 на MCP Atlas.",
+    capabilities: [
+      "agentic",
+      "coding",
+      "multimodal",
+      "tool-use",
+      "long-context",
+    ],
+    sourceUrl:
+      "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+    wikiUrl: "https://ru.wikipedia.org/wiki/Llama",
+    funFact:
+      "Meta никогда раньше не брала денег за свои модели — Muse Spark 1.1 с ценником $1.25/$4.25 за млн токенов закрывает эпоху бесплатных открытых весов Llama.",
+  },
 ];

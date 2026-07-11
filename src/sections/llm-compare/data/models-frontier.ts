@@ -9,6 +9,51 @@ import type { ComparableModel } from "../types";
 
 export const MODELS_FRONTIER: ComparableModel[] = [
   {
+    id: "meta-muse-spark-1-1",
+    vendor: "Meta",
+    name: "Muse Spark 1.1",
+    releaseDate: "2026-07-09",
+    contextTokens: 1000000,
+    maxOutputTokens: null,
+    pricing: { inputPerM: 1.25, outputPerM: 4.25 },
+    benchmarks: {
+      mmlu: null,
+      gpqa: null,
+      sweBench: null,
+      aime: null,
+    },
+    capabilities: ["reasoning", "agentic", "coding", "multimodal"],
+    modality: ["text", "vision"],
+    openWeights: false,
+    highlight:
+      "Первая платная закрытая модель Meta: агентная мультимодальная reasoning-модель с контекстом 1M, 61.5 на SWE-bench Pro и 88.1 на MCP Atlas.",
+    sourceUrl:
+      "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+    pricingAsOf: "2026-07-11",
+  },
+  {
+    id: "xai-grok-4-5",
+    vendor: "xAI",
+    name: "Grok 4.5",
+    releaseDate: "2026-07-08",
+    contextTokens: null,
+    maxOutputTokens: null,
+    pricing: { inputPerM: 2, outputPerM: 6 },
+    benchmarks: {
+      mmlu: null,
+      gpqa: null,
+      sweBench: null,
+      aime: null,
+    },
+    capabilities: ["reasoning", "coding", "agentic", "tool-use"],
+    modality: ["text"],
+    openWeights: false,
+    highlight:
+      "Кодинг класса Opus втрое дешевле: $2/$6, 80 токенов/с, 64.7% на SWE-bench Pro и 83.3% на Terminal-Bench 2.1.",
+    sourceUrl: "https://x.ai/news/grok-4-5",
+    pricingAsOf: "2026-07-11",
+  },
+  {
     id: "openai-gpt-5-6",
     vendor: "OpenAI",
     name: "GPT-5.6 (Sol)",

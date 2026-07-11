@@ -53,6 +53,28 @@ export const MODELS_OPEN: ComparableModel[] = [
     pricingAsOf: "2026-07-11",
   },
   {
+    id: "zhipu-glm-5-2",
+    vendor: "Zhipu AI",
+    name: "GLM-5.2",
+    releaseDate: "2026-06-13",
+    contextTokens: 1000000,
+    maxOutputTokens: 131072,
+    pricing: { inputPerM: 1.4, outputPerM: 4.4 },
+    benchmarks: {
+      mmlu: null,
+      gpqa: null,
+      sweBench: null,
+      aime: null,
+    },
+    capabilities: ["reasoning", "agentic", "coding", "open-weights", "MoE"],
+    modality: ["text", "vision"],
+    openWeights: true,
+    highlight:
+      "Открытая MIT-модель 744B почти на уровне Opus 4.8 в кодинге: 81.0 на Terminal-Bench 2.1 и 62.1 на SWE-bench Pro за $1.4/$4.4.",
+    sourceUrl: "https://docs.z.ai/guides/llm/glm-5.2",
+    pricingAsOf: "2026-07-11",
+  },
+  {
     id: "zhipu-glm-5",
     vendor: "Zhipu AI",
     name: "GLM-5",
