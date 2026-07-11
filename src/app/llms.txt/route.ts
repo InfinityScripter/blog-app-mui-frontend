@@ -25,12 +25,6 @@ export async function GET() {
       "Русскоязычный блог про AI, LLM и агентов: кейсы, гайды и честные разборы.",
     resources: [
       {
-        title: "Реальная статистика LLM",
-        url: `${CONFIG.site.url}/llm-stats/`,
-        description:
-          "Первичные данные: реальное использование LLM автором — токены, разбивка по моделям и инструментам, тренд активности и оценка стоимости.",
-      },
-      {
         title: "Сравнение LLM",
         url: `${CONFIG.site.url}/llm-compare/`,
         description:

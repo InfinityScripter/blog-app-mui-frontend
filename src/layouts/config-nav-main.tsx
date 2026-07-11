@@ -37,11 +37,6 @@ export const NAV_ITEMS = [
     icon: <Iconify width={22} icon="solar:ranking-bold-duotone" />,
   },
   {
-    key: "llmStats",
-    path: "/llm-stats",
-    icon: <Iconify width={22} icon="solar:chart-2-bold-duotone" />,
-  },
-  {
     key: "library",
     path: "/library",
     icon: <Iconify width={22} icon="solar:bookmark-square-bold-duotone" />,

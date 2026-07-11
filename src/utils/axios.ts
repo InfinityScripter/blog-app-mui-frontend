@@ -189,8 +189,5 @@ export const endpoints = {
     avatar: "/api/user/avatar",
     changePassword: "/api/user/change-password",
   },
-  llmStats: {
-    public: "/api/llm-stats/public",
-  },
   upload: "/api/upload",
 };
