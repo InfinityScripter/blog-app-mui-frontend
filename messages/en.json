@@ -430,7 +430,8 @@
     },
     "labels": {
       "openWeights": "open weights",
-      "openWeightsSuffix": "· open weights"
+      "openWeightsSuffix": "· open weights",
+      "sourceTooltip": "Official data source — the vendor page"
     },
     "actions": {
       "pin": "Pin for comparison",
@@ -449,6 +450,12 @@
       "ogTitle": "Compare LLMs | Talalaev",
       "ogDescription": "Pricing, context and benchmarks of current language models in one comparison table.",
       "jsonLdName": "Large language model comparison"
+    },
+    "legend": {
+      "title": "What the metrics mean and where the data comes from",
+      "aboutLink": "about the benchmark",
+      "sources": "Every number comes from official vendor publications (announcement, model card, docs, or pricing page). The model name links to the primary source, and each benchmark links to its methodology. All benchmarks are percentages — higher is better.",
+      "noData": "An em dash (—) means the vendor did not publish that specific benchmark (or price/context) — third-party measurements and estimates are never used, and values are never invented."
     }
   },
   "llmTimeline": {

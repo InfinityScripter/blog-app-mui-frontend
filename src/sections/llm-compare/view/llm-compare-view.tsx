@@ -8,6 +8,7 @@ import { CompareHero } from "../compare-hero";
 import { CompareCard } from "../compare-card";
 import { CompareTable } from "../compare-table";
 import { CompareEmpty } from "../compare-empty";
+import { CompareLegend } from "../compare-legend";
 import { ComparePinBar } from "../compare-pin-bar";
 import { CompareToolbar } from "../compare-toolbar";
 import { useCompareSort } from "../hooks/use-compare-sort";
@@ -110,6 +111,8 @@ export function LlmCompareView() {
           />
         ))
       )}
+
+      <CompareLegend />
 
       <ComparePinBar
         models={pinnedModels}

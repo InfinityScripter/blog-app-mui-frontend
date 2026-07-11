@@ -83,6 +83,11 @@ export function CompareCard({
             sx={{ fontWeight: 700 }}
           >
             {model.name}
+            <Iconify
+              icon="eva:external-link-fill"
+              width={12}
+              sx={{ ml: 0.5, verticalAlign: "-1px", color: "text.disabled" }}
+            />
           </Link>
           <Stack
             direction="row"

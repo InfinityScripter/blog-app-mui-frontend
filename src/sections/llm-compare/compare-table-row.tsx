@@ -62,16 +62,27 @@ export function CompareTableRow({
             }
           />
           <Stack spacing={0}>
-            <Link
-              href={model.sourceUrl}
-              target="_blank"
-              rel="noopener"
-              color="inherit"
-              underline="hover"
-              sx={{ fontWeight: 600, fontSize: 14 }}
-            >
-              {model.name}
-            </Link>
+            <Tooltip title={t("labels.sourceTooltip")} arrow placement="top">
+              <Link
+                href={model.sourceUrl}
+                target="_blank"
+                rel="noopener"
+                color="inherit"
+                underline="hover"
+                sx={{ fontWeight: 600, fontSize: 14 }}
+              >
+                {model.name}
+                <Iconify
+                  icon="eva:external-link-fill"
+                  width={12}
+                  sx={{
+                    ml: 0.5,
+                    verticalAlign: "-1px",
+                    color: "text.disabled",
+                  }}
+                />
+              </Link>
+            </Tooltip>
             <Typography variant="caption" sx={{ color: "text.disabled" }}>
               {model.vendor}
               {model.openWeights ? ` ${t("labels.openWeightsSuffix")}` : ""}

@@ -33,22 +33,51 @@ export const HIGHER_IS_BETTER: Record<SortKey, boolean> = {
 };
 
 /**
- * A benchmark column: its data key and its short header label. The `label` is a
- * proper noun (benchmark name) and stays here as data; the longer tooltip copy
- * is localized — resolved via `t("benchmarks.<key>.hint")` in the component.
+ * A benchmark column: its data key, short header label, the exact variant name
+ * the matrix compares on, and the benchmark's canonical reference page. Labels
+ * and names are proper nouns and stay here as data; the longer description is
+ * localized — resolved via `t("benchmarks.<key>.hint")` in the component.
  */
 export interface BenchmarkColumn {
   key: BenchmarkKey;
   sortKey: SortKey;
   label: string;
+  /** Exact benchmark variant shown in the legend, e.g. "SWE-bench Verified". */
+  fullLabel: string;
+  /** Canonical page describing the benchmark (paper / official site). */
+  infoUrl: string;
 }
 
 /** Ordered benchmark columns shown in the matrix. */
 export const BENCHMARK_COLUMNS: BenchmarkColumn[] = [
-  { key: "mmlu", sortKey: "mmlu", label: "MMLU" },
-  { key: "gpqa", sortKey: "gpqa", label: "GPQA" },
-  { key: "sweBench", sortKey: "sweBench", label: "SWE-bench" },
-  { key: "aime", sortKey: "aime", label: "AIME" },
+  {
+    key: "mmlu",
+    sortKey: "mmlu",
+    label: "MMLU",
+    fullLabel: "MMLU",
+    infoUrl: "https://arxiv.org/abs/2009.03300",
+  },
+  {
+    key: "gpqa",
+    sortKey: "gpqa",
+    label: "GPQA",
+    fullLabel: "GPQA Diamond",
+    infoUrl: "https://arxiv.org/abs/2311.12022",
+  },
+  {
+    key: "sweBench",
+    sortKey: "sweBench",
+    label: "SWE-bench",
+    fullLabel: "SWE-bench Verified",
+    infoUrl: "https://www.swebench.com/",
+  },
+  {
+    key: "aime",
+    sortKey: "aime",
+    label: "AIME",
+    fullLabel: "AIME",
+    infoUrl: "https://maa.org/maa-invitational-competitions/",
+  },
 ];
 
 /**
