@@ -1,6 +1,5 @@
 "use client";
 
-import Alert from "@mui/material/Alert";
 import { usePathname } from "src/routes/hooks";
 import { useTheme } from "@mui/material/styles";
 import { useBoolean } from "src/hooks/use-boolean";
@@ -61,14 +60,6 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
               notifications: false,
             }}
             slots={{
-              topArea: (
-                <Alert
-                  severity="info"
-                  sx={{ display: "none", borderRadius: 0 }}
-                >
-                  This is an info Alert.
-                </Alert>
-              ),
               rightAreaStart: (
                 <>
                   <PostSearchbar />
