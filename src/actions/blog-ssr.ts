@@ -1,5 +1,6 @@
 // Note: Do not import SWR in SSR helpers to avoid RSC import issues
 
+import type { LlmStats } from "src/sections/admin/llm-stats/types";
 import type { Post, Comment, PublishStatus } from "src/types/domain";
 import type {
   PostResponse,
@@ -114,6 +115,23 @@ export async function getReleases(): Promise<ListReleasesResponse> {
     `${SERVER_URL}${endpoints.changelog.list}`,
     CHANGELOG_FETCH_INIT,
   );
+}
+
+// ----------------------------------------------------------------------
+
+/**
+ * Public LLM-usage snapshot for the /llm-stats page (ISR-cached, 10 min). The
+ * backend returns aggregate token/model/harness/cost data with all private
+ * fields stripped. The envelope is `{ data: { bundle, pushedAt } }`.
+ */
+export async function getPublicLlmStats(): Promise<{
+  bundle: LlmStats | null;
+  pushedAt: string | null;
+}> {
+  const res = await fetchJsonWithRetry<{
+    data?: { bundle: LlmStats | null; pushedAt: string | null };
+  }>(`${SERVER_URL}${endpoints.llmStats.public}`, CHANGELOG_FETCH_INIT);
+  return { bundle: res.data?.bundle ?? null, pushedAt: res.data?.pushedAt ?? null };
 }
 
 // ----------------------------------------------------------------------

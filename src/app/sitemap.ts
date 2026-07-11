@@ -49,6 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/changelog/", changeFrequency: "daily", priority: 0.8 },
     { path: "/llm-compare/", changeFrequency: "weekly", priority: 0.8 },
     { path: "/llm-timeline/", changeFrequency: "monthly", priority: 0.7 },
+    { path: "/llm-stats/", changeFrequency: "weekly", priority: 0.8 },
     { path: "/library/", changeFrequency: "weekly", priority: 0.7 },
   ];
 

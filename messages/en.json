@@ -19,6 +19,7 @@
     "releases": "Releases",
     "llmTimeline": "LLM history",
     "llmCompare": "Compare LLMs",
+    "llmStats": "Stats",
     "library": "Library",
     "about": "About"
   },
@@ -484,6 +485,18 @@
       "description": "A timeline of key large language models from GPT-1 to the reasoning era: release dates, context, parameters, interesting facts and links to announcements and Wikipedia.",
       "ogTitle": "LLM history | Talalaev",
       "ogDescription": "Key LLMs from GPT to modern models: dates, context and significance in one timeline."
+    }
+  },
+  "llmStats": {
+    "overline": "Real data",
+    "title": "How much I actually spend on LLMs",
+    "subtitle": "Live stats of my real AI usage: tokens, models, tools, activity trend and a cost estimate — from actual logs, not vendor promises. Updated regularly.",
+    "updated": "Updated {date}",
+    "empty": "The stats snapshot hasn't been pushed yet.",
+    "meta": {
+      "title": "Real LLM stats: tokens, models and cost",
+      "description": "Open stats of the author's real LLM usage: tokens, split by model and tool, activity trend and a cost estimate. Primary-source data, not marketing.",
+      "ogTitle": "Real LLM stats | Talalaev"
     }
   },
   "portfolio": {
