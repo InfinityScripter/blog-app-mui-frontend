@@ -9,6 +9,28 @@ import type { ComparableModel } from "../types";
 
 export const MODELS_RU: ComparableModel[] = [
   {
+    id: "sber-gigachat-3-5-ultra",
+    vendor: "Sber",
+    name: "GigaChat 3.5 Ultra",
+    releaseDate: "2026-07-06",
+    contextTokens: null,
+    maxOutputTokens: null,
+    pricing: { inputPerM: null, outputPerM: null },
+    benchmarks: {
+      mmlu: null,
+      gpqa: null,
+      sweBench: { value: 42.6, unit: "percent" },
+      aime: null,
+    },
+    capabilities: ["chat", "russian", "open-weights", "reasoning"],
+    modality: ["text"],
+    openWeights: true,
+    highlight:
+      "Открытый MoE-флагман Сбера: 432B параметров (28B активных) с гибридной архитектурой, 42.6% на SWE-bench Verified.",
+    sourceUrl: "https://habr.com/ru/companies/sberbank/articles/1055826/",
+    pricingAsOf: "2026-07-11",
+  },
+  {
     id: "yandex-yandexgpt-5-pro",
     vendor: "Yandex",
     name: "YandexGPT 5 Pro",

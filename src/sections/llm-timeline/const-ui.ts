@@ -10,5 +10,5 @@
  * here show no caption (the era continues).
  */
 export const ERA_YEARS: readonly number[] = [
-  2018, 2020, 2022, 2023, 2024, 2025,
+  2018, 2020, 2022, 2023, 2024, 2025, 2026,
 ] as const;

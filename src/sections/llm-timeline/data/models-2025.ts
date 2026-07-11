@@ -468,4 +468,106 @@ export const LLM_MODELS_2025: LlmModel[] = [
     funFact:
       "Внутри 675B-модели живёт отдельный vision-энкодер на 2,5B параметров — флагман «видит» изображения из коробки.",
   },
+  {
+    id: "anthropic-claude-haiku-4-5",
+    slug: "claude-haiku-4-5",
+    vendor: "Anthropic",
+    name: "Claude Haiku 4.5",
+    releaseDate: "2025-10-15",
+    contextTokens: 200000,
+    params: null,
+    highlight:
+      "Near-фронтир по коду за треть цены: 73.3% на SWE-bench Verified при $1/$5 за млн токенов.",
+    description:
+      "Самая быстрая и дешёвая модель четвёртого поколения Anthropic и первый Haiku с расширенным мышлением, computer use и осознанием контекста. По коду почти догоняет Sonnet 4 (73.3% на SWE-bench Verified) при вдвое большей скорости и трети стоимости — $1/$5 за млн токенов, окно 200K.",
+    capabilities: [
+      "extended-thinking",
+      "computer-use",
+      "coding",
+      "agentic",
+      "multimodal",
+    ],
+    sourceUrl: "https://www.anthropic.com/news/claude-haiku-4-5",
+    wikiUrl: "https://en.wikipedia.org/wiki/Claude_(language_model)",
+    funFact:
+      "Первая модель линейки Haiku, которой дали расширенное мышление — но thinking-токены тарифицируются как выходные ($5/млн).",
+  },
+  {
+    id: "xai-grok-4-1",
+    slug: "grok-4-1",
+    vendor: "xAI",
+    name: "Grok 4.1",
+    releaseDate: "2025-11-17",
+    contextTokens: 256000,
+    params: null,
+    highlight:
+      "Крупный апгрейд личности и эмоционального интеллекта: втрое меньше галлюцинаций и #1 в слепых сравнениях LMArena.",
+    description:
+      "Инкрементальный преемник Grok 4 от xAI на той же RL-инфраструктуре, переобученный с упором на стиль, эмпатию и надёжность. Версия Thinking на момент релиза заняла #1 в LMArena Text Arena с 1483 Elo, non-thinking — #2 с 1465 Elo. Частота галлюцинаций снижена с 12.09% до 4.22%.",
+    capabilities: ["reasoning", "chat", "creative-writing", "search"],
+    sourceUrl: "https://x.ai/news/grok-4-1",
+    wikiUrl: "https://ru.wikipedia.org/wiki/Grok",
+    funFact:
+      "В слепом тестировании на живом трафике пользователи предпочитали ответы Grok 4.1 в 64.78% случаев, не зная, какую модель видят.",
+  },
+  {
+    id: "deepseek-deepseek-v3-2",
+    slug: "deepseek-v3-2",
+    vendor: "DeepSeek",
+    name: "DeepSeek-V3.2",
+    releaseDate: "2025-12-01",
+    contextTokens: 128000,
+    params: "685B (MoE, разреженное внимание)",
+    highlight:
+      "Разреженное внимание DeepSeek: та же архитектура V3, но дешевле в длинном контексте — $0.28/$0.42.",
+    description:
+      "DeepSeek-V3.2 развивает линейку V3, добавляя механизм разреженного внимания (DeepSeek Sparse Attention) ради дешёвого длинного контекста. Гибридный чекпойнт (thinking/non-thinking) на 685B параметров с открытыми весами и первопартийным API по рекордно низкой цене $0.28/$0.42 за млн токенов.",
+    capabilities: [
+      "open-weights",
+      "MoE",
+      "reasoning",
+      "hybrid-thinking",
+      "agentic",
+    ],
+    sourceUrl: "https://api-docs.deepseek.com/news/news251201/",
+    wikiUrl: "https://ru.wikipedia.org/wiki/DeepSeek",
+    funFact:
+      "DeepSeek Sparse Attention снизила стоимость обработки длинного контекста настолько, что цену вывода опустили до $0.42 за млн токенов — дешевле почти всех конкурентов.",
+  },
+  {
+    id: "openai-gpt-5-2",
+    slug: "gpt-5-2",
+    vendor: "OpenAI",
+    name: "GPT-5.2",
+    releaseDate: "2025-12-11",
+    contextTokens: 400000,
+    params: null,
+    highlight:
+      "Ответ OpenAI на Gemini 3 в режиме «Code Red»: флагман для профессиональной работы, 92.4% GPQA.",
+    description:
+      "GPT-5.2 — семейство из трёх моделей (Instant, Thinking, Pro), выпущенное на фоне внутренней записки «Code Red» после выхода Gemini 3. Позиционируется как самая способная линейка OpenAI для профессиональной работы: таблицы, презентации, код, длинный контекст, инструменты. Контекст 400K токенов, 92.4% на GPQA Diamond, дата отсечки знаний — 31 августа 2025.",
+    capabilities: ["reasoning", "coding", "multimodal", "tool-use", "agentic"],
+    sourceUrl: "https://openai.com/index/introducing-gpt-5-2/",
+    wikiUrl: "https://en.wikipedia.org/wiki/GPT-5.2",
+    funFact:
+      "Релиз ускорили из-за внутренней записки «Code Red» от Сэма Альтмана, вызванной доминированием Gemini 3 в бенчмарках.",
+  },
+  {
+    id: "google-gemini-3-flash",
+    slug: "gemini-3-flash",
+    vendor: "Google",
+    name: "Gemini 3 Flash",
+    releaseDate: "2025-12-17",
+    contextTokens: 1000000,
+    params: null,
+    highlight:
+      "Дешёвый фронтир Google как новый дефолт: втрое быстрее и заметно дешевле Gemini 2.5 Pro при 90.4% GPQA.",
+    description:
+      "Быстрая и экономичная модель семейства Gemini 3, ставшая новым дефолтом в приложении Gemini. Даёт фронтирный интеллект менее чем за четверть цены Gemini 3 Pro: 90.4% на GPQA Diamond и 78% на SWE-bench Verified, будучи втрое быстрее Gemini 2.5 Pro. Цена — $0.50/$3 за млн токенов.",
+    capabilities: ["reasoning", "coding", "agentic", "multimodal"],
+    sourceUrl: "https://blog.google/products/gemini/gemini-3-flash/",
+    wikiUrl: "https://ru.wikipedia.org/wiki/Gemini_(языковая_модель)",
+    funFact:
+      "К моменту релиза Flash API Gemini обрабатывал более 1 триллиона токенов в день.",
+  },
 ];
