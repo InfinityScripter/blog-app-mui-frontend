@@ -32,10 +32,15 @@ interface UseGetPostsOptions {
    * for "recent posts" widgets that want the latest N without client sorting.
    */
   limit?: number;
+  /**
+   * Server-fetched posts to seed SWR with. Lets a route SSR the initial feed
+   * (crawlable HTML) while the client still revalidates in the background.
+   */
+  fallbackData?: ListPostsResponse;
 }
 
 export function useGetPosts(options: UseGetPostsOptions = {}) {
-  const { excludeTag, limit } = options;
+  const { excludeTag, limit, fallbackData } = options;
   const locale = activeLocale(useLocale());
   // Feed/list titles ARE translated for a non-original locale. The backend
   // returns each post's title/description from the translation cache (warmed
@@ -54,7 +59,7 @@ export function useGetPosts(options: UseGetPostsOptions = {}) {
   const { data, isLoading, error, isValidating } = useSWR<ListPostsResponse>(
     url,
     fetcher,
-    swrOptions,
+    fallbackData ? { ...swrOptions, fallbackData } : swrOptions,
   );
 
   const memoizedValue = useMemo(

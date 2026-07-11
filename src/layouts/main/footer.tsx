@@ -112,23 +112,19 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                     {t(list.headlineKey)}
                   </Typography>
 
-                  {list.children.map((link) => {
-                    const label =
-                      "nameKey" in link ? t(link.nameKey) : link.name;
-                    return (
-                      <Link
-                        key={link.href}
-                        component={RouterLink}
-                        href={link.href}
-                        // Low-traffic footer links — skip background prefetch.
-                        prefetch={false}
-                        color="inherit"
-                        variant="body2"
-                      >
-                        {label}
-                      </Link>
-                    );
-                  })}
+                  {list.children.map((link) => (
+                    <Link
+                      key={link.href}
+                      component={RouterLink}
+                      href={link.href}
+                      // Low-traffic footer links — skip background prefetch.
+                      prefetch={false}
+                      color="inherit"
+                      variant="body2"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
                 </Stack>
               ))}
             </Stack>

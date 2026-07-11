@@ -1,5 +1,7 @@
 "use client";
 
+import type { ListPostsResponse } from "src/types/api";
+
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
@@ -21,12 +23,17 @@ import { useFeedInfiniteScroll } from "./hooks/use-feed-infinite-scroll";
 
 // ----------------------------------------------------------------------
 
-export function HomeFeed() {
+interface HomeFeedProps {
+  /** Server-rendered first page of posts; seeds SWR so the feed is crawlable. */
+  initialPosts?: ListPostsResponse;
+}
+
+export function HomeFeed({ initialPosts }: HomeFeedProps) {
   const t = useTranslations("home");
 
   // Лента — общая: показывает ВСЕ опубликованные посты (и новости, и блог) от
   // новых к старым. Разделение по типу живёт на /news и /post, не здесь.
-  const { posts, postsLoading } = useGetPosts();
+  const { posts, postsLoading } = useGetPosts({ fallbackData: initialPosts });
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

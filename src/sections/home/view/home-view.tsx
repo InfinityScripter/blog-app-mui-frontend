@@ -1,5 +1,7 @@
 "use client";
 
+import type { ListPostsResponse } from "src/types/api";
+
 import { HomeHero } from "../home-hero";
 import { HomeFeed } from "../home-feed";
 import { HomeTelegramCta } from "../home-telegram-cta";
@@ -8,7 +10,12 @@ import { BackToTop, ScrollProgress } from "../../../components/animate";
 
 // ----------------------------------------------------------------------
 
-export function HomeView() {
+interface HomeViewProps {
+  /** Server-rendered posts, forwarded to the feed to seed SWR (SSR/crawlable). */
+  initialPosts?: ListPostsResponse;
+}
+
+export function HomeView({ initialPosts }: HomeViewProps) {
   return (
     <>
       <ScrollProgress />
@@ -19,7 +26,7 @@ export function HomeView() {
       <HomeHero />
 
       {/* News-feed of latest posts with a tag filter */}
-      <HomeFeed />
+      <HomeFeed initialPosts={initialPosts} />
 
       {/* Email newsletter capture (double-opt-in) */}
       <HomeNewsletterCta />
