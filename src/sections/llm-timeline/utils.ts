@@ -30,6 +30,7 @@ const VENDOR_TO_COLOR: Record<string, LabelColor> = {
   bigscience: "secondary",
   "moonshot ai": "primary",
   "zhipu ai": "info",
+  minimax: "secondary",
 };
 
 /** Maps a vendor to a theme semantic color for its Label (never a hex). */

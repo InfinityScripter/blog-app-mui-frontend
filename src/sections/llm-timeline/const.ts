@@ -1,6 +1,7 @@
 import { LLM_MODELS_2023 } from "./data/models-2023";
 import { LLM_MODELS_2024 } from "./data/models-2024";
 import { LLM_MODELS_2025 } from "./data/models-2025";
+import { LLM_MODELS_2026 } from "./data/models-2026";
 import { LLM_MODELS_2018_2022 } from "./data/models-2018-2022";
 
 import type { LlmModel } from "./types";
@@ -20,4 +21,5 @@ export const LLM_MODELS: LlmModel[] = [
   ...LLM_MODELS_2023,
   ...LLM_MODELS_2024,
   ...LLM_MODELS_2025,
+  ...LLM_MODELS_2026,
 ];
