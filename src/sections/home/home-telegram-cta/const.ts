@@ -1,8 +1,9 @@
 import { CONFIG } from "src/config-global";
 
-// TODO: заменить на ссылку Telegram-канала, когда будет готова. Пока ведёт на
-// личный аккаунт (тот же, что в футере).
-export const TELEGRAM_URL = CONFIG.social.telegram;
+// The subscribe CTA points at the public Telegram CHANNEL (set via
+// NEXT_PUBLIC_TELEGRAM_CHANNEL_URL); falls back to the personal handle until the
+// channel is public.
+export const TELEGRAM_URL = CONFIG.social.telegramChannel;
 
 // Copy (label / title / text / button) is resolved per-locale in
 // `HomeTelegramCta` via `useTranslations("home")` under `home.telegram.*`.

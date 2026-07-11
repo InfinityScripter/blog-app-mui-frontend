@@ -21,6 +21,8 @@ interface Config {
   };
   social: {
     telegram: string;
+    /** Public Telegram CHANNEL the bot cross-posts to (subscribe CTA target). */
+    telegramChannel: string;
     github: string;
     linkedin: string;
   };
@@ -46,6 +48,11 @@ export const CONFIG: Config = {
   },
   social: {
     telegram: "https://t.me/sh0ny",
+    // The subscribe-CTA target. Point this at the public channel the bot
+    // cross-posts to via env (NEXT_PUBLIC_TELEGRAM_CHANNEL_URL); falls back to
+    // the personal handle until the channel is public.
+    telegramChannel:
+      process.env.NEXT_PUBLIC_TELEGRAM_CHANNEL_URL ?? "https://t.me/sh0ny",
     github: "https://github.com/InfinityScripter",
     linkedin: "https://www.linkedin.com/in/talalaevs/",
   },

@@ -9,6 +9,7 @@ import { LanguageSwitcher } from "src/components/language-switcher";
 import { Searchbar } from "../components/searchbar";
 import { SignInButton } from "../components/sign-in-button";
 import { AccountDrawer } from "../components/account-drawer";
+import { TelegramButton } from "../components/telegram-button";
 import { SettingsButton } from "../components/settings-button";
 import { NotificationsDrawer } from "../components/notifications-drawer";
 
@@ -56,6 +57,9 @@ export function HeaderRightArea({
 
         {/* -- Notifications drawer (self-fetching) -- */}
         {notifications && <NotificationsDrawer data-slot="notifications" />}
+
+        {/* -- Telegram channel link -- */}
+        <TelegramButton data-slot="telegram" />
 
         {/* -- Language switcher -- */}
         <LanguageSwitcher data-slot="language" />
