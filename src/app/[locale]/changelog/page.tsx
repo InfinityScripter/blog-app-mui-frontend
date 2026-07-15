@@ -1,8 +1,11 @@
 import { CONFIG } from "src/config-global";
 import { getReleases } from "src/actions/blog-ssr";
+import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { ChangelogListView } from "src/sections/changelog/view/changelog-list-view";
+
+import { buildReleaseListJsonLd } from "./json-ld";
 
 // ----------------------------------------------------------------------
 
@@ -42,23 +45,14 @@ export default async function Page() {
   const { releases } = await getReleases();
 
   // ItemList of the release detail pages → richer SERP for the archive.
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: releases.map((release, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `${BASE_URL}/changelog/${encodeURIComponent(release.slug)}/`,
-      name: `${release.model} ${release.version}`.trim(),
-    })),
-  };
+  const jsonLd = buildReleaseListJsonLd(releases);
 
   return (
     <>
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <ChangelogListView releases={releases} />
     </>

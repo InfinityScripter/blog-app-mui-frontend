@@ -1,4 +1,5 @@
 import { it, expect, describe } from "vitest";
+import { serializeJsonLd } from "src/utils/serialize-json-ld";
 
 import { buildFaqJsonLd } from "../json-ld";
 
@@ -59,5 +60,32 @@ describe("buildFaqJsonLd", () => {
     expect(text).toContain("Вот код:");
     expect(text).toContain("Всё.");
     expect(text).not.toContain("const x");
+  });
+});
+
+describe("serializeJsonLd", () => {
+  it("cannot close the JSON-LD script through a post title or description", () => {
+    const serialized = serializeJsonLd({
+      headline: '</script><script data-attack="title">alert(1)</script>',
+      description: "</script><img src=x onerror=alert(1)>",
+    });
+
+    expect(serialized).not.toContain("</script>");
+    expect(serialized).not.toContain("<img");
+    expect(serialized).toContain("\\u003c/script");
+  });
+
+  it("escapes a script terminator preserved inside FAQ inline code", () => {
+    const faq = buildFaqJsonLd([
+      {
+        question: "Безопасно?",
+        answer:
+          "Проверьте `</script><script>alert(1)</script>` перед публикацией.",
+      },
+    ]);
+    const serialized = serializeJsonLd(faq);
+
+    expect(serialized).not.toContain("</script>");
+    expect(serialized).toContain("\\u003c/script");
   });
 });

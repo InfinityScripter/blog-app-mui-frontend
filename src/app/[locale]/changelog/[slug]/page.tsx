@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
 import { NotFoundError } from "src/utils/fetch-retry";
+import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { getRelease, getReleases } from "src/actions/blog-ssr";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
@@ -94,7 +95,7 @@ export default async function Page({ params }: PageProps) {
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
       )}
       <ChangelogDetailView release={release} />

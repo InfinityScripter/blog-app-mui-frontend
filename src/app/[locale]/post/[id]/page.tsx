@@ -4,6 +4,7 @@ import { paramCase } from "src/utils/change-case";
 import { NotFoundError } from "src/utils/fetch-retry";
 import { getPost, getPosts } from "src/actions/blog-ssr";
 import { parsePostContent } from "src/utils/post-geo-content";
+import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { toAppLocale, DEFAULT_LOCALE } from "src/i18n/locales";
 import { localizedAlternates } from "src/utils/seo-alternates";
 // Import directly from the view file (not the barrel) — the barrel re-exports
@@ -96,14 +97,14 @@ export default async function Page({ params }: PageProps) {
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
         />
       )}
       {faqJsonLd && (
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(faqJsonLd) }}
         />
       )}
       <PostDetailsHomeView post={post} latestPosts={latestPosts} />

@@ -49,3 +49,6 @@ tsconfig.tsbuildinfo
 skills-lock.json
 
 .superpowers/
+
+# Override this machine's global `/*` rule for project-owned source additions.
+!/src/
