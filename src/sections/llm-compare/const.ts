@@ -67,18 +67,18 @@ export const BENCHMARK_COLUMNS: BenchmarkColumn[] = [
     infoUrl: "https://arxiv.org/abs/2311.12022",
   },
   {
-    key: "sweBench",
-    sortKey: "sweBench",
-    label: "SWE-bench",
-    fullLabel: "SWE-bench Verified",
-    infoUrl: "https://www.swebench.com/",
-  },
-  {
     key: "sweBenchPro",
     sortKey: "sweBenchPro",
     label: "SWE Pro",
     fullLabel: "SWE-Bench Pro",
     infoUrl: "https://arxiv.org/abs/2509.16941",
+  },
+  {
+    key: "sweBench",
+    sortKey: "sweBench",
+    label: "SWE-bench",
+    fullLabel: "SWE-bench Verified",
+    infoUrl: "https://www.swebench.com/",
   },
   {
     key: "aime",
