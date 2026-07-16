@@ -388,7 +388,7 @@
       "eyebrow": "Compare LLMs",
       "title": "Language model comparison matrix",
       "subtitle": "Pricing, context and key benchmarks for current LLMs — by the numbers, not by promises. Sort by any column, filter, and pin up to three models for a head-to-head comparison.",
-      "provenance": "pricing (standard tier, $/1M tokens) and benchmarks per vendor data, verified {pricingAsOf}. Unknown values are shown as a dash, not invented. Benchmarks: MMLU, GPQA Diamond, SWE-bench Verified, AIME; conditions vary by vendor.",
+      "provenance": "pricing (standard tier, $/1M tokens) and benchmarks per vendor data, verified {pricingAsOf}. Unknown values are shown as a dash, not invented. Benchmarks: MMLU, GPQA Diamond, SWE-Bench Pro, SWE-bench Verified, AIME; conditions vary by vendor.",
       "countAll": "{total} models",
       "countFiltered": "{shown} of {total} models"
     },
