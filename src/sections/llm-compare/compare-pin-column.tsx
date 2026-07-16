@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { useTranslations } from "next-intl";
@@ -14,8 +16,9 @@ import {
   formatContext,
 } from "src/sections/llm-timeline/utils";
 
+import { formatUsd } from "./utils";
+import { BenchValue } from "./bench-value";
 import { BENCHMARK_COLUMNS } from "./const";
-import { formatUsd, formatBench } from "./utils";
 
 import type { ComparableModel } from "./types";
 
@@ -23,7 +26,7 @@ import type { ComparableModel } from "./types";
 
 interface PinRowProps {
   label: string;
-  value: string;
+  value: ReactNode;
 }
 
 /** One metric line inside a pinned column. */
@@ -105,7 +108,7 @@ export function ComparePinColumn({ model, onRemove }: ComparePinColumnProps) {
         <PinRow
           key={col.key}
           label={col.label}
-          value={formatBench(model.benchmarks[col.key])}
+          value={<BenchValue score={model.benchmarks[col.key]} />}
         />
       ))}
     </Box>

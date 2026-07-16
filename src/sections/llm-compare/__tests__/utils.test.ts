@@ -78,13 +78,18 @@ describe("metricValue", () => {
     const m = model({
       pricing: { inputPerM: 5, outputPerM: null },
       contextTokens: 200000,
-      benchmarks: { mmlu: { value: 88, unit: "percent" } },
+      benchmarks: {
+        mmlu: { value: 88, unit: "percent" },
+        sweBenchPro: { value: 63.2, unit: "percent" },
+      },
     });
     expect(metricValue(m, "priceIn")).toBe(5);
     expect(metricValue(m, "priceOut")).toBeNull();
     expect(metricValue(m, "context")).toBe(200000);
     expect(metricValue(m, "mmlu")).toBe(88);
+    expect(metricValue(m, "sweBenchPro")).toBe(63.2);
     expect(metricValue(m, "gpqa")).toBeNull();
+    expect(metricValue(m, "sweBench")).toBeNull();
   });
 });
 

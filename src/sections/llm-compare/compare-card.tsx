@@ -1,5 +1,7 @@
 "use client";
 
+import type { ReactNode } from "react";
+
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
@@ -17,8 +19,9 @@ import {
   formatContext,
 } from "src/sections/llm-timeline/utils";
 
+import { formatUsd } from "./utils";
+import { BenchValue } from "./bench-value";
 import { BENCHMARK_COLUMNS } from "./const";
-import { formatUsd, formatBench } from "./utils";
 
 import type { ComparableModel } from "./types";
 
@@ -26,7 +29,7 @@ import type { ComparableModel } from "./types";
 
 interface StatProps {
   label: string;
-  value: string;
+  value: ReactNode;
 }
 
 /** One label/value pair in the card's stat grid. */
@@ -141,7 +144,7 @@ export function CompareCard({
           <Stat
             key={col.key}
             label={col.label}
-            value={formatBench(model.benchmarks[col.key])}
+            value={<BenchValue score={model.benchmarks[col.key]} />}
           />
         ))}
       </Box>

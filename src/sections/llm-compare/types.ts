@@ -20,6 +20,12 @@ export interface BenchmarkScore {
   value: number | null;
   /** Disambiguates rendering / comparison semantics. */
   unit: "percent" | "elo";
+  /**
+   * Direct link to the publication carrying this exact measurement (e.g. a
+   * system-card PDF) when it differs from the model's main `sourceUrl`. The
+   * value renders as a link so provenance is one click away.
+   */
+  sourceUrl?: string;
 }
 
 /**
@@ -33,6 +39,8 @@ export interface ModelBenchmarks {
   gpqa?: BenchmarkScore | null;
   /** SWE-bench Verified — agentic coding, %. */
   sweBench?: BenchmarkScore | null;
+  /** SWE-Bench Pro — long-horizon agentic coding (Scale AI), %. */
+  sweBenchPro?: BenchmarkScore | null;
   /** AIME — competition math, %. */
   aime?: BenchmarkScore | null;
 }

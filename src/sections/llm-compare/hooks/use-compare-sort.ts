@@ -17,6 +17,7 @@ const SORT_KEYS: SortKey[] = [
   "mmlu",
   "gpqa",
   "sweBench",
+  "sweBenchPro",
   "aime",
 ];
 

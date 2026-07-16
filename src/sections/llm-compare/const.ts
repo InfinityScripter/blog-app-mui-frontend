@@ -13,6 +13,7 @@ export type SortKey =
   | "mmlu"
   | "gpqa"
   | "sweBench"
+  | "sweBenchPro"
   | "aime";
 
 export type SortDir = "asc" | "desc";
@@ -29,6 +30,7 @@ export const HIGHER_IS_BETTER: Record<SortKey, boolean> = {
   mmlu: true,
   gpqa: true,
   sweBench: true,
+  sweBenchPro: true,
   aime: true,
 };
 
@@ -70,6 +72,13 @@ export const BENCHMARK_COLUMNS: BenchmarkColumn[] = [
     label: "SWE-bench",
     fullLabel: "SWE-bench Verified",
     infoUrl: "https://www.swebench.com/",
+  },
+  {
+    key: "sweBenchPro",
+    sortKey: "sweBenchPro",
+    label: "SWE Pro",
+    fullLabel: "SWE-Bench Pro",
+    infoUrl: "https://arxiv.org/abs/2509.16941",
   },
   {
     key: "aime",

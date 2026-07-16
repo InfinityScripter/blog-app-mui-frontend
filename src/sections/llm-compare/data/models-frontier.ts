@@ -20,6 +20,7 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: null,
       sweBench: null,
+      sweBenchPro: { value: 61.5, unit: "percent" },
       aime: null,
     },
     capabilities: ["reasoning", "agentic", "coding", "multimodal"],
@@ -43,6 +44,7 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: null,
       sweBench: null,
+      sweBenchPro: { value: 64.7, unit: "percent" },
       aime: null,
     },
     capabilities: ["reasoning", "coding", "agentic", "tool-use"],
@@ -63,17 +65,18 @@ export const MODELS_FRONTIER: ComparableModel[] = [
     pricing: { inputPerM: 5, outputPerM: 30 },
     benchmarks: {
       mmlu: null,
-      gpqa: null,
+      gpqa: { value: 94.6, unit: "percent" },
       sweBench: null,
+      sweBenchPro: { value: 64.6, unit: "percent" },
       aime: null,
     },
     capabilities: ["reasoning", "coding", "agentic", "computer-use"],
     modality: ["text", "vision"],
     openWeights: false,
     highlight:
-      "Новейший флагман OpenAI (уровень Sol) с контекстом ~1.05M токенов: 88.8% на Terminal-Bench 2.1, 91.9% в режиме Sol Ultra.",
-    sourceUrl: "https://openai.com/index/previewing-gpt-5-6-sol/",
-    pricingAsOf: "2026-07-11",
+      "Флагман OpenAI (GA 09.07.2026, семейство Sol/Terra/Luna): 94.6% GPQA Diamond, 64.6% SWE-Bench Pro; режим ultra запускает 4 параллельных агента.",
+    sourceUrl: "https://openai.com/index/gpt-5-6/",
+    pricingAsOf: "2026-07-16",
   },
   {
     id: "openai-gpt-5-5",
@@ -87,6 +90,7 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: { value: 93.6, unit: "percent" },
       sweBench: null,
+      sweBenchPro: { value: 58.6, unit: "percent" },
       aime: null,
     },
     capabilities: ["reasoning", "coding", "agentic", "computer-use"],
@@ -109,6 +113,7 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: { value: 92.8, unit: "percent" },
       sweBench: null,
+      sweBenchPro: { value: 57.7, unit: "percent" },
       aime: null,
     },
     capabilities: ["reasoning", "coding", "computer-use", "agentic"],
@@ -130,7 +135,18 @@ export const MODELS_FRONTIER: ComparableModel[] = [
     benchmarks: {
       mmlu: null,
       gpqa: null,
-      sweBench: { value: 95, unit: "percent" },
+      sweBench: {
+        value: 95,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf",
+      },
+      sweBenchPro: {
+        value: 80,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf",
+      },
       aime: null,
     },
     capabilities: ["reasoning", "agentic", "coding", "extended-thinking"],
@@ -153,6 +169,12 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: null,
       sweBench: null,
+      sweBenchPro: {
+        value: 69.2,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf",
+      },
       aime: null,
     },
     capabilities: ["reasoning", "agentic", "coding", "computer-use"],
@@ -174,7 +196,18 @@ export const MODELS_FRONTIER: ComparableModel[] = [
     benchmarks: {
       mmlu: null,
       gpqa: null,
-      sweBench: { value: 85.2, unit: "percent" },
+      sweBench: {
+        value: 85.2,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/9e6a1044980d8c4ed85669faf9c2a8342e2e9f1e/Claude%20Sonnet%205%20System%20Card.pdf",
+      },
+      sweBenchPro: {
+        value: 63.2,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/9e6a1044980d8c4ed85669faf9c2a8342e2e9f1e/Claude%20Sonnet%205%20System%20Card.pdf",
+      },
       aime: null,
     },
     capabilities: ["reasoning", "agentic", "coding", "extended-thinking"],
@@ -195,9 +228,25 @@ export const MODELS_FRONTIER: ComparableModel[] = [
     pricing: { inputPerM: 5, outputPerM: 25 },
     benchmarks: {
       mmlu: null,
-      gpqa: { value: 91.31, unit: "percent" },
+      gpqa: {
+        value: 91.31,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+      },
       sweBench: { value: 80.8, unit: "percent" },
-      aime: { value: 99.79, unit: "percent" },
+      sweBenchPro: {
+        value: 53.4,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf",
+      },
+      aime: {
+        value: 99.79,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf",
+      },
     },
     capabilities: ["reasoning", "agentic", "coding", "computer-use"],
     modality: ["text", "vision"],
@@ -219,6 +268,7 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: { value: 94.3, unit: "percent" },
       sweBench: { value: 80.6, unit: "percent" },
+      sweBenchPro: { value: 54.2, unit: "percent" },
       aime: null,
     },
     capabilities: ["reasoning", "multimodal", "agentic", "long-context"],
@@ -263,6 +313,12 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: null,
       sweBench: null,
+      sweBenchPro: {
+        value: 55.1,
+        unit: "percent",
+        sourceUrl:
+          "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+      },
       aime: null,
     },
     capabilities: ["reasoning", "coding", "agentic", "multimodal"],
@@ -286,6 +342,7 @@ export const MODELS_FRONTIER: ComparableModel[] = [
       mmlu: null,
       gpqa: { value: 92.4, unit: "percent" },
       sweBench: { value: 80.4, unit: "percent" },
+      sweBenchPro: { value: 60.6, unit: "percent" },
       aime: null,
     },
     capabilities: ["reasoning", "agentic", "coding", "long-context"],

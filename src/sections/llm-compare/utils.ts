@@ -53,6 +53,8 @@ export function metricValue(
       return model.benchmarks.gpqa?.value ?? null;
     case "sweBench":
       return model.benchmarks.sweBench?.value ?? null;
+    case "sweBenchPro":
+      return model.benchmarks.sweBenchPro?.value ?? null;
     case "aime":
       return model.benchmarks.aime?.value ?? null;
     default:

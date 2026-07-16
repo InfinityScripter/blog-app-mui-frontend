@@ -75,6 +75,12 @@ export function CompareLegend() {
         variant="caption"
         sx={{ color: "text.disabled", display: "block" }}
       >
+        {t("legend.valueLink")}
+      </Typography>
+      <Typography
+        variant="caption"
+        sx={{ color: "text.disabled", display: "block" }}
+      >
         {t("legend.noData")}
       </Typography>
     </Box>

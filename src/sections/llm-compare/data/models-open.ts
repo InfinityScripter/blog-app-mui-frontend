@@ -18,8 +18,21 @@ export const MODELS_OPEN: ComparableModel[] = [
     pricing: { inputPerM: 0.435, outputPerM: 0.87 },
     benchmarks: {
       mmlu: null,
-      gpqa: { value: 90.1, unit: "percent" },
-      sweBench: { value: 80.6, unit: "percent" },
+      gpqa: {
+        value: 90.1,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      },
+      sweBench: {
+        value: 80.6,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      },
+      sweBenchPro: {
+        value: 55.4,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro",
+      },
       aime: null,
     },
     capabilities: ["reasoning", "agentic", "open-weights", "MoE"],
@@ -40,9 +53,24 @@ export const MODELS_OPEN: ComparableModel[] = [
     pricing: { inputPerM: 0.28, outputPerM: 0.42 },
     benchmarks: {
       mmlu: null,
-      gpqa: { value: 82.4, unit: "percent" },
-      sweBench: { value: 73.1, unit: "percent" },
-      aime: { value: 93.1, unit: "percent" },
+      gpqa: {
+        value: 82.4,
+        unit: "percent",
+        sourceUrl:
+          "https://huggingface.co/deepseek-ai/DeepSeek-V3.2/blob/main/assets/paper.pdf",
+      },
+      sweBench: {
+        value: 73.1,
+        unit: "percent",
+        sourceUrl:
+          "https://huggingface.co/deepseek-ai/DeepSeek-V3.2/blob/main/assets/paper.pdf",
+      },
+      aime: {
+        value: 93.1,
+        unit: "percent",
+        sourceUrl:
+          "https://huggingface.co/deepseek-ai/DeepSeek-V3.2/blob/main/assets/paper.pdf",
+      },
     },
     capabilities: ["reasoning", "hybrid-thinking", "open-weights", "MoE"],
     modality: ["text"],
@@ -62,9 +90,22 @@ export const MODELS_OPEN: ComparableModel[] = [
     pricing: { inputPerM: 1.4, outputPerM: 4.4 },
     benchmarks: {
       mmlu: null,
-      gpqa: { value: 91.2, unit: "percent" },
+      gpqa: {
+        value: 91.2,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/zai-org/GLM-5.2",
+      },
       sweBench: null,
-      aime: { value: 99.2, unit: "percent" },
+      sweBenchPro: {
+        value: 62.1,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/zai-org/GLM-5.2",
+      },
+      aime: {
+        value: 99.2,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/zai-org/GLM-5.2",
+      },
     },
     capabilities: ["reasoning", "agentic", "coding", "open-weights", "MoE"],
     modality: ["text", "vision"],
@@ -108,6 +149,7 @@ export const MODELS_OPEN: ComparableModel[] = [
       mmlu: null,
       gpqa: { value: 87.6, unit: "percent" },
       sweBench: { value: 76.8, unit: "percent" },
+      sweBenchPro: { value: 50.7, unit: "percent" },
       aime: { value: 96.1, unit: "percent" },
     },
     capabilities: ["reasoning", "agentic", "multimodal", "open-weights", "MoE"],
@@ -130,7 +172,16 @@ export const MODELS_OPEN: ComparableModel[] = [
       mmlu: null,
       gpqa: { value: 88.4, unit: "percent" },
       sweBench: { value: 76.4, unit: "percent" },
-      aime: { value: 91.3, unit: "percent" },
+      sweBenchPro: {
+        value: 50.9,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/Qwen/Qwen3.6-27B",
+      },
+      aime: {
+        value: 91.3,
+        unit: "percent",
+        sourceUrl: "https://huggingface.co/Qwen/Qwen3.5-397B-A17B",
+      },
     },
     capabilities: ["reasoning", "coding", "multimodal", "open-weights", "MoE"],
     modality: ["text", "vision"],
@@ -152,6 +203,7 @@ export const MODELS_OPEN: ComparableModel[] = [
       mmlu: null,
       gpqa: null,
       sweBench: null,
+      sweBenchPro: { value: 59, unit: "percent" },
       aime: null,
     },
     capabilities: [
@@ -250,7 +302,12 @@ export const MODELS_OPEN: ComparableModel[] = [
     maxOutputTokens: null,
     pricing: { inputPerM: null, outputPerM: null },
     benchmarks: {
-      mmlu: { value: 85.5, unit: "percent" },
+      mmlu: {
+        value: 85.5,
+        unit: "percent",
+        sourceUrl:
+          "https://huggingface.co/meta-llama/Llama-4-Maverick-17B-128E-Instruct",
+      },
       gpqa: { value: 69.8, unit: "percent" },
       sweBench: null,
       aime: null,
@@ -294,7 +351,11 @@ export const MODELS_OPEN: ComparableModel[] = [
     maxOutputTokens: null,
     pricing: { inputPerM: 0.7, outputPerM: 2.8 },
     benchmarks: {
-      mmlu: { value: 87.81, unit: "percent" },
+      mmlu: {
+        value: 87.81,
+        unit: "percent",
+        sourceUrl: "https://arxiv.org/abs/2505.09388",
+      },
       gpqa: { value: 71.1, unit: "percent" },
       sweBench: null,
       aime: { value: 85.7, unit: "percent" },

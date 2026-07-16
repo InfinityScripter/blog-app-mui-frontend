@@ -401,7 +401,7 @@ export const LLM_MODELS_2026: LlmModel[] = [
       "computer-use",
       "long-context",
     ],
-    sourceUrl: "https://openai.com/index/previewing-gpt-5-6-sol/",
+    sourceUrl: "https://openai.com/index/gpt-5-6/",
     wikiUrl: "https://en.wikipedia.org/wiki/GPT-5.6",
     funFact:
       "OpenAI публично раскритиковала правительственный гейтинг в собственном анонсе: «Мы не считаем, что такой процесс доступа со стороны государства должен стать нормой по умолчанию».",

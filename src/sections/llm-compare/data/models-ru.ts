@@ -100,10 +100,30 @@ export const MODELS_RU: ComparableModel[] = [
     maxOutputTokens: 8192,
     pricing: { inputPerM: 0.8, outputPerM: 4 },
     benchmarks: {
-      mmlu: { value: 77.6, unit: "percent" },
-      gpqa: { value: 41.6, unit: "percent" },
-      sweBench: { value: 40.6, unit: "percent" },
-      aime: { value: 5.3, unit: "percent" },
+      mmlu: {
+        value: 77.6,
+        unit: "percent",
+        sourceUrl:
+          "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
+      },
+      gpqa: {
+        value: 41.6,
+        unit: "percent",
+        sourceUrl:
+          "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
+      },
+      sweBench: {
+        value: 40.6,
+        unit: "percent",
+        sourceUrl:
+          "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
+      },
+      aime: {
+        value: 5.3,
+        unit: "percent",
+        sourceUrl:
+          "https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf",
+      },
     },
     capabilities: ["chat", "vision", "coding", "tool-use"],
     modality: ["text", "vision"],
@@ -123,9 +143,24 @@ export const MODELS_RU: ComparableModel[] = [
     pricing: { inputPerM: 0.1, outputPerM: 0.4 },
     benchmarks: {
       mmlu: null,
-      gpqa: { value: 65.2, unit: "percent" },
-      sweBench: { value: 21.4, unit: "percent" },
-      aime: { value: 29.7, unit: "percent" },
+      gpqa: {
+        value: 65.2,
+        unit: "percent",
+        sourceUrl:
+          "https://storage.googleapis.com/deepmind-media/gemini/gemini_v2_5_report.pdf",
+      },
+      sweBench: {
+        value: 21.4,
+        unit: "percent",
+        sourceUrl:
+          "https://storage.googleapis.com/deepmind-media/gemini/gemini_v2_5_report.pdf",
+      },
+      aime: {
+        value: 29.7,
+        unit: "percent",
+        sourceUrl:
+          "https://storage.googleapis.com/deepmind-media/gemini/gemini_v2_5_report.pdf",
+      },
     },
     capabilities: ["chat", "vision", "tool-use", "multimodal"],
     modality: ["text", "vision", "audio"],

@@ -16,8 +16,9 @@ import {
   formatContext,
 } from "src/sections/llm-timeline/utils";
 
+import { BenchValue } from "./bench-value";
+import { formatUsd, isColumnLeader } from "./utils";
 import { MAX_PINS, BENCHMARK_COLUMNS } from "./const";
-import { formatUsd, formatBench, isColumnLeader } from "./utils";
 
 import type { SortKey } from "./const";
 import type { ComparableModel } from "./types";
@@ -103,7 +104,7 @@ export function CompareTableRow({
 
       {BENCHMARK_COLUMNS.map((col) => (
         <TableCell key={col.key} align="right" sx={leaderSx(col.sortKey)}>
-          {formatBench(model.benchmarks[col.key])}
+          <BenchValue score={model.benchmarks[col.key]} />
         </TableCell>
       ))}
 
