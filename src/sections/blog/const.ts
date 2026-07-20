@@ -65,8 +65,8 @@ export const MAX_RELATED = 3;
  * plain data module.
  */
 export interface ShareTarget {
-  name: string;
-  icon: string;
+  /** Ключ инлайновой иконки в SocialIcon (не Iconify-имя — те фетчатся в рантайме и могут отрендерить пустой span). */
+  name: "telegram" | "twitter" | "vk";
   network: string;
   href: (url: string, title: string) => string;
 }
@@ -74,21 +74,18 @@ export interface ShareTarget {
 export const SHARE_TARGETS: ShareTarget[] = [
   {
     name: "telegram",
-    icon: "logos:telegram",
     network: "Telegram",
     href: (url, title) =>
       `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
   },
   {
     name: "twitter",
-    icon: "ri:twitter-x-fill",
     network: "X",
     href: (url, title) =>
       `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
   },
   {
     name: "vk",
-    icon: "logos:vk",
     network: "ВКонтакте",
     href: (url) => `https://vk.com/share.php?url=${encodeURIComponent(url)}`,
   },

@@ -26,7 +26,23 @@ export interface FlagIconProps
 
 // ----------------------------------------------------------------------
 
+/**
+ * Ключи инлайновых глифов в social-icon.tsx. Именно union, не string: имя вне
+ * switch рендерит пустой SvgIcon — невидимая иконка (кейс logos:vk), а union
+ * ловит опечатку на компиляции.
+ */
+export type SocialIconName =
+  | "google"
+  | "facebook"
+  | "linkedin"
+  | "twitter"
+  | "instagram"
+  | "github"
+  | "vk"
+  | "telegram"
+  | "yandex";
+
 export interface SocialIconProps extends Omit<SvgIconProps, "width"> {
-  icon?: string;
+  icon?: SocialIconName;
   width?: number | string;
 }

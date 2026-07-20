@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import { Iconify, SocialIcon } from "src/components/iconify";
+import { SocialIcon } from "src/components/iconify";
 import { signInWithGoogle, signInWithYandex } from "src/auth/context/jwt";
 
 // ----------------------------------------------------------------------
@@ -25,7 +25,7 @@ export function JwtSignInSocial() {
           fullWidth
           size="large"
           variant="outlined"
-          startIcon={<Iconify icon="flat-color-icons:google" />}
+          startIcon={<SocialIcon icon="google" />}
           onClick={signInWithGoogle}
         >
           Войти через Google

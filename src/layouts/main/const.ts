@@ -1,3 +1,5 @@
+import type { SocialIconName } from "src/components/iconify";
+
 import { CONFIG } from "src/config-global";
 
 // ----------------------------------------------------------------------
@@ -21,7 +23,13 @@ export const LINKS = [
   },
 ] as const;
 
-export const socials = [
+interface SocialLink {
+  value: SocialIconName;
+  name: string;
+  path: string;
+}
+
+export const socials: SocialLink[] = [
   {
     value: "telegram",
     name: "Telegram",

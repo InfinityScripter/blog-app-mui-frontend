@@ -11,11 +11,11 @@ import { fDate } from "src/utils/format-time";
 import { monoValueSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
-import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { useResponsive } from "src/hooks/use-responsive";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { formatImageUrl } from "src/utils/format-image-url";
+import { Iconify, SocialIcon } from "src/components/iconify";
 
 import { SHARE_TARGETS } from "./const";
 import { useCopyShareLink } from "./hooks/use-copy-share-link";
@@ -75,7 +75,10 @@ export function PostDetailsHero({
               {SHARE_TARGETS.map((target) => (
                 <SpeedDialAction
                   key={target.name}
-                  icon={<Iconify icon={target.icon} />}
+                  // Инлайновый SVG (SocialIcon), не Iconify: имени vk нет в
+                  // наборе logos, и иконка рендерилась пустым span —
+                  // невидимая белая кнопка шаринга.
+                  icon={<SocialIcon icon={target.name} />}
                   tooltipTitle={t("share.tooltip", { network: target.network })}
                   tooltipPlacement="top"
                   FabProps={{ color: "default" }}

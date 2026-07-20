@@ -21,6 +21,7 @@
     "start:out": "npx serve@latest out -p 3033",
     "knip": "knip",
     "test:unit": "vitest run",
+    "icons:build": "node scripts/generate-icon-bundle.mjs",
     "test:unit:watch": "vitest",
     "llm-stats:push": "tsx scripts/push-llm-stats.ts",
     "analyze": "ANALYZE=true next build",

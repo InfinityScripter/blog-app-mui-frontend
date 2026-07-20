@@ -57,7 +57,17 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      // Locally tests run in Yandex Browser (Chromium-based, no bundled
+      // browser download needed); CI has no Yandex Browser and uses the
+      // bundled Playwright chromium.
+      use: {
+        ...devices["Desktop Chrome"],
+        launchOptions: process.env.CI
+          ? {}
+          : {
+              executablePath: "/Applications/Yandex.app/Contents/MacOS/Yandex",
+            },
+      },
     },
   ],
   webServer: {

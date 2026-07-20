@@ -52,3 +52,5 @@ skills-lock.json
 
 # Override this machine's global `/*` rule for project-owned source additions.
 !/src/
+!/scripts/
+!/docs/

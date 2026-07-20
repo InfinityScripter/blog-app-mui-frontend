@@ -158,3 +158,9 @@ JWT-флоу без next-middleware — всё на клиенте:
 
 - `blog-app-mui-backend` — API (Next.js 14, PostgreSQL, JWT), деплой на VDS через GitHub Actions.
 - `ai-bot-tg` — Telegram-бот, наполняющий новости и changelog (управляется из `/dashboard/admin/bot`).
+
+Конвейер новостного бота — от RSS до публикации поста в блог:
+
+<p align="center">
+  <img src="docs/news-bot-pipeline.gif" alt="Конвейер новостного бота: RSS → карточка в Telegram → рерайт LLM → аппрув → публикация" width="720">
+</p>

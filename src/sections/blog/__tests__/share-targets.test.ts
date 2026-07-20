@@ -6,7 +6,7 @@ import { SHARE_TARGETS } from "src/sections/blog/const";
 const URL = "https://aifirst.us.com/post/abc123/";
 const TITLE = "Заголовок & <тест>";
 
-function targetByName(name: string): ShareTarget {
+function targetByName(name: ShareTarget["name"]): ShareTarget {
   const found = SHARE_TARGETS.find((target) => target.name === name);
   if (!found) throw new Error(`missing share target: ${name}`);
   return found;

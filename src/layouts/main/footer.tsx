@@ -82,7 +82,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                   href={social.path}
                   target="_blank"
                 >
-                  <SocialIcon icon={social.name} />
+                  <SocialIcon icon={social.value} />
                 </IconButton>
               ))}
             </Stack>

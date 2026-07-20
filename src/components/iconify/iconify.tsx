@@ -6,10 +6,14 @@ import { Icon } from "@iconify/react";
 import NoSsr from "@mui/material/NoSsr";
 
 import { iconifyClasses } from "./classes";
+import { registerIconCollections } from "./register-icons";
 
 import type { IconifyProps } from "./types";
 
 // ----------------------------------------------------------------------
+
+// До первого рендера Icon: офлайн-бандл вместо рантайм-фетча с CDN.
+registerIconCollections();
 
 export const Iconify = forwardRef<HTMLDivElement, IconifyProps>(
   ({ className, width = 20, sx, ...other }, ref) => {
