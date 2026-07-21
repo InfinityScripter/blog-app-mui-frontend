@@ -11,15 +11,21 @@ import { logoClasses } from "./classes";
 import type { LogoProps } from "./types";
 
 // ----------------------------------------------------------------------
+// aifirst — Editorial Ink logo.
+//   variant="full"     → mark + "aifirst." wordmark (default; header/footer)
+//   variant="mark"     → tile only (favicon-like spots)
+//   variant="wordmark" → "aifirst." only
+// Colors come from theme vars, so light/dark schemes track automatically.
 
 export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
   (
     {
-      width = 40,
+      width,
       height = 40,
       disableLink = false,
       className,
       href = "/",
+      variant = "full",
       sx,
       ...other
     },
@@ -27,50 +33,71 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
   ) => {
     const theme = useTheme();
 
-    const PRIMARY_MAIN = theme.vars.palette.primary.main;
-    const PRIMARY_DARK = theme.vars.palette.primary.dark;
-    const PRIMARY_LIGHT = theme.vars.palette.primary.light;
+    const TILE = theme.vars.palette.text.primary; // warm ink / bone in dark
+    const CARET = theme.vars.palette.background.paper; // paper / charcoal
+    const CURSOR = theme.vars.palette.primary.main; // signal vermilion
 
-    const gradientId = "logo-gradient";
-
-    /*
-     * Personal-brand mark: a rounded tile with a geometric "T" monogram
-     * (Talalaev). Colors come from the theme primary palette, so it tracks
-     * the active color scheme / light-dark mode.
-     */
-    const logo = (
-      <svg
+    const mark = (
+      <Box
+        component="svg"
         xmlns="http://www.w3.org/2000/svg"
-        fill="none"
         viewBox="0 0 512 512"
-        width="100%"
-        height="100%"
+        fill="none"
+        sx={{ width: height, height, flexShrink: 0, display: "block" }}
       >
-        <defs>
-          <linearGradient
-            id={gradientId}
-            x1="0"
-            y1="0"
-            x2="512"
-            y2="512"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stopColor={PRIMARY_LIGHT} />
-            <stop offset="0.55" stopColor={PRIMARY_MAIN} />
-            <stop offset="1" stopColor={PRIMARY_DARK} />
-          </linearGradient>
-        </defs>
-
-        <rect width="512" height="512" rx="120" fill={`url(#${gradientId})`} />
-        <path fill="#FFFFFF" d="M140 150h232v56h-88v212h-56V206h-88z" />
-      </svg>
+        <rect width="512" height="512" rx="116" fill={TILE} />
+        <polyline
+          points="168,166 282,256 168,346"
+          fill="none"
+          stroke={CARET}
+          strokeWidth="46"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <rect x="300" y="166" width="52" height="180" rx="14" fill={CURSOR} />
+      </Box>
     );
+
+    const word = (
+      <Box
+        component="span"
+        sx={{
+          fontFamily: theme.typography.fontSecondaryFamily, // Unbounded
+          fontWeight: 600,
+          fontSize:
+            typeof height === "number"
+              ? height * 0.72
+              : `calc(${height} * 0.72)`,
+          letterSpacing: "-0.04em",
+          lineHeight: 1,
+          color: "text.primary",
+          userSelect: "none",
+        }}
+      >
+        aifirst
+        <Box component="span" sx={{ color: "primary.main" }}>
+          .
+        </Box>
+      </Box>
+    );
+
+    const content =
+      variant === "mark" ? (
+        mark
+      ) : variant === "wordmark" ? (
+        word
+      ) : (
+        <>
+          {mark}
+          {word}
+        </>
+      );
 
     return (
       <NoSsr
         fallback={
           <Box
-            width={width}
+            width={width ?? height}
             height={height}
             className={logoClasses.root.concat(
               className ? ` ${className}` : "",
@@ -88,20 +115,24 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
           ref={ref}
           component={RouterLink}
           href={href}
-          width={width}
-          height={height}
           className={logoClasses.root.concat(className ? ` ${className}` : "")}
-          aria-label="logo"
+          aria-label="aifirst."
           sx={{
+            gap:
+              typeof height === "number"
+                ? `${height * 0.3}px`
+                : `calc(${height} * 0.3)`,
             flexShrink: 0,
             display: "inline-flex",
+            alignItems: "center",
             verticalAlign: "middle",
+            textDecoration: "none",
             ...(disableLink && { pointerEvents: "none" }),
             ...sx,
           }}
           {...other}
         >
-          {logo}
+          {content}
         </Box>
       </NoSsr>
     );

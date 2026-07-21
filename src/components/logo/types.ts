@@ -9,4 +9,5 @@ export interface LogoProps
   height?: number | string;
   disableLink?: boolean;
   href?: string;
+  variant?: "full" | "mark" | "wordmark";
 }

@@ -16,7 +16,7 @@ export function NavVerticalMini({
     <>
       {slots?.topArea ?? (
         <Box sx={{ display: "flex", justifyContent: "center", py: 2.5 }}>
-          <Logo />
+          <Logo variant="mark" />
         </Box>
       )}
 
