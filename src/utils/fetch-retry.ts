@@ -35,6 +35,22 @@ export class FetchFailedError extends Error {
   }
 }
 
+// A 429 that survived all retries. Distinct from a plain FetchFailedError so a
+// 429 ("we tripped our OWN backend rate-limit" — a big build bursting past the
+// per-IP cap) is identifiable in logs/monitoring apart from a real outage
+// (5xx/network). NOTE: this is observability only — no code branches on it yet;
+// an exhausted RateLimitedError still propagates and fails the build like any
+// other. The actual build-safety guard is the prerender cap in the post page's
+// generateStaticParams (fewer concurrent build-time detail fetches), NOT a catch
+// on this type. Subclasses FetchFailedError so existing `instanceof
+// FetchFailedError` consumers keep catching it.
+export class RateLimitedError extends FetchFailedError {
+  constructor(url: string) {
+    super(url, 429);
+    this.name = "RateLimitedError";
+  }
+}
+
 // Retries after the initial attempt. The longer tail (15s) is sized for the
 // backend's per-IP list rate-limit (60/min): a big build that prerenders many
 // posts/tags can burst past the cap and get 429s, so a rate-limited read waits
@@ -69,7 +85,13 @@ export async function fetchJsonWithRetry<T>(
       if (res.ok) {
         return (await res.json()) as T;
       }
-      lastError = new FetchFailedError(url, res.status);
+      // 429 is retried like any transient failure (the retry delays are sized
+      // to wait out most of the rate-limit window), but the error we carry
+      // forward is the typed RateLimitedError so a caller can special-case it.
+      lastError =
+        res.status === 429
+          ? new RateLimitedError(url)
+          : new FetchFailedError(url, res.status);
     } catch (error) {
       if (error instanceof NotFoundError) {
         throw error;

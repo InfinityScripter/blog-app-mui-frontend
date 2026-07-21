@@ -2,6 +2,7 @@ import { it, vi, expect, describe, afterEach } from "vitest";
 
 import {
   NotFoundError,
+  RateLimitedError,
   FetchFailedError,
   fetchJsonWithRetry,
 } from "./fetch-retry";
@@ -68,6 +69,38 @@ describe("fetchJsonWithRetry", () => {
     await expect(promise).rejects.toBeInstanceOf(FetchFailedError);
     await promise.catch((error: FetchFailedError) => {
       expect(error.status).toBe(500);
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+  });
+
+  it("retries 429 (rate limit) and succeeds", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(jsonResponse({}, 429))
+      .mockResolvedValueOnce(jsonResponse({ posts: [] }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await expect(
+      fetchJsonWithRetry("https://api.test/post?id=x", undefined, NO_DELAYS),
+    ).resolves.toEqual({ posts: [] });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it("throws RateLimitedError (a FetchFailedError) after exhausting 429 retries", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse({}, 429));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const promise = fetchJsonWithRetry(
+      "https://api.test/post?id=x",
+      undefined,
+      NO_DELAYS,
+    );
+    // Subclass of FetchFailedError, so existing `instanceof FetchFailedError`
+    // consumers keep catching it; carries the 429 status.
+    await expect(promise).rejects.toBeInstanceOf(RateLimitedError);
+    await expect(promise).rejects.toBeInstanceOf(FetchFailedError);
+    await promise.catch((error: RateLimitedError) => {
+      expect(error.status).toBe(429);
     });
     expect(fetchMock).toHaveBeenCalledTimes(3);
   });

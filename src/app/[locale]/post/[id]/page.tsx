@@ -114,21 +114,47 @@ export default async function Page({ params }: PageProps) {
 
 // ----------------------------------------------------------------------
 
+// Cap on how many post pages are prerendered at build time. The backend's
+// per-IP detail rate-limit is 60 req/min; a Vercel build fetches these pages
+// concurrently, so prerendering ALL posts (109 and growing) bursts past the cap
+// and a 429 kills the deploy. Prerender only the newest N and let the older tail
+// render on demand on first request, then ISR-cache (same `revalidate`). Keep
+// N < 60. Measured: a build issues exactly N `/api/post/details` calls for these
+// pages — Next's fetch cache dedupes the sibling getPost in opengraph-image.tsx
+// against page.tsx's (same URL + revalidate init), so there is no 2× doubling.
+const PRERENDER_POST_LIMIT = 40;
+
 /**
- * Prerender the published posts at build time — but ONLY for the default locale
- * (Russian original). The `en` variants are machine-translated per post on the
- * backend; prebuilding every post × locale would double the build-time fetch
- * volume and trip the backend list rate-limit (429). `en` posts render on demand
- * on first request (dynamicParams defaults to true) and are then ISR-cached. Any
- * unknown id also renders on demand. Wrapped so an unreachable backend at build
- * time yields no params instead of failing the build.
+ * Prerender a bounded set of published posts at build time — the newest
+ * PRERENDER_POST_LIMIT, and ONLY for the default locale (Russian original):
+ *   - Older posts beyond the cap render on demand on first request
+ *     (dynamicParams defaults to true) and are then ISR-cached. This keeps the
+ *     build-time detail fetch volume under the backend's 60/min rate-limit so a
+ *     large corpus can't 429 the deploy.
+ *   - `en` variants are machine-translated per post on the backend; prebuilding
+ *     every post × locale would double the fetch volume — they too render on
+ *     demand and ISR-cache.
+ *   - Any unknown id also renders on demand.
+ * Wrapped so an unreachable backend at build time yields no params instead of
+ * failing the build.
  */
 export async function generateStaticParams(): Promise<
   Array<{ locale: string; id: string }>
 > {
   try {
     const { posts } = await getPosts();
-    return posts.map((post) => {
+    // The list endpoint returns oldest-first; sort newest-first so the cap keeps
+    // the FRESH posts prerendered (the tail we defer is the least-visited old
+    // posts). A missing OR unparseable createdAt (NaN) sorts last (as 0) so it
+    // can't scramble the ordering of the valid-dated posts.
+    const time = (value?: string | Date): number => {
+      const ms = value ? new Date(value).getTime() : 0;
+      return Number.isNaN(ms) ? 0 : ms;
+    };
+    const newestFirst = [...posts].sort(
+      (a, b) => time(b.createdAt) - time(a.createdAt),
+    );
+    return newestFirst.slice(0, PRERENDER_POST_LIMIT).map((post) => {
       // The backend serialises the primary key as `_id`; `id`/`title` are
       // fallbacks for older shapes.
       const { _id, id, title } = post;
