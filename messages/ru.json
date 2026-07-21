@@ -247,7 +247,7 @@
     },
     "about": {
       "title": "Обо мне",
-      "lead": "Software Engineer с 13+ годами в IT. Веду продукт через весь цикл — от проектирования архитектуры до поставки в прод. Сильная сторона — фронтенд (React, Next.js, TypeScript); уверенно работаю с backend (Node.js, PostgreSQL) и инфраструктурой (Docker, CI/CD).",
+      "lead": "Инженер с 13+ годами в IT, сейчас работаю в Яндексе. Разработку веду AI-first: код, ревью и рутина идут через агентов. На LLM строю и продукты — например, автономного бота, который сам находит AI-новости, переписывает и публикует их в этот блог и Telegram-канал.",
       "highlights": {
         "experience": {
           "label": "Опыт",
@@ -501,9 +501,9 @@
   },
   "portfolio": {
     "heroEyebrow": "{name} · 13+ лет в IT",
-    "heroTitleLead": "Software",
+    "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
-    "heroSummary": "Проектирую и поставляю продукты в прод — от архитектуры до релиза. Сильная сторона — фронтенд: React, Next.js, TypeScript.",
+    "heroSummary": "Строю продукты на LLM и веду разработку через AI-агентов. Здесь пишу, что из AI-инструментов реально работает в проде.",
     "downloadCv": "Скачать резюме",
     "metrics": {
       "experience": {
@@ -512,7 +512,7 @@
       },
       "specialization": {
         "label": "Специализация",
-        "value": "Software Engineer"
+        "value": "AI Engineer"
       },
       "stack": {
         "label": "Основной стек"
@@ -520,7 +520,7 @@
     },
     "meta": {
       "title": "Обо мне | Mihail Talalaev",
-      "description": "Software Engineer Михаил Талалаев — опыт, стек и контакты. 13+ лет в IT."
+      "description": "AI Engineer Михаил Талалаев — продукты на LLM, разработка через AI-агентов. 13+ лет в IT, опыт и контакты."
     }
   }
 }

@@ -28,6 +28,6 @@ export const PORTFOLIO_METRICS: PortfolioMetric[] = [
   {
     key: "stack",
     icon: "solar:cpu-bolt-bold-duotone",
-    value: "React · Next.js",
+    value: "LLM · Claude Code · MCP",
   },
 ];

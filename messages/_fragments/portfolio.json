@@ -1,9 +1,9 @@
 {
   "portfolio": {
     "heroEyebrow": "{name} · 13+ лет в IT",
-    "heroTitleLead": "Software",
+    "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
-    "heroSummary": "Проектирую и поставляю продукты в прод — от архитектуры до релиза. Сильная сторона — фронтенд: React, Next.js, TypeScript.",
+    "heroSummary": "Строю продукты на LLM и веду разработку через AI-агентов. Здесь пишу, что из AI-инструментов реально работает в проде.",
     "downloadCv": "Скачать резюме",
     "metrics": {
       "experience": {
@@ -12,7 +12,7 @@
       },
       "specialization": {
         "label": "Специализация",
-        "value": "Software Engineer"
+        "value": "AI Engineer"
       },
       "stack": {
         "label": "Основной стек"

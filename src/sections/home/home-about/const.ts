@@ -4,7 +4,7 @@ import type { AboutHighlight } from "./types";
 
 export const ABOUT_PROFILE = {
   name: "Михаил Талалаев",
-  role: "Software Engineer",
+  role: "AI Engineer",
   email: CONFIG.contacts.email,
   imageSrc: "/assets/images/about/developer.webp",
   imageAlt: "Михаил Талалаев",
@@ -45,4 +45,6 @@ export const ABOUT_STACK = [
   "Node.js",
   "Material UI",
   "Redux",
+  "Claude Code",
+  "MCP",
 ];

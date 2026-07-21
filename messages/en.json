@@ -247,7 +247,7 @@
     },
     "about": {
       "title": "About me",
-      "lead": "A Software Engineer with 13+ years in IT. I take a product through its whole lifecycle — from architecture design to production delivery. My strong suit is frontend (React, Next.js, TypeScript); I'm confident with backend (Node.js, PostgreSQL) and infrastructure (Docker, CI/CD).",
+      "lead": "An engineer with 13+ years in IT, currently at Yandex. I work AI-first: code, reviews and routine go through agents. I also build products on LLMs, like an autonomous bot that finds AI news, rewrites it and publishes it to this blog and a Telegram channel.",
       "highlights": {
         "experience": {
           "label": "Experience",
@@ -501,9 +501,9 @@
   },
   "portfolio": {
     "heroEyebrow": "{name} · 13+ years in IT",
-    "heroTitleLead": "Software",
+    "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
-    "heroSummary": "I design and ship products to production — from architecture to release. My strong suit is frontend: React, Next.js, TypeScript.",
+    "heroSummary": "I build LLM products and run my development through AI agents. Here I write about which AI tools actually work in production.",
     "downloadCv": "Download résumé",
     "metrics": {
       "experience": {
@@ -512,7 +512,7 @@
       },
       "specialization": {
         "label": "Specialization",
-        "value": "Software Engineer"
+        "value": "AI Engineer"
       },
       "stack": {
         "label": "Core stack"
@@ -520,7 +520,7 @@
     },
     "meta": {
       "title": "About | Mikhail Talalaev",
-      "description": "Software Engineer Mikhail Talalaev — experience, stack and contacts. 13+ years in IT."
+      "description": "AI engineer Mikhail Talalaev — LLM products and agent-driven development. 13+ years in IT, experience and contacts."
     }
   }
 }
