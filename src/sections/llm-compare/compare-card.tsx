@@ -80,7 +80,7 @@ export function CompareCard({
           <Link
             href={model.sourceUrl}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             color="inherit"
             underline="hover"
             sx={{ fontWeight: 700 }}

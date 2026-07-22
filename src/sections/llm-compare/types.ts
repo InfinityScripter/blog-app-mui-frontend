@@ -67,8 +67,8 @@ export interface ComparableModel {
   capabilities: string[];
   /** Accepted/produced modalities. */
   modality: Modality[];
-  /** True when weights are openly released. */
-  openWeights: boolean;
+  /** True when weights are openly released; null when release feed is silent. */
+  openWeights: boolean | null;
   /** One-line «why pick this», shown in the row/card. */
   highlight: string;
   /** Vendor pricing/model page — must be verifiable. */

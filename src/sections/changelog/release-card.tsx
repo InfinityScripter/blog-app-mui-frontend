@@ -22,6 +22,7 @@ import {
 
 interface ReleaseCardProps {
   release: ModelRelease;
+  sourceOnly?: boolean;
 }
 
 /**
@@ -29,10 +30,12 @@ interface ReleaseCardProps {
  * заголовок «model version», mono-спеки). Свежий релиз (≤7 дней) получает
  * пульсирующую vermilion-точку — единственная постоянная микро-анимация.
  */
-export function ReleaseCard({ release }: ReleaseCardProps) {
+export function ReleaseCard({ release, sourceOnly = false }: ReleaseCardProps) {
   const theme = useTheme();
   const t = useTranslations("changelog");
-  const linkTo = paths.changelog.details(release.slug);
+  const linkTo = sourceOnly
+    ? release.sourceUrl
+    : paths.changelog.details(release.slug);
   const title = `${release.model} ${release.version}`.trim();
   const fresh = isFreshRelease(release.releasedAt);
 
@@ -89,8 +92,9 @@ export function ReleaseCard({ release }: ReleaseCardProps) {
         </Stack>
 
         <Link
-          component={RouterLink}
+          component={sourceOnly ? "a" : RouterLink}
           href={linkTo}
+          {...(sourceOnly && { target: "_blank", rel: "noopener noreferrer" })}
           color="text.primary"
           underline="none"
           sx={{

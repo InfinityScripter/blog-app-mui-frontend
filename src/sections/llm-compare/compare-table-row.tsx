@@ -67,7 +67,7 @@ export function CompareTableRow({
               <Link
                 href={model.sourceUrl}
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 color="inherit"
                 underline="hover"
                 sx={{ fontWeight: 600, fontSize: 14 }}

@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import Stack from "@mui/material/Stack";
 import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
@@ -21,16 +20,6 @@ import type { ChangelogListViewProps } from "./types";
 export function ChangelogListView({ releases }: ChangelogListViewProps) {
   const t = useTranslations("changelog");
 
-  const ordered = useMemo(
-    () =>
-      [...releases].sort((a, b) => {
-        const aTime = a.releasedAt ? new Date(a.releasedAt).getTime() : 0;
-        const bTime = b.releasedAt ? new Date(b.releasedAt).getTime() : 0;
-        return bTime - aTime;
-      }),
-    [releases],
-  );
-
   return (
     <Container sx={{ py: { xs: 5, md: 8 } }}>
       <Stack spacing={1} sx={{ mb: { xs: 3, md: 5 } }}>
@@ -42,9 +31,13 @@ export function ChangelogListView({ releases }: ChangelogListViewProps) {
         </Typography>
       </Stack>
 
-      {ordered.length > 0 ? (
-        ordered.map((release) => (
-          <ReleaseCard key={release.id} release={release} />
+      {releases.length > 0 ? (
+        releases.map((release) => (
+          <ReleaseCard
+            key={release.id}
+            release={release}
+            sourceOnly={release.id.startsWith("catalog-")}
+          />
         ))
       ) : (
         <Typography

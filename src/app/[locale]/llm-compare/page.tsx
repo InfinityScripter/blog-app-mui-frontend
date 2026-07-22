@@ -1,6 +1,11 @@
 import { CONFIG } from "src/config-global";
+import { getReleases } from "src/actions/blog-ssr";
 import { getTranslations } from "next-intl/server";
+import { sortModels } from "src/sections/llm-compare/utils";
+import { LLM_MODELS } from "src/sections/llm-timeline/const";
+import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { localizedAlternates } from "src/utils/seo-alternates";
+import { buildUnifiedLlmCatalog } from "src/utils/llm-catalog";
 import { COMPARABLE_MODELS } from "src/sections/llm-compare/data";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { LlmCompareView } from "src/sections/llm-compare/view/llm-compare-view";
@@ -33,13 +38,20 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "llmCompare.meta" });
+  const { releases } = await getReleases();
+  const catalog = buildUnifiedLlmCatalog(
+    LLM_MODELS,
+    COMPARABLE_MODELS,
+    releases,
+  );
+  const models = sortModels(catalog.comparableModels, "release", "desc");
 
   // ItemList of the compared models → richer SERP + machine-readable for LLMs.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: t("jsonLdName"),
-    itemListElement: COMPARABLE_MODELS.map((model, index) => ({
+    itemListElement: models.map((model, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: `${model.vendor} ${model.name}`.trim(),
@@ -52,9 +64,9 @@ export default async function Page({ params }: PageProps) {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
-      <LlmCompareView />
+      <LlmCompareView models={models} pricingAsOf={catalog.pricingAsOf} />
     </>
   );
 }

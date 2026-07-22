@@ -1,3 +1,4 @@
+import type { ModelRelease } from "src/types/api";
 import type { LabelColor } from "src/components/label";
 
 import { VENDOR_TO_COLOR } from "./const";
@@ -48,4 +49,16 @@ export function isFreshRelease(releasedAt: string | null | undefined): boolean {
   const releasedTime = new Date(releasedAt).getTime();
   if (Number.isNaN(releasedTime)) return false;
   return Date.now() - releasedTime <= FRESH_RELEASE_WINDOW_MS;
+}
+
+/** Stable newest-first order shared by the rendered list and its JSON-LD. */
+export function sortReleasesDesc(releases: ModelRelease[]): ModelRelease[] {
+  return [...releases].sort((a, b) => {
+    const aTime = a.releasedAt ? new Date(a.releasedAt).getTime() : 0;
+    const bTime = b.releasedAt ? new Date(b.releasedAt).getTime() : 0;
+    return (
+      bTime - aTime ||
+      `${a.model} ${a.version}`.localeCompare(`${b.model} ${b.version}`)
+    );
+  });
 }

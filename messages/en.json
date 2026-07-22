@@ -466,7 +466,7 @@
   "llmTimeline": {
     "hero": {
       "title": "The history of large language models",
-      "subtitle": "A timeline of key LLMs — from the first transformers to reasoning models and agents. Click a model to see details, facts and sources.",
+      "subtitle": "A timeline of key LLMs, with newest releases first and early models below. Click a model to see details, facts and sources.",
       "stats": {
         "models": "models",
         "vendors": "vendors",

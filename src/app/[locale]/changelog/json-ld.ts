@@ -8,6 +8,7 @@ interface ReleaseListItem {
   slug: string;
   model: string;
   version: string;
+  url?: string;
 }
 
 /** Builds archive JSON-LD separately so backend-controlled fields are testable. */
@@ -18,7 +19,9 @@ export function buildReleaseListJsonLd(releases: ReleaseListItem[]) {
     itemListElement: releases.map((release, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      url: `${BASE_URL}/changelog/${encodeURIComponent(release.slug)}/`,
+      url:
+        release.url ??
+        `${BASE_URL}/changelog/${encodeURIComponent(release.slug)}/`,
       name: `${release.model} ${release.version}`.trim(),
     })),
   };

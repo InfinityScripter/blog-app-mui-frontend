@@ -13,6 +13,3 @@ export const COMPARABLE_MODELS: ComparableModel[] = [
   ...MODELS_OPEN,
   ...MODELS_RU,
 ];
-
-/** The single «prices verified as of» date shown on the page (all rows share it). */
-export const PRICING_AS_OF = "2026-07-05";

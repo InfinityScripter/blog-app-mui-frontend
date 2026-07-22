@@ -1,8 +1,11 @@
+import type { ModelRelease } from "src/types/api";
+
 import { it, expect, describe } from "vitest";
 import {
   vendorColor,
   formatPrice,
   formatContext,
+  sortReleasesDesc,
 } from "src/sections/changelog/utils";
 
 // ----------------------------------------------------------------------
@@ -40,5 +43,40 @@ describe("vendorColor", () => {
 
   it("falls back to default for an unknown vendor", () => {
     expect(vendorColor("Acme AI")).toBe("default");
+  });
+});
+
+describe("sortReleasesDesc", () => {
+  it("sorts newest first with a deterministic name tie-break", () => {
+    const makeRelease = (
+      id: string,
+      model: string,
+      releasedAt: string,
+    ): ModelRelease => ({
+      id,
+      model,
+      releasedAt,
+      slug: id,
+      vendor: "Test",
+      version: "",
+      contextTokens: null,
+      priceIn: null,
+      priceOut: null,
+      changes: [],
+      verdict: null,
+      sourceUrl: "https://example.com",
+      sourceName: null,
+      createdAt: releasedAt,
+      updatedAt: releasedAt,
+    });
+    const older = makeRelease("older", "Zeta", "2026-01-01T00:00:00Z");
+    const beta = makeRelease("beta", "Beta", "2026-02-01T00:00:00Z");
+    const alpha = makeRelease("alpha", "Alpha", "2026-02-01T00:00:00Z");
+
+    expect(sortReleasesDesc([older, beta, alpha]).map(({ id }) => id)).toEqual([
+      "alpha",
+      "beta",
+      "older",
+    ]);
   });
 });

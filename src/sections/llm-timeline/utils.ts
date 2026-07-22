@@ -111,14 +111,23 @@ export function sortByReleaseAsc(models: LlmModel[]): LlmModel[] {
   );
 }
 
+/** Orders models newest → oldest without mutating the source. */
+export function sortByReleaseDesc(models: LlmModel[]): LlmModel[] {
+  return [...models].sort(
+    (a, b) =>
+      new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime() ||
+      a.name.localeCompare(b.name),
+  );
+}
+
 /**
- * Flattens models into an ascending render list, tagging each with `yearStart`
+ * Flattens models into a newest-first render list, tagging each with `yearStart`
  * = the year when it is the first model of a new year (else null). Lets the
  * alternating timeline show a year chip at each boundary without breaking the
  * L/R alternation that separate year-label items would cause.
  */
 export function withYearMarkers(models: LlmModel[]): LlmTimelineRow[] {
-  const ordered = sortByReleaseAsc(models);
+  const ordered = sortByReleaseDesc(models);
   return ordered.map((model, index) => {
     const year = releaseYear(model.releaseDate);
     const prevYear =
@@ -140,10 +149,10 @@ export function hasEra(year: number): boolean {
   return ERA_YEARS.includes(year);
 }
 
-/** Ascending list of distinct release years. */
+/** Newest-first list of distinct release years. */
 export function timelineYears(models: LlmModel[]): number[] {
   const years = models.map((model) => releaseYear(model.releaseDate));
-  return Array.from(new Set(years)).sort((a, b) => a - b);
+  return Array.from(new Set(years)).sort((a, b) => b - a);
 }
 
 /** A vendor with how many of its models are on the timeline. */

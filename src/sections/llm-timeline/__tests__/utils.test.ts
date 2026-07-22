@@ -15,6 +15,7 @@ import {
   filterByVendors,
   withYearMarkers,
   sortByReleaseAsc,
+  sortByReleaseDesc,
 } from "src/sections/llm-timeline/utils";
 
 // ----------------------------------------------------------------------
@@ -107,6 +108,19 @@ describe("sortByReleaseAsc", () => {
   });
 });
 
+describe("sortByReleaseDesc", () => {
+  it("orders models newest → oldest without mutating the input", () => {
+    const input = [
+      model("b", "2024-01-01"),
+      model("a", "2020-01-01"),
+      model("c", "2023-06-01"),
+    ];
+    const sorted = sortByReleaseDesc(input);
+    expect(sorted.map((m) => m.id)).toEqual(["b", "c", "a"]);
+    expect(input.map((m) => m.id)).toEqual(["b", "a", "c"]);
+  });
+});
+
 describe("withYearMarkers", () => {
   it("tags the first model of each year with yearStart, others null", () => {
     const rows = withYearMarkers([
@@ -114,13 +128,13 @@ describe("withYearMarkers", () => {
       model("y2020", "2020-06-01"),
       model("y2024-a", "2024-01-01"),
     ]);
-    // ascending: 2020, 2024-a, 2024-b
+    // newest first: 2024-b, 2024-a, 2020
     expect(rows.map((r) => r.model.id)).toEqual([
-      "y2020",
-      "y2024-a",
       "y2024-b",
+      "y2024-a",
+      "y2020",
     ]);
-    expect(rows.map((r) => r.yearStart)).toEqual([2020, 2024, null]);
+    expect(rows.map((r) => r.yearStart)).toEqual([2024, null, 2020]);
   });
 
   it("returns an empty array for no models", () => {
@@ -129,13 +143,13 @@ describe("withYearMarkers", () => {
 });
 
 describe("timelineYears", () => {
-  it("returns distinct years ascending", () => {
+  it("returns distinct years newest first", () => {
     const years = timelineYears([
       model("a", "2024-06-01"),
       model("b", "2020-01-01"),
       model("c", "2024-02-01"),
     ]);
-    expect(years).toEqual([2020, 2024]);
+    expect(years).toEqual([2024, 2020]);
   });
 });
 

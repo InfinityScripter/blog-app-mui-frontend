@@ -13,7 +13,6 @@ import { ComparePinBar } from "../compare-pin-bar";
 import { CompareToolbar } from "../compare-toolbar";
 import { useCompareSort } from "../hooks/use-compare-sort";
 import { useComparePins } from "../hooks/use-compare-pins";
-import { PRICING_AS_OF, COMPARABLE_MODELS } from "../data";
 import { useCompareFilters } from "../hooks/use-compare-filters";
 import {
   sortModels,
@@ -23,6 +22,8 @@ import {
   filterByModalities,
 } from "../utils";
 
+import type { ComparableModel } from "../types";
+
 // ----------------------------------------------------------------------
 
 /**
@@ -31,29 +32,39 @@ import {
  * dataset; sort and pins are URL-synced (shareable), filters are local. Table
  * on ≥ md, stacked cards below.
  */
-export function LlmCompareView() {
+interface LlmCompareViewProps {
+  models: ComparableModel[];
+  pricingAsOf: string;
+}
+
+export function LlmCompareView({ models, pricingAsOf }: LlmCompareViewProps) {
   const isDesktop = useResponsive("up", "md");
   const filters = useCompareFilters();
   const { sortKey, sortDir, toggleSort } = useCompareSort();
-  const pins = useComparePins(COMPARABLE_MODELS);
+  const pins = useComparePins(models);
 
-  const vendors = useMemo(() => distinctVendors(COMPARABLE_MODELS), []);
+  const vendors = useMemo(() => distinctVendors(models), [models]);
 
   const shown = useMemo(() => {
-    const byVendor = filterByVendors(COMPARABLE_MODELS, filters.vendors);
+    const byVendor = filterByVendors(models, filters.vendors);
     const byModality = filterByModalities(byVendor, filters.modalities);
     const byOpen = filterOpenWeights(byModality, filters.openOnly);
     return sortModels(byOpen, sortKey, sortDir);
-  }, [filters.vendors, filters.modalities, filters.openOnly, sortKey, sortDir]);
+  }, [
+    models,
+    filters.vendors,
+    filters.modalities,
+    filters.openOnly,
+    sortKey,
+    sortDir,
+  ]);
 
   const pinnedModels = useMemo(
     () =>
       pins.pinned
-        .map((id) => COMPARABLE_MODELS.find((model) => model.id === id))
-        .filter((model): model is (typeof COMPARABLE_MODELS)[number] =>
-          Boolean(model),
-        ),
-    [pins.pinned],
+        .map((id) => models.find((model) => model.id === id))
+        .filter((model): model is ComparableModel => Boolean(model)),
+    [pins.pinned, models],
   );
 
   const [shared, setShared] = useState(false);
@@ -72,8 +83,8 @@ export function LlmCompareView() {
     <Container sx={{ py: { xs: 4, md: 7 } }}>
       <CompareHero
         shown={shown.length}
-        total={COMPARABLE_MODELS.length}
-        pricingAsOf={PRICING_AS_OF}
+        total={models.length}
+        pricingAsOf={pricingAsOf}
       />
 
       <CompareToolbar

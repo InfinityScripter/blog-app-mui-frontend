@@ -110,10 +110,29 @@ export async function getPost(
  * `data.releases` directly.
  */
 export async function getReleases(): Promise<ListReleasesResponse> {
-  return fetchJsonWithRetry<ListReleasesResponse>(
-    `${SERVER_URL}${endpoints.changelog.list}`,
+  const pageSize = 100;
+  const firstPage = await fetchJsonWithRetry<ListReleasesResponse>(
+    `${SERVER_URL}${endpoints.changelog.list}?limit=${pageSize}&offset=0`,
     CHANGELOG_FETCH_INIT,
   );
+  const offsets = Array.from(
+    { length: Math.max(0, Math.ceil(firstPage.total / pageSize) - 1) },
+    (_, index) => (index + 1) * pageSize,
+  );
+  const remainingPages = await Promise.all(
+    offsets.map((offset) =>
+      fetchJsonWithRetry<ListReleasesResponse>(
+        `${SERVER_URL}${endpoints.changelog.list}?limit=${pageSize}&offset=${offset}`,
+        CHANGELOG_FETCH_INIT,
+      ),
+    ),
+  );
+  const releases = [
+    ...firstPage.releases,
+    ...remainingPages.flatMap((page) => page.releases),
+  ];
+
+  return { releases, total: firstPage.total };
 }
 
 // ----------------------------------------------------------------------

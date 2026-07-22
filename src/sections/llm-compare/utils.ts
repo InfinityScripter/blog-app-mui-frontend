@@ -79,7 +79,7 @@ export function sortModels(
     if (av === null && bv === null) return 0;
     if (av === null) return 1; // a missing → after b
     if (bv === null) return -1; // b missing → after a
-    return (av - bv) * factor;
+    return (av - bv) * factor || a.name.localeCompare(b.name);
   });
 }
 
