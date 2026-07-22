@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
+import { CONFIG } from "src/config-global";
 import Divider from "@mui/material/Divider";
 import { useTranslations } from "next-intl";
 import { useGetPost } from "src/actions/blog";
@@ -170,7 +171,8 @@ export function PostDetailsHomeView({
 
           <PostFaq items={faq} />
 
-          <PostNewsletterCta />
+          {/* Email capture (double-opt-in) — collects PD, so gated. */}
+          {CONFIG.features.pdCollection && <PostNewsletterCta />}
 
           <PostTelegramCta />
 

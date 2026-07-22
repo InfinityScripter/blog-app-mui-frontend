@@ -32,6 +32,15 @@ interface Config {
     skip: boolean;
     redirectPath: string;
   };
+  features: {
+    /**
+     * Personal-data collection (registration, OAuth sign-up, newsletter
+     * subscribe). Off by default so a public deploy collects no personal data
+     * (152-ФЗ). Mirrors the backend PD_COLLECTION_ENABLED flag; the code stays
+     * in place either way. Sign-in of existing users is never gated.
+     */
+    pdCollection: boolean;
+  };
 }
 
 export const CONFIG: Config = {
@@ -61,5 +70,8 @@ export const CONFIG: Config = {
     method: "jwt",
     skip: false,
     redirectPath: paths.dashboard.root,
+  },
+  features: {
+    pdCollection: process.env.NEXT_PUBLIC_PD_COLLECTION_ENABLED === "true",
   },
 };

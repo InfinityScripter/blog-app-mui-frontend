@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
+import { CONFIG } from "src/config-global";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
@@ -103,19 +104,21 @@ export function JwtSignInView() {
     <Stack spacing={1.5} sx={{ mb: 5 }}>
       <Typography variant="h5">Вход в аккаунт</Typography>
 
-      <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
-          Нет аккаунта?
-        </Typography>
+      {CONFIG.features.pdCollection && (
+        <Stack direction="row" spacing={0.5}>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            Нет аккаунта?
+          </Typography>
 
-        <Link
-          component={RouterLink}
-          href={paths.auth.jwt.signUp}
-          variant="subtitle2"
-        >
-          Зарегистрироваться
-        </Link>
-      </Stack>
+          <Link
+            component={RouterLink}
+            href={paths.auth.jwt.signUp}
+            variant="subtitle2"
+          >
+            Зарегистрироваться
+          </Link>
+        </Stack>
+      )}
     </Stack>
   );
 
@@ -209,7 +212,8 @@ export function JwtSignInView() {
         {renderForm}
       </Form>
 
-      <JwtSignInSocial />
+      {/* OAuth sign-up creates new accounts → gated with the rest of PD collection. */}
+      {CONFIG.features.pdCollection && <JwtSignInSocial />}
     </>
   );
 }

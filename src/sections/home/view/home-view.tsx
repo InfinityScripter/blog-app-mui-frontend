@@ -2,6 +2,8 @@
 
 import type { ListPostsResponse } from "src/types/api";
 
+import { CONFIG } from "src/config-global";
+
 import { HomeHero } from "../home-hero";
 import { HomeFeed } from "../home-feed";
 import { HomeTelegramCta } from "../home-telegram-cta";
@@ -28,10 +30,10 @@ export function HomeView({ initialPosts }: HomeViewProps) {
       {/* News-feed of latest posts with a tag filter */}
       <HomeFeed initialPosts={initialPosts} />
 
-      {/* Email newsletter capture (double-opt-in) */}
-      <HomeNewsletterCta />
+      {/* Email newsletter capture (double-opt-in) — collects PD, so gated. */}
+      {CONFIG.features.pdCollection && <HomeNewsletterCta />}
 
-      {/* Telegram subscription CTA */}
+      {/* Telegram subscription CTA — external link, no PD collected. */}
       <HomeTelegramCta />
     </>
   );
