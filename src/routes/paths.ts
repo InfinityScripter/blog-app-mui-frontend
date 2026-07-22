@@ -77,6 +77,7 @@ interface Paths {
       bot: string;
       llmStats: string;
       system: string;
+      settings: string;
     };
   };
 }
@@ -161,6 +162,7 @@ export const paths: Paths = {
       bot: `${ROOTS.DASHBOARD}/admin/bot`,
       llmStats: `${ROOTS.DASHBOARD}/admin/llm-stats`,
       system: `${ROOTS.DASHBOARD}/admin/system`,
+      settings: `${ROOTS.DASHBOARD}/admin/settings`,
     },
   },
 };

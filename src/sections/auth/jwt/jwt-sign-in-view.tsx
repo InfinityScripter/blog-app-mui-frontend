@@ -8,7 +8,6 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
-import { CONFIG } from "src/config-global";
 import { useAuthContext } from "src/auth/hooks";
 import { Iconify } from "src/components/iconify";
 import IconButton from "@mui/material/IconButton";
@@ -19,6 +18,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, Field } from "src/components/hook-form";
 import { signInWithPassword } from "src/auth/context/jwt";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useGetPublicSettings } from "src/actions/settings";
 import { useRouter, useSearchParams } from "src/routes/hooks";
 
 import { SignInSchema } from "./jwt-sign-in-schema";
@@ -32,6 +32,7 @@ export function JwtSignInView() {
   const searchParams = useSearchParams();
 
   const { checkUserSession } = useAuthContext();
+  const { settings } = useGetPublicSettings();
 
   const [errorMsg, setErrorMsg] = useState("");
   const [consentRequiredForEmail, setConsentRequiredForEmail] = useState<
@@ -104,7 +105,7 @@ export function JwtSignInView() {
     <Stack spacing={1.5} sx={{ mb: 5 }}>
       <Typography variant="h5">Вход в аккаунт</Typography>
 
-      {CONFIG.features.pdCollection && (
+      {settings?.pdCollection && (
         <Stack direction="row" spacing={0.5}>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             Нет аккаунта?
@@ -213,7 +214,7 @@ export function JwtSignInView() {
       </Form>
 
       {/* OAuth sign-up creates new accounts → gated with the rest of PD collection. */}
-      {CONFIG.features.pdCollection && <JwtSignInSocial />}
+      {settings?.pdCollection && <JwtSignInSocial />}
     </>
   );
 }

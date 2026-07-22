@@ -74,6 +74,11 @@ export function getNavData(role?: string) {
           path: paths.dashboard.admin.system,
           icon: ICONS.dashboard,
         },
+        {
+          title: "Настройки",
+          path: paths.dashboard.admin.settings,
+          icon: ICONS.dashboard,
+        },
       ],
     });
   }

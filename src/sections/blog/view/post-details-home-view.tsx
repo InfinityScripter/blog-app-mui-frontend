@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
-import { CONFIG } from "src/config-global";
 import Divider from "@mui/material/Divider";
 import { useTranslations } from "next-intl";
 import { useGetPost } from "src/actions/blog";
@@ -20,6 +19,7 @@ import { RouterLink } from "src/routes/components";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { usePostView } from "src/hooks/use-post-view";
 import { getReadingTime } from "src/utils/reading-time";
+import { useGetPublicSettings } from "src/actions/settings";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
 import {
   parsePostContent,
@@ -46,6 +46,7 @@ export function PostDetailsHomeView({
 }: PostDetailsHomeViewProps) {
   const t = useTranslations("blog");
   const { post, postMutate } = useGetPost(initialPost?._id);
+  const { settings } = useGetPublicSettings();
   const currentPost = post || initialPost;
 
   usePostView(currentPost?._id);
@@ -171,8 +172,9 @@ export function PostDetailsHomeView({
 
           <PostFaq items={faq} />
 
-          {/* Email capture (double-opt-in) — collects PD, so gated. */}
-          {CONFIG.features.pdCollection && <PostNewsletterCta />}
+          {/* Email capture (double-opt-in) — collects PD, so gated on the
+              runtime flag (hidden until it loads, so PD UI never flashes). */}
+          {settings?.pdCollection && <PostNewsletterCta />}
 
           <PostTelegramCta />
 

@@ -2,7 +2,7 @@
 
 import type { ListPostsResponse } from "src/types/api";
 
-import { CONFIG } from "src/config-global";
+import { useGetPublicSettings } from "src/actions/settings";
 
 import { HomeHero } from "../home-hero";
 import { HomeFeed } from "../home-feed";
@@ -18,6 +18,8 @@ interface HomeViewProps {
 }
 
 export function HomeView({ initialPosts }: HomeViewProps) {
+  const { settings } = useGetPublicSettings();
+
   return (
     <>
       <ScrollProgress />
@@ -30,8 +32,9 @@ export function HomeView({ initialPosts }: HomeViewProps) {
       {/* News-feed of latest posts with a tag filter */}
       <HomeFeed initialPosts={initialPosts} />
 
-      {/* Email newsletter capture (double-opt-in) — collects PD, so gated. */}
-      {CONFIG.features.pdCollection && <HomeNewsletterCta />}
+      {/* Email newsletter capture (double-opt-in) — collects PD, so gated on the
+          runtime flag (hidden until it loads, so PD UI never flashes). */}
+      {settings?.pdCollection && <HomeNewsletterCta />}
 
       {/* Telegram subscription CTA — external link, no PD collected. */}
       <HomeTelegramCta />

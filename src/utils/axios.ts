@@ -170,8 +170,13 @@ export const endpoints = {
     confirm: "/api/newsletter/confirm",
     unsubscribe: "/api/newsletter/unsubscribe",
   },
+  settings: {
+    public: "/api/settings/public",
+  },
   admin: {
     users: "/api/admin/users",
+    settings: "/api/admin/settings",
+    pdCollection: "/api/admin/settings/pd-collection",
     userById: (id: string) => `/api/admin/users/${id}`,
     postById: (id: string) => `/api/admin/posts/${id}`,
     auditLogs: "/api/admin/audit-logs",

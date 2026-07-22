@@ -1,33 +1,20 @@
-"use client";
-
 import { notFound } from "next/navigation";
-import { CONFIG } from "src/config-global";
-import { confirmSubscription } from "src/actions/newsletter";
+import { fetchPdCollectionEnabled } from "src/actions/settings-ssr";
 
-import { NewsletterStatus } from "../newsletter-status";
-import { useTokenAction } from "../hooks/use-token-action";
+import { NewsletterConfirmView } from "./confirm-view";
 
-export default function Page() {
-  // Confirming completes a subscription (collects PD). When collection is
-  // disabled the route 404s to match the backend gate — otherwise a late click
-  // on a confirm link would surface the raw backend "Not found" as the page
-  // message. Unsubscribe stays open so people can always leave.
-  if (!CONFIG.features.pdCollection) {
+// Read the runtime flag per request (no ISR) so an admin toggle takes effect
+// immediately. Confirming completes a subscription (collects PD); when collection
+// is disabled the route 404s to match the backend gate — otherwise a late click
+// on a confirm link would surface the raw backend "Not found" as the page
+// message. Unsubscribe stays open so people can always leave.
+export const dynamic = "force-dynamic";
+
+export default async function Page() {
+  const pdCollectionEnabled = await fetchPdCollectionEnabled();
+  if (!pdCollectionEnabled) {
     notFound();
   }
 
-  const { status, message, redirectIn } = useTokenAction(
-    confirmSubscription,
-    "Подписка подтверждена",
-    "Ссылка недействительна — токен отсутствует",
-  );
-
-  return (
-    <NewsletterStatus
-      status={status}
-      message={message}
-      redirectIn={redirectIn}
-      loadingText="Подтверждаем подписку..."
-    />
-  );
+  return <NewsletterConfirmView />;
 }
