@@ -2,6 +2,7 @@
 
 import { CONFIG } from "src/config-global";
 import axios, { endpoints } from "src/utils/axios";
+import { PERSONAL_DATA_CONSENT_VERSION } from "src/constants/privacy";
 
 // ----------------------------------------------------------------------
 // Auth is cookie-based: the backend sets httpOnly access/refresh cookies and a
@@ -11,6 +12,7 @@ import axios, { endpoints } from "src/utils/axios";
 interface SignInParams {
   email: string;
   password: string;
+  personalDataConsent?: boolean;
 }
 
 /** **************************************
@@ -19,14 +21,17 @@ interface SignInParams {
 export const signInWithPassword = async ({
   email,
   password,
+  personalDataConsent,
 }: SignInParams): Promise<void> => {
-  try {
-    // On success the backend sets the auth cookies; nothing to store client-side.
-    await axios.post(endpoints.auth.signIn, { email, password });
-  } catch (error) {
-    console.error("Error during sign in:", error);
-    throw error;
-  }
+  // On success the backend sets the auth cookies; nothing to store client-side.
+  await axios.post(endpoints.auth.signIn, {
+    email,
+    password,
+    ...(personalDataConsent && {
+      personalDataConsent: true,
+      personalDataConsentVersion: PERSONAL_DATA_CONSENT_VERSION,
+    }),
+  });
 };
 
 // ----------------------------------------------------------------------
@@ -36,6 +41,7 @@ interface SignUpParams {
   password: string;
   firstName: string;
   lastName: string;
+  personalDataConsent: boolean;
 }
 
 interface SignUpResponse {
@@ -50,21 +56,19 @@ export const signUp = async ({
   password,
   firstName,
   lastName,
+  personalDataConsent,
 }: SignUpParams): Promise<SignUpResponse> => {
   const params = {
     email,
     password,
     firstName,
     lastName,
+    personalDataConsent,
+    personalDataConsentVersion: PERSONAL_DATA_CONSENT_VERSION,
   };
 
-  try {
-    const res = await axios.post<SignUpResponse>(endpoints.auth.signUp, params);
-    return res.data;
-  } catch (error) {
-    console.error("Error during sign up:", error);
-    throw error;
-  }
+  const res = await axios.post<SignUpResponse>(endpoints.auth.signUp, params);
+  return res.data;
 };
 
 // ----------------------------------------------------------------------
@@ -109,4 +113,12 @@ export const signInWithYandex = () => {
   }
 
   window.location.href = `${CONFIG.site.serverUrl}${endpoints.auth.yandex}`;
+};
+
+export const completeOAuthConsent = async (token: string): Promise<void> => {
+  await axios.post(endpoints.auth.oauthConsent, {
+    token,
+    personalDataConsent: true,
+    personalDataConsentVersion: PERSONAL_DATA_CONSENT_VERSION,
+  });
 };

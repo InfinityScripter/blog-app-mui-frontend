@@ -21,6 +21,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { useRouter, useSearchParams } from "src/routes/hooks";
 
 import { SignInSchema } from "./jwt-sign-in-schema";
+import { JwtSignUpTerms } from "./jwt-sign-up-terms";
 import { JwtSignInSocial } from "./jwt-sign-in-social";
 
 // ----------------------------------------------------------------------
@@ -32,6 +33,9 @@ export function JwtSignInView() {
   const { checkUserSession } = useAuthContext();
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [consentRequiredForEmail, setConsentRequiredForEmail] = useState<
+    string | null
+  >(null);
   const oauthError = searchParams.get("oauthError");
 
   const password = useBoolean();
@@ -39,6 +43,7 @@ export function JwtSignInView() {
   const defaultValues = {
     email: "",
     password: "",
+    personalDataConsent: false,
   };
 
   const methods = useForm({
@@ -48,16 +53,40 @@ export function JwtSignInView() {
 
   const {
     handleSubmit,
+    setError,
     formState: { isSubmitting },
   } = methods;
+  const currentEmail = methods.watch("email").trim().toLowerCase();
+  const consentRequired = consentRequiredForEmail === currentEmail;
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await signInWithPassword({ email: data.email, password: data.password });
+      if (consentRequired && !data.personalDataConsent) {
+        setError("personalDataConsent", {
+          message: "Подтвердите согласие на обработку персональных данных",
+        });
+        return;
+      }
+
+      await signInWithPassword({
+        email: data.email,
+        password: data.password,
+        personalDataConsent: consentRequired ? data.personalDataConsent : false,
+      });
       await checkUserSession?.();
 
       router.refresh();
     } catch (error) {
+      if (isAxiosError(error) && error.response?.status === 428) {
+        methods.setValue("personalDataConsent", false);
+        setConsentRequiredForEmail(data.email.trim().toLowerCase());
+        setError("personalDataConsent", {
+          message: "Подтвердите согласие на обработку персональных данных",
+        });
+        setErrorMsg("");
+        return;
+      }
+
       // Извлекаем сообщение об ошибке из ответа сервера, если оно есть
       const errorMessage =
         (isAxiosError(error)
@@ -132,6 +161,16 @@ export function JwtSignInView() {
         />
       </Stack>
 
+      {consentRequired && (
+        <Stack spacing={1}>
+          <Typography role="alert" variant="body2" color="warning.main">
+            Пароль подтверждён. Для продолжения примите актуальную редакцию
+            согласия.
+          </Typography>
+          <JwtSignUpTerms />
+        </Stack>
+      )}
+
       <Button
         fullWidth
         color="inherit"
@@ -158,7 +197,11 @@ export function JwtSignInView() {
 
       {!!oauthError && (
         <Alert severity="error" sx={{ mb: 3 }}>
-          Не удалось выполнить OAuth-вход. Попробуйте ещё раз.
+          {oauthError === "account_not_found"
+            ? "Сначала зарегистрируйтесь по email и подтвердите согласие на обработку персональных данных."
+            : oauthError === "consent_required"
+              ? "Для этого аккаунта нужно подтвердить актуальное согласие. Войдите по email или свяжитесь с оператором."
+              : "Не удалось выполнить OAuth-вход. Попробуйте ещё раз."}
         </Alert>
       )}
 

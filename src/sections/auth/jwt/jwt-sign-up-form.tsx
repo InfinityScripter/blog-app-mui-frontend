@@ -7,6 +7,7 @@ import { useBoolean } from "src/hooks/use-boolean";
 import InputAdornment from "@mui/material/InputAdornment";
 
 import { JwtSignUpFormProps } from "./types";
+import { JwtSignUpTerms } from "./jwt-sign-up-terms";
 
 // ----------------------------------------------------------------------
 
@@ -53,6 +54,8 @@ export function JwtSignUpForm({ isSubmitting }: JwtSignUpFormProps) {
           ),
         }}
       />
+
+      <JwtSignUpTerms />
 
       <Button
         fullWidth

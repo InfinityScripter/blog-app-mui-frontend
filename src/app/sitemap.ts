@@ -50,6 +50,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/llm-compare/", changeFrequency: "weekly", priority: 0.8 },
     { path: "/llm-timeline/", changeFrequency: "monthly", priority: 0.7 },
     { path: "/library/", changeFrequency: "weekly", priority: 0.7 },
+    { path: "/privacy-policy/", changeFrequency: "yearly", priority: 0.2 },
+    {
+      path: "/personal-data-consent/",
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
   ];
 
   const postSpecs: RouteSpec[] = [];

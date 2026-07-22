@@ -7,4 +7,5 @@ export const SignInSchema = zod.object({
     message: "Email должен быть действительным адресом электронной почты!",
   }),
   password: zod.string().min(1, { message: "Пароль обязателен!" }),
+  personalDataConsent: zod.boolean().optional(),
 });

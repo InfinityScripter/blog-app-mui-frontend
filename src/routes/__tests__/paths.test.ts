@@ -44,3 +44,16 @@ describe("paths.changelog", () => {
     );
   });
 });
+
+describe("paths.legal", () => {
+  it("exposes personal data documents", () => {
+    expect(paths.legal.privacyPolicy).toBe("/privacy-policy");
+    expect(paths.legal.personalDataConsent).toBe("/personal-data-consent");
+  });
+});
+
+describe("paths.auth.oauthConsent", () => {
+  it("exposes the OAuth consent completion page", () => {
+    expect(paths.auth.oauthConsent).toBe("/auth/oauth-consent");
+  });
+});

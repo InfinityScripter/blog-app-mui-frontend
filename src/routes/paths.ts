@@ -44,6 +44,10 @@ interface Paths {
   library: {
     root: string;
   };
+  legal: {
+    privacyPolicy: string;
+    personalDataConsent: string;
+  };
   auth: {
     jwt: {
       signIn: string;
@@ -53,6 +57,7 @@ interface Paths {
     updatePassword: string;
     verify: string;
     success: string;
+    oauthConsent: string;
   };
   dashboard: {
     root: string;
@@ -121,6 +126,10 @@ export const paths: Paths = {
   library: {
     root: `/library`,
   },
+  legal: {
+    privacyPolicy: "/privacy-policy",
+    personalDataConsent: "/personal-data-consent",
+  },
   // AUTH
   auth: {
     jwt: {
@@ -131,6 +140,7 @@ export const paths: Paths = {
     updatePassword: `${ROOTS.AUTH}/update-password`,
     verify: `${ROOTS.AUTH}/verify`,
     success: `${ROOTS.AUTH}/success`,
+    oauthConsent: `${ROOTS.AUTH}/oauth-consent`,
   },
   // DASHBOARD
   dashboard: {

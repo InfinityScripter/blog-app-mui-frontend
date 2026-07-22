@@ -15,8 +15,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { JwtSignUpForm } from "./jwt-sign-up-form";
 import { SignUpSchema } from "./jwt-sign-up-schema";
-import { JwtSignUpTerms } from "./jwt-sign-up-terms";
-import { JwtSignUpSocial } from "./jwt-sign-up-social";
 
 // ----------------------------------------------------------------------
 
@@ -31,6 +29,7 @@ export function JwtSignUpView() {
     lastName: "",
     email: "",
     password: "",
+    personalDataConsent: false,
   };
 
   const methods = useForm({
@@ -51,13 +50,13 @@ export function JwtSignUpView() {
         password: data.password,
         firstName: data.firstName,
         lastName: data.lastName,
+        personalDataConsent: data.personalDataConsent,
       });
       setSuccessMsg("Код подтверждения отправлен на email");
       router.push(
         `${paths.auth.verify}?email=${encodeURIComponent(data.email)}`,
       );
     } catch (error) {
-      console.error(error);
       setErrorMsg(error instanceof Error ? error.message : String(error));
     }
   });
@@ -101,10 +100,6 @@ export function JwtSignUpView() {
       <Form methods={methods} onSubmit={onSubmit}>
         <JwtSignUpForm isSubmitting={isSubmitting} />
       </Form>
-
-      <JwtSignUpSocial />
-
-      <JwtSignUpTerms />
     </>
   );
 }

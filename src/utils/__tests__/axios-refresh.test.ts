@@ -45,6 +45,21 @@ function unauthorized(config: InternalAxiosRequestConfig): never {
   throw err;
 }
 
+function preconditionRequired(config: InternalAxiosRequestConfig): never {
+  const err = new Error("Consent required") as Error & {
+    response: { status: number; data: { message: string } };
+    config: InternalAxiosRequestConfig;
+    isAxiosError: boolean;
+  };
+  err.response = {
+    status: 428,
+    data: { message: "Подтвердите согласие" },
+  };
+  err.config = config;
+  err.isAxiosError = true;
+  throw err;
+}
+
 /** Install a scripted adapter and return call counters. */
 function installAdapter(
   script: (url: string, config: InternalAxiosRequestConfig) => AxiosResponse,
@@ -98,6 +113,18 @@ describe("axios refresh interceptor", () => {
     await expect(axiosInstance.post("/api/auth/refresh")).rejects.toThrow();
     // The bypass list prevents the refresh call from triggering another refresh.
     expect(calls.filter((u) => u === "/api/auth/refresh")).toHaveLength(1);
+  });
+
+  it("preserves HTTP 428 so the sign-in form can open re-consent", async () => {
+    installAdapter((_url, config) => preconditionRequired(config));
+
+    const error = await axiosInstance
+      .post("/api/auth/sign-in")
+      .catch((caught) => caught);
+
+    expect(error.isAxiosError).toBe(true);
+    expect(error.response?.status).toBe(428);
+    expect(error.message).toBe("Подтвердите согласие");
   });
 
   it("single-flight: concurrent 401s share ONE refresh call", async () => {

@@ -12,4 +12,7 @@ export const SignUpSchema = zod.object({
     .string()
     .min(1, { message: "Пароль обязателен!" })
     .min(8, { message: "Пароль должен содержать не менее 8 символов!" }),
+  personalDataConsent: zod.boolean().refine(Boolean, {
+    message: "Подтвердите согласие на обработку персональных данных",
+  }),
 });

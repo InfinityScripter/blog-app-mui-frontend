@@ -1,4 +1,5 @@
 import axios, { endpoints } from "src/utils/axios";
+import { PERSONAL_DATA_CONSENT_VERSION } from "src/constants/privacy";
 
 // ----------------------------------------------------------------------
 // Newsletter double-opt-in actions. Backend wraps writes in ok() →
@@ -12,10 +13,15 @@ interface SubscribeResponse {
 
 export async function subscribeToNewsletter(
   email: string,
+  personalDataConsent: boolean,
 ): Promise<SubscribeResponse> {
   const res = await axios.post<SubscribeResponse>(
     endpoints.newsletter.subscribe,
-    { email },
+    {
+      email,
+      personalDataConsent,
+      personalDataConsentVersion: PERSONAL_DATA_CONSENT_VERSION,
+    },
   );
   return res.data;
 }

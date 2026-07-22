@@ -21,36 +21,53 @@ export function RHFCheckbox({
   const { control } = useFormContext();
 
   const ariaLabel = `Checkbox ${name}`;
+  const helperTextId = `${name}-helper-text`;
 
   return (
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error } }) => (
-        <Box sx={slotProps?.wrap}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                {...field}
-                checked={field.value}
-                {...slotProps?.checkbox}
-                inputProps={{
-                  ...(!label && { "aria-label": ariaLabel }),
-                  ...slotProps?.checkbox?.inputProps,
-                }}
-              />
-            }
-            label={label}
-            {...other}
-          />
+      render={({ field, fieldState: { error } }) => {
+        const hasHelperText = !!error || !!helperText;
+        const describedBy = [
+          slotProps?.checkbox?.inputProps?.["aria-describedby"],
+          hasHelperText ? helperTextId : undefined,
+        ]
+          .filter(Boolean)
+          .join(" ");
 
-          {(!!error || helperText) && (
-            <FormHelperText error={!!error} {...slotProps?.formHelperText}>
-              {error ? error?.message : helperText}
-            </FormHelperText>
-          )}
-        </Box>
-      )}
+        return (
+          <Box sx={slotProps?.wrap}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  {...field}
+                  checked={field.value}
+                  {...slotProps?.checkbox}
+                  inputProps={{
+                    ...(!label && { "aria-label": ariaLabel }),
+                    ...slotProps?.checkbox?.inputProps,
+                    "aria-describedby": describedBy || undefined,
+                    "aria-invalid": !!error || undefined,
+                  }}
+                />
+              }
+              label={label}
+              {...other}
+            />
+
+            {hasHelperText && (
+              <FormHelperText
+                id={helperTextId}
+                error={!!error}
+                {...slotProps?.formHelperText}
+              >
+                {error ? error?.message : helperText}
+              </FormHelperText>
+            )}
+          </Box>
+        );
+      }}
     />
   );
 }

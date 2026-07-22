@@ -4,10 +4,12 @@ import type { Theme } from "@mui/material/styles";
 
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
+import { paths } from "src/routes/paths";
 import { Logo } from "src/components/logo";
 import { CONFIG } from "src/config-global";
 import { useTranslations } from "next-intl";
 import Container from "@mui/material/Container";
+import { RouterLink } from "src/routes/components";
 import { hairline, monoValueSx } from "src/theme/styles";
 
 import type { HomeFooterProps } from "./types";
@@ -35,6 +37,14 @@ export function HomeFooter({ sx }: HomeFooterProps) {
           {t("rights")}
           <br /> {t("madeBy")}
           <Link href={CONFIG.social.telegram}> Mikhail Talalaev </Link>
+          <br />
+          <Link component={RouterLink} href={paths.legal.privacyPolicy}>
+            {t("privacyPolicy")}
+          </Link>
+          {" · "}
+          <Link component={RouterLink} href={paths.legal.personalDataConsent}>
+            {t("personalDataConsent")}
+          </Link>
         </Box>
       </Container>
     </Box>

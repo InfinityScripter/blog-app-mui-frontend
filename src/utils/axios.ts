@@ -55,17 +55,21 @@ async function runRefresh(): Promise<boolean> {
   }
 }
 
-function toError(error: AxiosError<{ message?: string }>): Error {
+function toError(
+  error: AxiosError<{ message?: string }>,
+): AxiosError<{ message?: string }> {
   if (error.response?.data?.message) {
-    return new Error(error.response.data.message);
+    error.message = error.response.data.message;
+    return error;
   }
   // No backend message — keep the axios context ("Network Error", "Request
   // failed with status code 500") instead of one generic string, so logs and
   // toasts can distinguish offline / server / client failures.
   if (error.message) {
-    return new Error(error.message);
+    return error;
   }
-  return new Error("Something went wrong. Please try again.");
+  error.message = "Something went wrong. Please try again.";
+  return error;
 }
 
 axiosInstance.interceptors.response.use(
@@ -134,6 +138,7 @@ export const endpoints = {
     refresh: "/api/auth/refresh",
     google: "/api/auth/google",
     yandex: "/api/auth/yandex",
+    oauthConsent: "/api/auth/oauth/consent",
     verify: "/api/auth/verify",
     resendVerification: "/api/auth/resend-verification",
     resetPassword: "/api/auth/reset-password",

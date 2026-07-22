@@ -122,7 +122,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                       color="inherit"
                       variant="body2"
                     >
-                      {link.name}
+                      {link.nameKey ? t(link.nameKey) : link.name}
                     </Link>
                   ))}
                 </Stack>

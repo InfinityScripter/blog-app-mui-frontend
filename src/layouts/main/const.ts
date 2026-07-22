@@ -1,5 +1,6 @@
 import type { SocialIconName } from "src/components/iconify";
 
+import { paths } from "src/routes/paths";
 import { CONFIG } from "src/config-global";
 
 // ----------------------------------------------------------------------
@@ -7,11 +8,21 @@ import { CONFIG } from "src/config-global";
 // Footer link columns. Translatable labels reference a `footer.<key>` message
 // (`headlineKey` / `nameKey`); the contacts email is literal data, so it uses
 // `name` directly. The footer component resolves keys via `t()`.
-// Dropped the "docs" column (Terms/Privacy) — both were dead `href: "#"`
-// placeholders with no backing pages: broken UX, and their shared "#" href
-// collided as React keys in the footer (site-wide console error). No legal
-// pages exist for this personal blog, so the column is removed rather than faked.
-export const LINKS = [
+type FooterHeadlineKey = "contacts" | "documents";
+type FooterLinkNameKey = "privacyPolicy" | "personalDataConsent";
+
+interface FooterLink {
+  href: string;
+  name?: string;
+  nameKey?: FooterLinkNameKey;
+}
+
+interface FooterLinkList {
+  headlineKey: FooterHeadlineKey;
+  children: FooterLink[];
+}
+
+export const LINKS: FooterLinkList[] = [
   {
     headlineKey: "contacts",
     children: [
@@ -21,7 +32,20 @@ export const LINKS = [
       },
     ],
   },
-] as const;
+  {
+    headlineKey: "documents",
+    children: [
+      {
+        nameKey: "privacyPolicy",
+        href: paths.legal.privacyPolicy,
+      },
+      {
+        nameKey: "personalDataConsent",
+        href: paths.legal.personalDataConsent,
+      },
+    ],
+  },
+];
 
 interface SocialLink {
   value: SocialIconName;

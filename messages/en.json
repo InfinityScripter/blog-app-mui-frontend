@@ -26,7 +26,10 @@
     "lead": "A blog and notes on development. The easiest way to reach me is via the social links below.",
     "rights": "© All rights reserved.",
     "contacts": "Contacts",
-    "madeBy": "made by"
+    "madeBy": "made by",
+    "documents": "Documents",
+    "privacyPolicy": "Personal data processing policy",
+    "personalDataConsent": "Personal data processing consent"
   },
   "blog": {
     "meta": {
@@ -237,7 +240,10 @@
       "note": "Double opt-in. Unsubscribe in one click.",
       "success": "Check your inbox — we sent a confirmation email",
       "error": "Could not subscribe",
-      "invalidEmail": "Enter a valid email"
+      "invalidEmail": "Enter a valid email",
+      "consentRequired": "Confirm your consent to personal data processing",
+      "consentPrefix": "I consent to email processing for the newsletter and accept the ",
+      "consentLink": "consent terms"
     },
     "telegram": {
       "label": "Telegram channel",
