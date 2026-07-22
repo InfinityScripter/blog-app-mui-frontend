@@ -94,6 +94,9 @@ const StyledNavItem = styled(ButtonBase, {
       ...baseStyles.item,
       height: "100%",
       position: "relative",
+      // Multi-word labels («LLM history», «Compare LLMs») must not wrap to a
+      // second line — that breaks the row rhythm and misplaces the underline.
+      whiteSpace: "nowrap",
       "&:hover": { color: theme.vars.palette.primary.main },
       ...(active && {
         color: theme.vars.palette.primary.main,

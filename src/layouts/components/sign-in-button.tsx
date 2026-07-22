@@ -19,7 +19,8 @@ export function SignInButton({ sx, ...other }: SignInButtonProps) {
       // Don't prefetch the heavy dashboard route from every public page header.
       prefetch={false}
       variant="outlined"
-      sx={sx}
+      // Keep «Sign in» / «Войти» on one line — never wrap to two.
+      sx={{ flexShrink: 0, whiteSpace: "nowrap", ...sx }}
       {...other}
     >
       {t("signIn")}

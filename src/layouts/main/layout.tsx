@@ -30,7 +30,10 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
   // Dim the logo backdrop behind long article bodies; fuller on landing/lists.
   const readingPage = pathname.startsWith("/post/");
 
-  const layoutQuery = "md";
+  // The 8 full-text nav items + logo + search + right-side icons only fit on
+  // one clean row from ~1200px up; below that we collapse to the mobile
+  // hamburger (which already carries every nav link) instead of wrapping.
+  const layoutQuery = "lg";
 
   const defaultNav = useNavData();
   const navData = data?.nav ?? defaultNav;
