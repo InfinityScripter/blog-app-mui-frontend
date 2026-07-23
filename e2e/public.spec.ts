@@ -1,4 +1,5 @@
 import { test, expect } from "./fixtures";
+import { getContrastRatio } from "@mui/material/styles";
 
 /**
  * Public (unauthenticated) smoke flow.
@@ -15,6 +16,72 @@ test.describe("public pages", () => {
     await expect(
       page.getByRole("link", { name: "Обо мне" }).first(),
     ).toBeVisible();
+  });
+
+  test("light theme keeps the auth logo readable on its dark panel", async ({
+    page,
+  }) => {
+    await page.goto("/auth/jwt/sign-in");
+
+    const logo = page.locator('[data-slot="logo"]');
+    const panel = page.locator("main > div:first-child");
+
+    await expect(logo).toBeVisible();
+    await expect(panel).toBeVisible();
+
+    const [tileColor, wordmarkColor, panelColor] = await Promise.all([
+      logo
+        .locator("svg > rect:first-child")
+        .evaluate((element) => getComputedStyle(element).fill),
+      logo
+        .locator(":scope > span")
+        .evaluate((element) => getComputedStyle(element).color),
+      panel.evaluate((element) => getComputedStyle(element).backgroundColor),
+    ]);
+
+    expect(getContrastRatio(tileColor, panelColor)).toBeGreaterThanOrEqual(3);
+    expect(getContrastRatio(wordmarkColor, panelColor)).toBeGreaterThanOrEqual(
+      4.5,
+    );
+  });
+
+  test("TIL tab switches without navigation or layout shift", async ({
+    page,
+  }) => {
+    await page.goto("/library");
+
+    const rscRequests: string[] = [];
+    page.on("request", (request) => {
+      if (new URL(request.url()).searchParams.has("_rsc")) {
+        rscRequests.push(request.url());
+      }
+    });
+
+    const tabs = page.getByRole("tablist");
+    const til = page.getByRole("tab", { name: "TIL", exact: true });
+
+    await expect(til).toBeVisible();
+    await page.evaluate(() => window.scrollTo(0, 120));
+
+    const beforeScrollY = await page.evaluate(() => window.scrollY);
+    const beforeTabs = await tabs.boundingBox();
+    if (!beforeTabs) throw new Error("Library tabs are not measurable");
+
+    await til.click();
+
+    await expect(page).toHaveURL(/[?&]tab=til(?:&|$)/);
+    await expect(
+      page.getByRole("heading", {
+        name: "SWR не делает запрос, если ключ — null",
+      }),
+    ).toBeVisible();
+
+    const afterTabs = await tabs.boundingBox();
+    if (!afterTabs) throw new Error("Library tabs are not measurable");
+
+    expect(await page.evaluate(() => window.scrollY)).toBe(beforeScrollY);
+    expect(Math.abs(afterTabs.x - beforeTabs.x)).toBeLessThanOrEqual(1);
+    expect(rscRequests).toEqual([]);
   });
 
   // A post *detail* link: under <main> (excludes the nav "Блог" link, whose

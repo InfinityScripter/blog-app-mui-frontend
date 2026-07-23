@@ -33,8 +33,8 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
   ) => {
     const theme = useTheme();
 
-    const TILE = theme.vars.palette.text.primary; // warm ink / bone in dark
-    const CARET = theme.vars.palette.background.paper; // paper / charcoal
+    const TILE = `var(--logo-foreground, ${theme.vars.palette.text.primary})`;
+    const CARET = `var(--logo-background, ${theme.vars.palette.background.paper})`;
     const CURSOR = theme.vars.palette.primary.main; // signal vermilion
 
     const mark = (
@@ -70,7 +70,7 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
               : `calc(${height} * 0.72)`,
           letterSpacing: "-0.04em",
           lineHeight: 1,
-          color: "text.primary",
+          color: TILE,
           userSelect: "none",
         }}
       >

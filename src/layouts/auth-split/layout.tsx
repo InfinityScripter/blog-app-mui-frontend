@@ -2,6 +2,7 @@
 
 import Alert from "@mui/material/Alert";
 import { CONFIG } from "src/config-global";
+import { useTheme } from "@mui/material/styles";
 import { useBoolean } from "src/hooks/use-boolean";
 
 import { Main } from "./main";
@@ -19,6 +20,8 @@ export function AuthSplitLayout({
   section,
   children,
 }: AuthSplitLayoutProps) {
+  const theme = useTheme();
+
   const mobileNavOpen = useBoolean();
 
   const layoutQuery = "md";
@@ -61,6 +64,8 @@ export function AuthSplitLayout({
       sx={sx}
       cssVars={{
         "--layout-auth-content-width": "420px",
+        "--logo-foreground": theme.vars.palette.common.white,
+        "--logo-background": theme.vars.palette.grey[900],
       }}
     >
       <Main layoutQuery={layoutQuery}>

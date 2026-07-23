@@ -1,5 +1,4 @@
 import { useMemo, useCallback } from "react";
-import { useRouter } from "src/routes/hooks/use-router";
 import { usePathname } from "src/routes/hooks/use-pathname";
 import { useSearchParams } from "src/routes/hooks/use-search-params";
 
@@ -26,7 +25,6 @@ interface UseLibraryTabReturn {
  * default tab.
  */
 export function useLibraryTab(): UseLibraryTabReturn {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -38,9 +36,13 @@ export function useLibraryTab(): UseLibraryTabReturn {
       if (next === DEFAULT_TAB) params.delete("tab");
       else params.set("tab", next);
       const query = params.toString();
-      router.replace(query ? `${pathname}?${query}` : pathname);
+      window.history.replaceState(
+        null,
+        "",
+        query ? `${pathname}?${query}` : pathname,
+      );
     },
-    [router, pathname, searchParams],
+    [pathname, searchParams],
   );
 
   return useMemo(() => ({ tab, setTab }), [tab, setTab]);
