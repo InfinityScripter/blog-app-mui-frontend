@@ -14,12 +14,25 @@ export interface PublicSettings {
   pdCollection: boolean;
 }
 
+// The admin snapshot is a superset of the public flags: it also carries the
+// news-bot auto-publish master switches, which are admin-only (never exposed on
+// the public endpoint). Keep autoPublish keys off PublicSettings so public UI
+// can't read them.
+interface AdminFlags extends PublicSettings {
+  autoPublishReleases: boolean;
+  autoPublishNews: boolean;
+}
+
+// The two auto-publish switches the toggle route accepts (mirrors the backend's
+// AUTO_PUBLISH_KEYS allow-list). A union, not string, so a typo can't compile.
+export type AutoPublishKey = "autoPublishReleases" | "autoPublishNews";
+
 interface PublicSettingsResponse {
   data: PublicSettings;
 }
 
 interface AdminSettingsResponse {
-  data: { flags: PublicSettings };
+  data: { flags: AdminFlags };
 }
 
 const swrOptions = {
@@ -70,4 +83,11 @@ export function useGetAdminSettings(enabled = true) {
 
 export async function setPdCollection(enabled: boolean) {
   await axiosInstance.post(endpoints.admin.pdCollection, { enabled });
+}
+
+// Toggle one news-bot auto-publish master switch. Keyed route (body { key,
+// enabled }) — the backend allow-lists the key so this can only ever flip an
+// auto-publish flag, never pdCollection.
+export async function setAutoPublish(key: AutoPublishKey, enabled: boolean) {
+  await axiosInstance.post(endpoints.admin.autoPublish, { key, enabled });
 }

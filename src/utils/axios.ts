@@ -177,6 +177,7 @@ export const endpoints = {
     users: "/api/admin/users",
     settings: "/api/admin/settings",
     pdCollection: "/api/admin/settings/pd-collection",
+    autoPublish: "/api/admin/settings/auto-publish",
     userById: (id: string) => `/api/admin/users/${id}`,
     postById: (id: string) => `/api/admin/posts/${id}`,
     auditLogs: "/api/admin/audit-logs",
