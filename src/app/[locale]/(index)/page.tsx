@@ -2,6 +2,7 @@ import { CONFIG } from "src/config-global";
 import { getPosts } from "src/actions/blog-ssr";
 import { HomeView } from "src/sections/home/view";
 import { getTranslations } from "next-intl/server";
+import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { localizedAlternates } from "src/utils/seo-alternates";
 import { toAppLocale, DEFAULT_LOCALE } from "src/i18n/locales";
 
@@ -93,7 +94,7 @@ export default async function Page({ params }: PageProps) {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(JSON_LD) }}
       />
       <HomeView initialPosts={initialPosts} />
     </>

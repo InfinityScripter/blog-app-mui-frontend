@@ -1,5 +1,6 @@
 import { CONFIG } from "src/config-global";
 import { getTranslations } from "next-intl/server";
+import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { localizedAlternates } from "src/utils/seo-alternates";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { LibraryView } from "src/sections/library/view/library-view";
@@ -52,7 +53,7 @@ export default async function Page({ params }: PageProps) {
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <LibraryView />
     </>
