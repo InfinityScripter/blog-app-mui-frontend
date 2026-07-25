@@ -34,8 +34,7 @@ export function HomeFooter({ sx }: HomeFooterProps) {
       <Container>
         <Logo />
         <Box sx={{ ...monoValueSx, fontSize: 11, mt: 1.5 }}>
-          {t("rights")}
-          <br /> {t("madeBy")}
+          {t("madeBy")}
           <Link href={CONFIG.social.telegram}> Mikhail Talalaev </Link>
           <br />
           <Link component={RouterLink} href={paths.legal.privacyPolicy}>

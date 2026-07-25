@@ -10,7 +10,8 @@
     "preview": "Preview",
     "signIn": "Sign in",
     "search": "Search…",
-    "recentPosts": "Recent posts"
+    "recentPosts": "Recent posts",
+    "backToSite": "Back to site"
   },
   "nav": {
     "home": "Home",
@@ -24,7 +25,6 @@
   },
   "footer": {
     "lead": "A blog and notes on development. The easiest way to reach me is via the social links below.",
-    "rights": "© All rights reserved.",
     "contacts": "Contacts",
     "madeBy": "made by",
     "documents": "Documents",

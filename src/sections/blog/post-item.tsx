@@ -44,7 +44,10 @@ export function PostItem({
   );
 
   return (
-    <Card>
+    // Full height + column flow so every card in a grid row ends on the same
+    // baseline; without it a card that has no tags is ~32px shorter than its
+    // neighbour and its bottom edge floats.
+    <Card sx={{ height: 1, display: "flex", flexDirection: "column" }}>
       <Box sx={{ position: "relative" }}>
         <AvatarShape
           sx={{
@@ -78,7 +81,9 @@ export function PostItem({
         />
       </Box>
 
-      <CardContent sx={{ pt: 6 }}>
+      <CardContent
+        sx={{ pt: 6, flexGrow: 1, display: "flex", flexDirection: "column" }}
+      >
         <Typography
           variant="caption"
           component="div"
@@ -114,6 +119,7 @@ export function PostItem({
         )}
 
         <InfoBlock
+          sx={{ mt: "auto", pt: 3 }}
           readingTime={post.readingTime ?? getReadingTime(post.content)}
           totalViews={post.totalViews}
           totalShares={post.totalShares}

@@ -19,7 +19,14 @@ export function HomeExperience() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Container component={MotionViewport} sx={{ py: { xs: 6, md: 10 } }}>
+    // The cards reveal with varFade().inRight/inLeft, which parks them 120px
+    // off their resting x until they scroll into view — that widened the
+    // document and gave the page a horizontal scrollbar. `clip` (not `hidden`)
+    // cuts the overhang without turning this into a scroll container.
+    <Container
+      component={MotionViewport}
+      sx={{ py: { xs: 6, md: 10 }, overflowX: "clip" }}
+    >
       <SectionHeading
         overline={t("experience.overline")}
         title={t("experience.title")}

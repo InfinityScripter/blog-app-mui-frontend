@@ -36,12 +36,14 @@ export function SearchButton({ onOpen, sx, ...other }: SearchButtonProps) {
         </SvgIcon>
       </IconButton>
 
+      {/* Keycap hint: theme surface + hairline instead of a hardcoded white
+          chip, which punched a bright hole in the dark header. */}
       <Label
         sx={{
           fontSize: 12,
-          color: "grey.800",
-          bgcolor: "common.white",
-          boxShadow: theme.customShadows.z1,
+          color: "text.secondary",
+          bgcolor: "background.paper",
+          border: `1px solid ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,
           display: { xs: "none", sm: "inline-flex" },
         }}
       >

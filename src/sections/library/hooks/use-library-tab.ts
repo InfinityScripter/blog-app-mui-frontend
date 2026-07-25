@@ -1,5 +1,4 @@
 import { useMemo, useCallback } from "react";
-import { usePathname } from "src/routes/hooks/use-pathname";
 import { useSearchParams } from "src/routes/hooks/use-search-params";
 
 import { TABS, DEFAULT_TAB } from "../const";
@@ -25,7 +24,6 @@ interface UseLibraryTabReturn {
  * default tab.
  */
 export function useLibraryTab(): UseLibraryTabReturn {
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const tab = parseTab(searchParams.get("tab"));
@@ -36,13 +34,13 @@ export function useLibraryTab(): UseLibraryTabReturn {
       if (next === DEFAULT_TAB) params.delete("tab");
       else params.set("tab", next);
       const query = params.toString();
-      window.history.replaceState(
-        null,
-        "",
-        query ? `${pathname}?${query}` : pathname,
-      );
+      // Raw History API → needs the raw browser path. `usePathname` is the
+      // next-intl one and strips the locale, so it rewrote /en/library to
+      // /library and a reload bounced the reader to the default locale.
+      const path = window.location.pathname;
+      window.history.replaceState(null, "", query ? `${path}?${query}` : path);
     },
-    [pathname, searchParams],
+    [searchParams],
   );
 
   return useMemo(() => ({ tab, setTab }), [tab, setTab]);

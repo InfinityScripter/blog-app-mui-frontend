@@ -29,8 +29,6 @@ export function HeaderRightArea({
 }: HeaderRightAreaProps): ReactNode {
   return (
     <>
-      {slots?.rightAreaStart}
-
       <Box
         data-area="right"
         sx={{
@@ -39,6 +37,10 @@ export function HeaderRightArea({
           gap: { xs: 1, sm: 1.5 },
         }}
       >
+        {/* Inside the box so consumer-provided controls (e.g. the public post
+            search) sit on the same gap rhythm as the built-in icons. */}
+        {slots?.rightAreaStart}
+
         {/* -- Help link -- */}
         {helpLink && (
           <Link

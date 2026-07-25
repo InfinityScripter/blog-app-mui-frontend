@@ -57,6 +57,11 @@ export interface NavUpgradeProps {
   [key: string]: unknown;
 }
 
+export interface BackToSiteButtonProps {
+  sx?: SxProps<Theme>;
+  [key: string]: unknown;
+}
+
 export interface SettingsButtonProps {
   sx?: SxProps<Theme>;
   [key: string]: unknown;

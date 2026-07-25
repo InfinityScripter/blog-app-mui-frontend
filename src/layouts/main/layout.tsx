@@ -63,23 +63,31 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
               notifications: false,
             }}
             slots={{
-              rightAreaStart: (
-                <>
-                  <PostSearchbar />
-                  <NavDesktop
-                    data={navData}
-                    sx={{
-                      display: "none",
-                      [theme.breakpoints.up(layoutQuery)]: {
-                        ml: 2.5,
-                        mr: 2.5,
-                        display: "flex",
-                      },
-                    }}
-                  />
-                </>
+              // Three zones: brand + navigation left, utilities right. Keeping
+              // the nav next to the logo stops search/nav/icons piling into one
+              // right-hand blob with the logo stranded on the far side.
+              leftAreaEnd: (
+                <NavDesktop
+                  data={navData}
+                  sx={{
+                    display: "none",
+                    [theme.breakpoints.up(layoutQuery)]: {
+                      ml: 3,
+                      display: "flex",
+                    },
+                    // A hard floor under the zone spacer, but only where the
+                    // row has slack — forcing it at `lg` pushed the utilities
+                    // past the viewport instead of just closing the gap.
+                    [theme.breakpoints.up("xl")]: { mr: 4 },
+                  }}
+                />
               ),
+              rightAreaStart: <PostSearchbar />,
             }}
+            // The header is a utility bar, not part of the reading column: at
+            // `lg` the RU nav + logo + utilities need ~1163px of a 1152px
+            // content box, so it has to be allowed past the page container.
+            slotProps={{ container: { maxWidth: "xl" } }}
           />
         }
         /** **************************************
