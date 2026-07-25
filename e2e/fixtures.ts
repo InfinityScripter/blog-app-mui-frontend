@@ -26,6 +26,35 @@ async function login(
   await page.getByRole("textbox", { name: "Email" }).fill(creds.email);
   await page.locator('input[name="password"]').fill(creds.password);
   await page.getByRole("button", { name: "Войти", exact: true }).click();
+
+  // An account whose personal-data consent is missing or on an older revision
+  // gets HTTP 428 instead of a session: the form keeps the credentials, reveals
+  // the consent checkbox and expects a SECOND submit. A seeded account has no
+  // consent on file, so without this step every authenticated spec just sat on
+  // /sign-in until the timeout. Walk the same two-step path a real user walks
+  // rather than back-dooring consent into the DB.
+  const consentCheckbox = page.getByRole("checkbox", {
+    name: /согласен на обработку персональных данных/i,
+  });
+
+  // Whichever comes first: the guard redirecting (consent already on file) or
+  // the consent prompt appearing.
+  await Promise.race([
+    page
+      .waitForURL((url) => !url.pathname.includes("/sign-in"), {
+        timeout: 30_000,
+      })
+      .catch(() => {}),
+    consentCheckbox
+      .waitFor({ state: "visible", timeout: 30_000 })
+      .catch(() => {}),
+  ]);
+
+  if (await consentCheckbox.isVisible()) {
+    await consentCheckbox.check();
+    await page.getByRole("button", { name: "Войти", exact: true }).click();
+  }
+
   // After a successful login the guard redirects away from the sign-in page.
   // 30s: the first dashboard visit may hit a cold dev-server compile.
   await page.waitForURL((url) => !url.pathname.includes("/sign-in"), {
