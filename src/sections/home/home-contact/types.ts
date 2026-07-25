@@ -1,9 +1,4 @@
-export type ContactLinkKey =
-  | "email"
-  | "github"
-  | "linkedin"
-  | "telegram"
-  | "location";
+type ContactLinkKey = "email" | "github" | "linkedin" | "telegram" | "location";
 
 // Raw config: `labelKey` resolves to `home.contact.links.<key>`. A `value` is
 // proper-noun data shown as-is; `valueKey` (location only) resolves to

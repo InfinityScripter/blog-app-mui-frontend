@@ -6,19 +6,6 @@ const ROOTS: { AUTH: string; DASHBOARD: string } = {
 // ----------------------------------------------------------------------
 
 interface Paths {
-  comingSoon: string;
-  maintenance: string;
-  pricing: string;
-  payment: string;
-  about: string;
-  contact: string;
-  page403: string;
-  page404: string;
-  page500: string;
-  components: string;
-  zoneStore: string;
-  freeUI: string;
-  figma: string;
   post: {
     root: string;
     details: (id: string) => string;
@@ -83,20 +70,6 @@ interface Paths {
 }
 
 export const paths: Paths = {
-  comingSoon: "/coming-soon",
-  maintenance: "/maintenance",
-  pricing: "/pricing",
-  payment: "/payment",
-  about: "/about-us",
-  contact: "/contact-us",
-  page403: "/error/403",
-  page404: "/error/404",
-  page500: "/error/500",
-  components: "/components",
-  zoneStore: "https://mui.com/store/items/zone-landing-page/",
-  freeUI: "https://mui.com/store/items/minimal-dashboard-free/",
-  figma:
-    "https://www.figma.com/design/cAPz4pYPtQEXivqe11EcDE/%5BPreview%5D-Minimal-Web.v6.0.0",
   post: {
     root: `/post`,
     details: (id: string) => `/post/${id}`,

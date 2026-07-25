@@ -7,7 +7,7 @@
 export type Modality = "text" | "vision" | "audio" | "image-gen";
 
 /** USD price per 1M tokens. `null` = undisclosed / not applicable. */
-export interface ModelPricing {
+interface ModelPricing {
   /** $ per 1M input tokens; null if undisclosed. */
   inputPerM: number | null;
   /** $ per 1M output tokens; null if undisclosed. */

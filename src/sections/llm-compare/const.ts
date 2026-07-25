@@ -19,7 +19,7 @@ export type SortKey =
 export type SortDir = "asc" | "desc";
 
 /** Keys of {@link ModelBenchmarks} — the benchmark sub-columns. */
-export type BenchmarkKey = keyof ModelBenchmarks;
+type BenchmarkKey = keyof ModelBenchmarks;
 
 /** For each numeric column, whether a higher raw value is better. */
 export const HIGHER_IS_BETTER: Record<SortKey, boolean> = {
@@ -40,7 +40,7 @@ export const HIGHER_IS_BETTER: Record<SortKey, boolean> = {
  * and names are proper nouns and stay here as data; the longer description is
  * localized — resolved via `t("benchmarks.<key>.hint")` in the component.
  */
-export interface BenchmarkColumn {
+interface BenchmarkColumn {
   key: BenchmarkKey;
   sortKey: SortKey;
   label: string;
@@ -94,7 +94,7 @@ export const BENCHMARK_COLUMNS: BenchmarkColumn[] = [
  * label is localized via `t("modalities.<labelKey>")` in the toolbar, so this
  * stays a plain data list without calling `t()` at module scope.
  */
-export interface ModalityOption {
+interface ModalityOption {
   value: ComparableModel["modality"][number];
   labelKey: "vision" | "audio" | "imageGen";
 }

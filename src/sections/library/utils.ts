@@ -28,7 +28,7 @@ import type {
 // helpers locale-agnostic and unit-testable without a translator.
 
 /** A reading kind with its items, in {@link READING_KIND_ORDER}. */
-export interface ReadingGroup {
+interface ReadingGroup {
   kind: ReadingKind;
   /** i18n key for the group heading (→ `library.readingKind.<kind>`). */
   labelKey: string;

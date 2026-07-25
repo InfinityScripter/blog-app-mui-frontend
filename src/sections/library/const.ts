@@ -1,11 +1,8 @@
 import type { LabelColor } from "src/components/label";
 
 import type {
-  TilItem,
-  ToolItem,
   LibraryTab,
   ReadingKind,
-  ReadingItem,
   PricingModel,
   ToolCategory,
 } from "./types";
@@ -18,7 +15,7 @@ import type {
 // in the components/hooks via `useTranslations("library")`.
 
 /** A hub tab: its value (also the `?tab=` slug) and icon; label via `tabs.<value>`. */
-export interface TabDef {
+interface TabDef {
   value: LibraryTab;
   icon: string;
 }
@@ -92,6 +89,3 @@ export const READING_KIND_ICON: Record<ReadingKind, string> = {
 /** i18n key for the label shown when an enum value has no mapping (→ `library.fallbackLabel`). */
 export const FALLBACK_LABEL_KEY = "fallbackLabel";
 export const FALLBACK_COLOR: LabelColor = "default";
-
-// Re-export the item types so consumers can import config + types from one place.
-export type { TilItem, ToolItem, LibraryTab, ReadingItem };

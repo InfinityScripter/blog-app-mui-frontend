@@ -1,4 +1,4 @@
-export type AboutHighlightKey = "experience" | "stack" | "companies";
+type AboutHighlightKey = "experience" | "stack" | "companies";
 
 export interface AboutHighlight {
   icon: string;

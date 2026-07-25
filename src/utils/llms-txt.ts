@@ -7,7 +7,7 @@ import type { Post } from "src/types/domain";
 // is unit-testable.
 
 /** A curated non-post page worth surfacing to LLMs (tools, references). */
-export interface LlmsResource {
+interface LlmsResource {
   title: string;
   /** Absolute or site-relative URL. */
   url: string;

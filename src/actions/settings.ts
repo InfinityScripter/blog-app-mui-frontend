@@ -10,7 +10,7 @@ import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
 // toggle mutates it. Envelope is ok() → { success, data: { ... } }, so the
 // payload lives under res.data.data.
 
-export interface PublicSettings {
+interface PublicSettings {
   pdCollection: boolean;
 }
 

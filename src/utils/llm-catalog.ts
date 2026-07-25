@@ -11,7 +11,7 @@ import {
 
 // ----------------------------------------------------------------------
 
-export interface UnifiedLlmCatalog {
+interface UnifiedLlmCatalog {
   releases: ModelRelease[];
   timelineModels: LlmModel[];
   comparableModels: ComparableModel[];
