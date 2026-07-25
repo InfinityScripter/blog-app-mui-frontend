@@ -66,6 +66,8 @@ export function PostDetailsHomeView({
         title={currentPost?.title ?? ""}
         author={currentPost?.author}
         coverUrl={currentPost?.coverUrl ?? ""}
+        coverCreditName={currentPost?.coverCreditName}
+        coverCreditUrl={currentPost?.coverCreditUrl}
         createdAt={currentPost?.createdAt}
         postId={currentPost?._id}
       />

@@ -59,6 +59,9 @@
       "linkCopied": "Link copied",
       "copyFailed": "Failed to copy link"
     },
+    "coverCredit": {
+      "prefix": "Photo:"
+    },
     "toolbar": {
       "back": "Back",
       "view": "View",

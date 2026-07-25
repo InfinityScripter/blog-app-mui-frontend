@@ -62,6 +62,13 @@ export interface Post {
   /** Server-computed reading time in minutes; present on list rows (see `content`). */
   readingTime?: number;
   coverUrl?: string;
+  /**
+   * Photographer credit for an Unsplash-API cover (their terms require showing
+   * it). Null/absent for every other cover — source images, uploads, the static
+   * pool. Assigned by the backend, see `services/cover-assign.ts` there.
+   */
+  coverCreditName?: string | null;
+  coverCreditUrl?: string | null;
   tags: string[];
   metaTitle?: string;
   metaDescription?: string;

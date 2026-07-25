@@ -26,6 +26,9 @@
       "copyLink": "Скопировать ссылку",
       "linkCopied": "Ссылка скопирована"
     },
+    "coverCredit": {
+      "prefix": "Фото:"
+    },
     "toolbar": {
       "back": "Назад",
       "view": "Просмотреть",

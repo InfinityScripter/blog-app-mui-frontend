@@ -51,6 +51,13 @@ export interface PostDetailsHeroProps {
   title?: string;
   author?: AuthorInfo;
   coverUrl?: string;
+  /**
+   * Photographer credit — set only for covers the backend fetched from the
+   * Unsplash API, whose terms require naming the author next to the photo.
+   * Absent for source images, uploads and the static pool.
+   */
+  coverCreditName?: string | null;
+  coverCreditUrl?: string | null;
   createdAt?: string | Date;
   /**
    * Post id used to build the share URL. When absent (e.g. the draft preview)

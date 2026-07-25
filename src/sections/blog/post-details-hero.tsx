@@ -1,6 +1,7 @@
 "use client";
 
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
@@ -24,6 +25,10 @@ import type { PostDetailsHeroProps } from "./types";
 
 // ----------------------------------------------------------------------
 
+// utm-метки обязательны по правилам Unsplash API для любой ссылки на них.
+const UNSPLASH_URL =
+  "https://unsplash.com/?utm_source=aifirst&utm_medium=referral";
+
 // Editorial Ink: обложка отдельно (радиус 24, без затемнения), заголовок ПОД
 // ней — текст никогда не лежит поверх изображения. Шеринг — SpeedDial у края
 // обложки.
@@ -31,6 +36,8 @@ export function PostDetailsHero({
   title,
   author,
   coverUrl,
+  coverCreditName,
+  coverCreditUrl,
   createdAt,
   postId,
 }: PostDetailsHeroProps) {
@@ -52,59 +59,93 @@ export function PostDetailsHero({
   return (
     <Container sx={{ pt: { xs: 3, md: 5 } }}>
       <Stack spacing={3} sx={{ maxWidth: 860, mx: "auto" }}>
-        <Box sx={{ position: "relative" }}>
-          <Image
-            alt={title}
-            src={formattedCoverUrl}
-            ratio="21/9"
-            sx={{ borderRadius: 3 }}
-          />
+        <Stack spacing={0.75}>
+          <Box sx={{ position: "relative" }}>
+            <Image
+              alt={title}
+              src={formattedCoverUrl}
+              ratio="21/9"
+              sx={{ borderRadius: 3 }}
+            />
 
-          {postUrl && (
-            <SpeedDial
-              direction={smUp ? "left" : "up"}
-              ariaLabel={t("share.ariaLabel")}
-              icon={<Iconify icon="solar:share-bold" />}
-              FabProps={{ size: "medium" }}
-              sx={{
-                position: "absolute",
-                bottom: { xs: 16, md: 24 },
-                right: { xs: 16, md: 24 },
-              }}
-            >
-              {SHARE_TARGETS.map((target) => (
+            {postUrl && (
+              <SpeedDial
+                direction={smUp ? "left" : "up"}
+                ariaLabel={t("share.ariaLabel")}
+                icon={<Iconify icon="solar:share-bold" />}
+                FabProps={{ size: "medium" }}
+                sx={{
+                  position: "absolute",
+                  bottom: { xs: 16, md: 24 },
+                  right: { xs: 16, md: 24 },
+                }}
+              >
+                {SHARE_TARGETS.map((target) => (
+                  <SpeedDialAction
+                    key={target.name}
+                    // Инлайновый SVG (SocialIcon), не Iconify: имени vk нет в
+                    // наборе logos, и иконка рендерилась пустым span —
+                    // невидимая белая кнопка шаринга.
+                    icon={<SocialIcon icon={target.name} />}
+                    tooltipTitle={t("share.tooltip", {
+                      network: target.network,
+                    })}
+                    tooltipPlacement="top"
+                    FabProps={{ color: "default" }}
+                    // SpeedDialAction's FabProps can't type an anchor with
+                    // target/rel (no cast allowed), so open the share intent in a
+                    // new tab with noopener/noreferrer instead of an <a href>.
+                    onClick={() =>
+                      window.open(
+                        target.href(postUrl, shareTitle),
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
+                  />
+                ))}
+
                 <SpeedDialAction
-                  key={target.name}
-                  // Инлайновый SVG (SocialIcon), не Iconify: имени vk нет в
-                  // наборе logos, и иконка рендерилась пустым span —
-                  // невидимая белая кнопка шаринга.
-                  icon={<SocialIcon icon={target.name} />}
-                  tooltipTitle={t("share.tooltip", { network: target.network })}
+                  icon={<Iconify icon="solar:copy-bold" />}
+                  tooltipTitle={t("share.copyLink")}
                   tooltipPlacement="top"
                   FabProps={{ color: "default" }}
-                  // SpeedDialAction's FabProps can't type an anchor with
-                  // target/rel (no cast allowed), so open the share intent in a
-                  // new tab with noopener/noreferrer instead of an <a href>.
-                  onClick={() =>
-                    window.open(
-                      target.href(postUrl, shareTitle),
-                      "_blank",
-                      "noopener,noreferrer",
-                    )
-                  }
+                  onClick={handleCopyLink}
                 />
-              ))}
+              </SpeedDial>
+            )}
+          </Box>
 
-              <SpeedDialAction
-                icon={<Iconify icon="solar:copy-bold" />}
-                tooltipTitle={t("share.copyLink")}
-                tooltipPlacement="top"
-                FabProps={{ color: "default" }}
-                onClick={handleCopyLink}
-              />
-            </SpeedDial>
+          {/* Обязательная атрибуция Unsplash: заполнена только у обложек,
+              полученных через их API (см. backend services/unsplash-cover.ts). */}
+          {coverCreditName && (
+            <Typography
+              variant="caption"
+              sx={{ color: "text.disabled", textAlign: "right" }}
+            >
+              {t("coverCredit.prefix")}{" "}
+              <Link
+                href={coverCreditUrl ?? UNSPLASH_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                color="inherit"
+                underline="hover"
+              >
+                {coverCreditName}
+              </Link>
+              {" / "}
+              <Link
+                href={UNSPLASH_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                color="inherit"
+                underline="hover"
+              >
+                Unsplash
+              </Link>
+            </Typography>
           )}
-        </Box>
+        </Stack>
 
         <Typography variant="h2" component="h1" sx={{ maxWidth: 720 }}>
           {title}
