@@ -38,16 +38,21 @@ export const primaryDark = createPaletteChannel({
 });
 
 // Text
+// `disabled` carries real metadata across the site (post dates, reading time,
+// view counts, card captions), so it has to clear WCAG AA 4.5:1 on every
+// background of its scheme — grey[400]/grey[600] only reached ~2.4:1 and read
+// as unreadable on the dark charcoal. Both values stay a visible step dimmer
+// than `secondary`.
 const text = {
   light: createPaletteChannel({
     primary: grey[900],
     secondary: grey[600],
-    disabled: grey[400],
+    disabled: "#726B65",
   }),
   dark: createPaletteChannel({
     primary: "#F5F5F4",
     secondary: grey[400],
-    disabled: grey[600],
+    disabled: "#938B85",
   }),
 };
 

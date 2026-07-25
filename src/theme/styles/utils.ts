@@ -1,11 +1,16 @@
 // ----------------------------------------------------------------------
 
+// Must match `colorSchemeSelector` in create-theme.ts ("class"), which makes MUI
+// emit the palette vars under `:root, .light` / `.dark` and put the class on
+// <html>. Keying these off `data-mui-color-scheme` instead left every
+// scheme-specific override reading a different scheme than the palette did —
+// e.g. a light-palette pill painted with the dark-mode text colour, invisible.
 export const stylesMode: {
-  light: '[data-mui-color-scheme="light"] &';
-  dark: '[data-mui-color-scheme="dark"] &';
+  light: ".light &";
+  dark: ".dark &";
 } = {
-  light: '[data-mui-color-scheme="light"] &',
-  dark: '[data-mui-color-scheme="dark"] &',
+  light: ".light &",
+  dark: ".dark &",
 };
 
 export const mediaQueries: {

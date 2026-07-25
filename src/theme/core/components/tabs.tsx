@@ -57,11 +57,13 @@ const MuiTab = {
       minHeight: 48,
       padding: theme.spacing(1, 0),
       color: theme.vars.palette.text.secondary,
-      fontWeight: theme.typography.fontWeightMedium,
+      // One weight for every state on purpose: bumping it on `.selected`
+      // re-measured the label and nudged each following tab a pixel sideways
+      // on every switch. Selection reads through colour + the indicator.
+      fontWeight: theme.typography.fontWeightSemiBold,
       lineHeight: theme.typography.body2.lineHeight,
       [`&.${tabClasses.selected}`]: {
         color: theme.vars.palette.text.primary,
-        fontWeight: theme.typography.fontWeightSemiBold,
       },
     }),
   },

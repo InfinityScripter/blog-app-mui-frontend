@@ -23,7 +23,7 @@ export function TelegramButton({ sx, ...other }: IconButtonProps) {
       sx={{ p: 0, width: 40, height: 40, ...sx }}
       {...other}
     >
-      <Iconify icon="mingcute:telegram-fill" width={24} />
+      <Iconify icon="mingcute:telegram-fill" width={22} />
     </IconButton>
   );
 }

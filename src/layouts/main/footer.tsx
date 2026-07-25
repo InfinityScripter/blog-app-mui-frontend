@@ -7,7 +7,6 @@ import Stack from "@mui/material/Stack";
 import { Logo } from "src/components/logo";
 import { useTranslations } from "next-intl";
 import Divider from "@mui/material/Divider";
-import { monoValueSx } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
@@ -130,10 +129,6 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
             </Stack>
           </Grid>
         </Grid>
-
-        <Typography component="p" sx={{ ...monoValueSx, fontSize: 11, mt: 10 }}>
-          {t("rights")}
-        </Typography>
       </Container>
     </Box>
   );

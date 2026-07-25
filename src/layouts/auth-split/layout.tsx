@@ -1,6 +1,5 @@
 "use client";
 
-import Alert from "@mui/material/Alert";
 import { CONFIG } from "src/config-global";
 import { useTheme } from "@mui/material/styles";
 import { useBoolean } from "src/hooks/use-boolean";
@@ -10,6 +9,7 @@ import { Section } from "./section";
 import { Content } from "./content";
 import { HeaderBase } from "../core/header-base";
 import { LayoutSection } from "../core/layout-section";
+import { BackToSiteButton } from "../components/back-to-site-button";
 
 import type { AuthSplitLayoutProps } from "./types";
 
@@ -44,11 +44,7 @@ export function AuthSplitLayout({
             notifications: false,
           }}
           slots={{
-            topArea: (
-              <Alert severity="info" sx={{ display: "none", borderRadius: 0 }}>
-                This is an info Alert.
-              </Alert>
-            ),
+            leftAreaEnd: <BackToSiteButton sx={{ ml: 2 }} />,
           }}
           slotProps={{ container: { maxWidth: false } }}
           sx={{ position: { [layoutQuery]: "fixed" } }}
@@ -64,8 +60,13 @@ export function AuthSplitLayout({
       sx={sx}
       cssVars={{
         "--layout-auth-content-width": "420px",
-        "--logo-foreground": theme.vars.palette.common.white,
-        "--logo-background": theme.vars.palette.grey[900],
+        // The ink panel behind the header's left area only exists from
+        // `layoutQuery` up. Unscoped, these inverted colours also applied on
+        // mobile, where they painted the wordmark white on a white page.
+        [theme.breakpoints.up(layoutQuery)]: {
+          "--logo-foreground": theme.vars.palette.common.white,
+          "--logo-background": theme.vars.palette.grey[900],
+        },
       }}
     >
       <Main layoutQuery={layoutQuery}>

@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import { useTranslations } from "next-intl";
-import SvgIcon from "@mui/material/SvgIcon";
 import MenuItem from "@mui/material/MenuItem";
+import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
@@ -39,15 +39,7 @@ export function LanguageSwitcher({ sx, ...other }: LanguageSwitcherProps) {
         sx={{ p: 0, width: 40, height: 40, ...sx }}
         {...other}
       >
-        <SvgIcon>
-          {/* solar:global-linear */}
-          <path
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            d="M2 12c0 5.523 4.477 10 10 10s10-4.477 10-10S17.523 2 12 2S2 6.477 2 12Zm10-10c2.5 2.5 3.5 6 3.5 10s-1 7.5-3.5 10c-2.5-2.5-3.5-6-3.5-10s1-7.5 3.5-10ZM2.5 9h19M2.5 15h19"
-          />
-        </SvgIcon>
+        <Iconify icon="solar:global-bold" width={22} />
       </IconButton>
 
       <Menu

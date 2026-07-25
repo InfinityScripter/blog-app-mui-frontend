@@ -36,7 +36,12 @@ export function LibraryHero({ tab, onTabChange }: LibraryHeroProps) {
         {t("hero.subtitle")}
       </Typography>
 
+      {/* The theme defaults Tabs to `scrollable`, which kept a phantom ">"
+          scroll button next to TIL (it measures before the tab icons load and
+          never re-measures), shifting the row and swallowing clicks. Three
+          short tabs always fit — standard needs no scroller. */}
       <Tabs
+        variant="standard"
         value={tab}
         onChange={(_, value: LibraryTab) => onTabChange(value)}
         sx={{ mt: 1 }}

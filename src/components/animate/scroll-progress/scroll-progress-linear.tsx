@@ -16,6 +16,10 @@ export function ScrollProgressLinear({
     <Box
       component={m.div}
       sx={{
+        // Fixed to the viewport: without it the bar sits in normal flow under
+        // the sticky header and scrolls away, so it was only ever visible at
+        // the very top of the page. zIndex clears the header (1100).
+        position: "fixed",
         top: 0,
         left: 0,
         right: 0,

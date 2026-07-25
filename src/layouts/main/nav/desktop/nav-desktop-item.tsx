@@ -60,16 +60,6 @@ const StyledNavItem = styled(ButtonBase, {
         },
       ),
     },
-    // Editorial Ink: активный пункт — vermilion + 2px подчёрк с отступом.
-    underline: {
-      left: 0,
-      right: 0,
-      height: 2,
-      bottom: -6,
-      content: '""',
-      position: "absolute",
-      backgroundColor: theme.vars.palette.primary.main,
-    },
     dot: {
       width: 6,
       height: 6,
@@ -95,13 +85,15 @@ const StyledNavItem = styled(ButtonBase, {
       height: "100%",
       position: "relative",
       // Multi-word labels («LLM history», «Compare LLMs») must not wrap to a
-      // second line — that breaks the row rhythm and misplaces the underline.
+      // second line — that breaks the row rhythm.
       whiteSpace: "nowrap",
       "&:hover": { color: theme.vars.palette.primary.main },
+      // Active state is vermilion + bold. An underline used to sit here too,
+      // but the item is full header height, so `bottom` anchored it to the
+      // header's edge — a bar floating well below the label.
       ...(active && {
         color: theme.vars.palette.primary.main,
         fontWeight: theme.typography.fontWeightBold,
-        "&::after": baseStyles.underline,
       }),
       ...(open && { opacity: 0.64 }),
     }),
