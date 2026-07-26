@@ -2,23 +2,23 @@
 
 import type { ListPostsResponse } from "src/types/api";
 
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useTranslations } from "next-intl";
-import { useGetPosts } from "src/actions/blog";
 import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { useMemo, useState, useCallback } from "react";
 import { PostItemFeed } from "src/sections/blog/post-item-feed";
 import { PostItemFeedFeatured } from "src/sections/blog/post-item-feed-featured";
 
+import { toggleTag } from "./utils";
+import { FEED_SENTINEL_PRELOAD } from "./const";
 import { useFeedTags } from "./hooks/use-feed-tags";
-import { toggleTag, selectFeedPosts } from "./utils";
-import { FEED_PAGE_SIZE, FEED_SENTINEL_PRELOAD } from "./const";
+import { useFeedPosts } from "./hooks/use-feed-posts";
 import { useFeedInfiniteScroll } from "./hooks/use-feed-infinite-scroll";
 
 // ----------------------------------------------------------------------
@@ -26,48 +26,47 @@ import { useFeedInfiniteScroll } from "./hooks/use-feed-infinite-scroll";
 interface HomeFeedProps {
   /** Server-rendered first page of posts; seeds SWR so the feed is crawlable. */
   initialPosts?: ListPostsResponse;
+  /**
+   * Tag vocabulary ranked server-side over the whole corpus. The feed itself
+   * only holds the pages it has loaded, so the chips can't be derived from it.
+   */
+  feedTags?: string[];
 }
 
-export function HomeFeed({ initialPosts }: HomeFeedProps) {
+export function HomeFeed({ initialPosts, feedTags }: HomeFeedProps) {
   const t = useTranslations("home");
-
-  // Лента — общая: показывает ВСЕ опубликованные посты (и новости, и блог) от
-  // новых к старым. Разделение по типу живёт на /news и /post, не здесь.
-  const { posts, postsLoading } = useGetPosts({ fallbackData: initialPosts });
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const feedTags = useFeedTags(posts, { pinned: selectedTags });
-  const [visibleCount, setVisibleCount] = useState(FEED_PAGE_SIZE);
+  // Лента — общая: показывает ВСЕ опубликованные посты (и новости, и блог) от
+  // новых к старым. Разделение по типу живёт на /news и /post, не здесь.
+  const { posts, loading, hasMore, loadMore, resetPaging } = useFeedPosts({
+    selectedTags,
+    initialPage: initialPosts,
+  });
 
-  const feedPosts = useMemo(
-    () => selectFeedPosts(posts, selectedTags),
-    [posts, selectedTags],
-  );
+  const visibleTags = useFeedTags(posts, {
+    pinned: selectedTags,
+    ranked: feedTags,
+  });
 
-  const visiblePosts = feedPosts.slice(0, visibleCount);
   // Featured-слот — только в неотфильтрованной ленте: при активном фильтре
   // список должен читаться однородно.
-  const showFeatured = selectedTags.length === 0 && visiblePosts.length > 0;
-  const featured = showFeatured ? visiblePosts[0] : undefined;
-  const restPosts = showFeatured ? visiblePosts.slice(1) : visiblePosts;
-  const hasMore = feedPosts.length > visibleCount;
+  const showFeatured = selectedTags.length === 0 && posts.length > 0;
+  const featured = showFeatured ? posts[0] : undefined;
+  const restPosts = showFeatured ? posts.slice(1) : posts;
 
-  // Reveal the next page — same action for the scroll sentinel and the fallback
-  // button. Stable identity so the observer effect doesn't re-run each render.
-  const loadMore = useCallback(
-    () => setVisibleCount((c) => c + FEED_PAGE_SIZE),
-    [],
-  );
   const { sentinelRef } = useFeedInfiniteScroll({
     hasMore,
     onLoadMore: loadMore,
-    resetKey: visibleCount,
+    // Кол-во загруженных постов: меняется, когда порция приехала, — этим
+    // observer переподписывается и заново эмитит текущее пересечение.
+    resetKey: posts.length,
   });
 
   const handleToggleTag = (tag: string) => {
     setSelectedTags((prev) => toggleTag(prev, tag));
-    setVisibleCount(FEED_PAGE_SIZE);
+    resetPaging();
   };
 
   return (
@@ -84,7 +83,7 @@ export function HomeFeed({ initialPosts }: HomeFeedProps) {
         </Typography>
       </Stack>
 
-      {feedTags.length > 0 && (
+      {visibleTags.length > 0 && (
         <Box
           sx={{
             mb: 5,
@@ -95,7 +94,7 @@ export function HomeFeed({ initialPosts }: HomeFeedProps) {
             pb: { xs: 1, sm: 0 },
           }}
         >
-          {feedTags.map((tag) => {
+          {visibleTags.map((tag) => {
             const active = selectedTags.includes(tag);
             return (
               <Chip
@@ -112,7 +111,7 @@ export function HomeFeed({ initialPosts }: HomeFeedProps) {
         </Box>
       )}
 
-      {!postsLoading && visiblePosts.length === 0 ? (
+      {!loading && posts.length === 0 ? (
         <Typography variant="body2" sx={{ py: 6, color: "text.disabled" }}>
           {t("feed.empty")}
         </Typography>

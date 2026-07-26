@@ -1,10 +1,9 @@
 import type { Post } from "src/types/domain";
 
 import { useMemo } from "react";
-import { PUBLISH_STATUS } from "src/types/domain";
-import { NEWS_TAG } from "src/sections/news/const";
 
 import { FEED_TAGS_LIMIT } from "../const";
+import { capFeedTags, rankPostTags } from "../utils";
 
 // ----------------------------------------------------------------------
 
@@ -17,24 +16,27 @@ interface UseFeedTagsOptions {
    * from the row the moment the list is capped, which reads as a broken filter.
    */
   pinned?: string[];
+  /**
+   * Tag vocabulary already ranked over the FULL corpus (server-side, see
+   * `rankPostTags`). When given, `posts` is not ranked at all — the paginated
+   * home feed holds only the pages it has loaded, so ranking client-side there
+   * would show the tags of the ten newest posts instead of the whole blog.
+   */
+  ranked?: string[];
 }
 
 /**
  * Filter chips for the feed are derived from the tags that ACTUALLY exist on
- * published posts — never a hardcoded list. Tags are returned distinct,
- * ordered by how many posts carry them (most common first), de-duplicated
- * case-insensitively (first-seen casing kept), then capped to `limit` so the
- * row stays short (Habr/vc.ru style) instead of listing every rare tag.
- *
- * The system `NEWS_TAG` («новости») is excluded: it's a routing marker stamped
- * on every news post, not a topic the reader would filter by. Any `pinned` tag
- * (a current selection) is always kept, in its natural frequency position.
+ * published posts — never a hardcoded list. Ranking, de-duplication and the
+ * `NEWS_TAG` exclusion live in `rankPostTags`; capping and pinning in
+ * `capFeedTags`. Callers that hold the whole corpus (the /post blog list) pass
+ * `posts`; the paginated home feed passes a server-ranked `ranked` list.
  */
 export function useFeedTags(
   posts: Post[],
   options: UseFeedTagsOptions = {},
 ): string[] {
-  const { limit = FEED_TAGS_LIMIT, pinned = [] } = options;
+  const { limit = FEED_TAGS_LIMIT, pinned = [], ranked } = options;
 
   // Stable primitive so the memo doesn't re-run on every new array identity.
   const pinnedKey = pinned
@@ -42,41 +44,13 @@ export function useFeedTags(
     .sort()
     .join("|");
 
-  return useMemo(() => {
-    const counts = new Map<string, { label: string; count: number }>();
-
-    posts
-      .filter((post) => post.publish === PUBLISH_STATUS.published)
-      .forEach((post) => {
-        (post.tags ?? []).forEach((raw) => {
-          const label = raw.trim();
-          if (!label) return;
-
-          const key = label.toLowerCase();
-          if (key === NEWS_TAG.toLowerCase()) return;
-
-          const existing = counts.get(key);
-          if (existing) {
-            existing.count += 1;
-          } else {
-            counts.set(key, { label, count: 1 });
-          }
-        });
-      });
-
-    const ordered = Array.from(counts.values()).sort(
-      (a, b) => b.count - a.count || a.label.localeCompare(b.label),
-    );
-
-    const pinnedKeys = new Set(pinnedKey ? pinnedKey.split("|") : []);
-
-    // Keep the top `limit` plus any pinned (selected) tag that ranked lower,
-    // preserving the overall frequency order.
-    return ordered
-      .filter(
-        (entry, index) =>
-          index < limit || pinnedKeys.has(entry.label.toLowerCase()),
-      )
-      .map((entry) => entry.label);
-  }, [posts, limit, pinnedKey]);
+  return useMemo(
+    () =>
+      capFeedTags(
+        ranked ?? rankPostTags(posts),
+        limit,
+        pinnedKey ? pinnedKey.split("|") : [],
+      ),
+    [posts, limit, pinnedKey, ranked],
+  );
 }

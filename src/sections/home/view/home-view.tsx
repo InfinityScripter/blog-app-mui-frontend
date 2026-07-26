@@ -15,9 +15,11 @@ import { BackToTop, ScrollProgress } from "../../../components/animate";
 interface HomeViewProps {
   /** Server-rendered posts, forwarded to the feed to seed SWR (SSR/crawlable). */
   initialPosts?: ListPostsResponse;
+  /** Server-ranked tag vocabulary for the feed's filter chips. */
+  feedTags?: string[];
 }
 
-export function HomeView({ initialPosts }: HomeViewProps) {
+export function HomeView({ initialPosts, feedTags }: HomeViewProps) {
   const { settings } = useGetPublicSettings();
 
   return (
@@ -30,7 +32,7 @@ export function HomeView({ initialPosts }: HomeViewProps) {
       <HomeHero />
 
       {/* News-feed of latest posts with a tag filter */}
-      <HomeFeed initialPosts={initialPosts} />
+      <HomeFeed initialPosts={initialPosts} feedTags={feedTags} />
 
       {/* Email newsletter capture (double-opt-in) — collects PD, so gated on the
           runtime flag (hidden until it loads, so PD UI never flashes). */}

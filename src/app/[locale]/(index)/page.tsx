@@ -5,6 +5,14 @@ import { getTranslations } from "next-intl/server";
 import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { localizedAlternates } from "src/utils/seo-alternates";
 import { toAppLocale, DEFAULT_LOCALE } from "src/i18n/locales";
+// Imported from the section's own files rather than its barrel — the barrel
+// re-exports the client feed component, which has no business in this server
+// module's graph. These two are pure functions.
+import { FEED_PAGE_SIZE } from "src/sections/home/home-feed/const";
+import {
+  rankPostTags,
+  buildFeedFirstPage,
+} from "src/sections/home/home-feed/utils";
 
 // ----------------------------------------------------------------------
 
@@ -83,11 +91,17 @@ export function generateStaticParams() {
 
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
-  // Fetch the full feed server-side (all posts, newest-first via the list
-  // endpoint — same data useGetPosts() reads). Localized titles come from the
-  // warmed cache; getPosts retries transient failures and throws on a real
-  // outage rather than caching an empty feed for the ISR window.
-  const initialPosts = await getPosts(toAppLocale(locale));
+  // Read the corpus server-side. Localized titles come from the warmed cache;
+  // getPosts retries transient failures and throws on a real outage rather than
+  // caching an empty feed for the ISR window.
+  //
+  // Only two small things cross the wire to the browser: the feed's FIRST PAGE
+  // and the tag vocabulary. The client then pages the rest from the backend's
+  // paginated path, instead of receiving all 146 posts (~250 KB, +2/day) in the
+  // RSC payload and rendering ten of them. The tag ranking has to happen here —
+  // the client holds only the pages it has loaded, and the ten newest posts
+  // carry 8 of the corpus's 37 tags.
+  const { posts } = await getPosts(toAppLocale(locale));
 
   return (
     <>
@@ -96,7 +110,10 @@ export default async function Page({ params }: PageProps) {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(JSON_LD) }}
       />
-      <HomeView initialPosts={initialPosts} />
+      <HomeView
+        initialPosts={buildFeedFirstPage(posts, FEED_PAGE_SIZE)}
+        feedTags={rankPostTags(posts)}
+      />
     </>
   );
 }

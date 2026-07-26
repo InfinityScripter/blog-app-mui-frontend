@@ -5,8 +5,9 @@ import type {
 } from "src/types/api";
 
 import useSWR from "swr";
-import { useMemo } from "react";
 import { useLocale } from "next-intl";
+import useSWRInfinite from "swr/infinite";
+import { useMemo, useCallback } from "react";
 import { langQuery } from "src/utils/lang-param";
 import { fetcher, endpoints } from "src/utils/axios";
 import { DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
@@ -37,10 +38,16 @@ interface UseGetPostsOptions {
    * (crawlable HTML) while the client still revalidates in the background.
    */
   fallbackData?: ListPostsResponse;
+  /**
+   * `false` holds the request back (SWR key `null`). This read is the UNBOUNDED
+   * one — the whole corpus in a single response — so a caller that only needs it
+   * conditionally (the feed's tag filter) can avoid paying for it up front.
+   */
+  enabled?: boolean;
 }
 
 export function useGetPosts(options: UseGetPostsOptions = {}) {
-  const { excludeTag, limit, fallbackData } = options;
+  const { excludeTag, limit, fallbackData, enabled = true } = options;
   const locale = activeLocale(useLocale());
   // Feed/list titles ARE translated for a non-original locale. The backend
   // returns each post's title/description from the translation cache (warmed
@@ -57,7 +64,7 @@ export function useGetPosts(options: UseGetPostsOptions = {}) {
     : endpoints.post.list;
 
   const { data, isLoading, error, isValidating } = useSWR<ListPostsResponse>(
-    url,
+    enabled ? url : null,
     fetcher,
     fallbackData ? { ...swrOptions, fallbackData } : swrOptions,
   );
@@ -74,6 +81,76 @@ export function useGetPosts(options: UseGetPostsOptions = {}) {
   );
 
   return memoizedValue;
+}
+
+interface UseGetPostsInfiniteOptions {
+  /** Rows per request, sent as `?limit` (the backend clamps it to 100). */
+  pageSize: number;
+  /**
+   * Server-rendered pages to seed SWR with — `useSWRInfinite` holds one entry
+   * per page, so the SSR first page is passed as a single-element array. Lets
+   * the route ship crawlable HTML without a client round-trip for page 1.
+   */
+  fallbackData?: ListPostsResponse[];
+}
+
+/**
+ * The public feed, read one page at a time. Passing `?page`/`?limit` switches
+ * the backend to its paginated path: newest-first rows plus `{ total, hasMore }`
+ * instead of the entire corpus in one response (146 posts ≈ 250 KB today, and
+ * growing by ~2 posts a day). Callers that genuinely need every row — sitemap,
+ * llms.txt, generateStaticParams — keep using the unbounded `getPosts()`.
+ */
+export function useGetPostsInfinite(options: UseGetPostsInfiniteOptions) {
+  const { pageSize, fallbackData } = options;
+  const locale = activeLocale(useLocale());
+
+  // Returning null stops SWR from requesting a page past the end of the feed.
+  const getKey = (index: number, previous: ListPostsResponse | null) => {
+    if (previous && !previous.hasMore) return null;
+    const params = new URLSearchParams({
+      page: String(index + 1),
+      limit: String(pageSize),
+    });
+    if (locale !== DEFAULT_LOCALE) params.set("lang", locale);
+    return `${endpoints.post.list}?${params.toString()}`;
+  };
+
+  const { data, error, size, setSize } = useSWRInfinite<ListPostsResponse>(
+    getKey,
+    fetcher,
+    {
+      ...swrOptions,
+      fallbackData,
+      // Page 1 arrives from SSR; re-fetching it on every "load more" would
+      // re-download a page we already hold.
+      revalidateFirstPage: false,
+    },
+  );
+
+  const loadMore = useCallback(() => {
+    setSize((current) => current + 1);
+  }, [setSize]);
+
+  return useMemo(() => {
+    const pages = data ?? [];
+    const lastPage = pages[pages.length - 1];
+    return {
+      posts: pages.flatMap((page) => page.posts),
+      // Derived from the page array, NOT from SWR's isLoading/isValidating:
+      // when `fallbackData` is supplied those stay true indefinitely (SWR skips
+      // the mount revalidation but never clears the flags), so gating on them
+      // wedges "load more" shut. `data` is the honest signal.
+      postsLoading: pages.length === 0,
+      // A requested page that hasn't landed yet leaves `data` short of `size`.
+      // Callers gate "load more" on this so one long scroll can't queue several
+      // page requests at once.
+      postsLoadingMore: pages.length < size,
+      postsError: error,
+      hasMore: lastPage ? Boolean(lastPage.hasMore) : false,
+      loadMore,
+    };
+  }, [data, error, size, loadMore]);
 }
 
 export function useGetPost(postId?: string) {
