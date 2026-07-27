@@ -467,4 +467,78 @@ export const LLM_MODELS_2026: LlmModel[] = [
     funFact:
       "Meta никогда раньше не брала денег за свои модели — Muse Spark 1.1 с ценником $1.25/$4.25 за млн токенов закрывает эпоху бесплатных открытых весов Llama.",
   },
+  {
+    id: "moonshot-kimi-k3",
+    slug: "kimi-k3",
+    vendor: "Moonshot AI",
+    name: "Kimi K3",
+    releaseDate: "2026-07-16",
+    contextTokens: 1000000,
+    params: "2.8T total / 16 of 896 experts active (MoE)",
+    highlight:
+      "Первая открытая модель класса 3T: 2.8 триллиона параметров, миллион токенов контекста и первое место в Frontend Code Arena.",
+    description:
+      "Moonshot AI показала K3 на WAIC в Шанхае — «первую открытую модель 3T-класса». Разреженный MoE активирует 16 экспертов из 896, поверх двух собственных разработок: Kimi Delta Attention (гибридное линейное внимание) и Attention Residuals вместо обычных residual-связей; заявленный выигрыш по эффективности масштабирования — примерно 2.5x к Kimi K2. Контекст 1M токенов, нативное зрение, вход текстом, картинкой и видео. API стоит $3.00/$15.00 за млн токенов ($0.30 при попадании в кеш) и работает с 16 июля, а веса Moonshot обещала выложить на Hugging Face к 27 июля. В Frontend Code Arena K3 занял первое место с 1679 очками, обойдя Claude Fable 5 (1631) и GPT-5.6 Sol (1618).",
+    capabilities: [
+      "open-weights",
+      "MoE",
+      "multimodal",
+      "agentic",
+      "coding",
+      "long-context",
+    ],
+    sourceUrl: "https://www.kimi.com/blog/kimi-k3",
+    wikiUrl: "https://en.wikipedia.org/wiki/Kimi_K2",
+    funFact:
+      "Независимый замер Artificial Analysis показал, что доля галлюцинаций у K3 выросла с 39% до примерно 51% — этой цифры в бенчмарк-графиках Moonshot нет.",
+  },
+  {
+    id: "google-gemini-3-6-flash",
+    slug: "gemini-3-6-flash",
+    vendor: "Google",
+    name: "Gemini 3.6 Flash",
+    releaseDate: "2026-07-21",
+    contextTokens: 1000000,
+    params: null,
+    highlight:
+      "Рабочая лошадка Google дешевеет и умнеет: тот же контекст 1M, но на 17% меньше выходных токенов и вдвое ниже цена вывода.",
+    description:
+      "Google выпустила 21 июля 2026 сразу тройку Gemini-моделей — 3.6 Flash, 3.5 Flash-Lite и security-версию 3.5 Flash Cyber (пилот только для госзаказчиков), — но флагманский 3.5 Pro снова отложила, зато объявила о старте пред-обучения Gemini 4. Основная 3.6 Flash сохраняет контекст 1M токенов и 64K вывода, поднимает knowledge cutoff до марта 2026, добавляет встроенный Computer Use и тратит на ту же агентную задачу на ~17% меньше выходных токенов. Цена — $1.50/$7.50 за млн токенов (вывод подешевел с $9.00 у 3.5 Flash). Более дешёвый Gemini 3.5 Flash-Lite стоит $0.30/$2.50 за млн и метит в высоконагруженные сценарии. Обе модели сразу доступны в Gemini API и AI Studio.",
+    capabilities: [
+      "multimodal",
+      "agentic",
+      "coding",
+      "tool-use",
+      "long-context",
+    ],
+    sourceUrl:
+      "https://blog.google/technology/google-deepmind/gemini-3-6-flash/",
+    wikiUrl: "https://en.wikipedia.org/wiki/Gemini_(language_model)",
+    funFact:
+      "В том же анонсе Google не показала обещанный флагман 3.5 Pro, зато объявила о запуске самого масштабного в своей истории цикла пред-обучения — уже под Gemini 4.",
+  },
+  {
+    id: "anthropic-claude-opus-5",
+    slug: "claude-opus-5",
+    vendor: "Anthropic",
+    name: "Claude Opus 5",
+    releaseDate: "2026-07-24",
+    contextTokens: 1000000,
+    params: null,
+    highlight:
+      "Интеллект уровня Fable 5 за половину цены плюс «ручка усилия»: сам решаешь, сколько модель думает.",
+    description:
+      "Claude Opus 5 — четвёртая модель Anthropic меньше чем за два месяца (после Mythos 5, Fable 5 и Sonnet 5) и уже дефолтная на Claude Max. Подходит вплотную к фронтиру Fable 5 при цене $5/$25 против $10/$50 — прайс не изменился относительно Opus 4.8. Главное новое — параметр effort (low/medium/high): на низких уровнях модель сохраняет большую часть качества, тратя заметно меньше токенов; есть fast mode примерно вдвое быстрее за двойную цену. Контекст 1M токенов, вывод до 128K. По замерам Anthropic — SOTA на Frontier-Bench v0.1 (43.3% против 18.7% у Opus 4.8 и 33.7% у Fable 5), втрое выше ближайшей модели на ARC-AGI-3 и выше Fable 5 на OSWorld 2.0 примерно за треть стоимости; на кибербезопасности остаётся позади Mythos 5.",
+    capabilities: [
+      "adaptive-thinking",
+      "agentic",
+      "coding",
+      "computer-use",
+      "long-context",
+    ],
+    sourceUrl: "https://www.anthropic.com/news/claude-opus-5",
+    wikiUrl: "https://en.wikipedia.org/wiki/Claude_(language_model)",
+    funFact:
+      "У Opus 5 knowledge cutoff — май 2026, тогда как у более дорогого Fable 5 и у Opus 4.8 он январский: младшая по цене модель знает мир на четыре месяца свежее.",
+  },
 ];

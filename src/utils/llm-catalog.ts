@@ -26,9 +26,16 @@ function normalize(value: string): string {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
 }
 
+const VENDOR_ALIASES: Readonly<Record<string, string>> = {
+  mistralai: "mistral",
+  // Zhipu AI rebranded to Z.ai; the bot feed already uses the new name while
+  // curated entries still carry the old one.
+  zhipuai: "zai",
+};
+
 function normalizeVendor(value: string): string {
   const normalized = normalize(value);
-  return normalized === "mistralai" ? "mistral" : normalized;
+  return VENDOR_ALIASES[normalized] ?? normalized;
 }
 
 function nameKey(vendor: string, model: string): string {
@@ -44,6 +51,7 @@ const MODEL_ALIAS_GROUPS: ReadonlyArray<ReadonlyArray<string>> = [
   ["gemini31pro", "gemini31propreview"],
   ["gemini3", "gemini3pro"],
   ["llama4scoutmaverick", "llama4maverick"],
+  ["gpt56", "gpt56sol"],
 ];
 
 function sameModel(left: string, right: string): boolean {
