@@ -312,6 +312,31 @@ export const LLM_MODELS_2024: LlmModel[] = [
       "Средняя модель 3.5 Sonnet обошла флагманскую Claude 3 Opus — впервые «середняк» нового поколения побил топ предыдущего.",
   },
   {
+    id: "anthropic-claude-3-5-sonnet-v2",
+    slug: "claude-3-5-sonnet-v2",
+    vendor: "Anthropic",
+    name: "Claude 3.5 Sonnet v2",
+    releaseDate: "2024-10-22",
+    contextTokens: 200000,
+    params: null,
+    highlight:
+      "Первая модель, которая сама водит курсором: computer use в бете и скачок на SWE-bench с 33.4% до 49.0%.",
+    description:
+      "22 октября 2024 года Anthropic обновила Claude 3.5 Sonnet, сохранив имя и цену ($3/$15 за млн токенов), — отсюда закрепившееся в сообществе «v2». Главное новшество релиза: computer use в публичной бете, когда модель управляет курсором, кликами и вводом текста, то есть работает с интерфейсами, а не только с API. В кодинге результат на SWE-bench Verified вырос с 33.4% до 49.0%, подтянулась и работа с инструментами (TAU-bench). Тем же анонсом вышла Claude 3.5 Haiku, дотянувшая малую модель до уровня прежнего флагмана.",
+    capabilities: [
+      "computer-use",
+      "agentic",
+      "coding",
+      "tool-use",
+      "vision",
+      "long-context",
+    ],
+    sourceUrl: "https://www.anthropic.com/news/3-5-models-and-computer-use",
+    wikiUrl: "https://ru.wikipedia.org/wiki/Claude",
+    funFact:
+      "Anthropic выпустила обновление под тем же названием «Claude 3.5 Sonnet» — имя «v2» родилось у пользователей и разработчиков, а не в анонсе.",
+  },
+  {
     id: "meta-llama-3-1-405b",
     slug: "llama-3-1-405b",
     vendor: "Meta",

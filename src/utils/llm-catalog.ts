@@ -52,6 +52,10 @@ const MODEL_ALIAS_GROUPS: ReadonlyArray<ReadonlyArray<string>> = [
   ["gemini3", "gemini3pro"],
   ["llama4scoutmaverick", "llama4maverick"],
   ["gpt56", "gpt56sol"],
+  // Anthropic shipped the October 2024 refresh under the unchanged name, so
+  // the feed carries two "Claude 3.5 Sonnet" records. The release dates tell
+  // them apart; only the curated entry spells the community "v2" label out.
+  ["claude35sonnet", "claude35sonnetv2"],
 ];
 
 function sameModel(left: string, right: string): boolean {
