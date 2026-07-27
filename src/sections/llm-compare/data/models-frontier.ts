@@ -9,6 +9,68 @@ import type { ComparableModel } from "../types";
 
 export const MODELS_FRONTIER: ComparableModel[] = [
   {
+    id: "anthropic-claude-opus-5",
+    vendor: "Anthropic",
+    name: "Claude Opus 5",
+    releaseDate: "2026-07-24",
+    contextTokens: 1000000,
+    maxOutputTokens: 128000,
+    pricing: { inputPerM: 5, outputPerM: 25 },
+    benchmarks: {
+      mmlu: null,
+      gpqa: null,
+      sweBench: {
+        value: 96,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/b514064af1408018e64b1ad24e7d5e75850b4ffd/Claude%20Opus%205%20System%20Card.pdf",
+      },
+      sweBenchPro: {
+        value: 79.2,
+        unit: "percent",
+        sourceUrl:
+          "https://www-cdn.anthropic.com/b514064af1408018e64b1ad24e7d5e75850b4ffd/Claude%20Opus%205%20System%20Card.pdf",
+      },
+      aime: null,
+    },
+    capabilities: ["reasoning", "agentic", "coding", "computer-use"],
+    modality: ["text", "vision"],
+    openWeights: false,
+    highlight:
+      "Интеллект уровня Fable 5 вдвое дешевле: 96.0% на SWE-bench Verified и 43.3% на FrontierBench v0.1 против 33.8% у Fable 5.",
+    sourceUrl: "https://www.anthropic.com/news/claude-opus-5",
+    pricingAsOf: "2026-07-27",
+  },
+  {
+    id: "google-gemini-3-6-flash",
+    vendor: "Google",
+    name: "Gemini 3.6 Flash",
+    releaseDate: "2026-07-21",
+    contextTokens: 1000000,
+    maxOutputTokens: 65536,
+    pricing: { inputPerM: 1.5, outputPerM: 7.5 },
+    benchmarks: {
+      mmlu: null,
+      gpqa: null,
+      sweBench: null,
+      sweBenchPro: {
+        value: 58.7,
+        unit: "percent",
+        sourceUrl:
+          "https://deepmind.google/models/model-cards/gemini-3-6-flash/",
+      },
+      aime: null,
+    },
+    capabilities: ["reasoning", "coding", "agentic", "multimodal"],
+    modality: ["text", "vision", "audio"],
+    openWeights: false,
+    highlight:
+      "Рабочая лошадка Google на 17% экономнее по выходным токенам: 78.0% на Terminal-Bench 2.1 и 83.0% на OSWorld-Verified при вдвое дешевле выводе.",
+    sourceUrl:
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
+    pricingAsOf: "2026-07-27",
+  },
+  {
     id: "meta-muse-spark-1-1",
     vendor: "Meta",
     name: "Muse Spark 1.1",

@@ -512,7 +512,7 @@ export const LLM_MODELS_2026: LlmModel[] = [
       "long-context",
     ],
     sourceUrl:
-      "https://blog.google/technology/google-deepmind/gemini-3-6-flash/",
+      "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/",
     wikiUrl: "https://en.wikipedia.org/wiki/Gemini_(language_model)",
     funFact:
       "В том же анонсе Google не показала обещанный флагман 3.5 Pro, зато объявила о запуске самого масштабного в своей истории цикла пред-обучения — уже под Gemini 4.",
@@ -528,7 +528,7 @@ export const LLM_MODELS_2026: LlmModel[] = [
     highlight:
       "Интеллект уровня Fable 5 за половину цены плюс «ручка усилия»: сам решаешь, сколько модель думает.",
     description:
-      "Claude Opus 5 — четвёртая модель Anthropic меньше чем за два месяца (после Mythos 5, Fable 5 и Sonnet 5) и уже дефолтная на Claude Max. Подходит вплотную к фронтиру Fable 5 при цене $5/$25 против $10/$50 — прайс не изменился относительно Opus 4.8. Главное новое — параметр effort (low/medium/high): на низких уровнях модель сохраняет большую часть качества, тратя заметно меньше токенов; есть fast mode примерно вдвое быстрее за двойную цену. Контекст 1M токенов, вывод до 128K. По замерам Anthropic — SOTA на Frontier-Bench v0.1 (43.3% против 18.7% у Opus 4.8 и 33.7% у Fable 5), втрое выше ближайшей модели на ARC-AGI-3 и выше Fable 5 на OSWorld 2.0 примерно за треть стоимости; на кибербезопасности остаётся позади Mythos 5.",
+      "Claude Opus 5 — четвёртая модель Anthropic меньше чем за два месяца (после Mythos 5, Fable 5 и Sonnet 5) и уже дефолтная на Claude Max. Подходит вплотную к фронтиру Fable 5 при цене $5/$25 против $10/$50 — прайс не изменился относительно Opus 4.8. Главное новое — параметр effort (low/medium/high): на низких уровнях модель сохраняет большую часть качества, тратя заметно меньше токенов; есть fast mode примерно вдвое быстрее за двойную цену. Контекст 1M токенов, вывод до 128K. По system card Anthropic — 96.0% на SWE-bench Verified и 43.3% на FrontierBench v0.1 против 21.1% у Opus 4.8 и 33.8% у Fable 5; на SWE-bench Pro 79.2% — чуть ниже Fable 5 с её 80.0%.",
     capabilities: [
       "adaptive-thinking",
       "agentic",
