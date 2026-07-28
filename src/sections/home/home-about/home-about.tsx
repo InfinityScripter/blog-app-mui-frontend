@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
 import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
@@ -30,55 +29,34 @@ export function HomeAbout() {
           textAlign: { xs: "center", md: "left" },
         }}
       >
-        {/* Identity — small avatar, name, role, contact */}
+        {/* Identity — name, role, contact */}
         <m.div variants={varFade().inUp}>
-          <Stack
-            spacing={2.5}
-            direction={{ xs: "column", sm: "row" }}
-            alignItems={{ xs: "center", sm: "center" }}
-          >
-            <Avatar
-              src={ABOUT_PROFILE.imageSrc}
-              alt={ABOUT_PROFILE.imageAlt}
-              sx={(theme: Theme) => ({
-                width: 88,
-                height: 88,
-                border: `2px solid ${alpha(theme.palette.primary.main, 0.32)}`,
-              })}
-            />
-
-            <Stack
-              spacing={0.5}
-              alignItems={{ xs: "center", sm: "flex-start" }}
+          <Stack spacing={0.5} alignItems={{ xs: "center", md: "flex-start" }}>
+            <Typography
+              variant="overline"
+              sx={{ color: "primary.main", letterSpacing: 1.2 }}
             >
-              <Typography
-                variant="overline"
-                sx={{ color: "primary.main", letterSpacing: 1.2 }}
-              >
-                {t("about.title")}
-              </Typography>
-              <Typography variant="h3" sx={{ lineHeight: 1.1 }}>
-                {ABOUT_PROFILE.name}
-              </Typography>
-              <Stack
-                direction="row"
-                spacing={1.5}
-                flexWrap="wrap"
-                justifyContent={{ xs: "center", sm: "flex-start" }}
+              {t("about.title")}
+            </Typography>
+            <Typography variant="h3" sx={{ lineHeight: 1.1 }}>
+              {ABOUT_PROFILE.name}
+            </Typography>
+            <Stack
+              direction="row"
+              spacing={1.5}
+              flexWrap="wrap"
+              justifyContent={{ xs: "center", md: "flex-start" }}
+              sx={{ color: "text.secondary" }}
+            >
+              <Typography variant="subtitle2">{ABOUT_PROFILE.role}</Typography>
+              <Link
+                href={`mailto:${ABOUT_PROFILE.email}`}
+                variant="subtitle2"
+                underline="hover"
                 sx={{ color: "text.secondary" }}
               >
-                <Typography variant="subtitle2">
-                  {ABOUT_PROFILE.role}
-                </Typography>
-                <Link
-                  href={`mailto:${ABOUT_PROFILE.email}`}
-                  variant="subtitle2"
-                  underline="hover"
-                  sx={{ color: "text.secondary" }}
-                >
-                  {ABOUT_PROFILE.email}
-                </Link>
-              </Stack>
+                {ABOUT_PROFILE.email}
+              </Link>
             </Stack>
           </Stack>
         </m.div>

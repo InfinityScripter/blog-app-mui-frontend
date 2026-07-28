@@ -6,8 +6,6 @@ export const ABOUT_PROFILE = {
   name: "Михаил Талалаев",
   role: "AI Engineer",
   email: CONFIG.contacts.email,
-  imageSrc: "/assets/images/about/developer.webp",
-  imageAlt: "Михаил Талалаев",
 };
 
 // Section title (`home.about.title`) and lead (`home.about.lead`) are UI copy,

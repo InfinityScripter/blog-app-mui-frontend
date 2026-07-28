@@ -25,7 +25,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     link: "https://pererabotka.gazprom.ru",
   },
   {
-    position: "Frontend Developer (React, TS)",
+    position: "Frontend Developer",
     company: "QCup",
     location: "Санкт-Петербург",
     startDate: "2022-11-01",
@@ -42,7 +42,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     link: CONFIG.social.github,
   },
   {
-    position: "Frontend Developer (JS)",
+    position: "Frontend Developer",
     company: "Яндекс",
     location: "Санкт-Петербург",
     startDate: "2023-05-01",
@@ -57,7 +57,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     link: "https://userver.tech",
   },
   {
-    position: "Frontend Developer (React, JS)",
+    position: "Frontend Developer",
     company: "ShurikMarket",
     location: "Санкт-Петербург",
     startDate: "2023-10-01",
@@ -75,7 +75,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     link: "https://shurik.market",
   },
   {
-    position: "Frontend Developer (Angular, TS)",
+    position: "Frontend Developer",
     company: "СТОМПЛАН",
     location: "Москва",
     startDate: "2024-05-01",
@@ -92,7 +92,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     link: "https://stomplan.ru",
   },
   {
-    position: "Frontend Developer (React, TS)",
+    position: "Software Developer",
     company: "Яндекс",
     location: "Москва",
     startDate: "2025-04-01",
