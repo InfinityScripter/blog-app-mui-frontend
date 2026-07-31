@@ -468,6 +468,31 @@ export const LLM_MODELS_2026: LlmModel[] = [
       "Meta никогда раньше не брала денег за свои модели — Muse Spark 1.1 с ценником $1.25/$4.25 за млн токенов закрывает эпоху бесплатных открытых весов Llama.",
   },
   {
+    id: "thinking-machines-inkling",
+    slug: "inkling",
+    vendor: "Thinking Machines Lab",
+    name: "Inkling",
+    releaseDate: "2026-07-15",
+    contextTokens: 1000000,
+    params: "975B total / 41B active (MoE)",
+    highlight:
+      "Первая модель лаборатории Миры Мурати — сразу с открытыми весами и мультимодальностью до видео.",
+    description:
+      "Thinking Machines Lab выпустила Inkling — первую модель в своём семействе и сразу с полными весами в открытом доступе, «чтобы люди могли сделать её своей». Разреженный MoE на 975B параметров (41B активных) принимает текст, картинки, звук и видео, держит контекст до 1 млн токенов и умеет управляемое «усилие мышления» ради экономии на простых задачах. Заявленные результаты: 97.1% на AIME 2026, 87.2% на GPQA Diamond, 77.6% на SWE-bench Verified, 46.0% на Humanity's Last Exam с инструментами и 73.5% на MMMU Pro. Лаборатория не претендует на первое место в бенчмарках, а позиционирует Inkling как удобную открытую базу для кастомизации: дообучение через собственный Tinker, инференс — у Together AI, Fireworks, Modal, Databricks и Baseten.",
+    capabilities: [
+      "open-weights",
+      "MoE",
+      "reasoning",
+      "multimodal",
+      "agentic",
+      "long-context",
+    ],
+    sourceUrl: "https://thinkingmachines.ai/news/introducing-inkling/",
+    wikiUrl: null,
+    funFact:
+      "Бенчмарки на официальной странице сняты при effort=0.99 — у Inkling «усилие мышления» задаётся дробным числом, и витринные цифры получены почти на максимуме шкалы.",
+  },
+  {
     id: "moonshot-kimi-k3",
     slug: "kimi-k3",
     vendor: "Moonshot AI",
@@ -540,5 +565,30 @@ export const LLM_MODELS_2026: LlmModel[] = [
     wikiUrl: "https://en.wikipedia.org/wiki/Claude_(language_model)",
     funFact:
       "У Opus 5 knowledge cutoff — май 2026, тогда как у более дорогого Fable 5 и у Opus 4.8 он январский: младшая по цене модель знает мир на четыре месяца свежее.",
+  },
+  {
+    id: "thinking-machines-inkling-small",
+    slug: "inkling-small",
+    vendor: "Thinking Machines Lab",
+    name: "Inkling-Small",
+    releaseDate: "2026-07-30",
+    contextTokens: 1000000,
+    params: "276B total / 12B active (MoE)",
+    highlight:
+      "Ученик обошёл учителя: вчетверо меньше флагмана, но выше него в рассуждениях и агентном коде.",
+    description:
+      "Через две недели после первой открытой модели Inkling лаборатория Миры Мурати выпустила её уменьшенную версию — 276B параметров против 975B, из них 12B активных. По собственному замеру лаборатории Inkling-Small «обходит Inkling на бенчмарках рассуждений и агентного кода»: 31.6% на Humanity's Last Exam (текст, без инструментов), 80.2% на SWE-bench Verified, 82.2% на IFBench, 40.0% по индексу Artificial Analysis v4.1. Разреженный MoE на 42 слоя маршрутизирует каждый токен в 6 из 256 экспертов плюс два общих, нативно рассуждает по тексту, картинкам и звуку, поддерживает регулируемое «усилие мышления» и контекст до 1 млн токенов. Полные веса выложены в публичный репозиторий Hugging Face, дообучение — через Tinker.",
+    capabilities: [
+      "open-weights",
+      "MoE",
+      "reasoning",
+      "multimodal",
+      "coding",
+      "agentic",
+    ],
+    sourceUrl: "https://thinkingmachines.ai/news/inkling-small/",
+    wikiUrl: null,
+    funFact:
+      "Модель дообучали on-policy дистилляцией, где учителем был сам Inkling, — и ученик обошёл учителя в рассуждениях, но не в эрудиции: 20.6% на SimpleQA Verified, и лаборатория прямо признаёт, что «Inkling сохраняет преимущество в покрытии знаний и фактологии».",
   },
 ];
