@@ -18,6 +18,33 @@ test.describe("public pages", () => {
     ).toBeVisible();
   });
 
+  test("cookie notice shows once and stays dismissed after reload", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const notice = page.getByRole("complementary").filter({
+      hasText: "только необходимые cookie",
+    });
+    await expect(notice).toBeVisible();
+    await expect(
+      notice.getByRole("link", { name: "Подробнее" }),
+    ).toHaveAttribute("href", /\/privacy-policy/);
+
+    await notice.getByRole("button", { name: "Понятно" }).click();
+    await expect(notice).toHaveCount(0);
+
+    await page.reload();
+    await expect(
+      page.getByRole("link", { name: "Блог", exact: true }),
+    ).toBeVisible();
+    await expect(
+      page
+        .getByRole("complementary")
+        .filter({ hasText: "только необходимые cookie" }),
+    ).toHaveCount(0);
+  });
+
   test("light theme keeps the auth logo readable on its dark panel", async ({
     page,
   }) => {

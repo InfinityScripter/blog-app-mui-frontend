@@ -13,6 +13,7 @@ import { AuthProvider } from "src/auth/context/jwt";
 import { ThemeProvider } from "src/theme/theme-provider";
 import { ProgressBar } from "src/components/progress-bar";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { CookieNotice } from "src/components/cookie-notice";
 import { schemeConfig } from "src/theme/color-scheme-script";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { MotionLazy } from "src/components/animate/motion-lazy";
@@ -101,6 +102,7 @@ export default async function LocaleLayout({
                   <ProgressBar />
                   <SettingsDrawer />
                   <Snackbar />
+                  <CookieNotice />
                   {children}
                   <Analytics />
                   <SpeedInsights />
