@@ -531,5 +531,10 @@
       "title": "About | Mikhail Talalaev",
       "description": "AI engineer Mikhail Talalaev — LLM products and agent-driven development. 13+ years in IT, experience and contacts."
     }
+  },
+  "cookieNotice": {
+    "message": "This site uses only essential cookies — for sign-in, security and interface preferences. No ad trackers.",
+    "more": "Learn more",
+    "dismiss": "Got it"
   }
 }
