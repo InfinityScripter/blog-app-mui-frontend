@@ -48,6 +48,7 @@ interface Paths {
   };
   dashboard: {
     root: string;
+    finance: string;
     user: {
       account: string;
     };
@@ -119,6 +120,7 @@ export const paths: Paths = {
   // DASHBOARD
   dashboard: {
     root: ROOTS.DASHBOARD,
+    finance: `${ROOTS.DASHBOARD}/finance`,
     user: {
       account: `${ROOTS.DASHBOARD}/user/account`,
     },

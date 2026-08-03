@@ -173,6 +173,11 @@ export const endpoints = {
   settings: {
     public: "/api/settings/public",
   },
+  finance: {
+    summary: "/api/finance/summary",
+    import: "/api/finance/import",
+    export: "/api/finance/export",
+  },
   admin: {
     users: "/api/admin/users",
     settings: "/api/admin/settings",

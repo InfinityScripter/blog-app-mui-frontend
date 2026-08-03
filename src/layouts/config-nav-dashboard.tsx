@@ -45,6 +45,11 @@ export function getNavData(role?: string) {
       subheader: "Администрирование",
       items: [
         {
+          title: "Финансы",
+          path: paths.dashboard.finance,
+          icon: ICONS.dashboard,
+        },
+        {
           title: "Пользователи",
           path: paths.dashboard.admin.users,
           icon: ICONS.user,

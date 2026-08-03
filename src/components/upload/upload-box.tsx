@@ -26,6 +26,7 @@ export function UploadBox({
   return (
     <Box
       {...getRootProps()}
+      role="button"
       sx={{
         width: 64,
         height: 64,
