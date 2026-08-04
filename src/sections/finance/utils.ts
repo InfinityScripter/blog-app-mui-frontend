@@ -20,6 +20,20 @@ export function fRubShort(value: number): string {
   return fRub(value);
 }
 
+// Операции хранятся с московским смещением — форматируем в той же зоне,
+// иначе ночная покупка уезжает на сутки назад у тех, кто смотрит из другого
+// часового пояса.
+const OP_DATE_FORMAT = new Intl.DateTimeFormat("ru-RU", {
+  timeZone: "Europe/Moscow",
+  day: "2-digit",
+  month: "2-digit",
+  year: "2-digit",
+});
+
+export function fOpDate(iso: string): string {
+  return OP_DATE_FORMAT.format(new Date(iso));
+}
+
 export function ymLabel(ym: string): string {
   const [year, month] = ym.split("-");
   const label = MONTH_LABELS[Number(month) - 1];

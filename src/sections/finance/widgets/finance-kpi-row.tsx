@@ -1,7 +1,7 @@
 import type { FinanceSummary } from "src/types/finance";
 
 import Grid from "@mui/material/Grid";
-import { fRubShort } from "src/sections/finance/utils";
+import { Amount } from "src/sections/finance/finance-privacy";
 import { FinanceKpi } from "src/sections/finance/widgets/finance-kpi";
 
 export function FinanceKpiRow({ summary }: { summary: FinanceSummary }) {
@@ -23,17 +23,25 @@ export function FinanceKpiRow({ summary }: { summary: FinanceSummary }) {
   const cells = [
     {
       label: "Доход в месяц",
-      value: fRubShort(summary.totals.income / monthCount),
-      hint: `за период ${fRubShort(summary.totals.income)}`,
+      value: <Amount short value={summary.totals.income / monthCount} />,
+      hint: (
+        <>
+          за период <Amount short value={summary.totals.income} />
+        </>
+      ),
     },
     {
       label: "Расход в месяц",
-      value: fRubShort(summary.totals.expense / monthCount),
-      hint: `за период ${fRubShort(summary.totals.expense)}`,
+      value: <Amount short value={summary.totals.expense / monthCount} />,
+      hint: (
+        <>
+          за период <Amount short value={summary.totals.expense} />
+        </>
+      ),
     },
     {
       label: "Отложено",
-      value: fRubShort(summary.totals.saved),
+      value: <Amount short value={summary.totals.saved} />,
       hint: `${savedShare}% дохода`,
     },
     {

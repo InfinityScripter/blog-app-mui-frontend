@@ -2,13 +2,14 @@
 
 import type { FinanceRange } from "src/actions/finance";
 
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { useState, useCallback } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { fRubShort } from "src/sections/finance/utils";
 import { useGetFinanceSummary } from "src/actions/finance";
+import { Amount } from "src/sections/finance/finance-privacy";
 import { FinanceKpiRow } from "src/sections/finance/widgets/finance-kpi-row";
 import { useFinanceImport } from "src/sections/finance/hooks/use-finance-import";
 import { FinanceImportCard } from "src/sections/finance/widgets/finance-import-card";
@@ -17,6 +18,7 @@ import { FinanceIncomeCard } from "src/sections/finance/widgets/finance-income-c
 import { FinanceRangeSelect } from "src/sections/finance/widgets/finance-range-select";
 import { FinanceCategoryList } from "src/sections/finance/widgets/finance-category-list";
 import { FinanceMonthlyChart } from "src/sections/finance/widgets/finance-monthly-chart";
+import { FinancePrivacyToggle } from "src/sections/finance/widgets/finance-privacy-toggle";
 import { FinanceSubscriptionsCard } from "src/sections/finance/widgets/finance-subscriptions-card";
 
 export function FinanceView() {
@@ -35,13 +37,24 @@ export function FinanceView() {
 
   return (
     <Container maxWidth="xl">
-      <Typography variant="h4" sx={{ mb: 1 }}>
-        Финансы
-      </Typography>
-      <Typography variant="body2" sx={{ color: "text.secondary", mb: 3 }}>
-        Личный учёт по выпискам Т-Банка: доходы, расходы по категориям,
-        регулярные платежи. Страница видна только администратору.
-      </Typography>
+      <Stack
+        spacing={2}
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ sm: "flex-start" }}
+        justifyContent="space-between"
+        sx={{ mb: 3 }}
+      >
+        <Box>
+          <Typography variant="h4" sx={{ mb: 1 }}>
+            Финансы
+          </Typography>
+          <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            Личный учёт по выпискам Т-Банка: доходы, расходы по категориям,
+            регулярные платежи. Страница видна только администратору.
+          </Typography>
+        </Box>
+        <FinancePrivacyToggle />
+      </Stack>
       {summaryError ? (
         <Typography sx={{ color: "error.main", mb: 3 }}>
           Не удалось загрузить данные.
@@ -65,8 +78,11 @@ export function FinanceView() {
               />
               <Typography variant="caption" sx={{ color: "text.disabled" }}>
                 Внутренних переливов за период:{" "}
-                {fRubShort(summary.internalVolume + summary.washVolume)} — они
-                не считаются ни доходом, ни расходом
+                <Amount
+                  short
+                  value={summary.internalVolume + summary.washVolume}
+                />{" "}
+                — они не считаются ни доходом, ни расходом
               </Typography>
             </Stack>
           ) : null}
@@ -75,7 +91,11 @@ export function FinanceView() {
           <Grid container spacing={3}>
             <Grid size={{ xs: 12, md: 7 }}>
               {hasData ? (
-                <FinanceCategoryList buckets={summary.buckets} />
+                <FinanceCategoryList
+                  buckets={summary.buckets}
+                  from={effectiveFrom}
+                  to={effectiveTo}
+                />
               ) : (
                 <Typography sx={{ color: "text.secondary" }}>
                   Пока пусто. Загрузи первую CSV-выписку из Т-Банка — и здесь

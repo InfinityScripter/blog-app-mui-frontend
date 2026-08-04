@@ -7,10 +7,12 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import { fRub, ymLabel, fRubShort } from "src/sections/finance/utils";
+import { useFinancePrivacy } from "src/sections/finance/finance-privacy";
 
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export function FinanceMonthlyChart({ months }: { months: FinanceMonth[] }) {
+  const { hidden } = useFinancePrivacy();
   const categories = months.map((month) => ymLabel(month.ym));
   const series = [
     {
@@ -31,7 +33,18 @@ export function FinanceMonthlyChart({ months }: { months: FinanceMonth[] }) {
         title="Доходы и расходы по месяцам"
         subheader="Вся загруженная история для контекста — выбранный период влияет на карточки и категории. Внутренние переводы уже исключены."
       />
-      <Box sx={{ p: 3 }}>
+      <Box
+        sx={{
+          p: 3,
+          // Столбцы и подписи осей — те же суммы: в скрытом режиме график
+          // размывается целиком, а тултип не должен проявлять цифру по ховеру.
+          ...(hidden && {
+            filter: "blur(10px)",
+            pointerEvents: "none",
+            userSelect: "none",
+          }),
+        }}
+      >
         <Chart
           type="line"
           series={series}

@@ -25,6 +25,18 @@ export interface FinanceBucket {
   merchants: FinanceMerchant[];
 }
 
+export interface FinanceBucketOperation {
+  id: string;
+  opAt: string;
+  merchant: string;
+  description: string;
+  amount: number;
+  card: string;
+  mcc: string;
+  bankCategory: string;
+  cashback: number;
+}
+
 export interface FinanceIncomeSource {
   source: string;
   total: number;

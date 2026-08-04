@@ -175,6 +175,7 @@ export const endpoints = {
   },
   finance: {
     summary: "/api/finance/summary",
+    operations: "/api/finance/operations",
     import: "/api/finance/import",
     export: "/api/finance/export",
   },

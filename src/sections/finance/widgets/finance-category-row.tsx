@@ -1,21 +1,26 @@
 "use client";
 
-import type { FinanceBucket } from "src/types/finance";
+import type { FinanceBucket, FinanceBucketOperation } from "src/types/finance";
 
+import { useMemo } from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { varAlpha } from "src/theme/styles";
 import Collapse from "@mui/material/Collapse";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
-import { fRub } from "src/sections/finance/utils";
 import { FAMILY_BUCKET } from "src/sections/finance/const";
-
-const VISIBLE_MERCHANTS = 8;
+import { useGetFinanceOperations } from "src/actions/finance";
+import { Amount } from "src/sections/finance/finance-privacy";
+import { bucketIcon } from "src/sections/finance/category-icons";
+import { FinanceMerchantRow } from "src/sections/finance/widgets/finance-merchant-row";
 
 interface Props {
   bucket: FinanceBucket;
   maxTotal: number;
+  from: string | null;
+  to: string | null;
   expanded: boolean;
   onToggle: () => void;
 }
@@ -23,15 +28,36 @@ interface Props {
 export function FinanceCategoryRow({
   bucket,
   maxTotal,
+  from,
+  to,
   expanded,
   onToggle,
 }: Props) {
   const isFamily = bucket.bucket === FAMILY_BUCKET;
+  const { icon, color } = bucketIcon(bucket.bucket);
   const share =
     maxTotal > 0 ? Math.max(2, Math.round((bucket.total / maxTotal) * 100)) : 0;
-  const visible = bucket.merchants.slice(0, VISIBLE_MERCHANTS);
-  const rest = bucket.merchants.slice(VISIBLE_MERCHANTS);
-  const restTotal = rest.reduce((acc, merchant) => acc + merchant.total, 0);
+
+  const { operations, operationsLoading } = useGetFinanceOperations(
+    expanded ? bucket.bucket : null,
+    { from: from ?? undefined, to: to ?? undefined },
+  );
+
+  // Сводка группирует получателей по имени в нижнем регистре — раскладываем
+  // операции тем же ключом, иначе строка получателя останется пустой.
+  const operationsByMerchant = useMemo(() => {
+    const grouped = new Map<string, FinanceBucketOperation[]>();
+    operations.forEach((operation) => {
+      const key = operation.merchant.toLowerCase();
+      const list = grouped.get(key);
+      if (list) {
+        list.push(operation);
+      } else {
+        grouped.set(key, [operation]);
+      }
+    });
+    return grouped;
+  }, [operations]);
 
   const panelId = `finance-bucket-${bucket.bucket.replace(/[^0-9a-zа-яё]+/gi, "-").toLowerCase()}`;
 
@@ -51,12 +77,27 @@ export function FinanceCategoryRow({
           "&:hover": { bgcolor: "action.hover" },
         }}
       >
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack direction="row" alignItems="center" spacing={1.25}>
+          <Box
+            sx={(theme) => ({
+              width: 32,
+              height: 32,
+              flexShrink: 0,
+              borderRadius: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: `${color}.main`,
+              bgcolor: varAlpha(theme.vars.palette[color].mainChannel, 0.12),
+            })}
+          >
+            <Iconify icon={icon} width={18} />
+          </Box>
           <Typography variant="body2" noWrap sx={{ flexGrow: 1, minWidth: 0 }}>
             {bucket.bucket}
           </Typography>
           <Typography variant="subtitle2" sx={{ whiteSpace: "nowrap" }}>
-            {fRub(bucket.total)}
+            <Amount value={bucket.total} />
           </Typography>
           <Iconify
             width={16}
@@ -76,49 +117,30 @@ export function FinanceCategoryRow({
               height: 1,
               borderRadius: 1,
               width: `${share}%`,
-              bgcolor: isFamily ? "grey.500" : "primary.main",
+              bgcolor: isFamily ? "grey.500" : `${color}.main`,
             }}
           />
         </Box>
       </ButtonBase>
+
       <Collapse id={panelId} in={expanded} unmountOnExit>
-        <Stack spacing={0.5} sx={{ px: 1, pt: 0.5, pb: 1.5 }}>
+        <Stack spacing={0.25} sx={{ px: 1, pt: 0.5, pb: 1.5 }}>
           {isFamily ? (
             <Typography variant="caption" sx={{ color: "text.secondary" }}>
               Семейный контур: встречные поступления учтены в «Доходах по
               источникам», нетто близко к нулю.
             </Typography>
           ) : null}
-          {visible.map((merchant) => (
-            <Stack
+          {bucket.merchants.map((merchant) => (
+            <FinanceMerchantRow
               key={merchant.name}
-              direction="row"
-              spacing={2}
-              justifyContent="space-between"
-            >
-              <Typography
-                variant="body2"
-                noWrap
-                sx={{ color: "text.secondary", minWidth: 0 }}
-              >
-                {merchant.name}
-                {merchant.count > 1 ? ` × ${merchant.count}` : ""}
-              </Typography>
-              <Typography variant="body2" sx={{ whiteSpace: "nowrap" }}>
-                {fRub(merchant.total)}
-              </Typography>
-            </Stack>
+              merchant={merchant}
+              loading={operationsLoading}
+              operations={
+                operationsByMerchant.get(merchant.name.toLowerCase()) ?? []
+              }
+            />
           ))}
-          {rest.length > 0 ? (
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-              <Typography variant="body2" sx={{ color: "text.disabled" }}>
-                ещё {rest.length} мелких
-              </Typography>
-              <Typography variant="body2" sx={{ color: "text.disabled" }}>
-                {fRub(restTotal)}
-              </Typography>
-            </Stack>
-          ) : null}
         </Stack>
       </Collapse>
     </Box>

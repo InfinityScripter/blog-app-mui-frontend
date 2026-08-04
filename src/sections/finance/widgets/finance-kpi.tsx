@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 
@@ -7,8 +9,8 @@ export function FinanceKpi({
   hint,
 }: {
   label: string;
-  value: string;
-  hint?: string;
+  value: ReactNode;
+  hint?: ReactNode;
 }) {
   return (
     <Card sx={{ p: 3, height: 1 }}>

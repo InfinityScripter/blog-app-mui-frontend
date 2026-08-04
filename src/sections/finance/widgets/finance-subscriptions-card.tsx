@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import CardHeader from "@mui/material/CardHeader";
-import { fRub } from "src/sections/finance/utils";
+import { Amount } from "src/sections/finance/finance-privacy";
 
 export function FinanceSubscriptionsCard({
   subscriptions,
@@ -38,7 +38,8 @@ export function FinanceSubscriptionsCard({
               {subscription.name}
             </Typography>
             <Typography variant="body2" sx={{ whiteSpace: "nowrap" }}>
-              {fRub(subscription.average)}/мес · {subscription.monthsCount} мес
+              <Amount value={subscription.average} />
+              /мес · {subscription.monthsCount} мес
             </Typography>
           </Stack>
         ))}

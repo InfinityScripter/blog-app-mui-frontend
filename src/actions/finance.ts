@@ -1,5 +1,9 @@
 import type { FetcherArgs } from "src/utils/axios";
-import type { FinanceSummary, FinanceImportResult } from "src/types/finance";
+import type {
+  FinanceSummary,
+  FinanceImportResult,
+  FinanceBucketOperation,
+} from "src/types/finance";
 
 import useSWR from "swr";
 import { useMemo } from "react";
@@ -7,6 +11,10 @@ import axiosInstance, { fetcher, endpoints } from "src/utils/axios";
 
 interface SummaryResponse {
   data?: FinanceSummary;
+}
+
+interface OperationsResponse {
+  data?: { operations: FinanceBucketOperation[] };
 }
 
 interface ImportResponse {
@@ -45,6 +53,32 @@ export function useGetFinanceSummary(range: FinanceRange) {
       summaryMutate: mutate,
     }),
     [data, isLoading, error, mutate],
+  );
+}
+
+// Операции конкретной категории тянутся лениво — только когда карточку
+// раскрыли. Свёрнутая карточка передаёт bucket = null: SWR с null-ключом
+// не ходит в сеть.
+export function useGetFinanceOperations(
+  bucket: string | null,
+  range: FinanceRange,
+) {
+  const key: FetcherArgs | null = bucket
+    ? [endpoints.finance.operations, { params: { bucket, ...range } }]
+    : null;
+  const { data, isLoading, error } = useSWR<OperationsResponse>(
+    key,
+    fetcher,
+    swrOptions,
+  );
+
+  return useMemo(
+    () => ({
+      operations: data?.data?.operations ?? [],
+      operationsLoading: isLoading,
+      operationsError: error,
+    }),
+    [data, isLoading, error],
   );
 }
 
