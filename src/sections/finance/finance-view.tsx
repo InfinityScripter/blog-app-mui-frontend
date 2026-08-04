@@ -112,7 +112,11 @@ export function FinanceView() {
                   onDrop={importFiles}
                 />
                 {hasData ? (
-                  <FinanceIncomeCard sources={summary.incomeBySource} />
+                  <FinanceIncomeCard
+                    sources={summary.incomeBySource}
+                    from={effectiveFrom}
+                    to={effectiveTo}
+                  />
                 ) : null}
                 {hasData ? (
                   <FinanceSubscriptionsCard

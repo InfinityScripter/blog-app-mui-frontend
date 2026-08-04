@@ -26,6 +26,8 @@ export interface FinanceRange {
   to?: string;
 }
 
+export type FinanceOperationsTarget = { bucket: string } | { source: string };
+
 const swrOptions = {
   revalidateOnFocus: false,
   revalidateIfStale: true,
@@ -56,15 +58,15 @@ export function useGetFinanceSummary(range: FinanceRange) {
   );
 }
 
-// Операции конкретной категории тянутся лениво — только когда карточку
-// раскрыли. Свёрнутая карточка передаёт bucket = null: SWR с null-ключом
-// не ходит в сеть.
+// Операции конкретной категории расходов или источника дохода тянутся лениво —
+// только когда карточку раскрыли. Свёрнутая карточка передаёт target = null:
+// SWR с null-ключом не ходит в сеть.
 export function useGetFinanceOperations(
-  bucket: string | null,
+  target: FinanceOperationsTarget | null,
   range: FinanceRange,
 ) {
-  const key: FetcherArgs | null = bucket
-    ? [endpoints.finance.operations, { params: { bucket, ...range } }]
+  const key: FetcherArgs | null = target
+    ? [endpoints.finance.operations, { params: { ...target, ...range } }]
     : null;
   const { data, isLoading, error } = useSWR<OperationsResponse>(
     key,

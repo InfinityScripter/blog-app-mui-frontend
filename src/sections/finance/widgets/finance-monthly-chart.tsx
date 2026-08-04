@@ -50,6 +50,10 @@ export function FinanceMonthlyChart({ months }: { months: FinanceMonth[] }) {
           series={series}
           height={340}
           options={{
+            // Панель зума апекса живёт в том же верхнем правом углу, что и
+            // легенда, и наезжает на неё. Зум по 20 месяцам не нужен — панель
+            // убрана, угол остаётся легенде.
+            chart: { toolbar: { show: false } },
             stroke: { width: [0, 3], curve: "smooth" },
             plotOptions: { bar: { columnWidth: "55%", borderRadius: 3 } },
             dataLabels: { enabled: false },

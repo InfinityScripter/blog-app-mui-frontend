@@ -1,6 +1,6 @@
 "use client";
 
-import type { FinanceBucket } from "src/types/finance";
+import type { FinanceIncomeSource } from "src/types/finance";
 
 import { useMemo } from "react";
 import Box from "@mui/material/Box";
@@ -10,15 +10,14 @@ import Collapse from "@mui/material/Collapse";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
-import { FAMILY_BUCKET } from "src/sections/finance/const";
 import { useGetFinanceOperations } from "src/actions/finance";
 import { Amount } from "src/sections/finance/finance-privacy";
-import { bucketIcon } from "src/sections/finance/category-icons";
+import { incomeIcon } from "src/sections/finance/category-icons";
 import { groupOperationsByMerchant } from "src/sections/finance/utils";
 import { FinanceMerchantRow } from "src/sections/finance/widgets/finance-merchant-row";
 
 interface Props {
-  bucket: FinanceBucket;
+  source: FinanceIncomeSource;
   maxTotal: number;
   from: string | null;
   to: string | null;
@@ -26,30 +25,29 @@ interface Props {
   onToggle: () => void;
 }
 
-export function FinanceCategoryRow({
-  bucket,
+export function FinanceIncomeSourceRow({
+  source,
   maxTotal,
   from,
   to,
   expanded,
   onToggle,
 }: Props) {
-  const isFamily = bucket.bucket === FAMILY_BUCKET;
-  const { icon, color } = bucketIcon(bucket.bucket);
+  const { icon, color } = incomeIcon(source.source);
   const share =
-    maxTotal > 0 ? Math.max(2, Math.round((bucket.total / maxTotal) * 100)) : 0;
+    maxTotal > 0 ? Math.max(2, Math.round((source.total / maxTotal) * 100)) : 0;
 
   const { operations, operationsLoading } = useGetFinanceOperations(
-    expanded ? { bucket: bucket.bucket } : null,
+    expanded ? { source: source.source } : null,
     { from: from ?? undefined, to: to ?? undefined },
   );
 
-  const operationsByMerchant = useMemo(
+  const operationsByPayer = useMemo(
     () => groupOperationsByMerchant(operations),
     [operations],
   );
 
-  const panelId = `finance-bucket-${bucket.bucket.replace(/[^0-9a-zа-яё]+/gi, "-").toLowerCase()}`;
+  const panelId = `finance-source-${source.source.replace(/[^0-9a-zа-яё]+/gi, "-").toLowerCase()}`;
 
   return (
     <Box>
@@ -60,18 +58,18 @@ export function FinanceCategoryRow({
         sx={{
           width: 1,
           px: 1,
-          py: 0.75,
+          py: 0.5,
           display: "block",
           textAlign: "left",
           borderRadius: 1,
           "&:hover": { bgcolor: "action.hover" },
         }}
       >
-        <Stack direction="row" alignItems="center" spacing={1.25}>
+        <Stack direction="row" spacing={1.25} alignItems="center">
           <Box
             sx={(theme) => ({
-              width: 32,
-              height: 32,
+              width: 28,
+              height: 28,
               flexShrink: 0,
               borderRadius: 1,
               display: "flex",
@@ -81,13 +79,13 @@ export function FinanceCategoryRow({
               bgcolor: varAlpha(theme.vars.palette[color].mainChannel, 0.12),
             })}
           >
-            <Iconify icon={icon} width={18} />
+            <Iconify icon={icon} width={16} />
           </Box>
           <Typography variant="body2" noWrap sx={{ flexGrow: 1, minWidth: 0 }}>
-            {bucket.bucket}
+            {source.source}
           </Typography>
           <Typography variant="subtitle2" sx={{ whiteSpace: "nowrap" }}>
-            <Amount value={bucket.total} />
+            <Amount value={source.total} />
           </Typography>
           <Iconify
             width={16}
@@ -100,36 +98,28 @@ export function FinanceCategoryRow({
           />
         </Stack>
         <Box
-          sx={{ mt: 0.75, height: 6, borderRadius: 1, bgcolor: "action.hover" }}
+          sx={{ mt: 0.5, height: 4, borderRadius: 1, bgcolor: "action.hover" }}
         >
           <Box
             sx={{
               height: 1,
               borderRadius: 1,
               width: `${share}%`,
-              bgcolor: isFamily ? "grey.500" : `${color}.main`,
+              bgcolor: `${color}.main`,
             }}
           />
         </Box>
       </ButtonBase>
 
       <Collapse id={panelId} in={expanded} unmountOnExit>
-        <Stack spacing={0.25} sx={{ px: 1, pt: 0.5, pb: 1.5 }}>
-          {isFamily ? (
-            <Typography variant="caption" sx={{ color: "text.secondary" }}>
-              Семейный контур: встречные поступления учтены в «Доходах по
-              источникам», нетто близко к нулю.
-            </Typography>
-          ) : null}
-          {bucket.merchants.map((merchant) => (
+        <Stack spacing={0.25} sx={{ px: 1, pt: 0.5, pb: 1 }}>
+          {source.payers.map((payer) => (
             <FinanceMerchantRow
-              key={merchant.name}
-              flow="expense"
-              merchant={merchant}
+              key={payer.name}
+              flow="income"
+              merchant={payer}
               loading={operationsLoading}
-              operations={
-                operationsByMerchant.get(merchant.name.toLowerCase()) ?? []
-              }
+              operations={operationsByPayer.get(payer.name.toLowerCase()) ?? []}
             />
           ))}
         </Stack>

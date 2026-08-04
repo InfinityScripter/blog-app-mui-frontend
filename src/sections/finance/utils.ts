@@ -1,3 +1,5 @@
+import type { FinanceBucketOperation } from "src/types/finance";
+
 import { MONTH_LABELS } from "src/sections/finance/const";
 
 const RUB_FORMAT = new Intl.NumberFormat("ru-RU", {
@@ -18,6 +20,24 @@ export function fRubShort(value: number): string {
     return `${RUB_FORMAT.format(Math.round(value / 1_000))} тыс ₽`;
   }
   return fRub(value);
+}
+
+// Сводка группирует получателей и плательщиков по имени в нижнем регистре —
+// операции раскладываем тем же ключом, иначе строка получателя останется пустой.
+export function groupOperationsByMerchant(
+  operations: FinanceBucketOperation[],
+): Map<string, FinanceBucketOperation[]> {
+  const grouped = new Map<string, FinanceBucketOperation[]>();
+  operations.forEach((operation) => {
+    const key = operation.merchant.toLowerCase();
+    const list = grouped.get(key);
+    if (list) {
+      list.push(operation);
+    } else {
+      grouped.set(key, [operation]);
+    }
+  });
+  return grouped;
 }
 
 // Операции хранятся с московским смещением — форматируем в той же зоне,

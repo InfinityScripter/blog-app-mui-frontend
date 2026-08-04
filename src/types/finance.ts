@@ -40,6 +40,7 @@ export interface FinanceBucketOperation {
 export interface FinanceIncomeSource {
   source: string;
   total: number;
+  payers: FinanceMerchant[];
 }
 
 export interface FinanceSubscription {

@@ -19,10 +19,17 @@ interface Props {
   merchant: FinanceMerchant;
   operations: FinanceBucketOperation[];
   loading: boolean;
+  flow: "expense" | "income";
 }
 
-export function FinanceMerchantRow({ merchant, operations, loading }: Props) {
+export function FinanceMerchantRow({
+  merchant,
+  operations,
+  loading,
+  flow,
+}: Props) {
   const [open, setOpen] = useState(false);
+  const isExpense = flow === "expense";
 
   return (
     <Box>
@@ -96,10 +103,14 @@ export function FinanceMerchantRow({ merchant, operations, loading }: Props) {
                   // Возврат приходит в той же категории положительной суммой:
                   // в списке трат это минус, и он подсвечен зелёным.
                   color:
-                    operation.amount > 0 ? "success.main" : "text.secondary",
+                    isExpense && operation.amount > 0
+                      ? "success.main"
+                      : "text.secondary",
                 }}
               >
-                <Amount value={-operation.amount} />
+                <Amount
+                  value={isExpense ? -operation.amount : operation.amount}
+                />
               </Typography>
             </Stack>
           ))}
