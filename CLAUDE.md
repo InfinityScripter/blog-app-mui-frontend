@@ -117,6 +117,24 @@ other sections or by `src/components`. The one documented exception:
 `src/sections/llm-timeline/utils` (color/icon maps) — duplicating those maps
 would drift. Keep such cross-section imports display-only and rare.
 
+### 8a. Раскладка секции: данные и стили отдельно от компонента
+
+Рядом с крупным компонентом секции держать:
+
+- `const.ts` — статические данные (массивы, конфиги без логики)
+- `types.ts` — типы этой секции
+- `utils.ts` — чистые хелперы (форматирование, маппинг в `sx`/className, константы имён классов), без JSX
+
+Секционные **статические** токены (например фиксированный брендовый градиент) — в CSS рядом с секцией, `@import` в `src/global.css`. **Рамки, hover, текст** — через палитру темы в `sx` / `utils.ts` (`alpha`, `theme.palette`), без хардкода в CSS, чтобы смена primary / light-dark работала предсказуемо.
+
+### 8b. MUI v7, формы и навигация
+
+- **MUI v7**: `Grid` (не `Grid2`); загрузка у `Button` — через пропсы `loadingIndicator` / `loadingPosition`
+- **Формы**: React Hook Form + Zod через `src/components/hook-form/`; использовать `RHF*`-компоненты (`RHFTextField` и т.д.) — сырые MUI-инпуты в формах не применять
+- **Навигация**: только через `src/routes/hooks` (ре-экспорт `next/navigation`) и константы `src/routes/paths.ts`
+- **Тема без мигания**: скрипт цветовой схемы инжектится в корневой `layout.tsx` App Router — не переносить его в клиентский компонент
+- **Пути к API**: все объявлены в `endpoints` внутри `src/utils/axios.ts` — не разбрасывать по компонентам
+
 ### 9. Guard every SSG/ISR fetch
 
 A public page that fetches at build/regenerate time must `try/catch` — one
