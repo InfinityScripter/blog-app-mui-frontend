@@ -256,11 +256,11 @@
     },
     "about": {
       "title": "About me",
-      "lead": "An engineer with 13+ years in IT, currently at Yandex. I work AI-first: code, reviews and routine go through agents. I also build products on LLMs, like an autonomous bot that finds AI news, rewrites it and publishes it to this blog and a Telegram channel.",
+      "lead": "AI engineer at Yandex. I work AI-first: code, reviews and routine go through agents. I also build products on LLMs, like an autonomous bot that finds AI news, rewrites it and publishes it to this blog and a Telegram channel.",
       "highlights": {
-        "experience": {
-          "label": "Experience",
-          "value": "13+ years in IT"
+        "focus": {
+          "label": "Focus",
+          "value": "LLM products & agents"
         },
         "stack": {
           "label": "Stack"
@@ -292,7 +292,7 @@
     "experience": {
       "overline": "Career",
       "title": "Work experience",
-      "subtitle": "My professional path as a web developer",
+      "subtitle": "My professional path",
       "present": "present",
       "technologies": "Technologies:"
     },
@@ -509,15 +509,15 @@
     }
   },
   "portfolio": {
-    "heroEyebrow": "{name} · 13+ years in IT",
+    "heroEyebrow": "{name} · AI Engineer",
     "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
     "heroSummary": "I build LLM products and run my development through AI agents. Here I write about which AI tools actually work in production.",
     "downloadCv": "Download résumé",
     "metrics": {
-      "experience": {
-        "label": "Experience in IT",
-        "value": "13+ years"
+      "company": {
+        "label": "Company",
+        "value": "Yandex"
       },
       "specialization": {
         "label": "Specialization",
@@ -529,7 +529,7 @@
     },
     "meta": {
       "title": "About | Mikhail Talalaev",
-      "description": "AI engineer Mikhail Talalaev — LLM products and agent-driven development. 13+ years in IT, experience and contacts."
+      "description": "AI engineer Mikhail Talalaev — LLM products and agent-driven development. Experience, projects and contacts."
     }
   },
   "cookieNotice": {

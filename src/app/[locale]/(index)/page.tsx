@@ -35,7 +35,7 @@ const JSON_LD = {
         "@type": "Person",
         name: "Михаил Талалаев",
         alternateName: "Mihail Talalaev",
-        jobTitle: "Software Engineer",
+        jobTitle: "AI Engineer",
       },
       potentialAction: {
         "@type": "SearchAction",
@@ -48,7 +48,7 @@ const JSON_LD = {
       name: "Михаил Талалаев",
       alternateName: "Mihail Talalaev",
       url: `${CONFIG.site.url}/`,
-      jobTitle: "Software Engineer",
+      jobTitle: "AI Engineer",
       knowsAbout: [
         "Искусственный интеллект",
         "AI",

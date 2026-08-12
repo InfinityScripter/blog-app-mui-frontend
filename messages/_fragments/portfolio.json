@@ -1,14 +1,14 @@
 {
   "portfolio": {
-    "heroEyebrow": "{name} · 13+ лет в IT",
+    "heroEyebrow": "{name} · AI Engineer",
     "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
     "heroSummary": "Строю продукты на LLM и веду разработку через AI-агентов. Здесь пишу, что из AI-инструментов реально работает в проде.",
     "downloadCv": "Скачать резюме",
     "metrics": {
-      "experience": {
-        "label": "Опыт в IT",
-        "value": "13+ лет"
+      "company": {
+        "label": "Компания",
+        "value": "Яндекс"
       },
       "specialization": {
         "label": "Специализация",

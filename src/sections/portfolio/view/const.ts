@@ -9,7 +9,7 @@ export const PROFILE_NAME = "Михаил Талалаев";
 // Резюме: путь к файлу в public/ и имя при скачивании.
 // Файл-плейсхолдер лежит в public/assets/cv/ — заменить на актуальный PDF.
 export const CV_URL = "/assets/cv/mikhail-talalaev-cv.pdf";
-export const CV_DOWNLOAD_NAME = "Mikhail-Talalaev-Software-Engineer.pdf";
+export const CV_DOWNLOAD_NAME = "Mikhail-Talalaev-AI-Engineer.pdf";
 
 export const GITHUB_URL = CONFIG.social.github;
 
@@ -18,8 +18,8 @@ export const GITHUB_URL = CONFIG.social.github;
 // proper nouns) and short-circuits the message lookup.
 export const PORTFOLIO_METRICS: PortfolioMetric[] = [
   {
-    key: "experience",
-    icon: "solar:clock-circle-bold-duotone",
+    key: "company",
+    icon: "solar:buildings-3-bold-duotone",
   },
   {
     key: "specialization",

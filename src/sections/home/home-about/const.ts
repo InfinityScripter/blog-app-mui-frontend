@@ -13,14 +13,14 @@ export const ABOUT_PROFILE = {
 
 /**
  * Сканируемые «факты». `labelKey` → `home.about.highlights.<key>.label`. The
- * experience value is UI copy (`valueKey` → `.value`); the stack/company values
+ * focus value is UI copy (`valueKey` → `.value`); the stack/company values
  * are proper-noun lists kept as-is data.
  */
 export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
   {
-    icon: "solar:clock-circle-bold-duotone",
-    labelKey: "experience",
-    valueKey: "experience",
+    icon: "solar:magic-stick-3-bold-duotone",
+    labelKey: "focus",
+    valueKey: "focus",
   },
   {
     icon: "solar:cpu-bolt-bold-duotone",
