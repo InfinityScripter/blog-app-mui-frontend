@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useSearchPosts } from "src/actions/blog";
-import { useDebounce } from "src/hooks/use-debounce";
+import { useDebounceValue } from "@siberiacancode/reactuse";
 
 // ----------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ import { useDebounce } from "src/hooks/use-debounce";
 export function usePostSearch() {
   const [query, setQuery] = useState("");
 
-  const debouncedQuery = useDebounce(query);
+  const debouncedQuery = useDebounceValue(query, 500);
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 

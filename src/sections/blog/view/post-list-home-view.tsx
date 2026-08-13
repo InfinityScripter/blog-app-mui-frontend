@@ -10,7 +10,7 @@ import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useSearchPosts } from "src/actions/blog";
-import { useDebounce } from "src/hooks/use-debounce";
+import { useDebounceValue } from "@siberiacancode/reactuse";
 import { POST_SORT_OPTIONS } from "src/sections/blog/const";
 import { toggleTag, useFeedTags } from "src/sections/home/home-feed";
 
@@ -33,7 +33,7 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 
   const feedTags = useFeedTags(posts, { pinned: selectedTags });
 
-  const debouncedQuery = useDebounce(searchQuery);
+  const debouncedQuery = useDebounceValue(searchQuery, 500);
 
   const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
 

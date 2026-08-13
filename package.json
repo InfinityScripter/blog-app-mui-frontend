@@ -39,6 +39,7 @@
     "@mui/material-nextjs": "^7.3.0",
     "@mui/system": "7.3.5",
     "@mui/x-date-pickers": "^8.9.2",
+    "@siberiacancode/reactuse": "^1.0.13",
     "@tiptap/core": "^3.0.9",
     "@tiptap/extension-code-block": "^3.0.9",
     "@tiptap/extension-code-block-lowlight": "^3.0.9",

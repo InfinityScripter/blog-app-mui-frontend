@@ -1332,6 +1332,11 @@
   resolved "https://registry.npmjs.org/@schummar/icu-type-parser/-/icu-type-parser-1.21.5.tgz#75989085bbbf80ee325874a0137437bde77e9baf"
   integrity sha512-bXHSaW5jRTmke9Vd0h5P7BtWZG9Znqb8gSDxZnxaGSJnGwPLDPfS+3g0BKzeWqzgZPsIVZkM7m2tbo18cm5HBw==
 
+"@siberiacancode/reactuse@^1.0.13":
+  version "1.0.13"
+  resolved "https://registry.npmjs.org/@siberiacancode/reactuse/-/reactuse-1.0.13.tgz#514b7f84294c884fba5bef04a3cf91eebec323d5"
+  integrity sha512-qGsNabPnLOIO/0txZ/uWOGq/cw+pdCO8YUyXDsMTZj+kV+w92mjT9+S7fvVM47ruOvHAX2NW9YTr7DT/0EthyA==
+
 "@standard-schema/utils@^0.3.0":
   version "0.3.0"
   resolved "https://registry.npmjs.org/@standard-schema/utils/-/utils-0.3.0.tgz"

@@ -14,8 +14,8 @@ import { isExternalLink } from "src/routes/utils";
 import { useBoolean } from "src/hooks/use-boolean";
 import { Scrollbar } from "src/components/scrollbar";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useWindowEvent } from "@siberiacancode/reactuse";
 import Dialog, { dialogClasses } from "@mui/material/Dialog";
-import { useEventListener } from "src/hooks/use-event-listener";
 import { SearchNotFound } from "src/components/search-not-found";
 
 import { RenderItems } from "./render-items";
@@ -53,7 +53,7 @@ export function Searchbar({
     }
   };
 
-  useEventListener("keydown", handleKeyDown);
+  useWindowEvent("keydown", handleKeyDown);
 
   const handleClick = useCallback(
     (path: string) => {

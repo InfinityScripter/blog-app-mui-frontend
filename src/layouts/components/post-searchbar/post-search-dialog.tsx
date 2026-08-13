@@ -14,8 +14,8 @@ import { Iconify } from "src/components/iconify";
 import { useBoolean } from "src/hooks/use-boolean";
 import { Scrollbar } from "src/components/scrollbar";
 import InputAdornment from "@mui/material/InputAdornment";
+import { useWindowEvent } from "@siberiacancode/reactuse";
 import Dialog, { dialogClasses } from "@mui/material/Dialog";
-import { useEventListener } from "src/hooks/use-event-listener";
 import { SearchNotFound } from "src/components/search-not-found";
 
 import { usePostSearch } from "./hooks/use-post-search";
@@ -58,7 +58,7 @@ export function PostSearchDialog() {
     }
   };
 
-  useEventListener("keydown", handleKeyDown);
+  useWindowEvent("keydown", handleKeyDown);
 
   const handleClickItem = useCallback(
     (postId: string) => {
