@@ -9,7 +9,6 @@ import type {
   GenericMessageResponse,
 } from "src/types/api";
 
-import { langQuery } from "src/utils/lang-param";
 import axios, { endpoints } from "src/utils/axios";
 import { NEWS_TAG } from "src/sections/news/const";
 import { fetchJsonWithRetry } from "src/utils/fetch-retry";
@@ -45,11 +44,25 @@ const CHANGELOG_FETCH_INIT = {
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL ?? "";
 
+/**
+ * The whole published corpus. Used by the home feed (localized) and by the
+ * sitemap / llms.txt / generateStaticParams (always `ru`, so the fallback path
+ * below is inert for them).
+ *
+ * Goes through the same cold-cache fallback as the news/blog/tag feeds: the home
+ * page is the most-linked URL on the site and it was the ONE localized feed
+ * reading the backend without a budget. On 2026-08-20 that cost us the English
+ * home page — a slow translated list ran past Vercel's 10s limit and the page
+ * served 504 for a day, while /news and /post degraded to Russian and stayed up.
+ */
 export async function getPosts(
   lang: AppLocale = DEFAULT_LOCALE,
 ): Promise<ListPostsResponse> {
-  const url = `${SERVER_URL}${endpoints.post.list}${langQuery(lang, false)}`;
-  return fetchJsonWithRetry<ListPostsResponse>(url, ISR_FETCH_INIT);
+  return fetchListLocalized(
+    `${SERVER_URL}${endpoints.post.list}`,
+    lang,
+    ISR_FETCH_INIT,
+  );
 }
 
 // ----------------------------------------------------------------------

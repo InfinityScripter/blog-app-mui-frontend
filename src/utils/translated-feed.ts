@@ -74,12 +74,14 @@ async function withColdCacheFallback<T>(
 }
 
 /**
- * Fetches a post list (`{ posts }`) in the active locale from `baseUrl` (which
- * already carries its own query, e.g. `?tag=…`), appending `&lang=` for a
- * translatable locale, with the cold-cache fallback above. The caller (an
- * ISR/SSR list page) gets translated titles on a warm cache and the original
- * (Russian) feed if a cold translation would time out. `ru` fetches the
- * byte-identical original with no fallback path.
+ * Fetches a post list (`{ posts }`) in the active locale from `baseUrl`,
+ * appending the `lang=` param for a translatable locale, with the cold-cache
+ * fallback above. The caller (an ISR/SSR list page) gets translated titles on a
+ * warm cache and the original (Russian) feed if a cold translation would time
+ * out. `ru` fetches the byte-identical original with no fallback path.
+ *
+ * The separator is derived from `baseUrl`: the tag/news feeds arrive with their
+ * own query (`?tag=…`), the home feed with none at all.
  */
 export function fetchListLocalized(
   baseUrl: string,
@@ -88,7 +90,7 @@ export function fetchListLocalized(
 ): Promise<ListPostsResponse> {
   const read = (at: AppLocale) =>
     fetchJsonWithRetry<ListPostsResponse>(
-      `${baseUrl}${langQuery(at, true)}`,
+      `${baseUrl}${langQuery(at, baseUrl.includes("?"))}`,
       init,
     );
   return withColdCacheFallback(
