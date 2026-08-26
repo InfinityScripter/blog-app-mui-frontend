@@ -7,12 +7,14 @@ import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import { useTranslations } from "next-intl";
 import { Image } from "src/components/image";
 import { fToNow } from "src/utils/format-time";
 import { coverSrc } from "src/utils/cover-src";
+import { toAppLocale } from "src/i18n/locales";
+import { tagLabel } from "src/utils/tag-labels";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
+import { useLocale, useTranslations } from "next-intl";
 import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
 import { maxLine, hairline, hoverLiftSx, monoValueSx } from "src/theme/styles";
@@ -30,6 +32,7 @@ export function PostItemFeedFeatured({ post }: PostItemFeedProps) {
   const { title, coverUrl, createdAt, totalViews, description, tags } = post;
 
   const t = useTranslations("blog");
+  const locale = toAppLocale(useLocale());
   const href = paths.post.details(post.id ?? "");
   const readingTime = post.readingTime ?? getReadingTime(post.content);
   const visibleTags = (tags ?? []).slice(0, MAX_TAGS);
@@ -59,7 +62,7 @@ export function PostItemFeedFeatured({ post }: PostItemFeedProps) {
           alignItems="center"
           sx={{ ...monoValueSx, color: "text.disabled" }}
         >
-          <Box component="span">{fToNow(createdAt)}</Box>
+          <Box component="span">{fToNow(createdAt, locale)}</Box>
           <InfoBlock
             icon="solar:clock-circle-bold"
             value={t("readingTime", { minutes: readingTime })}
@@ -97,7 +100,7 @@ export function PostItemFeedFeatured({ post }: PostItemFeedProps) {
             {visibleTags.map((tag) => (
               <Chip
                 key={tag}
-                label={tag}
+                label={tagLabel(tag, locale)}
                 size="small"
                 variant="outlined"
                 clickable

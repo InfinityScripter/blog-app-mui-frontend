@@ -1,23 +1,22 @@
 "use client";
 
 import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
-import { useTranslations } from "next-intl";
 import { useGetPost } from "src/actions/blog";
 import { fDate } from "src/utils/format-time";
+import { toAppLocale } from "src/i18n/locales";
 import { monoValueSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
-import { RouterLink } from "src/routes/components";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { usePostView } from "src/hooks/use-post-view";
+import { useLocale, useTranslations } from "next-intl";
 import { getReadingTime } from "src/utils/reading-time";
 import { useGetPublicSettings } from "src/actions/settings";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
@@ -30,6 +29,7 @@ import { PostFaq } from "../post-faq";
 import { PostItem } from "../post-item";
 import { PostBluf } from "../post-bluf";
 import { PostRelated } from "../post-related";
+import { PostDetailsTags } from "../post-details-tags";
 import { PostCommentList } from "../post-comment-list";
 import { PostCommentForm } from "../post-comment-form";
 import { PostDetailsHero } from "../post-details-hero";
@@ -45,6 +45,7 @@ export function PostDetailsHomeView({
   latestPosts,
 }: PostDetailsHomeViewProps) {
   const t = useTranslations("blog");
+  const locale = toAppLocale(useLocale());
   const { post, postMutate } = useGetPost(initialPost?._id);
   const { settings } = useGetPublicSettings();
   const currentPost = post || initialPost;
@@ -118,7 +119,7 @@ export function PostDetailsHomeView({
                 />
                 <Box component="span" sx={{ color: "primary.main" }}>
                   {t("updatedAt", {
-                    date: fDate(currentPost?.updatedAt) ?? "",
+                    date: fDate(currentPost?.updatedAt, locale) ?? "",
                   })}
                 </Box>
               </>
@@ -146,18 +147,7 @@ export function PostDetailsHomeView({
               borderBottom: `dashed 1px var(--palette-divider)`,
             }}
           >
-            <Stack direction="row" flexWrap="wrap" spacing={1}>
-              {currentPost?.tags.map((tag) => (
-                <Chip
-                  key={tag}
-                  label={tag}
-                  variant="outlined"
-                  clickable
-                  component={RouterLink}
-                  href={paths.tag.details(tag)}
-                />
-              ))}
-            </Stack>
+            <PostDetailsTags tags={currentPost?.tags ?? []} />
 
             <Stack direction="row" alignItems="center">
               <AvatarGroup>

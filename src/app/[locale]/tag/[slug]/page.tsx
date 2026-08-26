@@ -1,4 +1,5 @@
 import { CONFIG } from "src/config-global";
+import { tagLabel } from "src/utils/tag-labels";
 import { getTranslations } from "next-intl/server";
 import { getPosts, getPostsByTag } from "src/actions/blog-ssr";
 import { localizedAlternates } from "src/utils/seo-alternates";
@@ -32,9 +33,12 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug, locale } = await params;
   const decoded = safeDecode(slug);
   const t = await getTranslations({ locale, namespace: "tag.meta" });
+  // Title/description show the tag in the page's language; the URL below keeps
+  // the raw tag, which is the identity everywhere (routing, sitemap, backend).
+  const label = tagLabel(decoded, toAppLocale(locale));
   return {
-    title: t("title", { tag: decoded }),
-    description: t("description", { tag: decoded, site: CONFIG.site.name }),
+    title: t("title", { tag: label }),
+    description: t("description", { tag: label, site: CONFIG.site.name }),
     // Encode the raw (case-sensitive, possibly Cyrillic) tag; trailing slash
     // matches next.config trailingSlash:true.
     ...localizedAlternates(locale, `/tag/${encodeURIComponent(decoded)}/`),

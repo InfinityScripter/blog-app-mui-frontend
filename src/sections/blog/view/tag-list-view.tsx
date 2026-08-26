@@ -1,10 +1,12 @@
 "use client";
 
 import Stack from "@mui/material/Stack";
-import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
+import { toAppLocale } from "src/i18n/locales";
+import { tagLabel } from "src/utils/tag-labels";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
+import { useLocale, useTranslations } from "next-intl";
 
 import { PostList } from "../post-list";
 
@@ -16,6 +18,7 @@ import type { TagListViewProps } from "./types";
 // through activeTags so each card surfaces the matched tag first.
 export function TagListView({ tag, posts }: TagListViewProps) {
   const t = useTranslations("blog");
+  const locale = toAppLocale(useLocale());
 
   return (
     <Container>
@@ -24,7 +27,7 @@ export function TagListView({ tag, posts }: TagListViewProps) {
           {t("tag.overline")}
         </Typography>
         <Typography variant="h2" component="h1">
-          {tag}
+          {tagLabel(tag, locale)}
         </Typography>
       </Stack>
 

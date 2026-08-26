@@ -4,12 +4,14 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
-import { useTranslations } from "next-intl";
 import { useState, useCallback } from "react";
+import { toAppLocale } from "src/i18n/locales";
 import { monoLabelSx } from "src/theme/styles";
+import { tagLabel } from "src/utils/tag-labels";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import { useSearchPosts } from "src/actions/blog";
+import { useLocale, useTranslations } from "next-intl";
 import { useDebounceValue } from "@siberiacancode/reactuse";
 import { POST_SORT_OPTIONS } from "src/sections/blog/const";
 import { toggleTag, useFeedTags } from "src/sections/home/home-feed";
@@ -25,6 +27,7 @@ import type { PostListHomeViewProps } from "./types";
 
 export function PostListHomeView({ posts }: PostListHomeViewProps) {
   const t = useTranslations("blog");
+  const locale = toAppLocale(useLocale());
   const [sortBy, setSortBy] = useState("latest");
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -104,7 +107,7 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
             return (
               <Chip
                 key={tag}
-                label={tag}
+                label={tagLabel(tag, locale)}
                 clickable
                 onClick={() => handleToggleTag(tag)}
                 color={active ? "primary" : "default"}

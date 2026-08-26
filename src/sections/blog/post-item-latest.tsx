@@ -2,10 +2,12 @@ import type { Post } from "src/types/domain";
 
 import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
+import { useLocale } from "next-intl";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
+import { toAppLocale } from "src/i18n/locales";
 import { coverSrc } from "src/utils/cover-src";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -18,6 +20,7 @@ import { InfoBlock } from "./post-item-info-block";
 // ----------------------------------------------------------------------
 
 export function PostItemLatest({ post, index }: { post: Post; index: number }) {
+  const locale = toAppLocale(useLocale());
   const theme = useTheme();
 
   const linkTo = paths.post.details(String(post._id));
@@ -70,7 +73,7 @@ export function PostItemLatest({ post, index }: { post: Post; index: number }) {
           component="div"
           sx={{ mb: 1, opacity: 0.64 }}
         >
-          {fDate(post.createdAt)}
+          {fDate(post.createdAt, locale)}
         </Typography>
 
         <Link

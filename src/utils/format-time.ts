@@ -1,11 +1,14 @@
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
 
 // ----------------------------------------------------------------------
 
 dayjs.extend(relativeTime);
-// Russian-language news portal — dates read "20 июня 2026", not "20 Jun 2026".
+// The original locale is Russian — dates read "20 июня 2026", not "20 Jun 2026".
+// This global default keeps every caller that passes no locale unchanged;
+// callers on a localized page pass theirs to fDate instead.
 dayjs.locale("ru");
 
 /**
@@ -29,30 +32,46 @@ export const formatStr = {
 
 type DateInput = string | number | Date | dayjs.Dayjs | null | undefined;
 
-/** output: 17 Apr 2022
+/**
+ * output: 17 апреля 2022 (or "17 April 2022" for `locale: "en"`)
+ *
+ * `locale` is applied to THIS value only, never through `dayjs.locale()`: that
+ * setter is global, so an English page would flip the language of dates for
+ * every request being rendered at the same time. Omitting it keeps the original
+ * (Russian) rendering, so untouched callers behave exactly as before.
  */
-export function fDate(date: DateInput, format?: string): string | null {
+export function fDate(
+  date: DateInput,
+  locale?: AppLocale,
+  format?: string,
+): string | null {
   if (!date) {
     return null;
   }
 
-  const isValid = dayjs(date).isValid();
+  const value = dayjs(date).locale(locale ?? DEFAULT_LOCALE);
 
-  return isValid
-    ? dayjs(date).format(format ?? formatStr.date)
+  return value.isValid()
+    ? value.format(format ?? formatStr.date)
     : "Invalid time value";
 }
 
 // ----------------------------------------------------------------------
 
-/** output: a few seconds, 2 years
+/**
+ * output: несколько секунд, 2 года (or "a few seconds", "2 years" for `"en"`)
+ *
+ * Same per-value locale rule as fDate — never the global `dayjs.locale()`.
  */
-export function fToNow(date: DateInput): string | null {
+export function fToNow(
+  date: DateInput,
+  locale: AppLocale = DEFAULT_LOCALE,
+): string | null {
   if (!date) {
     return null;
   }
 
-  const isValid = dayjs(date).isValid();
+  const value = dayjs(date).locale(locale);
 
-  return isValid ? dayjs(date).toNow(true) : "Invalid time value";
+  return value.isValid() ? value.toNow(true) : "Invalid time value";
 }
