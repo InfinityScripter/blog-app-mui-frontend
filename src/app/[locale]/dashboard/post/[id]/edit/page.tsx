@@ -32,25 +32,8 @@ async function getPost(id: string): Promise<PostResponse> {
   return res.data;
 }
 
-/**
- * [1] Default
- * Remove [1] and [2] if not using [2]
- */
-const dynamic = CONFIG.isStaticExport ? "auto" : "force-dynamic";
-
-export { dynamic };
-
-/**
- * [2] Static exports
- * https://nextjs.org/docs/app/building-your-application/deploying/static-exports
- */
-export async function generateStaticParams(): Promise<Array<{ id: string }>> {
-  if (CONFIG.isStaticExport) {
-    const res = await axios.get<{ posts: Array<{ id: string }> }>(
-      endpoints.post.list,
-    );
-
-    return res.data.posts.map((post) => ({ id: post.id }));
-  }
-  return [];
-}
+// Литерал обязателен: вычисляемый `export { dynamic }` Next статически не
+// распознаёт и молча игнорирует (билд предупреждал «can't recognize the
+// exported dynamic field»). Ветка isStaticExport была мёртвой — next.config
+// жёстко инжектит BUILD_STATIC_EXPORT="false".
+export const dynamic = "force-dynamic";

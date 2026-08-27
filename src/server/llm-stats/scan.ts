@@ -18,6 +18,11 @@ import {
   CACHE_FILE,
 } from "src/server/llm-stats/cache";
 
+// catch отдаёт unknown; сужаем без type assertion (правило AGENTS.md №2).
+function errorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : String(err);
+}
+
 interface ScanRoots {
   claudeRoot?: string;
   codexRoot?: string;
@@ -72,7 +77,7 @@ function runOne(
       events: [],
       harness: null,
       files: 0,
-      warning: `${harness}: ${(err as Error).message}`,
+      warning: `${harness}: ${errorMessage(err)}`,
     };
   }
 }
@@ -130,7 +135,7 @@ export function runAdapters(roots: ScanRoots = {}): ScanResult {
       pruneCache(cache, live);
       saveCache(cache, cacheFile);
     } catch (err) {
-      cacheWarnings.push(`cache: ${(err as Error).message}`);
+      cacheWarnings.push(`cache: ${errorMessage(err)}`);
     }
   }
 

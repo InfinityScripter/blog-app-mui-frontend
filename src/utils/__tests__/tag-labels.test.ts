@@ -26,4 +26,12 @@ describe("tagLabel", () => {
   it("не зависит от регистра исходного тега", () => {
     expect(tagLabel("Новости", "en")).toBe("News");
   });
+
+  it("тег, совпадающий с ключом прототипа, отдаёт как есть, а не наследованное значение", () => {
+    // labels["constructor"] без hasOwnProperty вернул бы функцию из
+    // Object.prototype — React упал бы на «Functions are not valid as a child».
+    expect(tagLabel("constructor", "en")).toBe("constructor");
+    expect(tagLabel("__proto__", "en")).toBe("__proto__");
+    expect(tagLabel("hasOwnProperty", "en")).toBe("hasOwnProperty");
+  });
 });

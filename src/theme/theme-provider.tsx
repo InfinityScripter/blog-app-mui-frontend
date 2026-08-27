@@ -5,8 +5,10 @@ import type { SettingsState } from "src/types/domain";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSettingsContext } from "src/components/settings";
+// Стабильный ThemeProvider: CSS-vars режим (бывший Experimental_CssVarsProvider)
+// в него влит начиная с MUI v6 — тема из extendTheme включает его автоматически.
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-import { Experimental_CssVarsProvider as CssVarsProvider } from "@mui/material/styles";
 
 import { createTheme } from "./create-theme";
 import { RTL } from "./with-settings/right-to-left";
@@ -43,14 +45,14 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   return (
     <AppRouterCacheProvider options={{ key: "css" }}>
-      <CssVarsProvider
+      <MuiThemeProvider
         theme={theme}
         defaultMode={schemeConfig.defaultMode}
         modeStorageKey={schemeConfig.modeStorageKey}
       >
         <CssBaseline />
         <RTL direction={settings.direction}>{children}</RTL>
-      </CssVarsProvider>
+      </MuiThemeProvider>
     </AppRouterCacheProvider>
   );
 }

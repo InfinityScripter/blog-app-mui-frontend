@@ -54,5 +54,11 @@ export function tagLabel(
   locale: AppLocale = DEFAULT_LOCALE,
 ): string {
   const labels = LABELS_BY_LOCALE[locale];
-  return labels?.[tag.toLowerCase()] ?? tag;
+  const key = tag.toLowerCase();
+  // Прямой labels[key] прошёл бы по прототипной цепочке: тег "constructor"
+  // вернул бы Object.prototype.constructor (функцию) вместо строки.
+  if (labels && Object.prototype.hasOwnProperty.call(labels, key)) {
+    return labels[key];
+  }
+  return tag;
 }

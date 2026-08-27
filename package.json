@@ -86,6 +86,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^16.2.9",
+    "@next/eslint-plugin-next": "^15.4.8",
     "@playwright/test": "^1.60.0",
     "@types/autosuggest-highlight": "^3.2.3",
     "@types/better-sqlite3": "^7.6.13",

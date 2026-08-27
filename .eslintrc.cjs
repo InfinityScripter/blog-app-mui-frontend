@@ -7,7 +7,15 @@ module.exports = {
     "prettier",
     "@typescript-eslint",
   ],
-  extends: ["airbnb", "airbnb/hooks", "prettier"],
+  // @next/next: Next-специфичные правила (no-img-element, no-html-link-for-pages,
+  // core-web-vitals) — без него `next build` предупреждал «The Next.js plugin
+  // was not detected in your ESLint configuration».
+  extends: [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:@next/next/core-web-vitals",
+    "prettier",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
@@ -34,6 +42,40 @@ module.exports = {
    * 2 ~ 'error'
    */
   rules: {
+    // Airbnb-список запрещённого синтаксиса + while/do-while: правило CLAUDE.md
+    // «функциональный код вместо циклов» раньше жило только в доке и не
+    // энфорсилось (while в searchbar/utils.ts проходил lint).
+    "no-restricted-syntax": [
+      2,
+      {
+        selector: "ForInStatement",
+        message:
+          "for..in ходит и по прототипной цепочке. Используйте Object.{keys,values,entries} + map/filter/reduce.",
+      },
+      {
+        selector: "ForOfStatement",
+        message:
+          "for..of требует regenerator при es5-таргете. Используйте map/filter/reduce.",
+      },
+      {
+        selector: "WhileStatement",
+        message:
+          "while — императивный цикл. Используйте рекурсию или функциональные методы массивов.",
+      },
+      {
+        selector: "DoWhileStatement",
+        message:
+          "do..while — императивный цикл. Используйте рекурсию или функциональные методы массивов.",
+      },
+      {
+        selector: "LabeledStatement",
+        message: "Labels — форма GOTO, усложняют поток управления.",
+      },
+      {
+        selector: "WithStatement",
+        message: "`with` запрещён в strict mode и делает код непредсказуемым.",
+      },
+    ],
     "no-use-before-define": 0,
     "no-alert": 0,
     "no-undef": 0,

@@ -26,7 +26,7 @@ export interface FinanceRange {
   to?: string;
 }
 
-export type FinanceOperationsTarget = { bucket: string } | { source: string };
+type FinanceOperationsTarget = { bucket: string } | { source: string };
 
 const swrOptions = {
   revalidateOnFocus: false,

@@ -1,7 +1,5 @@
 // Contract types for /api/finance/* (mirrors the backend finance service).
 
-export type FinanceFlow = "income" | "expense" | "internal" | "wash";
-
 export interface FinanceMonth {
   ym: string;
   income: number;

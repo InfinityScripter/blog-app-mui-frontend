@@ -4,12 +4,12 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import { fDate } from "src/utils/format-time";
-import { toAppLocale } from "src/i18n/locales";
 import { useTheme } from "@mui/material/styles";
 import { RouterLink } from "src/routes/components";
-import { useLocale, useTranslations } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { maxLine, monoValueSx } from "src/theme/styles";
 
 import {
@@ -32,7 +32,7 @@ interface ReleaseCardProps {
  * пульсирующую vermilion-точку — единственная постоянная микро-анимация.
  */
 export function ReleaseCard({ release, sourceOnly = false }: ReleaseCardProps) {
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const theme = useTheme();
   const t = useTranslations("changelog");
   const linkTo = sourceOnly
