@@ -18,11 +18,13 @@ export function formatModelLabel(model: BotModel): string {
 }
 
 // Сужает строку (значение MUI Select) до union провайдера, иначе null.
-// Единственная точка приведения — остальной код остаётся без assertions.
+// Type predicate вместо assertions — как isAppLocale в src/i18n/locales.ts.
+function isControlProvider(value: string): value is ControlProviderName {
+  return BOT_PROVIDER_NAMES.some((name) => name === value);
+}
+
 export function toControlProvider(value: string): ControlProviderName | null {
-  return (BOT_PROVIDER_NAMES as readonly string[]).includes(value)
-    ? (value as ControlProviderName)
-    : null;
+  return isControlProvider(value) ? value : null;
 }
 
 // ----------------------------------------------------------------------

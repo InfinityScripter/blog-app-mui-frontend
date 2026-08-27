@@ -7,14 +7,14 @@ import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
+import { useTranslations } from "next-intl";
 import { Image } from "src/components/image";
 import { fToNow } from "src/utils/format-time";
 import { coverSrc } from "src/utils/cover-src";
-import { toAppLocale } from "src/i18n/locales";
 import { tagLabel } from "src/utils/tag-labels";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
-import { useLocale, useTranslations } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { getReadingTime } from "src/utils/reading-time";
 import { fShortenNumber } from "src/utils/format-number";
 import { maxLine, hairline, monoValueSx } from "src/theme/styles";
@@ -33,7 +33,7 @@ export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
   const { title, coverUrl, createdAt, totalViews, description, tags } = post;
 
   const t = useTranslations("blog");
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const href = paths.post.details(post.id ?? "");
   // List rows carry a precomputed readingTime (content is stripped for a lean
   // payload); fall back to deriving it where a full body is present.

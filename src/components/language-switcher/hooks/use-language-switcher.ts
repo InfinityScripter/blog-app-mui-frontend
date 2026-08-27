@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { useLocale } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { useRouter, usePathname } from "src/routes/hooks";
 import { LOCALES, LOCALE_META, type AppLocale } from "src/i18n/locales";
 
@@ -16,23 +16,14 @@ interface UseLanguageSwitcher {
   change: (next: AppLocale) => void;
 }
 
-// The active locale comes from next-intl (URL-derived). Switching replaces the
-// current route under the new locale prefix — the locale-aware router keeps the
-// same pathname and swaps only the prefix. useLocale() returns a plain string,
-// so narrow it back to AppLocale (routing guarantees it is one of LOCALES)
-// without a type assertion.
-function isAppLocale(value: string): value is AppLocale {
-  return LOCALES.some((locale) => locale === value);
-}
-
-function toAppLocale(value: string): AppLocale {
-  return isAppLocale(value) ? value : "ru";
-}
-
+// The active locale comes from next-intl (URL-derived, narrowed to AppLocale
+// by useAppLocale — the file used to keep its own toAppLocale copy). Switching
+// replaces the current route under the new locale prefix — the locale-aware
+// router keeps the same pathname and swaps only the prefix.
 export function useLanguageSwitcher(): UseLanguageSwitcher {
   const router = useRouter();
   const pathname = usePathname();
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
 
   const change = useCallback(
     (next: AppLocale) => {

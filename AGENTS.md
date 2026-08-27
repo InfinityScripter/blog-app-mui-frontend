@@ -19,9 +19,15 @@ Port **3033** (`npm run dev`). Backend is a separate repo on port 7272.
 1. **kebab-case files/folders, named-export functions.** Never PascalCase a
    filename. Never mass-rename. The codebase is kebab-case — keep it.
 2. **No `any`. No type assertions (`as` / `as const` / `as unknown as`).** Fix
-   the cause: annotate the source, or use `unknown` + a runtime narrow. The only
-   sanctioned `as` is a documented third-party-type augmentation in
-   `src/types/*.d.ts` (e.g. `theme.vars`), never inline at a call site.
+   the cause: annotate the source, or use `unknown` + a runtime narrow (type
+   predicate — see `isAppLocale` in `src/i18n/locales.ts`). Sanctioned `as`,
+   exhaustively: (a) a documented third-party-type augmentation in
+   `src/types/*.d.ts` (e.g. `theme.vars`); (b) typing raw IO at a boundary —
+   `JSON.parse(...) as X` in `src/server/llm-stats/**` and the generic
+   `as T` in `src/utils/fetch-retry.ts`, where the shape is trusted input and a
+   zod schema would be dead weight; (c) the `TypedAutocomplete` workaround in
+   `rhf-autocomplete.tsx` for MUI's too-generic props. Never add a new inline
+   `as` outside these three classes.
 3. **String params with a fixed value set are a union/enum**, never bare
    `string`. e.g. `type Variant = "filled" | "outlined"`.
 4. **No suppressions.** `@ts-nocheck` / `@ts-ignore` are **banned by lint**
@@ -96,6 +102,18 @@ E2E (`yarn e2e`) needs the backend on :7272 **and Postgres running** — a backe
   `scan.ts`. Costs are estimates from `pricing.ts`, not billing.
 - `src/server/llm-stats/**` must stay React-free; the section
   (`src/sections/admin/llm-stats/`) is presentation only.
+
+## Finance dashboard
+
+- Route `/dashboard/finance` (admin-guarded, скрытая страница) — учёт личных
+  финансов по выпискам Т-Банка: импорт/экспорт, месячные срезы, дрилл-даун до
+  операции, скрытие сумм (`finance-privacy.tsx`).
+- Contract: `/api/finance/*` (`endpoints.finance` в `src/utils/axios.ts`),
+  типы — `src/types/finance.ts` (зеркалят backend finance service).
+  Классификация категорий живёт на бэке (`services/finance-classify.ts`);
+  новая категория без записи в `category-icons.ts` получает нейтральный фолбэк.
+- Section: `src/sections/finance/` (view + widgets + hooks), SWR через
+  `src/actions/finance.ts`. Unit-тесты — Vitest (`__tests__/`).
 
 ## Out of scope
 

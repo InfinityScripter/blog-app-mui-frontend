@@ -1,4 +1,6 @@
-import "./code-highlight-block.css";
+// Общая тема подсветки с markdown-рендерером: селектор `pre code` покрывает и
+// NodeViewContent редактора (code[as='code']). Своя копия файла дрейфовала.
+import "../../markdown/code-highlight-block.css";
 
 import type { NodeViewProps } from "@tiptap/react";
 

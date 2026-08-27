@@ -2,14 +2,9 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    include: [
-      "src/server/llm-stats/**/*.test.ts",
-      "src/app/**/*.test.ts",
-      "src/components/**/*.test.ts",
-      "src/utils/**/*.test.ts",
-      "src/routes/**/*.test.ts",
-      "src/sections/**/*.test.ts",
-    ],
+    // Весь src: точечный список директорий молча терял тесты, добавленные в
+    // не перечисленные места (actions/, hooks/, auth/, layouts/).
+    include: ["src/**/*.test.{ts,tsx}"],
     environment: "node",
   },
   resolve: {

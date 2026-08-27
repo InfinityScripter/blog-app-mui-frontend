@@ -6,9 +6,9 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
+import { useTranslations } from "next-intl";
 import { useGetPost } from "src/actions/blog";
 import { fDate } from "src/utils/format-time";
-import { toAppLocale } from "src/i18n/locales";
 import { monoValueSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import { Markdown } from "src/components/markdown";
 import AvatarGroup from "@mui/material/AvatarGroup";
 import { usePostView } from "src/hooks/use-post-view";
-import { useLocale, useTranslations } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { getReadingTime } from "src/utils/reading-time";
 import { useGetPublicSettings } from "src/actions/settings";
 import { CustomBreadcrumbs } from "src/components/custom-breadcrumbs";
@@ -45,7 +45,7 @@ export function PostDetailsHomeView({
   latestPosts,
 }: PostDetailsHomeViewProps) {
   const t = useTranslations("blog");
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const { post, postMutate } = useGetPost(initialPost?._id);
   const { settings } = useGetPublicSettings();
   const currentPost = post || initialPost;

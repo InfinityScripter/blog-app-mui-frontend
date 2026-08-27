@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import Link from "next/link";
 import { CONFIG } from "src/config-global";
 
 // Root-level 404 for paths that never enter a `[locale]` segment (the locale
@@ -26,7 +27,7 @@ function RootNotFound(): ReactNode {
         <div style={{ textAlign: "center" }}>
           <h1 style={{ fontSize: 48, margin: 0 }}>404</h1>
           <p>
-            <a href="/ru">На главную</a>
+            <Link href="/ru">На главную</Link>
           </p>
         </div>
       </body>

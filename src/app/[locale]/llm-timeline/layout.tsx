@@ -1,17 +1,16 @@
 import type { ReactNode } from "react";
 
 import { MainLayout } from "src/layouts/main";
+
 // ----------------------------------------------------------------------
-import { AuthProvider } from "src/auth/context/jwt";
+// Только MainLayout: AuthProvider уже оборачивает всё дерево в
+// src/app/[locale]/layout.tsx — второй экземпляр здесь дублировал бы
+// GET /me на каждый просмотр страницы.
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
-  return (
-    <AuthProvider>
-      <MainLayout>{children}</MainLayout>
-    </AuthProvider>
-  );
+  return <MainLayout>{children}</MainLayout>;
 }

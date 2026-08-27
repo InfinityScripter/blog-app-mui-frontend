@@ -57,33 +57,23 @@ export function applyFilter({
 // ----------------------------------------------------------------------
 
 function splitPath(array: SearchLoopItem[], key: string): string[] | null {
-  let stack: { path: string[]; currItem: SearchLoopItem }[] = array.map(
-    (item) => ({ path: [item.title ?? ""], currItem: item }),
-  );
-
-  while (stack.length) {
-    const popped = stack.pop();
-
-    if (!popped) {
-      break;
+  return array.reduce<string[] | null>((found, item) => {
+    if (found) {
+      return found;
     }
 
-    const { path, currItem } = popped;
+    const path = [item.title ?? ""];
 
-    if (currItem.path === key) {
+    if (item.path === key) {
       return path;
     }
 
-    if (currItem.children?.length) {
-      stack = stack.concat(
-        currItem.children.map((item) => ({
-          path: path.concat(item.title ?? ""),
-          currItem: item,
-        })),
-      );
-    }
-  }
-  return null;
+    const childMatch = item.children?.length
+      ? splitPath(item.children, key)
+      : null;
+
+    return childMatch ? path.concat(childMatch) : null;
+  }, null);
 }
 
 // ----------------------------------------------------------------------

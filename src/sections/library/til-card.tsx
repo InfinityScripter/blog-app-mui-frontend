@@ -2,11 +2,11 @@ import Link from "@mui/material/Link";
 import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { fDate } from "src/utils/format-time";
-import { toAppLocale } from "src/i18n/locales";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { useLocale, useTranslations } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 
 import type { TilItem } from "./types";
 
@@ -18,7 +18,7 @@ interface TilCardProps {
 
 /** One TIL note: date, title, body, tag chips, and an optional source link. */
 export function TilCard({ til }: TilCardProps) {
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const t = useTranslations("library");
 
   return (

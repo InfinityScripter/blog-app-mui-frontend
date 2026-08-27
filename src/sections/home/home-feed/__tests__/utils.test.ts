@@ -15,7 +15,7 @@ import {
 // Only the fields these helpers read matter (id/tags/publish/createdAt); the
 // rest is padded to satisfy the Post shape without pulling in a fixture factory.
 function makePost(overrides: Partial<Post>): Post {
-  const base = {
+  const base: Post = {
     id: "id-1",
     publish: PUBLISH_STATUS.published,
     title: "Заголовок",
@@ -24,8 +24,14 @@ function makePost(overrides: Partial<Post>): Post {
     metaKeywords: [],
     favoritePerson: [],
     comments: [],
+    totalViews: 0,
+    totalShares: 0,
+    totalComments: 0,
+    totalFavorites: 0,
+    userId: "user-1",
+    author: { name: "Автор" },
   };
-  return { ...base, ...overrides } as Post;
+  return { ...base, ...overrides };
 }
 
 describe("rankPostTags", () => {

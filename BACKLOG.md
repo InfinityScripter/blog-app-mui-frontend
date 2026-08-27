@@ -209,14 +209,54 @@ searchbar на функциональный обход), либо смягчит
 
 ---
 
-## Порядок работ (рекомендация)
+## Статус выполнения (2026-08-27, та же ветка)
 
-1. **Скоп «за один присест»:** A1 + A3 + B1 + C1 + C4 + B7 (все XS, каждый — с
-   тестом/проверкой гейта).
-2. **Скоп «роутинг/доки»:** B2 + B4 + C7 (связаны: код и доки чинятся вместе).
-3. **Скоп «lint»:** B3 + C6 (+ решение по B6) — один PR по конфигу ESLint.
-4. A2, B5, C2 — отдельными маленькими PR.
-5. C3 — миноры сейчас, мажоры по одному; C5 — спланировать отдельно.
+**Сделано (в этом PR):**
+
+- **A1** — `tagLabel` через `hasOwnProperty.call` + тесты на
+  `constructor`/`__proto__`/`hasOwnProperty`.
+- **A2** — литеральный `export const dynamic = "force-dynamic"` в обеих
+  dashboard-страницах; мёртвая ветка `isStaticExport` и вестигиальный
+  `generateStaticParams` удалены.
+- **A3** — `DAY` в тестах `fDate` переведён на локальный полдень без `Z`.
+- **B1** — 4 типа разэкспортированы/удалены, `yarn knip` = 0.
+- **B2** — 8 роут-layout'ов стали `MainLayout`-only; один `AuthProvider` на
+  дерево, один `GET /me` на просмотр.
+- **B3** — `@next/eslint-plugin-next` подключён
+  (`plugin:@next/next/core-web-vitals`); сразу поймал и починен реальный кейс:
+  `<a href="/ru">` → `next/link` в корневом `not-found.tsx`.
+- **B4** — готча №1 CLAUDE.md переписана под `[locale]`-структуру, сниппет
+  теперь `MainLayout`-only, добавлено правило «не оборачивать AuthProvider»;
+  упоминания vitest-allow-list и места скрипта темы актуализированы.
+- **B5** — `experimental_extendTheme` → стабильный `extendTheme`,
+  `Experimental_CssVarsProvider` → стабильный `ThemeProvider`
+  (`defaultMode`/`modeStorageKey` поддерживает); шим
+  `mui-deprecated-shims.d.ts` удалён.
+- **B6** — устранимые ассерты переписаны: `(err as Error)` → narrowing-хелпер
+  в `scan.ts`, `toControlProvider` → type predicate, тестовый `as Post` →
+  полный типизированный фикстур-объект. Оставшиеся классы (IO-boundary
+  `JSON.parse as` в `src/server/llm-stats/**`, `as T` в `fetch-retry`,
+  `TypedAutocomplete`) явно задокументированы в правиле №2 AGENTS.md как
+  исчерпывающий список исключений.
+- **B7** — CSS подсветки один (`components/markdown/code-highlight-block.css`),
+  редактор импортирует его; копия удалена.
+- **C1** — vitest include = `src/**/*.test.{ts,tsx}`.
+- **C2** — хук `src/hooks/use-app-locale.ts`; 16 компонентов + языковой свитчер
+  (у которого была ещё и своя локальная копия `toAppLocale`) переведены на него.
+- **C4** — knip в CI переведён в блокирующий гейт (`|| true` убран).
+- **C6** — `while` в searchbar переписан рекурсивным `reduce`;
+  `no-restricted-syntax` (airbnb-список + While/DoWhile) закреплён в
+  `.eslintrc.cjs` как error.
+- **C7** — раздел «Finance dashboard» добавлен в AGENTS.md.
+
+**Осталось (осознанно вне этого PR):**
+
+- **C3** — bump зависимостей: миноры скопом отдельным PR (next 15.5.x — патчи
+  безопасности, axios, tiptap, playwright); мажоры по одному (eslint 8 EOL →
+  10 + flat config, knip 6, react-hooks 7, apexcharts 7, framer-motion 13);
+  next 16 / MUI 9 — отдельное решение. Не смешивать с код-фиксами.
+- **C5** — автозапуск e2e: nightly workflow с docker-compose бэкенда или
+  прод-smoke сабсет. Требует инфраструктуры backend-репо — решение владельца.
 
 Что НЕ трогать: публичный /llm-stats не отстраивать (решение владельца,
 см. IMPROVEMENT-PLAN.md); секции изоляцию, SSG-guard'ы, i18n-паритет — уже

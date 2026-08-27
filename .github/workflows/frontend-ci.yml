@@ -15,8 +15,10 @@ name: frontend-ci
 #
 # Intentionally NOT gated here:
 #  - e2e: requires a running backend + seeded Postgres; too heavy for this gate.
-#  - knip: reports false positives for some live features, so it runs as a
-#    non-blocking report rather than a hard gate.
+#  - (knip is a hard gate since 2026-08-27: the report is at zero and the known
+#    false positives — critters, depcheck — live in knip.json ignoreDependencies.
+#    A new false positive goes into that ignore list with a comment, the gate
+#    stays blocking.)
 
 on:
   pull_request:
@@ -62,5 +64,5 @@ jobs:
           NEXT_PUBLIC_SERVER_URL: https://api.aifirst.us.com:8444
           NEXT_PUBLIC_ASSET_URL: https://api.aifirst.us.com:8444
 
-      - name: Dead-code report (non-blocking)
-        run: yarn knip || true
+      - name: Dead-code check
+        run: yarn knip

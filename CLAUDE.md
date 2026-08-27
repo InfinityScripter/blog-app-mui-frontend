@@ -14,28 +14,32 @@ Next.js 15 (App Router) + React 19, MUI v7, TypeScript. Port 3033.
 
 ### 1. Header/footer: every top-level public route needs its own `layout.tsx`
 
-The root `src/app/layout.tsx` wraps **only** `AuthProvider` — it does **not**
-render `MainLayout`. The site header + footer come from `MainLayout`, and each
-public route mounts it via its own `src/app/<route>/layout.tsx`:
+Public routes live under `src/app/[locale]/<route>/` (`localePrefix: "always"`).
+The root `src/app/layout.tsx` is a bare passthrough (site-wide metadata only);
+the whole provider tree — `AuthProvider`, `ThemeProvider`, fonts, `<html lang>`
+— lives in `src/app/[locale]/layout.tsx`. The site header + footer come from
+`MainLayout`, and each public route mounts it via its own
+`src/app/[locale]/<route>/layout.tsx`:
 
 ```tsx
-import { MainLayout } from "src/layouts/main";
-import { AuthProvider } from "../../auth/context/jwt";
+import type { ReactNode } from "react";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <AuthProvider>
-      <MainLayout>{children}</MainLayout>
-    </AuthProvider>
-  );
+import { MainLayout } from "src/layouts/main";
+
+export default function Layout({ children }: { children: ReactNode }) {
+  return <MainLayout>{children}</MainLayout>;
 }
 ```
 
-- Have it: `llm-timeline`, `changelog`, `news`, `llm-compare`, `library`.
-- Routes inside the `(index)` route group (home, `portfolio`) inherit
-  `src/app/(index)/layout.tsx`.
+- Have it: `news`, `changelog`, `library`, `llm-compare`, `llm-timeline`,
+  `newsletter`, `post`, `tag/[slug]`.
+- Routes inside the `(index)` route group (home) inherit
+  `src/app/[locale]/(index)/layout.tsx`.
 - **A new top-level route without `layout.tsx` renders with no header/footer.**
   Always add it. (This bit us — fixed in PR #18 for `/llm-compare`, `/library`.)
+- **Do NOT wrap `AuthProvider` in route layouts** — `[locale]/layout.tsx`
+  already provides it; a second instance fires a duplicate `GET /me` on every
+  page view (this bit us: 8 layouts double-wrapped it, fixed 2026-08-27).
 - **Do NOT double-wrap `MainLayout`.** A nested layout above an already-wrapped
   one renders two headers/footers (the `changelog/[slug]` bug, PR #14).
 
@@ -81,8 +85,9 @@ discrepancy with `llm-compare`/`library` is expected, not a regression.
 - Run all: `npm run test:unit` · one file: `npx vitest run <path>`.
 - Test files **must** explicitly `import { it, expect, describe } from "vitest"`
   — there are no globals (else `describe is not defined`).
-- `vitest.config.ts` `include` is an allow-list of dirs; `__tests__/*.test.ts`
-  inside a section is picked up. (Jest is the **backend's** runner only.)
+- `vitest.config.ts` `include` covers **all of `src`** (`src/**/*.test.{ts,tsx}`)
+  — a test file anywhere under `src` is picked up. (Jest is the **backend's**
+  runner only.)
 
 ### 4. `max-lines` is locked at error (200)
 
@@ -132,7 +137,7 @@ would drift. Keep such cross-section imports display-only and rare.
 - **MUI v7**: `Grid` (не `Grid2`); загрузка у `Button` — через пропсы `loadingIndicator` / `loadingPosition`
 - **Формы**: React Hook Form + Zod через `src/components/hook-form/`; использовать `RHF*`-компоненты (`RHFTextField` и т.д.) — сырые MUI-инпуты в формах не применять
 - **Навигация**: только через `src/routes/hooks` (ре-экспорт `next/navigation`) и константы `src/routes/paths.ts`
-- **Тема без мигания**: скрипт цветовой схемы инжектится в корневой `layout.tsx` App Router — не переносить его в клиентский компонент
+- **Тема без мигания**: скрипт цветовой схемы (`InitColorSchemeScript`) инжектится в `src/app/[locale]/layout.tsx` — не переносить его в клиентский компонент
 - **Пути к API**: все объявлены в `endpoints` внутри `src/utils/axios.ts` — не разбрасывать по компонентам
 
 ### 9. Guard every SSG/ISR fetch
