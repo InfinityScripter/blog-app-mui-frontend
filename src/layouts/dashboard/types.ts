@@ -19,8 +19,10 @@ export interface MainProps {
   sx?: SxProps<Theme>;
 }
 
-export interface DashboardContentProps
-  extends Omit<ContainerProps, "maxWidth"> {
+export interface DashboardContentProps extends Omit<
+  ContainerProps,
+  "maxWidth"
+> {
   sx?: SxProps<Theme>;
   children: ReactNode;
   disablePadding?: boolean;

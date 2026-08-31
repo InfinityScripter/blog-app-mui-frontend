@@ -4,12 +4,7 @@
 // получит нейтральный фолбэк, страница не сломается.
 
 type FinanceIconColor =
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | "error";
+  "primary" | "secondary" | "info" | "success" | "warning" | "error";
 
 interface FinanceIcon {
   icon: string;

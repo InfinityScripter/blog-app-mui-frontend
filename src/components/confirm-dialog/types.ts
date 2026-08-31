@@ -3,8 +3,10 @@ import type { DialogProps } from "@mui/material/Dialog";
 
 // ----------------------------------------------------------------------
 
-export interface ConfirmDialogProps
-  extends Omit<DialogProps, "title" | "content"> {
+export interface ConfirmDialogProps extends Omit<
+  DialogProps,
+  "title" | "content"
+> {
   title?: ReactNode;
   content?: ReactNode;
   action?: ReactNode;
