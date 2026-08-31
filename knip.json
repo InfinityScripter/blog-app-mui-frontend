@@ -7,5 +7,5 @@
   ],
   "project": ["src/**/*.{ts,tsx,js,jsx}"],
   "ignoreDependencies": ["critters", "depcheck"],
-  "ignoreBinaries": ["madge"]
+  "ignoreBinaries": ["psql"]
 }
