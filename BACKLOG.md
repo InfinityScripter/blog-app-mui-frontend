@@ -249,14 +249,46 @@ searchbar на функциональный обход), либо смягчит
   `.eslintrc.cjs` как error.
 - **C7** — раздел «Finance dashboard» добавлен в AGENTS.md.
 
-**Осталось (осознанно вне этого PR):**
+## Статус выполнения — цикл 2 (2026-08-31, автономный проход)
 
-- **C3** — bump зависимостей: миноры скопом отдельным PR (next 15.5.x — патчи
-  безопасности, axios, tiptap, playwright); мажоры по одному (eslint 8 EOL →
-  10 + flat config, knip 6, react-hooks 7, apexcharts 7, framer-motion 13);
-  next 16 / MUI 9 — отдельное решение. Не смешивать с код-фиксами.
-- **C5** — автозапуск e2e: nightly workflow с docker-compose бэкенда или
-  прод-smoke сабсет. Требует инфраструктуры backend-репо — решение владельца.
+**Сделано:**
+
+- **C3, часть 1 (миноры)** — все wanted-версии скопом: next 15.5.24
+  (security-патчи), axios 1.20, tiptap 3.30, @mui/material 7.3.11 (+system
+  выровнен), playwright 1.62, prettier 3.9 (+переформат 16 файлов) и т.д.
+- **C3, часть 2–3 (мажоры)** — сделаны: @vercel/analytics 2, apexcharts 7 +
+  react-apexcharts 2, framer-motion 13, mui-one-time-password-input 7, knip 6
+  (конфиг приведён к его новым подсказкам). Попробованы и откачены с
+  причинами: eslint-plugin-perfectionist 5 (переименованы группы
+  sort-imports — миграция не стоит выгоды), better-sqlite3 13 и lint-staged
+  17 (engines node>=22, а CI/Vercel на Node 20). По-прежнему отложены:
+  eslint 8→10 (airbnb несовместим с flat config), next 16 / MUI 9 (отдельное
+  решение владельца).
+- **C5 (в дешёвой форме)** — ночной read-only прод-смоук: workflow
+  `prod-smoke.yml` (04:12 UTC + ручной запуск) гоняет `e2e/public.spec.ts`
+  против aifirst.us.com; `E2E_BASE_URL` в playwright.config отключает
+  webServer, fixtures сеют куку `NEXT_LOCALE=ru` (иначе geo-middleware отдал
+  бы /en US-раннеру) и блокируют не-GET `/api/*` и маяки `/_vercel/*`;
+  артефакты трейсов грузятся при падении. Полные e2e с бэкендом — по-прежнему
+  ручные (docker-compose инфраструктура — отдельное решение).
+- **Тесты** — searchbar utils покрыты (getAllItems/applyFilter/groupItems,
+  включая рекурсивный splitPath): 222 теста.
+- **Самоулучшающийся пайплайн** — заведён еженедельный Routine
+  «Авто-улучшение blog-app-mui-frontend» (пн 03:00 UTC, свежая сессия):
+  прогоняет гейты, бампит миноры, гоняет /code-review high, чинит находки и
+  открывает draft-PR с ветки `claude/auto-improve`; мержит только владелец.
+  Управление — в списке Routines на claude.ai.
+- Дифф этого цикла прогнан через /code-review high: 6 находок (Node-engines
+  в CI, geo-локаль в смоуке, флак _rsc-ассерта, отсутствие артефактов при
+  падении, маяки аналитики, $schema knip) — все исправлены до пуша.
+
+**Осталось (решения владельца):**
+
+- eslint 8 (EOL) → 10: ждёт совместимости airbnb-конфига с flat config либо
+  решения сменить базовый конфиг.
+- next 16 / MUI 9 — крупные мажоры, отдельными PR после ручной проверки UI.
+- Полные e2e (auth/CRUD) в CI — нужна docker-compose инфраструктура
+  backend-репо.
 
 Что НЕ трогать: публичный /llm-stats не отстраивать (решение владельца,
 см. IMPROVEMENT-PLAN.md); секции изоляцию, SSG-guard'ы, i18n-паритет — уже
