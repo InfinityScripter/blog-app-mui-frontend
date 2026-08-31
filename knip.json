@@ -2,12 +2,8 @@
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
     "src/app/**/{page,layout,loading,error,not-found,template,default,route}.{ts,tsx}",
-    "src/i18n/request.ts",
     "src/app/**/{sitemap,robots,manifest,icon,apple-icon,opengraph-image,twitter-image}.{ts,tsx}",
-    "next.config.mjs",
-    "playwright.config.ts",
-    "e2e/**/*.spec.ts",
-    "e2e/global-setup.ts"
+    "e2e/**/*.spec.ts"
   ],
   "project": ["src/**/*.{ts,tsx,js,jsx}"],
   "ignoreDependencies": ["critters", "depcheck"],
