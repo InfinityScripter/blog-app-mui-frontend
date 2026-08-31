@@ -108,7 +108,12 @@ test.describe("public pages", () => {
 
     expect(await page.evaluate(() => window.scrollY)).toBe(beforeScrollY);
     expect(Math.abs(afterTabs.x - beforeTabs.x)).toBeLessThanOrEqual(1);
-    expect(rscRequests).toEqual([]);
+    // Против next dev ноль _rsc-запросов — надёжный признак «таб не навигация».
+    // На проде next/link префетчит ссылки во вьюпорте теми же ?_rsc=-запросами
+    // в непредсказуемый момент, так что там это ассертить нельзя (флак).
+    if (!process.env.E2E_BASE_URL) {
+      expect(rscRequests).toEqual([]);
+    }
   });
 
   // A post *detail* link: under <main> (excludes the nav "Блог" link, whose

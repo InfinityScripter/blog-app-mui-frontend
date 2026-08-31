@@ -61,16 +61,20 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      // Locally tests run in Yandex Browser (Chromium-based, no bundled
-      // browser download needed); CI has no Yandex Browser and uses the
-      // bundled Playwright chromium.
+      // Приоритет бинаря: явный E2E_CHROMIUM_PATH (любая машина с готовым
+      // Chromium — напр. /opt/pw-browsers/chromium в облачных сессиях) →
+      // в CI бандловый Playwright-chromium → локально Yandex Browser
+      // (Chromium-based, без скачивания бандла).
       use: {
         ...devices["Desktop Chrome"],
-        launchOptions: process.env.CI
-          ? {}
-          : {
-              executablePath: "/Applications/Yandex.app/Contents/MacOS/Yandex",
-            },
+        launchOptions: process.env.E2E_CHROMIUM_PATH
+          ? { executablePath: process.env.E2E_CHROMIUM_PATH }
+          : process.env.CI
+            ? {}
+            : {
+                executablePath:
+                  "/Applications/Yandex.app/Contents/MacOS/Yandex",
+              },
       },
     },
   ],

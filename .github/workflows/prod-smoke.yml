@@ -45,3 +45,17 @@ jobs:
         env:
           E2E_BASE_URL: https://aifirst.us.com
           CI: "true"
+
+      # Ночной прогон никто не смотрит живьём — без артефактов красный ран
+      # неотлаживаем (list-репортер и всё). Трейсы/скриншоты пишутся в
+      # test-results/ по playwright.config (on-first-retry / only-on-failure).
+      - name: Upload traces and screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-smoke-failure
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 14
+          if-no-files-found: ignore
