@@ -1,0 +1,47 @@
+name: prod-smoke
+
+# Ночной read-only смоук живого прода: публичные страницы, навигация,
+# карточки, 404. Гоняет ТОЛЬКО e2e/public.spec.ts против https://aifirst.us.com
+# — авторизационные и CRUD-спеки требуют локального бэкенда и сюда не входят.
+# E2E_BASE_URL включает в playwright.config режим «внешний URL»: webServer не
+# поднимается, а fixtures блокируют все не-GET запросы к /api/, так что прогон
+# ничего не пишет в прод (закрывает пункт C5 бэклога в его дешёвой форме).
+#
+# Красный прогон здесь = реальная регрессия на проде или падение прода —
+# не «флак инфраструктуры»: спеки читают только то, что видит любой посетитель.
+
+on:
+  schedule:
+    # 04:12 UTC ежедневно — вне часов деплоев, минута не :00, чтобы не
+    # толкаться с толпой чужих cron-задач GitHub.
+    - cron: "12 4 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: prod-smoke
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install Playwright chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run public smoke against prod
+        run: npx playwright test e2e/public.spec.ts
+        env:
+          E2E_BASE_URL: https://aifirst.us.com
+          CI: "true"

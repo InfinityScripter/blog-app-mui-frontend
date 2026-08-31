@@ -63,6 +63,14 @@ async function login(
 }
 
 /**
+ * Прод-смоук (E2E_BASE_URL задан) обязан быть строго read-only: все не-GET
+ * запросы к /api/ блокируются на уровне браузера, чтобы прогоны не писали в
+ * прод (счётчики просмотров и т.п. — fire-and-forget с catch, абор безвреден).
+ * Локальных прогонов guard не касается.
+ */
+const READ_ONLY = Boolean(process.env.E2E_BASE_URL);
+
+/**
  * `authedPage` logs in via the real sign-in form before the test body runs,
  * so authenticated routes (dashboard, admin) are reachable.
  */
@@ -70,6 +78,14 @@ export const test = base.extend<{
   authedPage: import("@playwright/test").Page;
   nonAdminPage: import("@playwright/test").Page;
 }>({
+  page: async ({ page }, use) => {
+    if (READ_ONLY) {
+      await page.route("**/api/**", (route) =>
+        route.request().method() === "GET" ? route.continue() : route.abort(),
+      );
+    }
+    await use(page);
+  },
   authedPage: async ({ page }, use) => {
     await login(page, DEMO_USER);
     await use(page);

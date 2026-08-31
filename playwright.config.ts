@@ -19,7 +19,11 @@ import { defineConfig, devices } from "@playwright/test";
  */
 
 const PORT = Number(process.env.E2E_PORT ?? 3055);
-const BASE_URL = `http://localhost:${PORT}`;
+// Прод-смоук: E2E_BASE_URL=https://… гоняет read-only спеки против живого
+// сайта — без webServer и без бэкенда (global-setup сам скипает сид, а
+// fixtures блокируют не-GET запросы к /api/). См. prod-smoke.yml.
+const EXTERNAL_URL = process.env.E2E_BASE_URL;
+const BASE_URL = EXTERNAL_URL ?? `http://localhost:${PORT}`;
 const PROD = process.env.E2E_PROD === "1";
 
 // Invoke the local Next binary directly: the webServer command runs via
@@ -70,11 +74,16 @@ export default defineConfig({
       },
     },
   ],
-  webServer: {
-    command: PROD ? prodCommand : devCommand,
-    url: BASE_URL,
-    reuseExistingServer: !process.env.CI,
-    // Next cold dev compile (or a full prod build) can take a while.
-    timeout: PROD ? 300_000 : 180_000,
-  },
+  // Против внешнего URL локальный сервер не поднимается.
+  ...(EXTERNAL_URL
+    ? {}
+    : {
+        webServer: {
+          command: PROD ? prodCommand : devCommand,
+          url: BASE_URL,
+          reuseExistingServer: !process.env.CI,
+          // Next cold dev compile (or a full prod build) can take a while.
+          timeout: PROD ? 300_000 : 180_000,
+        },
+      }),
 });
