@@ -1,5 +1,6 @@
 // Note: Do not import SWR in SSR helpers to avoid RSC import issues
 
+import type { LlmModel } from "src/sections/llm-timeline/types";
 import type { Post, Comment, PublishStatus } from "src/types/domain";
 import type {
   PostResponse,
@@ -146,6 +147,21 @@ export async function getReleases(): Promise<ListReleasesResponse> {
   ];
 
   return { releases, total: firstPage.total };
+}
+
+// ----------------------------------------------------------------------
+
+/**
+ * Timeline entries published by the changelog job — editorial text for models
+ * that have no hand-written entry in the static data. Same ISR window and the
+ * same "throw, don't cache empty" rule as the changelog.
+ */
+export async function getTimelineModels(): Promise<LlmModel[]> {
+  const { models } = await fetchJsonWithRetry<{ models: LlmModel[] }>(
+    `${SERVER_URL}${endpoints.llmTimeline.list}`,
+    CHANGELOG_FETCH_INIT,
+  );
+  return models;
 }
 
 // ----------------------------------------------------------------------

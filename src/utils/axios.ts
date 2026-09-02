@@ -165,6 +165,9 @@ export const endpoints = {
     list: "/api/changelog/list",
     details: (slug: string) => `/api/changelog/${encodeURIComponent(slug)}`,
   },
+  llmTimeline: {
+    list: "/api/llm-timeline/list",
+  },
   newsletter: {
     subscribe: "/api/newsletter/subscribe",
     confirm: "/api/newsletter/confirm",

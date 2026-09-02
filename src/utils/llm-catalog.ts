@@ -68,7 +68,7 @@ function sameModel(left: string, right: string): boolean {
   );
 }
 
-function isSafeHttpUrl(value: string): boolean {
+export function isSafeHttpUrl(value: string): boolean {
   try {
     const url = new URL(value);
     return url.protocol === "https:" || url.protocol === "http:";
