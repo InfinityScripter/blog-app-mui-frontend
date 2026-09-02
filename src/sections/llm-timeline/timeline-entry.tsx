@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
+import { useTranslations } from "next-intl";
 import { Label } from "src/components/label";
 import Collapse from "@mui/material/Collapse";
 import { fDate } from "src/utils/format-time";
-import { toAppLocale } from "src/i18n/locales";
 import TimelineDot from "@mui/lab/TimelineDot";
 import { monoValueSx } from "src/theme/styles";
 import { useTheme } from "@mui/material/styles";
@@ -12,8 +12,8 @@ import { Iconify } from "src/components/iconify";
 import TimelineItem from "@mui/lab/TimelineItem";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
-import { useLocale, useTranslations } from "next-intl";
 import TimelineContent from "@mui/lab/TimelineContent";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
@@ -51,7 +51,7 @@ export function TimelineEntry({
   onToggle,
   yearStart,
 }: TimelineEntryProps) {
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const theme = useTheme();
   const t = useTranslations("llmTimeline");
   const color = vendorColor(model.vendor);

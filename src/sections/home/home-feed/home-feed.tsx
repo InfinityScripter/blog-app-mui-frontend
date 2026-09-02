@@ -7,13 +7,13 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import { toAppLocale } from "src/i18n/locales";
+import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
 import { tagLabel } from "src/utils/tag-labels";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { useLocale, useTranslations } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { PostItemFeed } from "src/sections/blog/post-item-feed";
 import { PostItemFeedFeatured } from "src/sections/blog/post-item-feed-featured";
 
@@ -37,7 +37,7 @@ interface HomeFeedProps {
 
 export function HomeFeed({ initialPosts, feedTags }: HomeFeedProps) {
   const t = useTranslations("home");
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
 
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

@@ -9,12 +9,7 @@ import type { CustomShadows } from "../custom-shadows";
  * `theme.vars.palette[color]` (e.g. `theme.vars.palette.primary`).
  */
 export type ColorType =
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | "error";
+  "primary" | "secondary" | "info" | "success" | "warning" | "error";
 
 /**
  * Custom typography tokens defined by the app in `src/theme/core/typography.ts`

@@ -20,43 +20,41 @@ export default async function OpengraphImage() {
   const fonts = await loadOgFonts();
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: BRAND_GRADIENT,
+        color: "#FFFFFF",
+        fontFamily: "Roboto",
+      }}
+    >
       <div
         style={{
-          width: "100%",
-          height: "100%",
+          width: 200,
+          height: 200,
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: BRAND_GRADIENT,
-          color: "#FFFFFF",
-          fontFamily: "Roboto",
+          borderRadius: 48,
+          background: "rgba(255,255,255,0.16)",
+          fontSize: 140,
+          fontWeight: 800,
         }}
       >
-        <div
-          style={{
-            width: 200,
-            height: 200,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 48,
-            background: "rgba(255,255,255,0.16)",
-            fontSize: 140,
-            fontWeight: 800,
-          }}
-        >
-          T
-        </div>
-        <div style={{ marginTop: 48, fontSize: 64, fontWeight: 700 }}>
-          {CONFIG.site.name}
-        </div>
-        <div style={{ marginTop: 12, fontSize: 32, opacity: 0.9 }}>
-          AI-агрегатор новостей
-        </div>
+        T
       </div>
-    ),
+      <div style={{ marginTop: 48, fontSize: 64, fontWeight: 700 }}>
+        {CONFIG.site.name}
+      </div>
+      <div style={{ marginTop: 12, fontSize: 32, opacity: 0.9 }}>
+        AI-агрегатор новостей
+      </div>
+    </div>,
     { ...size, fonts },
   );
 }

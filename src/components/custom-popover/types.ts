@@ -32,8 +32,10 @@ export interface StyledArrowProps {
   sx?: SxProps<Theme>;
 }
 
-export interface CustomPopoverProps
-  extends Omit<PopoverProps, "open" | "children"> {
+export interface CustomPopoverProps extends Omit<
+  PopoverProps,
+  "open" | "children"
+> {
   open: boolean;
   children?: ReactNode;
   slotProps?: {

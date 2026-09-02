@@ -5,11 +5,10 @@ import type { Theme, SxProps } from "@mui/material/styles";
 
 // ----------------------------------------------------------------------
 
-export interface IconifyProps
-  extends Omit<
-    IconifyIconProps,
-    "icon" | "width" | "height" | "color" | "onLoad"
-  > {
+export interface IconifyProps extends Omit<
+  IconifyIconProps,
+  "icon" | "width" | "height" | "color" | "onLoad"
+> {
   className?: string;
   width?: number | string;
   sx?: SxProps<Theme>;
@@ -18,8 +17,10 @@ export interface IconifyProps
 
 // ----------------------------------------------------------------------
 
-export interface FlagIconProps
-  extends Omit<BoxProps, "children" | "component"> {
+export interface FlagIconProps extends Omit<
+  BoxProps,
+  "children" | "component"
+> {
   code?: string;
   sx?: SxProps<Theme>;
 }

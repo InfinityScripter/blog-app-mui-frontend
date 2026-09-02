@@ -3,8 +3,10 @@ import type { RouterLink } from "src/routes/components";
 
 // ----------------------------------------------------------------------
 
-export interface LogoProps
-  extends Omit<BoxProps<typeof RouterLink>, "component" | "href"> {
+export interface LogoProps extends Omit<
+  BoxProps<typeof RouterLink>,
+  "component" | "href"
+> {
   width?: number | string;
   height?: number | string;
   disableLink?: boolean;

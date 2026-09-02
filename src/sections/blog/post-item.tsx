@@ -4,13 +4,11 @@ import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
-import { useLocale } from "next-intl";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { maxLine } from "src/theme/styles";
 import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
-import { toAppLocale } from "src/i18n/locales";
 import { coverSrc } from "src/utils/cover-src";
 import { tagLabel } from "src/utils/tag-labels";
 import { useTheme } from "@mui/material/styles";
@@ -18,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import CardContent from "@mui/material/CardContent";
 import { AvatarShape } from "src/assets/illustrations";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { getReadingTime } from "src/utils/reading-time";
 
 import { MAX_TAGS } from "./const";
@@ -37,7 +36,7 @@ export function PostItem({
   post: Post;
   activeTags?: string[];
 }) {
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const theme = useTheme();
 
   const linkTo = paths.post.details(String(post._id));

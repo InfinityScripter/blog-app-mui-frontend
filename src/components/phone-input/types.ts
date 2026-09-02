@@ -6,11 +6,10 @@ import type { Props as PhoneNumberInputProps } from "react-phone-number-input/in
 
 // ----------------------------------------------------------------------
 
-export interface PhoneInputProps
-  extends Omit<
-    PhoneNumberInputProps<TextFieldProps>,
-    "value" | "onChange" | "country"
-  > {
+export interface PhoneInputProps extends Omit<
+  PhoneNumberInputProps<TextFieldProps>,
+  "value" | "onChange" | "country"
+> {
   value?: string;
   onChange?: (newValue?: string) => void;
   country?: Country;

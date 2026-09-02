@@ -3,15 +3,10 @@
 // (services/finance-classify.ts): новая категория там без записи здесь просто
 // получит нейтральный фолбэк, страница не сломается.
 
-export type FinanceIconColor =
-  | "primary"
-  | "secondary"
-  | "info"
-  | "success"
-  | "warning"
-  | "error";
+type FinanceIconColor =
+  "primary" | "secondary" | "info" | "success" | "warning" | "error";
 
-export interface FinanceIcon {
+interface FinanceIcon {
   icon: string;
   color: FinanceIconColor;
 }

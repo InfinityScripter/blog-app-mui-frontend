@@ -4,13 +4,13 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import { useTranslations } from "next-intl";
 import { fDate } from "src/utils/format-time";
-import { toAppLocale } from "src/i18n/locales";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useBoolean } from "src/hooks/use-boolean";
-import { useLocale, useTranslations } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { useAuthContext } from "src/auth/hooks/use-auth-context";
 
 import { PostCommentEdit } from "./post-comment-edit";
@@ -34,7 +34,7 @@ export default function PostCommentItem({
 }: PostCommentItemProps) {
   const reply = useBoolean();
   const t = useTranslations("blog");
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const { user } = useAuthContext();
 
   const {

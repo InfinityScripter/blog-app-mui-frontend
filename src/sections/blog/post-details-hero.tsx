@@ -6,14 +6,14 @@ import Stack from "@mui/material/Stack";
 import { paths } from "src/routes/paths";
 import Avatar from "@mui/material/Avatar";
 import { CONFIG } from "src/config-global";
+import { useTranslations } from "next-intl";
 import { Image } from "src/components/image";
 import { fDate } from "src/utils/format-time";
-import { toAppLocale } from "src/i18n/locales";
 import { monoValueSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import SpeedDial from "@mui/material/SpeedDial";
 import Typography from "@mui/material/Typography";
-import { useLocale, useTranslations } from "next-intl";
+import { useAppLocale } from "src/hooks/use-app-locale";
 import { useResponsive } from "src/hooks/use-responsive";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import { formatImageUrl } from "src/utils/format-image-url";
@@ -42,7 +42,7 @@ export function PostDetailsHero({
   createdAt,
   postId,
 }: PostDetailsHeroProps) {
-  const locale = toAppLocale(useLocale());
+  const locale = useAppLocale();
   const smUp = useResponsive("up", "sm");
   const t = useTranslations("blog");
 
