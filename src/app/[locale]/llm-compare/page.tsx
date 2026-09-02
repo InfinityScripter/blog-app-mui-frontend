@@ -1,5 +1,4 @@
 import { CONFIG } from "src/config-global";
-import { getReleases } from "src/actions/blog-ssr";
 import { getTranslations } from "next-intl/server";
 import { sortModels } from "src/sections/llm-compare/utils";
 import { LLM_MODELS } from "src/sections/llm-timeline/const";
@@ -7,6 +6,8 @@ import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { localizedAlternates } from "src/utils/seo-alternates";
 import { buildUnifiedLlmCatalog } from "src/utils/llm-catalog";
 import { COMPARABLE_MODELS } from "src/sections/llm-compare/data";
+import { mergeTimelineModels } from "src/utils/llm-timeline-source";
+import { getReleases, getTimelineModels } from "src/actions/blog-ssr";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { LlmCompareView } from "src/sections/llm-compare/view/llm-compare-view";
 
@@ -34,13 +35,17 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-// Fully static — data is a curated constant, no fetch (cannot fail on a backend).
+// Reads the release feed and the remote timeline entries with the same ISR
+// window as /changelog; a persistent backend failure must throw, not cache.
 export default async function Page({ params }: PageProps) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "llmCompare.meta" });
-  const { releases } = await getReleases();
+  const [{ releases }, timelineModels] = await Promise.all([
+    getReleases(),
+    getTimelineModels(),
+  ]);
   const catalog = buildUnifiedLlmCatalog(
-    LLM_MODELS,
+    mergeTimelineModels(LLM_MODELS, timelineModels),
     COMPARABLE_MODELS,
     releases,
   );

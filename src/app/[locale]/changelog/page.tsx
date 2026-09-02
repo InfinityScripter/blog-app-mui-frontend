@@ -1,11 +1,12 @@
 import { CONFIG } from "src/config-global";
-import { getReleases } from "src/actions/blog-ssr";
 import { LLM_MODELS } from "src/sections/llm-timeline/const";
 import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { buildUnifiedLlmCatalog } from "src/utils/llm-catalog";
 import { sortReleasesDesc } from "src/sections/changelog/utils";
 import { COMPARABLE_MODELS } from "src/sections/llm-compare/data";
+import { mergeTimelineModels } from "src/utils/llm-timeline-source";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getReleases, getTimelineModels } from "src/actions/blog-ssr";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { ChangelogListView } from "src/sections/changelog/view/changelog-list-view";
 
@@ -46,9 +47,12 @@ export default async function Page() {
   // No error swallowing: transient backend failures are retried inside
   // getReleases; a persistent one must THROW instead of ISR-caching an empty
   // changelog for an hour (2026-07-03 incident).
-  const { releases: feedReleases } = await getReleases();
+  const [{ releases: feedReleases }, timelineModels] = await Promise.all([
+    getReleases(),
+    getTimelineModels(),
+  ]);
   const catalog = buildUnifiedLlmCatalog(
-    LLM_MODELS,
+    mergeTimelineModels(LLM_MODELS, timelineModels),
     COMPARABLE_MODELS,
     feedReleases,
   );

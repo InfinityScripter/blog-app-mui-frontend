@@ -1,12 +1,13 @@
 import { CONFIG } from "src/config-global";
-import { getReleases } from "src/actions/blog-ssr";
 import { getTranslations } from "next-intl/server";
 import { LLM_MODELS } from "src/sections/llm-timeline/const";
 import { serializeJsonLd } from "src/utils/serialize-json-ld";
 import { localizedAlternates } from "src/utils/seo-alternates";
 import { buildUnifiedLlmCatalog } from "src/utils/llm-catalog";
 import { COMPARABLE_MODELS } from "src/sections/llm-compare/data";
+import { mergeTimelineModels } from "src/utils/llm-timeline-source";
 import { sortByReleaseDesc } from "src/sections/llm-timeline/utils";
+import { getReleases, getTimelineModels } from "src/actions/blog-ssr";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
 import { LlmTimelineView } from "src/sections/llm-timeline/view/llm-timeline-view";
 
@@ -37,9 +38,12 @@ export async function generateMetadata({ params }: PageProps) {
 export const revalidate = 600;
 
 export default async function Page() {
-  const { releases } = await getReleases();
+  const [{ releases }, timelineModels] = await Promise.all([
+    getReleases(),
+    getTimelineModels(),
+  ]);
   const catalog = buildUnifiedLlmCatalog(
-    LLM_MODELS,
+    mergeTimelineModels(LLM_MODELS, timelineModels),
     COMPARABLE_MODELS,
     releases,
   );
