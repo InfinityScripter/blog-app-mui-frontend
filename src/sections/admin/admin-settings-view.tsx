@@ -21,7 +21,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 
-// The two auto-publish switches, rendered from data so the near-identical
+// The auto-publish switches, rendered from data so the near-identical
 // cards don't duplicate JSX. pdCollection is kept separate below because its
 // toggle additionally flushes the public ISR cache — the auto-publish flags
 // gate only the news bot, never public pages, so they skip that step.
@@ -39,6 +39,11 @@ const AUTO_PUBLISH_TOGGLES: {
     key: "autoPublishNews",
     label: "Автопубликация новостей (блог)",
     hint: "Включено — бот сам публикует переписанные новости в блог и канал при прохождении гейта. Выключено — каждая новость приходит карточкой в Telegram на ручной аппрув. Ничего не теряется.",
+  },
+  {
+    key: "autoPublishTimeline",
+    label: "Автопубликация записей таймлайна (llm-timeline)",
+    hint: "Включено — ночная джоба сама публикует проверенные записи о новых моделях в /llm-timeline и /changelog. Выключено — джоба складывает их в локальный черновик, на сайт ничего не попадает.",
   },
 ];
 

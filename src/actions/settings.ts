@@ -21,11 +21,15 @@ interface PublicSettings {
 interface AdminFlags extends PublicSettings {
   autoPublishReleases: boolean;
   autoPublishNews: boolean;
+  autoPublishTimeline: boolean;
 }
 
-// The two auto-publish switches the toggle route accepts (mirrors the backend's
+// The auto-publish switches the toggle route accepts (mirrors the backend's
 // AUTO_PUBLISH_KEYS allow-list). A union, not string, so a typo can't compile.
-export type AutoPublishKey = "autoPublishReleases" | "autoPublishNews";
+export type AutoPublishKey =
+  | "autoPublishReleases"
+  | "autoPublishNews"
+  | "autoPublishTimeline";
 
 interface PublicSettingsResponse {
   data: PublicSettings;
