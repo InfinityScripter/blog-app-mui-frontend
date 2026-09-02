@@ -16,8 +16,10 @@ export interface BreadcrumbsLinkProps {
   disabled?: boolean;
 }
 
-export interface CustomBreadcrumbsProps
-  extends Omit<BreadcrumbsProps, "children" | "slotProps"> {
+export interface CustomBreadcrumbsProps extends Omit<
+  BreadcrumbsProps,
+  "children" | "slotProps"
+> {
   links: BreadcrumbLinkItem[];
   action?: ReactNode;
   heading?: ReactNode;

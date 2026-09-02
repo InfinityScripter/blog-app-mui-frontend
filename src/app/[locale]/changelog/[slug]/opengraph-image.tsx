@@ -43,48 +43,46 @@ export default async function ReleaseOpengraphImage({ params }: ImageProps) {
   const [fonts, title] = await Promise.all([loadOgFonts(), resolveTitle(slug)]);
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        padding: 80,
+        background: BRAND_GRADIENT,
+        color: "#FFFFFF",
+        fontFamily: "Roboto",
+      }}
+    >
       <div
         style={{
-          width: "100%",
-          height: "100%",
+          width: 96,
+          height: 96,
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: 80,
-          background: BRAND_GRADIENT,
-          color: "#FFFFFF",
-          fontFamily: "Roboto",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 24,
+          background: "rgba(255,255,255,0.16)",
+          fontSize: 64,
+          fontWeight: 700,
         }}
       >
-        <div
-          style={{
-            width: 96,
-            height: 96,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 24,
-            background: "rgba(255,255,255,0.16)",
-            fontSize: 64,
-            fontWeight: 700,
-          }}
-        >
-          T
-        </div>
-        <div
-          style={{
-            display: "flex",
-            fontSize: 64,
-            fontWeight: 700,
-            lineHeight: 1.2,
-          }}
-        >
-          {title}
-        </div>
-        <div style={{ fontSize: 30, opacity: 0.9 }}>{CONFIG.site.name}</div>
+        T
       </div>
-    ),
+      <div
+        style={{
+          display: "flex",
+          fontSize: 64,
+          fontWeight: 700,
+          lineHeight: 1.2,
+        }}
+      >
+        {title}
+      </div>
+      <div style={{ fontSize: 30, opacity: 0.9 }}>{CONFIG.site.name}</div>
+    </div>,
     { ...size, fonts },
   );
 }

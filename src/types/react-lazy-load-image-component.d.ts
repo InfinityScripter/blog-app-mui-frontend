@@ -9,8 +9,10 @@ declare module "react-lazy-load-image-component" {
     ImgHTMLAttributes,
   } from "react";
 
-  export interface LazyLoadImageProps
-    extends Omit<ImgHTMLAttributes<HTMLImageElement>, "placeholder"> {
+  export interface LazyLoadImageProps extends Omit<
+    ImgHTMLAttributes<HTMLImageElement>,
+    "placeholder"
+  > {
     afterLoad?: () => void;
     beforeLoad?: () => void;
     delayMethod?: "debounce" | "throttle";

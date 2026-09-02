@@ -63,6 +63,19 @@ async function login(
 }
 
 /**
+ * Прод-смоук (E2E_BASE_URL задан) обязан быть строго read-only: все не-GET
+ * запросы к /api/ и все маяки Vercel Analytics (/_vercel/*) блокируются на
+ * уровне браузера, чтобы прогоны не писали в прод — ни в данные (счётчики
+ * просмотров — fire-and-forget с catch, аборт безвреден), ни в статистику
+ * трафика. Локальных прогонов guard не касается.
+ *
+ * Плюс кука NEXT_LOCALE=ru: middleware сеет локаль по x-vercel-ip-country
+ * РАНЬШЕ Accept-Language, а раннер GitHub — в US, так что без куки прод
+ * отдал бы /en и все русские getByRole-запросы падали бы.
+ */
+const PROD_SMOKE_URL = process.env.E2E_BASE_URL;
+
+/**
  * `authedPage` logs in via the real sign-in form before the test body runs,
  * so authenticated routes (dashboard, admin) are reachable.
  */
@@ -70,6 +83,22 @@ export const test = base.extend<{
   authedPage: import("@playwright/test").Page;
   nonAdminPage: import("@playwright/test").Page;
 }>({
+  page: async ({ page }, use) => {
+    if (PROD_SMOKE_URL) {
+      await page.context().addCookies([
+        {
+          name: "NEXT_LOCALE",
+          value: "ru",
+          url: PROD_SMOKE_URL,
+        },
+      ]);
+      await page.route("**/_vercel/**", (route) => route.abort());
+      await page.route("**/api/**", (route) =>
+        route.request().method() === "GET" ? route.continue() : route.abort(),
+      );
+    }
+    await use(page);
+  },
   authedPage: async ({ page }, use) => {
     await login(page, DEMO_USER);
     await use(page);

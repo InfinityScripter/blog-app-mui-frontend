@@ -8,12 +8,7 @@ export type LibraryTab = "read" | "tools" | "til";
 
 /** Kind of an external reading source. */
 export type ReadingKind =
-  | "blog"
-  | "newsletter"
-  | "paper"
-  | "post"
-  | "video"
-  | "book";
+  "blog" | "newsletter" | "paper" | "post" | "video" | "book";
 
 /** An external source worth reading. */
 export interface ReadingItem {

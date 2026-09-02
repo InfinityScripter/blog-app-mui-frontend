@@ -20,21 +20,20 @@ export interface CountrySelectInputProps {
   multiple?: boolean;
 }
 
-export interface CountrySelectProps
-  extends Omit<
-    AutocompleteProps<
-      CountryOption,
-      boolean | undefined,
-      boolean | undefined,
-      boolean | undefined
-    >,
-    | "options"
-    | "renderInput"
-    | "renderOption"
-    | "renderTags"
-    | "getOptionLabel"
-    | "multiple"
-  > {
+export interface CountrySelectProps extends Omit<
+  AutocompleteProps<
+    CountryOption,
+    boolean | undefined,
+    boolean | undefined,
+    boolean | undefined
+  >,
+  | "options"
+  | "renderInput"
+  | "renderOption"
+  | "renderTags"
+  | "getOptionLabel"
+  | "multiple"
+> {
   id: string;
   label?: string;
   error?: boolean;
