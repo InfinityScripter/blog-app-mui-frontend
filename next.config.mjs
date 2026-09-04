@@ -42,6 +42,9 @@ const securityHeaders = [
 
 const nextConfig = {
   pageExtensions,
+  turbopack: {
+    root: import.meta.dirname,
+  },
   trailingSlash: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
   async headers() {
