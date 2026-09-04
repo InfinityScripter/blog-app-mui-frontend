@@ -149,8 +149,8 @@ caches a 404 for an hour). Fully static pages (no fetch — like `llm-compare`,
 
 ## Deploy
 
-Push to `main` → Vercel auto-deploys the frontend (aliases `aifirst.us.com`,
-`talalaev.su`). Static pages are edge-cached; a fresh deploy re-prerenders them,
+Push to `main` → Vercel auto-deploys the frontend (alias `aifirst.us.com`).
+Static pages are edge-cached; a fresh deploy re-prerenders them,
 but confirm the live prod in a browser after the deployment is READY — not by
 cache age. The direct `blog-<hash>.vercel.app` URL is Vercel-auth protected
 (fetch 401).
