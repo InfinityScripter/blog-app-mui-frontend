@@ -30,7 +30,7 @@ export interface CountrySelectProps extends Omit<
   | "options"
   | "renderInput"
   | "renderOption"
-  | "renderTags"
+  | "renderValue"
   | "getOptionLabel"
   | "multiple"
 > {

@@ -25,7 +25,11 @@ export function NavUpgrade({ sx, ...other }: NavUpgradeProps) {
 
   return (
     <Stack sx={{ px: 2, py: 5, textAlign: "center", ...sx }} {...other}>
-      <Stack alignItems="center">
+      <Stack
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Box sx={{ position: "relative" }}>
           <Avatar
             src={userView?.photoURL}

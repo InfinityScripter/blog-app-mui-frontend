@@ -34,11 +34,19 @@ export function BotModelsHealth({ enabled = true }: Props) {
       <Stack
         direction="row"
         spacing={2}
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 2 }}
+        sx={{
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 2,
+        }}
       >
-        <Stack direction="row" spacing={1.5} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={1.5}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Typography variant="h6">Проверка моделей</Typography>
           {hasData && (
             <Chip
@@ -61,7 +69,12 @@ export function BotModelsHealth({ enabled = true }: Props) {
       </Stack>
 
       {botModelsHealthError && (
-        <Typography variant="body2" color="error.main">
+        <Typography
+          variant="body2"
+          sx={{
+            color: "error.main",
+          }}
+        >
           Не удалось получить статус моделей.
         </Typography>
       )}
@@ -73,7 +86,13 @@ export function BotModelsHealth({ enabled = true }: Props) {
       ) : (
         <Stack divider={<Divider flexItem />}>
           {checks.length === 0 && !botModelsHealthError ? (
-            <Typography variant="body2" color="text.secondary" sx={{ py: 1 }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "text.secondary",
+                py: 1,
+              }}
+            >
               Нет данных. Нажмите «Проверить».
             </Typography>
           ) : (

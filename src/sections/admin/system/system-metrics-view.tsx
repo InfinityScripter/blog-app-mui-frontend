@@ -35,9 +35,11 @@ export function AdminSystemMetricsView() {
     <Container maxWidth="xl">
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 1 }}
+        sx={{
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 1,
+        }}
       >
         <Typography variant="h4">Сервер</Typography>
         <IconButton

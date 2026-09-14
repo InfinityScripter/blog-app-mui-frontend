@@ -30,7 +30,9 @@ export function RHFCheckbox({
       render={({ field, fieldState: { error } }) => {
         const hasHelperText = !!error || !!helperText;
         const describedBy = [
-          slotProps?.checkbox?.inputProps?.["aria-describedby"],
+          typeof slotProps?.checkbox?.slotProps?.input === "object"
+            ? slotProps.checkbox.slotProps.input?.["aria-describedby"]
+            : undefined,
           hasHelperText ? helperTextId : undefined,
         ]
           .filter(Boolean)
@@ -44,11 +46,17 @@ export function RHFCheckbox({
                   {...field}
                   checked={field.value}
                   {...slotProps?.checkbox}
-                  inputProps={{
-                    ...(!label && { "aria-label": ariaLabel }),
-                    ...slotProps?.checkbox?.inputProps,
-                    "aria-describedby": describedBy || undefined,
-                    "aria-invalid": !!error || undefined,
+                  slotProps={{
+                    ...slotProps?.checkbox?.slotProps,
+                    input: {
+                      ...(!label && { "aria-label": ariaLabel }),
+                      ...(typeof slotProps?.checkbox?.slotProps?.input ===
+                      "object"
+                        ? slotProps.checkbox.slotProps.input
+                        : undefined),
+                      "aria-describedby": describedBy || undefined,
+                      "aria-invalid": !!error || undefined,
+                    },
                   }}
                 />
               }
@@ -120,11 +128,17 @@ export function RHFMultiCheckbox({
                     }
                     name={accessibility(option.label)}
                     {...slotProps?.checkbox}
-                    inputProps={{
-                      ...(!option.label && {
-                        "aria-label": ariaLabel(option.label),
-                      }),
-                      ...slotProps?.checkbox?.inputProps,
+                    slotProps={{
+                      ...slotProps?.checkbox?.slotProps,
+                      input: {
+                        ...(!option.label && {
+                          "aria-label": ariaLabel(option.label),
+                        }),
+                        ...(typeof slotProps?.checkbox?.slotProps?.input ===
+                        "object"
+                          ? slotProps.checkbox.slotProps.input
+                          : undefined),
+                      },
                     }}
                   />
                 }

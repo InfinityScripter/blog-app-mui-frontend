@@ -7,7 +7,13 @@ import { Iconify } from "src/components/iconify";
 
 export function InfoBlock({ icon, value }: { icon: string; value: ReactNode }) {
   return (
-    <Box display="flex" alignItems="center" gap={0.5}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: 0.5,
+      }}
+    >
       <Iconify icon={icon} width={16} />
       {value}
     </Box>

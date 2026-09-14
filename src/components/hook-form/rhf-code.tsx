@@ -18,9 +18,9 @@ export function RHFCode({ name, ...other }: RHFCodeProps) {
           <MuiOtpInput
             {...field}
             autoFocus
-            gap={1.5}
             length={6}
             TextFieldsProps={{ error: !!error, placeholder: "-" }}
+            sx={{ gap: 1.5 }}
             {...other}
           />
 

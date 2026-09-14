@@ -23,8 +23,8 @@ export function PostTelegramCta() {
   return (
     <Stack
       spacing={2}
-      alignItems="center"
       sx={{
+        alignItems: "center",
         mt: 3,
         p: { xs: 3, md: 4 },
         borderRadius: 2,

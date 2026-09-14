@@ -51,7 +51,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
             },
           }}
         >
-          <Grid {...{ xs: 12, [layoutQuery]: 3 }}>
+          <Grid size={{ xs: 12, [layoutQuery]: 3 }}>
             <Typography
               variant="body2"
               sx={{
@@ -87,7 +87,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
             </Stack>
           </Grid>
 
-          <Grid {...{ xs: 12, [layoutQuery]: 6 }}>
+          <Grid size={{ xs: 12, [layoutQuery]: 6 }}>
             <Stack
               spacing={5}
               sx={{

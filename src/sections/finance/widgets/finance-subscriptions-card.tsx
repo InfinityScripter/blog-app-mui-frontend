@@ -28,7 +28,9 @@ export function FinanceSubscriptionsCard({
             key={subscription.name}
             direction="row"
             spacing={2}
-            justifyContent="space-between"
+            sx={{
+              justifyContent: "space-between",
+            }}
           >
             <Typography
               variant="body2"

@@ -43,10 +43,13 @@ export function BaseOption({
       {...other}
     >
       <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ width: 1, mb: 3 }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: 1,
+          mb: 3,
+        }}
       >
         <SvgColor
           src={`${CONFIG.site.basePath}/assets/icons/setting/ic-${icon}.svg`}
@@ -61,10 +64,12 @@ export function BaseOption({
       </Box>
 
       <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ width: 1 }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: 1,
+        }}
       >
         <Box
           component="span"

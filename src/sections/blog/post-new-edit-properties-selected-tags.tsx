@@ -1,17 +1,19 @@
 import type { ReactNode } from "react";
-import type { AutocompleteRenderGetTagProps } from "@mui/material/Autocomplete";
+import type { AutocompleteRenderValueGetItemProps } from "@mui/material/Autocomplete";
 
 import Chip from "@mui/material/Chip";
 
 // ----------------------------------------------------------------------
 
 export const renderSelectedTags = (
-  selected: string[],
-  getTagProps: AutocompleteRenderGetTagProps,
-): ReactNode =>
-  selected.map((option, index) => (
+  selected: string | readonly string[],
+  getItemProps: AutocompleteRenderValueGetItemProps<true>,
+): ReactNode => {
+  const values = Array.isArray(selected) ? selected : [selected];
+
+  return values.map((option, index) => (
     <Chip
-      {...getTagProps({ index })}
+      {...getItemProps({ index })}
       key={option}
       label={option}
       size="small"
@@ -19,3 +21,4 @@ export const renderSelectedTags = (
       variant="soft"
     />
   ));
+};

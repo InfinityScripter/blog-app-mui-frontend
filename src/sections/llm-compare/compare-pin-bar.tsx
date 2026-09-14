@@ -57,9 +57,11 @@ export function ComparePinBar({
     >
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 1.5 }}
+        sx={{
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 1.5,
+        }}
       >
         <Typography variant="subtitle1">
           {t("pinBar.title", { count: models.length })}

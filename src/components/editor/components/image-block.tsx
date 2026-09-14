@@ -62,7 +62,13 @@ export function ImageBlock({ editor }: ImageBlockProps) {
           URL
         </Typography>
 
-        <Stack direction="row" alignItems="center" spacing={1}>
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <TextField
             size="small"
             placeholder="Enter URL here..."

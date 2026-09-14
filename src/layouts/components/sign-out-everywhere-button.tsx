@@ -33,10 +33,14 @@ export function SignOutEverywhereButton({ onClose }: SignOutButtonProps) {
       component="button"
       type="button"
       variant="caption"
-      color="text.secondary"
       underline="always"
       onClick={handleLogoutEverywhere}
-      sx={{ display: "block", mx: "auto", mt: 1.5 }}
+      sx={{
+        color: "text.secondary",
+        display: "block",
+        mx: "auto",
+        mt: 1.5,
+      }}
     >
       Выйти на всех устройствах
     </Link>

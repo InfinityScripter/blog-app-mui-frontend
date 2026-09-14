@@ -22,9 +22,9 @@ export function InfoBlock({
     <Stack
       spacing={1.5}
       direction="row"
-      flexWrap="wrap"
-      justifyContent="flex-end"
       sx={{
+        flexWrap: "wrap",
+        justifyContent: "flex-end",
         mt: 3,
         typography: "caption",
         color: "text.disabled",
@@ -32,23 +32,44 @@ export function InfoBlock({
       }}
     >
       {readingTime != null && (
-        <Stack direction="row" alignItems="center" sx={{ mr: "auto" }}>
+        <Stack
+          direction="row"
+          sx={{
+            alignItems: "center",
+            mr: "auto",
+          }}
+        >
           <Iconify icon="solar:clock-circle-bold" width={16} sx={{ mr: 0.5 }} />
           {t("readingTime", { minutes: readingTime })}
         </Stack>
       )}
 
-      <Stack direction="row" alignItems="center">
+      <Stack
+        direction="row"
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Iconify icon="eva:message-circle-fill" width={16} sx={{ mr: 0.5 }} />
         {fShortenNumber(totalComments)}
       </Stack>
 
-      <Stack direction="row" alignItems="center">
+      <Stack
+        direction="row"
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Iconify icon="solar:eye-bold" width={16} sx={{ mr: 0.5 }} />
         {fShortenNumber(totalViews)}
       </Stack>
 
-      <Stack direction="row" alignItems="center">
+      <Stack
+        direction="row"
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Iconify icon="solar:share-bold" width={16} sx={{ mr: 0.5 }} />
         {fShortenNumber(totalShares)}
       </Stack>

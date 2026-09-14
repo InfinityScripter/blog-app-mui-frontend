@@ -149,7 +149,12 @@ export function PostDetailsHomeView({
           >
             <PostDetailsTags tags={currentPost?.tags ?? []} />
 
-            <Stack direction="row" alignItems="center">
+            <Stack
+              direction="row"
+              sx={{
+                alignItems: "center",
+              }}
+            >
               <AvatarGroup>
                 {currentPost?.favoritePerson.map((person) => (
                   <Avatar

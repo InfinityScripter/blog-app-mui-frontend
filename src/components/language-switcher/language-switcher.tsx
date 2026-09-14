@@ -66,7 +66,9 @@ export function LanguageSwitcher({ sx, ...other }: LanguageSwitcherProps) {
               primary={
                 code === "ru" ? t("languageOriginal") : meta[code].native
               }
-              primaryTypographyProps={{ variant: "body2" }}
+              slotProps={{
+                primary: { variant: "body2" },
+              }}
             />
           </MenuItem>
         ))}

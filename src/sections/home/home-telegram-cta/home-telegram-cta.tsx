@@ -22,9 +22,9 @@ export function HomeTelegramCta() {
       <Stack
         spacing={{ xs: 3, md: 5 }}
         direction={{ xs: "column", md: "row" }}
-        alignItems={{ xs: "flex-start", md: "center" }}
-        justifyContent="space-between"
         sx={{
+          alignItems: { xs: "flex-start", md: "center" },
+          justifyContent: "space-between",
           p: { xs: 4, md: 5 },
           borderRadius: 2.5,
           bgcolor: "background.paper",

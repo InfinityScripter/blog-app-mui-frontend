@@ -22,7 +22,13 @@ export function NavOptionsLayout({
       <Box component="span" sx={labelStyles}>
         Layout
       </Box>
-      <Box gap={1.5} display="flex" sx={{ mt: 1.5 }}>
+      <Box
+        sx={{
+          gap: 1.5,
+          display: "flex",
+          mt: 1.5,
+        }}
+      >
         {options.map((option) => (
           <LayoutOption
             key={option}

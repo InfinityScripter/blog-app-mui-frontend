@@ -122,7 +122,6 @@ export const fetcher = async <T = unknown>(args: FetcherArgs): Promise<T> => {
     });
     return res.data;
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error("Failed to fetch:", error);
     throw error;
   }

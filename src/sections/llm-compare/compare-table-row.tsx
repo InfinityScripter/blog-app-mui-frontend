@@ -52,7 +52,13 @@ export function CompareTableRow({
   return (
     <TableRow hover selected={pinned}>
       <TableCell>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+          direction="row"
+          spacing={1}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Iconify
             width={20}
             icon={vendorIcon(model.vendor)}

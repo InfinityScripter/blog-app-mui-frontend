@@ -105,8 +105,10 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
         open={open}
         onClose={handleCloseDrawer}
         anchor="right"
-        slotProps={{ backdrop: { invisible: true } }}
-        PaperProps={{ sx: { width: 320 } }}
+        slotProps={{
+          backdrop: { invisible: true },
+          paper: { sx: { width: 320 } },
+        }}
       >
         <IconButton
           onClick={handleCloseDrawer}
@@ -116,7 +118,12 @@ export function AccountDrawer({ data = [], sx, ...other }: AccountDrawerProps) {
         </IconButton>
 
         <Scrollbar>
-          <Stack alignItems="center" sx={{ pt: 8 }}>
+          <Stack
+            sx={{
+              alignItems: "center",
+              pt: 8,
+            }}
+          >
             {renderAvatar}
 
             <Typography variant="subtitle1" noWrap sx={{ mt: 2 }}>

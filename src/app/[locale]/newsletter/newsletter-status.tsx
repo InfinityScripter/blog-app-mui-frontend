@@ -47,9 +47,9 @@ export function NewsletterStatus({
     >
       <Stack
         spacing={3}
-        alignItems="center"
-        textAlign="center"
         sx={{
+          alignItems: "center",
+          textAlign: "center",
           mx: "auto",
           maxWidth: 480,
           width: 1,

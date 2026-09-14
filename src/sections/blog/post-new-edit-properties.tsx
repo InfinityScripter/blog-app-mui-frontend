@@ -37,7 +37,7 @@ export function PostNewEditProperties() {
           options={TAG_SUGGESTIONS}
           getOptionLabel={(option: string) => option}
           renderOption={renderTagOption}
-          renderTags={renderSelectedTags}
+          renderValue={renderSelectedTags}
         />
 
         <Field.Text name="metaTitle" label={t("form.fieldMetaTitle")} />
@@ -60,7 +60,7 @@ export function PostNewEditProperties() {
           options={TAG_SUGGESTIONS}
           getOptionLabel={(option: string) => option}
           renderOption={renderTagOption}
-          renderTags={renderSelectedTags}
+          renderValue={renderSelectedTags}
         />
       </Stack>
     </Card>

@@ -97,12 +97,12 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
       <NoSsr
         fallback={
           <Box
-            width={width ?? height}
-            height={height}
             className={logoClasses.root.concat(
               className ? ` ${className}` : "",
             )}
             sx={{
+              width: width ?? height,
+              height: height,
               flexShrink: 0,
               display: "inline-flex",
               verticalAlign: "middle",

@@ -19,13 +19,16 @@ export function NavSubList({ data, subheader, sx, ...other }: NavSubListProps) {
   return (
     <Stack
       component={NavLi}
-      alignItems="flex-start"
-      sx={{
-        flex: "1 1 auto",
-        ...(isDashboard && { maxWidth: { md: 1 / 3, lg: 540 } }),
-        ...sx,
-      }}
       {...other}
+      sx={[
+        {
+          alignItems: "flex-start",
+          flex: "1 1 auto",
+          ...(isDashboard && { maxWidth: { md: 1 / 3, lg: 540 } }),
+          ...sx,
+        },
+        ...(Array.isArray(other.sx) ? other.sx : [other.sx]),
+      ]}
     >
       <NavUl>
         <ListSubheader

@@ -31,7 +31,12 @@ export function HomeAbout() {
       >
         {/* Identity — name, role, contact */}
         <m.div variants={varFade().inUp}>
-          <Stack spacing={0.5} alignItems={{ xs: "center", md: "flex-start" }}>
+          <Stack
+            spacing={0.5}
+            sx={{
+              alignItems: { xs: "center", md: "flex-start" },
+            }}
+          >
             <Typography
               variant="overline"
               sx={{ color: "primary.main", letterSpacing: 1.2 }}
@@ -44,9 +49,11 @@ export function HomeAbout() {
             <Stack
               direction="row"
               spacing={1.5}
-              flexWrap="wrap"
-              justifyContent={{ xs: "center", md: "flex-start" }}
-              sx={{ color: "text.secondary" }}
+              sx={{
+                flexWrap: "wrap",
+                justifyContent: { xs: "center", md: "flex-start" },
+                color: "text.secondary",
+              }}
             >
               <Typography variant="subtitle2">{ABOUT_PROFILE.role}</Typography>
               <Link
@@ -79,10 +86,12 @@ export function HomeAbout() {
         <m.div variants={varFade().inUp}>
           <Stack
             direction="row"
-            flexWrap="wrap"
             useFlexGap
             spacing={1}
-            justifyContent={{ xs: "center", md: "flex-start" }}
+            sx={{
+              flexWrap: "wrap",
+              justifyContent: { xs: "center", md: "flex-start" },
+            }}
           >
             {ABOUT_STACK.map((tech) => (
               <Chip

@@ -23,7 +23,7 @@ export function ResetPasswordForm({
         label="Email адрес"
         placeholder="example@gmail.com"
         autoFocus
-        InputLabelProps={{ shrink: true }}
+        slotProps={{ inputLabel: { shrink: true } }}
       />
       {error && <Alert severity="error">{error}</Alert>}
       {success && <Alert severity="success">{success}</Alert>}

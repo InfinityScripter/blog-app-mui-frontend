@@ -83,7 +83,6 @@ export function PostCommentForm({
       if (onCommentUpdated) {
         onCommentUpdated();
       }
-      // eslint-disable-next-line no-shadow
     } catch (error) {
       console.error("Failed to add comment:", error);
       setError(
@@ -108,8 +107,19 @@ export function PostCommentForm({
           rows={4}
         />
 
-        <Stack direction="row" alignItems="center">
-          <Stack direction="row" alignItems="center" flexGrow={1}>
+        <Stack
+          direction="row"
+          sx={{
+            alignItems: "center",
+          }}
+        >
+          <Stack
+            direction="row"
+            sx={{
+              alignItems: "center",
+              flexGrow: 1,
+            }}
+          >
             {/* <IconButton> */}
             {/*  <Iconify icon="solar:gallery-add-bold" /> */}
             {/* </IconButton> */}

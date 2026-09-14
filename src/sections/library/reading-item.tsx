@@ -36,8 +36,10 @@ export function ReadingItem({ item }: ReadingItemProps) {
         <Stack
           direction="row"
           spacing={1}
-          alignItems="center"
-          sx={{ flexWrap: "wrap" }}
+          sx={{
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
         >
           <Link
             href={item.url}

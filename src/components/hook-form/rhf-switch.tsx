@@ -34,9 +34,14 @@ export function RHFSwitch({
                 {...field}
                 checked={field.value}
                 {...slotProps?.switch}
-                inputProps={{
-                  ...(!label && { "aria-label": ariaLabel }),
-                  ...slotProps?.switch?.inputProps,
+                slotProps={{
+                  ...slotProps?.switch?.slotProps,
+                  input: {
+                    ...(!label && { "aria-label": ariaLabel }),
+                    ...(typeof slotProps?.switch?.slotProps?.input === "object"
+                      ? slotProps.switch.slotProps.input
+                      : undefined),
+                  },
                 }}
               />
             }
@@ -110,11 +115,17 @@ export function RHFMultiSwitch({
                     }
                     name={accessibility(option.label)}
                     {...slotProps?.switch}
-                    inputProps={{
-                      ...(!option.label && {
-                        "aria-label": ariaLabel(option.label),
-                      }),
-                      ...slotProps?.switch?.inputProps,
+                    slotProps={{
+                      ...slotProps?.switch?.slotProps,
+                      input: {
+                        ...(!option.label && {
+                          "aria-label": ariaLabel(option.label),
+                        }),
+                        ...(typeof slotProps?.switch?.slotProps?.input ===
+                        "object"
+                          ? slotProps.switch.slotProps.input
+                          : undefined),
+                      },
                     }}
                   />
                 }

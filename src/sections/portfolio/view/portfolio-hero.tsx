@@ -37,9 +37,20 @@ export const PortfolioHero = () => {
         component={MotionContainer}
         sx={{ py: { xs: 8, md: "clamp(4rem, 8vw, 6rem)" } }}
       >
-        <Grid container spacing={{ xs: 6, md: 10 }} alignItems="center">
+        <Grid
+          container
+          spacing={{ xs: 6, md: 10 }}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Grid size={{ xs: 12, md: 7 }}>
-            <Stack spacing={4} alignItems="flex-start">
+            <Stack
+              spacing={4}
+              sx={{
+                alignItems: "flex-start",
+              }}
+            >
               <m.div variants={varFade().inDown}>
                 <Typography component="p" sx={{ ...monoLabelSx, mb: 2 }}>
                   {t("heroEyebrow", { name: PROFILE_NAME })}
@@ -56,8 +67,8 @@ export const PortfolioHero = () => {
               <m.div variants={varFade().inDown}>
                 <Typography
                   variant="body1"
-                  color="text.secondary"
                   sx={{
+                    color: "text.secondary",
                     maxWidth: "65ch",
                     fontSize: { xs: 16, md: 18 },
                     lineHeight: 1.7,
@@ -128,7 +139,13 @@ export const PortfolioHero = () => {
                     >
                       {t(`metrics.${metric.key}.label`)}
                     </Typography>
-                    <Stack direction="row" spacing={1.5} alignItems="center">
+                    <Stack
+                      direction="row"
+                      spacing={1.5}
+                      sx={{
+                        alignItems: "center",
+                      }}
+                    >
                       <Iconify
                         icon={metric.icon}
                         width={22}

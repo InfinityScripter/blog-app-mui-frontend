@@ -18,7 +18,15 @@ export function SettingsDrawerHead() {
   const { setMode } = useColorScheme();
 
   return (
-    <Box display="flex" alignItems="center" sx={{ py: 2, pr: 1, pl: 2.5 }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        py: 2,
+        pr: 1,
+        pl: 2.5,
+      }}
+    >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
         Settings
       </Typography>

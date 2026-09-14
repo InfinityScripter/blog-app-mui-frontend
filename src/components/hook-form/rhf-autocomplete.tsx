@@ -44,9 +44,11 @@ export function RHFAutocomplete({
               placeholder={placeholder}
               error={!!error}
               helperText={error ? error?.message : helperText}
-              inputProps={{
-                ...params.inputProps,
-                autoComplete: "new-password",
+              slotProps={{
+                htmlInput: {
+                  ...params.slotProps.htmlInput,
+                  autoComplete: "new-password",
+                },
               }}
             />
           )}

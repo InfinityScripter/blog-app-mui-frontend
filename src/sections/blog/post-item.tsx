@@ -108,7 +108,14 @@ export function PostItem({
         </Link>
 
         {visibleTags.length > 0 && (
-          <Box display="flex" flexWrap="wrap" gap={0.5} sx={{ mt: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 0.5,
+              mt: 1,
+            }}
+          >
             {visibleTags.map((tag) => (
               <Chip
                 key={tag}

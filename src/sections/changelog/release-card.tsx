@@ -97,9 +97,9 @@ export function ReleaseCard({ release, sourceOnly = false }: ReleaseCardProps) {
           component={sourceOnly ? "a" : RouterLink}
           href={linkTo}
           {...(sourceOnly && { target: "_blank", rel: "noopener noreferrer" })}
-          color="text.primary"
           underline="none"
           sx={{
+            color: "text.primary",
             typography: "h5",
             ...maxLine({ line: 2, persistent: theme.typography.h5 }),
             transition: theme.transitions.create("color"),

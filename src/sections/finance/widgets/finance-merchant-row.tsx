@@ -47,9 +47,11 @@ export function FinanceMerchantRow({
       >
         <Stack
           direction="row"
-          alignItems="center"
           spacing={1}
-          sx={{ width: 1 }}
+          sx={{
+            alignItems: "center",
+            width: 1,
+          }}
         >
           <Iconify
             width={14}
@@ -86,7 +88,9 @@ export function FinanceMerchantRow({
               key={operation.id}
               direction="row"
               spacing={2}
-              justifyContent="space-between"
+              sx={{
+                justifyContent: "space-between",
+              }}
             >
               <Typography
                 variant="caption"

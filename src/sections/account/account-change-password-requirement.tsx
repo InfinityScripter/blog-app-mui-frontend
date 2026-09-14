@@ -10,8 +10,8 @@ export function Requirement({ ok, children }: RequirementProps) {
     <Stack
       direction="row"
       spacing={1}
-      alignItems="center"
       sx={{
+        alignItems: "center",
         typography: "body2",
         color: ok ? "success.main" : "text.secondary",
         transition: (theme) => theme.transitions.create("color"),

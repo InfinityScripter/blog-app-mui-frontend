@@ -13,9 +13,6 @@
 //      must be rethrown by the page (failing the build / keeping the stale ISR
 //      page) instead of being cached as a 404 or an empty list.
 
-/* eslint-disable max-classes-per-file -- two tiny sibling error types that
-   only make sense together with the helper below */
-
 export class NotFoundError extends Error {
   constructor(url: string) {
     super(`Resource not found (404): ${url}`);
@@ -64,8 +61,6 @@ function sleep(ms: number): Promise<void> {
   });
 }
 
-/* eslint-disable no-await-in-loop -- sequential backoff retries: each attempt
-   must finish (and the delay elapse) before the next one starts */
 export async function fetchJsonWithRetry<T>(
   url: string,
   init?: Parameters<typeof fetch>[1],
@@ -102,4 +97,3 @@ export async function fetchJsonWithRetry<T>(
 
   throw lastError;
 }
-/* eslint-enable no-await-in-loop */

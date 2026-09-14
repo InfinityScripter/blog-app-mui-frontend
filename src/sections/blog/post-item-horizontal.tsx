@@ -23,13 +23,13 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
 import { getReadingTime } from "src/utils/reading-time";
-import { fShortenNumber } from "src/utils/format-number";
 import { usePostDelete } from "src/hooks/use-post-delete";
 import { usePopover } from "src/components/custom-popover";
 import { ConfirmDialog } from "src/components/confirm-dialog";
 
 import { MAX_TAGS } from "./const";
 import { PostItemHorizontalMenu } from "./post-item-horizontal-menu";
+import { PostItemHorizontalStats } from "./post-item-horizontal-stats";
 import { usePublishStatusLabel } from "./hooks/use-publish-status-label";
 
 // ----------------------------------------------------------------------
@@ -86,10 +86,12 @@ export function PostItemHorizontal({ post }: { post: Post }) {
       <Card sx={{ display: "flex" }}>
         <Stack spacing={1} sx={{ p: theme.spacing(3, 3, 2, 3) }}>
           <Box
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            sx={{ mb: 2 }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              mb: 2,
+            }}
           >
             <Label
               variant="soft"
@@ -108,7 +110,7 @@ export function PostItemHorizontal({ post }: { post: Post }) {
             </Box>
           </Box>
 
-          <Stack spacing={1} flexGrow={1}>
+          <Stack spacing={1} sx={{ flexGrow: 1 }}>
             <Link
               component={RouterLink}
               href={paths.dashboard.post.details(String(post._id))}
@@ -127,7 +129,7 @@ export function PostItemHorizontal({ post }: { post: Post }) {
             </Typography>
 
             {visibleTags.length > 0 && (
-              <Box display="flex" flexWrap="wrap" gap={0.5}>
+              <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
                 {visibleTags.map((tag) => (
                   <Chip key={tag} label={tag} size="small" variant="soft" />
                 ))}
@@ -135,7 +137,7 @@ export function PostItemHorizontal({ post }: { post: Post }) {
             )}
           </Stack>
 
-          <Box display="flex" alignItems="center">
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <IconButton
               color={popover.open ? "inherit" : "default"}
               onClick={popover.onOpen}
@@ -143,35 +145,12 @@ export function PostItemHorizontal({ post }: { post: Post }) {
               <Iconify icon="eva:more-horizontal-fill" />
             </IconButton>
 
-            <Box
-              gap={1.5}
-              flexGrow={1}
-              display="flex"
-              flexWrap="wrap"
-              alignItems="center"
-              justifyContent="flex-end"
-              sx={{ typography: "caption", color: "text.disabled" }}
-            >
-              <Box display="flex" alignItems="center" gap={0.5}>
-                <Iconify icon="solar:clock-circle-bold" width={16} />
-                {t("readingTime", { minutes: readingTime })}
-              </Box>
-
-              <Box display="flex" alignItems="center" gap={0.5}>
-                <Iconify icon="eva:message-circle-fill" width={16} />
-                {fShortenNumber(totalComments)}
-              </Box>
-
-              <Box display="flex" alignItems="center" gap={0.5}>
-                <Iconify icon="solar:eye-bold" width={16} />
-                {fShortenNumber(totalViews)}
-              </Box>
-
-              <Box display="flex" alignItems="center" gap={0.5}>
-                <Iconify icon="solar:share-bold" width={16} />
-                {fShortenNumber(totalShares)}
-              </Box>
-            </Box>
+            <PostItemHorizontalStats
+              readingTime={readingTime}
+              totalComments={totalComments}
+              totalViews={totalViews}
+              totalShares={totalShares}
+            />
           </Box>
         </Stack>
 

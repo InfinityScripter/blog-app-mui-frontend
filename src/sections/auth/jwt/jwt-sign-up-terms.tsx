@@ -16,7 +16,9 @@ export function JwtSignUpTerms() {
         name="personalDataConsent"
         label="Я согласен на обработку персональных данных"
         slotProps={{
-          checkbox: { inputProps: { "aria-describedby": detailsId } },
+          checkbox: {
+            slotProps: { input: { "aria-describedby": detailsId } },
+          },
         }}
       />
 
@@ -24,8 +26,11 @@ export function JwtSignUpTerms() {
         id={detailsId}
         component="p"
         variant="caption"
-        color="text.secondary"
-        sx={{ m: 0, pl: 5.25 }}
+        sx={{
+          color: "text.secondary",
+          m: 0,
+          pl: 5.25,
+        }}
       >
         {"Согласие даётся на условиях "}
         <Link
@@ -34,7 +39,9 @@ export function JwtSignUpTerms() {
           target="_blank"
           rel="noopener noreferrer"
           underline="always"
-          color="text.primary"
+          sx={{
+            color: "text.primary",
+          }}
         >
           согласия на обработку персональных данных
         </Link>
@@ -45,7 +52,9 @@ export function JwtSignUpTerms() {
           target="_blank"
           rel="noopener noreferrer"
           underline="always"
-          color="text.primary"
+          sx={{
+            color: "text.primary",
+          }}
         >
           политикой обработки персональных данных
         </Link>

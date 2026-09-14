@@ -34,9 +34,10 @@ function PinRow({ label, value }: PinRowProps) {
   return (
     <Stack
       direction="row"
-      justifyContent="space-between"
       sx={{
+        justifyContent: "space-between",
         py: 0.5,
+
         borderBottom: (theme) =>
           `1px dashed ${alpha(theme.palette.grey[500], 0.16)}`,
       }}
@@ -72,7 +73,14 @@ export function ComparePinColumn({ model, onRemove }: ComparePinColumnProps) {
         border: (theme) => `1px solid ${alpha(theme.palette.grey[500], 0.16)}`,
       }}
     >
-      <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          alignItems: "center",
+          mb: 1,
+        }}
+      >
         <Iconify
           width={18}
           icon={vendorIcon(model.vendor)}

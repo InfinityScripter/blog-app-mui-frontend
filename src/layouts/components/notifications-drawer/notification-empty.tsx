@@ -36,18 +36,24 @@ export function NotificationEmpty({ tab, hasError }: NotificationEmptyProps) {
   return (
     <Stack
       spacing={2}
-      alignItems="center"
-      justifyContent="center"
-      sx={{ flexGrow: 1, px: 4, py: 10, textAlign: "center" }}
+      sx={{
+        alignItems: "center",
+        justifyContent: "center",
+        flexGrow: 1,
+        px: 4,
+        py: 10,
+        textAlign: "center",
+      }}
     >
       <Stack
-        alignItems="center"
-        justifyContent="center"
         sx={{
+          alignItems: "center",
+          justifyContent: "center",
           width: 64,
           height: 64,
           borderRadius: "50%",
           color: "text.disabled",
+
           bgcolor: (theme) =>
             varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
         }}

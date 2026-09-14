@@ -88,9 +88,11 @@ export function AccountGeneralIdentity({
         <Stack
           direction="row"
           spacing={0.75}
-          alignItems="center"
-          justifyContent="center"
-          sx={{ color: verified ? "success.main" : "warning.main" }}
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            color: verified ? "success.main" : "warning.main",
+          }}
         >
           <Iconify
             width={18}

@@ -19,8 +19,11 @@ export function CompareEmpty({ onReset }: CompareEmptyProps) {
   return (
     <Stack
       spacing={2}
-      alignItems="center"
-      sx={{ py: { xs: 6, md: 10 }, textAlign: "center" }}
+      sx={{
+        alignItems: "center",
+        py: { xs: 6, md: 10 },
+        textAlign: "center",
+      }}
     >
       <Iconify
         width={48}

@@ -1,4 +1,7 @@
-import type { AutocompleteRenderGetTagProps } from "@mui/material/Autocomplete";
+import type {
+  AutocompleteOwnerState,
+  AutocompleteRenderValueGetItemProps,
+} from "@mui/material/Autocomplete";
 
 import Chip from "@mui/material/Chip";
 import { FlagIcon } from "src/components/iconify";
@@ -10,15 +13,24 @@ import type { CountryOption } from "./types";
 // ----------------------------------------------------------------------
 
 export function CountrySelectTags(
-  selected: readonly CountryOption[],
-  getTagProps: AutocompleteRenderGetTagProps,
+  selected: CountryOption | CountryOption[],
+  getItemProps: AutocompleteRenderValueGetItemProps<boolean | undefined>,
+  _ownerState: AutocompleteOwnerState<
+    CountryOption,
+    boolean | undefined,
+    boolean | undefined,
+    boolean | undefined
+  >,
 ) {
-  return selected.map((option, index) => {
+  const values = Array.isArray(selected) ? selected : [selected];
+
+  return values.map((option, index) => {
     const country = getCountry(option);
+    const itemProps = getItemProps({ index });
 
     return (
       <Chip
-        {...getTagProps({ index })}
+        {...itemProps}
         key={country.label}
         label={country.label}
         size="small"

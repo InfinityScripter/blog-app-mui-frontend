@@ -47,7 +47,15 @@ export function FinanceExportCard({ from, to }: Props) {
         title="Экспорт истории"
         subheader="CSV в формате Т-Банка + колонки категорий; его же можно импортировать обратно"
       />
-      <Stack direction="row" spacing={1.5} flexWrap="wrap" sx={{ p: 3, pt: 2 }}>
+      <Stack
+        direction="row"
+        spacing={1.5}
+        sx={{
+          flexWrap: "wrap",
+          p: 3,
+          pt: 2,
+        }}
+      >
         <Button
           size="small"
           variant="contained"

@@ -39,8 +39,13 @@ export function CountryList({
             <ListItemText
               primary={country.label}
               secondary={`${country.code} (+${country.phone})`}
-              primaryTypographyProps={{ noWrap: true, typography: "body2" }}
-              secondaryTypographyProps={{ typography: "caption" }}
+              slotProps={{
+                primary: {
+                  noWrap: true,
+                  variant: "body2",
+                },
+                secondary: { variant: "caption" },
+              }}
             />
           </MenuItem>
         );

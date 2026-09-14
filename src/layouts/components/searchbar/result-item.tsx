@@ -34,11 +34,6 @@ export function ResultItem({
       }}
     >
       <ListItemText
-        primaryTypographyProps={{
-          typography: "subtitle2",
-          sx: { textTransform: "capitalize" },
-        }}
-        secondaryTypographyProps={{ typography: "caption", noWrap: true }}
         primary={title.map((part, index) => (
           <Box
             key={index}
@@ -57,6 +52,14 @@ export function ResultItem({
             {part.text}
           </Box>
         ))}
+        slotProps={{
+          primary: {
+            variant: "subtitle2",
+            sx: { textTransform: "capitalize" },
+          },
+
+          secondary: { variant: "caption", noWrap: true },
+        }}
       />
 
       {groupLabel && <Label color="info">{groupLabel}</Label>}

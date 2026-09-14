@@ -58,11 +58,14 @@ export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
     >
       <Stack spacing={1} sx={{ flexGrow: 1, minWidth: 0 }}>
         <Box
-          gap={1.5}
-          display="flex"
-          flexWrap="wrap"
-          alignItems="center"
-          sx={{ ...monoValueSx, color: "text.disabled" }}
+          sx={{
+            gap: 1.5,
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            ...monoValueSx,
+            color: "text.disabled",
+          }}
         >
           <Box component="span">{fToNow(createdAt, locale)}</Box>
           <InfoBlock
@@ -98,7 +101,14 @@ export function PostItemFeed({ post, activeTags = [] }: PostItemFeedProps) {
         </Typography>
 
         {visibleTags.length > 0 && (
-          <Box display="flex" flexWrap="wrap" gap={0.5} sx={{ mt: 0.5 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 0.5,
+              mt: 0.5,
+            }}
+          >
             {visibleTags.map((tag) => (
               <Chip
                 key={tag}

@@ -28,9 +28,9 @@ export function StatCard({ label, value, icon, loading }: StatCardProps) {
       }}
     >
       <Stack
-        alignItems="center"
-        justifyContent="center"
         sx={{
+          alignItems: "center",
+          justifyContent: "center",
           width: 48,
           height: 48,
           borderRadius: "50%",

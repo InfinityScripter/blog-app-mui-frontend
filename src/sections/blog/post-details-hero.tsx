@@ -89,12 +89,12 @@ export function PostDetailsHero({
                     // наборе logos, и иконка рендерилась пустым span —
                     // невидимая белая кнопка шаринга.
                     icon={<SocialIcon icon={target.name} />}
-                    tooltipTitle={t("share.tooltip", {
+                    title={t("share.tooltip", {
                       network: target.network,
                     })}
-                    tooltipPlacement="top"
-                    FabProps={{ color: "default" }}
-                    // SpeedDialAction's FabProps can't type an anchor with
+                    placement="top"
+                    slotProps={{ fab: { color: "default" } }}
+                    // SpeedDialAction's fab slot can't type an anchor with
                     // target/rel (no cast allowed), so open the share intent in a
                     // new tab with noopener/noreferrer instead of an <a href>.
                     onClick={() =>
@@ -109,9 +109,9 @@ export function PostDetailsHero({
 
                 <SpeedDialAction
                   icon={<Iconify icon="solar:copy-bold" />}
-                  tooltipTitle={t("share.copyLink")}
-                  tooltipPlacement="top"
-                  FabProps={{ color: "default" }}
+                  title={t("share.copyLink")}
+                  placement="top"
+                  slotProps={{ fab: { color: "default" } }}
                   onClick={handleCopyLink}
                 />
               </SpeedDial>
@@ -154,7 +154,13 @@ export function PostDetailsHero({
         </Typography>
 
         {author && createdAt && (
-          <Stack direction="row" alignItems="center" spacing={1.5}>
+          <Stack
+            direction="row"
+            spacing={1.5}
+            sx={{
+              alignItems: "center",
+            }}
+          >
             <Avatar
               alt={author.name}
               src={author.avatarUrl}
