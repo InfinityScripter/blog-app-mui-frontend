@@ -1,6 +1,7 @@
 import type { LlmStats } from "src/sections/admin/llm-stats/types";
 
 import Grid from "@mui/material/Grid";
+import { ownRecordGet } from "src/utils/own-record";
 import { Kpi } from "src/sections/admin/llm-stats/widgets/kpi";
 import { formatTokens } from "src/sections/admin/llm-stats/utils";
 import {
@@ -21,7 +22,7 @@ export function KpiRow({ stats }: { stats: LlmStats }) {
     {
       label: "Топ модель",
       value: k.topModelFamily
-        ? (FAMILY_LABEL[k.topModelFamily] ?? k.topModelFamily)
+        ? ownRecordGet(FAMILY_LABEL, k.topModelFamily, k.topModelFamily)
         : "—",
     },
     {

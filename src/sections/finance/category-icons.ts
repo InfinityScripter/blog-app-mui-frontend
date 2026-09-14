@@ -3,6 +3,8 @@
 // (services/finance-classify.ts): новая категория там без записи здесь просто
 // получит нейтральный фолбэк, страница не сломается.
 
+import { ownRecordGet } from "src/utils/own-record";
+
 type FinanceIconColor =
   "primary" | "secondary" | "info" | "success" | "warning" | "error";
 
@@ -69,14 +71,12 @@ const INCOME_ICONS: Record<string, FinanceIcon> = {
 };
 
 export function bucketIcon(bucket: string): FinanceIcon {
-  return BUCKET_ICONS[bucket] ?? FALLBACK_ICON;
+  return ownRecordGet(BUCKET_ICONS, bucket, FALLBACK_ICON);
 }
 
 export function incomeIcon(source: string): FinanceIcon {
-  return (
-    INCOME_ICONS[source] ?? {
-      icon: "solar:wallet-money-bold",
-      color: "success",
-    }
-  );
+  return ownRecordGet(INCOME_ICONS, source, {
+    icon: "solar:wallet-money-bold",
+    color: "success",
+  });
 }

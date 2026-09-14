@@ -44,6 +44,12 @@ describe("vendorColor", () => {
   it("falls back to default for an unknown vendor", () => {
     expect(vendorColor("Acme AI")).toBe("default");
   });
+
+  it("не отдаёт унаследованные prototype-ключи как цвет", () => {
+    // VENDOR_TO_COLOR["constructor"] без own-check = Function → палитра падает.
+    expect(vendorColor("constructor")).toBe("default");
+    expect(vendorColor("__proto__")).toBe("default");
+  });
 });
 
 describe("sortReleasesDesc", () => {

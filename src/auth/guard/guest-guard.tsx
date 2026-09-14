@@ -6,6 +6,7 @@ import { SplashScreen } from "src/components/loading-screen";
 import { useRouter, useSearchParams } from "src/routes/hooks";
 
 import { useAuthContext } from "../hooks";
+import { safeReturnTo } from "./safe-return-to";
 
 // ----------------------------------------------------------------------
 
@@ -22,7 +23,10 @@ export function GuestGuard({ children }: GuestGuardProps) {
 
   const [isChecking, setIsChecking] = useState(true);
 
-  const returnTo = searchParams?.get("returnTo") || CONFIG.auth.redirectPath;
+  const returnTo = safeReturnTo(
+    searchParams?.get("returnTo"),
+    CONFIG.auth.redirectPath,
+  );
 
   const checkPermissions = async () => {
     if (loading) {

@@ -1,5 +1,7 @@
 import type { LabelColor } from "src/components/label";
 
+import { ownRecordGet, ownRecordHas } from "src/utils/own-record";
+
 import { ERA_YEARS } from "./const-ui";
 
 import type { LlmModel, LlmTimelineRow } from "./types";
@@ -35,7 +37,8 @@ const VENDOR_TO_COLOR: Record<string, LabelColor> = {
 
 /** Maps a vendor to a theme semantic color for its Label (never a hex). */
 export function vendorColor(vendor: string): LabelColor {
-  return VENDOR_TO_COLOR[vendor.trim().toLowerCase()] ?? "default";
+  // ownRecordGet: `?? "default"` не спасает от prototype keys (constructor).
+  return ownRecordGet(VENDOR_TO_COLOR, vendor.trim().toLowerCase(), "default");
 }
 
 /**
@@ -65,12 +68,16 @@ const VENDOR_FALLBACK_ICON = "solar:cpu-bolt-bold-duotone";
 
 /** Resolves a vendor's brand icon, or the generic fallback if none exists. */
 export function vendorIcon(vendor: string): string {
-  return VENDOR_TO_ICON[vendor.trim().toLowerCase()] ?? VENDOR_FALLBACK_ICON;
+  return ownRecordGet(
+    VENDOR_TO_ICON,
+    vendor.trim().toLowerCase(),
+    VENDOR_FALLBACK_ICON,
+  );
 }
 
 /** True when the vendor has a real brand logo (colored) vs the tinted fallback. */
 export function hasBrandIcon(vendor: string): boolean {
-  return Boolean(VENDOR_TO_ICON[vendor.trim().toLowerCase()]);
+  return ownRecordHas(VENDOR_TO_ICON, vendor.trim().toLowerCase());
 }
 
 /** Extracts the release year from an ISO date string. */

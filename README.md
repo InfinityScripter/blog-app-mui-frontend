@@ -122,7 +122,7 @@ public/             # favicon, robots, шрифты (og-image), ассеты (с
 | `user`       | profile, avatar, change-password                                                                                                                     | `actions/account.ts`                                              |
 | `upload`     | `/api/upload`                                                                                                                                        | загрузка картинок (редактор, аватар)                              |
 
-**Клиент:** SWR-хуки в `src/actions/*.ts` (кэш, мутации, revalidate-on-focus для статуса бота). JWT-токен хранится в `sessionStorage` и уходит заголовком `Authorization: Bearer`.
+**Клиент:** SWR-хуки в `src/actions/*.ts` (кэш, мутации, revalidate-on-focus для статуса бота). Сессия — httpOnly cookie (access/refresh) + CSRF-cookie; клиент не читает JWT, «есть ли сессия» = успех `GET /api/auth/me`. Axios шлёт cookies (`withCredentials`) и CSRF-заголовок на мутации.
 
 **Сервер (SSG/ISR):** `src/actions/blog-ssr.ts` ходит в бэкенд нативным `fetch` c ретраями транзиентных ошибок (`src/utils/fetch-retry.ts`): 5xx/сеть ретраятся, настоящий 404 бросает `NotFoundError`, и сборка **падает громко**, а не кэширует пустоту (урок инцидента 2026-07-03).
 
@@ -130,24 +130,24 @@ public/             # favicon, robots, шрифты (og-image), ассеты (с
 
 ## Авторизация
 
-JWT-флоу без next-middleware — всё на клиенте:
+JWT-флоу без next-middleware — guards на клиенте, токены в httpOnly cookies:
 
-1. `AuthProvider` (`src/auth/context/jwt/`) при монтировании читает токен из `sessionStorage`, валидирует срок (`isValidToken`) и подтверждает через `GET /api/auth/me`.
-2. `AuthGuard` оборачивает дерево `/dashboard/*` (redirect на sign-in), `GuestGuard` — страницы auth (redirect в дашборд), `RoleBasedGuard` — админ-разделы (роль из JWT: `user` | `admin`).
-3. OAuth Google/Яндекс: редирект на бэкенд (`endpoints.auth.google|yandex`) → callback → `/auth/success` кладёт токен в storage.
+1. `AuthProvider` (`src/auth/context/jwt/`) при монтировании дергает `GET /api/auth/me`; успех → user в контексте, провал (после silent refresh) → гость. Access/refresh живут в httpOnly cookies, CSRF — в читаемой cookie.
+2. `AuthGuard` оборачивает дерево `/dashboard/*` (redirect на sign-in с `?returnTo=` — только relative in-app path), `GuestGuard` — страницы auth (redirect в дашборд), `RoleBasedGuard` — админ-разделы (роль из `/me`: `user` | `admin`).
+3. OAuth Google/Яндекс: редирект на бэкенд (`endpoints.auth.google|yandex`) → callback выставляет cookies → `/auth/success` просто закрывает цикл (токен в storage не кладётся).
 
 ## Тема и стили
 
-`src/theme/` — фабрика темы MUI v7 c CSS-переменными: дизайн «Editorial Ink» (шрифты Unbounded / Manrope / JetBrains Mono с кириллицей), оверрайды компонентов в `theme/core/components/`, миксины в `theme/styles/`. Тёмная/светлая тема без «вспышки» — инлайн-скрипт схемы в корневом `layout.tsx`; настройки (режим, direction) — `src/components/settings/` (drawer грузится лениво).
+`src/theme/` — фабрика темы MUI v7 c CSS-переменными: дизайн «Editorial Ink» (шрифты Unbounded / Manrope / JetBrains Mono с кириллицей), оверрайды компонентов в `theme/core/components/`, миксины в `theme/styles/`. Тёмная/светлая тема без «вспышки» — инлайн-скрипт схемы в `src/app/[locale]/layout.tsx`; настройки (режим, direction) — `src/components/settings/` (drawer грузится лениво).
 
 ## Тесты
 
-- **Vitest** (`yarn test:unit`) — 16 файлов: `src/server/llm-stats/__tests__` (агрегация статистики), `src/utils` (fetch-retry, feed-xml), утилиты секций blog/changelog/llm-timeline, markdown.
-- **Playwright** (`yarn e2e`) — `e2e/*.spec.ts`: auth-флоу, CRUD поста через дашборд, аккаунт, публичные страницы. Поднимает свой сервер на **3055** (у бэкенда должен быть разрешён этот origin в CORS), сериальный одиночный воркер.
+- **Vitest** (`yarn test:unit`) — `src/**/*.test.{ts,tsx}` (~36 файлов): `src/server/llm-stats`, `src/utils`, утилиты секций blog/changelog/llm-timeline/library, auth guards, markdown.
+- **Playwright** (`yarn e2e`) — `e2e/*.spec.ts`: auth-флоу, CRUD поста через дашборд, аккаунт, публичные страницы. Поднимает свой сервер на **3055** (у бэкенда должен быть разрешён этот origin в CORS), сериальный одиночный воркер. Ночной read-only прод-смоук — `.github/workflows/prod-smoke.yml`.
 
 ## CI и деплой
 
-- **CI** (`.github/workflows/frontend-ci.yml`, на PR и push в main): lint → `tsc --noEmit` → unit-тесты → `madge --circular` → **сборка против прод-API** (`https://api.aifirst.us.com:8444`) → knip-отчёт (не блокирует). Красная сборка = деплой бы выкатил битые страницы.
+- **CI** (`.github/workflows/frontend-ci.yml`, на PR и push в main): lint → `tsc --noEmit` → unit-тесты → `madge --circular` → **сборка против прод-API** (`https://api.aifirst.us.com:8444`) → **knip (блокирующий)**. Красная сборка = деплой бы выкатил битые страницы.
 - **Деплой:** Vercel, автоматически на каждый push в `main`. Env-переменные заданы в Vercel Project Settings. Husky + lint-staged прогоняют ESLint/Prettier на каждый коммит.
 
 ## Ассеты в `public/`
