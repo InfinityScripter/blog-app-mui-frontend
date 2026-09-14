@@ -10,7 +10,7 @@ import { test, expect, NON_ADMIN_USER } from "./fixtures";
  * - reject a wrong current password
  *
  * Runs as the seeded non-admin user. global-setup re-seeds that user (name +
- * password hash) on every run with ON CONFLICT DO UPDATE, so name/avatar
+ * password hash) on every run with ON CONFLICT (id) DO UPDATE, so name/avatar
  * mutations here are self-healing. The password test restores the original
  * password within the test to keep the suite re-runnable in one DB.
  *

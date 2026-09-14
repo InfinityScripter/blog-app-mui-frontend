@@ -11,7 +11,7 @@ export const DEMO_USER = {
 } as const;
 
 /**
- * Non-admin user seeded for role-guard tests. Created by e2e/seed.ts.
+ * Non-admin user seeded for role-guard tests. Created by e2e/global-setup.ts.
  */
 export const NON_ADMIN_USER = {
   email: "user@demo.cc",

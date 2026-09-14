@@ -5,18 +5,30 @@ import { existsSync, readFileSync } from "node:fs";
 import { NON_ADMIN_USER } from "./fixtures";
 
 /**
- * Seeds the non-admin e2e user (and a post they own) directly into the
- * backend's PostgreSQL database so role-guard / post-scoping tests are
- * reproducible.
+ * Seeds the non-admin e2e user (and a published post they own) directly into
+ * the backend's PostgreSQL database so role-guard / post-scoping / public-blog
+ * tests are reproducible.
  *
- * It reads DATABASE_URL from the sibling backend's .env. If psql or the env
- * file is unavailable, it logs a warning and skips — the admin/public tests
- * still run; only the non-admin test will fail loudly if the user is missing.
+ * It reads DATABASE_URL from E2E_DATABASE_URL or the sibling backend's .env.
+ * If psql or the env file is unavailable, it logs a warning and skips — the
+ * admin/public tests still run; only the non-admin specs fail loudly.
+ *
+ * `users.email` is NOT unique (only `id` is PK; there is a best-effort unique
+ * index on LOWER(email)). Never `ON CONFLICT (email)` — Postgres rejects it.
  *
  * Password hash below is bcrypt("@user1").
  */
 const NON_ADMIN_PASSWORD_HASH =
   "$2b$10$8hddQPFvs0eklF9Nh9FrWeVHM9JhRDZ4lOHfq8x7p04RQZR6cmPku";
+
+const NON_ADMIN_ID = "test-user-nonadmin";
+const OWNED_POST_ID = "test-user-post-1";
+
+/** Denormalized author on the owned post — admin "Все посты" asserts this cell. */
+const HELLO_FRIEND_AUTHOR = JSON.stringify({
+  name: "Hello Friend",
+  avatarUrl: null,
+});
 
 function readDatabaseUrl(): string | null {
   // Explicit override wins (CI / non-standard checkouts).
@@ -56,6 +68,63 @@ function readDatabaseUrl(): string | null {
     .replace(/^["']|["']$/g, "");
 }
 
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function execStderr(error: unknown): string {
+  if (typeof error !== "object" || error === null || !("stderr" in error)) {
+    return "";
+  }
+  const { stderr } = error;
+  return typeof stderr === "string" ? stderr : "";
+}
+
+function seedSql(): string {
+  return `
+INSERT INTO users (
+  id, name, email, password_hash, is_email_verified, role,
+  personal_data_consent_at, personal_data_consent_version
+) VALUES (
+  '${NON_ADMIN_ID}',
+  'Test User',
+  '${NON_ADMIN_USER.email}',
+  '${NON_ADMIN_PASSWORD_HASH}',
+  true,
+  'user',
+  NOW(),
+  'ci'
+)
+ON CONFLICT (id) DO UPDATE SET
+  name = EXCLUDED.name,
+  email = EXCLUDED.email,
+  password_hash = EXCLUDED.password_hash,
+  is_email_verified = true,
+  role = 'user',
+  personal_data_consent_at = COALESCE(users.personal_data_consent_at, NOW()),
+  personal_data_consent_version = COALESCE(users.personal_data_consent_version, 'ci');
+
+INSERT INTO posts (
+  id, title, description, content, user_id, publish, author
+) VALUES (
+  '${OWNED_POST_ID}',
+  'Test User own post',
+  'Seeded for e2e',
+  '<p>Seeded for e2e so the public post detail page has a body.</p>',
+  '${NON_ADMIN_ID}',
+  'published',
+  '${HELLO_FRIEND_AUTHOR}'::jsonb
+)
+ON CONFLICT (id) DO UPDATE SET
+  title = EXCLUDED.title,
+  description = EXCLUDED.description,
+  content = EXCLUDED.content,
+  user_id = EXCLUDED.user_id,
+  publish = 'published',
+  author = EXCLUDED.author;
+`;
+}
+
 export default function globalSetup() {
   const dbUrl = readDatabaseUrl();
   if (!dbUrl) {
@@ -65,29 +134,17 @@ export default function globalSetup() {
     return;
   }
 
-  const sql = `
-INSERT INTO users (id, name, email, password_hash, is_email_verified, role)
-VALUES ('test-user-nonadmin', 'Test User', '${NON_ADMIN_USER.email}',
-        '${NON_ADMIN_PASSWORD_HASH}', true, 'user')
-ON CONFLICT (email) DO UPDATE
-  SET password_hash = EXCLUDED.password_hash, is_email_verified = true, role = 'user';
-
-INSERT INTO posts (id, title, user_id, publish, author)
-VALUES ('test-user-post-1', 'Test User own post', 'test-user-nonadmin', 'published',
-        '{"name":"Test User","avatarUrl":null}'::jsonb)
-ON CONFLICT (id) DO UPDATE
-  SET title = EXCLUDED.title, user_id = EXCLUDED.user_id, publish = 'published';
-`;
-
   try {
-    execFileSync("psql", [dbUrl, "-v", "ON_ERROR_STOP=1", "-c", sql], {
-      stdio: "pipe",
+    execFileSync("psql", [dbUrl, "-v", "ON_ERROR_STOP=1", "-c", seedSql()], {
+      stdio: ["ignore", "pipe", "pipe"],
+      encoding: "utf8",
     });
     console.log("[e2e seed] non-admin user + owned post ensured.");
-  } catch (err) {
+  } catch (error) {
     console.warn(
       "[e2e seed] psql seed failed — non-admin test may fail:",
-      (err as Error).message,
+      errorMessage(error),
+      execStderr(error),
     );
   }
 }
