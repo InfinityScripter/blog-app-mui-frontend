@@ -28,8 +28,6 @@ export function Toolbar({
     <Stack
       spacing={1}
       direction="row"
-      flexWrap="wrap"
-      alignItems="center"
       divider={
         <Divider
           orientation="vertical"
@@ -39,10 +37,13 @@ export function Toolbar({
       }
       className={editorClasses.toolbar.root}
       sx={{
+        flexWrap: "wrap",
+        alignItems: "center",
         p: 1.25,
         bgcolor: "background.paper",
         borderTopRightRadius: "inherit",
         borderTopLeftRadius: "inherit",
+
         borderBottom: (theme) =>
           `solid 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.2)}`,
       }}

@@ -57,17 +57,19 @@ export function LayoutOptionNav({ option, selected }: LayoutOptionNavProps) {
   return (
     <Stack
       spacing={0.5}
-      flexShrink={0}
       sx={{
+        flexShrink: 0,
         p: 0.75,
         width: 32,
         height: 1,
         borderRightWidth: 1,
         borderRightStyle: "solid",
         borderRightColor: "var(--item-border-color)",
+
         ...(option === "mini" && {
           width: 22,
         }),
+
         ...(option === "horizontal" && {
           width: 1,
           height: 22,

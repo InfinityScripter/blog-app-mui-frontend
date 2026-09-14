@@ -21,9 +21,11 @@ export function PostListHorizontal({
   return (
     <>
       <Box
-        gap={3}
-        display="grid"
-        gridTemplateColumns={{ xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" }}
+        sx={{
+          gap: 3,
+          display: "grid",
+          gridTemplateColumns: { xs: "repeat(1, 1fr)", md: "repeat(2, 1fr)" },
+        }}
       >
         {loading ? renderLoading : renderList}
       </Box>

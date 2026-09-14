@@ -18,8 +18,8 @@ export function CountrySelectInput({
   error,
   multiple,
 }: CountrySelectInputProps) {
-  const inputValue =
-    typeof params.inputProps.value === "string" ? params.inputProps.value : "";
+  const htmlInputValue = params.slotProps.htmlInput.value;
+  const inputValue = typeof htmlInputValue === "string" ? htmlInputValue : "";
   const country = getCountry(inputValue);
 
   const baseField = {
@@ -29,9 +29,12 @@ export function CountrySelectInput({
     helperText,
     hiddenLabel,
     error: !!error,
-    inputProps: {
-      ...params.inputProps,
-      autoComplete: "new-password",
+    slotProps: {
+      ...params.slotProps,
+      htmlInput: {
+        ...params.slotProps.htmlInput,
+        autoComplete: "new-password",
+      },
     },
   };
 
@@ -42,26 +45,33 @@ export function CountrySelectInput({
   return (
     <TextField
       {...baseField}
-      InputProps={{
-        ...params.InputProps,
-        startAdornment: (
-          <InputAdornment
-            position="start"
-            sx={{ ...(!country.code && { display: "none" }) }}
-          >
-            <FlagIcon
-              key={country.label}
-              code={country.code}
-              sx={{
-                ml: 0.5,
-                mr: -0.5,
-                width: 22,
-                height: 22,
-                borderRadius: "50%",
-              }}
-            />
-          </InputAdornment>
-        ),
+      slotProps={{
+        ...params.slotProps,
+        htmlInput: {
+          ...params.slotProps.htmlInput,
+          autoComplete: "new-password",
+        },
+        input: {
+          ...params.slotProps.input,
+          startAdornment: (
+            <InputAdornment
+              position="start"
+              sx={{ ...(!country.code && { display: "none" }) }}
+            >
+              <FlagIcon
+                key={country.label}
+                code={country.code}
+                sx={{
+                  ml: 0.5,
+                  mr: -0.5,
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                }}
+              />
+            </InputAdornment>
+          ),
+        },
       }}
       sx={{
         ...(!hiddenLabel && {

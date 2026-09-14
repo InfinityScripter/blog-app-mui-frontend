@@ -48,11 +48,17 @@ export function RHFRadioGroup({
                 control={
                   <Radio
                     {...slotProps?.radio}
-                    inputProps={{
-                      ...(!option.label && {
-                        "aria-label": ariaLabel(option.label),
-                      }),
-                      ...slotProps?.radio?.inputProps,
+                    slotProps={{
+                      ...slotProps?.radio?.slotProps,
+                      input: {
+                        ...(!option.label && {
+                          "aria-label": ariaLabel(option.label),
+                        }),
+                        ...(typeof slotProps?.radio?.slotProps?.input ===
+                        "object"
+                          ? slotProps.radio.slotProps.input
+                          : undefined),
+                      },
                     }}
                   />
                 }

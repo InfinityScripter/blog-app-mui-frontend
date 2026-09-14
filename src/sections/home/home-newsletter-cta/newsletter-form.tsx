@@ -78,7 +78,9 @@ export function NewsletterForm({ tone = "light" }: NewsletterFormProps) {
         <Stack
           spacing={1.5}
           direction={{ xs: "column", sm: "row" }}
-          alignItems="flex-start"
+          sx={{
+            alignItems: "flex-start",
+          }}
         >
           <RHFTextField
             name="email"
@@ -105,7 +107,9 @@ export function NewsletterForm({ tone = "light" }: NewsletterFormProps) {
           label={t("newsletter.consentPrefix")}
           slotProps={{
             checkbox: {
-              inputProps: { "aria-describedby": consentDetailsId },
+              slotProps: {
+                input: { "aria-describedby": consentDetailsId },
+              },
             },
           }}
         />

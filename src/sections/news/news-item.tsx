@@ -67,8 +67,8 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
           <Link
             component={RouterLink}
             href={linkTo}
-            color="text.primary"
             sx={{
+              color: "text.primary",
               typography: "h4",
               ...maxLine({ line: 3, persistent: theme.typography.h4 }),
               transition: theme.transitions.create("color"),
@@ -120,8 +120,8 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
         <Link
           component={RouterLink}
           href={linkTo}
-          color="text.primary"
           sx={{
+            color: "text.primary",
             typography: "subtitle1",
             ...maxLine({ line: 2, persistent: theme.typography.subtitle1 }),
             transition: theme.transitions.create("color"),

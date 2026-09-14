@@ -29,8 +29,10 @@ export function HomeNewsletterCta() {
         <Stack
           spacing={{ xs: 3, md: 5 }}
           direction={{ xs: "column", md: "row" }}
-          alignItems={{ xs: "flex-start", md: "center" }}
-          justifyContent="space-between"
+          sx={{
+            alignItems: { xs: "flex-start", md: "center" },
+            justifyContent: "space-between",
+          }}
         >
           <Stack spacing={1.5} sx={{ maxWidth: 460 }}>
             <Box

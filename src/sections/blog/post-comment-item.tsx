@@ -76,12 +76,18 @@ export default function PostCommentItem({
         sx={{ mr: 2, width: 48, height: 48 }}
       />
 
-      <Stack flexGrow={1}>
+      <Stack
+        sx={{
+          flexGrow: 1,
+        }}
+      >
         <Stack
           direction="row"
-          alignItems="center"
-          justifyContent="space-between"
           spacing={1}
+          sx={{
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
         >
           <Typography variant="subtitle2" sx={{ mb: 0.5 }}>
             {name}
@@ -125,7 +131,13 @@ export default function PostCommentItem({
           </Typography>
         )}
 
-        <Stack direction="row" alignItems="center" spacing={2}>
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Typography variant="caption" sx={{ color: "text.disabled" }}>
             {fDate(postedAt, locale)}
           </Typography>

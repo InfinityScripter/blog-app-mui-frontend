@@ -82,10 +82,10 @@ export type RHFSelectProps = Omit<TextFieldProps, "name"> & {
   native?: boolean;
   children?: ReactNode;
   helperText?: ReactNode;
-  inputProps?: Record<string, unknown>;
-  InputLabelProps?: Record<string, unknown>;
   slotProps?: {
     paper?: SxProps<Theme>;
+    htmlInput?: Record<string, unknown>;
+    inputLabel?: InputLabelProps;
   };
 };
 

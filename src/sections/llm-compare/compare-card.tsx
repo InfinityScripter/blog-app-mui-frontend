@@ -68,7 +68,13 @@ export function CompareCard({
 
   return (
     <Card variant="outlined" sx={{ p: 2, mb: 1.5 }}>
-      <Stack direction="row" spacing={1} alignItems="flex-start">
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          alignItems: "flex-start",
+        }}
+      >
         <Iconify
           width={24}
           icon={vendorIcon(model.vendor)}
@@ -95,8 +101,10 @@ export function CompareCard({
           <Stack
             direction="row"
             spacing={0.5}
-            alignItems="center"
-            sx={{ mt: 0.25 }}
+            sx={{
+              alignItems: "center",
+              mt: 0.25,
+            }}
           >
             <Typography variant="caption" sx={{ color: "text.secondary" }}>
               {model.vendor}

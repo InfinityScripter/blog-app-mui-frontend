@@ -14,7 +14,7 @@ name: frontend-ci
 # backend repo.
 #
 # Intentionally NOT gated here:
-#  - e2e: requires a running backend + seeded Postgres; too heavy for this gate.
+#  - full e2e (auth/CRUD): see frontend-e2e.yml (Postgres + backend checkout).
 #  - (knip is a hard gate since 2026-08-27: the report is at zero and the known
 #    false positives — critters, depcheck — live in knip.json ignoreDependencies.
 #    A new false positive goes into that ignore list with a comment, the gate

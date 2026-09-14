@@ -74,8 +74,13 @@ export function NotificationsDrawer({
   const renderHead = (
     <Stack
       direction="row"
-      alignItems="center"
-      sx={{ py: 2, pl: 2.5, pr: 1.5, minHeight: 68 }}
+      sx={{
+        alignItems: "center",
+        py: 2,
+        pl: 2.5,
+        pr: 1.5,
+        minHeight: 68,
+      }}
     >
       <Typography variant="h6" sx={{ flexGrow: 1 }}>
         Уведомления
@@ -152,8 +157,10 @@ export function NotificationsDrawer({
         open={drawer.value}
         onClose={drawer.onFalse}
         anchor="right"
-        slotProps={{ backdrop: { invisible: true } }}
-        PaperProps={{ sx: { width: 1, maxWidth: 420 } }}
+        slotProps={{
+          backdrop: { invisible: true },
+          paper: { sx: { width: 1, maxWidth: 420 } },
+        }}
       >
         {renderHead}
 

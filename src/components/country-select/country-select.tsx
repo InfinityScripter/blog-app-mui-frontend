@@ -47,7 +47,7 @@ export function CountrySelect({
           multiple={multiple}
         />
       )}
-      renderTags={multiple ? CountrySelectTags : undefined}
+      renderValue={multiple ? CountrySelectTags : undefined}
       getOptionLabel={getOptionLabel}
       {...other}
     />

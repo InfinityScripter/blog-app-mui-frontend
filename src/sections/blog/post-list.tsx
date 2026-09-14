@@ -27,12 +27,15 @@ export function PostList({
 
   const renderLoading = (
     <Box
-      gap={3}
-      display="grid"
-      gridTemplateColumns={{
-        xs: "repeat(1, 1fr)",
-        sm: "repeat(2, 1fr)",
-        md: "repeat(4, 1fr)",
+      sx={{
+        gap: 3,
+        display: "grid",
+
+        gridTemplateColumns: {
+          xs: "repeat(1, 1fr)",
+          sm: "repeat(2, 1fr)",
+          md: "repeat(4, 1fr)",
+        },
       }}
     >
       <PostItemSkeleton />
@@ -74,7 +77,13 @@ export function PostList({
       {initialLoading ? renderLoading : renderList}
 
       {hasMore && (
-        <Stack alignItems="center" sx={{ mt: 8, mb: { xs: 10, md: 15 } }}>
+        <Stack
+          sx={{
+            alignItems: "center",
+            mt: 8,
+            mb: { xs: 10, md: 15 },
+          }}
+        >
           <Button
             size="large"
             variant="outlined"

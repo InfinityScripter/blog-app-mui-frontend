@@ -20,38 +20,42 @@ export function JwtSignUpForm({ isSubmitting }: JwtSignUpFormProps) {
         <Field.Text
           name="firstName"
           label="Имя"
-          InputLabelProps={{ shrink: true }}
+          slotProps={{ inputLabel: { shrink: true } }}
         />
         <Field.Text
           name="lastName"
           label="Фамилия"
-          InputLabelProps={{ shrink: true }}
+          slotProps={{ inputLabel: { shrink: true } }}
         />
       </Stack>
 
       <Field.Text
         name="email"
         label="Email адрес"
-        InputLabelProps={{ shrink: true }}
+        slotProps={{ inputLabel: { shrink: true } }}
       />
 
       <Field.Text
         name="password"
         label="Пароль"
         type={password.value ? "text" : "password"}
-        InputLabelProps={{ shrink: true }}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify
-                  icon={
-                    password.value ? "solar:eye-bold" : "solar:eye-closed-bold"
-                  }
-                />
-              </IconButton>
-            </InputAdornment>
-          ),
+        slotProps={{
+          inputLabel: { shrink: true },
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={password.onToggle} edge="end">
+                  <Iconify
+                    icon={
+                      password.value
+                        ? "solar:eye-bold"
+                        : "solar:eye-closed-bold"
+                    }
+                  />
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
         }}
       />
 

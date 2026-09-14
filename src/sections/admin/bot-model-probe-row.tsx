@@ -13,25 +13,46 @@ export function BotModelProbeRow({ probe }: Props) {
     <Stack
       direction="row"
       spacing={2}
-      alignItems="center"
-      justifyContent="space-between"
-      sx={{ py: 1 }}
+      sx={{
+        alignItems: "center",
+        justifyContent: "space-between",
+        py: 1,
+      }}
     >
       <Box sx={{ minWidth: 0 }}>
         <Typography variant="subtitle2" noWrap>
           {probe.label}
         </Typography>
-        <Typography variant="caption" color="text.secondary" noWrap>
+        <Typography
+          variant="caption"
+          noWrap
+          sx={{
+            color: "text.secondary",
+          }}
+        >
           {probe.model}
         </Typography>
         {!probe.ok && probe.error && (
-          <Typography variant="caption" color="error.main" display="block">
+          <Typography
+            variant="caption"
+            sx={{
+              color: "error.main",
+              display: "block",
+            }}
+          >
             {probe.error}
           </Typography>
         )}
       </Box>
 
-      <Stack direction="row" spacing={1} alignItems="center" flexShrink={0}>
+      <Stack
+        direction="row"
+        spacing={1}
+        sx={{
+          alignItems: "center",
+          flexShrink: 0,
+        }}
+      >
         <Typography
           variant="body2"
           sx={{
@@ -41,7 +62,12 @@ export function BotModelProbeRow({ probe }: Props) {
         >
           {probe.ok ? "✅ OK" : "❌ ошибка"}
         </Typography>
-        <Typography variant="caption" color="text.secondary">
+        <Typography
+          variant="caption"
+          sx={{
+            color: "text.secondary",
+          }}
+        >
           {probe.ms} мс
         </Typography>
       </Stack>

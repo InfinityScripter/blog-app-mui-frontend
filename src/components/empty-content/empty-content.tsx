@@ -25,22 +25,25 @@ export function EmptyContent({
 }: EmptyContentProps) {
   return (
     <Stack
-      flexGrow={1}
-      alignItems="center"
-      justifyContent="center"
-      sx={{
-        px: 3,
-        height: 1,
-        ...(filled && {
-          borderRadius: 2,
-          bgcolor: (theme) =>
-            varAlpha(theme.vars.palette.grey["500Channel"], 0.04),
-          border: (theme) =>
-            `dashed 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.08)}`,
-        }),
-        ...sx,
-      }}
       {...other}
+      sx={[
+        {
+          flexGrow: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          px: 3,
+          height: 1,
+
+          ...(filled && {
+            borderRadius: 2,
+            bgcolor: (theme) =>
+              varAlpha(theme.vars.palette.grey["500Channel"], 0.04),
+            border: (theme) =>
+              `dashed 1px ${varAlpha(theme.vars.palette.grey["500Channel"], 0.08)}`,
+          }),
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       <Box
         component="img"

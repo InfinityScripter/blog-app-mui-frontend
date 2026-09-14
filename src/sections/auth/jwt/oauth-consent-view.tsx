@@ -84,7 +84,12 @@ export function OAuthConsentView() {
         <Typography component="h1" variant="h5">
           Завершение регистрации
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          variant="body2"
+          sx={{
+            color: "text.secondary",
+          }}
+        >
           OAuth-провайдер подтвердил ваш email. Аккаунт будет создан только
           после отдельного согласия.
         </Typography>

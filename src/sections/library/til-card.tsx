@@ -36,8 +36,12 @@ export function TilCard({ til }: TilCardProps) {
       <Stack
         direction="row"
         spacing={1}
-        alignItems="center"
-        sx={{ mt: 1.5, flexWrap: "wrap", gap: 1 }}
+        sx={{
+          alignItems: "center",
+          mt: 1.5,
+          flexWrap: "wrap",
+          gap: 1,
+        }}
       >
         {til.tags.map((tag) => (
           <Chip key={tag} size="small" variant="outlined" label={`#${tag}`} />

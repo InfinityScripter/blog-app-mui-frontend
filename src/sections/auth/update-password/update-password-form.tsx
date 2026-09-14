@@ -28,7 +28,7 @@ export function UpdatePasswordForm({
         name="email"
         label="Email address"
         placeholder="example@gmail.com"
-        InputLabelProps={{ shrink: true }}
+        slotProps={{ inputLabel: { shrink: true } }}
         disabled
       />
 
@@ -38,18 +38,22 @@ export function UpdatePasswordForm({
         name="password"
         label="New Password"
         type={password.value ? "text" : "password"}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify
-                  icon={
-                    password.value ? "solar:eye-bold" : "solar:eye-closed-bold"
-                  }
-                />
-              </IconButton>
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={password.onToggle} edge="end">
+                  <Iconify
+                    icon={
+                      password.value
+                        ? "solar:eye-bold"
+                        : "solar:eye-closed-bold"
+                    }
+                  />
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
         }}
       />
 
@@ -57,18 +61,22 @@ export function UpdatePasswordForm({
         name="confirmPassword"
         label="Confirm New Password"
         type={password.value ? "text" : "password"}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify
-                  icon={
-                    password.value ? "solar:eye-bold" : "solar:eye-closed-bold"
-                  }
-                />
-              </IconButton>
-            </InputAdornment>
-          ),
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={password.onToggle} edge="end">
+                  <Iconify
+                    icon={
+                      password.value
+                        ? "solar:eye-bold"
+                        : "solar:eye-closed-bold"
+                    }
+                  />
+                </IconButton>
+              </InputAdornment>
+            ),
+          },
         }}
       />
 

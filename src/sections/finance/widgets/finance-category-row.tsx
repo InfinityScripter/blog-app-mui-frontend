@@ -67,7 +67,13 @@ export function FinanceCategoryRow({
           "&:hover": { bgcolor: "action.hover" },
         }}
       >
-        <Stack direction="row" alignItems="center" spacing={1.25}>
+        <Stack
+          direction="row"
+          spacing={1.25}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Box
             sx={(theme) => ({
               width: 32,

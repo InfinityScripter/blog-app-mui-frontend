@@ -42,10 +42,12 @@ export function LayoutSection({
           <>
             {sidebarSection}
             <Box
-              display="flex"
-              flex="1 1 auto"
-              flexDirection="column"
               className={layoutClasses.hasSidebar}
+              sx={{
+                display: "flex",
+                flex: "1 1 auto",
+                flexDirection: "column",
+              }}
             >
               {headerSection}
               {children}

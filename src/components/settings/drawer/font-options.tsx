@@ -19,9 +19,11 @@ export function FontOptions({
     <Block title="Font">
       <Box
         component="ul"
-        gap={1.5}
-        display="grid"
-        gridTemplateColumns="repeat(2, 1fr)"
+        sx={{
+          gap: 1.5,
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+        }}
       >
         {options.map((option) => {
           const selected = value === option;

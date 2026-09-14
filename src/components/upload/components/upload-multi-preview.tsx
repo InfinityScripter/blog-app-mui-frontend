@@ -32,7 +32,13 @@ export function UploadMultiPreview({
       />
 
       {(onRemoveAll || onUpload) && (
-        <Stack direction="row" justifyContent="flex-end" spacing={1.5}>
+        <Stack
+          direction="row"
+          spacing={1.5}
+          sx={{
+            justifyContent: "flex-end",
+          }}
+        >
           {onRemoveAll && (
             <Button
               color="inherit"

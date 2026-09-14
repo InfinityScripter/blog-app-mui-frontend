@@ -7,7 +7,7 @@ easy to get wrong and have bitten us before.
 
 ## Stack
 
-Next.js 15 (App Router) + React 19, MUI v7, TypeScript. Port 3033.
+Next.js 16 (App Router) + React 19, MUI v9, TypeScript. Port 3033.
 `npm run dev` · `npm run build` · `npm run lint` / `lint:fix` · `npm run knip`.
 
 ## Gotchas — read before you touch these
@@ -132,9 +132,9 @@ would drift. Keep such cross-section imports display-only and rare.
 
 Секционные **статические** токены (например фиксированный брендовый градиент) — в CSS рядом с секцией, `@import` в `src/global.css`. **Рамки, hover, текст** — через палитру темы в `sx` / `utils.ts` (`alpha`, `theme.palette`), без хардкода в CSS, чтобы смена primary / light-dark работала предсказуемо.
 
-### 8b. MUI v7, формы и навигация
+### 8b. MUI v9, формы и навигация
 
-- **MUI v7**: `Grid` (не `Grid2`); загрузка у `Button` — через пропсы `loadingIndicator` / `loadingPosition`
+- **MUI v9**: `Grid` с `size` (не `xs`/`item`, не `GridLegacy`); загрузка у `Button` — через пропсы `loadingIndicator` / `loadingPosition`. Deprecated `InputProps`/`PaperProps`/`InputLabelProps` → `slotProps`.
 - **Формы**: React Hook Form + Zod через `src/components/hook-form/`; использовать `RHF*`-компоненты (`RHFTextField` и т.д.) — сырые MUI-инпуты в формах не применять
 - **Навигация**: только через `src/routes/hooks` (ре-экспорт `next/navigation`) и константы `src/routes/paths.ts`
 - **Тема без мигания**: скрипт цветовой схемы (`InitColorSchemeScript`) инжектится в `src/app/[locale]/layout.tsx` — не переносить его в клиентский компонент

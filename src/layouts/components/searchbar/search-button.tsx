@@ -14,17 +14,22 @@ export function SearchButton({ onOpen, sx, ...other }: SearchButtonProps) {
 
   return (
     <Box
-      display="flex"
-      alignItems="center"
       onClick={onOpen}
-      sx={{
-        pr: { sm: 1 },
-        borderRadius: { sm: 1.5 },
-        cursor: { sm: "pointer" },
-        bgcolor: { sm: varAlpha(theme.vars.palette.grey["500Channel"], 0.08) },
-        ...sx,
-      }}
       {...other}
+      sx={[
+        {
+          display: "flex",
+          alignItems: "center",
+          pr: { sm: 1 },
+          borderRadius: { sm: 1.5 },
+          cursor: { sm: "pointer" },
+          bgcolor: {
+            sm: varAlpha(theme.vars.palette.grey["500Channel"], 0.08),
+          },
+          ...sx,
+        },
+        ...(Array.isArray(other.sx) ? other.sx : [other.sx]),
+      ]}
     >
       <IconButton disableRipple>
         {/* https://icon-sets.iconify.design/eva/search-fill/ */}

@@ -16,29 +16,32 @@ export function ScrollProgressCircular({
   return (
     <Box
       component="svg"
-      width={progressSize}
-      height={progressSize}
       viewBox={`0 0 ${progressSize} ${progressSize}`}
       xmlns="http://www.w3.org/2000/svg"
-      sx={{
-        width: progressSize,
-        height: progressSize,
-        transform: "rotate(-90deg)",
-        color: (theme) =>
-          theme.vars?.palette.text.primary ?? theme.palette.text.primary,
-        ...(color !== "inherit" && {
-          color: (theme) =>
-            theme.vars?.palette[color].main ?? theme.palette[color].main,
-        }),
-        circle: {
-          fill: "none",
-          strokeDashoffset: 0,
-          strokeWidth: thickness,
-          stroke: "currentColor",
-        },
-        ...sx,
-      }}
       {...other}
+      sx={[
+        {
+          width: progressSize,
+          height: progressSize,
+          transform: "rotate(-90deg)",
+
+          color: (theme) =>
+            theme.vars?.palette.text.primary ?? theme.palette.text.primary,
+
+          ...(color !== "inherit" && {
+            color: (theme) =>
+              theme.vars?.palette[color].main ?? theme.palette[color].main,
+          }),
+
+          circle: {
+            fill: "none",
+            strokeDashoffset: 0,
+            strokeWidth: thickness,
+            stroke: "currentColor",
+          },
+        },
+        ...(Array.isArray(sx) ? sx : [sx]),
+      ]}
     >
       <Box
         component="circle"

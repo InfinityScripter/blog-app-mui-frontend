@@ -107,13 +107,24 @@ export function PostDetailsView({ initialPost }: PostDetailsViewProps) {
             borderBottom: `dashed 1px var(--palette-divider)`,
           }}
         >
-          <Stack direction="row" flexWrap="wrap" spacing={1}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+              flexWrap: "wrap",
+            }}
+          >
             {currentPost?.tags.map((tag) => (
               <Chip key={tag} label={tag} variant="soft" />
             ))}
           </Stack>
 
-          <Stack direction="row" alignItems="center">
+          <Stack
+            direction="row"
+            sx={{
+              alignItems: "center",
+            }}
+          >
             <AvatarGroup
               sx={{
                 [`& .${avatarGroupClasses.avatar}`]: { width: 32, height: 32 },

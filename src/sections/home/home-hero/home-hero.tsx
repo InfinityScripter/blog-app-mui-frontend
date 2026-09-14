@@ -32,9 +32,20 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
         component={MotionContainer}
         sx={{ py: { xs: 8, md: "clamp(4rem, 9vw, 7rem)" } }}
       >
-        <Grid container spacing={{ xs: 6, md: 10 }} alignItems="center">
+        <Grid
+          container
+          spacing={{ xs: 6, md: 10 }}
+          sx={{
+            alignItems: "center",
+          }}
+        >
           <Grid size={{ xs: 12, md: 7 }}>
-            <Stack spacing={4} alignItems="flex-start">
+            <Stack
+              spacing={4}
+              sx={{
+                alignItems: "flex-start",
+              }}
+            >
               <HeroHeading />
               <HeroText />
               <HeroButtons />

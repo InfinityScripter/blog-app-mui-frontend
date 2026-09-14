@@ -6,7 +6,7 @@ this file is the short, agent-facing source of truth. **Follow it exactly.**
 
 ## Stack
 
-**Next.js 15 (App Router) + React 19 + MUI v7**, built on the Minimals.cc
+**Next.js 16 (App Router) + React 19 + MUI v9**, built on the Minimals.cc
 template. SWR for data, React Hook Form + Zod for forms, Tiptap for the editor.
 Port **3033** (`npm run dev`). Backend is a separate repo on port 7272.
 

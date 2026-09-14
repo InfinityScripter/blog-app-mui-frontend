@@ -71,10 +71,12 @@ export function PostListHomeView({ posts }: PostListHomeViewProps) {
 
       <Stack
         spacing={3}
-        justifyContent="space-between"
-        alignItems={{ xs: "flex-end", sm: "center" }}
         direction={{ xs: "column", sm: "row" }}
-        sx={{ mb: 3 }}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-end", sm: "center" },
+          mb: 3,
+        }}
       >
         <PostSearch
           query={debouncedQuery}

@@ -1,3 +1,4 @@
+import { ownRecordGet } from "src/utils/own-record";
 import { DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
 
 // Английские подписи для тегов постов.
@@ -55,10 +56,7 @@ export function tagLabel(
 ): string {
   const labels = LABELS_BY_LOCALE[locale];
   const key = tag.toLowerCase();
-  // Прямой labels[key] прошёл бы по прототипной цепочке: тег "constructor"
-  // вернул бы Object.prototype.constructor (функцию) вместо строки.
-  if (labels && Object.prototype.hasOwnProperty.call(labels, key)) {
-    return labels[key];
-  }
-  return tag;
+  // ownRecordGet: прямой labels[key] прошёл бы по прототипной цепочке —
+  // тег "constructor" вернул бы Object.prototype.constructor (функцию).
+  return ownRecordGet(labels, key, tag);
 }

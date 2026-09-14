@@ -43,7 +43,13 @@ export function ContactCard({ item }: ContactCardProps) {
         }),
       }}
     >
-      <Stack direction="row" spacing={2} alignItems="center">
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          alignItems: "center",
+        }}
+      >
         <Box
           sx={{
             width: 44,

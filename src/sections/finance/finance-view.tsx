@@ -40,9 +40,11 @@ export function FinanceView() {
       <Stack
         spacing={2}
         direction={{ xs: "column", sm: "row" }}
-        alignItems={{ sm: "flex-start" }}
-        justifyContent="space-between"
-        sx={{ mb: 3 }}
+        sx={{
+          alignItems: { sm: "flex-start" },
+          justifyContent: "space-between",
+          mb: 3,
+        }}
       >
         <Box>
           <Typography variant="h4" sx={{ mb: 1 }}>
@@ -67,8 +69,10 @@ export function FinanceView() {
             <Stack
               spacing={2}
               direction={{ xs: "column", sm: "row" }}
-              alignItems={{ sm: "center" }}
-              justifyContent="space-between"
+              sx={{
+                alignItems: { sm: "center" },
+                justifyContent: "space-between",
+              }}
             >
               <FinanceRangeSelect
                 months={months.map((month) => month.ym)}

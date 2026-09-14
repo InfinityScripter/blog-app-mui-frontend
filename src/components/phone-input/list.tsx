@@ -75,15 +75,17 @@ export function CountryListPopover({
             value={searchCountry}
             onChange={handleSearchCountry}
             placeholder="Search..."
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Iconify
-                    icon="eva:search-fill"
-                    sx={{ color: "text.disabled" }}
-                  />
-                </InputAdornment>
-              ),
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Iconify
+                      icon="eva:search-fill"
+                      sx={{ color: "text.disabled" }}
+                    />
+                  </InputAdornment>
+                ),
+              },
             }}
           />
         </Box>

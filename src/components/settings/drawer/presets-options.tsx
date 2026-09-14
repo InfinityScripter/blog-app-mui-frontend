@@ -19,9 +19,11 @@ export function PresetsOptions({
     <Block title="Presets">
       <Box
         component="ul"
-        gap={1.5}
-        display="grid"
-        gridTemplateColumns="repeat(3, 1fr)"
+        sx={{
+          gap: 1.5,
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+        }}
       >
         {options.map((option) => {
           const selected = value === option.name;

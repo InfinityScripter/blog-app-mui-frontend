@@ -35,7 +35,9 @@ const MuiListItemText = {
   /** **************************************
    * DEFAULT PROPS
    *************************************** */
-  defaultProps: { primaryTypographyProps: { typography: "subtitle2" } },
+  defaultProps: {
+    slotProps: { primary: { variant: "subtitle2" } },
+  },
 
   /** **************************************
    * STYLE

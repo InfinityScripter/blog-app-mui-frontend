@@ -72,7 +72,6 @@ export function HeadingBlock({ editor }: HeadingBlockProps) {
         anchorEl={anchorEl}
         open={!!anchorEl}
         onClose={handleClose}
-        MenuListProps={{ "aria-labelledby": "heading-button" }}
         slotProps={{
           paper: {
             sx: {
@@ -92,6 +91,8 @@ export function HeadingBlock({ editor }: HeadingBlockProps) {
               },
             },
           },
+
+          list: { "aria-labelledby": "heading-button" },
         }}
       >
         <ToolbarItem

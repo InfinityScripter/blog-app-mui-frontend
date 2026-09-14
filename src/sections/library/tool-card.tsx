@@ -35,9 +35,11 @@ export function ToolCard({ tool }: ToolCardProps) {
       <Stack
         direction="row"
         spacing={1}
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 1 }}
+        sx={{
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 1,
+        }}
       >
         <Link
           href={tool.url}

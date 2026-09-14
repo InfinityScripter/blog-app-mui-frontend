@@ -82,9 +82,11 @@ export function AdminPostsView() {
     <Box>
       <Stack
         direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{ mb: 3 }}
+        sx={{
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 3,
+        }}
       >
         <Typography variant="h4">Все посты</Typography>
         <Tooltip title="Сбросить кеш публичных страниц (посты, лента, новости). Помогает, если пост завис с ошибкой 404 после деплоя.">

@@ -3,9 +3,9 @@
 // `emitSessionExpired()`; each mounted AuthProvider registers a handler that
 // clears its user state. Kept tiny and framework-free.
 //
-// A Set (not a single ref) so this stays correct when more than one AuthProvider
-// is mounted — this app nests a second AuthProvider under several route-group
-// layouts, and every instance must be notified, not just the last to subscribe.
+// A Set (not a single ref) so every subscribed AuthProvider is notified — not
+// just the last to subscribe. The app mounts a single AuthProvider in
+// `[locale]/layout.tsx`; the Set stays correct if that ever changes.
 
 type SessionExpiredHandler = () => void;
 

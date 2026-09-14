@@ -1,13 +1,16 @@
 import type { ModelRelease } from "src/types/api";
 import type { LabelColor } from "src/components/label";
 
+import { ownRecordGet } from "src/utils/own-record";
+
 import { VENDOR_TO_COLOR } from "./const";
 
 // ----------------------------------------------------------------------
 
 /** Maps a vendor to a theme semantic color for its Label (never a hex). */
 export function vendorColor(vendor: string): LabelColor {
-  return VENDOR_TO_COLOR[vendor.trim().toLowerCase()] ?? "default";
+  // ownRecordGet: `?? "default"` не спасает от prototype keys (constructor).
+  return ownRecordGet(VENDOR_TO_COLOR, vendor.trim().toLowerCase(), "default");
 }
 
 /**

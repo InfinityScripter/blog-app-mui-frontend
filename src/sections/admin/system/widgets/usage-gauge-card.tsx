@@ -30,8 +30,10 @@ export function UsageGaugeCard({
       <Stack spacing={2}>
         <Stack
           direction="row"
-          alignItems="baseline"
-          justifyContent="space-between"
+          sx={{
+            alignItems: "baseline",
+            justifyContent: "space-between",
+          }}
         >
           <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
             {title}

@@ -19,8 +19,6 @@ export function RHFSelect({
   children,
   slotProps,
   helperText,
-  inputProps,
-  InputLabelProps,
   ...other
 }: RHFSelectProps) {
   const { control } = useFormContext();
@@ -36,15 +34,20 @@ export function RHFSelect({
           {...field}
           select
           fullWidth
-          SelectProps={{
-            native,
-            MenuProps: {
-              PaperProps: { sx: { maxHeight: 220, ...slotProps?.paper } },
+          slotProps={{
+            select: {
+              native,
+              MenuProps: {
+                slotProps: {
+                  paper: { sx: { maxHeight: 220, ...slotProps?.paper } },
+                },
+              },
+              sx: { textTransform: "capitalize" },
             },
-            sx: { textTransform: "capitalize" },
+
+            htmlInput: { id: labelId, ...slotProps?.htmlInput },
+            inputLabel: { htmlFor: labelId, ...slotProps?.inputLabel },
           }}
-          InputLabelProps={{ htmlFor: labelId, ...InputLabelProps }}
-          inputProps={{ id: labelId, ...inputProps }}
           error={!!error}
           helperText={error ? error?.message : helperText}
           {...other}

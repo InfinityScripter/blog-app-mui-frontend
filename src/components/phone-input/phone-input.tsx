@@ -37,20 +37,22 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
         value={value}
         onChange={(newValue) => onChange?.(newValue)}
         placeholder={placeholder ?? "Enter phone number"}
-        InputProps={
+        slotProps={
           disableSelect
             ? undefined
             : {
-                startAdornment: (
-                  <InputAdornment position="start" sx={{ ml: 1 }}>
-                    <CountryListPopover
-                      countryCode={selectedCountry}
-                      onClickCountry={(inputValue) =>
-                        setSelectedCountry(inputValue)
-                      }
-                    />
-                  </InputAdornment>
-                ),
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start" sx={{ ml: 1 }}>
+                      <CountryListPopover
+                        countryCode={selectedCountry}
+                        onClickCountry={(inputValue) =>
+                          setSelectedCountry(inputValue)
+                        }
+                      />
+                    </InputAdornment>
+                  ),
+                },
               }
         }
         {...other}

@@ -35,10 +35,12 @@ export function RHFTextField<TFieldValues extends FieldValues = FieldValues>({
           }}
           error={!!error}
           helperText={error?.message ?? helperText}
-          inputProps={{
-            autoComplete: "off",
-          }}
           {...other}
+          slotProps={{
+            htmlInput: {
+              autoComplete: "off",
+            },
+          }}
         />
       )}
     />

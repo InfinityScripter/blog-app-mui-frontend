@@ -2,6 +2,7 @@ import type { ModelRelease } from "src/types/api";
 import type { LlmModel } from "src/sections/llm-timeline/types";
 import type { ComparableModel } from "src/sections/llm-compare/types";
 
+import { ownRecordGet } from "./own-record";
 import {
   releaseName,
   releaseFromTimeline,
@@ -35,7 +36,8 @@ const VENDOR_ALIASES: Readonly<Record<string, string>> = {
 
 function normalizeVendor(value: string): string {
   const normalized = normalize(value);
-  return VENDOR_ALIASES[normalized] ?? normalized;
+  // ownRecordGet: alias lookup must not inherit Object.prototype keys.
+  return ownRecordGet(VENDOR_ALIASES, normalized, normalized);
 }
 
 function nameKey(vendor: string, model: string): string {

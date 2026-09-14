@@ -33,7 +33,13 @@ export default function Page() {
 
   return (
     <Container sx={{ py: 10 }}>
-      <Stack spacing={2} alignItems="center" justifyContent="center">
+      <Stack
+        spacing={2}
+        sx={{
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         {!error ? (
           <>
             <CircularProgress />

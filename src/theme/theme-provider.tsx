@@ -8,7 +8,7 @@ import { useSettingsContext } from "src/components/settings";
 // Стабильный ThemeProvider: CSS-vars режим (бывший Experimental_CssVarsProvider)
 // в него влит начиная с MUI v6 — тема из extendTheme включает его автоматически.
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
 
 import { createTheme } from "./create-theme";
 import { RTL } from "./with-settings/right-to-left";

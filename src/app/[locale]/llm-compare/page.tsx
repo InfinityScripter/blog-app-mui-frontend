@@ -68,7 +68,6 @@ export default async function Page({ params }: PageProps) {
     <>
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }}
       />
       <LlmCompareView models={models} pricingAsOf={catalog.pricingAsOf} />

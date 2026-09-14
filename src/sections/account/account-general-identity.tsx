@@ -7,6 +7,7 @@ import { fData } from "src/utils/format-number";
 import { Iconify } from "src/components/iconify";
 import { Field } from "src/components/hook-form";
 import Typography from "@mui/material/Typography";
+import { ownRecordGet } from "src/utils/own-record";
 
 import { ROLE_LABEL } from "./const";
 
@@ -40,7 +41,7 @@ export function AccountGeneralIdentity({
         startIcon={<Iconify icon="solar:shield-user-bold" />}
         sx={{ position: "absolute", top: 24, left: 24 }}
       >
-        {ROLE_LABEL[role] ?? role}
+        {ownRecordGet(ROLE_LABEL, role, role)}
       </Label>
 
       <Field.UploadAvatar
@@ -87,9 +88,11 @@ export function AccountGeneralIdentity({
         <Stack
           direction="row"
           spacing={0.75}
-          alignItems="center"
-          justifyContent="center"
-          sx={{ color: verified ? "success.main" : "warning.main" }}
+          sx={{
+            alignItems: "center",
+            justifyContent: "center",
+            color: verified ? "success.main" : "warning.main",
+          }}
         >
           <Iconify
             width={18}

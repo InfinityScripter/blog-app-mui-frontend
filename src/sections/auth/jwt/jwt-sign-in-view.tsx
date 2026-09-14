@@ -128,7 +128,7 @@ export function JwtSignInView() {
       <Field.Text
         name="email"
         label="Email адрес"
-        InputLabelProps={{ shrink: true }}
+        slotProps={{ inputLabel: { shrink: true } }}
       />
 
       <Stack spacing={1.5}>
@@ -146,28 +146,36 @@ export function JwtSignInView() {
           name="password"
           label="Пароль"
           type={password.value ? "text" : "password"}
-          InputLabelProps={{ shrink: true }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify
-                    icon={
-                      password.value
-                        ? "solar:eye-bold"
-                        : "solar:eye-closed-bold"
-                    }
-                  />
-                </IconButton>
-              </InputAdornment>
-            ),
+          slotProps={{
+            inputLabel: { shrink: true },
+            input: {
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={password.onToggle} edge="end">
+                    <Iconify
+                      icon={
+                        password.value
+                          ? "solar:eye-bold"
+                          : "solar:eye-closed-bold"
+                      }
+                    />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
           }}
         />
       </Stack>
 
       {consentRequired && (
         <Stack spacing={1}>
-          <Typography role="alert" variant="body2" color="warning.main">
+          <Typography
+            role="alert"
+            variant="body2"
+            sx={{
+              color: "warning.main",
+            }}
+          >
             Пароль подтверждён. Для продолжения примите актуальную редакцию
             согласия.
           </Typography>

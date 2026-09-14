@@ -92,7 +92,7 @@ export function Searchbar({
           enter: theme.transitions.duration.shortest,
           exit: 0,
         }}
-        PaperProps={{ sx: { mt: 15, overflow: "unset" } }}
+        slotProps={{ paper: { sx: { mt: 15, overflow: "unset" } } }}
         sx={{ [`& .${dialogClasses.container}`]: { alignItems: "flex-start" } }}
       >
         <Box

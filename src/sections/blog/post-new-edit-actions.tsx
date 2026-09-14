@@ -21,10 +21,12 @@ export function PostNewEditActions({
 
   return (
     <Box
-      display="flex"
-      alignItems="center"
-      flexWrap="wrap"
-      justifyContent="flex-end"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        justifyContent: "flex-end",
+      }}
     >
       <Controller
         name="publish"

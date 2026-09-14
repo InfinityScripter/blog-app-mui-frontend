@@ -73,14 +73,6 @@ const nextConfig = {
       transform: "@mui/lab/{{member}}",
     },
   },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
-    });
-
-    return config;
-  },
   ...(isStaticExport === "true" && {
     output: "export",
   }),

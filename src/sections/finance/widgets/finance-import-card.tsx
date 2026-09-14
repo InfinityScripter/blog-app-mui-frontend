@@ -60,9 +60,11 @@ export function FinanceImportCard({
           sx={{ width: 1, height: 80 }}
           placeholder={
             <Stack
-              alignItems="center"
               spacing={0.5}
-              sx={{ color: "text.disabled" }}
+              sx={{
+                alignItems: "center",
+                color: "text.disabled",
+              }}
             >
               <Iconify icon="eva:cloud-upload-fill" width={24} />
               <Typography variant="caption">

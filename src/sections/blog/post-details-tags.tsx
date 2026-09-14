@@ -20,7 +20,13 @@ export function PostDetailsTags({ tags }: PostDetailsTagsProps) {
   const locale = useAppLocale();
 
   return (
-    <Stack direction="row" flexWrap="wrap" spacing={1}>
+    <Stack
+      direction="row"
+      spacing={1}
+      sx={{
+        flexWrap: "wrap",
+      }}
+    >
       {tags.map((tag) => (
         <Chip
           key={tag}

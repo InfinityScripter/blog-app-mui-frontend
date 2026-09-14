@@ -107,7 +107,7 @@ export function VerifyView() {
             name="email"
             label="Email"
             placeholder="example@domain.com"
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
 
           <Field.Code name="code" />

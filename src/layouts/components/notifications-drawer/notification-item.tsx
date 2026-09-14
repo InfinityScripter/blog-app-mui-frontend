@@ -43,14 +43,15 @@ export function NotificationItem({
     />
   ) : (
     <Stack
-      alignItems="center"
-      justifyContent="center"
       sx={{
+        alignItems: "center",
+        justifyContent: "center",
         width: 44,
         height: 44,
         flexShrink: 0,
         borderRadius: 1.5,
         color: `${config.color}.main`,
+
         bgcolor: (theme) =>
           varAlpha(theme.vars.palette[config.color].mainChannel, 0.08),
       }}
@@ -60,7 +61,13 @@ export function NotificationItem({
   );
 
   const renderMetaLine = (
-    <Stack direction="row" alignItems="center" spacing={0.75}>
+    <Stack
+      direction="row"
+      spacing={0.75}
+      sx={{
+        alignItems: "center",
+      }}
+    >
       {isUnread && (
         <Box
           sx={{

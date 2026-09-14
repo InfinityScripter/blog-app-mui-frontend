@@ -87,10 +87,12 @@ export function PostListView() {
 
       <Stack
         spacing={3}
-        justifyContent="space-between"
-        alignItems={{ xs: "flex-end", sm: "center" }}
         direction={{ xs: "column", sm: "row" }}
-        sx={{ mb: { xs: 3, md: 5 } }}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: { xs: "flex-end", sm: "center" },
+          mb: { xs: 3, md: 5 },
+        }}
       >
         <PostSearch
           query={debouncedQuery}

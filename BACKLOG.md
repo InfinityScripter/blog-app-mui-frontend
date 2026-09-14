@@ -1,24 +1,32 @@
 # BACKLOG — полный прогон проверок фронтенда
 
-Дата: 2026-08-27. Метод: прогнаны все verification gates из AGENTS.md + CI
-(`frontend-ci.yml`), статические проверки правил CLAUDE.md, ревью последнего
-коммита, аудит зависимостей. Каждая находка проверена вручную (file:line).
+Дата исходного прогона: 2026-08-27. Цикл 2: 2026-08-31.
+**Аудит-проверка 2026-09-14:** пункты A1–C7 из исходного списка **уже
+закрыты в коде** (см. «Статус выполнения» ниже). Шапка ниже — исторический
+отчёт находок; не чинить повторно.
 
-## Результаты гейтов
+## Аудит 2026-09-14 — новые находки (закрыты в том же проходе)
 
-| Гейт                             | Результат | Комментарий                                                                                                                                       |
-| -------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `yarn install --frozen-lockfile` | ✅        | lockfile в синхроне                                                                                                                               |
-| `npx tsc --noEmit`               | ✅        | 0 ошибок                                                                                                                                          |
-| `yarn lint`                      | ✅        | 0 ошибок и предупреждений                                                                                                                         |
-| `yarn test:unit`                 | ✅        | 32 файла, 217/217                                                                                                                                 |
-| `npx madge --circular`           | ✅        | циклов нет                                                                                                                                        |
-| `yarn fm:check`                  | ✅        | prettier чист                                                                                                                                     |
-| `yarn knip`                      | ❌        | 4 неиспользуемых экспортированных типа (см. B1)                                                                                                   |
-| `yarn build`                     | ⚠️        | компиляция+типы ок; пререндер не проверить из песочницы (порт 8444 закрыт), в CI идёт против живого API. Билд выдал 3 предупреждения → B3, B6, B7 |
-| e2e                              | —         | требует бэкенд :7272 + Postgres, вне CI (см. C5)                                                                                                  |
-| Паритет i18n ru/en               | ✅        | 346/346 ключей                                                                                                                                    |
-| Правила CLAUDE.md (сканы)        | ⚠️        | хуки/изоляция секций/layout'ы/SSG-guard'ы ок; расхождения — B2, B4, C6, C7                                                                        |
+| #   | Находка                                                                                                                                                                                                   | Статус                                     |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| N1  | Тот же prototype-chain lookup, что A1, в `vendorColor` / `vendorIcon` / `hasBrandIcon` (changelog + llm-timeline), `normalizeVendor` (llm-catalog), finance `bucketIcon`/`incomeIcon`, ROLE/FAMILY labels | ✅ `ownRecordGet` / `ownRecordHas` + тесты |
+| N2  | `GuestGuard` open redirect через `?returnTo=` (absolute / `//host`)                                                                                                                                       | ✅ `safeReturnTo`                          |
+| N3  | Устаревший README (sessionStorage Bearer, knip non-blocking, 16 vitest-файлов) и комментарий в `session-events.ts` про nested AuthProvider                                                                | ✅ актуализировано                         |
+
+**Осталось (решения владельца):** нет открытых мажорных долгов из C3 —
+eslint 10 / Next 16 / MUI 9 / full e2e CI закрыты в цикле 4.
+
+---
+
+## Результаты гейтов (2026-08-27, историческое)
+
+| Гейт                                 | Результат тогда | Сейчас           |
+| ------------------------------------ | --------------- | ---------------- |
+| tsc / lint / unit / madge / prettier | ✅              | ✅               |
+| knip                                 | ❌ (B1)         | ✅ блокирующий   |
+| build warnings B3/B5/B7              | ⚠️              | ✅               |
+| e2e                                  | вне CI          | + prod-smoke.yml |
+| CLAUDE расхождения B2/B4/C6/C7       | ⚠️              | ✅               |
 
 ---
 
@@ -293,3 +301,49 @@ searchbar на функциональный обход), либо смягчит
 Что НЕ трогать: публичный /llm-stats не отстраивать (решение владельца,
 см. IMPROVEMENT-PLAN.md); секции изоляцию, SSG-guard'ы, i18n-паритет — уже
 чисто, регрессий не найдено.
+
+## Статус выполнения — цикл 3 (2026-09-14)
+
+**Сделано:**
+
+- **N1** — общий `src/utils/own-record.ts` (`ownRecordGet` / `ownRecordHas`);
+  переведены tagLabel, changelog/llm-timeline vendor*, llm-catalog
+  normalizeVendor, finance icons, ROLE/FAMILY labels; тесты на poison-keys.
+- **N2** — `safeReturnTo` в GuestGuard; unit-тесты на `//`, absolute, `\\`.
+- **N3** — README (cookie-auth, knip blocking, vitest count, locale layout
+  script) + комментарий `session-events.ts`; шапка BACKLOG помечена как
+  историческая.
+
+**Осталось (решения владельца):**
+
+- eslint 8 (EOL) → 10: ждёт совместимости airbnb-конфига с flat config либо
+  решения сменить базовый конфиг.
+- next 16 / MUI 9 — крупные мажоры, отдельными PR после ручной проверки UI.
+- Полные e2e (auth/CRUD) в CI — нужна docker-compose инфраструктура
+  backend-репо.
+
+Что НЕ трогать: публичный /llm-stats не отстраивать (решение владельца,
+см. IMPROVEMENT-PLAN.md); секции изоляцию, SSG-guard'ы, i18n-паритет — уже
+чисто, регрессий не найдено.
+
+## Статус выполнения — цикл 4 (2026-09-14): majors + e2e CI
+
+**Сделано:**
+
+- **ESLint 8 → 10** — flat `eslint.config.mjs`. Airbnb/`eslint-plugin-react`
+  ещё peer≤9 и падают на RuleContext API ESLint 10 → база сменена на
+  `@eslint-react` + `eslint-plugin-import-x` + `typescript-eslint` +
+  `@next/eslint-plugin-next` (путь «сменить базовый конфиг» из C3). Кастомные
+  ratchets (no-restricted-syntax, max-lines, unused-imports, import cycle,
+  ban-ts-comment) сохранены.
+- **Next 15 → 16.3.5** — `middleware.ts` → `proxy.ts`, webpack SVG-правило
+  убрано (Turbopack default), `@mui/material-nextjs/v16-appRouter`, React 19.2.
+- **MUI 7 → 9.4** — system-props codemod + slotProps миграция
+  (InputProps/PaperProps/InputLabelProps/typographyProps/SpeedDialAction),
+  Grid size API, Autocomplete `params.slotProps`.
+- **Полные e2e в CI** — `.github/workflows/frontend-e2e.yml`: Postgres 16
+  service + checkout `blog-app-mui-backend` + seed demo admin + Playwright
+  suite (auth/CRUD/account/public).
+
+**Гейты после апгрейда:** lint 0/0 · tsc 0 · unit 237 · knip 0 · madge 0 ·
+`yarn build` против prod API ✅.

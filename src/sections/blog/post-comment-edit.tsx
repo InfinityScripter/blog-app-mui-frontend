@@ -32,7 +32,13 @@ export function PostCommentEdit({
         placeholder={t("comments.editPlaceholder")}
         sx={{ mb: 1 }}
       />
-      <Stack direction="row" spacing={2} justifyContent="flex-end">
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{
+          justifyContent: "flex-end",
+        }}
+      >
         <Button
           size="small"
           color="inherit"

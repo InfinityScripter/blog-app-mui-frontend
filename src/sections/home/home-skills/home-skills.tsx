@@ -56,7 +56,13 @@ export function HomeSkills() {
                 },
               })}
             >
-              <Stack direction="row" spacing={1.5} alignItems="center">
+              <Stack
+                direction="row"
+                spacing={1.5}
+                sx={{
+                  alignItems: "center",
+                }}
+              >
                 <Box
                   sx={(theme: Theme) => ({
                     width: 44,
@@ -81,7 +87,14 @@ export function HomeSkills() {
                 {t(`skills.groups.${skill.key}.description`)}
               </Typography>
 
-              <Stack direction="row" flexWrap="wrap" useFlexGap spacing={1}>
+              <Stack
+                direction="row"
+                useFlexGap
+                spacing={1}
+                sx={{
+                  flexWrap: "wrap",
+                }}
+              >
                 {skill.items.map((item, index) => (
                   <Chip
                     key={item}

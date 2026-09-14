@@ -36,9 +36,9 @@ export function NavSectionHorizontal({
       <Stack
         component="nav"
         direction="row"
-        alignItems="center"
         className={navSectionClasses.horizontal.root}
         sx={{
+          alignItems: "center",
           ...cssVars,
           mx: "auto",
           height: 1,

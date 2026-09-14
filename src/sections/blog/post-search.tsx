@@ -62,24 +62,31 @@ export function PostSearch({
           {...params}
           placeholder={t("search.placeholder")}
           onKeyUp={handleKeyUp}
-          InputProps={{
-            ...params.InputProps,
-            startAdornment: (
-              <InputAdornment position="start">
-                <Iconify
-                  icon="eva:search-fill"
-                  sx={{ ml: 1, color: "text.disabled" }}
-                />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <>
-                {loading ? (
-                  <Iconify icon="svg-spinners:8-dots-rotate" sx={{ mr: -3 }} />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </>
-            ),
+          slotProps={{
+            ...params.slotProps,
+
+            input: {
+              ...params.slotProps.input,
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Iconify
+                    icon="eva:search-fill"
+                    sx={{ ml: 1, color: "text.disabled" }}
+                  />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <>
+                  {loading ? (
+                    <Iconify
+                      icon="svg-spinners:8-dots-rotate"
+                      sx={{ mr: -3 }}
+                    />
+                  ) : null}
+                  {params.slotProps.input.endAdornment}
+                </>
+              ),
+            },
           }}
         />
       )}

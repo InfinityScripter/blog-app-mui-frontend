@@ -47,6 +47,11 @@ describe("vendorColor", () => {
   it("falls back to «default» for an unknown vendor", () => {
     expect(vendorColor("Unknown Corp")).toBe("default");
   });
+
+  it("не отдаёт унаследованные prototype-ключи как цвет", () => {
+    expect(vendorColor("constructor")).toBe("default");
+    expect(vendorColor("__proto__")).toBe("default");
+  });
 });
 
 describe("formatContext", () => {
@@ -91,6 +96,12 @@ describe("vendorIcon / hasBrandIcon", () => {
   it("falls back to a generic icon for a vendor without a brand logo", () => {
     expect(vendorIcon("Cohere")).toBe("solar:cpu-bolt-bold-duotone");
     expect(hasBrandIcon("Cohere")).toBe(false);
+  });
+
+  it("не принимает prototype-ключи за бренд-иконку", () => {
+    expect(vendorIcon("constructor")).toBe("solar:cpu-bolt-bold-duotone");
+    expect(hasBrandIcon("constructor")).toBe(false);
+    expect(hasBrandIcon("__proto__")).toBe(false);
   });
 });
 

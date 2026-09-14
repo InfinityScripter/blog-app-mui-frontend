@@ -37,10 +37,20 @@ export function ExperienceTimelineItem({
         }}
       >
         <m.div variants={varFade().inLeft}>
-          <Typography variant="subtitle2" color="text.primary">
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: "text.primary",
+            }}
+          >
             {periodLabel}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            sx={{
+              color: "text.secondary",
+            }}
+          >
             {item.location}
           </Typography>
         </m.div>
@@ -113,8 +123,10 @@ export function ExperienceTimelineItem({
               </Typography>
               <Typography
                 variant="subtitle2"
-                color="primary.main"
-                sx={{ mb: 1 }}
+                sx={{
+                  color: "primary.main",
+                  mb: 1,
+                }}
               >
                 {item.company}
               </Typography>

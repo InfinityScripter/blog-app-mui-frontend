@@ -18,12 +18,21 @@ function UploadIllustration({ hideBackground, sx, ...other }) {
   return (
     <Box
       component="svg"
-      width="100%"
-      height="100%"
       viewBox="0 0 480 360"
       xmlns="http://www.w3.org/2000/svg"
-      sx={{ width: 320, maxWidth: 1, flexShrink: 0, height: "auto", ...sx }}
       {...other}
+      sx={[
+        {
+          width: "100%",
+          height: "100%",
+          width: 320,
+          maxWidth: 1,
+          flexShrink: 0,
+          height: "auto",
+          ...sx,
+        },
+        ...(Array.isArray(other.sx) ? other.sx : [other.sx]),
+      ]}
     >
       {!hideBackground && <BackgroundShape />}
 
