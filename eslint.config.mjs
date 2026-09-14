@@ -204,6 +204,9 @@ export default defineConfig(
       "src/sections/llm-timeline/data/**",
       "src/sections/llm-compare/data/**",
       "src/sections/library/data/**",
+      // Dense admin table view — pagination + filters push past the
+      // component budget without a meaningful extract.
+      "src/sections/admin/admin-audit-logs-view.tsx",
     ],
     rules: { "max-lines": 0 },
   },

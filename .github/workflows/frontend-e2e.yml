@@ -1,0 +1,147 @@
+name: frontend-e2e
+
+# Full Playwright suite (auth, post CRUD, account, public) against a local
+# backend + Postgres. Runs on PRs and main pushes; complements frontend-ci
+# (lint/tsc/unit/build) and the nightly prod-smoke (read-only against prod).
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: frontend-e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: blog_app
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d blog_app"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/blog_app
+      E2E_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/blog_app
+      JWT_SECRET: ci_e2e_secret_not_for_prod
+      FRONTEND_URL: http://localhost:3055
+      BACKEND_URL: http://localhost:7272
+      NEXT_PUBLIC_SERVER_URL: http://localhost:7272
+      NEXT_PUBLIC_ASSET_URL: http://localhost:7272
+      # Sign-in of existing users is never gated; leave PD collection off.
+      PD_COLLECTION_ENABLED: "false"
+      NEXT_PUBLIC_PD_COLLECTION_ENABLED: "false"
+      CI: "true"
+
+    steps:
+      - name: Checkout frontend
+        uses: actions/checkout@v7
+
+      - name: Checkout backend
+        uses: actions/checkout@v7
+        with:
+          repository: InfinityScripter/blog-app-mui-backend
+          path: blog-app-mui-backend
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: Install frontend dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Install backend dependencies
+        working-directory: blog-app-mui-backend
+        run: yarn install --frozen-lockfile
+
+      - name: Build backend
+        working-directory: blog-app-mui-backend
+        run: yarn build
+
+      - name: Start backend
+        working-directory: blog-app-mui-backend
+        run: |
+          nohup yarn start > /tmp/backend-e2e.log 2>&1 &
+          echo $! > /tmp/backend-e2e.pid
+          for i in $(seq 1 60); do
+            if curl -sf "http://127.0.0.1:7272/api/post/list" >/dev/null; then
+              echo "backend ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "backend failed to become ready" >&2
+          cat /tmp/backend-e2e.log >&2 || true
+          exit 1
+
+      - name: Seed demo admin user
+        run: |
+          # Migrations already ran on the first API hit. Seed the admin the
+          # Playwright fixtures expect (backend has no built-in demo seed).
+          node <<'NODE'
+          const bcrypt = require("./blog-app-mui-backend/node_modules/bcrypt");
+          const { Client } = require("./blog-app-mui-backend/node_modules/pg");
+          (async () => {
+            const hash = await bcrypt.hash("Demo!Admin2026", 10);
+            const client = new Client({ connectionString: process.env.DATABASE_URL });
+            await client.connect();
+            await client.query(
+              `DELETE FROM users WHERE lower(email) = lower('demo@minimals.cc')`,
+            );
+            await client.query(
+              `INSERT INTO users (
+                 id, name, email, password_hash, is_email_verified, role,
+                 personal_data_consent_at, personal_data_consent_version
+               ) VALUES ($1,$2,$3,$4,true,'admin',NOW(),'ci')`,
+              ["demo-admin", "Hello Friend", "demo@minimals.cc", hash],
+            );
+            await client.end();
+            console.log("demo admin seeded");
+          })().catch((err) => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run e2e
+        run: yarn e2e
+        env:
+          E2E_PORT: "3055"
+          E2E_ADMIN_PASSWORD: Demo!Admin2026
+
+      - name: Upload Playwright traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
+
+      - name: Stop backend
+        if: always()
+        run: |
+          if [ -f /tmp/backend-e2e.pid ]; then
+            kill "$(cat /tmp/backend-e2e.pid)" || true
+          fi

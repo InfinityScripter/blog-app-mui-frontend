@@ -2,7 +2,7 @@
 
 Фронтенд блога **[aifirst.us.com](https://aifirst.us.com)** — русскоязычный блог про AI/LLM/агентов: посты, новостная лента, changelog релизов моделей, таймлайн LLM и портфолио автора.
 
-**Стек:** Next.js 15 (App Router) · React 19 · MUI v7 · SWR · React Hook Form + Zod · Tiptap. Бэкенд — отдельный репозиторий `blog-app-mui-backend` (Next.js API + PostgreSQL, порт 7272).
+**Стек:** Next.js 16 (App Router) · React 19 · MUI v9 · SWR · React Hook Form + Zod · Tiptap. Бэкенд — отдельный репозиторий `blog-app-mui-backend` (Next.js API + PostgreSQL, порт 7272).
 
 ---
 
@@ -50,7 +50,7 @@ src/
 ├── layouts/        # Каркасы: main (публичный сайт), dashboard, auth-split, simple
 ├── actions/        # Слой данных: SWR-хуки (клиент) + SSR-фетчеры (blog-ssr.ts)
 ├── auth/           # JWT-контекст, guard'ы (AuthGuard / GuestGuard / RoleBasedGuard)
-├── theme/          # Тема MUI v7 (Editorial Ink): палитра, типографика, оверрайды
+├── theme/          # Тема MUI v9 (Editorial Ink): палитра, типографика, оверрайды
 ├── routes/         # paths.ts (все URL) + hooks (обёртки next/navigation)
 ├── server/         # Серверный код вне React: llm-stats (SQLite-агрегация)
 ├── utils/          # axios + endpoints, форматтеры, retry-фетч, cover-src
@@ -138,7 +138,7 @@ JWT-флоу без next-middleware — guards на клиенте, токены
 
 ## Тема и стили
 
-`src/theme/` — фабрика темы MUI v7 c CSS-переменными: дизайн «Editorial Ink» (шрифты Unbounded / Manrope / JetBrains Mono с кириллицей), оверрайды компонентов в `theme/core/components/`, миксины в `theme/styles/`. Тёмная/светлая тема без «вспышки» — инлайн-скрипт схемы в `src/app/[locale]/layout.tsx`; настройки (режим, direction) — `src/components/settings/` (drawer грузится лениво).
+`src/theme/` — фабрика темы MUI v9 c CSS-переменными: дизайн «Editorial Ink» (шрифты Unbounded / Manrope / JetBrains Mono с кириллицей), оверрайды компонентов в `theme/core/components/`, миксины в `theme/styles/`. Тёмная/светлая тема без «вспышки» — инлайн-скрипт схемы в `src/app/[locale]/layout.tsx`; настройки (режим, direction) — `src/components/settings/` (drawer грузится лениво).
 
 ## Тесты
 
@@ -148,6 +148,7 @@ JWT-флоу без next-middleware — guards на клиенте, токены
 ## CI и деплой
 
 - **CI** (`.github/workflows/frontend-ci.yml`, на PR и push в main): lint → `tsc --noEmit` → unit-тесты → `madge --circular` → **сборка против прод-API** (`https://api.aifirst.us.com:8444`) → **knip (блокирующий)**. Красная сборка = деплой бы выкатил битые страницы.
+- **E2E CI** (`.github/workflows/frontend-e2e.yml`): Postgres 16 + checkout `blog-app-mui-backend` + seed demo admin + полный Playwright (auth/CRUD/account/public).
 - **Деплой:** Vercel, автоматически на каждый push в `main`. Env-переменные заданы в Vercel Project Settings. Husky + lint-staged прогоняют ESLint/Prettier на каждый коммит.
 
 ## Ассеты в `public/`

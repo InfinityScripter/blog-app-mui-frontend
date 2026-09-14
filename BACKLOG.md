@@ -13,7 +13,8 @@
 | N2  | `GuestGuard` open redirect через `?returnTo=` (absolute / `//host`)                                                                                                                                       | ✅ `safeReturnTo`                          |
 | N3  | Устаревший README (sessionStorage Bearer, knip non-blocking, 16 vitest-файлов) и комментарий в `session-events.ts` про nested AuthProvider                                                                | ✅ актуализировано                         |
 
-**Осталось (решения владельца, без изменений):** eslint 8→10, next 16 / MUI 9, полные e2e auth/CRUD в CI (нужен docker-compose бэка).
+**Осталось (решения владельца):** нет открытых мажорных долгов из C3 —
+eslint 10 / Next 16 / MUI 9 / full e2e CI закрыты в цикле 4.
 
 ---
 
@@ -324,3 +325,25 @@ searchbar на функциональный обход), либо смягчит
 Что НЕ трогать: публичный /llm-stats не отстраивать (решение владельца,
 см. IMPROVEMENT-PLAN.md); секции изоляцию, SSG-guard'ы, i18n-паритет — уже
 чисто, регрессий не найдено.
+
+## Статус выполнения — цикл 4 (2026-09-14): majors + e2e CI
+
+**Сделано:**
+
+- **ESLint 8 → 10** — flat `eslint.config.mjs`. Airbnb/`eslint-plugin-react`
+  ещё peer≤9 и падают на RuleContext API ESLint 10 → база сменена на
+  `@eslint-react` + `eslint-plugin-import-x` + `typescript-eslint` +
+  `@next/eslint-plugin-next` (путь «сменить базовый конфиг» из C3). Кастомные
+  ratchets (no-restricted-syntax, max-lines, unused-imports, import cycle,
+  ban-ts-comment) сохранены.
+- **Next 15 → 16.3.5** — `middleware.ts` → `proxy.ts`, webpack SVG-правило
+  убрано (Turbopack default), `@mui/material-nextjs/v16-appRouter`, React 19.2.
+- **MUI 7 → 9.4** — system-props codemod + slotProps миграция
+  (InputProps/PaperProps/InputLabelProps/typographyProps/SpeedDialAction),
+  Grid size API, Autocomplete `params.slotProps`.
+- **Полные e2e в CI** — `.github/workflows/frontend-e2e.yml`: Postgres 16
+  service + checkout `blog-app-mui-backend` + seed demo admin + Playwright
+  suite (auth/CRUD/account/public).
+
+**Гейты после апгрейда:** lint 0/0 · tsc 0 · unit 237 · knip 0 · madge 0 ·
+`yarn build` против prod API ✅.

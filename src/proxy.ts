@@ -24,7 +24,7 @@ function resolveGeoLocale(request: NextRequest): AppLocale | undefined {
   return COUNTRY_TO_LOCALE[country] ?? "en";
 }
 
-export default function middleware(request: NextRequest): NextResponse {
+export default function proxy(request: NextRequest): NextResponse {
   const hasLocaleCookie = request.cookies.has(LOCALE_COOKIE);
 
   if (!hasLocaleCookie) {
