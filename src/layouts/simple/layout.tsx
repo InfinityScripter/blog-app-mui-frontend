@@ -7,6 +7,7 @@ import { Main } from "./main";
 import { HeaderBase } from "../core/header-base";
 import { CompactContent } from "./compact-content";
 import { LayoutSection } from "../core/layout-section";
+import { LAYOUT, layoutCssPx } from "../config-layout";
 
 import type { SimpleLayoutProps } from "./types";
 
@@ -51,7 +52,9 @@ export function SimpleLayout({ sx, children, content }: SimpleLayoutProps) {
        * Style
        *************************************** */
       cssVars={{
-        "--layout-simple-content-compact-width": "448px",
+        "--layout-simple-content-compact-width": layoutCssPx(
+          LAYOUT.simpleContentCompactWidth,
+        ),
       }}
       sx={sx}
     >

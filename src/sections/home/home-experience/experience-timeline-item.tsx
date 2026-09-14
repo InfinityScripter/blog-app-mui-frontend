@@ -88,7 +88,7 @@ export function ExperienceTimelineItem({
         />
       </TimelineSeparator>
 
-      <TimelineContent sx={{ py: "12px", px: { xs: 1, sm: 2 } }}>
+      <TimelineContent sx={{ py: 1.5, px: { xs: 1, sm: 2 } }}>
         <m.div variants={varFade().inRight}>
           <Link
             href={item.link}

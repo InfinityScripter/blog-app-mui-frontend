@@ -36,7 +36,7 @@ export function PostBluf({ text }: PostBlufProps) {
         {t("bluf")}
       </Box>
       <Typography
-        sx={{ m: 0, fontSize: "1.125rem", fontWeight: 500, lineHeight: 1.5 }}
+        sx={{ m: 0, typography: "h5", fontWeight: 500, lineHeight: 1.5 }}
       >
         {text}
       </Typography>

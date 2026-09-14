@@ -45,7 +45,7 @@ export function SearchButton({ onOpen, sx, ...other }: SearchButtonProps) {
           chip, which punched a bright hole in the dark header. */}
       <Label
         sx={{
-          fontSize: 12,
+          typography: "caption",
           color: "text.secondary",
           bgcolor: "background.paper",
           border: `1px solid ${varAlpha(theme.vars.palette.grey["500Channel"], 0.16)}`,

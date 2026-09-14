@@ -33,7 +33,7 @@ export function HomeFooter({ sx }: HomeFooterProps) {
     >
       <Container>
         <Logo />
-        <Box sx={{ ...monoValueSx, fontSize: 11, mt: 1.5 }}>
+        <Box sx={{ ...monoValueSx, mt: 1.5 }}>
           {t("madeBy")}
           <Link href={CONFIG.social.telegram}> Mikhail Talalaev </Link>
           <br />

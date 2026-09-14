@@ -91,10 +91,7 @@ export function TimelineEntry({
             {era}
           </Typography>
         )}
-        <Typography
-          component="span"
-          sx={{ ...monoValueSx, fontSize: 12, display: "block" }}
-        >
+        <Typography component="span" sx={{ ...monoValueSx, display: "block" }}>
           {fDate(model.releaseDate, locale)}
         </Typography>
       </TimelineOppositeContent>

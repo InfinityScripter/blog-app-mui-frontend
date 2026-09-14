@@ -1,11 +1,10 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { useTranslations } from "next-intl";
-import { alpha } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { monoLabelSx, monoValueSx } from "src/theme/styles";
+import { varAlpha, monoLabelSx, monoValueSx } from "src/theme/styles";
 
 import { NewsletterForm } from "./newsletter-form";
 
@@ -52,7 +51,13 @@ export function HomeNewsletterCta() {
               {t("newsletter.title")}
             </Typography>
 
-            <Typography variant="body2" sx={{ color: alpha("#FFFFFF", 0.72) }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: (theme) =>
+                  varAlpha(theme.vars.palette.common.whiteChannel, 0.72),
+              }}
+            >
               {t("newsletter.text")}
             </Typography>
           </Stack>
@@ -63,9 +68,9 @@ export function HomeNewsletterCta() {
               component="p"
               sx={{
                 ...monoValueSx,
-                fontSize: 11,
                 mt: 1.5,
-                color: alpha("#FFFFFF", 0.5),
+                color: (theme) =>
+                  varAlpha(theme.vars.palette.common.whiteChannel, 0.5),
               }}
             >
               {t("newsletter.note")}

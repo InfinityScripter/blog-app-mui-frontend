@@ -37,7 +37,7 @@ export function HomeExperience() {
         position={isMobile ? "right" : "alternate"}
         sx={{
           [`& .MuiTimelineItem-root`]: {
-            minHeight: { xs: "auto", md: "70px" },
+            minHeight: { xs: "auto", md: 70 },
             "&:before": {
               display: { xs: "none", md: "block" },
             },

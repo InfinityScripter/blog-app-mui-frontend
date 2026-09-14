@@ -134,7 +134,7 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
         {meta && (
           <Typography
             component="p"
-            sx={{ ...monoValueSx, fontSize: 12, color: "text.secondary" }}
+            sx={{ ...monoValueSx, color: "text.secondary" }}
           >
             {meta}
           </Typography>

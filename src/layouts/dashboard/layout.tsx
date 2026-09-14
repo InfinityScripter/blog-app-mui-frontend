@@ -17,6 +17,7 @@ import { _account } from "../config-nav-account";
 import { HeaderBase } from "../core/header-base";
 import { getNavData } from "../config-nav-dashboard";
 import { LayoutSection } from "../core/layout-section";
+import { LAYOUT, layoutCssPx } from "../config-layout";
 import { useNavColorVars } from "./hooks/use-nav-color-vars";
 
 import type { DashboardLayoutProps } from "./types";
@@ -156,9 +157,11 @@ export function DashboardLayout({ sx, children, data }: DashboardLayoutProps) {
           ...navColorVars.layout,
           "--layout-transition-easing": "linear",
           "--layout-transition-duration": "120ms",
-          "--layout-nav-mini-width": "88px",
-          "--layout-nav-vertical-width": "300px",
-          "--layout-nav-horizontal-height": "64px",
+          "--layout-nav-mini-width": layoutCssPx(LAYOUT.navMiniWidth),
+          "--layout-nav-vertical-width": layoutCssPx(LAYOUT.navVerticalWidth),
+          "--layout-nav-horizontal-height": layoutCssPx(
+            LAYOUT.navHorizontalHeight,
+          ),
           "--layout-dashboard-content-pt": theme.spacing(1),
           "--layout-dashboard-content-pb": theme.spacing(8),
           "--layout-dashboard-content-px": theme.spacing(5),

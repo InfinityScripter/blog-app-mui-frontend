@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
 import { layoutClasses } from "../classes";
+import { LAYOUT, layoutCssPx } from "../config-layout";
 
 import type { LayoutSectionProps } from "./types";
 
@@ -22,11 +23,15 @@ export function LayoutSection({
       styles={{
         body: {
           "--layout-nav-zIndex": 1101,
-          "--layout-nav-mobile-width": "320px",
-          "--layout-header-blur": "8px",
+          "--layout-nav-mobile-width": layoutCssPx(LAYOUT.navMobileWidth),
+          "--layout-header-blur": layoutCssPx(LAYOUT.headerBlur),
           "--layout-header-zIndex": 1100,
-          "--layout-header-mobile-height": "64px",
-          "--layout-header-desktop-height": "72px",
+          "--layout-header-mobile-height": layoutCssPx(
+            LAYOUT.headerMobileHeight,
+          ),
+          "--layout-header-desktop-height": layoutCssPx(
+            LAYOUT.headerDesktopHeight,
+          ),
           ...cssVars,
         },
       }}

@@ -34,7 +34,7 @@ export function NavSubList({ data, subheader, sx, ...other }: NavSubListProps) {
         <ListSubheader
           disableSticky
           disableGutters
-          sx={{ fontSize: 11, color: "text.primary", typography: "overline" }}
+          sx={{ color: "text.primary", typography: "overline" }}
         >
           {subheader}
         </ListSubheader>

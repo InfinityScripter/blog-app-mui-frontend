@@ -75,7 +75,7 @@ export function PostFaq({ items }: PostFaqProps) {
               },
             }}
           >
-            <Typography sx={{ fontWeight: 600, fontSize: "1.0625rem" }}>
+            <Typography sx={{ fontWeight: 600, typography: "h6" }}>
               {item.question}
             </Typography>
           </AccordionSummary>

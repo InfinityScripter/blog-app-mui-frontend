@@ -52,10 +52,7 @@ export function NotificationTabs({
           >
             {tab.label}
 
-            <Box
-              component="span"
-              sx={{ ...monoValueSx, fontSize: 12, opacity: 0.64 }}
-            >
+            <Box component="span" sx={{ ...monoValueSx, opacity: 0.64 }}>
               {counts[tab.value]}
             </Box>
           </ButtonBase>

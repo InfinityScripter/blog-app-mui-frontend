@@ -9,6 +9,7 @@ import { Section } from "./section";
 import { Content } from "./content";
 import { HeaderBase } from "../core/header-base";
 import { LayoutSection } from "../core/layout-section";
+import { LAYOUT, layoutCssPx } from "../config-layout";
 import { BackToSiteButton } from "../components/back-to-site-button";
 
 import type { AuthSplitLayoutProps } from "./types";
@@ -59,7 +60,7 @@ export function AuthSplitLayout({
        *************************************** */
       sx={sx}
       cssVars={{
-        "--layout-auth-content-width": "420px",
+        "--layout-auth-content-width": layoutCssPx(LAYOUT.authContentWidth),
         // The ink panel behind the header's left area only exists from
         // `layoutQuery` up. Unscoped, these inverted colours also applied on
         // mobile, where they painted the wordmark white on a white page.

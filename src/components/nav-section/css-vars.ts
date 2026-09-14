@@ -56,14 +56,14 @@ function verticalVars(theme: Theme) {
     "--nav-item-pb": spacing(0.5),
     "--nav-item-pl": spacing(1.5),
     // root
-    "--nav-item-root-height": "44px",
+    "--nav-item-root-height": spacing(5.5),
     // sub
-    "--nav-item-sub-height": "36px",
+    "--nav-item-sub-height": spacing(4.5),
     // icon
-    "--nav-icon-size": "24px",
+    "--nav-icon-size": spacing(3),
     "--nav-icon-margin": spacing(0, 1.5, 0, 0),
     // bullet
-    "--nav-bullet-size": "12px",
+    "--nav-bullet-size": spacing(1.5),
     "--nav-bullet-light-color": bulletColor.light,
     "--nav-bullet-dark-color": bulletColor.dark,
   };
@@ -79,13 +79,13 @@ function miniVars(theme: Theme) {
     "--nav-item-gap": spacing(0.5),
     "--nav-item-radius": `${shape.borderRadius}px`,
     // root
-    "--nav-item-root-height": "56px",
+    "--nav-item-root-height": spacing(7),
     "--nav-item-root-padding": spacing(1, 0.5, 0.75, 0.5),
     // sub
-    "--nav-item-sub-height": "34px",
+    "--nav-item-sub-height": spacing(4.25),
     "--nav-item-sub-padding": spacing(0, 1),
     // icon
-    "--nav-icon-size": "22px",
+    "--nav-icon-size": spacing(2.75),
     "--nav-icon-root-margin": spacing(0, 0, 0.75, 0),
     "--nav-icon-sub-margin": spacing(0, 1, 0, 0),
   };
@@ -99,16 +99,16 @@ function horizontalVars(theme: Theme) {
   return {
     ...colorVars(theme, "horizontal"),
     "--nav-item-gap": spacing(0.75),
-    "--nav-height": "56px",
+    "--nav-height": spacing(7),
     "--nav-item-radius": `${Number(shape.borderRadius) * 0.75}px`,
     // root
-    "--nav-item-root-height": "32px",
+    "--nav-item-root-height": spacing(4),
     "--nav-item-root-padding": spacing(0, 0.75),
     // sub
-    "--nav-item-sub-height": "34px",
+    "--nav-item-sub-height": spacing(4.25),
     "--nav-item-sub-padding": spacing(0, 1),
     // icon
-    "--nav-icon-size": "22px",
+    "--nav-icon-size": spacing(2.75),
     "--nav-icon-sub-margin": spacing(0, 1, 0, 0),
     "--nav-icon-root-margin": spacing(0, 1, 0, 0),
   };

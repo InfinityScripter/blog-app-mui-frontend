@@ -2,6 +2,7 @@
 
 import Box from "@mui/material/Box";
 import { layoutClasses } from "src/layouts/classes";
+import { LAYOUT, layoutCssPx } from "src/layouts/config-layout";
 
 import type { MainProps } from "./types";
 
@@ -20,7 +21,9 @@ export function Main({ children, isNavHorizontal, sx, ...other }: MainProps) {
         flexDirection: "column",
         p: 3,
         ...(isNavHorizontal && {
-          "--layout-dashboard-content-pt": "40px",
+          "--layout-dashboard-content-pt": layoutCssPx(
+            LAYOUT.dashboardContentPtHorizontal,
+          ),
         }),
         ...sx,
       }}

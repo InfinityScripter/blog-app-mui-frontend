@@ -52,7 +52,7 @@ export const sharedStyles: Record<string, CSSObject> = {
     width: 16,
     height: 16,
     flexShrink: 0,
-    marginLeft: "6px",
+    marginLeft: 6,
     display: "inline-flex",
   },
 
@@ -60,7 +60,7 @@ export const sharedStyles: Record<string, CSSObject> = {
     fontSize: 12,
     flexShrink: 0,
     fontWeight: 600,
-    marginLeft: "6px",
+    marginLeft: 6,
     lineHeight: 18 / 12,
     display: "inline-flex",
   },
@@ -154,7 +154,7 @@ export function NavCollapse({
             "&::before": {
               top: 0,
               left: 0,
-              width: "2px",
+              width: 2,
               content: '""',
               position: "absolute",
               bottom:

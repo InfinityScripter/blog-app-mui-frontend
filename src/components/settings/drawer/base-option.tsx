@@ -74,7 +74,7 @@ export function BaseOption({
         <Box
           component="span"
           sx={{
-            lineHeight: "18px",
+            lineHeight: 1.38,
             fontWeight: "fontWeightSemiBold",
             fontSize: (theme) => theme.typography.pxToRem(13),
           }}

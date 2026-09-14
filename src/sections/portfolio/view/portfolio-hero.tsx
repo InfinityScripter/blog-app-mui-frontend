@@ -133,10 +133,7 @@ export const PortfolioHero = () => {
                       borderTop: (theme: Theme) => hairline(theme),
                     }}
                   >
-                    <Typography
-                      component="p"
-                      sx={{ ...monoLabelSx, fontSize: 11 }}
-                    >
+                    <Typography component="p" sx={monoLabelSx}>
                       {t(`metrics.${metric.key}.label`)}
                     </Typography>
                     <Stack
@@ -153,7 +150,11 @@ export const PortfolioHero = () => {
                       />
                       <Typography
                         component="p"
-                        sx={{ ...monoValueSx, fontSize: 18 }}
+                        sx={{
+                          ...monoValueSx,
+                          fontSize: (theme: Theme) =>
+                            theme.typography.h5.fontSize,
+                        }}
                       >
                         {metric.value ?? t(`metrics.${metric.key}.value`)}
                       </Typography>

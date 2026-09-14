@@ -114,7 +114,6 @@ export function ReleaseCard({ release, sourceOnly = false }: ReleaseCardProps) {
           spacing={2}
           sx={{
             ...monoValueSx,
-            fontSize: 12,
             flexWrap: "wrap",
             color: "text.secondary",
           }}

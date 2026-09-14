@@ -12,6 +12,8 @@ import reactHooks from "eslint-plugin-react-hooks";
 import unusedImports from "eslint-plugin-unused-imports";
 import { configs as tsConfigs } from "typescript-eslint";
 
+import designTokens from "./scripts/eslint-plugin-design-tokens.mjs";
+
 // ESLint 10 flat config. Airbnb + eslint-plugin-react still peer eslint≤9 and
 // crash on ESLint 10's RuleContext API — switched to @eslint-react + import-x
 // (BACKLOG: «сменить базовый конфиг»). Custom project ratchets kept as-is.
@@ -50,6 +52,7 @@ export default defineConfig(
       "import-x": importX,
       perfectionist,
       "unused-imports": unusedImports,
+      "design-tokens": designTokens,
       ...eslintReact.configs.recommended.plugins,
     },
     languageOptions: {
@@ -172,6 +175,10 @@ export default defineConfig(
         },
       ],
       "max-lines": [2, { max: 200, skipBlankLines: true, skipComments: true }],
+      // Design-token ratchet. Allowlists below ARE the backlog — shrink, never grow.
+      "design-tokens/no-hex-color": 2,
+      "design-tokens/no-raw-px": 2,
+      "design-tokens/no-raw-font-size": 2,
       // @eslint-react replaces eslint-plugin-react; keep it advisory until a
       // dedicated cleanup pass. Errors would fail the 0/0 CI ratchet.
       "@eslint-react/no-leaked-conditional-rendering": 0,
@@ -209,6 +216,44 @@ export default defineConfig(
       "src/sections/admin/admin-audit-logs-view.tsx",
     ],
     rules: { "max-lines": 0 },
+  },
+  {
+    // Token factory. Defining spacing/type/color IS this directory's job.
+    files: ["src/theme/**"],
+    rules: {
+      "design-tokens/no-hex-color": 0,
+      "design-tokens/no-raw-px": 0,
+      "design-tokens/no-raw-font-size": 0,
+    },
+  },
+  {
+    // Surfaces that cannot read CSS vars / MUI typography (satori OG, inline
+    // SVG brand fills, CSS-mask trick). Not a license to add more hex in UI.
+    files: [
+      "src/assets/**",
+      "src/app/icon.tsx",
+      "src/app/**/opengraph-image.tsx",
+      "src/components/iconify/social-icon.tsx",
+      "src/components/animate/animate-avatar.tsx",
+      "src/components/nav-section/const.ts",
+    ],
+    rules: {
+      "design-tokens/no-hex-color": 0,
+      "design-tokens/no-raw-font-size": 0,
+    },
+  },
+  {
+    // Remaining raw-fontSize backlog. Prefer Typography variant / editorial sx.
+    files: [
+      "src/app/not-found.tsx",
+      "src/components/nav-section/styles.tsx",
+      "src/components/settings/drawer/block.tsx",
+      "src/components/language-switcher/language-switcher.tsx",
+      "src/components/editor/components/toolbar-item.tsx",
+    ],
+    rules: {
+      "design-tokens/no-raw-font-size": 0,
+    },
   },
   prettier,
 );

@@ -65,7 +65,7 @@ export const StyledNavItem = styled(ButtonBase, {
       [`& .${navSectionClasses.item.title}`]: {
         ...baseStyles.title,
         ...sharedStyles.noWrap,
-        lineHeight: "16px",
+        lineHeight: 1.6,
         fontSize: theme.typography.pxToRem(10),
         fontWeight: active
           ? theme.typography.fontWeightBold
