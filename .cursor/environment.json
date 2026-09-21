@@ -1,0 +1,15 @@
+{
+  "name": "blog-app-mui-frontend",
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "backend",
+      "command": "bash .cursor/backend-dev.sh"
+    },
+    {
+      "name": "frontend",
+      "command": "yarn dev"
+    }
+  ]
+}
