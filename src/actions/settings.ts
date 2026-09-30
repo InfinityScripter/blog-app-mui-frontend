@@ -22,6 +22,7 @@ interface AdminFlags extends PublicSettings {
   autoPublishReleases: boolean;
   autoPublishNews: boolean;
   autoPublishTimeline: boolean;
+  autoPublishChannels: boolean;
 }
 
 // The auto-publish switches the toggle route accepts (mirrors the backend's
@@ -29,7 +30,8 @@ interface AdminFlags extends PublicSettings {
 export type AutoPublishKey =
   | "autoPublishReleases"
   | "autoPublishNews"
-  | "autoPublishTimeline";
+  | "autoPublishTimeline"
+  | "autoPublishChannels";
 
 interface PublicSettingsResponse {
   data: PublicSettings;
