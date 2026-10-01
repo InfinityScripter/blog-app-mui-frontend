@@ -42,7 +42,13 @@ build
 .unimportedrc.json
 tsconfig.tsbuildinfo
 
-.cursor
+# Ignore local Cursor state, but keep the committed rules + Cloud Agent env.
+.cursor/*
+!.cursor/rules
+!.cursor/environment.json
+!.cursor/install.sh
+!.cursor/start.sh
+!.cursor/backend-dev.sh
 
 .agents
 .claude
