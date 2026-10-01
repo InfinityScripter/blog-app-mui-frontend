@@ -76,7 +76,7 @@ export function CompareTableRow({
                 rel="noopener noreferrer"
                 color="inherit"
                 underline="hover"
-                sx={{ fontWeight: 600, fontSize: 14 }}
+                sx={{ fontWeight: 600, typography: "subtitle2" }}
               >
                 {model.name}
                 <Iconify

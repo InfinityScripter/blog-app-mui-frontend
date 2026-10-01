@@ -35,8 +35,11 @@ Port **3033** (`npm run dev`). Backend is a separate repo on port 7272.
    Don't `eslint-disable` to push code through — fix the cause.
 5. **Forms use RHF.** React Hook Form + Zod via `src/components/hook-form/`;
    use `RHF*` field components, never raw MUI inputs in a form.
-6. **Styling via MUI `sx` + theme palette** (`theme.palette`, `alpha(...)`) so
-   light/dark + primary-color switching work. Don't hardcode palette hex in CSS.
+6. **Styling via tokens.** MUI `sx` + `theme.vars.palette` / `varAlpha`. No hex,
+   quoted `px`, or raw `fontSize` outside `src/theme` — `design-tokens/*` eslint
+   rules are error; allowlists in `eslint.config.mjs` are the backlog (shrink,
+   don't grow). Spacing = sx units (`p: 2`); type = `Typography variant` or
+   `monoLabelSx` / `monoValueSx`; layout chrome = `src/layouts/config-layout.ts`.
 7. **Sections are isolated.** A file under `src/sections/X/` must NOT import from
    `src/sections/Y/`. Shared UI lives in `src/components/`.
 8. **No circular deps** (`import/no-cycle` = error). **No unused vars/imports**

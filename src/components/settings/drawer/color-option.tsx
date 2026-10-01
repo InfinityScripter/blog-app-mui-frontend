@@ -50,7 +50,7 @@ export function ColorOption({
       <Box
         component="span"
         sx={{
-          lineHeight: "18px",
+          lineHeight: 1.38,
           textTransform: "capitalize",
           fontWeight: "fontWeightSemiBold",
           fontSize: (theme) => theme.typography.pxToRem(13),

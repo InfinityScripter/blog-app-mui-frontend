@@ -51,7 +51,7 @@ export function PostSearchButton({
 
       <Label
         sx={{
-          fontSize: 12,
+          typography: "caption",
           color: "grey.800",
           bgcolor: "common.white",
           boxShadow: theme.customShadows.z1,

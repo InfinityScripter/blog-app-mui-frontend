@@ -24,7 +24,7 @@ export const StyledRoot = styled("div")(({ theme }) => ({
   // Reading measure: чуть крупнее и воздушнее базового body1 (Editorial Ink).
   p: {
     ...theme.typography.body1,
-    fontSize: 18,
+    fontSize: theme.typography.h5.fontSize,
     lineHeight: 1.7,
     marginBottom: "1.25rem",
   },

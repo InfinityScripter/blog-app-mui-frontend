@@ -30,7 +30,7 @@ export function Block({ title, tooltip, children, sx }: BlockProps) {
           top: -12,
           fontSize: 13,
           borderRadius: 22,
-          lineHeight: "22px",
+          lineHeight: 1.69,
           position: "absolute",
           alignItems: "center",
           color: "common.white",

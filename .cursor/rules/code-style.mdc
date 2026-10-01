@@ -71,11 +71,16 @@ If two sections need the same component, lift it into `src/components/`.
 
 ## Styling
 
-- Use MUI `sx` + the theme palette (`theme.palette`, `alpha(...)`) for borders,
-  hover, text — so primary-color and light/dark switching work predictably.
-- Static brand tokens (e.g. a fixed gradient) may live in CSS next to the
-  section and be `@import`-ed from `src/global.css`. Don't hardcode palette
-  colors in CSS.
+- Use MUI `sx` + the theme palette (`theme.vars.palette`, `varAlpha(channel, opacity)`)
+  for borders, hover, text — so primary-color and light/dark switching work.
+- **No hex / quoted `px` / raw `fontSize` in `src/sections` or `src/components`.**
+  Enforced by `design-tokens/*` eslint rules. Spacing goes through sx units
+  (`p: 2` → `theme.spacing`), type through `Typography variant` or editorial
+  `monoLabelSx` / `monoValueSx`, layout chrome through `src/layouts/config-layout.ts`.
+  Hairline `1px`/`-1px` is allowed.
+- Hex belongs in `src/theme/**` only. Static brand tokens (e.g. a fixed
+  gradient) may live in CSS next to the section and be `@import`-ed from
+  `src/global.css`. Don't hardcode palette colors in CSS.
 
 ## Forms
 

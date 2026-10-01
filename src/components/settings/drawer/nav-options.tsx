@@ -19,7 +19,7 @@ export function NavOptions({
   const theme = useTheme();
 
   const cssVars = {
-    "--item-radius": "12px",
+    "--item-radius": theme.spacing(1.5),
     "--item-bg": theme.vars.palette.grey[500],
     "--item-border-color": varAlpha(
       theme.vars.palette.grey["500Channel"],

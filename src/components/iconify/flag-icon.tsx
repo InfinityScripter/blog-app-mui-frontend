@@ -14,7 +14,7 @@ export const FlagIcon = forwardRef<HTMLSpanElement, FlagIconProps>(
       height: 20,
       flexShrink: 0,
       overflow: "hidden",
-      borderRadius: "5px",
+      borderRadius: 0.5,
       display: "inline-flex",
       bgcolor: "background.neutral",
     };

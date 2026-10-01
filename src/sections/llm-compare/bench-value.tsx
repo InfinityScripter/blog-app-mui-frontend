@@ -37,7 +37,7 @@ export function BenchValue({ score }: BenchValueProps) {
         sx={{
           textDecorationStyle: "dotted",
           textDecorationColor: (theme) => theme.palette.text.disabled,
-          textUnderlineOffset: "3px",
+          textUnderlineOffset: 3,
         }}
       >
         {text}

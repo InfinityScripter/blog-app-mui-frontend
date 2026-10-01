@@ -37,7 +37,7 @@ export const StyledArrow = styled("span", {
     width: size,
     height: size,
     position: "absolute",
-    backdropFilter: "6px",
+    backdropFilter: theme.spacing(0.75),
     borderBottomLeftRadius: size / 4,
     clipPath: "polygon(0% 0%, 100% 100%, 0% 100%)",
     backgroundColor: theme.vars.palette.background.paper,

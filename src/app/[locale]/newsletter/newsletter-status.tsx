@@ -90,7 +90,7 @@ export function NewsletterStatus({
             {!isError && redirectIn !== undefined && (
               <Typography
                 component="p"
-                sx={{ ...monoValueSx, fontSize: 12, color: "text.secondary" }}
+                sx={{ ...monoValueSx, color: "text.secondary" }}
               >
                 Через {redirectIn} с вернём вас на главную…
               </Typography>

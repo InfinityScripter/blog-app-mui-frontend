@@ -18,7 +18,7 @@ import type { NotificationItemProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-const metaLineSx = { ...monoLabelSx, fontSize: 11, lineHeight: "18px" };
+const metaLineSx = { ...monoLabelSx, lineHeight: 1.5 };
 
 export function NotificationItem({
   notification,
