@@ -7,9 +7,8 @@ import type { PortfolioMetric } from "./types";
 export const PROFILE_NAME = "Михаил Талалаев";
 
 // Резюме: путь к файлу в public/ и имя при скачивании.
-// Файл-плейсхолдер лежит в public/assets/cv/ — заменить на актуальный PDF.
 export const CV_URL = "/assets/cv/mikhail-talalaev-cv.pdf";
-export const CV_DOWNLOAD_NAME = "Mikhail-Talalaev-AI-Engineer.pdf";
+export const CV_DOWNLOAD_NAME = "Mikhail-Talalaev-CV.pdf";
 
 export const GITHUB_URL = CONFIG.social.github;
 
