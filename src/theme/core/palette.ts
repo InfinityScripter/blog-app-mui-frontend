@@ -27,7 +27,7 @@ export const error = createPaletteChannel(COLORS.error);
 // Common
 export const common = createPaletteChannel(COLORS.common);
 
-// Primary — dark scheme uses a brighter vermilion for contrast on charcoal
+// Primary — dark scheme uses lime for contrast on plum
 export const primaryDark = createPaletteChannel({
   lighter: "#F8F9D6",
   light: "#F3F5B4",
@@ -50,23 +50,23 @@ const secondaryDark = createPaletteChannel({
 // `disabled` carries real metadata across the site (post dates, reading time,
 // view counts, card captions), so it has to clear WCAG AA 4.5:1 on every
 // background of its scheme — grey[400]/grey[600] only reached ~2.4:1 and read
-// as unreadable on the dark charcoal. Both values stay a visible step dimmer
+// as unreadable on the dark plum. Both values stay a visible step dimmer
 // than `secondary`.
 const text = {
   light: createPaletteChannel({
     primary: "#1E1220",
     secondary: "#6B4A60",
-    disabled: "#726B65",
+    disabled: "#6A625D",
   }),
   dark: createPaletteChannel({
     primary: "#FCF2E8",
     secondary: "#CDB8C4",
-    disabled: "#938B85",
+    disabled: "#A89EA3",
   }),
 };
 
 // Background
-const background = {
+export const background = {
   light: createPaletteChannel({
     paper: "#FFFFFF",
     default: "#FCF2E8",

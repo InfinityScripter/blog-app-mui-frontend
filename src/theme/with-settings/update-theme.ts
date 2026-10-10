@@ -9,8 +9,8 @@ import {
   customShadows as coreCustomShadows,
 } from "../core/custom-shadows";
 import {
-  grey as coreGreyPalette,
   primary as corePrimaryPalette,
+  background as coreBackgroundPalette,
   primaryDark as corePrimaryDarkPalette,
 } from "../core/palette";
 
@@ -163,6 +163,8 @@ function getPalettePrimary(
 }
 
 function getBackgroundDefault(contrast: SettingsState["contrast"]): string {
-  /** [2] — paper canvas by default (Editorial Ink), deeper wash for contrast */
-  return contrast === "default" ? coreGreyPalette[50] : coreGreyPalette[200];
+  /** [2] — cream canvas by default, deeper cream wash for high contrast */
+  return contrast === "default"
+    ? coreBackgroundPalette.light.default
+    : coreBackgroundPalette.light.neutral;
 }
