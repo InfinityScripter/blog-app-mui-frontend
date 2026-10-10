@@ -29,12 +29,21 @@ export const common = createPaletteChannel(COLORS.common);
 
 // Primary — dark scheme uses a brighter vermilion for contrast on charcoal
 export const primaryDark = createPaletteChannel({
-  lighter: "#FBE3D9",
-  light: "#F2926B",
-  main: "#E06032",
-  dark: "#C2451E",
-  darker: "#9A3412",
-  contrastText: "#FFFFFF",
+  lighter: "#F8F9D6",
+  light: "#F3F5B4",
+  main: "#EEF091",
+  dark: "#C9CB5E",
+  darker: "#8E9034",
+  contrastText: "#1E1220",
+});
+
+const secondaryDark = createPaletteChannel({
+  lighter: "#E2FBF8",
+  light: "#B0F4EC",
+  main: "#7BECE0",
+  dark: "#4FC9BC",
+  darker: "#2A8F85",
+  contrastText: "#1E1220",
 });
 
 // Text
@@ -45,13 +54,13 @@ export const primaryDark = createPaletteChannel({
 // than `secondary`.
 const text = {
   light: createPaletteChannel({
-    primary: grey[900],
-    secondary: grey[600],
+    primary: "#1E1220",
+    secondary: "#6B4A60",
     disabled: "#726B65",
   }),
   dark: createPaletteChannel({
-    primary: "#F5F5F4",
-    secondary: grey[400],
+    primary: "#FCF2E8",
+    secondary: "#CDB8C4",
     disabled: "#938B85",
   }),
 };
@@ -60,13 +69,13 @@ const text = {
 const background = {
   light: createPaletteChannel({
     paper: "#FFFFFF",
-    default: grey[50],
-    neutral: grey[100],
+    default: "#FCF2E8",
+    neutral: "#F3E6DA",
   }),
   dark: createPaletteChannel({
-    paper: grey[900],
-    default: "#141210",
-    neutral: "#262220",
+    paper: "#43263B",
+    default: "#351C2F",
+    neutral: "#4A2B42",
   }),
 };
 
@@ -112,6 +121,7 @@ const lightPalette = {
 const darkPalette = {
   ...basePalette,
   primary: primaryDark,
+  secondary: secondaryDark,
   text: text.dark,
   background: background.dark,
   action: action.dark,
