@@ -1,0 +1,123 @@
+.ls-map {
+  position: relative;
+  aspect-ratio: 16 / 7;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #351c2f;
+}
+
+.ls-map__city {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  image-rendering: pixelated;
+  filter: brightness(0.6);
+}
+
+.ls-map__path {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ls-map__path polyline {
+  fill: none;
+  stroke: #fcf2e8;
+  stroke-opacity: 0.55;
+  stroke-width: 3;
+  stroke-dasharray: 2 10;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.ls-map .ls-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: clamp(28px, 5.5%, 56px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid #1e1220;
+  font:
+    800 clamp(12px, 1.6vw, 18px) var(--font-manrope),
+    sans-serif;
+}
+
+.ls-node[data-state="passed"],
+.ls-dot[data-state="passed"] {
+  background: #eef091;
+  color: #1e1220;
+}
+
+.ls-node[data-state="current"],
+.ls-dot[data-state="current"] {
+  background: #7bece0;
+  color: #1e1220;
+}
+
+.ls-node[data-state="open"],
+.ls-dot[data-state="open"] {
+  background: #fcf2e8;
+  color: #1e1220;
+}
+
+.ls-node[data-state="soon"],
+.ls-dot[data-state="soon"] {
+  background: #2a1624;
+  color: #cdb8c4;
+  border-color: #5e3a55;
+}
+
+.ls-node[data-state="current"] {
+  animation: ls-pulse 1.4s ease-in-out infinite;
+}
+
+.ls-node:focus-visible {
+  outline: 3px solid #eef091;
+  outline-offset: 3px;
+}
+
+.ls-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #1e1220;
+}
+
+.ls-sprite {
+  position: absolute;
+  width: clamp(36px, 7%, 72px);
+  aspect-ratio: 44 / 39;
+  transform: translate(-50%, -100%);
+  margin-top: calc(-1 * clamp(14px, 2.75%, 28px));
+  background: url("/assets/life-style/spitz-walk.png") 0 0 / 800% 100% no-repeat;
+  image-rendering: pixelated;
+  animation: ls-walk 0.9s steps(8) infinite;
+  pointer-events: none;
+}
+
+@keyframes ls-walk {
+  from {
+    background-position: 0% 0;
+  }
+  to {
+    background-position: 114.2857% 0;
+  }
+}
+
+@keyframes ls-pulse {
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-sprite,
+  .ls-node[data-state="current"] {
+    animation: none;
+  }
+}

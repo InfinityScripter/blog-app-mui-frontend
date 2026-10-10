@@ -227,6 +227,28 @@
         }
       }
     },
+    "series": {
+      "overline": "Series · 12 levels",
+      "title": "AI from the very first meeting",
+      "subtitle": "Every level is one video and three questions. Answer them and the level lights up while Varya runs to the next one. Progress is saved in this browser, no sign-up needed.",
+      "progress": "{passed} of {total} passed",
+      "level": "Level {number}",
+      "legendPassed": "passed",
+      "legendCurrent": "next",
+      "legendOpen": "open",
+      "legendSoon": "video coming soon",
+      "watch": "Watch the video (in Russian)",
+      "soonNote": "The video for this lesson is coming soon. You can already answer the questions.",
+      "questionOf": "Question {current} of {total}",
+      "yes": "Yes",
+      "no": "No",
+      "correct": "Correct.",
+      "wrong": "Not quite.",
+      "next": "Next",
+      "complete": "Level passed",
+      "close": "Close",
+      "reelLink": "Lesson {number} video (in Russian)"
+    },
     "feed": {
       "overline": "Fresh",
       "title": "Feed",

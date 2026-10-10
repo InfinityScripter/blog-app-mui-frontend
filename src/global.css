@@ -10,6 +10,9 @@
 /* image */
 @import "./components/image/styles.css";
 
+/* home series map */
+@import "./sections/home/home-series/styles.css";
+
 /** **************************************
 * Baseline
 *************************************** */
