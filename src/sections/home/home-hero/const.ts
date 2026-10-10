@@ -1,12 +1,21 @@
-// Structural hero config only. User-visible copy (overline, title parts, lead,
-// panel title/description, link labels) is resolved per-locale in the hero
-// components via `useTranslations("home")` — a plain data module can't call the
-// `t()` hook at module scope, so link labels carry a stable `key` instead.
+import { CONFIG } from "src/config-global";
 
-// Оглавление журнала: href — данные, label резолвится по `home.hero.panel.links.<key>`.
-export const HERO_PANEL_LINKS = [
-  { key: "news", href: "/news" },
-  { key: "llmTimeline", href: "/llm-timeline" },
-  { key: "changelog", href: "/changelog" },
-  { key: "about", href: "/portfolio" },
+export const HERO_HOST_SRC = "/assets/life-style/host-wave.png";
+
+export const HERO_SOCIAL_LINKS = [
+  {
+    key: "youtube",
+    href: CONFIG.social.youtube,
+    icon: "mingcute:youtube-fill",
+  },
+  {
+    key: "instagram",
+    href: CONFIG.social.instagram,
+    icon: "mingcute:instagram-fill",
+  },
+  {
+    key: "telegram",
+    href: CONFIG.social.telegramChannel,
+    icon: "mingcute:telegram-fill",
+  },
 ] as const;

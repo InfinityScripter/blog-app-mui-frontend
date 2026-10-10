@@ -27,46 +27,73 @@ export const error = createPaletteChannel(COLORS.error);
 // Common
 export const common = createPaletteChannel(COLORS.common);
 
-// Primary — dark scheme uses a brighter vermilion for contrast on charcoal
+// Primary — dark scheme uses lime for contrast on plum
 export const primaryDark = createPaletteChannel({
-  lighter: "#FBE3D9",
-  light: "#F2926B",
-  main: "#E06032",
-  dark: "#C2451E",
-  darker: "#9A3412",
-  contrastText: "#FFFFFF",
+  lighter: "#F8F9D6",
+  light: "#F3F5B4",
+  main: "#EEF091",
+  dark: "#C9CB5E",
+  darker: "#8E9034",
+  contrastText: "#1E1220",
+});
+
+const secondaryDark = createPaletteChannel({
+  lighter: "#E2FBF8",
+  light: "#B0F4EC",
+  main: "#7BECE0",
+  dark: "#4FC9BC",
+  darker: "#2A8F85",
+  contrastText: "#1E1220",
+});
+
+const successDark = createPaletteChannel({
+  lighter: "#DCF2E3",
+  light: "#A7DDBC",
+  main: "#6FC391",
+  dark: "#15803D",
+  darker: "#0F5C2C",
+  contrastText: "#1E1220",
+});
+
+const errorDark = createPaletteChannel({
+  lighter: "#FFE3EA",
+  light: "#FFC2D0",
+  main: "#FF8FA8",
+  dark: "#BE123C",
+  darker: "#8E0E2D",
+  contrastText: "#1E1220",
 });
 
 // Text
 // `disabled` carries real metadata across the site (post dates, reading time,
 // view counts, card captions), so it has to clear WCAG AA 4.5:1 on every
 // background of its scheme — grey[400]/grey[600] only reached ~2.4:1 and read
-// as unreadable on the dark charcoal. Both values stay a visible step dimmer
+// as unreadable on the dark plum. Both values stay a visible step dimmer
 // than `secondary`.
 const text = {
   light: createPaletteChannel({
-    primary: grey[900],
-    secondary: grey[600],
-    disabled: "#726B65",
+    primary: "#1E1220",
+    secondary: "#6B4A60",
+    disabled: "#6A625D",
   }),
   dark: createPaletteChannel({
-    primary: "#F5F5F4",
-    secondary: grey[400],
-    disabled: "#938B85",
+    primary: "#FCF2E8",
+    secondary: "#CDB8C4",
+    disabled: "#A89EA3",
   }),
 };
 
 // Background
-const background = {
+export const background = {
   light: createPaletteChannel({
     paper: "#FFFFFF",
-    default: grey[50],
-    neutral: grey[100],
+    default: "#FCF2E8",
+    neutral: "#F3E6DA",
   }),
   dark: createPaletteChannel({
-    paper: grey[900],
-    default: "#141210",
-    neutral: "#262220",
+    paper: "#43263B",
+    default: "#351C2F",
+    neutral: "#4A2B42",
   }),
 };
 
@@ -112,6 +139,9 @@ const lightPalette = {
 const darkPalette = {
   ...basePalette,
   primary: primaryDark,
+  secondary: secondaryDark,
+  success: successDark,
+  error: errorDark,
   text: text.dark,
   background: background.dark,
   action: action.dark,

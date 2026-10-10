@@ -10,6 +10,12 @@
 /* image */
 @import "./components/image/styles.css";
 
+/* home series map */
+@import "./sections/home/home-series/styles.css";
+
+/* home hero highlight */
+@import "./sections/home/home-hero/styles.css";
+
 /** **************************************
 * Baseline
 *************************************** */

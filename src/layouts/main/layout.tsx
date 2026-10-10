@@ -54,6 +54,7 @@ export function MainLayout({ sx, data, children }: MainLayoutProps) {
          *************************************** */
         headerSection={
           <HeaderBase
+            compactLogo
             layoutQuery={layoutQuery}
             onOpenNav={mobileNavOpen.onTrue}
             slotsDisplay={{

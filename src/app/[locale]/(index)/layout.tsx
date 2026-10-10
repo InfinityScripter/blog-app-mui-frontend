@@ -9,15 +9,5 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  return (
-    <>
-      <link
-        rel="preload"
-        as="image"
-        href="/assets/background/background-3.webp"
-        type="image/webp"
-      />
-      <MainLayout>{children}</MainLayout>
-    </>
-  );
+  return <MainLayout>{children}</MainLayout>;
 }

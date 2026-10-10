@@ -1,13 +1,12 @@
 import type { PostResponse } from "src/types/api";
 
-import { CONFIG } from "src/config-global";
 import axios, { endpoints } from "src/utils/axios";
 import { PostEditView } from "src/sections/blog/view";
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: `Post edit | Dashboard - ${CONFIG.site.name}`,
+  title: "Post edit | Dashboard",
 };
 
 interface PageProps {

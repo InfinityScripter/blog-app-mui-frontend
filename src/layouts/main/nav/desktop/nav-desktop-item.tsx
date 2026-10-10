@@ -87,12 +87,12 @@ const StyledNavItem = styled(ButtonBase, {
       // Multi-word labels («LLM history», «Compare LLMs») must not wrap to a
       // second line — that breaks the row rhythm.
       whiteSpace: "nowrap",
-      "&:hover": { color: theme.vars.palette.primary.main },
+      "&:hover": { color: theme.vars.palette.secondary.main },
       // Active state is vermilion + bold. An underline used to sit here too,
       // but the item is full header height, so `bottom` anchored it to the
       // header's edge — a bar floating well below the label.
       ...(active && {
-        color: theme.vars.palette.primary.main,
+        color: theme.vars.palette.secondary.main,
         fontWeight: theme.typography.fontWeightBold,
       }),
       ...(open && { opacity: 0.64 }),

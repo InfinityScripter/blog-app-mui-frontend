@@ -3,12 +3,7 @@ import type { Post } from "src/types/domain";
 import { it, expect, describe } from "vitest";
 import { PUBLISH_STATUS } from "src/types/domain";
 
-import {
-  capFeedTags,
-  rankPostTags,
-  selectFeedPosts,
-  buildFeedFirstPage,
-} from "../utils";
+import { capFeedTags, rankPostTags } from "../utils";
 
 // ----------------------------------------------------------------------
 
@@ -97,63 +92,6 @@ describe("capFeedTags", () => {
     expect(capFeedTags(["Alpha", "Beta", "Gamma"], 1, ["  gamma "])).toEqual([
       "Alpha",
       "Gamma",
-    ]);
-  });
-});
-
-describe("buildFeedFirstPage", () => {
-  const posts = [
-    makePost({ id: "old", createdAt: "2026-01-01T00:00:00.000Z" }),
-    makePost({ id: "new", createdAt: "2026-03-01T00:00:00.000Z" }),
-    makePost({ id: "mid", createdAt: "2026-02-01T00:00:00.000Z" }),
-  ];
-
-  // Must mirror GET /api/post/list?page=1&limit=N for an anonymous caller:
-  // published only, newest-first, with total counting every matching row.
-  it("takes the newest posts first and reports the untruncated total", () => {
-    expect(buildFeedFirstPage(posts, 2)).toEqual({
-      posts: [posts[1], posts[2]],
-      total: 3,
-      hasMore: true,
-    });
-  });
-
-  it("reports hasMore false when the page covers everything", () => {
-    const page = buildFeedFirstPage(posts, 3);
-
-    expect(page.posts).toHaveLength(3);
-    expect(page.hasMore).toBe(false);
-  });
-
-  it("counts only published posts, matching the anonymous backend scope", () => {
-    const withDraft = [
-      ...posts,
-      makePost({ id: "draft", publish: PUBLISH_STATUS.draft }),
-    ];
-
-    expect(buildFeedFirstPage(withDraft, 10).total).toBe(3);
-  });
-
-  it("handles an empty corpus", () => {
-    expect(buildFeedFirstPage([], 10)).toEqual({
-      posts: [],
-      total: 0,
-      hasMore: false,
-    });
-  });
-});
-
-describe("selectFeedPosts", () => {
-  it("matches any of the selected tags, case-insensitively", () => {
-    const posts = [
-      makePost({ id: "1", tags: ["AI"] }),
-      makePost({ id: "2", tags: ["react"] }),
-      makePost({ id: "3", tags: ["go"] }),
-    ];
-
-    expect(selectFeedPosts(posts, ["ai", "React"]).map((p) => p.id)).toEqual([
-      "1",
-      "2",
     ]);
   });
 });

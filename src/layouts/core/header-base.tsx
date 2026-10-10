@@ -13,6 +13,7 @@ export function HeaderBase({
   slotProps,
   onOpenNav,
   layoutQuery,
+  compactLogo,
 
   slotsDisplay: {
     signIn = true,
@@ -39,6 +40,7 @@ export function HeaderBase({
             onOpenNav={onOpenNav}
             layoutQuery={layoutQuery}
             menuButton={menuButton}
+            compactLogo={compactLogo}
           />
         ),
         rightArea: (

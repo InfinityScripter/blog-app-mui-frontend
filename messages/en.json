@@ -34,7 +34,7 @@
   "blog": {
     "meta": {
       "title": "Blog",
-      "ogTitle": "Blog | Talalaev",
+      "ogTitle": "Blog | Life Style",
       "description": "Mikhail Talalaev's articles on web development, React, Next.js and TypeScript."
     },
     "sort": {
@@ -176,7 +176,7 @@
     "meta": {
       "title": "AI news feed: artificial intelligence, IT, technology",
       "description": "AI news feed: a neural network (LLM) automatically gathers sources, filters and briefly summarizes the latest news about artificial intelligence, IT and technology.",
-      "ogTitle": "AI news feed: AI, IT, technology | Talalaev",
+      "ogTitle": "AI news feed: AI, IT, technology | Life Style",
       "ogDescription": "A neural network automatically gathers and briefly summarizes the latest news about artificial intelligence, IT and technology."
     },
     "feed": {
@@ -205,34 +205,50 @@
   },
   "home": {
     "meta": {
-      "title": "AI news aggregator: AI, IT and technology | Talalaev",
-      "description": "AI-first news aggregator: a neural network (LLM) finds, filters and briefly summarizes the latest news about artificial intelligence, IT and technology. No editor — the feed is curated by AI."
+      "title": "Life Style — AI in plain words, games and a spitz",
+      "description": "AI in plain words for people just meeting neural networks: short videos, a 12-level lesson map and a one-minute quiz. Plus games and life with Varya the spitz."
     },
     "hero": {
-      "overline": "AI · LLM · agents · practice",
-      "titleBefore": "Deep dives into ",
-      "titleAccent": "AI tools",
-      "titleAfter": " for real-world development",
-      "summary": "Case studies, guides and honest reviews: which AI tools actually work in production, and which are hype. No fluff, with examples from practice.",
-      "ctaBlog": "Read the blog",
-      "ctaAbout": "About",
-      "panel": {
-        "title": "In the journal",
-        "description": "LLMs, agents, Claude Code and tools — what I tried, what stuck in my workflow, and why.",
-        "links": {
-          "news": "AI news",
-          "llmTimeline": "LLM timeline",
-          "changelog": "Model releases",
-          "about": "About"
-        }
-      }
+      "title": "Life Style",
+      "subtitleBefore": "AI in ",
+      "subtitleAccent": "plain",
+      "subtitleAfter": " words, games and life with a spitz",
+      "summary": "I explain neural networks so they make sense the first time. Short videos, a game map of lessons and a one-minute quiz. And between lessons, games and Varya the spitz.",
+      "youtube": "YouTube",
+      "instagram": "Instagram",
+      "telegram": "Telegram",
+      "imageAlt": "The Life Style host waving, holding Varya the spitz"
     },
-    "feed": {
-      "overline": "Fresh",
-      "title": "Feed",
-      "subtitle": "Everything fresh: news, write-ups and notes — in order",
-      "empty": "No posts on the selected topics yet.",
-      "showMore": "Load more"
+    "series": {
+      "overline": "Series · 12 levels",
+      "title": "AI from the very first meeting",
+      "subtitle": "Every level is one video and three questions. Answer them and the level lights up while Varya runs to the next one. Progress is saved in this browser, no sign-up needed.",
+      "progress": "{passed} of {total} passed",
+      "level": "Level {number}",
+      "legendPassed": "passed",
+      "legendCurrent": "next",
+      "legendOpen": "open",
+      "legendSoon": "video coming soon",
+      "watch": "Watch the video (in Russian)",
+      "soonNote": "The video for this lesson is coming soon. You can already answer the questions.",
+      "questionOf": "Question {current} of {total}",
+      "yes": "Yes",
+      "no": "No",
+      "correct": "Correct.",
+      "wrong": "Not quite.",
+      "next": "Next",
+      "complete": "Level passed",
+      "close": "Close",
+      "reelLink": "Lesson {number} video (in Russian)"
+    },
+    "quiz": {
+      "title": "Check yourself in a minute",
+      "text": "Five yes-or-no questions from the series lessons. A short explanation after every answer.",
+      "start": "Start",
+      "result": "{score} of {total}",
+      "resultAll": "All correct. The next level is waiting on the map.",
+      "resultSome": "Mistakes are fine: every question has a lesson that explains it.",
+      "again": "Try again"
     },
     "newsletter": {
       "label": "Newsletter",
@@ -250,9 +266,15 @@
     },
     "telegram": {
       "label": "Telegram channel",
-      "title": "AI tool deep dives — no fluff",
-      "text": "I write about LLMs, agents and Claude Code: what actually works in production, and what's hype. Short, to the point, with examples.",
-      "button": "Subscribe on Telegram"
+      "title": "Video announcements, quizzes and news in plain words",
+      "text": "On release day the video is the first thing I post. Plus lesson quizzes and one short AI news digest a day.",
+      "button": "Subscribe"
+    },
+    "links": {
+      "title": "For those already in the topic",
+      "news": "AI news",
+      "changelog": "Model releases",
+      "llmCompare": "Compare LLMs"
     },
     "about": {
       "title": "About me",
@@ -330,9 +352,9 @@
     "meta": {
       "title": "AI model release chronicle: versions, pricing, context",
       "description": "A feed of large language model releases: new versions, per-token pricing, context size and a brief breakdown of the changes.",
-      "ogTitle": "AI model release chronicle | Talalaev",
+      "ogTitle": "AI model release chronicle | Life Style",
       "ogDescription": "New LLM versions: pricing, context and a brief breakdown of the changes in one feed.",
-      "detailFallbackTitle": "AI model release | Talalaev",
+      "detailFallbackTitle": "AI model release",
       "detailDescription": "{title} release by {vendor} on {site}"
     },
     "feed": {
@@ -387,7 +409,7 @@
     "meta": {
       "title": "Library: what to read about AI, tools and TIL notes",
       "description": "A curated selection of the best sources on AI and LLMs, a catalog of useful tools, and short notes from practice (TIL). No hype, updated regularly.",
-      "ogTitle": "Library | Talalaev",
+      "ogTitle": "Library | Life Style",
       "ogDescription": "The best AI sources, a tool catalog and notes from practice in one place.",
       "jsonLdName": "Library: AI sources and tools"
     }
@@ -460,7 +482,7 @@
     "meta": {
       "title": "Compare LLMs: pricing, context and language-model benchmarks",
       "description": "A comparison matrix of current LLMs: price per 1M tokens (input/output), context window and key benchmarks (MMLU, GPQA, SWE-bench, AIME). Sort, filter and compare up to three models.",
-      "ogTitle": "Compare LLMs | Talalaev",
+      "ogTitle": "Compare LLMs | Life Style",
       "ogDescription": "Pricing, context and benchmarks of current language models in one comparison table.",
       "jsonLdName": "Large language model comparison"
     },
@@ -504,7 +526,7 @@
     "meta": {
       "title": "LLM history: a timeline of large language models",
       "description": "A timeline of key large language models from GPT-1 to the reasoning era: release dates, context, parameters, interesting facts and links to announcements and Wikipedia.",
-      "ogTitle": "LLM history | Talalaev",
+      "ogTitle": "LLM history | Life Style",
       "ogDescription": "Key LLMs from GPT to modern models: dates, context and significance in one timeline."
     }
   },

@@ -1,14 +1,13 @@
 import type { ReactNode } from "react";
 
 import Link from "next/link";
-import { CONFIG } from "src/config-global";
 
 // Root-level 404 for paths that never enter a `[locale]` segment (the locale
 // layout owns `<html>`, so this one must render its own shell). Locale-scoped
 // not-found pages live at src/app/[locale]/not-found.tsx with the full styled
 // view. Kept intentionally minimal and dependency-free.
 export const metadata = {
-  title: `404 — ${CONFIG.site.name}`,
+  title: "404",
 };
 
 function RootNotFound(): ReactNode {

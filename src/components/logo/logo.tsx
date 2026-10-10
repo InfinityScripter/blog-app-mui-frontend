@@ -11,10 +11,10 @@ import { logoClasses } from "./classes";
 import type { LogoProps } from "./types";
 
 // ----------------------------------------------------------------------
-// aifirst — Editorial Ink logo.
-//   variant="full"     → mark + "aifirst." wordmark (default; header/footer)
+// Life Style logo.
+//   variant="full"     → mark + "Life Style." wordmark (default; header/footer)
 //   variant="mark"     → tile only (favicon-like spots)
-//   variant="wordmark" → "aifirst." only
+//   variant="wordmark" → "Life Style." only
 // Colors come from theme vars, so light/dark schemes track automatically.
 
 export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
@@ -35,7 +35,7 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
 
     const TILE = `var(--logo-foreground, ${theme.vars.palette.text.primary})`;
     const CARET = `var(--logo-background, ${theme.vars.palette.background.paper})`;
-    const CURSOR = theme.vars.palette.primary.main; // signal vermilion
+    const CURSOR = CARET;
 
     const mark = (
       <Box
@@ -74,7 +74,7 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
           userSelect: "none",
         }}
       >
-        aifirst
+        Life Style
         <Box component="span" sx={{ color: "primary.main" }}>
           .
         </Box>
@@ -116,7 +116,7 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
           component={RouterLink}
           href={href}
           className={logoClasses.root.concat(className ? ` ${className}` : "")}
-          aria-label="aifirst."
+          aria-label="Life Style"
           sx={{
             gap:
               typeof height === "number"

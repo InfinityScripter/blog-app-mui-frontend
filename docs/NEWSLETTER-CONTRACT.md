@@ -162,7 +162,7 @@ Clone `home-telegram-cta/` structure exactly:
 - `newsletter-schema.ts` — `z.object({ email: z.string().email("Введите корректный email") })`.
 - `home-newsletter-cta.tsx` — same Container/Stack/alpha-theme layout as telegram-cta, but with an inline RHF form: `Form` + `RHFTextField name="email" type="email"` + `LoadingButton type="submit" loading={isSubmitting}`. On submit → `subscribeToNewsletter(email)` → `toast.success(NL_SUCCESS)` ("Проверьте почту — отправили письмо для подтверждения") + `reset()`. On 409 → `toast.error(err.message)`. Import `toast` from `src/components/snackbar`, `RHFTextField` DIRECT (not barrel), `Form` from `form-provider`. **Keep ≤200 lines** — if tight, the form can be its own `newsletter-form.tsx` sub-component.
 - `index.ts` — `export { HomeNewsletterCta } from "./home-newsletter-cta";`
-Render it in `src/sections/home/view/home-view.tsx` — add `<HomeNewsletterCta />` between `<HomeFeed />` and `<HomeTelegramCta />`.
+Render it in `src/sections/home/view/home-view.tsx` — add `<HomeNewsletterCta />` before `<HomeTelegramCta />` (it renders only when `settings?.pdCollection` is on).
 
 ### 3.4 Post-footer capture
 Reuse the SAME form component. Extract the RHF form into a shared `src/sections/blog/post-newsletter-cta.tsx` (thin wrapper importing the same action) OR — simpler — make `home-newsletter-cta` export a compact `NewsletterForm` and render it in `post-details-home-view.tsx` just BEFORE the "Комментарии" Stack (~line 134). A slimmer variant (no big heading) is fine. Keep files ≤200 lines.

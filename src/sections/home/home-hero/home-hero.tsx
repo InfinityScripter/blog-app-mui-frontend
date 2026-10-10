@@ -8,16 +8,14 @@ import Container from "@mui/material/Container";
 import { MotionContainer } from "src/components/animate";
 
 import { HeroText } from "./hero-text";
+import { HeroHost } from "./hero-host";
 import { HeroButtons } from "./hero-buttons";
 import { HeroHeading } from "./hero-content";
-import { HeroMetaPanel } from "./hero-meta-panel";
 
 import type { HomeHeroProps } from "./types";
 
 // ----------------------------------------------------------------------
 
-// Асимметричный editorial-герой: текстовая колонка слева (7/12), индекс
-// журнала справа (5/12). Без параллакса, фиксированных слоёв и SVG-декора.
 export function HomeHero({ sx, ...other }: HomeHeroProps) {
   return (
     <Box
@@ -53,7 +51,7 @@ export function HomeHero({ sx, ...other }: HomeHeroProps) {
           </Grid>
 
           <Grid size={{ xs: 12, md: 5 }}>
-            <HeroMetaPanel />
+            <HeroHost />
           </Grid>
         </Grid>
       </Container>
