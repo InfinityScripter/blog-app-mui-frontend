@@ -1,28 +1,26 @@
 import Box from "@mui/material/Box";
 import { useTranslations } from "next-intl";
-import { monoLabelSx } from "src/theme/styles";
 import Typography from "@mui/material/Typography";
 
 import { MInview } from "./m-inview";
 
 // ----------------------------------------------------------------------
 
-// Заголовок главной: mono-надзаголовок + h1 с одним сплошным акцентом.
 export function HeroHeading() {
   const t = useTranslations("home");
 
   return (
     <MInview>
-      <Typography component="p" sx={{ ...monoLabelSx, mb: 2 }}>
-        {t("hero.overline")}
+      <Typography component="h1" variant="h1">
+        {t("hero.title")}
       </Typography>
 
-      <Typography component="h1" variant="h1" sx={{ maxWidth: 680 }}>
-        {t("hero.titleBefore")}
-        <Box component="span" sx={{ color: "primary.main" }}>
-          {t("hero.titleAccent")}
+      <Typography component="p" variant="h3" sx={{ mt: 2, maxWidth: 560 }}>
+        {t("hero.subtitleBefore")}
+        <Box component="span" className="ls-highlight">
+          {t("hero.subtitleAccent")}
         </Box>
-        {t("hero.titleAfter")}
+        {t("hero.subtitleAfter")}
       </Typography>
     </MInview>
   );

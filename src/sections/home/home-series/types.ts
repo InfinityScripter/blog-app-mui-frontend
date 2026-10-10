@@ -2,9 +2,9 @@ import type { AppLocale } from "src/i18n/locales";
 
 // ----------------------------------------------------------------------
 
-export type LocalizedText = Record<AppLocale, string>;
+type LocalizedText = Record<AppLocale, string>;
 
-export interface SeriesQuestion {
+interface SeriesQuestion {
   id: string;
   text: LocalizedText;
   answer: boolean;

@@ -25,6 +25,8 @@ interface Config {
     telegramChannel: string;
     github: string;
     linkedin: string;
+    youtube: string;
+    instagram: string;
   };
   isStaticExport: boolean;
   auth: {
@@ -64,6 +66,8 @@ export const CONFIG: Config = {
       process.env.NEXT_PUBLIC_TELEGRAM_CHANNEL_URL ?? "https://t.me/sh0ny",
     github: "https://github.com/InfinityScripter",
     linkedin: "https://www.linkedin.com/in/talalaevs/",
+    youtube: "https://www.youtube.com/@sh0ny",
+    instagram: "https://www.instagram.com/sh0ny.art/",
   },
   isStaticExport: JSON.parse(`${process.env.BUILD_STATIC_EXPORT ?? "false"}`),
   auth: {

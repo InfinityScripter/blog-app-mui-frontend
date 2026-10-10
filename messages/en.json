@@ -209,23 +209,15 @@
       "description": "AI in plain words for people just meeting neural networks: short videos, a 12-level lesson map and a one-minute quiz. Plus games and life with Varya the spitz."
     },
     "hero": {
-      "overline": "AI · LLM · agents · practice",
-      "titleBefore": "Deep dives into ",
-      "titleAccent": "AI tools",
-      "titleAfter": " for real-world development",
-      "summary": "Case studies, guides and honest reviews: which AI tools actually work in production, and which are hype. No fluff, with examples from practice.",
-      "ctaBlog": "Read the blog",
-      "ctaAbout": "About",
-      "panel": {
-        "title": "In the journal",
-        "description": "LLMs, agents, Claude Code and tools — what I tried, what stuck in my workflow, and why.",
-        "links": {
-          "news": "AI news",
-          "llmTimeline": "LLM timeline",
-          "changelog": "Model releases",
-          "about": "About"
-        }
-      }
+      "title": "Life Style",
+      "subtitleBefore": "AI in ",
+      "subtitleAccent": "plain",
+      "subtitleAfter": " words, games and life with a spitz",
+      "summary": "I explain neural networks so they make sense the first time. Short videos, a game map of lessons and a one-minute quiz. And between lessons, games and Varya the spitz.",
+      "youtube": "YouTube",
+      "instagram": "Instagram",
+      "telegram": "Telegram",
+      "imageAlt": "The Life Style host waving"
     },
     "series": {
       "overline": "Series · 12 levels",
@@ -258,13 +250,6 @@
       "resultSome": "Mistakes are fine: every question has a lesson that explains it.",
       "again": "Try again"
     },
-    "feed": {
-      "overline": "Fresh",
-      "title": "Feed",
-      "subtitle": "Everything fresh: news, write-ups and notes — in order",
-      "empty": "No posts on the selected topics yet.",
-      "showMore": "Load more"
-    },
     "newsletter": {
       "label": "Newsletter",
       "title": "A weekly digest in your inbox",
@@ -281,9 +266,15 @@
     },
     "telegram": {
       "label": "Telegram channel",
-      "title": "AI tool deep dives — no fluff",
-      "text": "I write about LLMs, agents and Claude Code: what actually works in production, and what's hype. Short, to the point, with examples.",
-      "button": "Subscribe on Telegram"
+      "title": "Video announcements, quizzes and news in plain words",
+      "text": "On release day the video is the first thing I post. Plus lesson quizzes and one short AI news digest a day.",
+      "button": "Subscribe"
+    },
+    "links": {
+      "title": "For those already in the topic",
+      "news": "AI news",
+      "changelog": "Model releases",
+      "llmCompare": "Compare LLMs"
     },
     "about": {
       "title": "About me",
