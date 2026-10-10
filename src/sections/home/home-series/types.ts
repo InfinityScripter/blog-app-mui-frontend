@@ -1,0 +1,37 @@
+import type { AppLocale } from "src/i18n/locales";
+
+// ----------------------------------------------------------------------
+
+export type LocalizedText = Record<AppLocale, string>;
+
+export interface SeriesQuestion {
+  id: string;
+  text: LocalizedText;
+  answer: boolean;
+  why: LocalizedText;
+}
+
+export interface SeriesLesson {
+  number: number;
+  title: LocalizedText;
+  reelUrl?: string;
+  questions: SeriesQuestion[];
+}
+
+export type LevelState = "passed" | "current" | "open" | "soon";
+
+export interface SeriesProgress {
+  passed: number[];
+}
+
+export interface QuizItem {
+  lesson: SeriesLesson;
+  question: SeriesQuestion;
+}
+
+export type QuizPhase = "intro" | "question" | "result";
+
+export interface MapPoint {
+  left: number;
+  top: number;
+}
