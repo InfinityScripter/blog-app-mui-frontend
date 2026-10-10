@@ -6,16 +6,16 @@ import { MInview } from "./m-inview";
 
 // ----------------------------------------------------------------------
 
-export function HeroHeading() {
+export function HeroSubtitle() {
   const t = useTranslations("home");
 
   return (
     <MInview>
-      <Typography component="h1" variant="h1">
-        {t("hero.title")}
-      </Typography>
-
-      <Typography component="p" variant="h3" sx={{ mt: 2, maxWidth: 560 }}>
+      <Typography
+        component="p"
+        variant="h5"
+        sx={{ maxWidth: 420, fontWeight: 600, lineHeight: 1.45 }}
+      >
         {t("hero.subtitleBefore")}
         <Box component="span" className="ls-highlight">
           {t("hero.subtitleAccent")}

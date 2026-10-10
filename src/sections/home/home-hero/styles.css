@@ -4,3 +4,255 @@
   padding: 0 0.2em;
   border-radius: 0.2em;
 }
+
+.ls-float {
+  animation: ls-float 5s ease-in-out infinite;
+}
+
+@keyframes ls-float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* ---------- pinned stage ---------- */
+
+.ls-hero {
+  position: relative;
+}
+
+.ls-hero__stage {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--palette-background-default);
+}
+
+@media (min-width: 900px) {
+  .ls-hero {
+    --ls-header-h: var(--layout-header-mobile-height, 64px);
+    height: 210vh;
+  }
+
+  .ls-hero__stage {
+    position: sticky;
+    top: var(--ls-header-h);
+    height: calc(100svh - var(--ls-header-h));
+  }
+}
+
+/* The header switches to its desktop height at the lg breakpoint (1200px). */
+@media (min-width: 1200px) {
+  .ls-hero {
+    --ls-header-h: var(--layout-header-desktop-height, 72px);
+  }
+}
+
+@media (min-width: 900px) and (prefers-reduced-motion: reduce) {
+  .ls-hero {
+    height: auto;
+  }
+
+  .ls-hero__stage {
+    position: relative;
+  }
+}
+
+/* ---------- living background ---------- */
+
+.ls-mesh {
+  position: absolute;
+  inset: -20%;
+  z-index: -2;
+  filter: blur(70px) saturate(1.15);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.ls-mesh i {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: multiply;
+  animation: ls-drift 18s ease-in-out infinite alternate;
+}
+
+.ls-mesh i:nth-child(1) {
+  width: 46vw;
+  height: 46vw;
+  left: 8%;
+  top: 4%;
+  background: #eef091;
+}
+
+.ls-mesh i:nth-child(2) {
+  width: 38vw;
+  height: 38vw;
+  right: 6%;
+  top: 18%;
+  background: #7bece0;
+  animation-duration: 22s;
+  animation-delay: -6s;
+}
+
+.ls-mesh i:nth-child(3) {
+  width: 34vw;
+  height: 34vw;
+  left: 38%;
+  bottom: 0;
+  background: #f6b8a8;
+  animation-duration: 26s;
+  animation-delay: -12s;
+}
+
+.dark .ls-mesh {
+  opacity: 0.35;
+}
+
+.dark .ls-mesh i {
+  mix-blend-mode: screen;
+}
+
+@keyframes ls-drift {
+  50% {
+    transform: translate(6vw, -4vh) scale(1.12);
+  }
+  100% {
+    transform: translate(-4vw, 5vh) scale(0.94);
+  }
+}
+
+.ls-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.ls-hero__night {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #351c2f;
+  pointer-events: none;
+}
+
+/* ---------- LIFE / STYLE ---------- */
+
+.ls-hero__title {
+  margin: 0;
+  font: inherit;
+}
+
+.ls-word {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: var(--font-unbounded), sans-serif;
+  font-weight: 800;
+  font-size: clamp(64px, 20vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--palette-text-primary);
+}
+
+.ls-word--sticker {
+  color: var(--palette-background-default);
+  -webkit-text-stroke: clamp(3px, 0.45vw, 8px) var(--palette-text-primary);
+  paint-order: stroke fill;
+  text-shadow: 0.04em 0.04em 0 var(--palette-text-primary);
+}
+
+.ls-word--bottom {
+  text-align: right;
+}
+
+@media (min-width: 900px) {
+  .ls-word {
+    position: absolute;
+    font-size: clamp(96px, 12.5vw, 240px);
+  }
+
+  .ls-word--top {
+    top: 3%;
+    left: 3vw;
+  }
+
+  .ls-word--bottom {
+    top: calc(3% + 0.9em);
+    right: 3vw;
+  }
+}
+
+/* ---------- host ---------- */
+
+.ls-hero__host {
+  position: relative;
+  z-index: 2;
+  width: min(340px, 86vw);
+  margin: 24px auto 0;
+}
+
+@media (min-width: 900px) {
+  .ls-hero__host {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: min(52svh, 36vw);
+    margin: 0 auto;
+  }
+}
+
+/* ---------- subtitle and buttons ---------- */
+
+.ls-hero__meta {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px 0 48px;
+}
+
+@media (min-width: 900px) {
+  .ls-hero__meta {
+    position: absolute;
+    left: 3vw;
+    right: 3vw;
+    bottom: 4vh;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .ls-hero__meta > * {
+    pointer-events: auto;
+    max-width: 30%;
+  }
+
+  body:has(.ls-cookie) .ls-hero__meta {
+    bottom: calc(4vh + 96px);
+  }
+}
+
+.ls-scroll-hint {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  right: 1.5vw;
+  writing-mode: vertical-rl;
+}
+
+@media (max-width: 899.95px) {
+  .ls-scroll-hint {
+    display: none;
+  }
+}

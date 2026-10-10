@@ -1,6 +1,8 @@
 import { it, expect, describe } from "vitest";
 
 import {
+  quizPose,
+  varyaPose,
   addPassed,
   countCorrect,
   pickQuizItems,
@@ -96,5 +98,52 @@ describe("countCorrect", () => {
 
     expect(countCorrect(items, [true, false])).toBe(1);
     expect(countCorrect(items, [true])).toBe(1);
+  });
+});
+
+describe("quizPose", () => {
+  const base = { index: 0, score: 0, total: 5 };
+
+  it("is curious before the quiz and thinks while a question is open", () => {
+    expect(quizPose({ ...base, phase: "intro" })).toBe("curious");
+    expect(quizPose({ ...base, phase: "question", answer: true })).toBe(
+      "think",
+    );
+  });
+
+  it("cheers a right answer and winces at a wrong one, varying by question", () => {
+    const right = {
+      ...base,
+      phase: "question",
+      answer: true,
+      picked: true,
+    } as const;
+    const wrong = {
+      ...base,
+      phase: "question",
+      answer: true,
+      picked: false,
+    } as const;
+
+    expect(quizPose(right)).toBe("thumbs-up");
+    expect(quizPose({ ...right, index: 1 })).toBe("laugh");
+    expect(quizPose(wrong)).toBe("oops");
+    expect(quizPose({ ...wrong, index: 1 })).toBe("facepalm");
+  });
+
+  it("picks the result pose by score", () => {
+    const result = { ...base, phase: "result" } as const;
+
+    expect(quizPose({ ...result, score: 5 })).toBe("wow");
+    expect(quizPose({ ...result, score: 3 })).toBe("smile");
+    expect(quizPose({ ...result, score: 2 })).toBe("shrug");
+  });
+});
+
+describe("varyaPose", () => {
+  it("walks on the way, sits after the last level and jumps over both", () => {
+    expect(varyaPose({ hopping: false, finished: false })).toBe("walk");
+    expect(varyaPose({ hopping: false, finished: true })).toBe("sit");
+    expect(varyaPose({ hopping: true, finished: true })).toBe("jump");
   });
 });

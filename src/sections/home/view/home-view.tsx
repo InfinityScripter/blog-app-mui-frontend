@@ -3,6 +3,7 @@
 import { useGetPublicSettings } from "src/actions/settings";
 
 import { HomeHero } from "../home-hero";
+import { Ribbons } from "../components/ribbons";
 import { HomeTelegramCta } from "../home-telegram-cta";
 import { HomeNewsletterCta } from "../home-newsletter-cta";
 import { HomeSeriesMap, HomeSeriesQuiz } from "../home-series";
@@ -20,6 +21,8 @@ export function HomeView() {
       <BackToTop />
 
       <HomeHero />
+
+      <Ribbons />
 
       <HomeSeriesMap />
 

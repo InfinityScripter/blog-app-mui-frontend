@@ -1,59 +1,78 @@
+import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import { useTranslations } from "next-intl";
+import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
 import { RouterLink } from "src/routes/components";
-import { hairline, monoLabelSx } from "src/theme/styles";
 
-import { TELEGRAM_URL, HOME_SECTION_LINKS } from "./const";
+import {
+  PEEK_SRC,
+  TELEGRAM_URL,
+  PEEK_VARIANTS,
+  MARQUEE_REPEATS,
+  HOME_SECTION_LINKS,
+} from "./const";
 
 // ----------------------------------------------------------------------
 
 export function HomeTelegramCta() {
   const t = useTranslations("home");
+  const marquee: string[] = t.raw("telegram.marquee");
 
   return (
-    <Container component="section" sx={{ py: { xs: 6, md: 10 } }}>
-      <Stack spacing={3}>
-        <Stack
-          spacing={{ xs: 3, md: 5 }}
-          direction={{ xs: "column", md: "row" }}
-          sx={{
-            alignItems: { xs: "flex-start", md: "center" },
-            justifyContent: "space-between",
-            p: { xs: 4, md: 5 },
-            borderRadius: 2.5,
-            bgcolor: "background.paper",
-            border: (theme) => hairline(theme),
-          }}
-        >
-          <Stack spacing={1.5} sx={{ maxWidth: 560 }}>
-            <Box
-              sx={{
-                ...monoLabelSx,
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 0.75,
-                color: "secondary.main",
-              }}
-            >
-              <Iconify icon="mingcute:telegram-fill" width={18} />
-              {t("telegram.label")}
-            </Box>
+    <Box
+      component={m.section}
+      initial="hidden"
+      whileInView="shown"
+      whileHover="hover"
+      viewport={{ once: true, amount: 0.3 }}
+      className="ls-tg"
+    >
+      <div className="ls-giant" aria-hidden>
+        <div className="ls-track">
+          {Array.from({ length: MARQUEE_REPEATS }, () => marquee)
+            .flat()
+            .map((word, index) => (
+              <span key={index}>{word}</span>
+            ))}
+        </div>
+      </div>
 
-            <Typography variant="h3" component="h2">
-              {t("telegram.title")}
-            </Typography>
+      <Box
+        component={m.img}
+        variants={PEEK_VARIANTS}
+        className="ls-tg__peek"
+        src={PEEK_SRC}
+        alt={t("telegram.peekAlt")}
+        width={560}
+        height={560}
+        loading="lazy"
+      />
 
-            <Typography variant="body1" sx={{ color: "text.secondary" }}>
-              {t("telegram.text")}
-            </Typography>
-          </Stack>
-
+      <Container className="ls-tg__body">
+        <Stack spacing={2} sx={{ maxWidth: 760 }}>
+          <Box
+            sx={{
+              ...monoLabelSx,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 0.75,
+            }}
+          >
+            <Iconify icon="mingcute:telegram-fill" width={18} />
+            {t("telegram.label")}
+          </Box>
+          <Typography component="h2" className="ls-display-xl">
+            {t("telegram.title")}
+          </Typography>
+          <Typography sx={{ color: "text.secondary" }}>
+            {t("telegram.text")}
+          </Typography>
           <Button
             component={Link}
             href={TELEGRAM_URL}
@@ -62,7 +81,8 @@ export function HomeTelegramCta() {
             size="large"
             color="primary"
             variant="contained"
-            sx={{ flexShrink: 0 }}
+            className="ls-sticker-btn"
+            sx={{ alignSelf: "flex-start" }}
             startIcon={<Iconify icon="mingcute:telegram-fill" width={24} />}
           >
             {t("telegram.button")}
@@ -73,7 +93,7 @@ export function HomeTelegramCta() {
           direction="row"
           spacing={3}
           useFlexGap
-          sx={{ flexWrap: "wrap", alignItems: "baseline" }}
+          sx={{ flexWrap: "wrap", alignItems: "baseline", mt: 6 }}
         >
           <Typography component="span" sx={monoLabelSx}>
             {t("links.title")}
@@ -89,7 +109,7 @@ export function HomeTelegramCta() {
             </Link>
           ))}
         </Stack>
-      </Stack>
-    </Container>
+      </Container>
+    </Box>
   );
 }

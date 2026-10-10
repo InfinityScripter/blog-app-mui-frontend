@@ -33,6 +33,7 @@ export function QuestionCard({ item, picked, onPick }: QuestionCardProps) {
           color="primary"
           variant={picked === true ? "contained" : "outlined"}
           disabled={answered}
+          className="ls-sticker-btn"
           onClick={() => onPick(true)}
         >
           {t("yes")}
@@ -41,6 +42,7 @@ export function QuestionCard({ item, picked, onPick }: QuestionCardProps) {
           color="primary"
           variant={picked === false ? "contained" : "outlined"}
           disabled={answered}
+          className="ls-sticker-btn"
           onClick={() => onPick(false)}
         >
           {t("no")}

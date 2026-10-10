@@ -24,6 +24,7 @@ export function BackToTop({ value = 90, sx, ...other }: BackToTopProps) {
   return (
     <Fab
       aria-label="Back to top"
+      className="ls-back-to-top"
       onClick={backToTop}
       sx={{
         width: 48,

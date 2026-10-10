@@ -70,6 +70,12 @@ function deriveCategory(post: Post): NewsCategory {
   return "main";
 }
 
+// The unpaginated backend list comes oldest-first (created_at ASC).
+export function sortNewestFirst(posts: Post[]): Post[] {
+  const time = (post: Post) => new Date(post.createdAt ?? 0).getTime();
+  return posts.slice().sort((a, b) => time(b) - time(a));
+}
+
 /** Builds a NewsItem (post + derived category + source) from a post. */
 export function toNewsItem(post: Post): NewsItem {
   return {
