@@ -39,7 +39,7 @@ const manrope = Manrope({
 
 const unbounded = Unbounded({
   subsets: ["latin", "cyrillic"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-unbounded",
   display: "swap",
 });

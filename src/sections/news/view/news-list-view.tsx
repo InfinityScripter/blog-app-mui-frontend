@@ -8,6 +8,7 @@ import { EmptyContent } from "src/components/empty-content";
 import { NewsList } from "../news-list";
 import { NewsSectionBar } from "../news-section-bar";
 import {
+  sortNewestFirst,
   availableCategories,
   filterPostsByCategory,
   DEFAULT_NEWS_CATEGORY,
@@ -29,6 +30,8 @@ export function NewsListView({ posts }: NewsListViewProps) {
     DEFAULT_NEWS_CATEGORY,
   );
 
+  const newestFirst = useMemo(() => sortNewestFirst(posts), [posts]);
+
   // Only рубрики that actually have posts are shown (+«Главное»). If the active
   // one isn't among them (e.g. its last post was removed), fall back to «Главное».
   const categories = useMemo(() => availableCategories(posts), [posts]);
@@ -38,8 +41,8 @@ export function NewsListView({ posts }: NewsListViewProps) {
     : DEFAULT_NEWS_CATEGORY;
 
   const filteredPosts = useMemo(
-    () => filterPostsByCategory(posts, safeActive),
-    [posts, safeActive],
+    () => filterPostsByCategory(newestFirst, safeActive),
+    [newestFirst, safeActive],
   );
 
   // Only the per-рубрика empty state lives here; an entirely empty feed is

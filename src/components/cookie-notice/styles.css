@@ -1,0 +1,32 @@
+.ls-cookie {
+  animation: ls-cookie-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.6s both;
+}
+
+.ls-cookie__varya {
+  flex-shrink: 0;
+  width: 36px;
+  height: 39px;
+  background: url("/assets/life-style/spitz-sit.png") 0 0 / 400% 100% no-repeat;
+  image-rendering: pixelated;
+  animation: ls-cookie-wag 0.8s steps(4) infinite;
+}
+
+@keyframes ls-cookie-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes ls-cookie-wag {
+  to {
+    background-position: 133.3333% 0;
+  }
+}
+
+/* The notice spans the full width on phones, so lift the back-to-top button above it. */
+@media (max-width: 599.95px) {
+  body:has(.ls-cookie) .ls-back-to-top {
+    bottom: 128px;
+  }
+}

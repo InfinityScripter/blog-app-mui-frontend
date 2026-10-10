@@ -1,0 +1,68 @@
+.ls-tg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 96px 0 280px;
+}
+
+@media (min-width: 900px) {
+  .ls-tg {
+    padding: 96px 0 120px;
+  }
+}
+
+.ls-giant {
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 48px;
+  font-family: var(--font-unbounded), sans-serif;
+  font-weight: 800;
+  font-size: clamp(80px, 15vw, 240px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--palette-background-default);
+  -webkit-text-stroke: clamp(3px, 0.4vw, 6px) var(--palette-text-primary);
+  paint-order: stroke fill;
+}
+
+.ls-giant .ls-track {
+  font: inherit;
+  animation-duration: 40s;
+}
+
+.ls-giant .ls-track span {
+  margin-right: 0.35em;
+}
+
+.ls-giant .ls-track span::after {
+  margin-left: 0.35em;
+  -webkit-text-stroke: 0;
+  color: var(--palette-text-primary);
+  font-size: 0.4em;
+  vertical-align: middle;
+}
+
+.ls-tg__peek {
+  position: absolute;
+  left: 0;
+  bottom: -2%;
+  z-index: -1;
+  height: 260px;
+  width: auto;
+  pointer-events: none;
+}
+
+@media (min-width: 900px) {
+  .ls-tg__peek {
+    height: min(520px, 62%);
+  }
+
+  .ls-tg .ls-tg__body {
+    padding-left: max(24px, 32vw);
+  }
+}
+
+.ls-tg .ls-display-xl.MuiTypography-root {
+  font-size: clamp(28px, 3vw, 46px);
+}

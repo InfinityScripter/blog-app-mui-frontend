@@ -10,11 +10,20 @@
 /* image */
 @import "./components/image/styles.css";
 
+/* cookie notice */
+@import "./components/cookie-notice/styles.css";
+
 /* home series map */
 @import "./sections/home/home-series/styles.css";
 
 /* home hero highlight */
 @import "./sections/home/home-hero/styles.css";
+
+/* home telegram block */
+@import "./sections/home/home-telegram-cta/styles.css";
+
+/* home host poses and speech bubbles */
+@import "./sections/home/components/styles.css";
 
 /** **************************************
 * Baseline

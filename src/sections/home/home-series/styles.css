@@ -1,7 +1,67 @@
-.ls-map {
+/* ---------- night block ---------- */
+
+.ls-night {
   position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 140px 0 96px;
+  background: #351c2f;
+  color: var(--palette-text-primary);
+}
+
+.ls-night__ghost {
+  position: absolute;
+  top: 40px;
+  right: -2vw;
+  font-family: var(--font-unbounded), sans-serif;
+  font-weight: 700;
+  font-size: clamp(160px, 34vw, 520px);
+  line-height: 0.85;
+  color: #fcf2e8;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.ls-night__head {
+  display: grid;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 900px) {
+  .ls-night__head {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4vw;
+    align-items: end;
+  }
+}
+
+.ls-night .ls-accent-lime {
+  font-style: normal;
+  color: #eef091;
+}
+
+.ls-night .ls-accent-teal {
+  color: #7bece0;
+}
+
+.ls-stat {
+  display: block;
+  font-family: var(--font-unbounded), sans-serif;
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.1;
+  color: #7bece0;
+}
+
+.ls-map {
+  --ls-px: clamp(0.818px, 0.159cqw, 1.636px);
+  position: relative;
+  container-type: inline-size;
   aspect-ratio: 16 / 7;
-  border-radius: 16px;
+  border-radius: 28px;
+  border: 2px solid #fcf2e8;
+  box-shadow: 10px 10px 0 #eef091;
   overflow: hidden;
   background: #351c2f;
 }
@@ -36,6 +96,7 @@
 
 .ls-map .ls-node {
   position: absolute;
+  z-index: 1;
   transform: translate(-50%, -50%);
   width: clamp(28px, 5.5%, 56px);
   aspect-ratio: 1;
@@ -107,30 +168,108 @@
   border: 2px solid #1e1220;
 }
 
-.ls-sprite {
+.ls-map .ls-varya {
   position: absolute;
-  width: clamp(36px, 7%, 72px);
-  aspect-ratio: 44 / 39;
+  width: calc(44 * var(--ls-px));
+  height: calc(39 * var(--ls-px));
   transform: translate(-50%, -100%);
   margin-top: calc(-1 * clamp(14px, 2.75%, 28px));
-  background: url("/assets/life-style/spitz-walk.png") 0 0 / 800% 100% no-repeat;
-  image-rendering: pixelated;
-  animation: ls-walk 0.9s steps(8) infinite;
-  pointer-events: none;
+  border-radius: 8px;
+  overflow: visible;
 }
 
-.ls-sprite--run {
+.ls-map .ls-varya--run {
   transition:
     left 0.6s ease,
     top 0.6s ease;
 }
 
-@keyframes ls-walk {
-  from {
-    background-position: 0% 0;
-  }
+.ls-varya.Mui-focusVisible {
+  outline: 3px solid #eef091;
+  outline-offset: 4px;
+}
+
+.ls-varya__sprite {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
+.ls-varya__sprite[data-pose="walk"] {
+  width: calc(44 * var(--ls-px));
+  height: calc(39 * var(--ls-px));
+  background: url("/assets/life-style/spitz-walk.png") 0 0 / 800% 100% no-repeat;
+  animation: ls-frames-8 0.9s steps(8) infinite;
+}
+
+.ls-varya__sprite[data-pose="sit"] {
+  width: calc(36 * var(--ls-px));
+  height: calc(39 * var(--ls-px));
+  background: url("/assets/life-style/spitz-sit.png") 0 0 / 400% 100% no-repeat;
+  animation: ls-frames-4 0.8s steps(4) infinite;
+}
+
+.ls-varya__sprite[data-pose="jump"] {
+  width: calc(62 * var(--ls-px));
+  height: calc(47 * var(--ls-px));
+  background: url("/assets/life-style/spitz-jump.png") 0 0 / 400% 100% no-repeat;
+  animation:
+    ls-frames-4 0.6s steps(4) 1,
+    ls-hop 0.6s ease-out 1;
+}
+
+.ls-varya__bark {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 2px solid #1e1220;
+  background: #fcf2e8;
+  color: #1e1220;
+  font:
+    800 clamp(11px, 1.3vw, 15px) var(--font-manrope),
+    sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  animation: ls-bark 1.8s ease forwards;
+}
+
+@keyframes ls-frames-8 {
   to {
     background-position: 114.2857% 0;
+  }
+}
+
+@keyframes ls-frames-4 {
+  to {
+    background-position: 133.3333% 0;
+  }
+}
+
+@keyframes ls-hop {
+  40% {
+    transform: translate(-50%, -55%);
+  }
+}
+
+@keyframes ls-bark {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 6px) scale(0.8);
+  }
+  15%,
+  80% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -6px);
   }
 }
 
@@ -140,13 +279,111 @@
   }
 }
 
+@keyframes ls-bark-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  15%,
+  80% {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ls-sprite,
   .ls-node[data-state="current"] {
     animation: none;
   }
 
-  .ls-sprite--run {
+  .ls-varya--run {
     transition: none;
   }
+
+  .ls-varya__bark {
+    transform: translateX(-50%);
+    animation: ls-bark-fade 2s ease forwards !important;
+  }
+}
+
+/* ---------- lime quiz block ---------- */
+
+.ls-lime {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 120px 0;
+  background: #eef091;
+  color: var(--palette-text-primary);
+}
+
+.ls-quiz-host {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.ls-quiz-host .ls-host {
+  transform: rotate(-4deg);
+  filter: drop-shadow(10px 12px 0 rgba(30, 18, 32, 0.9));
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ls-quiz-host:hover .ls-host {
+  transform: rotate(2deg) scale(1.03);
+}
+
+.ls-stamp {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  width: clamp(96px, 11vw, 132px);
+  animation: ls-spin 16s linear infinite;
+}
+
+.ls-stamp circle {
+  fill: #1e1220;
+}
+
+.ls-stamp text {
+  fill: #eef091;
+  font-family: var(--font-unbounded), sans-serif;
+  font-weight: 700;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@keyframes ls-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ls-quiz-card {
+  padding: clamp(24px, 4vw, 48px);
+  border: 2px solid #1e1220;
+  border-radius: 28px;
+  background: #fcf2e8;
+  box-shadow: 8px 8px 0 #1e1220;
+}
+
+.ls-quiz-card .ls-display-xl.MuiTypography-root {
+  font-size: clamp(34px, 4.2vw, 64px);
+}
+
+.ls-quiz-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.ls-quiz-dots i {
+  width: 28px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(30, 18, 32, 0.15);
+  transition: background 0.3s ease;
+}
+
+.ls-quiz-dots i[data-on="true"] {
+  background: #1e1220;
 }

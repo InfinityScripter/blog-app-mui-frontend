@@ -1,5 +1,6 @@
 "use client";
 
+import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import { paths } from "src/routes/paths";
@@ -24,39 +25,47 @@ export function CookieNotice() {
   return (
     <Paper
       component="aside"
+      className="ls-cookie"
       elevation={8}
       sx={{
-        p: 2,
-        gap: 1.5,
+        py: 1.25,
+        pl: 1.5,
+        pr: 1.25,
+        gap: { xs: 1, sm: 1.5 },
         display: "flex",
-        maxWidth: 460,
+        flexDirection: { xs: "column", sm: "row" },
+        maxWidth: { sm: 440 },
         borderRadius: 2,
         position: "fixed",
-        alignItems: "center",
+        alignItems: { xs: "stretch", sm: "center" },
         left: { xs: 12, md: 24 },
+        right: { xs: 12, sm: "auto" },
         bottom: { xs: 12, md: 24 },
-        // xs: leave the bottom-right corner free — BackToTop (48px FAB at
-        // right 24) must stay visible and clickable while the notice is open.
-        right: { xs: 84, md: "auto" },
         border: (theme) => hairline(theme),
         zIndex: (theme) => theme.zIndex.appBar - 1,
       }}
     >
-      <Typography variant="body2" sx={{ color: "text.secondary" }}>
-        {t("message")}{" "}
-        <Link
-          component={RouterLink}
-          href={paths.legal.privacyPolicy}
-          underline="always"
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+        <span className="ls-cookie__varya" aria-hidden />
+        <Typography
+          variant="caption"
+          sx={{ color: "text.secondary", lineHeight: 1.45 }}
         >
-          {t("more")}
-        </Link>
-      </Typography>
+          {t("message")}{" "}
+          <Link
+            component={RouterLink}
+            href={paths.legal.privacyPolicy}
+            underline="always"
+          >
+            {t("more")}
+          </Link>
+        </Typography>
+      </Box>
       <Button
         size="small"
         variant="contained"
         onClick={dismiss}
-        sx={{ flexShrink: 0 }}
+        sx={{ flexShrink: 0, alignSelf: { xs: "flex-end", sm: "auto" } }}
       >
         {t("dismiss")}
       </Button>

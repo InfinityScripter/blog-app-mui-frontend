@@ -213,15 +213,27 @@
       "subtitleBefore": "AI in ",
       "subtitleAccent": "plain",
       "subtitleAfter": " words, games and life with a spitz",
-      "summary": "I explain neural networks so they make sense the first time. Short videos, a game map of lessons and a one-minute quiz. And between lessons, games and Varya the spitz.",
       "youtube": "YouTube",
       "instagram": "Instagram",
       "telegram": "Telegram",
-      "imageAlt": "The Life Style host waving, holding Varya the spitz"
+      "imageAlt": "The Life Style host waving, holding Varya the spitz",
+      "hint": "Hi! Give us a tap",
+      "hover": {
+        "youtube": "One-minute videos: start from level one",
+        "instagram": "Reels and behind the scenes with Varya",
+        "telegram": "Announcements and quizzes land here"
+      },
+      "tap": {
+        "laugh": "Varya is sure neural networks are less scary than a vacuum cleaner",
+        "kiss": "Varya asks you to pass at least one level",
+        "secret": "Secret: every level on the map below takes a minute",
+        "quiz": "Can you get five questions right in a row?"
+      },
+      "tapLabel": "Talk to the host and Varya",
+      "scrollHint": "scroll down"
     },
     "series": {
       "overline": "Series · 12 levels",
-      "title": "AI from the very first meeting",
       "subtitle": "Every level is one video and three questions. Answer them and the level lights up while Varya runs to the next one. Progress is saved in this browser, no sign-up needed.",
       "progress": "{passed} of {total} passed",
       "level": "Level {number}",
@@ -239,7 +251,18 @@
       "next": "Next",
       "complete": "Level passed",
       "close": "Close",
-      "reelLink": "Lesson {number} video (in Russian)"
+      "reelLink": "Lesson {number} video (in Russian)",
+      "varyaLabel": "Varya the spitz. Tap to make her jump",
+      "bark": {
+        "woof": "Woof!",
+        "next": "One more level?",
+        "go": "Woof-woof! Let's go!"
+      },
+      "titleLead": "AI from the ",
+      "titleAccent": "very first meeting",
+      "statLevels": "levels",
+      "statReel": "video per level",
+      "statQuestions": "questions per level"
     },
     "quiz": {
       "title": "Check yourself in a minute",
@@ -248,7 +271,10 @@
       "result": "{score} of {total}",
       "resultAll": "All correct. The next level is waiting on the map.",
       "resultSome": "Mistakes are fine: every question has a lesson that explains it.",
-      "again": "Try again"
+      "again": "Try again",
+      "hostAlt": "The host and Varya the spitz react to your answer",
+      "overline": "Check yourself",
+      "stamp": "5 questions · 1 minute · "
     },
     "newsletter": {
       "label": "Newsletter",
@@ -268,7 +294,9 @@
       "label": "Telegram channel",
       "title": "Video announcements, quizzes and news in plain words",
       "text": "On release day the video is the first thing I post. Plus lesson quizzes and one short AI news digest a day.",
-      "button": "Subscribe"
+      "button": "Subscribe",
+      "peekAlt": "The host and Varya the spitz peeking around the corner",
+      "marquee": ["Subscribe", "Life Style"]
     },
     "links": {
       "title": "For those already in the topic",
@@ -330,6 +358,15 @@
         "telegram": "Telegram",
         "location": "Location"
       }
+    },
+    "ribbons": {
+      "a": [
+        "AI in plain words",
+        "12 levels",
+        "Varya the spitz",
+        "one-minute quiz"
+      ],
+      "b": ["YouTube", "Instagram", "Telegram", "videos, games and quizzes"]
     }
   },
   "changelog": {
@@ -555,7 +592,7 @@
     }
   },
   "cookieNotice": {
-    "message": "This site uses only essential cookies — for sign-in, security and interface preferences. No ad trackers.",
+    "message": "Only essential cookies: sign-in, security and preferences. No ad trackers.",
     "more": "Learn more",
     "dismiss": "Got it"
   }

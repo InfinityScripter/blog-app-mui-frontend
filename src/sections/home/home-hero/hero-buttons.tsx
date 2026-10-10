@@ -6,9 +6,15 @@ import { Iconify } from "src/components/iconify";
 import { MInview } from "./m-inview";
 import { HERO_SOCIAL_LINKS } from "./const";
 
+import type { HeroLinkKey } from "./types";
+
 // ----------------------------------------------------------------------
 
-export function HeroButtons() {
+interface HeroButtonsProps {
+  onHover: (key?: HeroLinkKey) => void;
+}
+
+export function HeroButtons({ onHover }: HeroButtonsProps) {
   const t = useTranslations("home");
 
   return (
@@ -24,6 +30,18 @@ export function HeroButtons() {
             variant={index === 0 ? "contained" : "outlined"}
             color={index === 0 ? "primary" : "inherit"}
             startIcon={<Iconify width={22} icon={item.icon} />}
+            className="ls-sticker-btn"
+            sx={index === 0 ? undefined : { bgcolor: "background.default" }}
+            onPointerEnter={(event) => {
+              if (event.pointerType === "mouse") onHover(item.key);
+            }}
+            onPointerLeave={() => onHover()}
+            onFocus={(event) => {
+              if (event.currentTarget.matches(":focus-visible")) {
+                onHover(item.key);
+              }
+            }}
+            onBlur={() => onHover()}
           >
             {t(`hero.${item.key}`)}
           </Button>

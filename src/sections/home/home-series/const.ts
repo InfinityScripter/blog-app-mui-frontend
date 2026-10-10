@@ -1,3 +1,4 @@
+import type { HostPoseName } from "../components/types";
 import type { MapPoint, LevelState, SeriesProgress } from "./types";
 
 // ----------------------------------------------------------------------
@@ -8,6 +9,18 @@ export const SERIES_PROGRESS_INITIAL: SeriesProgress = { passed: [] };
 
 export const QUIZ_SIZE = 5;
 
+export const QUIZ_POSES: readonly HostPoseName[] = [
+  "curious",
+  "think",
+  "thumbs-up",
+  "laugh",
+  "oops",
+  "facepalm",
+  "wow",
+  "smile",
+  "shrug",
+];
+
 export const LEVEL_STATE_LABEL_KEY: Record<
   LevelState,
   "legendPassed" | "legendCurrent" | "legendOpen" | "legendSoon"
@@ -17,6 +30,8 @@ export const LEVEL_STATE_LABEL_KEY: Record<
   open: "legendOpen",
   soon: "legendSoon",
 };
+
+export const VARYA_BARKS = ["woof", "next", "go"] as const;
 
 export const MAP_CITY_SRC = "/assets/life-style/night-city.png";
 

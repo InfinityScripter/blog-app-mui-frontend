@@ -9,6 +9,22 @@ export interface SectionHeadingProps {
   subtitle?: string;
 }
 
+export type HostPoseName =
+  | "wave"
+  | "point-left"
+  | "wow"
+  | "thumbs-up"
+  | "laugh"
+  | "dog-kiss"
+  | "smirk"
+  | "curious"
+  | "think"
+  | "oops"
+  | "facepalm"
+  | "smile"
+  | "shrug"
+  | "peek";
+
 // ----------------------------------------------------------------------
 
 /**

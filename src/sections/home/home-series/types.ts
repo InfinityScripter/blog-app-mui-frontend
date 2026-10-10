@@ -35,3 +35,5 @@ export interface MapPoint {
   left: number;
   top: number;
 }
+
+export type VaryaPose = "walk" | "sit" | "jump";
