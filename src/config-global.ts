@@ -45,7 +45,7 @@ interface Config {
 
 export const CONFIG: Config = {
   site: {
-    name: "Mihail Talalaev",
+    name: "Life Style",
     url: "https://aifirst.us.com",
     serverUrl: process.env.NEXT_PUBLIC_SERVER_URL ?? "",
     assetURL: process.env.NEXT_PUBLIC_ASSET_URL ?? "",

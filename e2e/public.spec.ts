@@ -9,7 +9,7 @@ import { getContrastRatio } from "@mui/material/styles";
 test.describe("public pages", () => {
   test("home renders nav and hero", async ({ page }) => {
     await page.goto("/");
-    await expect(page).toHaveTitle(/Talalaev/i);
+    await expect(page).toHaveTitle(/Life Style/);
     await expect(
       page.getByRole("link", { name: "Блог", exact: true }),
     ).toBeVisible();
@@ -140,7 +140,7 @@ test.describe("public pages", () => {
 
     // Navigate directly (fresh load) to the detail route.
     await page.goto(href!);
-    await expect(page).toHaveTitle(/Talalaev/i);
+    await expect(page).toHaveTitle(/Life Style/);
     // .first() — after hydration the comments section can match more than one
     // node; we only need to confirm the post detail rendered. The heading is
     // Russian ("Комментарии").

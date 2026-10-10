@@ -24,13 +24,13 @@ const JSON_LD = {
   "@graph": [
     {
       "@type": "WebSite",
-      name: "Talalaev — AI-агрегатор новостей",
+      name: "Life Style",
       url: `${CONFIG.site.url}/`,
       inLanguage: "ru-RU",
       description:
-        "AI-first агрегатор новостей: нейросеть (LLM) сама находит, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
+        "ИИ простыми словами: короткие ролики про нейросети, игровая карта из 12 уроков и тест на минуту.",
       keywords:
-        "AI-агрегатор, новости AI, искусственный интеллект, нейросеть, LLM, IT-новости, технологии",
+        "ИИ простыми словами, нейросети для начинающих, LLM, Claude Code, Codex, Life Style",
       author: {
         "@type": "Person",
         name: "Михаил Талалаев",
@@ -65,7 +65,7 @@ interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
-// `title.absolute` opts out of the root template (`%s | Talalaev`) so the
+// `title.absolute` opts out of the root template (`%s | Life Style`) so the
 // homepage title isn't doubled. Localized per locale; alternates carry the
 // hreflang links for ru/en.
 export async function generateMetadata({ params }: PageProps) {

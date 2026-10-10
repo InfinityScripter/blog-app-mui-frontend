@@ -85,7 +85,7 @@ test.describe("post CRUD (dashboard UI)", () => {
   test("view the post on the public page", async ({ page }) => {
     expect(postId).toBeTruthy();
     await page.goto(`/post/${postId}`);
-    await expect(page).toHaveTitle(/Talalaev/i);
+    await expect(page).toHaveTitle(/Life Style/);
     await expect(
       page.getByRole("heading", { name: title }).first(),
     ).toBeVisible({ timeout: 15_000 });

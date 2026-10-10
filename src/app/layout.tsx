@@ -17,28 +17,28 @@ import { primary } from "src/theme/core/palette";
 export const metadata = {
   metadataBase: new URL(CONFIG.site.url),
   title: {
-    default: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
-    template: "%s | Talalaev",
+    default: "Life Style — ИИ простыми словами, игры и шпиц",
+    template: "%s | Life Style",
   },
   description:
-    "AI-first агрегатор новостей: нейросеть (LLM) сама находит, фильтрует и кратко пересказывает свежие новости об искусственном интеллекте, IT и технологиях. Без редактора — лента курируется AI.",
+    "ИИ простыми словами для тех, кто только знакомится с нейросетями: короткие ролики, игровая карта из 12 уроков и тест на минуту. А ещё игры и жизнь со шпицем Варей.",
   openGraph: {
     type: "website",
     locale: "ru_RU",
     url: `${CONFIG.site.url}/`,
-    siteName: "Talalaev — AI-агрегатор новостей",
-    title: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
+    siteName: "Life Style",
+    title: "Life Style — ИИ простыми словами, игры и шпиц",
     description:
-      "AI-first агрегатор: нейросеть сама собирает, фильтрует и пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
+      "Короткие ролики про нейросети, игровая карта из 12 уроков и тест на минуту.",
     // og:image comes from the file-convention src/app/opengraph-image.tsx —
     // no hardcoded /assets/og-image.jpg (that file never existed → 404, and
     // listing it here would emit a duplicate og:image tag).
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI-агрегатор новостей: AI, IT и технологии | Talalaev",
+    title: "Life Style — ИИ простыми словами, игры и шпиц",
     description:
-      "AI-first агрегатор: нейросеть сама собирает, фильтрует и пересказывает свежие новости об искусственном интеллекте, IT и технологиях.",
+      "Короткие ролики про нейросети, игровая карта из 12 уроков и тест на минуту.",
     // twitter:image also comes from the file-convention opengraph-image.tsx.
   },
   robots: {

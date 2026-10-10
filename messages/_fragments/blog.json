@@ -2,7 +2,7 @@
   "blog": {
     "meta": {
       "title": "Блог",
-      "ogTitle": "Блог | Talalaev",
+      "ogTitle": "Блог | Life Style",
       "description": "Статьи Михаила Талалаева о веб-разработке, React, Next.js и TypeScript."
     },
     "sort": {
