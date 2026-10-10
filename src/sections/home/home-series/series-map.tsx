@@ -22,6 +22,7 @@ export function HomeSeriesMap() {
   const t = useTranslations("home.series");
   const { passed, markPassed } = useSeriesProgress();
   const [selected, setSelected] = useState<SeriesLesson>();
+  const [running, setRunning] = useState(false);
 
   const states = getLevelStates(SERIES_LESSONS, passed);
   const currentIndex = states.indexOf("current");
@@ -54,6 +55,7 @@ export function HomeSeriesMap() {
           className="ls-map__city"
           src={MAP_CITY_SRC}
           alt=""
+          loading="lazy"
         />
         <Box
           component="svg"
@@ -79,7 +81,7 @@ export function HomeSeriesMap() {
         ))}
         <Box
           component="span"
-          className="ls-sprite"
+          className={running ? "ls-sprite ls-sprite--run" : "ls-sprite"}
           aria-hidden
           sx={{ left: `${spritePoint.left}%`, top: `${spritePoint.top}%` }}
         />
@@ -92,7 +94,10 @@ export function HomeSeriesMap() {
           key={selected.number}
           lesson={selected}
           onClose={() => setSelected(undefined)}
-          onComplete={markPassed}
+          onComplete={(lessonNumber) => {
+            setRunning(true);
+            markPassed(lessonNumber);
+          }}
         />
       )}
     </Container>

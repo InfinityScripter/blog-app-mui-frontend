@@ -38,14 +38,16 @@ export function HomeTelegramCta() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 0.75,
-                color: "primary.main",
+                color: "secondary.main",
               }}
             >
               <Iconify icon="mingcute:telegram-fill" width={18} />
               {t("telegram.label")}
             </Box>
 
-            <Typography variant="h3">{t("telegram.title")}</Typography>
+            <Typography variant="h3" component="h2">
+              {t("telegram.title")}
+            </Typography>
 
             <Typography variant="body1" sx={{ color: "text.secondary" }}>
               {t("telegram.text")}

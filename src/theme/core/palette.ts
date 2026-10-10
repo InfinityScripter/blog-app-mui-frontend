@@ -46,6 +46,24 @@ const secondaryDark = createPaletteChannel({
   contrastText: "#1E1220",
 });
 
+const successDark = createPaletteChannel({
+  lighter: "#DCF2E3",
+  light: "#A7DDBC",
+  main: "#6FC391",
+  dark: "#15803D",
+  darker: "#0F5C2C",
+  contrastText: "#1E1220",
+});
+
+const errorDark = createPaletteChannel({
+  lighter: "#FFE3EA",
+  light: "#FFC2D0",
+  main: "#FF8FA8",
+  dark: "#BE123C",
+  darker: "#8E0E2D",
+  contrastText: "#1E1220",
+});
+
 // Text
 // `disabled` carries real metadata across the site (post dates, reading time,
 // view counts, card captions), so it has to clear WCAG AA 4.5:1 on every
@@ -122,6 +140,8 @@ const darkPalette = {
   ...basePalette,
   primary: primaryDark,
   secondary: secondaryDark,
+  success: successDark,
+  error: errorDark,
   text: text.dark,
   background: background.dark,
   action: action.dark,

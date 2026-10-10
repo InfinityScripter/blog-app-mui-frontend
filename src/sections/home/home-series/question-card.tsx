@@ -57,7 +57,12 @@ export function QuestionCard({ item, picked, onPick }: QuestionCardProps) {
           </Box>{" "}
           {item.question.why[locale]}{" "}
           {item.lesson.reelUrl && (
-            <Link href={item.lesson.reelUrl} target="_blank" rel="noopener">
+            <Link
+              href={item.lesson.reelUrl}
+              target="_blank"
+              rel="noopener"
+              underline="always"
+            >
               {t("reelLink", { number: item.lesson.number })}
             </Link>
           )}

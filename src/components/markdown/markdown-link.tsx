@@ -24,6 +24,7 @@ export const MarkdownLink: LinkComponent = ({
     <Link
       {...linkProps}
       href={href}
+      underline="always"
       className={markdownClasses.content.link}
       {...other}
     >

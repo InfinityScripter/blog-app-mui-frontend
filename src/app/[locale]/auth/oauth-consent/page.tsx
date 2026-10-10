@@ -1,8 +1,7 @@
-import { CONFIG } from "src/config-global";
 import { OAuthConsentView } from "src/sections/auth/jwt";
 
 export const metadata = {
-  title: `Согласие на обработку данных - ${CONFIG.site.name}`,
+  title: "Согласие на обработку данных",
 };
 
 export default function Page() {

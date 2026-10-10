@@ -17,6 +17,7 @@ export function HeroHost() {
         alt={t("hero.imageAlt")}
         width={560}
         height={560}
+        fetchPriority="high"
         sx={{
           display: "block",
           width: 1,

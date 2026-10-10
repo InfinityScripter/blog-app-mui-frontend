@@ -1,11 +1,10 @@
 import { notFound } from "next/navigation";
-import { CONFIG } from "src/config-global";
 import { JwtSignUpView } from "src/sections/auth/jwt";
 import { fetchPdCollectionEnabled } from "src/actions/settings-ssr";
 
 // ----------------------------------------------------------------------
 
-export const metadata = { title: `Регистрация | JWT - ${CONFIG.site.name}` };
+export const metadata = { title: "Регистрация | JWT" };
 
 // Read the runtime flag per request (no ISR) so an admin toggle takes effect
 // immediately: registration collects personal data, so when collection is

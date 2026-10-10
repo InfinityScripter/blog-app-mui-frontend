@@ -1,10 +1,9 @@
-import { CONFIG } from "src/config-global";
 import { PostCreateView } from "src/sections/blog/view";
 
 // ----------------------------------------------------------------------
 
 export const metadata = {
-  title: `Create a new post | Dashboard - ${CONFIG.site.name}`,
+  title: "Create a new post | Dashboard",
 };
 
 export default function Page() {
