@@ -249,6 +249,15 @@
       "close": "Close",
       "reelLink": "Lesson {number} video (in Russian)"
     },
+    "quiz": {
+      "title": "Check yourself in a minute",
+      "text": "Five yes-or-no questions from the series lessons. A short explanation after every answer.",
+      "start": "Start",
+      "result": "{score} of {total}",
+      "resultAll": "All correct. The next level is waiting on the map.",
+      "resultSome": "Mistakes are fine: every question has a lesson that explains it.",
+      "again": "Try again"
+    },
     "feed": {
       "overline": "Fresh",
       "title": "Feed",
