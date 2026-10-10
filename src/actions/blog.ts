@@ -37,16 +37,10 @@ interface UseGetPostsOptions {
    * (crawlable HTML) while the client still revalidates in the background.
    */
   fallbackData?: ListPostsResponse;
-  /**
-   * `false` holds the request back (SWR key `null`). This read is the UNBOUNDED
-   * one — the whole corpus in a single response — so a caller that only needs it
-   * conditionally (the feed's tag filter) can avoid paying for it up front.
-   */
-  enabled?: boolean;
 }
 
 export function useGetPosts(options: UseGetPostsOptions = {}) {
-  const { excludeTag, limit, fallbackData, enabled = true } = options;
+  const { excludeTag, limit, fallbackData } = options;
   const locale = activeLocale(useLocale());
   // Feed/list titles ARE translated for a non-original locale. The backend
   // returns each post's title/description from the translation cache (warmed
@@ -63,7 +57,7 @@ export function useGetPosts(options: UseGetPostsOptions = {}) {
     : endpoints.post.list;
 
   const { data, isLoading, error, isValidating } = useSWR<ListPostsResponse>(
-    enabled ? url : null,
+    url,
     fetcher,
     fallbackData ? { ...swrOptions, fallbackData } : swrOptions,
   );

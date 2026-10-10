@@ -34,8 +34,8 @@ export const SERIES_LESSONS: SeriesLesson[] = [
       {
         id: "1-3",
         text: {
-          ru: "Внутри нейросети работает живой мозг или спрятанный человек?",
-          en: "Is there a living brain or a hidden person inside a neural network?",
+          ru: "Внутри нейросети сидит спрятанный человек?",
+          en: "Is there a hidden person inside a neural network?",
         },
         answer: false,
         why: {
@@ -292,8 +292,8 @@ export const SERIES_LESSONS: SeriesLesson[] = [
       {
         id: "7-2",
         text: {
-          ru: "После уточнения условия задачи сверять уже не нужно?",
-          en: "After a clarification, is there no need to check the conditions again?",
+          ru: "После уточнения задачи результат можно принять без проверки?",
+          en: "After you refine the task, can you accept the result without checking?",
         },
         answer: false,
         why: {

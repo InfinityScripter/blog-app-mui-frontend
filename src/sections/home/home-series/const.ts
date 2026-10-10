@@ -1,4 +1,4 @@
-import type { MapPoint, SeriesProgress } from "./types";
+import type { MapPoint, LevelState, SeriesProgress } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -7,6 +7,16 @@ export const SERIES_PROGRESS_KEY = "life-style-series-progress";
 export const SERIES_PROGRESS_INITIAL: SeriesProgress = { passed: [] };
 
 export const QUIZ_SIZE = 5;
+
+export const LEVEL_STATE_LABEL_KEY: Record<
+  LevelState,
+  "legendPassed" | "legendCurrent" | "legendOpen" | "legendSoon"
+> = {
+  passed: "legendPassed",
+  current: "legendCurrent",
+  open: "legendOpen",
+  soon: "legendSoon",
+};
 
 export const MAP_CITY_SRC = "/assets/life-style/night-city.png";
 

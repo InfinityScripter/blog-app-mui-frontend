@@ -3,18 +3,9 @@ import Stack from "@mui/material/Stack";
 import { useTranslations } from "next-intl";
 import Typography from "@mui/material/Typography";
 
-import type { LevelState } from "./types";
+import { LEVEL_STATE_LABEL_KEY } from "./const";
 
 // ----------------------------------------------------------------------
-
-type LegendKey = "legendPassed" | "legendCurrent" | "legendOpen" | "legendSoon";
-
-const LEGEND: { state: LevelState; key: LegendKey }[] = [
-  { state: "passed", key: "legendPassed" },
-  { state: "current", key: "legendCurrent" },
-  { state: "open", key: "legendOpen" },
-  { state: "soon", key: "legendSoon" },
-];
 
 export function MapLegend() {
   const t = useTranslations("home.series");
@@ -26,15 +17,15 @@ export function MapLegend() {
       useFlexGap
       sx={{ flexWrap: "wrap", mt: 2 }}
     >
-      {LEGEND.map((item) => (
+      {Object.entries(LEVEL_STATE_LABEL_KEY).map(([state, key]) => (
         <Stack
-          key={item.state}
+          key={state}
           direction="row"
           spacing={1}
           sx={{ alignItems: "center" }}
         >
-          <Box component="span" className="ls-dot" data-state={item.state} />
-          <Typography variant="caption">{t(item.key)}</Typography>
+          <Box component="span" className="ls-dot" data-state={state} />
+          <Typography variant="caption">{t(key)}</Typography>
         </Stack>
       ))}
     </Stack>

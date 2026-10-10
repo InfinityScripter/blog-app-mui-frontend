@@ -354,7 +354,7 @@
       "description": "A feed of large language model releases: new versions, per-token pricing, context size and a brief breakdown of the changes.",
       "ogTitle": "AI model release chronicle | Life Style",
       "ogDescription": "New LLM versions: pricing, context and a brief breakdown of the changes in one feed.",
-      "detailFallbackTitle": "AI model release | Life Style",
+      "detailFallbackTitle": "AI model release",
       "detailDescription": "{title} release by {vendor} on {site}"
     },
     "feed": {

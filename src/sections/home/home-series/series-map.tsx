@@ -24,7 +24,9 @@ export function HomeSeriesMap() {
   const [selected, setSelected] = useState<SeriesLesson>();
 
   const states = getLevelStates(SERIES_LESSONS, passed);
-  const spritePoint = MAP_POINTS[Math.max(states.indexOf("current"), 0)];
+  const currentIndex = states.indexOf("current");
+  const spritePoint =
+    MAP_POINTS[currentIndex === -1 ? MAP_POINTS.length - 1 : currentIndex];
 
   return (
     <Container component="section" sx={{ py: { xs: 6, md: 10 } }}>

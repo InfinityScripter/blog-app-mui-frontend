@@ -14,11 +14,15 @@ export function useSeriesProgress() {
     SERIES_PROGRESS_INITIAL,
   );
 
+  const passed = Array.isArray(state.passed)
+    ? state.passed
+    : SERIES_PROGRESS_INITIAL.passed;
+
   const markPassed = useCallback(
     (lessonNumber: number) =>
-      setState({ passed: addPassed(state.passed, lessonNumber) }),
-    [setState, state.passed],
+      setState({ passed: addPassed(passed, lessonNumber) }),
+    [setState, passed],
   );
 
-  return { passed: state.passed, markPassed };
+  return { passed, markPassed };
 }

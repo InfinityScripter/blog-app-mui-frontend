@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PageProps) {
       },
     };
   } catch {
-    return { title: "Статья | Life Style" };
+    return { title: "Статья" };
   }
 }
 

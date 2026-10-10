@@ -1,7 +1,5 @@
-// Filter chips for the landing feed are NOT hardcoded — they are derived from
-// the tags that actually exist on published posts (see `useFeedTags`). The feed
-// (Лента) is COMMON: it lists every published post — news and blog alike —
-// newest first. Type-specific views live at /news and /post.
+// Filter chips for the blog list view are NOT hardcoded — they are derived from
+// the tags that actually exist on published posts (see `useFeedTags`).
 
 // Max filter chips shown in the row. Tags are frequency-ranked, so the most
 // common topics win the slots; rarer tags are dropped to keep the row short

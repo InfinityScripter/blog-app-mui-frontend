@@ -163,8 +163,8 @@ function getPalettePrimary(
 }
 
 function getBackgroundDefault(contrast: SettingsState["contrast"]): string {
-  /** [2] — cream canvas by default, deeper cream wash for high contrast */
+  /** [2] — cream canvas by default, deeper cream (#EBDCCD) for high contrast */
   return contrast === "default"
     ? coreBackgroundPalette.light.default
-    : coreBackgroundPalette.light.neutral;
+    : "#EBDCCD";
 }

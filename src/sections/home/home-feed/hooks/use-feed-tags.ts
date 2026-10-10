@@ -16,27 +16,19 @@ interface UseFeedTagsOptions {
    * from the row the moment the list is capped, which reads as a broken filter.
    */
   pinned?: string[];
-  /**
-   * Tag vocabulary already ranked over the FULL corpus (server-side, see
-   * `rankPostTags`). When given, `posts` is not ranked at all — the paginated
-   * home feed holds only the pages it has loaded, so ranking client-side there
-   * would show the tags of the ten newest posts instead of the whole blog.
-   */
-  ranked?: string[];
 }
 
 /**
  * Filter chips for the feed are derived from the tags that ACTUALLY exist on
  * published posts — never a hardcoded list. Ranking, de-duplication and the
  * `NEWS_TAG` exclusion live in `rankPostTags`; capping and pinning in
- * `capFeedTags`. Callers that hold the whole corpus (the /post blog list) pass
- * `posts`; the paginated home feed passes a server-ranked `ranked` list.
+ * `capFeedTags`. Callers pass the whole corpus (the /post blog list).
  */
 export function useFeedTags(
   posts: Post[],
   options: UseFeedTagsOptions = {},
 ): string[] {
-  const { limit = FEED_TAGS_LIMIT, pinned = [], ranked } = options;
+  const { limit = FEED_TAGS_LIMIT, pinned = [] } = options;
 
   // Stable primitive so the memo doesn't re-run on every new array identity.
   const pinnedKey = pinned
@@ -47,10 +39,10 @@ export function useFeedTags(
   return useMemo(
     () =>
       capFeedTags(
-        ranked ?? rankPostTags(posts),
+        rankPostTags(posts),
         limit,
         pinnedKey ? pinnedKey.split("|") : [],
       ),
-    [posts, limit, pinnedKey, ranked],
+    [posts, limit, pinnedKey],
   );
 }

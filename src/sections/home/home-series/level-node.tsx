@@ -2,6 +2,8 @@ import { useTranslations } from "next-intl";
 import ButtonBase from "@mui/material/ButtonBase";
 import { useAppLocale } from "src/hooks/use-app-locale";
 
+import { LEVEL_STATE_LABEL_KEY } from "./const";
+
 import type { MapPoint, LevelState, SeriesLesson } from "./types";
 
 // ----------------------------------------------------------------------
@@ -23,7 +25,7 @@ export function LevelNode({ lesson, state, point, onOpen }: LevelNodeProps) {
       className="ls-node"
       data-state={state}
       title={lesson.title[locale]}
-      aria-label={state === "soon" ? `${label}, ${t("legendSoon")}` : label}
+      aria-label={`${label}, ${t(LEVEL_STATE_LABEL_KEY[state])}`}
       onClick={() => onOpen(lesson)}
       sx={{ left: `${point.left}%`, top: `${point.top}%` }}
     >
