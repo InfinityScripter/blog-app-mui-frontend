@@ -38,6 +38,7 @@ export function HomeSeriesQuiz() {
                 {t("quiz.text")}
               </Typography>
               <Button
+                color="primary"
                 variant="contained"
                 size="large"
                 onClick={quiz.start}
@@ -63,6 +64,7 @@ export function HomeSeriesQuiz() {
                 onPick={quiz.pick}
               />
               <Button
+                color="primary"
                 variant="contained"
                 disabled={quiz.picked === undefined}
                 onClick={quiz.next}
@@ -84,6 +86,7 @@ export function HomeSeriesQuiz() {
                   : t("quiz.resultSome")}
               </Typography>
               <Button
+                color="primary"
                 variant="outlined"
                 onClick={quiz.start}
                 sx={{ alignSelf: "flex-start" }}

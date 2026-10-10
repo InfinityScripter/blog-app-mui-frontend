@@ -54,6 +54,7 @@ export function LevelDialog({ lesson, onClose, onComplete }: LevelDialogProps) {
               href={lesson.reelUrl}
               target="_blank"
               rel="noopener"
+              color="primary"
               variant="contained"
               startIcon={<Iconify icon="mingcute:play-fill" />}
               sx={{ alignSelf: "flex-start" }}
@@ -89,6 +90,7 @@ export function LevelDialog({ lesson, onClose, onComplete }: LevelDialogProps) {
           {t("close")}
         </Button>
         <Button
+          color="primary"
           variant="contained"
           disabled={picked === undefined}
           onClick={handleNext}

@@ -41,6 +41,7 @@ export function HeaderLeftArea({
   onOpenNav,
   layoutQuery,
   menuButton,
+  compactLogo,
 }: HeaderLeftAreaProps): ReactNode {
   const theme = useTheme();
 
@@ -62,7 +63,21 @@ export function HeaderLeftArea({
       )}
 
       {/* -- Logo -- */}
-      <Logo data-slot="logo" />
+      {compactLogo ? (
+        <>
+          <Logo
+            data-slot="logo"
+            sx={{ display: { xs: "none", sm: "inline-flex" } }}
+          />
+          <Logo
+            variant="mark"
+            data-slot="logo-mark"
+            sx={{ display: { xs: "inline-flex", sm: "none" } }}
+          />
+        </>
+      ) : (
+        <Logo data-slot="logo" />
+      )}
 
       {/* -- Divider -- */}
       <StyledDivider data-slot="divider" />

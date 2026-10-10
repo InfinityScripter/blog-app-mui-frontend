@@ -71,6 +71,10 @@
   border-color: #5e3a55;
 }
 
+.ls-dot[data-state="soon"] {
+  border-color: #cdb8c4;
+}
+
 .ls-node[data-state="current"] {
   animation: ls-pulse 1.4s ease-in-out infinite;
 }

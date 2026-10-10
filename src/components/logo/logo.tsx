@@ -11,7 +11,7 @@ import { logoClasses } from "./classes";
 import type { LogoProps } from "./types";
 
 // ----------------------------------------------------------------------
-// Life Style — Editorial Ink logo.
+// Life Style logo.
 //   variant="full"     → mark + "Life Style." wordmark (default; header/footer)
 //   variant="mark"     → tile only (favicon-like spots)
 //   variant="wordmark" → "Life Style." only
@@ -35,7 +35,7 @@ export const Logo = forwardRef<HTMLAnchorElement, LogoProps>(
 
     const TILE = `var(--logo-foreground, ${theme.vars.palette.text.primary})`;
     const CARET = `var(--logo-background, ${theme.vars.palette.background.paper})`;
-    const CURSOR = theme.vars.palette.primary.main; // signal vermilion
+    const CURSOR = CARET;
 
     const mark = (
       <Box

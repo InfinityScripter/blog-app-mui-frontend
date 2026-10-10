@@ -45,6 +45,7 @@ export interface HeaderBaseProps {
    */
   layoutQuery: Breakpoint;
   slotsDisplay?: HeaderBaseSlotsDisplay;
+  compactLogo?: boolean;
   [key: string]: unknown;
 }
 
@@ -55,6 +56,7 @@ export interface HeaderLeftAreaProps {
   onOpenNav?: () => void;
   layoutQuery: Breakpoint;
   menuButton: boolean;
+  compactLogo?: boolean;
 }
 
 // ----------------------------------------------------------------------

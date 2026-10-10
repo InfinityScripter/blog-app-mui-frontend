@@ -30,6 +30,7 @@ export function QuestionCard({ item, picked, onPick }: QuestionCardProps) {
 
       <Stack direction="row" spacing={1.5}>
         <Button
+          color="primary"
           variant={picked === true ? "contained" : "outlined"}
           disabled={answered}
           onClick={() => onPick(true)}
@@ -37,6 +38,7 @@ export function QuestionCard({ item, picked, onPick }: QuestionCardProps) {
           {t("yes")}
         </Button>
         <Button
+          color="primary"
           variant={picked === false ? "contained" : "outlined"}
           disabled={answered}
           onClick={() => onPick(false)}

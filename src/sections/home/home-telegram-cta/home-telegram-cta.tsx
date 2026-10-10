@@ -58,6 +58,7 @@ export function HomeTelegramCta() {
             target="_blank"
             rel="noopener"
             size="large"
+            color="primary"
             variant="contained"
             sx={{ flexShrink: 0 }}
             startIcon={<Iconify icon="mingcute:telegram-fill" width={24} />}
