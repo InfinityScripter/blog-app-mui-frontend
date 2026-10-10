@@ -19,7 +19,7 @@ export function TelegramButton({ sx, ...other }: IconButtonProps) {
       href={CONFIG.social.telegramChannel}
       target="_blank"
       rel="noopener"
-      aria-label={t("telegram.button")}
+      aria-label={t("telegram.label")}
       sx={{ p: 0, width: 40, height: 40, ...sx }}
       {...other}
     >
