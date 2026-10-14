@@ -95,7 +95,11 @@ export function ComparePinColumn({ model, onRemove }: ComparePinColumnProps) {
         >
           {model.name}
         </Typography>
-        <IconButton size="small" onClick={() => onRemove(model.id)}>
+        <IconButton
+          size="small"
+          aria-label={t("actions.unpinModel", { model: model.name })}
+          onClick={() => onRemove(model.id)}
+        >
           <Iconify width={16} icon="mingcute:close-line" />
         </IconButton>
       </Stack>

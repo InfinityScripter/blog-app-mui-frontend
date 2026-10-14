@@ -80,6 +80,7 @@ export function Footer({ layoutQuery, sx }: FooterProps) {
                   key={social.name}
                   href={social.path}
                   target="_blank"
+                  aria-label={social.name}
                 >
                   <SocialIcon icon={social.value} />
                 </IconButton>

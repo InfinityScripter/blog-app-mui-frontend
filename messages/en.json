@@ -11,7 +11,10 @@
     "signIn": "Sign in",
     "search": "Search…",
     "recentPosts": "Recent posts",
-    "backToSite": "Back to site"
+    "backToSite": "Back to site",
+    "openSearch": "Open search",
+    "openMenu": "Open menu",
+    "settings": "Settings"
   },
   "nav": {
     "home": "Home",
@@ -508,7 +511,9 @@
     "actions": {
       "pin": "Pin for comparison",
       "unpin": "Remove from comparison",
-      "pinMax": "Up to {max} models"
+      "pinMax": "Up to {max} models",
+      "pinModel": "Pin {model} for comparison",
+      "unpinModel": "Remove {model} from comparison"
     },
     "pinBar": {
       "title": "Comparison · {count}",

@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { useTranslations } from "next-intl";
 import SvgIcon from "@mui/material/SvgIcon";
 import { varAlpha } from "src/theme/styles";
 import { Label } from "src/components/label";
@@ -19,6 +20,7 @@ export function PostSearchButton({
   ...other
 }: PostSearchButtonProps) {
   const theme = useTheme();
+  const t = useTranslations("common");
 
   return (
     <Box
@@ -39,7 +41,7 @@ export function PostSearchButton({
         ...(Array.isArray(other.sx) ? other.sx : [other.sx]),
       ]}
     >
-      <IconButton disableRipple>
+      <IconButton disableRipple aria-label={t("openSearch")}>
         {/* https://icon-sets.iconify.design/eva/search-fill/ */}
         <SvgIcon sx={{ width: 20, height: 20 }}>
           <path

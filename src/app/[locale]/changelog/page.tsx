@@ -1,6 +1,7 @@
 import { CONFIG } from "src/config-global";
 import { LLM_MODELS } from "src/sections/llm-timeline/const";
 import { serializeJsonLd } from "src/utils/serialize-json-ld";
+import { localizedAlternates } from "src/utils/seo-alternates";
 import { buildUnifiedLlmCatalog } from "src/utils/llm-catalog";
 import { sortReleasesDesc } from "src/sections/changelog/utils";
 import { COMPARABLE_MODELS } from "src/sections/llm-compare/data";
@@ -28,11 +29,11 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: t("meta.title"),
     description: t("meta.description"),
-    alternates: { canonical: `${BASE_URL}/changelog/` },
+    ...localizedAlternates(locale, "/changelog/"),
     openGraph: {
       title: t("meta.ogTitle"),
       description: t("meta.ogDescription"),
-      url: `${BASE_URL}/changelog/`,
+      url: `${BASE_URL}/${locale}/changelog/`,
       type: "website",
     },
   };

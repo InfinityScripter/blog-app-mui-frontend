@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import SvgIcon from "@mui/material/SvgIcon";
 import IconButton from "@mui/material/IconButton";
 
@@ -6,8 +7,10 @@ import type { MenuButtonProps } from "./types";
 // ----------------------------------------------------------------------
 
 export function MenuButton({ sx, ...other }: MenuButtonProps) {
+  const t = useTranslations("common");
+
   return (
-    <IconButton sx={sx} {...other}>
+    <IconButton aria-label={t("openMenu")} sx={sx} {...other}>
       <SvgIcon>
         <path
           opacity="0.32"

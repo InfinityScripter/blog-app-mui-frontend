@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { CONFIG } from "src/config-global";
 import { NotFoundError } from "src/utils/fetch-retry";
 import { serializeJsonLd } from "src/utils/serialize-json-ld";
+import { localizedAlternates } from "src/utils/seo-alternates";
 import { getRelease, getReleases } from "src/actions/blog-ssr";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 // Import directly from the view file (not a barrel) to keep the public bundle lean.
@@ -48,15 +49,15 @@ export async function generateMetadata({ params }: PageProps) {
         vendor: release.vendor,
         site: CONFIG.site.name,
       });
-    const canonical = `${BASE_URL}/changelog/${encodeURIComponent(decoded)}/`;
+    const path = `/changelog/${encodeURIComponent(decoded)}/`;
     return {
       title: headline,
       description,
-      alternates: { canonical },
+      ...localizedAlternates(locale, path),
       openGraph: {
         title: headline,
         description,
-        url: canonical,
+        url: `${BASE_URL}/${locale}${path}`,
         type: "article",
       },
       twitter: {

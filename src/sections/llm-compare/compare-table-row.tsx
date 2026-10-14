@@ -128,6 +128,12 @@ export function CompareTableRow({
           <span>
             <IconButton
               size="small"
+              aria-label={t(
+                pinned ? "actions.unpinModel" : "actions.pinModel",
+                {
+                  model: model.name,
+                },
+              )}
               color={pinned ? "primary" : "default"}
               disabled={pinDisabled}
               onClick={() => onTogglePin(model.id)}

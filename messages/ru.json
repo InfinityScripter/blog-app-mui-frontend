@@ -11,7 +11,10 @@
     "signIn": "Вход",
     "search": "Поиск…",
     "recentPosts": "Свежие статьи",
-    "backToSite": "На сайт"
+    "backToSite": "На сайт",
+    "openSearch": "Открыть поиск",
+    "openMenu": "Открыть меню",
+    "settings": "Настройки"
   },
   "nav": {
     "home": "Главная",
@@ -503,7 +506,9 @@
     "actions": {
       "pin": "Закрепить для сравнения",
       "unpin": "Убрать из сравнения",
-      "pinMax": "Максимум {max} модели"
+      "pinMax": "Максимум {max} модели",
+      "pinModel": "Закрепить {model}",
+      "unpinModel": "Убрать из сравнения: {model}"
     },
     "pinBar": {
       "title": "Сравнение · {count}",

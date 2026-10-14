@@ -66,7 +66,7 @@ export const socials: SocialLink[] = [
   },
   {
     value: "linkedin",
-    name: "Linkedin",
+    name: "LinkedIn",
     path: CONFIG.social.linkedin,
   },
   {
