@@ -6,6 +6,8 @@ import type { Theme, SxProps } from "@mui/material/styles";
 
 export interface ImageProps extends Omit<BoxProps, "component" | "ref"> {
   ratio?: string;
+  /** Above-the-fold image: plain eager <img> with high fetch priority. */
+  priority?: boolean;
   disabledEffect?: boolean;
   alt?: string;
   src?: string;

@@ -1,4 +1,5 @@
 import type { BoxProps } from "@mui/material/Box";
+import type { Theme, SxProps } from "@mui/material/styles";
 
 import { forwardRef } from "react";
 import Box from "@mui/material/Box";
@@ -40,6 +41,7 @@ export const Image = forwardRef<HTMLSpanElement, ImageProps>(
   (
     {
       ratio,
+      priority = false,
       disabledEffect = false,
       //
       alt,
@@ -62,7 +64,24 @@ export const Image = forwardRef<HTMLSpanElement, ImageProps>(
     },
     ref,
   ) => {
-    const content = (
+    const imageSx: SxProps<Theme> = {
+      width: 1,
+      height: 1,
+      objectFit: "cover",
+      verticalAlign: "bottom",
+      aspectRatio: ratio,
+    };
+
+    const content = priority ? (
+      <Box
+        component="img"
+        alt={alt}
+        src={src}
+        loading="eager"
+        fetchPriority="high"
+        sx={imageSx}
+      />
+    ) : (
       <Box
         component={LazyLoadImage}
         alt={alt}
@@ -83,13 +102,7 @@ export const Image = forwardRef<HTMLSpanElement, ImageProps>(
             ? `${CONFIG.site.basePath}/assets/transparent.png`
             : `${CONFIG.site.basePath}/assets/placeholder.svg`
         }
-        sx={{
-          width: 1,
-          height: 1,
-          objectFit: "cover",
-          verticalAlign: "bottom",
-          aspectRatio: ratio,
-        }}
+        sx={imageSx}
       />
     );
 

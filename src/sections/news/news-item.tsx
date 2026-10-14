@@ -43,11 +43,15 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
         <Link
           component={RouterLink}
           href={linkTo}
+          aria-hidden="true"
+          tabIndex={-1}
           sx={{ flex: { sm: "0 0 46%" }, display: "block" }}
         >
           <Thumb
             item={item}
             ratio="16/9"
+            width={800}
+            priority
             sx={{ borderRadius: 2, height: { sm: 1 } }}
           />
         </Link>
@@ -103,9 +107,16 @@ export function NewsItemCard({ item, variant = "list" }: NewsItemProps) {
       <Link
         component={RouterLink}
         href={linkTo}
+        aria-hidden="true"
+        tabIndex={-1}
         sx={{ flex: "0 0 96px", display: "block" }}
       >
-        <Thumb item={item} ratio="4/3" sx={{ borderRadius: 1.5, width: 96 }} />
+        <Thumb
+          item={item}
+          ratio="4/3"
+          width={192}
+          sx={{ borderRadius: 1.5, width: 96 }}
+        />
       </Link>
 
       <Stack spacing={0.75} sx={{ flex: 1, minWidth: 0 }}>

@@ -110,3 +110,14 @@ export function availableCategories(posts: Post[]): NewsCategory[] {
     (category) => category === DEFAULT_NEWS_CATEGORY || present.has(category),
   );
 }
+
+/**
+ * Asks images.unsplash.com for the width the card really shows, instead of the
+ * 1200 px the editors put in the cover URL. Other hosts are returned as is.
+ */
+export function withImageWidth(src: string, width: number): string {
+  if (!src.startsWith("https://images.unsplash.com/")) return src;
+  const url = new URL(src);
+  url.searchParams.set("w", String(width));
+  return url.toString();
+}

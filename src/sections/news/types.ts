@@ -30,6 +30,10 @@ export interface NewsItemProps {
 export interface ThumbProps {
   item: NewsItem;
   ratio: "4/3" | "16/9";
+  /** Real display width in px (x2 for retina) used to size unsplash covers. */
+  width: number;
+  /** Above-the-fold image: loaded at once with high priority, not lazily. */
+  priority?: boolean;
   sx?: object;
 }
 
