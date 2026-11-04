@@ -8,14 +8,12 @@ import { monoLabelSx } from "src/theme/styles";
 import Container from "@mui/material/Container";
 import { Iconify } from "src/components/iconify";
 import Typography from "@mui/material/Typography";
-import { RouterLink } from "src/routes/components";
 
 import {
   PEEK_SRC,
   TELEGRAM_URL,
   PEEK_VARIANTS,
   MARQUEE_REPEATS,
-  HOME_SECTION_LINKS,
 } from "./const";
 
 // ----------------------------------------------------------------------
@@ -87,27 +85,6 @@ export function HomeTelegramCta() {
           >
             {t("telegram.button")}
           </Button>
-        </Stack>
-
-        <Stack
-          direction="row"
-          spacing={3}
-          useFlexGap
-          sx={{ flexWrap: "wrap", alignItems: "baseline", mt: 6 }}
-        >
-          <Typography component="span" sx={monoLabelSx}>
-            {t("links.title")}
-          </Typography>
-          {HOME_SECTION_LINKS.map((item) => (
-            <Link
-              key={item.key}
-              component={RouterLink}
-              href={item.href}
-              variant="subtitle2"
-            >
-              {t(`links.${item.key}`)}
-            </Link>
-          ))}
         </Stack>
       </Container>
     </Box>

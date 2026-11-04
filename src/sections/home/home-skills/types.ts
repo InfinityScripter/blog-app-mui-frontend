@@ -1,4 +1,4 @@
-type HomeSkillKey = "frontend" | "backend" | "tools";
+type HomeSkillKey = "ai" | "frontend" | "backend" | "tools";
 
 export interface HomeSkill {
   // Stable key → `home.skills.groups.<key>.name` / `.description`.

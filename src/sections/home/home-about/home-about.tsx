@@ -18,6 +18,7 @@ import { ABOUT_STACK, ABOUT_PROFILE, ABOUT_HIGHLIGHTS } from "./const";
 
 export function HomeAbout() {
   const t = useTranslations("home");
+  const tPortfolio = useTranslations("portfolio");
 
   return (
     <Container component={MotionViewport} sx={{ py: { xs: 6, md: 10 } }}>
@@ -44,7 +45,7 @@ export function HomeAbout() {
               {t("about.title")}
             </Typography>
             <Typography variant="h3" sx={{ lineHeight: 1.1 }}>
-              {ABOUT_PROFILE.name}
+              {tPortfolio("profileName")}
             </Typography>
             <Stack
               direction="row"

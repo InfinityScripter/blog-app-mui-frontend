@@ -45,9 +45,9 @@ export function HomeExperience() {
           px: { xs: 0, sm: 2 },
         }}
       >
-        {getSortedExperience().map((item, index) => (
+        {getSortedExperience().map((item) => (
           <ExperienceTimelineItem
-            key={index}
+            key={item.key}
             item={item}
             isMobile={isMobile}
             theme={theme}

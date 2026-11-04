@@ -33,7 +33,7 @@ export function HomeSkills() {
           gap: 3,
           gridTemplateColumns: {
             xs: "repeat(1, 1fr)",
-            md: "repeat(3, 1fr)",
+            md: "repeat(2, 1fr)",
           },
         }}
       >

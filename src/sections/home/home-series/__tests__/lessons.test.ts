@@ -51,4 +51,12 @@ describe("SERIES_LESSONS", () => {
 
     expect(insecure).toEqual([]);
   });
+
+  it("gives every lesson at least one related post tag", () => {
+    const untagged = SERIES_LESSONS.filter(
+      (lesson) => !lesson.relatedTags?.length,
+    ).map((lesson) => lesson.number);
+
+    expect(untagged).toEqual([]);
+  });
 });

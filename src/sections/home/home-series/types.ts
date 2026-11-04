@@ -15,6 +15,8 @@ export interface SeriesLesson {
   number: number;
   title: LocalizedText;
   reelUrl?: string;
+  /** Post tags whose newest posts are offered as further reading. */
+  relatedTags?: string[];
   questions: SeriesQuestion[];
 }
 

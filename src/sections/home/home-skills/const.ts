@@ -2,8 +2,29 @@ import type { HomeSkill } from "./types";
 
 // `key` → `home.skills.groups.<key>.name` / `.description` (resolved in
 // `HomeSkills` via `useTranslations`). `items`/`iconSkill` are proper-noun tech
-// names and icon ids — not translated.
+// names and icon ids — not translated. Only tech backed by the experience
+// timeline / CV goes here.
 export const SKILLS: HomeSkill[] = [
+  {
+    key: "ai",
+    icon: "mdi:robot-outline",
+    items: [
+      "Claude Code",
+      "Claude API",
+      "OpenAI API",
+      "MCP",
+      "Tool calling",
+      "Local LLM",
+    ],
+    iconSkill: [
+      "logos:claude-icon",
+      "logos:anthropic-icon",
+      "logos:openai-icon",
+      "mdi:connection",
+      "mdi:tools",
+      "mdi:server-network",
+    ],
+  },
   {
     key: "frontend",
     icon: "mdi:react",
@@ -13,8 +34,9 @@ export const SKILLS: HomeSkill[] = [
       "Next.js",
       "Angular",
       "Material UI",
-      "Redux",
-      "Tailwind CSS",
+      "Ant Design",
+      "TanStack Query",
+      "Module Federation",
     ],
     iconSkill: [
       "logos:react",
@@ -22,32 +44,21 @@ export const SKILLS: HomeSkill[] = [
       "logos:nextjs-icon",
       "logos:angular-icon",
       "logos:material-ui",
-      "logos:redux",
-      "logos:tailwindcss-icon",
+      "logos:ant-design",
+      "logos:react-query-icon",
+      "logos:webpack",
     ],
   },
   {
     key: "backend",
     icon: "mdi:database",
-    items: [
-      "Node.js",
-      "REST API",
-      "Symfony",
-      "Docker",
-      "Express",
-      "MongoDB",
-      "PostgreSQL",
-      "Mariadb",
-    ],
+    items: ["Node.js", "PostgreSQL", "REST API", "Temporal", "Docker"],
     iconSkill: [
       "logos:nodejs-icon",
-      "logos:rest",
-      "logos:symfony",
-      "logos:docker",
-      "logos:express",
-      "logos:mongodb-icon",
       "logos:postgresql",
-      "logos:mariadb",
+      "logos:rest",
+      "mdi:timer-cog-outline",
+      "logos:docker",
     ],
   },
   {
@@ -56,22 +67,20 @@ export const SKILLS: HomeSkill[] = [
     items: [
       "Git",
       "Webpack",
+      "Vitest / Jest",
+      "Playwright / Cypress",
+      "GitHub Actions",
       "Figma",
-      "Docker",
-      "AWS",
-      "CI/CD",
-      "Jest",
-      "Cypress",
+      "RUM",
     ],
     iconSkill: [
       "logos:git-icon",
       "logos:webpack",
+      "logos:vitest",
+      "logos:playwright",
+      "logos:github-actions",
       "logos:figma",
-      "logos:docker",
-      "logos:aws",
-      "logos:jenkins",
-      "logos:jest",
-      "logos:cypress",
+      "mdi:chart-line",
     ],
   },
 ];

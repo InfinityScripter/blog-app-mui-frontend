@@ -37,11 +37,6 @@ export const NAV_ITEMS = [
     icon: <Iconify width={22} icon="solar:ranking-bold-duotone" />,
   },
   {
-    key: "library",
-    path: "/library",
-    icon: <Iconify width={22} icon="solar:bookmark-square-bold-duotone" />,
-  },
-  {
     key: "about",
     path: "/portfolio",
     icon: <Iconify width={22} icon="solar:user-circle-bold-duotone" />,

@@ -28,9 +28,6 @@ interface Paths {
   llmCompare: {
     root: string;
   };
-  library: {
-    root: string;
-  };
   legal: {
     privacyPolicy: string;
     personalDataConsent: string;
@@ -97,9 +94,6 @@ export const paths: Paths = {
   },
   llmCompare: {
     root: `/llm-compare`,
-  },
-  library: {
-    root: `/library`,
   },
   legal: {
     privacyPolicy: "/privacy-policy",

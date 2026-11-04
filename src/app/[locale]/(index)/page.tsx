@@ -16,9 +16,9 @@ const JSON_LD = {
       url: `${CONFIG.site.url}/`,
       inLanguage: "ru-RU",
       description:
-        "ИИ простыми словами: короткие ролики про нейросети, игровая карта из 12 уроков и тест на минуту.",
+        "ИИ простыми словами: карта из 12 уроков по три вопроса с пояснениями, тест на минуту и ежедневная сводка новостей ИИ.",
       keywords:
-        "ИИ простыми словами, нейросети для начинающих, LLM, Claude Code, Codex, Life Style",
+        "ИИ простыми словами, нейросети для начинающих, новости ИИ, LLM, AI-агенты, Claude Code, Codex, Life Style",
       author: {
         "@type": "Person",
         name: "Михаил Талалаев",
@@ -37,14 +37,7 @@ const JSON_LD = {
       alternateName: "Mihail Talalaev",
       url: `${CONFIG.site.url}/`,
       jobTitle: "AI Engineer",
-      knowsAbout: [
-        "Искусственный интеллект",
-        "AI",
-        "LLM",
-        "React",
-        "Next.js",
-        "TypeScript",
-      ],
+      knowsAbout: ["Искусственный интеллект", "AI", "LLM", "AI-агенты"],
     },
   ],
 };

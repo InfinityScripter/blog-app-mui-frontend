@@ -1,4 +1,3 @@
-import type { HostPoseName } from "../components/types";
 import type { MapPoint, LevelState, SeriesProgress } from "./types";
 
 // ----------------------------------------------------------------------
@@ -7,19 +6,16 @@ export const SERIES_PROGRESS_KEY = "life-style-series-progress";
 
 export const SERIES_PROGRESS_INITIAL: SeriesProgress = { passed: [] };
 
+// Anchor the hero "start" button scrolls to. Duplicated as a literal in
+// home-hero (sections are isolated), keep both in sync.
+export const SERIES_SECTION_ID = "series";
+
 export const QUIZ_SIZE = 5;
 
-export const QUIZ_POSES: readonly HostPoseName[] = [
-  "curious",
-  "think",
-  "thumbs-up",
-  "laugh",
-  "oops",
-  "facepalm",
-  "wow",
-  "smile",
-  "shrug",
-];
+export const RELATED_POSTS_COUNT = 2;
+
+// Newest posts scanned for a lesson's tags; one shared SWR key for all levels.
+export const RELATED_POSTS_POOL = 50;
 
 export const LEVEL_STATE_LABEL_KEY: Record<
   LevelState,
