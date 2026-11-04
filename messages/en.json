@@ -412,14 +412,13 @@
           "company": "Yandex Go",
           "location": "Moscow",
           "description": [
-            "Own the frontend of a low-code workflow engine (Temporal-based, n8n-like) that runs millions of customer-communication scenarios daily; ship a production release roughly every week and support it in production",
-            "Built LLM features in the workflow editor: an “AI agent” step with a system prompt and tool calling, and prompt-based generation of whole workflows, taken from an internal hackathon idea to production",
-            "Work across the stack where needed: API layers, backend changes and CI/CD pipelines, releases and production support",
-            "Integrated a shared Email service via Module Federation and moved event-filter configuration into the platform, enabling new communication launches with measurable revenue impact",
-            "Designed and delivered role-based access control: permission model agreed with backend, API layer, action gating, 403 handling and access sharing for workflows, bots and templates",
-            "Delivered workflow versioning and rollback, new channels (Telegram, Viber, WhatsApp, Webhook, Push) and template management",
-            "Embedded a partner team’s AI-agent admin UI as an iframe module: 9 sections, two repos, three weeks",
-            "Set up RUM observability and alert thresholds; review ~50 PRs per half-year, decompose and assign work to 3 developers; drove team AI adoption and taught internal AI-coding sprints"
+            "Develop the frontend of a high-load low-code platform for automating customer communications; ship regular production releases and support them in production",
+            "Brought LLM features to production in the scenario editor: an “AI agent” step with tool calling and generation of a scenario from a text prompt — from a hackathon idea to a shipped feature",
+            "Work across the stack where needed: API layers, backend changes and CI/CD pipelines",
+            "Built role-based access control together with the backend: permission model, action gating and access sharing",
+            "Delivered scenario versioning and rollback, new messaging channels and template management",
+            "Integrated other teams' services and admin tools into the platform as micro-frontend modules",
+            "Set up frontend monitoring and alerting; review code and help teammates; drove team adoption of AI coding tools and ran internal AI-coding sessions"
           ]
         },
         "aifirst": {

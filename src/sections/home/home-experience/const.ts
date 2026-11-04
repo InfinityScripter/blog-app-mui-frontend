@@ -58,7 +58,7 @@ export const EXPERIENCE: ExperienceItem[] = [
     startDate: "2025-04-01",
     endDate: null,
     technologies:
-      "TypeScript, React, Ant Design, TanStack Query, Module Federation, Temporal, LLM",
+      "TypeScript, React, Ant Design, TanStack Query, Module Federation, LLM",
     logo: "/assets/icons/experience/yandex.png",
     link: "https://go.yandex",
   },
