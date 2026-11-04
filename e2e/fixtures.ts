@@ -18,7 +18,7 @@ export const NON_ADMIN_USER = {
   password: "@user1",
 } as const;
 
-async function login(
+export async function login(
   page: import("@playwright/test").Page,
   creds: { email: string; password: string },
 ) {
@@ -63,6 +63,28 @@ async function login(
 }
 
 /**
+ * Backend caps sign-in at 5 POSTs per minute per IP (withRateLimit in
+ * api/auth/sign-in.ts), and CI runs it as a production build where the cap is
+ * on. A fresh login before every test hit 429 within a minute and the test sat
+ * on /sign-in until timeout. So each account signs in once per worker and
+ * later tests reuse its cookies (the access token lives 15 minutes).
+ */
+const sessions = new Map<string, import("@playwright/test").Cookie[]>();
+
+async function signInOnce(
+  page: import("@playwright/test").Page,
+  creds: { email: string; password: string },
+) {
+  const cookies = sessions.get(creds.email);
+  if (cookies) {
+    await page.context().addCookies(cookies);
+    return;
+  }
+  await login(page, creds);
+  sessions.set(creds.email, await page.context().cookies());
+}
+
+/**
  * Прод-смоук (E2E_BASE_URL задан) обязан быть строго read-only: все не-GET
  * запросы к /api/ и все маяки Vercel Analytics (/_vercel/*) блокируются на
  * уровне браузера, чтобы прогоны не писали в прод — ни в данные (счётчики
@@ -76,8 +98,8 @@ async function login(
 const PROD_SMOKE_URL = process.env.E2E_BASE_URL;
 
 /**
- * `authedPage` logs in via the real sign-in form before the test body runs,
- * so authenticated routes (dashboard, admin) are reachable.
+ * `authedPage` / `nonAdminPage` start signed in (see signInOnce), so
+ * authenticated routes (dashboard, admin) are reachable.
  */
 export const test = base.extend<{
   authedPage: import("@playwright/test").Page;
@@ -100,11 +122,11 @@ export const test = base.extend<{
     await use(page);
   },
   authedPage: async ({ page }, use) => {
-    await login(page, DEMO_USER);
+    await signInOnce(page, DEMO_USER);
     await use(page);
   },
   nonAdminPage: async ({ page }, use) => {
-    await login(page, NON_ADMIN_USER);
+    await signInOnce(page, NON_ADMIN_USER);
     await use(page);
   },
 });
