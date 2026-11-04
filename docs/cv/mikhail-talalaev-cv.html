@@ -7,7 +7,7 @@ body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.6pt;line-height:1
 h1{font-size:20pt;margin:0}
 .role{font-size:11.5pt;font-weight:600;margin:2px 0 4px}
 .contact{font-size:9pt;color:#333}
-h2{font-size:10.5pt;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid #999;margin:12px 0 5px;padding-bottom:2px}
+h2{font-size:10.5pt;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid #999;margin:12px 0 5px;padding-bottom:2px;break-after:avoid;page-break-after:avoid}
 .job{margin-top:7px;page-break-inside:avoid}
 .head{display:flex;justify-content:space-between;font-weight:700}
 .ctx{font-style:italic;color:#333;margin:1px 0 2px}
@@ -22,7 +22,7 @@ a{color:#111;text-decoration:none}
 github.com/InfinityScripter · aifirst.us.com</div>
 
 <h2>Summary</h2>
-<p>Engineer with 4+ years of production experience in TypeScript, React/Next.js and Node.js, now focused on building LLM features and agents. At Yandex Go I build a high-load platform for automating customer communications and ship work end to end: UI, API layers, backend changes, CI/CD, releases and production support. I took LLM features in the platform from a hackathon idea to production: an “AI agent” step with tool calling and generation of scenarios from a text prompt. Outside work I build and run my own LLM products in production — an autonomous news agent, a Telegram assistant for AR glasses and an AI blog — owning quality, latency and LLM cost.</p>
+<p>Engineer with 4+ years of production experience in TypeScript, React/Next.js and Node.js, now focused on building LLM features and agents. With AI agents writing most of the code, I treat code itself as cheap and invest in guardrails instead — strict lint and type rules, tests, CI quality gates, agent rules and automated review — so a team can ship at agent speed and the codebase stays maintainable. At Yandex Go I build a high-load platform for automating customer communications and ship work end to end: UI, API layers, backend changes, CI/CD, releases and production support. I took LLM features in the platform from a hackathon idea to production: an “AI agent” step with tool calling and generation of scenarios from a text prompt. Outside work I build and run my own LLM products in production — an autonomous news agent, a Telegram assistant for AR glasses and an AI blog — owning quality, latency and LLM cost.</p>
 
 <h2>Experience</h2>
 <div class="job"><div class="head"><span>AI Engineer — Yandex Go</span><span>Apr 2025 – present</span></div>
@@ -34,7 +34,8 @@ github.com/InfinityScripter · aifirst.us.com</div>
 <li>Built role-based access control together with the backend: permission model, action gating and access sharing.</li>
 <li>Delivered scenario versioning and rollback, new messaging channels and template management.</li>
 <li>Integrated other teams' services and admin tools into the platform as micro-frontend modules.</li>
-<li>Set up frontend monitoring and alerting; review code and help teammates; drove team adoption of AI coding tools and ran internal AI-coding sessions.</li>
+<li>Set up guardrails for AI-assisted development in the team: agent rules, shared code-review skills for coding agents and quality checks, so agent-written code meets the team's standards before human review; ran internal AI-coding sessions.</li>
+<li>Set up frontend monitoring and alerting; review code and help teammates.</li>
 </ul></div>
 
 <div class="job"><div class="head"><span>Frontend Developer — STOMPLAN</span><span>May 2024 – Apr 2025</span></div>
@@ -59,7 +60,7 @@ github.com/InfinityScripter · aifirst.us.com</div>
 <h2>Projects (in production)</h2>
 <ul>
 <li><b>Autonomous AI news agent</b> (Node.js, Claude / OpenAI / local models): collects sources, ranks and summarises them with LLMs via multi-provider routing to balance quality and cost; human approval in Telegram, then auto-publishes to the blog and a Telegram channel.</li>
-<li><b>aifirst.us.com</b> — AI blog and LLM model comparison (Next.js, React, Node.js, PostgreSQL): feed, search and editorial CMS, ISR caching, JWT auth, unit and e2e tests, CI/CD with GitHub Actions and self-hosted deployment (nginx, VPS).</li>
+<li><b>aifirst.us.com</b> — AI blog and LLM model comparison (Next.js, React, Node.js, PostgreSQL): feed, search and editorial CMS, ISR caching, JWT auth, guarded by zero-warning lint, locked design tokens, dead-code checks (knip), unit and e2e tests in CI/CD with GitHub Actions and self-hosted deployment (nginx, VPS).</li>
 <li><b>rokid-ai</b> — Telegram assistant for AR glasses: an LLM turns a photo or voice note into a food-diary entry in a third-party API (OAuth, retry queue).</li>
 <li><b>claude-control-bar</b> — open-source macOS menu-bar app for Claude Code sessions.</li>
 </ul>
@@ -70,7 +71,7 @@ github.com/InfinityScripter · aifirst.us.com</div>
 <p><b>Frontend:</b> TypeScript, React 19, Next.js 15, micro-frontends (Module Federation), TanStack Query, Ant Design, MUI, Angular, Redux, accessibility and performance (ISR, RUM)</p>
 <p><b>Backend:</b> Node.js (Express, Next.js API routes), REST API design, PostgreSQL, SQLite, Redis, JWT/OAuth, RBAC, PHP/Symfony</p>
 <p><b>Quality and delivery:</b> Jest, Vitest, Playwright, CI/CD (GitHub Actions), Docker, nginx, release management, observability and alerting, on-call</p>
-<p><b>AI-assisted development:</b> I use Claude Code and Cursor daily on production code — custom skills and agent rules turn a task into a reviewed PR, and agents apply review comments and run the tests.</p>
+<p><b>AI-assisted development and guardrails:</b> I use Claude Code and Cursor daily on production code. Custom skills and agent rules turn a task into a reviewed PR; lint rules, type checks, tests and CI gates keep agent-written code consistent and maintainable at high delivery speed.</p>
 <p><b>Languages:</b> English (B2), Russian (native)</p>
 </div>
 
