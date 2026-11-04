@@ -408,7 +408,7 @@
           ]
         },
         "yandexGo": {
-          "position": "AI Engineer, frontend lead of the platform",
+          "position": "AI Engineer",
           "company": "Yandex Go",
           "location": "Moscow",
           "description": [
@@ -614,7 +614,7 @@
     "heroEyebrow": "{name} · AI Engineer",
     "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
-    "heroSummary": "I lead the frontend of a communication-automation platform at Yandex Go and take LLM features from hackathon to production. In my spare time I build and run my own LLM products: a news agent, a Telegram assistant for AR glasses, a utility for Claude Code. Here I write about which AI tools actually work in production.",
+    "heroSummary": "I build a communication-automation platform at Yandex Go and take LLM features from hackathon to production. In my spare time I build and run my own LLM products: a news agent, a Telegram assistant for AR glasses, a utility for Claude Code. Here I write about which AI tools actually work in production.",
     "downloadCv": "Download résumé",
     "metrics": {
       "company": {
