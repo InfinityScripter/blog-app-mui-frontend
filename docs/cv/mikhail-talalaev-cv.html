@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Mikhail Talalaev — AI Engineer CV</title>
+<!-- Source of public/assets/cv/mikhail-talalaev-cv.pdf. Rebuild: Chrome headless --print-to-pdf (see docs/cv/README.md). -->
+<style>
+@page{size:A4;margin:14mm 15mm}
+body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.6pt;line-height:1.38;color:#111;margin:0}
+h1{font-size:20pt;margin:0}
+.role{font-size:11.5pt;font-weight:600;margin:2px 0 4px}
+.contact{font-size:9pt;color:#333}
+h2{font-size:10.5pt;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid #999;margin:12px 0 5px;padding-bottom:2px}
+.job{margin-top:7px;page-break-inside:avoid}
+.head{display:flex;justify-content:space-between;font-weight:700}
+.ctx{font-style:italic;color:#333;margin:1px 0 2px}
+ul{margin:2px 0 0 0;padding-left:15px}li{margin:1px 0}
+p{margin:2px 0}
+a{color:#111;text-decoration:none}
+.skills p{margin:2px 0}
+</style></head><body>
+<h1>Mikhail Talalaev</h1>
+<div class="role">AI Engineer — frontend-focused, full-stack (TypeScript · React · Node.js · LLM)</div>
+<div class="contact">talalaev.misha@gmail.com · Moscow, Russia · open to relocation (Dubai) and remote work<br>
+github.com/InfinityScripter · aifirst.us.com</div>
+
+<h2>Summary</h2>
+<p>Engineer with 4+ years of production experience in TypeScript, React/Next.js and Node.js, now focused on building LLM features and agents. At Yandex Go I lead the frontend of a high-load workflow-automation platform that runs millions of customer-communication scenarios a day, and I ship work end to end: UI, API layers, backend changes, CI/CD, releases and production support. I took LLM features in the platform from a hackathon idea to production: an “AI agent” workflow step with tool calling and prompt-based generation of whole workflows. Outside work I build and run my own LLM products in production — an autonomous news agent, a Telegram assistant for AR glasses and an AI blog — owning quality, latency and LLM cost.</p>
+
+<h2>Experience</h2>
+<div class="job"><div class="head"><span>AI Engineer, frontend lead — Yandex Go (Communication Platform)</span><span>Apr 2025 – present</span></div>
+<div class="ctx">Low-code workflow engine (Temporal-based, n8n-like) for customer communications; millions of scenarios a day. Stack: TypeScript, React, Module Federation, Node.js, LLM APIs.</div>
+<ul>
+<li>Brought LLM features to production in the workflow editor: an “AI agent” step that calls an LLM with a system prompt and tool calling, and generation of a whole workflow from a prompt — from an internal hackathon idea to a shipped feature.</li>
+<li>Own the platform frontend and ship a production release roughly every week; work across the stack where needed — API layers, backend changes and CI/CD pipelines — and support releases in production.</li>
+<li>Designed and delivered role-based access control together with the backend: permission model, API layer, action gating, 403 handling and access sharing for workflows, bots and templates, closing a security requirement.</li>
+<li>Integrated a shared Email service via Module Federation and moved event-filter configuration into the platform, enabling new communication launches with measurable revenue impact.</li>
+<li>Delivered workflow versioning and rollback, new channels (Telegram, Viber, WhatsApp, Webhook, Push) and template management with its API layer.</li>
+<li>Embedded a partner team’s AI-agent admin UI as a module in three weeks (9 sections, two repositories) and demoed it to the org.</li>
+<li>Drove AI adoption in the team: agent rules, shared code-review skills for coding agents, internal AI-coding sprints; set up RUM observability and alerting; review ~50 PRs per half-year and plan work for 3 developers.</li>
+</ul></div>
+
+<div class="job"><div class="head"><span>Frontend Developer — STOMPLAN</span><span>May 2024 – Apr 2025</span></div>
+<div class="ctx">Dental treatment-planning SaaS. Stack: Angular, TypeScript.</div>
+<ul><li>Took the product from zero to MVP launch: treatment-planning service and an interactive patient-presentation builder with PDF export.</li>
+<li>Led the migration to modern Angular; designed the navigation architecture and interactive content blocks.</li></ul></div>
+
+<div class="job"><div class="head"><span>Full-stack Developer — ShurikMarket (e-commerce)</span><span>Nov 2022 – May 2024</span></div>
+<div class="ctx">Stack: React, Next.js, PHP/Symfony.</div>
+<ul><li>Cut initial page load time, built an internal UI kit and shipped news, certificates, feedback and favourites services.</li>
+<li>Maintained the Symfony monolith, prepared its migration to a REST API and implemented user registration and authentication.</li></ul></div>
+
+<div class="job"><div class="head"><span>Frontend Developer — Yandex userver (open-source C++ framework)</span><span>May 2023 – Oct 2023</span></div>
+<ul><li>Built and maintained the documentation site UI for the open-source framework.</li></ul></div>
+
+<div class="job"><div class="head"><span>Frontend Developer — QCup (loyalty platform)</span><span>Nov 2021 – Dec 2022</span></div>
+<ul><li>Designed the application architecture from scratch (UI / business logic / data layers), REST integration, async state and error handling (React, TypeScript, Redux).</li></ul></div>
+
+<div class="job"><div class="head"><span>IT Systems Implementation Specialist — Gazprom</span><span>2016 – 2022</span></div>
+<ul><li>Implemented and supported enterprise systems (SAP, 1C, SharePoint, SQL); moved into software engineering in 2021.</li></ul></div>
+
+<h2>Projects (in production)</h2>
+<ul>
+<li><b>Autonomous AI news agent</b> (Node.js, Claude / OpenAI / local models): collects sources, ranks and summarises them with LLMs via multi-provider routing to balance quality and cost; human approval in Telegram, then auto-publishes to the blog and a Telegram channel.</li>
+<li><b>aifirst.us.com</b> — AI blog and LLM model comparison (Next.js, React, Node.js, PostgreSQL): feed, search and editorial CMS, ISR caching, JWT auth, unit and e2e tests, CI/CD with GitHub Actions and self-hosted deployment (nginx, VPS).</li>
+<li><b>rokid-ai</b> — Telegram assistant for AR glasses: an LLM turns a photo or voice note into a food-diary entry in a third-party API (OAuth, retry queue).</li>
+<li><b>claude-control-bar</b> — open-source macOS menu-bar app for Claude Code sessions.</li>
+</ul>
+
+<h2>Skills</h2>
+<div class="skills">
+<p><b>LLMs and agents:</b> Anthropic and OpenAI APIs, tool calling, structured output, streaming, agent loops, MCP servers, prompt evals, multi-provider routing incl. local models, prompt and context engineering</p>
+<p><b>Frontend:</b> TypeScript, React 19, Next.js 15, micro-frontends (Module Federation), TanStack Query, Ant Design, MUI, Angular, Redux, accessibility and performance (ISR, RUM)</p>
+<p><b>Backend:</b> Node.js (Express, Next.js API routes), REST API design, PostgreSQL, SQLite, Redis, JWT/OAuth, RBAC, PHP/Symfony</p>
+<p><b>Quality and delivery:</b> Jest, Vitest, Playwright, CI/CD (GitHub Actions), Docker, nginx, release management, observability and alerting, on-call</p>
+<p><b>AI-assisted development:</b> I use Claude Code and Cursor daily on production code — custom skills and agent rules turn a task into a reviewed PR, and agents apply review comments and run the tests.</p>
+<p><b>Languages:</b> English (B2), Russian (native)</p>
+</div>
+
+<h2>Education</h2>
+<p>Yandex School of Interface Development — Frontend Developer, certificate, 2023</p>
+<p>Tyumen State Oil and Gas University — Engineer’s degree, Chemical Technology, 2011</p>
+</body></html>
