@@ -309,7 +309,7 @@
     },
     "about": {
       "title": "About me",
-      "lead": "4+ years with TypeScript, React/Next.js and Node.js. I work AI-first: code, review and routine go through agents.",
+      "lead": "4+ years with TypeScript, React/Next.js and Node.js. I work AI-first: agents write the code, and I set up the quality guardrails — lint, tests, CI gates and agent rules — so speed doesn't cost maintainability.",
       "highlights": {
         "focus": {
           "label": "Focus",
@@ -414,11 +414,12 @@
           "description": [
             "Develop the frontend of a high-load low-code platform for automating customer communications; ship regular production releases and support them in production",
             "Brought LLM features to production in the scenario editor: an “AI agent” step with tool calling and generation of a scenario from a text prompt — from a hackathon idea to a shipped feature",
+            "Set up guardrails for AI-assisted development: agent rules, shared code-review skills for coding agents and quality checks, so agent-written code meets the team's standards before human review; ran internal AI-coding sessions",
             "Work across the stack where needed: API layers, backend changes and CI/CD pipelines",
             "Built role-based access control together with the backend: permission model, action gating and access sharing",
             "Delivered scenario versioning and rollback, new messaging channels and template management",
             "Integrated other teams' services and admin tools into the platform as micro-frontend modules",
-            "Set up frontend monitoring and alerting; review code and help teammates; drove team adoption of AI coding tools and ran internal AI-coding sessions"
+            "Set up frontend monitoring and alerting; review code and help teammates"
           ]
         },
         "aifirst": {
@@ -613,7 +614,7 @@
     "heroEyebrow": "{name} · AI Engineer",
     "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
-    "heroSummary": "I build a communication-automation platform at Yandex Go and take LLM features from hackathon to production. In my spare time I build and run my own LLM products: a news agent, a Telegram assistant for AR glasses, a utility for Claude Code. Here I write about which AI tools actually work in production.",
+    "heroSummary": "I build a communication-automation platform at Yandex Go and take LLM features from hackathon to production. Agents write most of the code now, so my focus is quality guardrails: strict lint and type rules, tests, CI gates, agent rules and automated review. That lets a team ship very fast while the code stays maintainable. In my spare time I build and run my own LLM products: a news agent, a Telegram assistant for AR glasses, a utility for Claude Code.",
     "downloadCv": "Download résumé",
     "metrics": {
       "company": {
