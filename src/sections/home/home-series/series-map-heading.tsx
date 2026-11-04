@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
 import Typography from "@mui/material/Typography";
@@ -10,13 +11,14 @@ import { SERIES_LESSONS } from "./data/lessons";
 
 interface SeriesMapHeadingProps {
   passed: number;
+  onQuiz: () => void;
 }
 
-export function SeriesMapHeading({ passed }: SeriesMapHeadingProps) {
+export function SeriesMapHeading({ passed, onQuiz }: SeriesMapHeadingProps) {
   const t = useTranslations("home.series");
   const stats = [
     { value: SERIES_LESSONS.length, label: t("statLevels") },
-    { value: 1, label: t("statReel") },
+    { value: 1, label: t("statMinutes") },
     { value: SERIES_LESSONS[0].questions.length, label: t("statQuestions") },
   ];
 
@@ -51,6 +53,15 @@ export function SeriesMapHeading({ passed }: SeriesMapHeadingProps) {
         <Typography variant="subtitle2">
           {t("progress", { passed, total: SERIES_LESSONS.length })}
         </Typography>
+        <Button
+          color="primary"
+          variant="outlined"
+          className="ls-sticker-btn"
+          onClick={onQuiz}
+          sx={{ alignSelf: "flex-start" }}
+        >
+          {t("quizButton")}
+        </Button>
       </Stack>
     </Box>
   );

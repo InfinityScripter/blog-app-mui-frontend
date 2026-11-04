@@ -11,6 +11,7 @@ import DialogContent from "@mui/material/DialogContent";
 import { useAppLocale } from "src/hooks/use-app-locale";
 
 import { QuestionCard } from "./question-card";
+import { RelatedPosts } from "./related-posts";
 
 import type { SeriesLesson } from "./types";
 
@@ -66,6 +67,8 @@ export function LevelDialog({ lesson, onClose, onComplete }: LevelDialogProps) {
               {t("soonNote")}
             </Typography>
           )}
+
+          <RelatedPosts tags={lesson.relatedTags} />
 
           <Typography variant="caption" sx={{ color: "text.secondary" }}>
             {t("questionOf", {

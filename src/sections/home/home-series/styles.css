@@ -305,71 +305,7 @@
   }
 }
 
-/* ---------- lime quiz block ---------- */
-
-.ls-lime {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: 120px 0;
-  background: #eef091;
-  color: var(--palette-text-primary);
-}
-
-.ls-quiz-host {
-  position: relative;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.ls-quiz-host .ls-host {
-  transform: rotate(-4deg);
-  filter: drop-shadow(10px 12px 0 rgba(30, 18, 32, 0.9));
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.ls-quiz-host:hover .ls-host {
-  transform: rotate(2deg) scale(1.03);
-}
-
-.ls-stamp {
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  width: clamp(96px, 11vw, 132px);
-  animation: ls-spin 16s linear infinite;
-}
-
-.ls-stamp circle {
-  fill: #1e1220;
-}
-
-.ls-stamp text {
-  fill: #eef091;
-  font-family: var(--font-unbounded), sans-serif;
-  font-weight: 700;
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-@keyframes ls-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.ls-quiz-card {
-  padding: clamp(24px, 4vw, 48px);
-  border: 2px solid #1e1220;
-  border-radius: 28px;
-  background: #fcf2e8;
-  box-shadow: 8px 8px 0 #1e1220;
-}
-
-.ls-quiz-card .ls-display-xl.MuiTypography-root {
-  font-size: clamp(34px, 4.2vw, 64px);
-}
+/* ---------- quiz dialog ---------- */
 
 .ls-quiz-dots {
   display: flex;

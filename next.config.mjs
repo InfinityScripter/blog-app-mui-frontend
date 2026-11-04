@@ -47,6 +47,17 @@ const nextConfig = {
   },
   trailingSlash: true,
   basePath: process.env.NEXT_PUBLIC_BASE_PATH,
+  // The library section was removed; keep old links working.
+  async redirects() {
+    return [
+      {
+        source: "/:locale(ru|en)/library/:path*",
+        destination: "/:locale/",
+        permanent: true,
+      },
+      { source: "/library/:path*", destination: "/", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

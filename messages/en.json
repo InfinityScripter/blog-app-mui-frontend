@@ -23,7 +23,6 @@
     "releases": "Releases",
     "llmTimeline": "LLM history",
     "llmCompare": "Compare LLMs",
-    "library": "Library",
     "about": "About"
   },
   "footer": {
@@ -208,21 +207,21 @@
   },
   "home": {
     "meta": {
-      "title": "Life Style — AI in plain words, games and a spitz",
-      "description": "AI in plain words for people just meeting neural networks: short videos, a 12-level lesson map and a one-minute quiz. Plus games and life with Varya the spitz."
+      "title": "Life Style — AI in plain words: lessons from scratch and a news digest",
+      "description": "AI in plain words for people just meeting neural networks: a 12-level map of three-question lessons with explanations, a one-minute quiz and a daily AI news digest."
     },
     "hero": {
       "title": "Life Style",
       "subtitleBefore": "AI in ",
       "subtitleAccent": "plain",
-      "subtitleAfter": " words, games and life with a spitz",
+      "subtitleAfter": " words: lessons from scratch and a news digest",
       "youtube": "YouTube",
       "instagram": "Instagram",
       "telegram": "Telegram",
       "imageAlt": "The Life Style host waving, holding Varya the spitz",
       "hint": "Hi! Give us a tap",
       "hover": {
-        "youtube": "One-minute videos: start from level one",
+        "youtube": "AI videos and behind the scenes with Varya",
         "instagram": "Reels and behind the scenes with Varya",
         "telegram": "Announcements and quizzes land here"
       },
@@ -233,19 +232,20 @@
         "quiz": "Can you get five questions right in a row?"
       },
       "tapLabel": "Talk to the host and Varya",
-      "scrollHint": "scroll down"
+      "scrollHint": "scroll down",
+      "start": "Start with level 1"
     },
     "series": {
       "overline": "Series · 12 levels",
-      "subtitle": "Every level is one video and three questions. Answer them and the level lights up while Varya runs to the next one. Progress is saved in this browser, no sign-up needed.",
+      "subtitle": "Every level is three yes-or-no questions with a short explanation, about a minute in total. Answer them and the level lights up while Varya runs to the next one. Below the questions you get fresh posts on the lesson topic. Progress is saved in this browser, no sign-up needed.",
       "progress": "{passed} of {total} passed",
       "level": "Level {number}",
       "legendPassed": "passed",
       "legendCurrent": "next",
-      "legendOpen": "open",
-      "legendSoon": "video coming soon",
+      "legendOpen": "with video",
+      "legendSoon": "open",
       "watch": "Watch the video (in Russian)",
-      "soonNote": "The video for this lesson is coming soon. You can already answer the questions.",
+      "soonNote": "Three questions with explanations: answer them in order.",
       "questionOf": "Question {current} of {total}",
       "yes": "Yes",
       "no": "No",
@@ -264,8 +264,10 @@
       "titleLead": "AI from the ",
       "titleAccent": "very first meeting",
       "statLevels": "levels",
-      "statReel": "video per level",
-      "statQuestions": "questions per level"
+      "statQuestions": "questions per level",
+      "statMinutes": "minute per level",
+      "quizButton": "Check yourself: 5 random questions",
+      "relatedTitle": "Further reading"
     },
     "quiz": {
       "title": "Check yourself in a minute",
@@ -274,15 +276,12 @@
       "result": "{score} of {total}",
       "resultAll": "All correct. The next level is waiting on the map.",
       "resultSome": "Mistakes are fine: every question has a lesson that explains it.",
-      "again": "Try again",
-      "hostAlt": "The host and Varya the spitz react to your answer",
-      "overline": "Check yourself",
-      "stamp": "5 questions · 1 minute · "
+      "again": "Try again"
     },
     "newsletter": {
       "label": "Newsletter",
       "title": "A weekly digest in your inbox",
-      "text": "What actually works in LLMs, agents and Claude Code, and what's hype. Short, to the point, no spam.",
+      "text": "The week's main AI news: neural networks, LLMs and agents in plain words. No spam.",
       "button": "Subscribe",
       "placeholder": "you@example.com",
       "note": "Double opt-in. Unsubscribe in one click.",
@@ -295,21 +294,22 @@
     },
     "telegram": {
       "label": "Telegram channel",
-      "title": "Video announcements, quizzes and news in plain words",
-      "text": "On release day the video is the first thing I post. Plus lesson quizzes and one short AI news digest a day.",
+      "title": "AI news in plain words and lesson quizzes",
+      "text": "One short AI news digest a day plus quizzes on the series lessons.",
       "button": "Subscribe",
       "peekAlt": "The host and Varya the spitz peeking around the corner",
       "marquee": ["Subscribe", "Life Style"]
     },
     "links": {
-      "title": "For those already in the topic",
+      "title": "Tools",
       "news": "AI news",
       "changelog": "Model releases",
-      "llmCompare": "Compare LLMs"
+      "llmCompare": "Compare LLMs",
+      "llmTimeline": "LLM timeline"
     },
     "about": {
       "title": "About me",
-      "lead": "AI engineer at Yandex. I work AI-first: code, reviews and routine go through agents. I also build products on LLMs, like an autonomous bot that finds AI news, rewrites it and publishes it to this blog and a Telegram channel.",
+      "lead": "4+ years with TypeScript, React/Next.js and Node.js. I work AI-first: code, review and routine go through agents.",
       "highlights": {
         "focus": {
           "label": "Focus",
@@ -319,7 +319,8 @@
           "label": "Stack"
         },
         "companies": {
-          "label": "Companies"
+          "label": "Companies",
+          "value": "Yandex Go · STOMPLAN · ShurikMarket"
         }
       }
     },
@@ -328,17 +329,21 @@
       "title": "Skills and stack",
       "subtitle": "The technologies I use in product development",
       "groups": {
+        "ai": {
+          "name": "AI & LLM",
+          "description": "LLM features, tool-calling agents, MCP and multi-provider routing"
+        },
         "frontend": {
-          "name": "Frontend Development",
-          "description": "Building modern, responsive web interfaces"
+          "name": "Frontend",
+          "description": "Platform and product UIs, from micro-frontends to SSR"
         },
         "backend": {
-          "name": "Backend Development",
-          "description": "Server-side development and API implementation"
+          "name": "Backend",
+          "description": "APIs, data and background jobs for my own products"
         },
         "tools": {
-          "name": "Tools & DevOps",
-          "description": "Development and deployment tooling"
+          "name": "Tooling & quality",
+          "description": "Builds, tests, CI and production monitoring"
         }
       }
     },
@@ -347,7 +352,86 @@
       "title": "Work experience",
       "subtitle": "My professional path",
       "present": "present",
-      "technologies": "Technologies:"
+      "technologies": "Technologies:",
+      "items": {
+        "gazprom": {
+          "position": "IT Systems Implementation Specialist",
+          "company": "Gazprom",
+          "location": "St. Petersburg",
+          "description": [
+            "Rolled out corporate IT systems and integrated document management with adjacent services"
+          ]
+        },
+        "qcup": {
+          "position": "Frontend Developer",
+          "company": "QCup",
+          "location": "St. Petersburg",
+          "description": [
+            "Designed the application architecture from scratch (UI / BLL / DAL layers)",
+            "Built REST client-server integration",
+            "Implemented async state and error handling for a more resilient UX",
+            "Covered key user flows with reusable components"
+          ]
+        },
+        "userver": {
+          "position": "Frontend Developer",
+          "company": "Yandex",
+          "location": "St. Petersburg",
+          "description": [
+            "Developed the documentation UI of userver, Yandex's open-source C++ framework",
+            "Improved the docs and the docs frontend codebase",
+            "Moved the documentation UI to a new UI kit"
+          ]
+        },
+        "shurikmarket": {
+          "position": "Full-stack Developer",
+          "company": "ShurikMarket",
+          "location": "St. Petersburg",
+          "description": [
+            "Maintained a Symfony monolith and prepared its migration to a REST API",
+            "Cut initial page load time",
+            "Shipped news, certificates, feedback and favourites services",
+            "Implemented user registration and authentication end to end",
+            "Built a new pixel-perfect landing page",
+            "Introduced an internal UI kit"
+          ]
+        },
+        "stomplan": {
+          "position": "Frontend Developer",
+          "company": "STOMPLAN",
+          "location": "Moscow",
+          "description": [
+            "Built a dental treatment-planning service and an interactive patient-presentation builder with PDF export",
+            "Led the migration to modern Angular and designed the navigation architecture",
+            "Designed and shipped interactive content blocks",
+            "Took the product from zero to MVP launch"
+          ]
+        },
+        "yandexGo": {
+          "position": "Software Engineer, frontend lead of the platform",
+          "company": "Yandex Go",
+          "location": "Moscow",
+          "description": [
+            "Own the frontend of a low-code workflow engine (Temporal-based, n8n-like) that runs millions of customer-communication scenarios daily; ship a production release roughly every week and support it in production",
+            "Built LLM features in the workflow editor: an “AI agent” step with a system prompt and tool calling, and prompt-based generation of whole workflows, taken from an internal hackathon idea to production",
+            "Integrated a shared Email service via Module Federation and moved event-filter configuration into the platform, enabling new communication launches with measurable revenue impact",
+            "Designed and delivered role-based access control: permission model agreed with backend, API layer, action gating, 403 handling and access sharing for workflows, bots and templates",
+            "Delivered workflow versioning and rollback, new channels (Telegram, Viber, WhatsApp, Webhook, Push) and template management",
+            "Embedded a partner team’s AI-agent admin UI as an iframe module: 9 sections, two repos, three weeks",
+            "Set up RUM observability and alert thresholds; review ~50 PRs per half-year, decompose and assign work to 3 developers; drove team AI adoption and taught internal AI-coding sprints"
+          ]
+        },
+        "aifirst": {
+          "position": "Founder, full-stack engineer",
+          "company": "aifirst.us.com",
+          "location": "Moscow",
+          "description": [
+            "AI news journal (Next.js, React, Node.js, PostgreSQL): feed, search and editorial CMS, ISR caching, JWT auth, unit and e2e tests, self-hosted deployment",
+            "Autonomous news agent (Node.js): collects sources, ranks and summarises with LLMs via multi-provider routing (Claude, OpenAI, local models) to balance quality and cost; publishes after human approval in Telegram",
+            "Telegram assistant for AR glasses: a photo or voice note is turned by an LLM into a food-diary entry in a third-party API (OAuth, retry queue); open-source macOS menu-bar app for Claude Code"
+          ]
+        }
+      }
     },
     "contact": {
       "overline": "Get in touch",
@@ -369,7 +453,12 @@
         "Varya the spitz",
         "one-minute quiz"
       ],
-      "b": ["YouTube", "Instagram", "Telegram", "videos, games and quizzes"]
+      "b": ["YouTube", "Instagram", "Telegram", "daily AI news"]
+    },
+    "fresh": {
+      "overline": "Fresh",
+      "title": "AI news digest",
+      "all": "All news"
     }
   },
   "changelog": {
@@ -400,58 +489,6 @@
     "feed": {
       "title": "AI model releases",
       "description": "A chronicle of large language model releases: versions, pricing, context"
-    }
-  },
-  "library": {
-    "hero": {
-      "eyebrow": "Library",
-      "title": "What to read, what to use and what I learned",
-      "subtitle": "A curated selection: the best sources on AI and LLMs, tools that are genuinely worth your time, and short notes from practice. No hype, updated regularly."
-    },
-    "tabs": {
-      "read": "Read",
-      "tools": "Tools",
-      "til": "TIL"
-    },
-    "filter": {
-      "all": "All"
-    },
-    "readingKind": {
-      "blog": "Blogs",
-      "newsletter": "Newsletters",
-      "paper": "Papers & preprints",
-      "post": "Landmark posts",
-      "video": "Videos & podcasts",
-      "book": "Books"
-    },
-    "toolCategory": {
-      "agents": "Agents",
-      "ide": "IDE & coding",
-      "chat": "Chat assistants",
-      "search": "Search & research",
-      "images": "Images",
-      "audio": "Audio & speech",
-      "eval": "Evaluation & testing",
-      "orchestration": "Orchestration",
-      "data": "Data & RAG"
-    },
-    "pricing": {
-      "free": "Free",
-      "freemium": "Freemium",
-      "paid": "Paid",
-      "open-source": "Open source"
-    },
-    "fallbackLabel": "Other",
-    "til": {
-      "empty": "No notes yet — coming soon.",
-      "source": "Source"
-    },
-    "meta": {
-      "title": "Library: what to read about AI, tools and TIL notes",
-      "description": "A curated selection of the best sources on AI and LLMs, a catalog of useful tools, and short notes from practice (TIL). No hype, updated regularly.",
-      "ogTitle": "Library | Life Style",
-      "ogDescription": "The best AI sources, a tool catalog and notes from practice in one place.",
-      "jsonLdName": "Library: AI sources and tools"
     }
   },
   "llmCompare": {
@@ -576,12 +613,12 @@
     "heroEyebrow": "{name} · AI Engineer",
     "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
-    "heroSummary": "I build LLM products and run my development through AI agents. Here I write about which AI tools actually work in production.",
+    "heroSummary": "I lead the frontend of a communication-automation platform at Yandex Go and take LLM features from hackathon to production. In my spare time I build and run my own LLM products: a news agent, a Telegram assistant for AR glasses, a utility for Claude Code. Here I write about which AI tools actually work in production.",
     "downloadCv": "Download résumé",
     "metrics": {
       "company": {
         "label": "Company",
-        "value": "Yandex"
+        "value": "Yandex Go"
       },
       "specialization": {
         "label": "Specialization",
@@ -594,7 +631,32 @@
     "meta": {
       "title": "About | Mikhail Talalaev",
       "description": "AI engineer Mikhail Talalaev — LLM products and agent-driven development. Experience, projects and contacts."
-    }
+    },
+    "projects": {
+      "overline": "Projects",
+      "title": "Side projects",
+      "subtitle": "What I build and run in my spare time",
+      "open": "Open",
+      "items": {
+        "claudeControlBar": {
+          "description": "Open-source macOS menu-bar app for Claude Code: session status and one-click actions.",
+          "status": "Open source"
+        },
+        "rokidAi": {
+          "description": "Telegram assistant for Rokid AR glasses: a photo or voice note is turned by an LLM into a FatSecret food-diary entry.",
+          "status": "In production"
+        },
+        "aiBotTg": {
+          "description": "News agent: collects AI news from RSS, summarises it via several LLM providers and, after approval in Telegram, publishes to the blog and channel.",
+          "status": "In production"
+        },
+        "teacherDog": {
+          "description": "Booking site for a dog trainer, running on the same backend as this blog.",
+          "status": "Launching"
+        }
+      }
+    },
+    "profileName": "Mikhail Talalaev"
   },
   "cookieNotice": {
     "message": "Only essential cookies: sign-in, security and preferences. No ad trackers.",

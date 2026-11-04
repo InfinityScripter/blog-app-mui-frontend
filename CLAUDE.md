@@ -31,7 +31,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 }
 ```
 
-- Have it: `news`, `changelog`, `library`, `llm-compare`, `llm-timeline`,
+- Have it: `news`, `changelog`, `llm-compare`, `llm-timeline`,
   `newsletter`, `post`, `tag/[slug]`.
 - Routes inside the `(index)` route group (home) inherit
   `src/app/[locale]/(index)/layout.tsx`.
@@ -78,7 +78,7 @@ times** (MUI `AppBar` only appears after hydration). That is **not** a bug.
 `curl | grep '<header'` gives a false "broken". Verify with Playwright against
 the rendered DOM (`document.querySelector('header')`) after navigation. Some
 routes (e.g. `news`) prerender and _do_ show `<header>` in HTML — the
-discrepancy with `llm-compare`/`library` is expected, not a regression.
+discrepancy with `llm-compare` is expected, not a regression.
 
 ### 3. Unit tests use Vitest, not Jest
 
@@ -94,7 +94,7 @@ discrepancy with `llm-compare`/`library` is expected, not a regression.
 One React component per file, ≤200 lines (`skipBlankLines`, `skipComments`).
 Split growth into sub-components / `const.ts` / `types.ts` / `utils.ts`.
 **Curated static data files** (arrays, no logic) are exempt via `overrides` in
-`.eslintrc.cjs` — see `src/sections/{llm-timeline,llm-compare,library}/data/**`.
+`.eslintrc.cjs` — see `src/sections/{llm-timeline,llm-compare}/data/**`.
 Add new data dirs there, don't inline giant arrays into components.
 
 ### 5. ES5 target — no `for-of`/`while`/generators in `src`
@@ -118,7 +118,7 @@ a `hooks/` folder (module-local `<module>/hooks/use-x.ts`, or global
 
 `src/sections/*` components are paired to pages and must not be imported by
 other sections or by `src/components`. The one documented exception:
-`llm-compare` and `library` import display-only vendor helpers from
+`llm-compare` imports display-only vendor helpers from
 `src/sections/llm-timeline/utils` (color/icon maps) — duplicating those maps
 would drift. Keep such cross-section imports display-only and rare.
 
@@ -144,8 +144,8 @@ would drift. Keep such cross-section imports display-only and rare.
 
 A public page that fetches at build/regenerate time must `try/catch` — one
 backend 500 during a deploy window otherwise fails the whole Vercel build (or
-caches a 404 for an hour). Fully static pages (no fetch — like `llm-compare`,
-`library`, `llm-timeline`) can't hit this.
+caches a 404 for an hour). Fully static pages (no fetch — like `llm-compare`
+and `llm-timeline`) can't hit this.
 
 ## Deploy
 

@@ -3,6 +3,7 @@ import type { LlmModel } from "src/sections/llm-timeline/types";
 import type { ComparableModel } from "src/sections/llm-compare/types";
 
 import { ownRecordGet } from "./own-record";
+import { hasCompareData, dedupeReleases } from "./llm-catalog-dedupe";
 import {
   releaseName,
   releaseFromTimeline,
@@ -32,6 +33,7 @@ const VENDOR_ALIASES: Readonly<Record<string, string>> = {
   // Zhipu AI rebranded to Z.ai; the bot feed already uses the new name while
   // curated entries still carry the old one.
   zhipuai: "zai",
+  googledeepmind: "google",
 };
 
 function normalizeVendor(value: string): string {
@@ -117,8 +119,12 @@ export function buildUnifiedLlmCatalog(
 ): UnifiedLlmCatalog {
   // The release feed is external input. Unsafe schemes must never reach href
   // or JSON-LD sinks in any of the three catalog views.
-  const safeReleases = releases.filter((release) =>
-    isSafeHttpUrl(release.sourceUrl),
+  const safeReleases = dedupeReleases(
+    releases.filter((release) => isSafeHttpUrl(release.sourceUrl)),
+    (left, right) =>
+      nameKey(left.vendor, releaseName(left)) ===
+        nameKey(right.vendor, releaseName(right)) &&
+      datesNear(left.releasedAt, right.releasedAt),
   );
   const matchedTimelineReleaseIds = new Set<string>();
   const timelineModels = timelineSource.map((model) => {
@@ -221,7 +227,7 @@ export function buildUnifiedLlmCatalog(
   return {
     releases: unifiedReleases,
     timelineModels,
-    comparableModels,
+    comparableModels: comparableModels.filter(hasCompareData),
     pricingAsOf,
   };
 }

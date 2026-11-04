@@ -19,7 +19,6 @@ import { hairline, monoLabelSx, monoValueSx } from "src/theme/styles";
 import {
   CV_URL,
   GITHUB_URL,
-  PROFILE_NAME,
   CV_DOWNLOAD_NAME,
   PORTFOLIO_METRICS,
 } from "./const";
@@ -53,7 +52,7 @@ export const PortfolioHero = () => {
             >
               <m.div variants={varFade().inDown}>
                 <Typography component="p" sx={{ ...monoLabelSx, mb: 2 }}>
-                  {t("heroEyebrow", { name: PROFILE_NAME })}
+                  {t("heroEyebrow", { name: t("profileName") })}
                 </Typography>
 
                 <Typography variant="h1">

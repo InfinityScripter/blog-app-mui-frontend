@@ -49,5 +49,8 @@ export default function proxy(request: NextRequest): NextResponse {
 export const config = {
   // Run on pages only — skip API routes, Next internals, the locale-agnostic
   // SEO endpoints (feed.xml, llms.txt, sitemap), and any file with a dot.
-  matcher: "/((?!api|_next|_vercel|feed.xml|llms.txt|sitemap.xml|.*\\..*).*)",
+  // `icon` / `opengraph-image` are root metadata routes (src/app/icon.tsx…):
+  // without the exclusion the locale rewrite turns /icon/ into /ru/icon/ → 404.
+  matcher:
+    "/((?!api|_next|_vercel|feed.xml|llms.txt|sitemap.xml|icon|opengraph-image|.*\\..*).*)",
 };

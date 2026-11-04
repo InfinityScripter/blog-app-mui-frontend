@@ -3,7 +3,6 @@ import { CONFIG } from "src/config-global";
 import type { AboutHighlight } from "./types";
 
 export const ABOUT_PROFILE = {
-  name: "Михаил Талалаев",
   role: "AI Engineer",
   email: CONFIG.contacts.email,
 };
@@ -13,8 +12,9 @@ export const ABOUT_PROFILE = {
 
 /**
  * Сканируемые «факты». `labelKey` → `home.about.highlights.<key>.label`. The
- * focus value is UI copy (`valueKey` → `.value`); the stack/company values
- * are proper-noun lists kept as-is data.
+ * focus value is UI copy (`valueKey` → `.value`); the companies value is
+ * localized too (company names differ ru/en); the stack value is a proper-noun
+ * list kept as-is data.
  */
 export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
   {
@@ -25,12 +25,12 @@ export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
   {
     icon: "solar:cpu-bolt-bold-duotone",
     labelKey: "stack",
-    value: "React · TypeScript · Next.js",
+    value: "TypeScript · React · Node.js · LLM",
   },
   {
     icon: "solar:buildings-3-bold-duotone",
     labelKey: "companies",
-    value: "Яндекс · СТОМПЛАН · ShurikMarket",
+    valueKey: "companies",
   },
 ];
 
@@ -42,7 +42,7 @@ export const ABOUT_STACK = [
   "Angular",
   "Node.js",
   "Material UI",
-  "Redux",
+  "PostgreSQL",
   "Claude Code",
   "MCP",
 ];

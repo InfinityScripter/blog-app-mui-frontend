@@ -6,14 +6,15 @@ import Container from "@mui/material/Container";
 import { MapVarya } from "./map-varya";
 import { LevelNode } from "./level-node";
 import { MapLegend } from "./map-legend";
+import { QuizDialog } from "./quiz-dialog";
 import { LevelDialog } from "./level-dialog";
 import { SERIES_LESSONS } from "./data/lessons";
 import { useMapTilt } from "./hooks/use-map-tilt";
-import { MAP_POINTS, MAP_CITY_SRC } from "./const";
 import { useVaryaHop } from "./hooks/use-varya-hop";
 import { varyaPose, getLevelStates } from "./utils";
 import { SeriesMapHeading } from "./series-map-heading";
 import { useSeriesProgress } from "./hooks/use-series-progress";
+import { MAP_POINTS, MAP_CITY_SRC, SERIES_SECTION_ID } from "./const";
 
 import type { SeriesLesson } from "./types";
 
@@ -23,6 +24,7 @@ export function HomeSeriesMap() {
   const { passed, markPassed } = useSeriesProgress();
   const [selected, setSelected] = useState<SeriesLesson>();
   const [running, setRunning] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
   const varya = useVaryaHop();
   const tilt = useMapTilt();
 
@@ -33,12 +35,19 @@ export function HomeSeriesMap() {
     MAP_POINTS[finished ? MAP_POINTS.length - 1 : currentIndex];
 
   return (
-    <Box component="section" className="ls-night dark ls-grain">
+    <Box
+      component="section"
+      id={SERIES_SECTION_ID}
+      className="ls-night dark ls-grain"
+    >
       <span className="ls-night__ghost" aria-hidden>
         {SERIES_LESSONS.length}
       </span>
       <Container sx={{ position: "relative" }}>
-        <SeriesMapHeading passed={passed.length} />
+        <SeriesMapHeading
+          passed={passed.length}
+          onQuiz={() => setQuizOpen(true)}
+        />
 
         <m.div
           ref={tilt.ref}
@@ -105,6 +114,8 @@ export function HomeSeriesMap() {
           }}
         />
       )}
+
+      {quizOpen && <QuizDialog onClose={() => setQuizOpen(false)} />}
     </Box>
   );
 }

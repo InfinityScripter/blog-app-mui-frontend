@@ -142,7 +142,7 @@ JWT-флоу без next-middleware — guards на клиенте, токены
 
 ## Тесты
 
-- **Vitest** (`yarn test:unit`) — `src/**/*.test.{ts,tsx}` (~36 файлов): `src/server/llm-stats`, `src/utils`, утилиты секций blog/changelog/llm-timeline/library, auth guards, markdown.
+- **Vitest** (`yarn test:unit`) — `src/**/*.test.{ts,tsx}` (~36 файлов): `src/server/llm-stats`, `src/utils`, утилиты секций blog/changelog/llm-timeline, auth guards, markdown.
 - **Playwright** (`yarn e2e`) — `e2e/*.spec.ts`: auth-флоу, CRUD поста через дашборд, аккаунт, публичные страницы. Поднимает свой сервер на **3055** (у бэкенда должен быть разрешён этот origin в CORS), сериальный одиночный воркер. Ночной read-only прод-смоук — `.github/workflows/prod-smoke.yml`.
 
 ## CI и деплой

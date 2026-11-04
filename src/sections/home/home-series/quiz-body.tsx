@@ -71,7 +71,7 @@ export function QuizBody({ quiz }: QuizBodyProps) {
 
   return (
     <>
-      <Typography component="p" className="ls-display-xl">
+      <Typography component="p" variant="h2">
         {t("quiz.result", { score: quiz.score, total: quiz.total })}
       </Typography>
       <Typography sx={{ color: "text.secondary" }}>

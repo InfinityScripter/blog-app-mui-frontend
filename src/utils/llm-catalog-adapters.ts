@@ -12,13 +12,20 @@ export function releaseName(release: ModelRelease): string {
   const model = release.model.trim();
   const version = release.version.trim();
 
-  // Older bot records stored the family in `model` and the actual model name
-  // in `version` (for example Claude + 4.5 Sonnet). Current records already
-  // carry the full name in `model`, so only expand that unambiguous legacy
-  // shape and never append date-like release labels.
-  const isBareFamily = !/\s|\d/.test(model);
-  const isDateLikeVersion = /^\d{4}[-./]\d{1,2}/.test(version);
-  if (version && isBareFamily && !isDateLikeVersion) {
+  // Bot records often split the name between `model` and `version`
+  // (Claude Haiku + 5.5, GPT + 6.1 Sol). Append the version unless it is a
+  // release date, the model already ends with it, or it is a bare status
+  // label (GA, Preview) on an already numbered name.
+  const isStatusLabel = /\d/.test(model) && !/\d/.test(version);
+  const isDateLikeVersion = /^\(?\d{4}[-./]\d{1,2}/.test(version);
+  const squash = (value: string) =>
+    value.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  if (
+    version &&
+    !isDateLikeVersion &&
+    !isStatusLabel &&
+    !squash(model).endsWith(squash(version))
+  ) {
     return `${model} ${version}`;
   }
 

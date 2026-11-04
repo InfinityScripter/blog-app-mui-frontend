@@ -42,12 +42,6 @@ export async function GET() {
         description:
           "Хроника релизов языковых моделей с ключевыми характеристиками.",
       },
-      {
-        title: "Библиотека",
-        url: `${CONFIG.site.url}/library/`,
-        description:
-          "Курируемые источники про AI, каталог инструментов и заметки из практики (TIL).",
-      },
     ],
     posts,
   });

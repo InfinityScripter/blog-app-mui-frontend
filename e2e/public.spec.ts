@@ -72,50 +72,6 @@ test.describe("public pages", () => {
     );
   });
 
-  test("TIL tab switches without navigation or layout shift", async ({
-    page,
-  }) => {
-    await page.goto("/library");
-
-    const rscRequests: string[] = [];
-    page.on("request", (request) => {
-      if (new URL(request.url()).searchParams.has("_rsc")) {
-        rscRequests.push(request.url());
-      }
-    });
-
-    const tabs = page.getByRole("tablist");
-    const til = page.getByRole("tab", { name: "TIL", exact: true });
-
-    await expect(til).toBeVisible();
-    await page.evaluate(() => window.scrollTo(0, 120));
-
-    const beforeScrollY = await page.evaluate(() => window.scrollY);
-    const beforeTabs = await tabs.boundingBox();
-    if (!beforeTabs) throw new Error("Library tabs are not measurable");
-
-    await til.click();
-
-    await expect(page).toHaveURL(/[?&]tab=til(?:&|$)/);
-    await expect(
-      page.getByRole("heading", {
-        name: "SWR не делает запрос, если ключ — null",
-      }),
-    ).toBeVisible();
-
-    const afterTabs = await tabs.boundingBox();
-    if (!afterTabs) throw new Error("Library tabs are not measurable");
-
-    expect(await page.evaluate(() => window.scrollY)).toBe(beforeScrollY);
-    expect(Math.abs(afterTabs.x - beforeTabs.x)).toBeLessThanOrEqual(1);
-    // Против next dev ноль _rsc-запросов — надёжный признак «таб не навигация».
-    // На проде next/link префетчит ссылки во вьюпорте теми же ?_rsc=-запросами
-    // в непредсказуемый момент, так что там это ассертить нельзя (флак).
-    if (!process.env.E2E_BASE_URL) {
-      expect(rscRequests).toEqual([]);
-    }
-  });
-
   // A post *detail* link: under <main> (excludes the nav "Блог" link, whose
   // href ends at the list route), pointing at a slug below …/post/. Hrefs carry
   // a locale prefix (`localePrefix: "always"` → /ru/post/…, /en/post/…), so

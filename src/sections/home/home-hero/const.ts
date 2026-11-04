@@ -2,6 +2,10 @@ import { CONFIG } from "src/config-global";
 
 import type { HostPoseName } from "../components/types";
 
+// Id of the series map section (home-series SERIES_SECTION_ID); sections are
+// isolated, so the literal is kept in sync by hand.
+export const HERO_START_ANCHOR = "series";
+
 export const HERO_SOCIAL_LINKS = [
   {
     key: "youtube",

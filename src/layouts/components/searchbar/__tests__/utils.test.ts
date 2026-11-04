@@ -16,13 +16,15 @@ const NAV: SearchNavSection[] = [
       { title: "Блог", path: "/blog" },
       {
         title: "Справочники",
-        path: "/library",
+        path: "/llm-compare",
         children: [
-          { title: "Инструменты", path: "/library/tools" },
+          { title: "Инструменты", path: "/llm-compare/tools" },
           {
             title: "Чтение",
-            path: "/library/reading",
-            children: [{ title: "Архив", path: "/library/reading/archive" }],
+            path: "/llm-compare/reading",
+            children: [
+              { title: "Архив", path: "/llm-compare/reading/archive" },
+            ],
           },
         ],
       },
@@ -35,10 +37,10 @@ describe("getAllItems", () => {
     const items = getAllItems({ data: NAV });
     expect(items.map((i) => i.path)).toEqual([
       "/blog",
-      "/library",
-      "/library/tools",
-      "/library/reading",
-      "/library/reading/archive",
+      "/llm-compare",
+      "/llm-compare/tools",
+      "/llm-compare/reading",
+      "/llm-compare/reading/archive",
     ]);
   });
 
@@ -46,10 +48,10 @@ describe("getAllItems", () => {
     const items = getAllItems({ data: NAV });
     const byPath = Object.fromEntries(items.map((i) => [i.path, i.group]));
     expect(byPath["/blog"]).toBe("Меню");
-    expect(byPath["/library"]).toBe("Меню");
+    expect(byPath["/llm-compare"]).toBe("Меню");
     // Ветка «Справочники»: и прямой ребёнок, и внук группируются по её корню.
-    expect(byPath["/library/tools"]).toBe("Справочники");
-    expect(byPath["/library/reading/archive"]).toBe("Справочники");
+    expect(byPath["/llm-compare/tools"]).toBe("Справочники");
+    expect(byPath["/llm-compare/reading/archive"]).toBe("Справочники");
   });
 });
 

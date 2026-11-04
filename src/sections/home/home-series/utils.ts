@@ -1,11 +1,6 @@
-import type { HostPoseName } from "../components/types";
-import type {
-  QuizItem,
-  QuizPhase,
-  VaryaPose,
-  LevelState,
-  SeriesLesson,
-} from "./types";
+import type { Post } from "src/types/domain";
+
+import type { QuizItem, VaryaPose, LevelState, SeriesLesson } from "./types";
 
 // ----------------------------------------------------------------------
 
@@ -50,32 +45,15 @@ export function countCorrect(items: QuizItem[], answers: boolean[]): number {
     .length;
 }
 
-interface QuizPoseInput {
-  phase: QuizPhase;
-  index: number;
-  score: number;
-  total: number;
-  answer?: boolean;
-  picked?: boolean;
-}
-
-export function quizPose({
-  phase,
-  index,
-  score,
-  total,
-  answer,
-  picked,
-}: QuizPoseInput): HostPoseName {
-  if (phase === "intro") return "curious";
-  if (phase === "result") {
-    if (score === total) return "wow";
-    return score * 2 >= total ? "smile" : "shrug";
-  }
-  if (picked === undefined) return "think";
-  const even = index % 2 === 0;
-  if (picked === answer) return even ? "thumbs-up" : "laugh";
-  return even ? "oops" : "facepalm";
+export function pickRelatedPosts(
+  posts: Post[],
+  tags: string[] | undefined,
+  count: number,
+): Post[] {
+  if (!tags?.length) return [];
+  return posts
+    .filter((post) => post.tags.some((tag) => tags.includes(tag)))
+    .slice(0, count);
 }
 
 export function varyaPose({

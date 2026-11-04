@@ -4,12 +4,12 @@ import { m } from "framer-motion";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Avatar from "@mui/material/Avatar";
-import { useTranslations } from "next-intl";
 import { alpha } from "@mui/material/styles";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineItem from "@mui/lab/TimelineItem";
 import { varFade } from "src/components/animate";
 import Typography from "@mui/material/Typography";
+import { useLocale, useTranslations } from "next-intl";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
@@ -25,7 +25,12 @@ export function ExperienceTimelineItem({
   theme,
 }: ExperienceTimelineItemProps) {
   const t = useTranslations("home");
-  const periodLabel = getPeriodLabel(item, t("experience.present"));
+  const locale = useLocale();
+  const periodLabel = getPeriodLabel(item, t("experience.present"), locale);
+  const copyKey = `experience.items.${item.key}` as const;
+  const company = t(`${copyKey}.company`);
+  const location = t(`${copyKey}.location`);
+  const description = t.raw(`${copyKey}.description`) as string[];
 
   return (
     <TimelineItem>
@@ -51,7 +56,7 @@ export function ExperienceTimelineItem({
               color: "text.secondary",
             }}
           >
-            {item.location}
+            {location}
           </Typography>
         </m.div>
       </TimelineOppositeContent>
@@ -73,7 +78,7 @@ export function ExperienceTimelineItem({
         >
           <Avatar
             src={item.logo}
-            alt={`${item.company} logo`}
+            alt={`${company} logo`}
             sx={{
               width: "100%",
               height: "100%",
@@ -119,7 +124,7 @@ export function ExperienceTimelineItem({
               }}
             >
               <Typography variant="h6" component="div">
-                {item.position}
+                {t(`${copyKey}.position`)}
               </Typography>
               <Typography
                 variant="subtitle2"
@@ -128,7 +133,7 @@ export function ExperienceTimelineItem({
                   mb: 1,
                 }}
               >
-                {item.company}
+                {company}
               </Typography>
 
               {isMobile && (
@@ -136,12 +141,12 @@ export function ExperienceTimelineItem({
                   variant="body2"
                   sx={{ mb: 1.5, color: "text.secondary" }}
                 >
-                  {periodLabel} • {item.location}
+                  {periodLabel} • {location}
                 </Typography>
               )}
 
               <Box component="ul" sx={{ pl: 2.5, mb: 2, mt: 0 }}>
-                {item.description.map((desc, i) => (
+                {description.map((desc, i) => (
                   <Typography
                     key={i}
                     component="li"

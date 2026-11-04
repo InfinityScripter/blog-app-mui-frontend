@@ -210,7 +210,6 @@ export default defineConfig(
       "src/sections/llm-timeline/const.ts",
       "src/sections/llm-timeline/data/**",
       "src/sections/llm-compare/data/**",
-      "src/sections/library/data/**",
       "src/sections/home/home-series/data/**",
       // Dense admin table view — pagination + filters push past the
       // component budget without a meaningful extract.

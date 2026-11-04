@@ -1,12 +1,14 @@
+import type { Post } from "src/types/domain";
+
 import { it, expect, describe } from "vitest";
 
 import {
-  quizPose,
   varyaPose,
   addPassed,
   countCorrect,
   pickQuizItems,
   getLevelStates,
+  pickRelatedPosts,
 } from "../utils";
 
 import type { SeriesLesson } from "../types";
@@ -101,42 +103,46 @@ describe("countCorrect", () => {
   });
 });
 
-describe("quizPose", () => {
-  const base = { index: 0, score: 0, total: 5 };
+describe("pickRelatedPosts", () => {
+  const post = (id: string, tags: string[]): Post => ({
+    id,
+    title: id,
+    tags,
+    publish: "published",
+    metaKeywords: [],
+    totalViews: 0,
+    totalShares: 0,
+    totalComments: 0,
+    totalFavorites: 0,
+    favoritePerson: [],
+    comments: [],
+    userId: "u",
+    author: { name: "a" },
+  });
+  const posts = [
+    post("news", ["новости"]),
+    post("llm-1", ["новости", "llm"]),
+    post("agents", ["агенты"]),
+    post("llm-2", ["llm"]),
+    post("llm-3", ["llm"]),
+  ];
 
-  it("is curious before the quiz and thinks while a question is open", () => {
-    expect(quizPose({ ...base, phase: "intro" })).toBe("curious");
-    expect(quizPose({ ...base, phase: "question", answer: true })).toBe(
-      "think",
-    );
+  it("keeps the feed order and takes the first matches up to the count", () => {
+    expect(pickRelatedPosts(posts, ["llm"], 2).map((item) => item.id)).toEqual([
+      "llm-1",
+      "llm-2",
+    ]);
   });
 
-  it("cheers a right answer and winces at a wrong one, varying by question", () => {
-    const right = {
-      ...base,
-      phase: "question",
-      answer: true,
-      picked: true,
-    } as const;
-    const wrong = {
-      ...base,
-      phase: "question",
-      answer: true,
-      picked: false,
-    } as const;
-
-    expect(quizPose(right)).toBe("thumbs-up");
-    expect(quizPose({ ...right, index: 1 })).toBe("laugh");
-    expect(quizPose(wrong)).toBe("oops");
-    expect(quizPose({ ...wrong, index: 1 })).toBe("facepalm");
+  it("matches any of several tags", () => {
+    expect(
+      pickRelatedPosts(posts, ["агенты", "llm"], 2).map((item) => item.id),
+    ).toEqual(["llm-1", "agents"]);
   });
 
-  it("picks the result pose by score", () => {
-    const result = { ...base, phase: "result" } as const;
-
-    expect(quizPose({ ...result, score: 5 })).toBe("wow");
-    expect(quizPose({ ...result, score: 3 })).toBe("smile");
-    expect(quizPose({ ...result, score: 2 })).toBe("shrug");
+  it("returns nothing for a lesson without tags or with no matches", () => {
+    expect(pickRelatedPosts(posts, undefined, 2)).toEqual([]);
+    expect(pickRelatedPosts(posts, ["нет-такого"], 2)).toEqual([]);
   });
 });
 

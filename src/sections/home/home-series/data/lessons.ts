@@ -5,6 +5,7 @@ import type { SeriesLesson } from "../types";
 export const SERIES_LESSONS: SeriesLesson[] = [
   {
     number: 1,
+    relatedTags: ["нейросети"],
     title: { ru: "Что такое нейросеть", en: "What a neural network is" },
     questions: [
       {
@@ -47,6 +48,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 2,
+    relatedTags: ["нейросети"],
     title: {
       ru: "Как нейросеть учится на примерах",
       en: "How a neural network learns from examples",
@@ -92,6 +94,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 3,
+    relatedTags: ["llm"],
     title: {
       ru: "LLM: нейросеть для языка",
       en: "LLM: a neural network for language",
@@ -137,6 +140,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 4,
+    relatedTags: ["llm"],
     title: {
       ru: "ChatGPT, Claude и модель: что вы открываете",
       en: "ChatGPT, Claude and the model: what you open",
@@ -182,6 +186,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 5,
+    relatedTags: ["llm", "ai"],
     title: {
       ru: "Что написать нейросети, чтобы получить полезный ответ",
       en: "What to write to get a useful answer",
@@ -227,6 +232,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 6,
+    relatedTags: ["безопасность"],
     title: {
       ru: "Почему нейросеть может уверенно ошибаться",
       en: "Why a neural network can be confidently wrong",
@@ -272,6 +278,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 7,
+    relatedTags: ["ai"],
     title: {
       ru: "Первый полезный опыт с AI",
       en: "Your first useful experience with AI",
@@ -317,6 +324,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 8,
+    relatedTags: ["агенты"],
     title: { ru: "Что значит AI-агент", en: "What an AI agent is" },
     questions: [
       {
@@ -359,6 +367,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 9,
+    relatedTags: ["агенты", "разработка"],
     title: {
       ru: "Claude Code: помощник в папке проекта",
       en: "Claude Code: a helper in a project folder",
@@ -404,6 +413,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 10,
+    relatedTags: ["агенты", "разработка"],
     title: {
       ru: "Codex: агент OpenAI для работы с проектом",
       en: "Codex: an OpenAI agent for project work",
@@ -449,6 +459,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 11,
+    relatedTags: ["агенты", "разработка"],
     title: {
       ru: "Как Claude Code и Codex выполняют задачу",
       en: "How Claude Code and Codex carry out a task",
@@ -494,6 +505,7 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 12,
+    relatedTags: ["разработка"],
     title: {
       ru: "Первый мини-проект: папка для контента",
       en: "First mini-project: a content folder",
