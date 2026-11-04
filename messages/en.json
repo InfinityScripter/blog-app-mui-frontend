@@ -408,12 +408,13 @@
           ]
         },
         "yandexGo": {
-          "position": "Software Engineer, frontend lead of the platform",
+          "position": "AI Engineer, frontend lead of the platform",
           "company": "Yandex Go",
           "location": "Moscow",
           "description": [
             "Own the frontend of a low-code workflow engine (Temporal-based, n8n-like) that runs millions of customer-communication scenarios daily; ship a production release roughly every week and support it in production",
             "Built LLM features in the workflow editor: an “AI agent” step with a system prompt and tool calling, and prompt-based generation of whole workflows, taken from an internal hackathon idea to production",
+            "Work across the stack where needed: API layers, backend changes and CI/CD pipelines, releases and production support",
             "Integrated a shared Email service via Module Federation and moved event-filter configuration into the platform, enabling new communication launches with measurable revenue impact",
             "Designed and delivered role-based access control: permission model agreed with backend, API layer, action gating, 403 handling and access sharing for workflows, bots and templates",
             "Delivered workflow versioning and rollback, new channels (Telegram, Viber, WhatsApp, Webhook, Push) and template management",
