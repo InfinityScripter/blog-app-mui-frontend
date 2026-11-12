@@ -42,7 +42,7 @@ export function PostSearchDialog() {
   // immediately instead of lagging behind the debounce delay.
   const [inputValue, setInputValue] = useState("");
 
-  const { query, results, loading, onSearch } = usePostSearch();
+  const { query, results, loading, error, onSearch } = usePostSearch();
 
   const handleClose = useCallback(() => {
     search.onFalse();
@@ -78,11 +78,18 @@ export function PostSearchDialog() {
 
   const handleKeyUp = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (query && event.key === "Enter" && results.length) {
+      if (
+        event.key === "Enter" &&
+        query &&
+        inputValue === query &&
+        !loading &&
+        !error &&
+        results.length
+      ) {
         handleClickItem(String(results[0]._id));
       }
     },
-    [query, results, handleClickItem],
+    [query, inputValue, loading, error, results, handleClickItem],
   );
 
   const notFound = Boolean(query) && !loading && !results.length;

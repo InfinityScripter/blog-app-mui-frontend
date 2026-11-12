@@ -14,7 +14,8 @@ export function usePostSearch() {
 
   const debouncedQuery = useDebounceValue(query, 500);
 
-  const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
+  const { searchResults, searchLoading, searchError } =
+    useSearchPosts(debouncedQuery);
 
   const onSearch = useCallback((value: string) => {
     setQuery(value);
@@ -24,6 +25,7 @@ export function usePostSearch() {
     query: debouncedQuery,
     results: searchResults,
     loading: searchLoading,
+    error: searchError,
     onSearch,
   };
 }
