@@ -24,7 +24,7 @@ test.describe("public pages", () => {
     await page.goto("/");
 
     const notice = page.getByRole("complementary").filter({
-      hasText: "только необходимые cookie",
+      hasText: "нужные cookie",
     });
     await expect(notice).toBeVisible();
     await expect(
@@ -39,9 +39,7 @@ test.describe("public pages", () => {
       page.getByRole("link", { name: "Блог", exact: true }),
     ).toBeVisible();
     await expect(
-      page
-        .getByRole("complementary")
-        .filter({ hasText: "только необходимые cookie" }),
+      page.getByRole("complementary").filter({ hasText: "нужные cookie" }),
     ).toHaveCount(0);
   });
 
