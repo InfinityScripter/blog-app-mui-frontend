@@ -15,7 +15,9 @@ import type { SeriesLesson } from "../types";
 
 const lesson = (number: number, reelUrl?: string): SeriesLesson => ({
   number,
+  slug: `lesson-${number}`,
   title: { ru: `Урок ${number}`, en: `Lesson ${number}` },
+  intro: { ru: "Введение", en: "Introduction" },
   reelUrl,
   questions: [1, 2, 3].map((index) => ({
     id: `${number}-${index}`,

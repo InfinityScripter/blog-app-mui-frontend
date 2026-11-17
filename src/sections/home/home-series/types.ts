@@ -13,7 +13,9 @@ interface SeriesQuestion {
 
 export interface SeriesLesson {
   number: number;
+  slug: string;
   title: LocalizedText;
+  intro: LocalizedText;
   reelUrl?: string;
   /** Post tags whose newest posts are offered as further reading. */
   relatedTags?: string[];

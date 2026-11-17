@@ -5,8 +5,13 @@ import type { SeriesLesson } from "../types";
 export const SERIES_LESSONS: SeriesLesson[] = [
   {
     number: 1,
+    slug: "what-is-a-neural-network",
     relatedTags: ["нейросети"],
     title: { ru: "Что такое нейросеть", en: "What a neural network is" },
+    intro: {
+      ru: "Нейросеть учится находить закономерности на примерах. Разберём, как она отличает шпица на картинке и с какими данными может работать.",
+      en: "A neural network learns to find patterns in examples. See how it can recognize a Pomeranian in a picture and what kinds of data it can work with.",
+    },
     questions: [
       {
         id: "1-1",
@@ -48,10 +53,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 2,
+    slug: "how-neural-networks-learn",
     relatedTags: ["нейросети"],
     title: {
       ru: "Как нейросеть учится на примерах",
       en: "How a neural network learns from examples",
+    },
+    intro: {
+      ru: "На примере рукописной цифры 7 разберём, как нейросеть исправляет ошибки при обучении и что происходит, когда она получает новый пример.",
+      en: "Follow a handwritten digit 7 to see how a neural network learns from mistakes and what happens when it gets a new example.",
     },
     questions: [
       {
@@ -94,10 +104,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 3,
+    slug: "what-is-an-llm",
     relatedTags: ["llm"],
     title: {
       ru: "LLM: нейросеть для языка",
       en: "LLM: a neural network for language",
+    },
+    intro: {
+      ru: "Большая языковая модель продолжает текст с учётом предыдущих слов. Разберём, как устроен ответ LLM и почему факты нужно проверять.",
+      en: "A large language model continues text using the words that came before. See how an LLM builds an answer and why its facts need checking.",
     },
     questions: [
       {
@@ -140,10 +155,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 4,
+    slug: "chatgpt-claude-and-models",
     relatedTags: ["llm"],
     title: {
       ru: "ChatGPT, Claude и модель: что вы открываете",
       en: "ChatGPT, Claude and the model: what you open",
+    },
+    intro: {
+      ru: "Чем модель отличается от окна чата и откуда берутся поиск, работа с файлами и история разговоров? Разберём на примере ChatGPT и Claude.",
+      en: "What is the difference between a model and a chat app? Use ChatGPT and Claude to understand where search, file tools and chat history come from.",
     },
     questions: [
       {
@@ -186,10 +206,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 5,
+    slug: "how-to-write-a-prompt",
     relatedTags: ["llm", "ai"],
     title: {
       ru: "Что написать нейросети, чтобы получить полезный ответ",
       en: "What to write to get a useful answer",
+    },
+    intro: {
+      ru: "Укажите в промпте цель, условия и формат ответа. На примере короткого списка разберём, как эти детали помогают получить нужный результат.",
+      en: "Give your prompt a goal, constraints and an output format. See how these details shape the answer in a simple list-writing example.",
     },
     questions: [
       {
@@ -232,10 +257,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 6,
+    slug: "why-ai-makes-mistakes",
     relatedTags: ["безопасность"],
     title: {
       ru: "Почему нейросеть может уверенно ошибаться",
       en: "Why a neural network can be confidently wrong",
+    },
+    intro: {
+      ru: "Уверенный ответ нейросети может содержать неверную дату, число или ссылку. Разберём, как сверять такие утверждения с первоисточником.",
+      en: "A confident AI answer can contain a wrong date, number or link. Learn how to check those claims against the original source.",
     },
     questions: [
       {
@@ -278,10 +308,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 7,
+    slug: "first-task-with-ai",
     relatedTags: ["ai"],
     title: {
       ru: "Первый полезный опыт с AI",
       en: "Your first useful experience with AI",
+    },
+    intro: {
+      ru: "Начните с небольшой задачи без личных данных, например с плана на день. Уточните одну деталь и проверьте, как изменился результат.",
+      en: "Start with a small task that needs no personal details, such as planning a day. Refine one detail and check how the result changes.",
     },
     questions: [
       {
@@ -324,8 +359,13 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 8,
+    slug: "what-is-an-ai-agent",
     relatedTags: ["агенты"],
     title: { ru: "Что значит AI-агент", en: "What an AI agent is" },
+    intro: {
+      ru: "ИИ-агент использует модель и инструменты, чтобы выполнять действия, например читать и создавать файлы. Разберём, как работают разрешения.",
+      en: "An AI agent uses a model and tools to do things like read and create files. See what the different parts do and how permissions limit access.",
+    },
     questions: [
       {
         id: "8-1",
@@ -367,10 +407,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 9,
+    slug: "what-is-claude-code",
     relatedTags: ["агенты", "разработка"],
     title: {
       ru: "Claude Code: помощник в папке проекта",
       en: "Claude Code: a helper in a project folder",
+    },
+    intro: {
+      ru: "Claude Code может работать в папке проекта. На примере заметок и файла с планом разберём, как проверить результат и список изменений.",
+      en: "Claude Code can work inside a project folder. Follow a notes-to-plan example and learn how to check the result and the files it changed.",
     },
     questions: [
       {
@@ -413,10 +458,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 10,
+    slug: "what-is-codex",
     relatedTags: ["агенты", "разработка"],
     title: {
       ru: "Codex: агент OpenAI для работы с проектом",
       en: "Codex: an OpenAI agent for project work",
+    },
+    intro: {
+      ru: "Codex от OpenAI читает и изменяет файлы проекта. Разберём, когда агент может выполнить команду и что происходит, если нужно подтверждение.",
+      en: "OpenAI Codex can read and change project files. See when it can run a command and what happens when that command needs approval.",
     },
     questions: [
       {
@@ -459,10 +509,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 11,
+    slug: "how-coding-agents-work",
     relatedTags: ["агенты", "разработка"],
     title: {
       ru: "Как Claude Code и Codex выполняют задачу",
       en: "How Claude Code and Codex carry out a task",
+    },
+    intro: {
+      ru: "На примере Claude Code и Codex разберём, как модель выбирает шаг, инструмент выполняет действие, а агент проверяет результат.",
+      en: "Use Claude Code and Codex to see how the model chooses a step, a tool takes an action and the agent checks the result.",
     },
     questions: [
       {
@@ -505,10 +560,15 @@ export const SERIES_LESSONS: SeriesLesson[] = [
   },
   {
     number: 12,
+    slug: "first-ai-project",
     relatedTags: ["разработка"],
     title: {
       ru: "Первый мини-проект: папка для контента",
       en: "First mini-project: a content folder",
+    },
+    intro: {
+      ru: "Попробуйте собрать черновик контент-плана с агентом. Задайте границы работы, отметьте непроверенные факты и проверьте файлы перед публикацией.",
+      en: "Try drafting a content plan with an agent. Set clear limits, flag unverified facts and review the files before you publish.",
     },
     questions: [
       {

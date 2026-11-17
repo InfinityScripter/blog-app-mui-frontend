@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { CONFIG } from "src/config-global";
-import { LOCALES, DEFAULT_LOCALE } from "src/i18n/locales";
+import { LOCALES, DEFAULT_LOCALE, type AppLocale } from "src/i18n/locales";
 
 // Builds the `{ alternates }` metadata fragment for a localized page: a
 // locale-prefixed canonical plus `hreflang` links for every locale (and
@@ -27,5 +27,27 @@ export function localizedAlternates(
       canonical: `${base}/${locale}${path}`,
       languages,
     },
+  };
+}
+
+export function localizedPageMetadata(
+  locale: AppLocale,
+  path: string,
+  content: { title: string; description: string },
+): Metadata {
+  const image = `${CONFIG.site.url}/opengraph-image/`;
+
+  return {
+    ...content,
+    ...localizedAlternates(locale, path),
+    openGraph: {
+      ...content,
+      type: "website",
+      siteName: "Life Style",
+      locale: locale === "en" ? "en_US" : "ru_RU",
+      url: `${CONFIG.site.url}/${locale}${path}`,
+      images: [image],
+    },
+    twitter: { ...content, card: "summary_large_image", images: [image] },
   };
 }

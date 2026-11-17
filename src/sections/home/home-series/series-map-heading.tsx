@@ -1,9 +1,11 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import { paths } from "src/routes/paths";
 import Button from "@mui/material/Button";
 import { useTranslations } from "next-intl";
 import { monoLabelSx } from "src/theme/styles";
 import Typography from "@mui/material/Typography";
+import { RouterLink } from "src/routes/components";
 
 import { SERIES_LESSONS } from "./data/lessons";
 
@@ -16,6 +18,7 @@ interface SeriesMapHeadingProps {
 
 export function SeriesMapHeading({ passed, onQuiz }: SeriesMapHeadingProps) {
   const t = useTranslations("home.series");
+  const learn = useTranslations("home.learn");
   const stats = [
     { value: SERIES_LESSONS.length, label: t("statLevels") },
     { value: 1, label: t("statMinutes") },
@@ -61,6 +64,15 @@ export function SeriesMapHeading({ passed, onQuiz }: SeriesMapHeadingProps) {
           sx={{ alignSelf: "flex-start" }}
         >
           {t("quizButton")}
+        </Button>
+        <Button
+          component={RouterLink}
+          href={paths.learn.root}
+          color="primary"
+          variant="outlined"
+          sx={{ alignSelf: "flex-start" }}
+        >
+          {learn("read")}
         </Button>
       </Stack>
     </Box>

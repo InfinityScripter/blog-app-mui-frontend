@@ -22,6 +22,10 @@ interface Paths {
     root: string;
     details: (slug: string) => string;
   };
+  learn: {
+    root: string;
+    details: (slug: string) => string;
+  };
   llmTimeline: {
     root: string;
   };
@@ -88,6 +92,10 @@ export const paths: Paths = {
     // Slugs are backend-generated (ascii-safe) but encode defensively so a
     // slug with unexpected characters can't break the URL.
     details: (slug: string) => `/changelog/${encodeURIComponent(slug)}`,
+  },
+  learn: {
+    root: "/learn",
+    details: (slug: string) => `/learn/${slug}`,
   },
   llmTimeline: {
     root: `/llm-timeline`,

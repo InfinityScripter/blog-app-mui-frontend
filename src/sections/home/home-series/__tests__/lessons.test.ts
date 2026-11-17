@@ -1,3 +1,4 @@
+import { LOCALES } from "src/i18n/locales";
 import { it, expect, describe } from "vitest";
 
 import { SERIES_LESSONS } from "../data/lessons";
@@ -9,6 +10,28 @@ describe("SERIES_LESSONS", () => {
     expect(SERIES_LESSONS.map((lesson) => lesson.number)).toEqual(
       Array.from({ length: 12 }, (_, index) => index + 1),
     );
+  });
+
+  it("gives each localized lesson its own URL slug", () => {
+    const slugs = SERIES_LESSONS.map((lesson) => lesson.slug);
+
+    expect(slugs).toEqual(
+      SERIES_LESSONS.map(() =>
+        expect.stringMatching(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+      ),
+    );
+    expect(new Set(slugs).size).toBe(slugs.length);
+
+    LOCALES.forEach((locale) => {
+      SERIES_LESSONS.forEach((lesson) => {
+        expect(lesson.title[locale].trim()).not.toBe("");
+        expect(lesson.intro[locale].trim()).not.toBe("");
+        lesson.questions.forEach((question) => {
+          expect(question.text[locale].trim()).not.toBe("");
+          expect(question.why[locale].trim()).not.toBe("");
+        });
+      });
+    });
   });
 
   it("gives every lesson three questions with unique ids", () => {

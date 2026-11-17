@@ -235,6 +235,16 @@
       "scrollHint": "scroll down",
       "start": "Start with level 1"
     },
+    "learn": {
+      "title": "AI lessons for beginners",
+      "description": "12 short lessons on neural networks, language models, and AI agents. Each lesson has three questions with answers and explanations.",
+      "read": "Read the lessons",
+      "map": "Interactive lesson map",
+      "all": "All lessons",
+      "previous": "Previous lesson",
+      "next": "Next lesson",
+      "navigation": "Lesson navigation"
+    },
     "series": {
       "overline": "Series · 12 levels",
       "subtitle": "Every level is three yes-or-no questions with a short explanation, about a minute in total. Answer them and the level lights up while Varya runs to the next one. Below the questions you get fresh posts on the lesson topic. Progress is saved in this browser, no sign-up needed.",

@@ -1,12 +1,16 @@
 import type { MetadataRoute } from "next";
 
+import { paths } from "src/routes/paths";
 import { CONFIG } from "src/config-global";
 import { LOCALES, DEFAULT_LOCALE } from "src/i18n/locales";
 import { getPosts, getReleases } from "src/actions/blog-ssr";
+import { SERIES_LESSONS } from "src/sections/home/home-series/data/lessons";
 
 // ----------------------------------------------------------------------
 
 const BASE_URL = CONFIG.site.url;
+
+export const revalidate = 3600;
 
 type ChangeFrequency = NonNullable<
   MetadataRoute.Sitemap[number]["changeFrequency"]
@@ -17,6 +21,12 @@ interface RouteSpec {
   lastModified?: Date;
   changeFrequency: ChangeFrequency;
   priority: number;
+}
+
+function contentLastModified(...timestamps: (string | Date | undefined)[]) {
+  return timestamps
+    .map((timestamp) => (timestamp ? new Date(timestamp) : undefined))
+    .find((date) => date && Number.isFinite(date.getTime()));
 }
 
 // Expand one locale-less route into one sitemap entry per locale. Each entry
@@ -33,7 +43,7 @@ function localizedEntries(spec: RouteSpec): MetadataRoute.Sitemap {
 
   return LOCALES.map((code) => ({
     url: `${BASE_URL}/${code}${spec.path}`,
-    lastModified: spec.lastModified ?? new Date(),
+    lastModified: spec.lastModified,
     changeFrequency: spec.changeFrequency,
     priority: spec.priority,
     alternates: { languages },
@@ -43,6 +53,12 @@ function localizedEntries(spec: RouteSpec): MetadataRoute.Sitemap {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticSpecs: RouteSpec[] = [
     { path: "/", changeFrequency: "daily", priority: 1.0 },
+    { path: `${paths.learn.root}/`, changeFrequency: "monthly", priority: 0.8 },
+    ...SERIES_LESSONS.map<RouteSpec>((lesson) => ({
+      path: `${paths.learn.details(lesson.slug)}/`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    })),
     { path: "/post/", changeFrequency: "daily", priority: 0.9 },
     { path: "/news/", changeFrequency: "daily", priority: 0.8 },
     { path: "/portfolio/", changeFrequency: "monthly", priority: 0.7 },
@@ -57,52 +73,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const postSpecs: RouteSpec[] = [];
-  const tagSpecs: RouteSpec[] = [];
-  const releaseSpecs: RouteSpec[] = [];
+  const [{ posts }, { releases }] = await Promise.all([
+    getPosts(),
+    getReleases(),
+  ]);
 
-  try {
-    const { posts } = await getPosts();
-    posts.forEach((post) => {
-      postSpecs.push({
-        path: `/post/${post._id ?? post.id}/`,
-        lastModified: post.updatedAt ? new Date(post.updatedAt) : new Date(),
-        changeFrequency: "weekly",
-        priority: 0.7,
-      });
-    });
+  const postSpecs: RouteSpec[] = posts.flatMap((post) => {
+    const id = post._id ?? post.id;
+    return id
+      ? [
+          {
+            path: `/post/${id}/`,
+            lastModified: contentLastModified(post.updatedAt, post.createdAt),
+            changeFrequency: "weekly",
+            priority: 0.7,
+          },
+        ]
+      : [];
+  });
 
-    // Distinct tags → tag archive pages, exact casing (backend match is
-    // case-sensitive), encoded, deduped, trailing slash.
-    const distinctTags = Array.from(
-      new Set(posts.flatMap((post) => post.tags ?? [])),
-    );
-    distinctTags.forEach((tag) => {
-      tagSpecs.push({
-        path: `/tag/${encodeURIComponent(tag)}/`,
-        changeFrequency: "weekly",
-        priority: 0.5,
-      });
-    });
-  } catch {
-    // backend unreachable at build time — skip post/tag entries
-  }
+  const distinctTags = new Set(posts.flatMap((post) => post.tags ?? []));
+  const tagSpecs: RouteSpec[] = Array.from(distinctTags, (tag) => ({
+    path: `/tag/${encodeURIComponent(tag)}/`,
+    changeFrequency: "weekly",
+    priority: 0.5,
+  }));
 
-  try {
-    const { releases } = await getReleases();
-    const distinctSlugs = Array.from(
-      new Set(releases.map((release) => release.slug)),
-    );
-    distinctSlugs.forEach((slug) => {
-      releaseSpecs.push({
-        path: `/changelog/${encodeURIComponent(slug)}/`,
-        changeFrequency: "monthly",
-        priority: 0.6,
-      });
-    });
-  } catch {
-    // backend unreachable at build time — skip release entries
-  }
+  const releasesBySlug = new Map(
+    releases.map((release) => [release.slug, release]),
+  );
+  const releaseSpecs: RouteSpec[] = Array.from(
+    releasesBySlug.values(),
+    (release) => ({
+      path: `/changelog/${encodeURIComponent(release.slug)}/`,
+      lastModified: contentLastModified(release.updatedAt, release.releasedAt),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }),
+  );
 
   return [...staticSpecs, ...postSpecs, ...tagSpecs, ...releaseSpecs].flatMap(
     localizedEntries,
