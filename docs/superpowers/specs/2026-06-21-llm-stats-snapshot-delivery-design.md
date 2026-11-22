@@ -17,8 +17,8 @@ when viewed at `https://talalaev.su/dashboard/admin/llm-stats`.
 
 - Push a computed `StatsBundle` snapshot from the local mac to the backend DB.
 - Frontend (local AND prod) reads the snapshot from the backend — one code path.
-- Strip project names before pushing (work repos like Arcadia/tef must not leak
-  to a public site).
+- Strip project names before pushing (private work repos must not leak to a
+  public site).
 - Updating prod stats = run one local command (optionally scheduled).
 - Reuse the existing backend (Postgres + `requireAdmin` route pattern).
 

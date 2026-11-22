@@ -86,4 +86,4 @@
 - НЕ переписывать на Vite/SPA.
 - НЕ трогать backend (он быстрый).
 - НЕ менять дизайн/UX — только перф/архитектура загрузки.
-- Lighthouse ставить из публичного registry: `npx --registry=https://registry.npmjs.org lighthouse ...` (внутренний Yandex-mirror его не содержит). `CHROME_PATH` указывать на установленный Chrome/Canary.
+- Lighthouse ставить из публичного registry: `npx --registry=https://registry.npmjs.org lighthouse ...` (во внутреннем зеркале registry его нет). `CHROME_PATH` указывать на установленный Chrome/Canary.

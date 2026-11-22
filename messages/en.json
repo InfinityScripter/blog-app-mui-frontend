@@ -319,7 +319,7 @@
     },
     "about": {
       "title": "About me",
-      "lead": "4+ years with TypeScript, React/Next.js and Node.js. I work AI-first: agents write the code, and I set up the quality guardrails — lint, tests, CI gates and agent rules — so speed doesn't cost maintainability.",
+      "lead": "4+ years with TypeScript, React/Next.js and Node.js, in IT since 2016. I work AI-first: agents write the code, and I set up the quality guardrails — lint, tests, CI gates and agent rules — so speed doesn't cost maintainability.",
       "highlights": {
         "focus": {
           "label": "Focus",
@@ -328,9 +328,9 @@
         "stack": {
           "label": "Stack"
         },
-        "companies": {
-          "label": "Companies",
-          "value": "Yandex Go · STOMPLAN · ShurikMarket"
+        "delivery": {
+          "label": "How I work",
+          "value": "Turnkey: idea to production"
         }
       }
     },
@@ -364,82 +364,55 @@
       "present": "present",
       "technologies": "Technologies:",
       "items": {
-        "gazprom": {
-          "position": "IT Systems Implementation Specialist",
-          "company": "Gazprom",
+        "earlier": {
+          "position": "Frontend Developer; before that, IT systems rollout",
+          "company": "Loyalty platform; before that, enterprise IT systems",
           "location": "St. Petersburg",
           "description": [
-            "Rolled out corporate IT systems and integrated document management with adjacent services"
+            "Designed a web app frontend from scratch (UI, business-logic and data layers) with REST integration and resilient loading and error states",
+            "From 2016, rolled out and supported enterprise systems (SAP, 1C, SharePoint, SQL); moved into software engineering in 2021"
           ]
         },
-        "qcup": {
-          "position": "Frontend Developer",
-          "company": "QCup",
-          "location": "St. Petersburg",
-          "description": [
-            "Designed the application architecture from scratch (UI / BLL / DAL layers)",
-            "Built REST client-server integration",
-            "Implemented async state and error handling for a more resilient UX",
-            "Covered key user flows with reusable components"
-          ]
-        },
-        "userver": {
-          "position": "Frontend Developer",
-          "company": "Yandex",
-          "location": "St. Petersburg",
-          "description": [
-            "Developed the documentation UI of userver, Yandex's open-source C++ framework",
-            "Improved the docs and the docs frontend codebase",
-            "Moved the documentation UI to a new UI kit"
-          ]
-        },
-        "shurikmarket": {
+        "ecommerce": {
           "position": "Full-stack Developer",
-          "company": "ShurikMarket",
+          "company": "E-commerce platform",
           "location": "St. Petersburg",
           "description": [
-            "Maintained a Symfony monolith and prepared its migration to a REST API",
-            "Cut initial page load time",
-            "Shipped news, certificates, feedback and favourites services",
-            "Implemented user registration and authentication end to end",
-            "Built a new pixel-perfect landing page",
-            "Introduced an internal UI kit"
+            "Kept a Symfony monolith running in production and prepared its migration to a REST API",
+            "Shipped registration and authentication end to end plus four customer services: news, certificates, feedback, favourites",
+            "Cut initial page load time and introduced an internal UI kit for consistent interfaces"
           ]
         },
-        "stomplan": {
+        "dentalSaas": {
           "position": "Frontend Developer",
-          "company": "STOMPLAN",
+          "company": "Dental treatment-planning SaaS",
           "location": "Moscow",
           "description": [
-            "Built a dental treatment-planning service and an interactive patient-presentation builder with PDF export",
+            "Took the product from zero to MVP launch: a treatment-planning service and a patient-presentation builder with PDF export",
             "Led the migration to modern Angular and designed the navigation architecture",
-            "Designed and shipped interactive content blocks",
-            "Took the product from zero to MVP launch"
+            "Designed and shipped interactive content blocks"
           ]
         },
-        "yandexGo": {
+        "aiPlatform": {
           "position": "AI Engineer",
-          "company": "Yandex Go",
+          "company": "High-load B2B platform for customer communications",
           "location": "Moscow",
           "description": [
-            "Develop the frontend of a high-load low-code platform for automating customer communications; ship regular production releases and support them in production",
-            "Brought LLM features to production in the scenario editor: an “AI agent” step with tool calling and generation of a scenario from a text prompt — from a hackathon idea to a shipped feature",
-            "Set up guardrails for AI-assisted development: agent rules, shared code-review skills for coding agents and quality checks, so agent-written code meets the team's standards before human review; ran internal AI-coding sessions",
-            "Work across the stack where needed: API layers, backend changes and CI/CD pipelines",
-            "Built role-based access control together with the backend: permission model, action gating and access sharing",
-            "Delivered scenario versioning and rollback, new messaging channels and template management",
-            "Integrated other teams' services and admin tools into the platform as micro-frontend modules",
-            "Set up frontend monitoring and alerting; review code and help teammates"
+            "Took LLM features of the scenario editor to production: an “AI agent” step with tool calling and scenario generation from a text prompt — from idea to a shipped feature",
+            "Set up guardrails for AI-assisted development: agent rules, shared code-review skills and quality checks, so agent-written code meets team standards before human review",
+            "Built role-based access control with the backend (permissions, action gating, sharing), scenario versioning and rollback, new messaging channels and template management",
+            "Own the frontend from code to production: regular releases, monitoring and alerting, other teams' services embedded as micro-frontends; API-layer, backend and CI/CD changes where needed"
           ]
         },
         "aifirst": {
-          "position": "Founder, full-stack engineer",
-          "company": "aifirst.us.com",
+          "position": "Founder, AI Engineer",
+          "company": "aifirst.us.com — my own LLM product and client work",
           "location": "Moscow",
           "description": [
-            "AI news journal (Next.js, React, Node.js, PostgreSQL): feed, search and editorial CMS, ISR caching, JWT auth, unit and e2e tests, self-hosted deployment",
-            "Autonomous news agent (Node.js): collects sources, ranks and summarises with LLMs via multi-provider routing (Claude, OpenAI, local models) to balance quality and cost; publishes after human approval in Telegram",
-            "Telegram assistant for AR glasses: a photo or voice note is turned by an LLM into a food-diary entry in a third-party API (OAuth, retry queue); open-source macOS menu-bar app for Claude Code"
+            "Built an LLM news pipeline that collects RSS daily, rewrites with provider fallback (Anthropic, Gemini, GLM, DeepSeek, OpenRouter) and publishes to the site on its own: 650+ posts since June 2026",
+            "Prompt evals catch templated text, invented numbers and quotes, and lost author voice; a 30-minute watcher turns each new model release into a post, a changelog card and a channel post",
+            "Built the site and API solo: Next.js 16, React 19, PostgreSQL, email and OAuth sign-in with roles, double-opt-in newsletter, a 130-entry LLM timeline and a 46-model comparison; unit and e2e tests and a 7-step CI guard quality",
+            "Deliver turnkey products for clients and open-source tooling for agent-driven development — from a booking site with PWA and a Telegram bot to a macOS app; details on GitHub"
           ]
         }
       }
@@ -624,12 +597,12 @@
     "heroEyebrow": "{name} · AI Engineer",
     "heroTitleLead": "AI",
     "heroTitleHighlight": "Engineer",
-    "heroSummary": "I build a communication-automation platform at Yandex Go and take LLM features from hackathon to production. Agents write most of the code now, so my focus is quality guardrails: strict lint and type rules, tests, CI gates, agent rules and automated review. That lets a team ship very fast while the code stays maintainable. In my spare time I build and run my own LLM products: a news agent, a Telegram assistant for AR glasses, a utility for Claude Code.",
+    "heroSummary": "I build LLM products end to end and ship them myself: agent loop, backend, UI, deploy, tests and support. At my day job I took an “AI agent” step with tool calling and scenario generation from a text prompt to production in a high-load B2B platform for customer communications, from idea to a shipped feature. My own LLM news pipeline has published 650+ posts to aifirst.us.com since June 2026. Agents write most of the code now, so I own the quality guardrails: agent rules, lint and types, tests, CI gates and review.",
     "downloadCv": "Download résumé",
     "metrics": {
-      "company": {
-        "label": "Company",
-        "value": "Yandex Go"
+      "delivery": {
+        "label": "Delivery",
+        "value": "Turnkey projects"
       },
       "specialization": {
         "label": "Specialization",
@@ -641,31 +614,7 @@
     },
     "meta": {
       "title": "About | Mikhail Talalaev",
-      "description": "AI engineer Mikhail Talalaev — LLM products and agent-driven development. Experience, projects and contacts."
-    },
-    "projects": {
-      "overline": "Projects",
-      "title": "Side projects",
-      "subtitle": "What I build and run in my spare time",
-      "open": "Open",
-      "items": {
-        "claudeControlBar": {
-          "description": "Open-source macOS menu-bar app for Claude Code: session status and one-click actions.",
-          "status": "Open source"
-        },
-        "rokidAi": {
-          "description": "Telegram assistant for Rokid AR glasses: a photo or voice note is turned by an LLM into a FatSecret food-diary entry.",
-          "status": "In production"
-        },
-        "aiBotTg": {
-          "description": "News agent: collects AI news from RSS, summarises it via several LLM providers and, after approval in Telegram, publishes to the blog and channel.",
-          "status": "In production"
-        },
-        "teacherDog": {
-          "description": "Booking site for a dog trainer, running on the same backend as this blog.",
-          "status": "Launching"
-        }
-      }
+      "description": "AI engineer Mikhail Talalaev — LLM products and agent-driven development. Experience and contacts."
     },
     "profileName": "Mikhail Talalaev"
   },

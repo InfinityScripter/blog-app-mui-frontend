@@ -3,13 +3,7 @@ import type { MarketingTheme } from "src/sections/home/components/types";
 // ----------------------------------------------------------------------
 
 type ExperienceKey =
-  | "gazprom"
-  | "qcup"
-  | "userver"
-  | "shurikmarket"
-  | "stomplan"
-  | "yandexGo"
-  | "aifirst";
+  "earlier" | "ecommerce" | "dentalSaas" | "aiPlatform" | "aifirst";
 
 export interface ExperienceItem {
   // Stable key → `home.experience.items.<key>.{position,company,location,description}`.
@@ -17,8 +11,10 @@ export interface ExperienceItem {
   startDate: string;
   endDate: string | null;
   technologies: string;
-  logo: string;
-  link: string;
+  // Iconify name for the timeline dot — a neutral glyph, never a company logo.
+  icon: string;
+  // Only own public resources; when absent the card is not a link.
+  link?: string;
 }
 
 export interface ExperienceTimelineItemProps {

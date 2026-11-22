@@ -3,17 +3,7 @@
 // (tech stack) that must stay literal across locales — leave undefined to
 // resolve the value from the message catalog instead.
 export interface PortfolioMetric {
-  key: string;
+  key: "delivery" | "specialization" | "stack";
   icon: string;
   value?: string;
-}
-
-// `key` → `portfolio.projects.items.<key>.{description,status}`. `name`, `link`
-// and `stack` are proper nouns / URLs and stay literal across locales.
-export interface PortfolioProject {
-  key: "claudeControlBar" | "rokidAi" | "aiBotTg" | "teacherDog";
-  name: string;
-  icon: string;
-  link: string;
-  stack: string;
 }

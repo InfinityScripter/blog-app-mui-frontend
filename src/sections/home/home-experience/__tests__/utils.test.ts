@@ -7,7 +7,7 @@ import en from "../../../../../messages/en.json";
 import { getPeriodLabel, getSortedExperience } from "../utils";
 
 describe("getPeriodLabel", () => {
-  const item = EXPERIENCE.find((e) => e.key === "stomplan")!;
+  const item = EXPERIENCE.find((e) => e.key === "dentalSaas")!;
 
   it("formats dates in the requested locale", () => {
     expect(getPeriodLabel(item, "present", "en")).toBe("May 2024 — April 2025");
@@ -17,7 +17,7 @@ describe("getPeriodLabel", () => {
   });
 
   it("uses the present label for open-ended roles", () => {
-    const current = EXPERIENCE.find((e) => e.key === "yandexGo")!;
+    const current = EXPERIENCE.find((e) => e.key === "aiPlatform")!;
     expect(getPeriodLabel(current, "present", "en")).toBe(
       "April 2025 — present",
     );
@@ -26,7 +26,7 @@ describe("getPeriodLabel", () => {
 
 describe("getSortedExperience", () => {
   it("puts the newest role first", () => {
-    expect(getSortedExperience()[0].key).toBe("yandexGo");
+    expect(getSortedExperience()[0].key).toBe("aiPlatform");
   });
 });
 

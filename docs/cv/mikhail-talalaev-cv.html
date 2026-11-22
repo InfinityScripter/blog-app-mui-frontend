@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Mikhail Talalaev — AI Engineer CV</title>
-<!-- Source of public/assets/cv/mikhail-talalaev-cv.pdf. Rebuild: Chrome headless --print-to-pdf (see docs/cv/README.md). -->
+<!-- Source of public/assets/cv/mikhail-talalaev-cv.pdf. Rebuild from the repo root with any Chrome or Chrome Canary binary:
+  "<path to Chrome>" --headless --no-pdf-header-footer --user-data-dir="$(mktemp -d)" \
+    --print-to-pdf=public/assets/cv/mikhail-talalaev-cv.pdf docs/cv/mikhail-talalaev-cv.html -->
 <style>
 @page{size:A4;margin:14mm 15mm}
 body{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.6pt;line-height:1.38;color:#111;margin:0}
@@ -17,65 +19,66 @@ a{color:#111;text-decoration:none}
 .skills p{margin:2px 0}
 </style></head><body>
 <h1>Mikhail Talalaev</h1>
-<div class="role">AI Engineer — frontend-focused, full-stack (TypeScript · React · Node.js · LLM)</div>
+<div class="role">AI Engineer — LLM products, turnkey</div>
 <div class="contact">talalaev.misha@gmail.com · Moscow, Russia · open to relocation (Dubai) and remote work<br>
 github.com/InfinityScripter · aifirst.us.com</div>
 
 <h2>Summary</h2>
-<p>Engineer with 4+ years of production experience in TypeScript, React/Next.js and Node.js, now focused on building LLM features and agents. With AI agents writing most of the code, I treat code itself as cheap and invest in guardrails instead — strict lint and type rules, tests, CI quality gates, agent rules and automated review — so a team can ship at agent speed and the codebase stays maintainable. At Yandex Go I build a high-load platform for automating customer communications and ship work end to end: UI, API layers, backend changes, CI/CD, releases and production support. I took LLM features in the platform from a hackathon idea to production: an “AI agent” step with tool calling and generation of scenarios from a text prompt. Outside work I build and run my own LLM products in production — an autonomous news agent, a Telegram assistant for AR glasses and an AI blog — owning quality, latency and LLM cost.</p>
+<p>I build LLM products end to end and ship them myself: agent loop, backend, UI, deploy, tests and support. At my day job I took an “AI agent” step with tool calling and scenario generation from a text prompt to production in a high-load B2B platform for customer communications, from idea to a shipped feature. My own LLM news pipeline has published 650+ posts to aifirst.us.com since June 2026. Agents write most of the code now, so I own the quality guardrails: agent rules, lint and types, tests, CI gates and review.</p>
+<p>4+ years with TypeScript, React/Next.js and Node.js, in IT since 2016.</p>
 
 <h2>Experience</h2>
-<div class="job"><div class="head"><span>AI Engineer — Yandex Go</span><span>Apr 2025 – present</span></div>
-<div class="ctx">High-load low-code platform for automating customer communications. Stack: TypeScript, React, micro-frontends, Node.js, LLM APIs.</div>
+<div class="job"><div class="head"><span>AI Engineer</span><span>Apr 2025 – present</span></div>
+<div class="ctx">High-load B2B platform for customer communications. Stack: TypeScript, React, Ant Design, TanStack Query, Module Federation, LLM.</div>
 <ul>
-<li>Develop the frontend of a high-load low-code platform for automating customer communications; ship regular production releases and support them in production.</li>
-<li>Brought LLM features to production in the scenario editor: an “AI agent” step with tool calling and generation of a scenario from a text prompt — from a hackathon idea to a shipped feature.</li>
-<li>Work across the stack where needed: API layers, backend changes and CI/CD pipelines.</li>
-<li>Built role-based access control together with the backend: permission model, action gating and access sharing.</li>
-<li>Delivered scenario versioning and rollback, new messaging channels and template management.</li>
-<li>Integrated other teams' services and admin tools into the platform as micro-frontend modules.</li>
-<li>Set up guardrails for AI-assisted development in the team: agent rules, shared code-review skills for coding agents and quality checks, so agent-written code meets the team's standards before human review; ran internal AI-coding sessions.</li>
-<li>Set up frontend monitoring and alerting; review code and help teammates.</li>
+<li>Took LLM features of the scenario editor to production: an “AI agent” step with tool calling and scenario generation from a text prompt — from idea to a shipped feature.</li>
+<li>Set up guardrails for AI-assisted development: agent rules, shared code-review skills and quality checks, so agent-written code meets team standards before human review.</li>
+<li>Built role-based access control with the backend (permissions, action gating, sharing), scenario versioning and rollback, new messaging channels and template management.</li>
+<li>Own the frontend from code to production: regular releases, monitoring and alerting, other teams' services embedded as micro-frontends; API-layer, backend and CI/CD changes where needed.</li>
 </ul></div>
 
-<div class="job"><div class="head"><span>Frontend Developer — STOMPLAN</span><span>May 2024 – Apr 2025</span></div>
-<div class="ctx">Dental treatment-planning SaaS. Stack: Angular, TypeScript.</div>
-<ul><li>Took the product from zero to MVP launch: treatment-planning service and an interactive patient-presentation builder with PDF export.</li>
-<li>Led the migration to modern Angular; designed the navigation architecture and interactive content blocks.</li></ul></div>
-
-<div class="job"><div class="head"><span>Full-stack Developer — ShurikMarket (e-commerce)</span><span>Nov 2022 – May 2024</span></div>
-<div class="ctx">Stack: React, Next.js, PHP/Symfony.</div>
-<ul><li>Cut initial page load time, built an internal UI kit and shipped news, certificates, feedback and favourites services.</li>
-<li>Maintained the Symfony monolith, prepared its migration to a REST API and implemented user registration and authentication.</li></ul></div>
-
-<div class="job"><div class="head"><span>Frontend Developer — Yandex userver (open-source C++ framework)</span><span>May 2023 – Oct 2023</span></div>
-<ul><li>Built and maintained the documentation site UI for the open-source framework.</li></ul></div>
-
-<div class="job"><div class="head"><span>Frontend Developer — QCup (loyalty platform)</span><span>Nov 2021 – Dec 2022</span></div>
-<ul><li>Designed the application architecture from scratch (UI / business logic / data layers), REST integration, async state and error handling (React, TypeScript, Redux).</li></ul></div>
-
-<div class="job"><div class="head"><span>IT Systems Implementation Specialist — Gazprom</span><span>2016 – 2022</span></div>
-<ul><li>Implemented and supported enterprise systems (SAP, 1C, SharePoint, SQL); moved into software engineering in 2021.</li></ul></div>
-
-<h2>Projects (in production)</h2>
+<div class="job"><div class="head"><span>Founder, AI Engineer — aifirst.us.com</span><span>Jan 2025 – present</span></div>
+<div class="ctx">My own LLM product and client work. Stack: TypeScript, Next.js, React, Node.js, PostgreSQL, Anthropic SDK, Gemini, OpenRouter, MCP.</div>
 <ul>
-<li><b>Autonomous AI news agent</b> (Node.js, Claude / OpenAI / local models): collects sources, ranks and summarises them with LLMs via multi-provider routing to balance quality and cost; human approval in Telegram, then auto-publishes to the blog and a Telegram channel.</li>
-<li><b>aifirst.us.com</b> — AI blog and LLM model comparison (Next.js, React, Node.js, PostgreSQL): feed, search and editorial CMS, ISR caching, JWT auth, guarded by zero-warning lint, locked design tokens, dead-code checks (knip), unit and e2e tests in CI/CD with GitHub Actions and self-hosted deployment (nginx, VPS).</li>
-<li><b>rokid-ai</b> — Telegram assistant for AR glasses: an LLM turns a photo or voice note into a food-diary entry in a third-party API (OAuth, retry queue).</li>
-<li><b>claude-control-bar</b> — open-source macOS menu-bar app for Claude Code sessions.</li>
-</ul>
+<li>Built an LLM news pipeline that collects RSS daily, rewrites with provider fallback (Anthropic, Gemini, GLM, DeepSeek, OpenRouter) and publishes to the site on its own: 650+ posts since June 2026.</li>
+<li>Prompt evals catch templated text, invented numbers and quotes, and lost author voice; a 30-minute watcher turns each new model release into a post, a changelog card and a channel post.</li>
+<li>Built the site and API solo: Next.js 16, React 19, PostgreSQL, email and OAuth sign-in with roles, double-opt-in newsletter, a 130-entry LLM timeline and a 46-model comparison; unit and e2e tests and a 7-step CI guard quality.</li>
+<li>Deliver turnkey products for clients and open-source tooling for agent-driven development — from a booking site with PWA and a Telegram bot to a macOS app; details on GitHub.</li>
+</ul></div>
+
+<div class="job"><div class="head"><span>Frontend Developer</span><span>May 2024 – Apr 2025</span></div>
+<div class="ctx">Dental treatment-planning SaaS. Stack: Angular, TypeScript.</div>
+<ul>
+<li>Took the product from zero to MVP launch: a treatment-planning service and a patient-presentation builder with PDF export.</li>
+<li>Led the migration to modern Angular and designed the navigation architecture.</li>
+<li>Designed and shipped interactive content blocks.</li>
+</ul></div>
+
+<div class="job"><div class="head"><span>Full-stack Developer</span><span>Nov 2022 – May 2024</span></div>
+<div class="ctx">E-commerce platform. Stack: React, Next.js, PHP/Symfony.</div>
+<ul>
+<li>Kept a Symfony monolith running in production and prepared its migration to a REST API.</li>
+<li>Shipped registration and authentication end to end plus four customer services: news, certificates, feedback, favourites.</li>
+<li>Cut initial page load time and introduced an internal UI kit for consistent interfaces.</li>
+</ul></div>
+
+<div class="job"><div class="head"><span>Frontend Developer; before that, IT systems rollout</span><span>Mar 2016 – Dec 2022</span></div>
+<div class="ctx">Loyalty platform; before that, enterprise IT systems. Stack: TypeScript, React, Redux, REST API, SAP, 1C, SharePoint, SQL.</div>
+<ul>
+<li>Designed a web app frontend from scratch (UI, business-logic and data layers) with REST integration and resilient loading and error states.</li>
+<li>From 2016, rolled out and supported enterprise systems (SAP, 1C, SharePoint, SQL); moved into software engineering in 2021.</li>
+</ul></div>
 
 <h2>Skills</h2>
 <div class="skills">
-<p><b>LLMs and agents:</b> Anthropic and OpenAI APIs, tool calling, structured output, streaming, agent loops, MCP servers, prompt evals, multi-provider routing incl. local models, prompt and context engineering</p>
-<p><b>Frontend:</b> TypeScript, React 19, Next.js 15, micro-frontends (Module Federation), TanStack Query, Ant Design, MUI, Angular, Redux, accessibility and performance (ISR, RUM)</p>
-<p><b>Backend:</b> Node.js (Express, Next.js API routes), REST API design, PostgreSQL, SQLite, Redis, JWT/OAuth, RBAC, PHP/Symfony</p>
-<p><b>Quality and delivery:</b> Jest, Vitest, Playwright, CI/CD (GitHub Actions), Docker, nginx, release management, observability and alerting, on-call</p>
-<p><b>AI-assisted development and guardrails:</b> I use Claude Code and Cursor daily on production code. Custom skills and agent rules turn a task into a reviewed PR; lint rules, type checks, tests and CI gates keep agent-written code consistent and maintainable at high delivery speed.</p>
+<p><b>LLMs &amp; agents:</b> Anthropic SDK, Gemini, OpenRouter, tool calling, multi-provider routing, prompt evals, Whisper</p>
+<p><b>AI-first development:</b> Claude Code, Codex, Cursor, custom skills, subagents, hooks, MCP</p>
+<p><b>Product:</b> TypeScript, React 19, Next.js 16, MUI, Angular, micro-frontends (Module Federation), TanStack Query, Node.js, PostgreSQL, Zod, JWT/OAuth, RBAC</p>
+<p><b>Quality &amp; delivery:</b> Vitest, Playwright, GitHub Actions, Docker, nginx, systemd, Vercel, monitoring and alerting</p>
 <p><b>Languages:</b> English (B2), Russian (native)</p>
 </div>
 
 <h2>Education</h2>
-<p>Yandex School of Interface Development — Frontend Developer, certificate, 2023</p>
+<p>Frontend development school — certificate, 2023</p>
 <p>Tyumen State Oil and Gas University — Engineer’s degree, Chemical Technology, 2011</p>
 </body></html>
