@@ -6,7 +6,6 @@ import { HomeContact } from "src/sections/home/home-contact";
 import { HomeExperience } from "src/sections/home/home-experience";
 
 import { PortfolioHero } from "./portfolio-hero";
-import { PortfolioProjects } from "./portfolio-projects";
 
 // ----------------------------------------------------------------------
 
@@ -19,7 +18,6 @@ export function PortfolioView() {
       <HomeAbout />
       <HomeSkills />
       <HomeExperience />
-      <PortfolioProjects />
     </>
   );
 }

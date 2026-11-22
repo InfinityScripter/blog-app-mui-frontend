@@ -12,9 +12,8 @@ export const ABOUT_PROFILE = {
 
 /**
  * Сканируемые «факты». `labelKey` → `home.about.highlights.<key>.label`. The
- * focus value is UI copy (`valueKey` → `.value`); the companies value is
- * localized too (company names differ ru/en); the stack value is a proper-noun
- * list kept as-is data.
+ * focus and delivery values are UI copy (`valueKey` → `.value`); the stack
+ * value is a proper-noun list kept as-is data.
  */
 export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
   {
@@ -28,9 +27,9 @@ export const ABOUT_HIGHLIGHTS: AboutHighlight[] = [
     value: "TypeScript · React · Node.js · LLM",
   },
   {
-    icon: "solar:buildings-3-bold-duotone",
-    labelKey: "companies",
-    valueKey: "companies",
+    icon: "solar:rocket-2-bold-duotone",
+    labelKey: "delivery",
+    valueKey: "delivery",
   },
 ];
 

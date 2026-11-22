@@ -1,4 +1,4 @@
-type AboutHighlightKey = "focus" | "stack" | "companies";
+type AboutHighlightKey = "focus" | "stack" | "delivery";
 
 export interface AboutHighlight {
   icon: string;
