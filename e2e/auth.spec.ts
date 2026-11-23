@@ -1,4 +1,4 @@
-import { test, expect } from "./fixtures";
+import { test, login, expect, DEMO_USER } from "./fixtures";
 
 /**
  * Authentication + guard smoke flow.
@@ -19,14 +19,15 @@ test.describe("auth & guards", () => {
   });
 
   test("sign-in sets the httpOnly access_token cookie and lands on the dashboard", async ({
-    authedPage,
+    page,
   }) => {
-    // The authedPage fixture already performed the login.
-    await expect(authedPage).toHaveURL(/\/dashboard/);
+    // A real form login: authedPage reuses cookies and would skip the form.
+    await login(page, DEMO_USER);
+    await expect(page).toHaveURL(/\/dashboard/);
 
     // Auth rides in an httpOnly cookie (not sessionStorage) after the
     // cookie-auth migration, so assert the cookie is present in the context.
-    const cookies = await authedPage.context().cookies();
+    const cookies = await page.context().cookies();
     const accessCookie = cookies.find((c) => c.name === "access_token");
     expect(accessCookie, "access_token cookie should be set").toBeTruthy();
     expect(accessCookie?.httpOnly, "access_token must be httpOnly").toBe(true);
