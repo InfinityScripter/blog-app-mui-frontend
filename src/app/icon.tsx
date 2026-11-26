@@ -3,8 +3,10 @@ import { ImageResponse } from "next/og";
 // ----------------------------------------------------------------------
 
 // Favicon — Life Style mark: plum tile, cream caret, lime cursor.
+// 192px, not 32: Google Search recommends a favicon larger than 48×48 and
+// showed a generic globe for the 32px one; browsers downscale it for the tab.
 
-export const size = { width: 32, height: 32 };
+export const size = { width: 192, height: 192 };
 export const contentType = "image/png";
 
 export default function Icon() {
@@ -15,10 +17,10 @@ export default function Icon() {
         height: "100%",
         display: "flex",
         background: "#351C2F",
-        borderRadius: 7,
+        borderRadius: 42,
       }}
     >
-      <svg width="32" height="32" viewBox="0 0 512 512" fill="none">
+      <svg width="192" height="192" viewBox="0 0 512 512" fill="none">
         <rect width="512" height="512" rx="116" fill="#351C2F" />
         <polyline
           points="168,166 282,256 168,346"

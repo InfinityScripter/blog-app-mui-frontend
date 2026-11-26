@@ -11,4 +11,8 @@ export const routing = defineRouting({
   locales: LOCALES,
   defaultLocale: DEFAULT_LOCALE,
   localePrefix: "always",
+  // hreflang comes from page metadata and the sitemap (x-default → /ru/).
+  // next-intl's own `Link` response header points x-default at the
+  // redirecting root `/` instead, so Google got two conflicting answers.
+  alternateLinks: false,
 });
