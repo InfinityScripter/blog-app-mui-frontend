@@ -69,9 +69,8 @@ async function login(
  * просмотров — fire-and-forget с catch, аборт безвреден), ни в статистику
  * трафика. Локальных прогонов guard не касается.
  *
- * Плюс кука NEXT_LOCALE=ru: middleware сеет локаль по x-vercel-ip-country
- * РАНЬШЕ Accept-Language, а раннер GitHub — в US, так что без куки прод
- * отдал бы /en и все русские getByRole-запросы падали бы.
+ * Плюс кука NEXT_LOCALE=ru: она приоритетнее Accept-Language, так что прод
+ * гарантированно отдаст /ru и русские getByRole-запросы не упадут.
  */
 const PROD_SMOKE_URL = process.env.E2E_BASE_URL;
 

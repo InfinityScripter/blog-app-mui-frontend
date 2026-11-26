@@ -38,6 +38,10 @@ export default async function Page({ params }: PageProps) {
         "@type": "WebSite",
         "@id": siteId,
         name: "Life Style",
+        // Google may reject "Life Style" as too generic and then shows the
+        // site name of the parent domain us.com ("US.COM"). Our own host as
+        // an alternate gives it a backup it "strongly considers".
+        alternateName: ["aifirst.us.com"],
         url: `${CONFIG.site.url}/`,
         inLanguage: LOCALES,
         author: { "@type": "Person", name: "Михаил Талалаев" },
